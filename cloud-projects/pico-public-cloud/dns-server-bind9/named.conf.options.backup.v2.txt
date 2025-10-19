@@ -1,0 +1,34 @@
+options {
+    directory "/var/cache/bind";
+
+    // Allow queries from everywhere (optional for testing, restrict later)
+    recursion yes;
+    allow-query { any; };
+    allow-recursion { any; };
+
+    // Disable forwarding (this makes it a real recursive resolver)
+    forwarders { };
+
+    // Enable DNSSEC validation for authenticity
+    dnssec-validation auto;
+
+    // Listen on all network interfaces
+    listen-on { any; };
+    listen-on-v6 { any; };
+
+    // Enable response rate limiting (protects from abuse)
+    rate-limit {
+        responses-per-second 15;
+    };
+
+    // Clean and fast cache
+    max-cache-size 256M;
+    minimal-responses yes;
+
+    // Optional: identify server (you can comment this out)
+    version "emaduzzaman-dns resolver";
+
+    // Root hints (for recursion)
+    root-delegation-only exclude { "localhost"; "localdomain"; };
+};
+
