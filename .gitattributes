@@ -1,0 +1,1 @@
+cloud-projects/cloud-init/cloud-image/cloud-image-1-ubuntu/*.ova filter=lfs diff=lfs merge=lfs -text
