@@ -1,0 +1,219 @@
+#Permanently Set Hostname
+sudo hostnamectl set-hostname emaduzzaman-dns
+
+#Now verify
+hostnamectl
+
+#Output should show
+Static hostname: emaduzzaman-dns
+
+#Also fix /etc/hosts so BIND doesn’t complain later:
+sudo nano /etc/hosts
+
+#Add these lines (replace <your_server_ip> with your VM’s IP, e.g., 192.168.10.200 or your public IP):
+127.0.0.1       localhost
+<your_server_ip>   emaduzzaman-dns
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+#Backup Default BIND Config
+#Always back up before making changes:
+sudo cp /etc/bind/named.conf.options /etc/bind/named.conf.options.backup
+sudo cp /etc/bind/named.conf.local /etc/bind/named.conf.local.backup
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+#Configure Recursive Resolver
+sudo nano /etc/bind/named.conf.options
+
+#Delete everything and paste this exact working config:
+
+options {
+    directory "/var/cache/bind";
+
+    // Allow queries from everywhere (optional for testing, restrict later)
+    recursion yes;
+    allow-query { any; };
+    allow-recursion { any; };
+
+    // Disable forwarding (this makes it a real recursive resolver)
+    forwarders { };
+
+    // Enable DNSSEC validation for authenticity
+    dnssec-validation auto;
+
+    // Listen on all network interfaces
+    listen-on { any; };
+    listen-on-v6 { any; };
+
+    // Enable response rate limiting (protects from abuse)
+    rate-limit {
+        responses-per-second 15;
+    };
+
+    // Clean and fast cache
+    max-cache-size 256M;
+    minimal-responses yes;
+
+    // Optional: identify server (you can comment this out)
+    version "emaduzzaman-dns resolver";
+
+    // Root hints (for recursion)
+    root-delegation-only exclude { "localhost"; "localdomain"; };
+};
+
+-------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
+#STEP 4 — Include Root Zone Hints (Critical)
+#Ubuntu usually includes this file: /usr/share/dns/root.hints
+#If it doesn’t exist, download it: sudo wget https://www.internic.net/domain/named.root -O /usr/share/dns/root.hints
+#Then confirm it’s included in the main config.
+sudo nano /etc/bind/named.conf.default-zones
+
+#Find this line:
+zone "." {
+    type hint;
+    file "/usr/share/dns/root.hints";
+};
+
+-------------------------------------------------------------------------------------------------------------
+STEP 5 — Local Config File (named.conf.local)
+#We don’t need any forward or authoritative zones, but ensure this file exists:
+
+sudo nano /etc/bind/named.conf.local
+
+It should look like this:
+// No local zones — pure recursive resolver
+-------------------------------------------------------------------------------------------------------------
+STEP 6 — Fix AppArmor Permissions (Optional but Safe)
+#Ensure BIND can read /usr/share/dns/root.hints:
+sudo apparmor_parser -r /etc/apparmor.d/usr.sbin.named
+-------------------------------------------------------------------------------------------------------------
+#STEP 7 — Restart and Enable BIND
+#Now start it cleanly:
+sudo systemctl restart bind9
+sudo systemctl enable bind9
+
+#Check service status:
+sudo systemctl status bind9
+
+#Should show:
+Active: active (running)
+
+
+#but this will generate error cause Starting with Ubuntu 22.04+, the BIND9 package no longer installs the classic bind9.service.
+#Instead, it installs a socket-activated systemd unit called: named.service
+#That’s why: systemctl status bind9   will return “Unit not found.”
+
+
+
+
+
+#Check the installed service name
+systemctl list-units | grep named
+#You should see something like: named.service              loaded active running BIND Domain Name Server
+
+#Use the correct service name
+#Instead of using bind9, use:
+sudo systemctl restart named
+sudo systemctl enable named
+sudo systemctl status named
+---------------------------------------------------------------------------------------------------------------
+#If named service is missing
+#If the above command shows nothing, that means the DNS server binaries are installed but the service file isn’t properly configured.
+#Let’s reinstall the proper package:
+sudo apt update
+sudo apt install bind9 bind9-utils bind9-dnsutils bind9-host bind9-doc -y
+
+#Then check again:
+systemctl status named
+#Confirm BIND is responding
+#Once the service is active:	
+sudo systemctl status named
+sudo ss -tulpn | grep named
+
+#You should see it listening on port 53 for both tcp and udp — like:
+udp   UNCONN 0 0 0.0.0.0:53    0.0.0.0:*    users:(("named",pid=xxxx,fd=xxx))
+tcp   LISTEN 0 128 0.0.0.0:53  0.0.0.0:*    users:(("named",pid=xxxx,fd=xxx))
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+
+
+#Replace only the upstream (keep systemd stub) i want to do this no guide me line by line my dns server hostname is emaduzzaman-dns, ip is 192.168.10.148/24 , i have created a vm whiic has ubuntu 20.04 now guide me line by line to #implement this
+#Nice — we’ll do Option A: keep the OS stub (systemd-resolved at 127.0.0.53) and configure it to use your recursive DNS server emaduzzaman-dns at 192.168.10.148 as the upstream. I’ll give exact, copy-paste commands and short #explanations for each step. Run them on the Ubuntu 20.04 client VM (the machine that will keep using the systemd stub).
+#Important: these commands assume you have sudo on the client VM and the DNS server 192.168.10.148 is reachable and listening on port 53.
+----------------------------------------------------------------------------------------------------------------
+#Confirm current state (just for info)
+# show hostname + IPs
+hostnamectl
+ip -4 addr show
+
+# show current resolved status (which DNS server systemd-resolved uses)
+resolvectl status
+
+#Make sure /etc/resolv.conf is the systemd stub symlink (required)
+# show where /etc/resolv.conf points
+readlink -f /etc/resolv.conf
+#If the output is not /run/systemd/resolve/stub-resolv.conf, restore the symlink:
+sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+#(Explanation: we want the OS to keep using the local stub at 127.0.0.53.)
+
+#Edit systemd-resolved configuration to set upstream DNS
+#We’ll write the upstream IP into /etc/systemd/resolved.conf under [Resolve].
+sudo bash -c 'cat > /etc/systemd/resolved.conf <<EOF
+[Resolve]
+# Use the emaduzzaman-dns recursive resolver as upstream
+DNS=192.168.10.148
+# Keep the stub listener enabled (local clients talk to 127.0.0.53)
+DNSStubListener=yes
+# Optional: fallback DNS if your server is unreachable (comment out if you want no fallback)
+#FallbackDNS=
+EOF'
+#(Explanation: DNS= sets the upstream resolver that systemd-resolved will forward queries to. We leave DNSStubListener=yes so local apps still query 127.0.0.53.)
+#Restart systemd-resolved to apply changes
+sudo systemctl restart systemd-resolved
+sudo systemctl status systemd-resolved --no-pager
+
+#Verify the stub and upstream are active
+# confirm stub listener (127.0.0.53) exists
+ss -ulpn | grep 53 || ss -tulpn | grep 53
+
+# check what systemd-resolved now considers as DNS servers
+resolvectl status
+
+# show per-interface DNS (optional)
+resolvectl dns
+
+#Expected: resolvectl status should show Link/Global DNS or DNS Servers: 192.168.10.148 under the appropriate entry and DNS Stub Listener: yes. ss should show a UDP/TCP listener on 127.0.0.53:53.
+
+
+#Test name resolution (use normal commands — apps will use the stub)
+# standard resolution via normal system resolver (no explicit server)
+dig example.com +short
+
+# verify the queries actually forward to your server (shows server used)
+dig example.com +short +stats
+
+# explicitly ask the stub to reveal upstream resolution path
+resolvectl query example.com
+
+#dig without @ will use /etc/resolv.conf → the stub → your upstream 192.168.10.148.
+
+#resolvectl query shows details of resolution, including whether DNSSEC is OK (SECURE).
+
+#Confirm DNSSEC/authenticated data flag (optional)
+# ask your stub (which forwards to your server) for a DNSSEC-signed domain
+dig +dnssec cloudflare.com @127.0.0.53
+
+# test DNSSEC rejection
+dig +dnssec dnssec-failed.org @127.0.0.53
+#Expect ad/authenticated flag for good domains and SERVFAIL for dnssec-failed.org if DNSSEC validation is working on your recursive server.
+
+
+#Make per-interface DNS (optional — if you want only a single interface to use this upstream
+#If you prefer to set the DNS for a particular interface (for example ens3) rather than the global resolved.conf:
+# set DNS for the interface ens3
+sudo resolvectl dns ens3 192.168.10.148
+
+# optionally set domain search for that interface
+sudo resolvectl domain ens3 picocloud.test
+#(Explanation: resolvectl writes per-link settings to systemd-resolved without editing files.)
+
