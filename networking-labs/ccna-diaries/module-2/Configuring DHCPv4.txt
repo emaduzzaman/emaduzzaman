@@ -1,0 +1,18 @@
+Configuring DHCPv4
+==================
+Scenario 1: Configuring Router as DHCP Server
+---------------------------------------------
+Router(config)#ip dhcp excluded-address 172.16.1.1 172.16.1.10
+Router(config)#ip dhcp pool UserLAN
+Router(dhcp-config)#network 172.16.1.0 255.255.255.0
+Router(dhcp-config)#default-router 172.16.1.1
+Router(dhcp-config)#dns-server 8.8.8.8
+Router(dhcp-config)#exit
+
+Router#show ip dhcp binding
+
+Scenario 2: Configuring Router as DHCP Relay Server
+---------------------------------------------------
+Router(config)#interface g0/0/0
+Router(config-if)#ip helper-address 172.16.2.3
+Router(config-if)#exit

@@ -1,0 +1,9 @@
+Configuring Switchport Security
+===============================
+Switch(config)#int range f0/1-20
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport port-security 
+Switch(config-if-range)#switchport port-security maximum 1
+Switch(config-if-range)#switchport port-security mac-address sticky
+Switch(config-if-range)#switchport port-security aging time 30
+Switch(config-if-range)#switchport port-security violation shutdown
