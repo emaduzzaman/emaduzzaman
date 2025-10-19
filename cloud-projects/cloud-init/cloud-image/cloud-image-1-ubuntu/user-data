@@ -1,0 +1,16 @@
+#cloud-config
+users:
+  - name: gelani
+    gecos: "Kazi Gelani"
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+    ssh_authorized_keys:
+      - ssh-rsa AAAA...replace-with-your-ssh-public-key... user@example
+chpasswd:
+  list: |
+    gelani:YourPlainPasswordHere
+  expire: False
+ssh_pwauth: True
+hostname: gelani-cloud
+runcmd:
+  - [ cloud-init-per, instance, echo, "cloud-init applied on first boot" ]
