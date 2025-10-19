@@ -1,0 +1,98 @@
+Given Network
+172.16.0.0/20
+
+User LAN 	520 Hosts	/22
+Server LAN	12 Hosts	/28
+
+/20 -- /22
+172.16.0000  00 00.00000000
+	     01
+	     10
+	     11
+
+Assigning the first usable subnet to User LAN:
+172.16.000000   00.00000000/22
+
+Subnetting further the third usable subnet as per the requirement of Server LAN:
+
+/22 -- /28
+172.16.0000  10  00.0000  0000
+		 00.0001
+		 00.0010
+		 00.0011
+		 .......
+		 11.1111
+
+Assigning the fouth usable subnet to Server LAN:
+172.16.00001000.0011  0000/28
+
+User LAN
+========
+172.16.000000   00.00000000/22		Network Address		172.16.0.0/22
+		00.00000001		First Usable IP		172.16.0.1	PC1
+
+		01.00000100		260 Host IP		172.16.1.4	PC2
+
+		11.11111110		Last Usable IP		172.16.3.254	Gateway
+		11.11111111		Broadcast Address	172.16.3.255
+
+
+Server LAN
+==========
+172.16.00001000.0011  0000/28		Network Address		172.16.8.48/28
+		      0001		First Usable IP		172.16.8.49	Web Server
+		      0010		Second Usable IP	172.16.8.50	DNS and TFTP Server
+
+		      1110		Last Usable IP		172.16.8.62	Gateway		
+		      1111		Broadcast Address	172.16.8.63	
+
+
+Router(config)#hostname SM
+SM(config)#enable secret enpa$$word
+
+SM(config)#line console 0
+SM(config-line)#password smpa$$word
+SM(config-line)#login
+SM(config-line)#exit
+SM(config)#line vty 0 4
+SM(config-line)#password smpa$$word
+SM(config-line)#login
+SM(config-line)#exit
+
+SM(config)#service password-encryption 
+
+SM(config)#ip domain-name sm.net
+
+SM(config)#crypto key generate rsa 
+SM(config)#ip ssh version 2
+SM(config)#ip ssh time-out 60
+SM(config)#ip ssh authentication-retries 5
+SM(config)#line vty 0 4
+SM(config-line)#transport input ssh 
+SM(config-line)#exit
+
+SM(config)#username admin secret adminpa$$
+SM(config)#line console 0
+SM(config-line)#login local
+SM(config-line)#exit
+SM(config)#line vty 0 4
+SM(config-line)#login local
+SM(config-line)#exit
+
+SM(config)#int g0/0
+SM(config-if)#description User LAN
+SM(config-if)#ip address 172.16.3.254 255.255.252.0
+SM(config-if)#no shutdown
+SM(config-if)#exit
+SM(config)#int g0/1
+SM(config-if)#description Server LAN
+SM(config-if)#ip address 172.16.8.62 255.255.255.240
+SM(config-if)#no shutdown
+SM(config-if)#exit
+
+SM#copy running-config startup-config 
+SM#copy running-config tftp: 
+Address or name of remote host []? 172.16.8.50
+Destination filename [SM-confg]? 
+
+		
