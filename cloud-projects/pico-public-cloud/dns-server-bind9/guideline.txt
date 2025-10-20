@@ -217,3 +217,111 @@ sudo resolvectl dns ens3 192.168.10.148
 sudo resolvectl domain ens3 picocloud.test
 #(Explanation: resolvectl writes per-link settings to systemd-resolved without editing files.)
 
+#How to revert (if needed)
+# restore default config file and restart
+sudo sed -i '/^DNS=/d' /etc/systemd/resolved.conf
+sudo systemctl restart systemd-resolved
+# or to remove a per-interface DNS setting
+sudo resolvectl revert ens3
+====================================================================================
+Checking everything at right place or not:
+#Verify BIND installation
+sudo apt list --installed | grep bind9
+#You should see something like:
+bind9/focal-updates ...
+bind9-utils ...
+bind9-dnsutils ...
+#Configure BIND as a recursive resolver
+#Edit the main options file:
+sudo nano /etc/bind/named.conf.options
+#Make sure it looks like this:
+options {
+    directory "/var/cache/bind";
+
+    // Allow queries from your internal subnet
+    allow-query { 192.168.10.0/24; localhost; };
+
+    // Enable recursion
+    recursion yes;
+
+    // Forwarders: (disable Google if you want full recursion)
+    forwarders { };
+
+    // Listen on your interface and localhost
+    listen-on { 127.0.0.1; 192.168.10.148; };
+    listen-on-v6 { none; };
+
+    dnssec-validation auto;
+    auth-nxdomain no;
+};
+
+
+#⚠️ Note:
+
+#Leave forwarders { }; empty for full recursion (queries root servers directly).
+
+#You can use forwarders only if you want BIND to use another DNS as cache upstream.
+#Make sure root hints file exists
+ls /usr/share/dns/root.hints
+#If it doesn’t exist: sudo wget -O /usr/share/dns/root.hints https://www.internic.net/domain/named.root
+#Check configuration syntax
+sudo named-checkconf
+
+#Restart BIND service
+sudo systemctl restart bind9
+sudo systemctl enable bind9
+dig @127.0.0.1 google.com #Test if recursion work
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#Change your systemd-resolved upstream to use local
+Right now, your OS stub resolver (127.0.0.53) sends DNS queries to 8.8.8.8.
+We’ll change that to point to localhost (127.0.0.1) instead, so all system DNS queries go to your local BIND.
+
+sudo resolvectl dns ens3 127.0.0.1
+sudo systemctl restart systemd-resolved
+
+resolvectl status
+
+Current DNS Server: 127.0.0.1
+DNS Servers: 127.0.0.1
+Test from the system’s perspective
+==================================================================================================================
+! Let’s configure your client VM step by step so it uses your emaduzzaman-dns server (192.168.10.148) as the recursive resolver
+
+resolvectl status #Check current DNS
+
+#Configure systemd-resolved to use your DNS
+#We’ll tell the system to forward queries to 192.168.10.148.
+sudo resolvectl dns ens3 192.168.10.148
+#ens3 → Replace with your network interface name if different (ip a to check).
+
+192.168.10.148 → Your DNS server IP.
+
+sudo resolvectl domain ens3 picocloud.test
+
+Restart systemd-resolved
+
+sudo systemctl restart systemd-resolved
+
+
+resolvectl status #Verify DNS on the client
+
+Test resolution
+dig @127.0.0.53 google.com +short
+dig @127.0.0.53 ubuntu.com +short
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

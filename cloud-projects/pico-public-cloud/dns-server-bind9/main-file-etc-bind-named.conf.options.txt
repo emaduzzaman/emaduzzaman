@@ -1,0 +1,22 @@
+#Contains global options: recursion, forwarding, listen-on interfaces, DNSSEC, allow-query, cache size, etc. Crucial for recursive behavior.
+
+options {
+    directory "/var/cache/bind";
+
+    // Allow queries from your internal subnet
+    allow-query { 192.168.10.0/24; localhost; };
+
+    // Enable recursion
+    recursion yes;
+
+    // Forwarders: (disable Google if you want full recursion)
+    forwarders { };
+
+    // Listen on your interface and localhost
+    listen-on { 127.0.0.1; 192.168.10.148; };
+    listen-on-v6 { none; };
+
+    dnssec-validation auto;
+    auth-nxdomain no;
+};
+

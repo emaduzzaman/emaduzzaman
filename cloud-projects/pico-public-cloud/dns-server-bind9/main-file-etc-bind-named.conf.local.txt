@@ -1,0 +1,15 @@
+// No local zones — pure recursive resolver//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+
+#Local zones (like internal openstack.internal domain). Keep it if there is/are any internal authoritative zones
+
+zone "openstack.internal" {
+    type master;
+    file "/etc/bind/zones/db.openstack.internal";
+};
