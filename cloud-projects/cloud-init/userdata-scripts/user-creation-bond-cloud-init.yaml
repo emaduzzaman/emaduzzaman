@@ -1,0 +1,53 @@
+#cloud-config
+#
+# ==========================================================
+# Cloud-Init Configuration: User Creation for "bond"
+# Description:
+#   This configuration creates a new user named "bond"
+#   with sudo privileges and password-based SSH access.
+#   It also ensures the OpenSSH server is installed,
+#   enabled, and running.
+# ==========================================================
+
+# ----------------------------------------------------------
+# Define system users to be created during instance setup
+# ----------------------------------------------------------
+users:
+  - name: bond                      # Username for the new account
+    gecos: Bond User                # Full name or description
+    groups: sudo                    # Add user to the 'sudo' group
+    shell: /bin/bash                # Default shell for the user
+    sudo: ALL=(ALL) NOPASSWD:ALL    # Grant passwordless sudo access
+    lock_passwd: false              # Ensure the password can be set
+
+# ----------------------------------------------------------
+# Set user password (plaintext for demo; consider using hashed)
+# ----------------------------------------------------------
+chpasswd:
+  list: |
+    bond:royalcasino                # Format: username:password
+  expire: False                     # Prevent forced password reset
+
+# ----------------------------------------------------------
+# Enable SSH password authentication (for login via SSH)
+# ----------------------------------------------------------
+ssh_pwauth: true
+
+# ----------------------------------------------------------
+# Packages to be installed on first boot
+# ----------------------------------------------------------
+packages:
+  - openssh-server                  # Ensures SSH server is available
+
+# ----------------------------------------------------------
+# Commands to run after package installation
+# ----------------------------------------------------------
+runcmd:
+  - [ apt-get, update ]                                 # Update package index
+  - [ apt-get, -y, install, openssh-server ]            # Reinstall SSH if needed
+  - [ systemctl, enable, ssh ]                          # Enable SSH service on boot
+  - [ systemctl, start, ssh ]                           # Start SSH service immediately
+
+# ----------------------------------------------------------
+# End of Cloud-Init Configuration
+# ----------------------------------------------------------
