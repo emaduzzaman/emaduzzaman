@@ -77,7 +77,7 @@
        │ External Forwarders:
        │ nslookup google.com 192.168.42.1
        ▼
-[Result]
+[ Result]
        │
        ├─ www.gelani.com → 192.168.42.11
        ├─ emaduzzaman.gelani.com → 192.168.42.11
