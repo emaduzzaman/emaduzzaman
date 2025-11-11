@@ -23,7 +23,7 @@ A DNS (Domain Name System) server translates human-friendly domain names into IP
 
 ---
 
-## ** Assign a Static IP**
+## **Assign a Static IP**
 
 1. Go to **Network Connections → select your active adapter → Properties → IPv4 → Manual configuration**  
 2. Example:
@@ -50,7 +50,7 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.4
 
 ---
 
-## ** Install DNS Server Role**
+## **Install DNS Server Role**
 
 1. Open **Server Manager → Manage → Add Roles and Features**
 2. Role-based or feature-based installation → select local server → Next
@@ -61,13 +61,13 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.4
 
 ---
 
-## ** Access DNS Manager**
+## **Access DNS Manager**
 
 * Server Manager → **Tools → DNS**
 
 ---
 
-## ** Create Forward Lookup Zones (Authoritative Part)**
+## **Create Forward Lookup Zones (Authoritative Part)**
 
 **Purpose**: Maps internal domain names to IP addresses. This is the **authoritative part** of the DNS server.
 
@@ -99,7 +99,7 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.4
 
 ---
 
-## ** Create Reverse Lookup Zone (Optional but Recommended)**
+## **Create Reverse Lookup Zone (Optional but Recommended)**
 
 **Purpose**: Resolves IP → Domain names (helpful for troubleshooting).
 
@@ -115,7 +115,7 @@ Reverse Lookup Zone → 42.168.192 → New Pointer → IP suffix: 11 → Select 
 
 ---
 
-## ** Configure Forwarders (Recursive Part)**
+## **Configure Forwarders (Recursive Part)**
 
 **Purpose**: Resolve external domains (e.g., google.com). This is the **recursive part** of the DNS server.
 
@@ -134,7 +134,7 @@ nslookup google.com 192.168.42.1
 
 ---
 
-## ** Configure Firewall for DNS**
+## **Configure Firewall for DNS**
 
 ### **Step 1 – Check DNS inbound rules**
 
@@ -166,7 +166,7 @@ Restart-Service -Name DNS
 
 ---
 
-## ** Test & Verification**
+## **Test & Verification**
 
 ### **Authoritative DNS (Internal Domains)**
 
@@ -189,7 +189,7 @@ Should return external IPs resolved via forwarders
 
 ---
 
-## ** Verification Checklist**
+## **Verification Checklist**
 
 * Static IP correctly applied (`ipconfig /all`)
 * DNS service running (`Restart-Service -Name DNS`)
