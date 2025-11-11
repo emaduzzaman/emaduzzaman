@@ -1,7 +1,7 @@
 
 ---
 
-# **Windows Server 2022 DNS Server Setup & Configuration **
+# Windows Server 2022 DNS Server Setup & Configuration 
 
 ---
 
