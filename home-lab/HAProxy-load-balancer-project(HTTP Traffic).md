@@ -183,12 +183,3 @@ Repeat on:
 - ✅ Resolved SSH access issue on all VMs
 
 ---
-
-## ✍️ Notes for Future
-
-- To change algorithm: edit `balance roundrobin` to `leastconn` or `source`.
-- You can monitor HAProxy with stats UI (`stats enable`) if needed.
-- Use `journalctl -xe` for HAProxy errors if it fails to start.
-- HAProxy is **L7 (Application Layer)** aware and **lightweight**.
-
----
