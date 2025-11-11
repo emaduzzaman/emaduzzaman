@@ -22,13 +22,13 @@
        ▼
 [Forward Lookup Zones]
        │
-       ├─ Zone: lplmis.com
+       ├─ Zone: gelani.com
        │      ├─ A Record: www → 192.168.42.11
        │      │   PTR auto-created if reverse zone exists
-       │      └─ A Record: intranet → 192.168.42.11
+       │      └─ A Record: emaduzzaman → 192.168.42.11
        │
-       └─ Zone: labaidpharma.com
-              └─ A Record: order → 192.168.42.11
+       └─ Zone: example.com
+              └─ A Record: kazi → 192.168.42.11
               
 [Reverse Lookup Zone (Optional)]
        │
@@ -63,16 +63,16 @@
 [Test & Verification – Command Line]
        │
        │ Internal Names:
-       │ nslookup www.lplmis.com 192.168.42.1
-       │ nslookup intranet.lplmis.com 192.168.42.1
-       │ nslookup order.labaidpharma.com 192.168.42.1
+       │ nslookup www.gelani.com 192.168.42.1
+       │ nslookup emaduzzaman.gelani.com 192.168.42.1
+       │ nslookup kazi.example.com 192.168.42.1
        │
        │ External Forwarders:
        │ nslookup google.com 192.168.42.1
        ▼
 [✅ Result]
        │
-       ├─ www.lplmis.com → 192.168.42.11
-       ├─ intranet.lplmis.com → 192.168.42.11
-       ├─ order.labaidpharma.com → 192.168.42.11
+       ├─ www.gelani.com → 192.168.42.11
+       ├─ emaduzzaman.gelani.com → 192.168.42.11
+       ├─ kazi.example.com → 192.168.42.11
        └─ External sites resolvable via forwarders
