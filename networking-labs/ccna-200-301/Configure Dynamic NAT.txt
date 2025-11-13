@@ -1,0 +1,32 @@
+Configure Dynamic NAT
+=====================
+1. Define NAT Source (Whom to NAT)
+----------------------------------
+BR(config)#ip access-list standard NAT-SOURCE
+BR(config-std-nacl)#permit 172.16.1.0 0.0.0.255
+BR(config-std-nacl)#exit
+
+2. Write the NAT Statement
+--------------------------
+BR(config)#ip nat inside source list NAT-SOURCE interface f1/0 overload
+
+OR
+If NAT using Pool:
+BR(config)#ip nat pool NAT-POOL 123.49.42.11 123.49.42.14 netmask 255.255.255.240
+BR(config)#ip nat inside source list NAT-SOURCE pool NAT-POOL overload
+
+3. Apply NAT
+------------
+BR(config)#int f0/0
+BR(config-if)#ip nat inside
+BR(config-if)#exit
+BR(config)#int f1/0
+BR(config-if)#ip nat outside
+BR(config-if)#exit
+
+BR#show ip nat translations
+
+Configure Static NAT
+====================
+BR(config)#ip nat inside source static 172.16.1.100 123.49.42.1 
+BR(config)#ip nat inside source static 172.16.1.101 123.49.42.2
