@@ -1,0 +1,20 @@
+IPv4:  172.20.0.0/21
+
+Host Information
+Sales		280 Hosts	
+Marketing	90 Hosts	
+Administration	28 Hosts	
+IT		8 Hosts		
+
+IPv4
+====
+Step 1: Subnet the given subnet and assign the 1st subnet to Sales department while wasting the fewest addresses.
+Step 2: From the available subnets that you created in Step 1, subnet further the 2nd subnet as per the host requirement of Marketing department.
+Step 3: From the subnets that you created in Step 2, assign the 1st subnet to Marketing department and subnet further the 3rd subnet as per the requirement of Administration department.
+Step 4: From the subnets that you created in Step 3, assign the 1st subnet to Administration department and subnet further the 2nd subnet as per the requirement of IT department and assign the 2nd subnet to IT Department.
+
+Show step-by-step solution and answer the following:
+a.	Network Address, Broadcast Address, Subnet Mask of each assigned subnet to Sales, Marketing, Administration, and IT department
+b.	Find the 255th and 280th Host IP of Sales Department.
+c.	Find the 50th Host IP of Marketing Department
+d.	Find the 8th Host IP of IT Department

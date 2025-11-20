@@ -1,0 +1,77 @@
+
+ACL Example 1: A particular host HR can not reach the web server----Standard Numbered ACL
+==========================================================================================  
+Fri Jan 17 20:35:22 2025   DC   DC>en
+Fri Jan 17 20:35:34 2025   DC   DC#conf t
+Fri Jan 17 20:36:04 2025   DC   DC(config)#ip access-list ?
+Fri Jan 17 20:36:13 2025   DC   DC(config)#ip access-list standard ?
+Fri Jan 17 20:36:40 2025   DC   DC(config)#ip access-list standard 10
+Fri Jan 17 20:38:02 2025   DC   DC(config-std-nacl)#deny host 172.16.4.3
+Fri Jan 17 20:39:24 2025   DC   DC(config-std-nacl)#permit any 
+Fri Jan 17 20:39:28 2025   DC   DC(config-std-nacl)#exit
+Fri Jan 17 20:41:17 2025   DC   DC(config)#int f0/0
+Fri Jan 17 20:41:36 2025   DC   DC(config-if)#ip access-group ?
+Fri Jan 17 20:42:02 2025   DC   DC(config-if)#ip access-group 10 out 
+Fri Jan 17 20:42:06 2025   DC   DC(config-if)#exit
+Fri Jan 17 20:44:07 2025   DC   DC(config)#exit
+Fri Jan 17 20:44:09 2025   DC   DC#wr
+ACL Example 2: A particular host Sales can not reach the another particular Host IT---- Extended Numbered ACL
+===============================================================================================================
+Fri Jan 17 20:47:32 2025   Gulsan   Gulsan>en
+Fri Jan 17 20:47:39 2025   Gulsan   Gulsan#conf t
+Fri Jan 17 20:47:48 2025   Gulsan   Gulsan(config)#ip access-list extended ?
+Fri Jan 17 20:48:17 2025   Gulsan   Gulsan(config)#ip access-list extended 100
+Fri Jan 17 20:50:51 2025   Gulsan   Gulsan(config-ext-nacl)#deny ip host 172.16.5.2 host 172.16.4.2
+Fri Jan 17 20:51:19 2025   Gulsan   Gulsan(config-ext-nacl)#permit ip any any 
+Fri Jan 17 20:51:21 2025   Gulsan   Gulsan(config-ext-nacl)#exit
+Fri Jan 17 20:52:34 2025   Gulsan   Gulsan(config)#int f0/1
+Fri Jan 17 20:52:52 2025   Gulsan   Gulsan(config-if)#ip access-group 100 in
+Fri Jan 17 20:52:57 2025   Gulsan   Gulsan(config-if)#exit
+Fri Jan 17 20:52:59 2025   Gulsan   Gulsan(config)#exit
+Fri Jan 17 20:53:04 2025   Gulsan   Gulsan#wr
+ACL Example 3: Block a specific service for the host Sales and Modified ACL
+=========================================================================================================
+Fri Jan 17 20:58:22 2025   Gulsan   Gulsan#conf t
+Fri Jan 17 20:58:34 2025   Gulsan   Gulsan(config)#ip access-list extended 100
+Fri Jan 17 21:01:07 2025   Gulsan   Gulsan(config-ext-nacl)#deny tcp host 172.16.5.2 host 172.16.3.3 eq 80
+Fri Jan 17 21:01:18 2025   Gulsan   Gulsan(config-ext-nacl)#exit
+Fri Jan 17 21:01:33 2025   Gulsan   Gulsan(config)#exit
+Fri Jan 17 21:02:27 2025   Gulsan   Gulsan#show run
+Fri Jan 17 21:03:20 2025   Gulsan   Gulsan#wr
+How to show ACL
+===============================================================================================================
+Fri Jan 17 21:04:14 2025   Gulsan   Gulsan#show ip access-lists 
+Fri Jan 17 21:06:33 2025   Gulsan   Gulsan#conf t
+Fri Jan 17 21:06:44 2025   Gulsan   Gulsan(config)#ip access-list extended 100
+Fri Jan 17 21:07:09 2025   Gulsan   Gulsan(config-ext-nacl)#no 30 deny tcp host 172.16.5.2 host 172.16.3.3 eq www
+Fri Jan 17 21:07:30 2025   Gulsan   Gulsan(config-ext-nacl)#11 deny tcp host 172.16.5.2 host 172.16.3.3 eq www
+Fri Jan 17 21:07:33 2025   Gulsan   Gulsan(config-ext-nacl)#exit
+Fri Jan 17 21:07:35 2025   Gulsan   Gulsan(config)#exit
+Fri Jan 17 21:07:36 2025   Gulsan   Gulsan#wr
+Fri Jan 17 21:07:37 2025   Gulsan   Gulsan#wr
+Fri Jan 17 21:07:46 2025   Gulsan   Gulsan#show ip access-lists 
+Fri Jan 17 21:10:28 2025   Banani   Banani#conf t
+Fri Jan 17 21:10:53 2025   Banani   Banani(config)#line vty 0 4
+Fri Jan 17 21:11:02 2025   Banani   Banani(config-line)#password cricket
+Fri Jan 17 21:11:06 2025   Banani   Banani(config-line)#exit
+Fri Jan 17 21:11:20 2025   Banani   Banani(config)#enable password cricket
+Fri Jan 17 21:11:22 2025   Banani   Banani(config)#exit
+Fri Jan 17 21:11:39 2025   Banani   Banani#conf t
+ACL Example 4: Restricted Remote login for Every User except IT----- Standard Named ACL
+================================================================================================================
+Fri Jan 17 21:12:20 2025   Banani   Banani(config)#ip access-list standard ResReAcc
+Fri Jan 17 21:12:53 2025   Banani   Banani(config-std-nacl)#permit host 172.16.4.2
+Fri Jan 17 21:13:03 2025   Banani   Banani(config-std-nacl)#exit
+Apply ACL
+==============================================================================================================
+Fri Jan 17 21:14:16 2025   Banani   Banani(config)#line vty 0 4
+Fri Jan 17 21:15:17 2025   Banani   Banani(config-line)#access-class ResReAcc in
+Fri Jan 17 21:15:19 2025   Banani   Banani(config-line)#exit
+Fri Jan 17 21:15:21 2025   Banani   Banani(config)#exit
+Fri Jan 17 21:15:24 2025   Banani   Banani#wr
+Fri Jan 17 21:16:22 2025   Banani   Banani#conf t
+Fri Jan 17 21:16:27 2025   Banani   Banani(config)#line vty 0 4
+Fri Jan 17 21:16:34 2025   Banani   Banani(config-line)#transport input telnet 
+Fri Jan 17 21:16:35 2025   Banani   Banani(config-line)#exit
+Fri Jan 17 21:16:37 2025   Banani   Banani(config)#exit
+Fri Jan 17 21:17:06 2025   IT   C:\>telent 172.16.4.1
