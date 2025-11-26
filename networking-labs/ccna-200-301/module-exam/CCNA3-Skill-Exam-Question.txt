@@ -1,0 +1,47 @@
+HQ VLANs
+========
+1    default 172.16.1.0/24  2001:211:A:1::/64
+2    sales 172.16.2.0/24 2001:211:A:2::/64
+3    marketing 172.16.3.0/26 2001:211:A:3::/64
+4    administration 172.16.4.0/28 2001:211:A:4::/64
+5    it 172.16.5.0/29 2001:211:A:5::/64
+6    wireless 172.16.6.0/24 2001:211:A:6::/64
+
+1. Configure VLAN, VTP, Inter-VLAN Routing, DHCPv4, DHCPv6
+==========================================================
+a. Configure DLSW as VTP Server. ALSW1 and ALSW2 will be VTP client.
+b. Configure Inter-VLAN Routing using Router-in-the-Stick.
+c. Configure DHCPv4. Sales and Marketing VLAN users will receive IP address configuration from DHCP Server. Exclude first 10 IP addresses from the pool. Configure 8.8.8.8 as the DNS Server for the DHCP Pool.
+d. Configure Stateful DHCPv6 for Sales and Marketing VLAN users.
+
+2. Configure STP, EtherChannel, Switchport Security
+===================================================
+a. Configure Rapid PVST in all switches.
+b. Configure PortFast and BPDU Guard in ALSW1.
+c. Configure EtherChannel as depicted in the topology.
+c. Configure Switchport Security in ALSW2.
+
+3. Configure Wireless LAN
+=========================
+a. Configure WLC and LAPs as required. SSID: XYZ
+b. Configure WPA2 Personal.
+
+4. Configure Routing
+====================
+a. Configure default static route to ISP.
+b. Configure OSPF routing between HQ and Branch Routers. Establish seamless connectivity between all branches. Redistribute default static route to all branch routers via OSPF.
+
+5. Configure NAT and ACL
+========================
+a. Configure NAT on the HQ Router.
+b. Configure ACL on the ISP Router so that no host can go to internet with a Private IP.
+c. Configure ACL on the HQ Router so that only people from IT VLAN can remotely access the HQ Router.
+
+BR
+=== 
+a. Configure OSPF to establish connectivity with all branches. 
+b. Configure Wireless Router in the BR Network.
+
+Save all Router and Switch configuration in the TFTP Server.
+
+Final Checkpoint: Everyone should have seamless connectivity among themselves and to the internet.
