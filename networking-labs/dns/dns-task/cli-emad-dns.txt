@@ -1,0 +1,83 @@
+root@emad-dns:/home/ubuntu# cd /etc
+root@emad-dns:/etc# ls
+PackageKit                     cloud                 e2scrub.conf  hosts.allow      libaudit.conf   mke2fs.conf          os-release              rc1.d         shells             tmpfiles.d
+X11                            console-setup         ec2_version   hosts.deny       libblockdev     modprobe.d           overlayroot.conf        rc2.d         skel               ubuntu-advantage
+adduser.conf                   cron.d                environment   init.d           libnl-3         modules              overlayroot.local.conf  rc3.d         sos                ucf.conf
+alternatives                   cron.daily            ethertypes    initramfs-tools  locale.alias    modules-load.d       pam.conf                rc4.d         ssh                udev
+apparmor                       cron.hourly           fstab         inputrc          locale.gen      mtab                 pam.d                   rc5.d         ssl                ufw
+apparmor.d                     cron.monthly          fuse.conf     insserv.conf.d   localtime       multipath            passwd                  rc6.d         subgid             update-manager
+apport                         cron.weekly           gai.conf      iproute2         logcheck        multipath.conf       passwd-                 rcS.d         subgid-            update-motd.d
+apt                            crontab               groff         iscsi            login.defs      nanorc               perl                    resolv.conf   subuid             update-notifier
+bash.bashrc                    cryptsetup-initramfs  group         issue            logrotate.conf  needrestart          pm                      rmt           subuid-            usb_modeswitch.conf
+bash_completion                crypttab              group-        issue.net        logrotate.d     netconfig            polkit-1                rpc           sudo.conf          usb_modeswitch.d
+bash_completion.d              dbus-1                grub.d        kernel           lsb-release     netplan              pollinate               rsyslog.conf  sudo_logsrvd.conf  vim
+bind                           debconf.conf          gshadow       kernel-img.conf  lvm             network              ppp                     rsyslog.d     sudoers            vmware-tools
+bindresvport.blacklist         debian_version        gshadow-      landscape        machine-id      networkd-dispatcher  profile                 screenrc      sudoers.d          vtrgb
+binfmt.d                       default               gss           ld.so.cache      magic           networks             profile.d               security      sysctl.conf        wgetrc
+byobu                          deluser.conf          hdparm.conf   ld.so.conf       magic.mime      newt                 protocols               selinux       sysctl.d           xattr.conf
+ca-certificates                depmod.d              host.conf     ld.so.conf.d     manpath.config  nftables.conf        python3                 services      systemd            xdg
+ca-certificates.conf           dhcp                  hostname      ldap             mdadm           nsswitch.conf        python3.10              shadow        terminfo           zsh_command_not_found
+ca-certificates.conf.dpkg-old  dpkg                  hosts         legal            mime.types      opt                  rc0.d                   shadow-       timezone
+root@emad-dns:/etc# cd b
+bash.bashrc             bash_completion         bash_completion.d/      bind/                   bindresvport.blacklist  binfmt.d/               byobu/
+root@emad-dns:/etc# cd bind
+root@emad-dns:/etc/bind# ls
+bind.keys  db.0  db.127  db.255  db.empty  db.local  named.conf  named.conf.default-zones  named.conf.local  named.conf.options  rndc.key  zones.rfc1918
+root@emad-dns:/etc/bind# mkdir -p /etc/bind/zones
+root@emad-dns:/etc/bind# ls
+bind.keys  db.0  db.127  db.255  db.empty  db.local  named.conf  named.conf.default-zones  named.conf.local  named.conf.options  rndc.key  zones  zones.rfc1918
+root@emad-dns:/etc/bind# nano named.conf.
+named.conf.default-zones  named.conf.local          named.conf.options
+root@emad-dns:/etc/bind# nano named.conf.local
+root@emad-dns:/etc/bind# cat named.conf.local
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "gelani.com" {
+    type master;
+    file "/etc/bind/zones/gelani.com.db";
+};
+root@emad-dns:/etc/bind# sudo nano /etc/bind/zones/gelani.com.db
+root@emad-dns:/etc/bind# sudo nano /etc/bind/zones/gelani.com.db
+root@emad-dns:/etc/bind# cat zones/gelani.com.db
+$TTL    604800
+@       IN      SOA     ns1.youname.com. admin.youname.com. (
+                              2025120301 ; Serial
+                              604800     ; Refresh
+                              86400      ; Retry
+                              2419200    ; Expire
+                              604800 )   ; Negative Cache TTL
+
+; Name Servers
+@       IN      NS      ns1.youname.com.
+
+; A Records
+ns1     IN      A       <DNS_SERVER_IP>
+@       IN      A       <WEB_SERVER_IP>
+mail    IN      A       <EMAIL_SERVER_IP>
+
+; CNAME Records
+www     IN      CNAME   youname.com.
+
+; MX Records
+@       IN      MX 10   mail.youname.com.
+
+; TXT Records (SPF)
+@       IN      TXT     "v=spf1 ip4:<EMAIL_SERVER_IP> -all"
+root@emad-dns:/etc/bind# cat /etc/netplan/01-netcfg.yaml
+network:
+  version: 2
+  ethernets:
+    ens3:
+      dhcp4: true
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 1.1.1.1
+root@emad-dns:/etc/bind# nano /etc/netplan/01-netcfg.yaml
+root@emad-dns:/etc/bind#
