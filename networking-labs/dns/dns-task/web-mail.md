@@ -8059,9 +8059,350 @@ Dec 04 12:23:26 web-mail mariadbd[40459]: 2025-12-04 12:23:26 38 [Warning] Acces
 Dec 04 12:27:49 web-mail mariadbd[40459]: 2025-12-04 12:27:49 39 [Warning] Access denied for user 'roundcube'@'localhost' (using password: YES)
 Dec 04 12:27:49 web-mail mariadbd[40459]: 2025-12-04 12:27:49 41 [Warning] Access denied for user 'roundcube'@'localhost' (using password: YES)
 ubuntu@web-mail:~$
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ubuntu@web-mail:~$ sudo adduser nahid-101
+Adding user `nahid-101' ...
+Adding new group `nahid-101' (1001) ...
+Adding new user `nahid-101' (1001) with group `nahid-101' ...
+Creating home directory `/home/nahid-101' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for nahid-101
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n] y
+ubuntu@web-mail:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 8942 qdisc fq_codel state UP group default qlen 1000
+    link/ether fa:16:3e:39:0e:80 brd ff:ff:ff:ff:ff:ff
+    altname enp0s3
+    inet 192.168.20.15/24 metric 100 brd 192.168.20.255 scope global dynamic ens3
+       valid_lft 32883sec preferred_lft 32883sec
+    inet6 fe80::f816:3eff:fe39:e80/64 scope link
+       valid_lft forever preferred_lft forever
+ubuntu@web-mail:~$ sudo adduser fuad-102
+Adding user `fuad-102' ...
+Adding new group `fuad-102' (1002) ...
+Adding new user `fuad-102' (1002) with group `fuad-102' ...
+Creating home directory `/home/fuad-102' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for fuad-102
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n] y
+ubuntu@web-mail:~$ sudo adduser ashfaq
+Adding user `ashfaq' ...
+Adding new group `ashfaq' (1003) ...
+Adding new user `ashfaq' (1003) with group `ashfaq' ...
+Creating home directory `/home/ashfaq' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for ashfaq
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n] y
+ubuntu@web-mail:~$ sudo i
+sudo: i: command not found
+ubuntu@web-mail:~$ sudo bash
+root@web-mail:/home/ubuntu# usermod -l ashfaq-103 ashfaq
+root@web-mail:/home/ubuntu# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:102:105::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:103:106:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+syslog:x:104:111::/home/syslog:/usr/sbin/nologin
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+tss:x:106:112:TPM software stack,,,:/var/lib/tpm:/bin/false
+uuidd:x:107:113::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:108:114::/nonexistent:/usr/sbin/nologin
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
+pollinate:x:110:1::/var/cache/pollinate:/bin/false
+landscape:x:111:116::/var/lib/landscape:/usr/sbin/nologin
+fwupd-refresh:x:112:117:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+lxd:x:999:100::/var/snap/lxd/common/lxd:/bin/false
+postfix:x:113:122::/var/spool/postfix:/usr/sbin/nologin
+dovecot:x:114:124:Dovecot mail server,,,:/usr/lib/dovecot:/usr/sbin/nologin
+dovenull:x:115:125:Dovecot login user,,,:/nonexistent:/usr/sbin/nologin
+mysql:x:116:126:MySQL Server,,,:/nonexistent:/bin/false
+nahid-101:x:1001:1001:,,,:/home/nahid-101:/bin/bash
+fuad-102:x:1002:1002:,,,:/home/fuad-102:/bin/bash
+ashfaq-103:x:1003:1003:,,,:/home/ashfaq:/bin/bash
+root@web-mail:/home/ubuntu# nano rename-user.sh
+root@web-mail:/home/ubuntu# chmod +x rename-user.sh
+root@web-mail:/home/ubuntu# ./rename-user.sh
+Renaming user...
+usermod: user 'ashfaq' does not exist
+usermod: directory /home/ashfaq-103 exists
+Done! ✔️
+User has been renamed from ashfaq to ashfaq-103.
+It is recommended to reboot:  sudo reboot
+root@web-mail:/home/ubuntu# cat rename-user.sh
+#!/bin/bash
 
+OLD_USER="ashfaq"
+NEW_USER="ashfaq-103"
 
+# 1. Make sure you're not logged in as the user you want to rename
+if [ "$(whoami)" = "$OLD_USER" ]; then
+  echo "❌ You are logged in as $OLD_USER. Log in as root or another sudo user."
+  exit 1
+fi
 
+echo "Renaming user..."
 
+# 2. Change the username
+usermod -l "$NEW_USER" "$OLD_USER"
+
+# 3. Rename group if it exists and matches old username
+if getent group "$OLD_USER" > /dev/null; then
+  groupmod -n "$NEW_USER" "$OLD_USER"
+fi
+
+# 4. Rename the home directory
+if [ -d "/home/$OLD_USER" ]; then
+  mv "/home/$OLD_USER" "/home/$NEW_USER"
+fi
+
+# 5. Update home directory path in user settings
+usermod -d "/home/$NEW_USER" -m "$NEW_USER"
+
+echo "Done! ✔️"
+echo "User has been renamed from $OLD_USER to $NEW_USER."
+echo "It is recommended to reboot:  sudo reboot"
+root@web-mail:/home/ubuntu# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:102:105::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:103:106:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+syslog:x:104:111::/home/syslog:/usr/sbin/nologin
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+tss:x:106:112:TPM software stack,,,:/var/lib/tpm:/bin/false
+uuidd:x:107:113::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:108:114::/nonexistent:/usr/sbin/nologin
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
+pollinate:x:110:1::/var/cache/pollinate:/bin/false
+landscape:x:111:116::/var/lib/landscape:/usr/sbin/nologin
+fwupd-refresh:x:112:117:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+lxd:x:999:100::/var/snap/lxd/common/lxd:/bin/false
+postfix:x:113:122::/var/spool/postfix:/usr/sbin/nologin
+dovecot:x:114:124:Dovecot mail server,,,:/usr/lib/dovecot:/usr/sbin/nologin
+dovenull:x:115:125:Dovecot login user,,,:/nonexistent:/usr/sbin/nologin
+mysql:x:116:126:MySQL Server,,,:/nonexistent:/bin/false
+nahid-101:x:1001:1001:,,,:/home/nahid-101:/bin/bash
+fuad-102:x:1002:1002:,,,:/home/fuad-102:/bin/bash
+ashfaq-103:x:1003:1003:,,,:/home/ashfaq-103:/bin/bash
+root@web-mail:/home/ubuntu#
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+root@web-mail:/home/ubuntu# ls
+Maildir  rename-user.sh
+root@web-mail:/home/ubuntu# nano rename-user.sh
+root@web-mail:/home/ubuntu# ./rename-user.sh
+Renaming user...
+usermod: user 'ashfaq-101' does not exist
+usermod: user 'ashfaq-101' does not exist
+Done! ✔️
+User has been renamed from ashfaq-101 to ashfaq-101.
+It is recommended to reboot:  sudo reboot
+root@web-mail:/home/ubuntu# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:102:105::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:103:106:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+syslog:x:104:111::/home/syslog:/usr/sbin/nologin
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+tss:x:106:112:TPM software stack,,,:/var/lib/tpm:/bin/false
+uuidd:x:107:113::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:108:114::/nonexistent:/usr/sbin/nologin
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
+pollinate:x:110:1::/var/cache/pollinate:/bin/false
+landscape:x:111:116::/var/lib/landscape:/usr/sbin/nologin
+fwupd-refresh:x:112:117:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+lxd:x:999:100::/var/snap/lxd/common/lxd:/bin/false
+postfix:x:113:122::/var/spool/postfix:/usr/sbin/nologin
+dovecot:x:114:124:Dovecot mail server,,,:/usr/lib/dovecot:/usr/sbin/nologin
+dovenull:x:115:125:Dovecot login user,,,:/nonexistent:/usr/sbin/nologin
+mysql:x:116:126:MySQL Server,,,:/nonexistent:/bin/false
+nahid-101:x:1001:1001:,,,:/home/nahid-101:/bin/bash
+fuad-102:x:1002:1002:,,,:/home/fuad-102:/bin/bash
+ashfaq-103:x:1003:1003:,,,:/home/ashfaq-103:/bin/bash
+root@web-mail:/home/ubuntu# nano rename-user.sh
+root@web-mail:/home/ubuntu# nano rename-user.sh
+root@web-mail:/home/ubuntu# ./rename-user.sh
+Renaming user...
+usermod: directory /home/ashfaq-101 exists
+Done! ✔️
+User has been renamed from ashfaq-103 to ashfaq-101.
+It is recommended to reboot:  sudo reboot
+root@web-mail:/home/ubuntu# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:102:105::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:103:106:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+syslog:x:104:111::/home/syslog:/usr/sbin/nologin
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+tss:x:106:112:TPM software stack,,,:/var/lib/tpm:/bin/false
+uuidd:x:107:113::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:108:114::/nonexistent:/usr/sbin/nologin
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
+pollinate:x:110:1::/var/cache/pollinate:/bin/false
+landscape:x:111:116::/var/lib/landscape:/usr/sbin/nologin
+fwupd-refresh:x:112:117:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+lxd:x:999:100::/var/snap/lxd/common/lxd:/bin/false
+postfix:x:113:122::/var/spool/postfix:/usr/sbin/nologin
+dovecot:x:114:124:Dovecot mail server,,,:/usr/lib/dovecot:/usr/sbin/nologin
+dovenull:x:115:125:Dovecot login user,,,:/nonexistent:/usr/sbin/nologin
+mysql:x:116:126:MySQL Server,,,:/nonexistent:/bin/false
+nahid-101:x:1001:1001:,,,:/home/nahid-101:/bin/bash
+fuad-102:x:1002:1002:,,,:/home/fuad-102:/bin/bash
+ashfaq-101:x:1003:1003:,,,:/home/ashfaq-101:/bin/bash
+root@web-mail:/home/ubuntu# nano rename-user.sh
+root@web-mail:/home/ubuntu# ./rename-user.sh
+Renaming user...
+usermod: directory /home/fuad-101 exists
+Done! ✔️
+User has been renamed from fuad-102 to fuad-101.
+It is recommended to reboot:  sudo reboot
+root@web-mail:/home/ubuntu# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:102:105::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:103:106:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+syslog:x:104:111::/home/syslog:/usr/sbin/nologin
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+tss:x:106:112:TPM software stack,,,:/var/lib/tpm:/bin/false
+uuidd:x:107:113::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:108:114::/nonexistent:/usr/sbin/nologin
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
+pollinate:x:110:1::/var/cache/pollinate:/bin/false
+landscape:x:111:116::/var/lib/landscape:/usr/sbin/nologin
+fwupd-refresh:x:112:117:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+lxd:x:999:100::/var/snap/lxd/common/lxd:/bin/false
+postfix:x:113:122::/var/spool/postfix:/usr/sbin/nologin
+dovecot:x:114:124:Dovecot mail server,,,:/usr/lib/dovecot:/usr/sbin/nologin
+dovenull:x:115:125:Dovecot login user,,,:/nonexistent:/usr/sbin/nologin
+mysql:x:116:126:MySQL Server,,,:/nonexistent:/bin/false
+nahid-101:x:1001:1001:,,,:/home/nahid-101:/bin/bash
+ashfaq-101:x:1003:1003:,,,:/home/ashfaq-101:/bin/bash
+fuad-101:x:1002:1002:,,,:/home/fuad-101:/bin/bash
+root@web-mail:/home/ubuntu#
 
 
