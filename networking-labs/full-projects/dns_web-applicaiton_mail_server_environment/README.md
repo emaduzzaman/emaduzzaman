@@ -1,5 +1,4 @@
 # DNS, Web, and Mail Server Project  
-### By Gelani
 
 ## **Project Summary**
 
