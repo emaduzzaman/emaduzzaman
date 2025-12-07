@@ -50,7 +50,7 @@ Complete implementation of integrated DNS, web, and mail server infrastructure o
 
 #### VM 1: dns-lab (DNS Server)
 - **CPU:** 2 Cores
-- **RAM:** 8 GB
+- **RAM:** 4 GB
 - **Storage:** 80 GB NVMe
 - **IP Address:** 192.168.20.20
 - **OS:** Ubuntu Server 22.04 LTS
@@ -64,6 +64,8 @@ Complete implementation of integrated DNS, web, and mail server infrastructure o
 - **OS:** Ubuntu Server 22.04 LTS
 - **Services:** 
   - Nginx (Web Server)
+    - Virtual Host 1: gelani.com, www.gelani.com (Main website)
+    - Virtual Host 2: mail.gelani.com (Roundcube webmail)
   - Postfix (SMTP)
   - Dovecot (IMAP/POP3)
   - Roundcube (Webmail)
@@ -71,7 +73,8 @@ Complete implementation of integrated DNS, web, and mail server infrastructure o
   - PHP 8.1-FPM
 
 #### Testing Environment
-- Three Windows VMs for client testing
+- Two Windows 10 Pro VMs for client testing
+- One Ubuntu 24.04 Desktop (XFCE) for mail client testing
 - IP Range: 192.168.20.x
 
 ### Network Topology
@@ -84,14 +87,19 @@ Gateway (192.168.20.1)
     │   └─ BIND9: ns1.gelani.com
     │
     ├─→ Web/Mail Server (192.168.20.15)
-    │   ├─ Nginx: gelani.com, www.gelani.com
+    │   ├─ Nginx Virtual Hosts:
+    │   │   ├─ gelani.com, www.gelani.com
+    │   │   └─ mail.gelani.com (Roundcube)
     │   ├─ Postfix: SMTP Server
     │   ├─ Dovecot: IMAP/POP3 Server
-    │   ├─ Roundcube: mail.gelani.com
+    │   ├─ Roundcube: Webmail Interface
     │   └─ MariaDB: Database Backend
     │
-    └─→ Windows Clients (192.168.20.x)
-        └─ Testing & Verification
+    └─→ Testing & Verification
+        ├─ PC-1: 192.168.20.13 (Windows 10 Pro)
+        ├─ PC-2: 192.168.20.14 (Windows 10 Pro)
+        └─ PC-3: 192.168.20.16 (Ubuntu 24.04 Desktop - XFCE)
+            
 ```
 
 ---
@@ -2055,13 +2063,6 @@ sudo tail -f /var/log/syslog
 
 ## Project Summary
 
-### Achievements
-✓ Successfully deployed complete DNS, Web, and Mail infrastructure
-✓ Integrated services with proper DNS resolution
-✓ Implemented webmail interface for easy access
-✓ Created and tested multiple user accounts
-✓ Verified cross-service functionality
-✓ Documented comprehensive troubleshooting procedures
 
 ### Technical Skills Demonstrated
 - Linux system administration (Ubuntu 22.04)
@@ -2072,28 +2073,9 @@ sudo tail -f /var/log/syslog
 - PHP application integration (Roundcube)
 - Network troubleshooting
 - Service integration and testing
-
-### Project Metrics
-- **Total VMs:** 5 (2 Ubuntu servers + 3 Windows clients)
-- **Services Configured:** 6 (BIND9, Nginx, Postfix, Dovecot, MariaDB, PHP-FPM)
-- **Configuration Files Modified:** 15+
-- **Users Created:** 4
-- **Test Emails Sent:** 4+
-- **Zero Downtime:** All services running continuously
-
-### Future Enhancements
-1. Implement SSL/TLS encryption for all services
-2. Configure SPF, DKIM, and DMARC for production
-3. Set up automated backups
-4. Implement monitoring and alerting
-5. Configure fail2ban for security
-6. Add spam filtering (SpamAssassin)
-7. Implement webmail calendar and contacts
-8. Set up external mail relay for internet delivery
-
 ---
 
-## Credits and References
+## References
 
 ### Documentation Sources
 - BIND9 Administrator Reference Manual
