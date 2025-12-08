@@ -1,5 +1,4 @@
-# \#journey to prepare the vm to configure the dns bind9
-
+#Preparing the Virtual Machine
 ubuntu@dns-lab:~$ sudo apt update
 
 Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease \[129 kB]

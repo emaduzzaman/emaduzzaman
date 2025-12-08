@@ -573,6 +573,44 @@ curl -I http://gelani.com  # Check headers
 # Server: nginx/1.18.0
 # Content-Type: text/html
 ```
+### Windows Client Configuration
+
+To enable proper DNS resolution and network connectivity for testing, each Windows 10 Pro client was configured with static IP addresses and custom DNS settings:
+
+**Configuration Steps:**
+1. Open **Control Panel** → **Network and Sharing Center** → **Change adapter settings**
+2. Right-click on the active network adapter and select **Properties**
+3. Select **Internet Protocol Version 4 (TCP/IPv4)** and click **Properties**
+4. Configure the following settings:
+   - **PC-1 (192.168.20.13):**
+     - IP Address: `192.168.20.13`
+     - Subnet Mask: `255.255.255.0`
+     - Default Gateway: `192.168.20.1`
+     - Preferred DNS Server: `192.168.20.20` (dns-lab server)
+     - Alternate DNS Server: `8.8.8.8` (Google DNS as fallback)
+   
+   - **PC-2 (192.168.20.14):**
+     - IP Address: `192.168.20.14`
+     - Subnet Mask: `255.255.255.0`
+     - Default Gateway: `192.168.20.1`
+     - Preferred DNS Server: `192.168.20.20` (dns-lab server)
+     - Alternate DNS Server: `8.8.8.8` (Google DNS as fallback)
+
+5. Click **OK** to apply the settings
+6. Open **Command Prompt** and verify configuration:
+```cmd
+   ipconfig /all
+   nslookup gelani.com
+   ping gelani.com
+```
+
+**Verification Results:**
+- Static IP addresses assigned correctly ✓
+- DNS resolution working via 192.168.20.20 ✓
+- All domain names (gelani.com, www.gelani.com, mail.gelani.com) resolving correctly ✓
+- Network connectivity to gateway and internet confirmed ✓
+
+This configuration ensured that all Windows clients could properly resolve domain names using the custom BIND9 DNS server and access web and mail services within the test environment.
 
 **Testing from Windows Client:**
 1. Configure DNS to use 192.168.20.20
@@ -921,6 +959,11 @@ sudo passwd fuad-101
 sudo passwd ashfaq-101
 ```
 
+**Note:** After creating users, you can either:
+1. Log in as each user and let the system automatically create necessary directories
+2. Wait for Roundcube/Dovecot to automatically create the Maildir structure when the user first sends or receives email
+3. Manually create the Maildir structure (optional, shown below)
+
 ##### Rename Existing Users (if needed)
 
 Create bash script for renaming: `/home/ubuntu/rename_user.sh`
@@ -953,13 +996,37 @@ chmod +x rename_user.sh
 ./rename_user.sh ashfaq-103 ashfaq-101
 ```
 
-#### 19. Create Maildir Structure for Users
+#### 19. Maildir Structure Creation
+
+**Important:** The Maildir structure is **automatically created** by Dovecot when a user first receives or sends an email through Roundcube or any IMAP/POP3 client. Manual creation is **optional** and only needed if you want to pre-configure the mail directories.
+
+##### Automatic Creation (Recommended)
+Simply have each user:
+1. Log into Roundcube webmail (http://mail.gelani.com)
+2. Send or receive their first email
+3. Dovecot will automatically create the Maildir structure with proper permissions
+
+##### Manual Creation (Optional)
+If you prefer to create the Maildir structure manually before the first email:
 ```bash
-# Create Maildir for each user
+# Create Maildir for each user (optional)
 sudo -u nahid-101 mkdir -p /home/nahid-101/Maildir/{cur,new,tmp}
 sudo -u fuad-101 mkdir -p /home/fuad-101/Maildir/{cur,new,tmp}
 sudo -u ashfaq-101 mkdir -p /home/ashfaq-101/Maildir/{cur,new,tmp}
 sudo -u ubuntu mkdir -p /home/ubuntu/Maildir/{cur,new,tmp}
+```
+
+**Maildir Structure Explanation:**
+- `cur/` - Contains read/processed messages
+- `new/` - Contains new, unread messages
+- `tmp/` - Temporary storage during message delivery
+
+**Verification:**
+```bash
+# Check if Maildir exists for a user
+ls -la /home/nahid-101/Maildir/
+
+# After first email, you should see the structure automatically created
 ```
 
 ---
@@ -1154,24 +1221,6 @@ sudo tail -f /var/log/dovecot.log
 - No errors in logs ✓
 - Mail queue empty (all delivered) ✓
 - IMAP connections successful ✓
-
-### Complete Testing Summary
-
-| Component | Test | Result | Notes |
-|-----------|------|--------|-------|
-| DNS | Forward lookup | ✓ PASS | All domains resolve correctly |
-| DNS | Reverse lookup | ✓ PASS | PTR records working |
-| DNS | CNAME resolution | ✓ PASS | www → gelani.com |
-| DNS | MX record | ✓ PASS | mail.gelani.com priority 10 |
-| Web | HTTP access | ✓ PASS | 200 OK responses |
-| Web | Virtual hosts | ✓ PASS | gelani.com and www work |
-| Web | Browser access | ✓ PASS | From Windows clients |
-| Mail | SMTP delivery | ✓ PASS | Local delivery working |
-| Mail | IMAP access | ✓ PASS | All users can login |
-| Mail | Roundcube | ✓ PASS | Web interface accessible |
-| Mail | Cross-user email | ✓ PASS | All test emails delivered |
-| Mail | Windows client | ✓ PASS | External client configured |
-
 ---
 
 ## Troubleshooting Guide
