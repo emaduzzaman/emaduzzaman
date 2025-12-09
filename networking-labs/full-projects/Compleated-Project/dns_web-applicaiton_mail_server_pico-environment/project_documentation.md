@@ -12,7 +12,7 @@ This infrastructure was built purely for **testing purposes** in a controlled la
 
 If you plan to use this setup in a production environment, you **MUST** refer to the comprehensive security hardening guide:
 
-[production-security-hardening-guide.md](Production-Security-Hardening-Guide.md)
+[production-security-hardening-guide.md](production-security-hardening-guide.md)
 
 
 ### Additional Resources
