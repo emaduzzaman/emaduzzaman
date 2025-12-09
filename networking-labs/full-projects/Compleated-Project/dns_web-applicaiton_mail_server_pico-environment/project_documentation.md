@@ -41,7 +41,6 @@ The CLI files contain the raw command history showing exactly how the project wa
 7. [Troubleshooting Guide](#troubleshooting-guide)
 8. [Appendix: Configuration Files](#appendix-configuration-files)
 9. [Quick Reference Commands](#quick-reference-commands)
-10. [Project Summary](#project-summary)
 
 ---
 
