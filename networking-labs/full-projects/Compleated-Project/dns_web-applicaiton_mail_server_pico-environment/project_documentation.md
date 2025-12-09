@@ -6,13 +6,13 @@
 
 **This documentation describes a test/lab environment setup and is NOT suitable for production use.**
 
-This infrastructure was built purely for **testing purposes** in a controlled lab environment. The configuration includes several security compromises that make it unsuitable for production deployment:
+This infrastructure was built purely for **testing purposes** in a controlled lab environment.
 
 ### For Production Deployment
 
 If you plan to use this setup in a production environment, you **MUST** refer to the comprehensive security hardening guide:
 
-** [Production-Security-Hardening-Guide.md](Production-Security-Hardening-Guide.md)**
+[Production-Security-Hardening-Guide.md](Production-Security-Hardening-Guide.md)
 
 
 ### Additional Resources
