@@ -1,7 +1,7 @@
 # HAProxy Load Balancer on Proxmox VE
 ---
 
-## 🎯 Overview
+## Overview
 
 This project implements a simple yet effective HTTP load balancer using **HAProxy** to distribute incoming traffic across two Nginx web servers in a round-robin fashion. The entire infrastructure runs on Proxmox VE installed on repurposed laptop hardware.
 
@@ -14,7 +14,7 @@ This project implements a simple yet effective HTTP load balancer using **HAProx
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ### Network Topology
 
@@ -69,7 +69,7 @@ This project implements a simple yet effective HTTP load balancer using **HAProx
 
 ---
 
-## 🚀 Infrastructure Setup
+## Infrastructure Setup
 
 ### Step 1: Create Virtual Machines in Proxmox
 
@@ -136,7 +136,7 @@ curl http://192.168.10.138
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Step 3: Install HAProxy on Load Balancer
 
@@ -247,7 +247,7 @@ sudo systemctl status haproxy
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Basic Load Balancing Test
 
@@ -322,7 +322,7 @@ ab -n 1000 -c 10 http://192.168.10.244/
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Common Issues and Solutions
 
