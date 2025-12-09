@@ -1,8 +1,37 @@
-# DNS, Web, and Mail Server Infrastructure Project
+# DNS, Web, and Mail Server Infrastructure Project in PICO PUBLIC CLOUD
 
 ---
 
-## Table of Contents
+## IMPORTANT NOTICE - TESTING ENVIRONMENT ONLY
+
+**This documentation describes a test/lab environment setup and is NOT suitable for production use.**
+
+This infrastructure was built purely for **testing purposes** in a controlled lab environment. The configuration includes several security compromises that make it unsuitable for production deployment:
+
+### For Production Deployment
+
+If you plan to use this setup in a production environment, you **MUST** refer to the comprehensive security hardening guide:
+
+** [Production-Security-Hardening-Guide.md](Production-Security-Hardening-Guide.md)**
+
+
+### Additional Resources
+
+This documentation is part of a complete project repository that includes:
+
+- **project-documentation.md** (This file) - Main project documentation
+- **production-security-hardening-guide.md** - Security guidelines for production deployment
+- **cli-dns-lab.md** - Command-line history and actual implementation steps for DNS server
+- **cli-web-mail.md** - Command-line history and actual implementation steps for Web/Mail server
+- **test_result-screenshots** - Command-line history and actual implementation steps for Web/Mail server
+- **README.md** - Brief summary of the project scope and overall implementation overview
+
+The CLI files contain the raw command history showing exactly how the project was implemented, including troubleshooting steps and real-time problem-solving.
+
+---
+
+## 📑 Table of Contents
+
 1. [Project Overview](#project-overview)
 2. [Infrastructure Details](#infrastructure-details)
 3. [DNS Server Configuration](#dns-server-configuration)
@@ -10,24 +39,28 @@
 5. [Mail Server Configuration](#mail-server-configuration)
 6. [Testing Results](#testing-results)
 7. [Troubleshooting Guide](#troubleshooting-guide)
-8. [Security Considerations](#security-considerations)
-9. [Appendix: Configuration Files](#appendix-configuration-files)
+8. [Appendix: Configuration Files](#appendix-configuration-files)
+9. [Quick Reference Commands](#quick-reference-commands)
+10. [Project Summary](#project-summary)
 
 ---
 
 ## Project Overview
 
 ### Summary
-Complete implementation of integrated DNS, web, and mail server infrastructure on Pico Public Cloud for the **gelani.com** domain (gelnai.com is a fictitious domain used for illustrative purposes.). The project involves deploying two Ubuntu Server 22.04 VMs in a 192.168.20.0/24 subnet with full service integration and comprehensive testing.
+
+Complete implementation of integrated DNS, web, and mail server infrastructure on Pico Public Cloud for the **gelani.com** domain (gelani.com is a fictitious domain used for illustrative purposes). The project involves deploying two Ubuntu Server 22.04 VMs in a 192.168.20.0/24 subnet with full service integration and comprehensive testing.
 
 ### Domain Information
-- **Domain Name:** gelani.com (this is a fictitious domain used for illustrative purposes)
+
+- **Domain Name:** gelani.com (fictitious domain for demonstration)
 - **Subdomains:** 
   - ns1.gelani.com (DNS server)
   - www.gelani.com (web server)
   - mail.gelani.com (mail server)
 
 ### User Accounts Created
+
 - nahid-101
 - fuad-101
 - ashfaq-101
@@ -38,9 +71,11 @@ Complete implementation of integrated DNS, web, and mail server infrastructure o
 ## Infrastructure Details
 
 ### Cloud Platform
+
 **Provider:** Pico Public Cloud
 
 ### Network Configuration
+
 - **Subnet:** 192.168.20.0/24
 - **Gateway:** 192.168.20.1
 - **DNS Server IP:** 192.168.20.20
@@ -49,17 +84,19 @@ Complete implementation of integrated DNS, web, and mail server infrastructure o
 ### Virtual Machines
 
 #### VM 1: dns-lab (DNS Server)
+
 - **CPU:** 2 Cores
 - **RAM:** 4 GB
-- **Storage:** 80 GB NVMe
+- **Storage:** 40 GB NVMe
 - **IP Address:** 192.168.20.20
 - **OS:** Ubuntu Server 22.04 LTS
 - **Services:** BIND9 DNS Server
 
 #### VM 2: web-mail (Web & Mail Server)
+
 - **CPU:** 4 Cores
 - **RAM:** 8 GB
-- **Storage:** 100 GB NVMe
+- **Storage:** 80 GB NVMe
 - **IP Address:** 192.168.20.15
 - **OS:** Ubuntu Server 22.04 LTS
 - **Services:** 
@@ -73,11 +110,12 @@ Complete implementation of integrated DNS, web, and mail server infrastructure o
   - PHP 8.1-FPM
 
 #### Testing Environment
-- Two Windows 10 Pro VMs for client testing
-- One Ubuntu 24.04 Desktop (XFCE) for mail client testing
+
+- One Windows 10 Pro VM for client testing
 - IP Range: 192.168.20.x
 
 ### Network Topology
+
 ```
 Internet
     ↓
@@ -96,10 +134,7 @@ Gateway (192.168.20.1)
     │   └─ MariaDB: Database Backend
     │
     └─→ Testing & Verification
-        ├─ PC-1: 192.168.20.13 (Windows 10 Pro)
-        ├─ PC-2: 192.168.20.14 (Windows 10 Pro)
-        └─ PC-3: 192.168.20.16 (Ubuntu 24.04 Desktop - XFCE)
-            
+        └─ PC-1: 192.168.20.13 (Windows 10 Pro)
 ```
 
 ---
@@ -109,6 +144,7 @@ Gateway (192.168.20.1)
 ### System Preparation
 
 #### 1. System Updates
+
 ```bash
 sudo apt update
 sudo apt upgrade -y
@@ -123,13 +159,17 @@ sudo apt upgrade -y
 **Solution:** Disable cloud-init network management and use netplan.
 
 ##### Step 2.1: Disable Cloud-Init Network Config
+
 Create file: `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg`
+
 ```yaml
 network: {config: disabled}
 ```
 
 ##### Step 2.2: Configure Static IP with Netplan
+
 Create file: `/etc/netplan/01-netcfg.yaml`
+
 ```yaml
 network:
   version: 2
@@ -148,6 +188,7 @@ network:
 ```
 
 ##### Step 2.3: Secure Netplan Configuration
+
 ```bash
 sudo chmod 600 /etc/netplan/01-netcfg.yaml
 sudo rm /etc/netplan/50-cloud-init.yaml
@@ -156,6 +197,7 @@ sudo netplan apply
 ```
 
 ##### Step 2.4: Verify Network Connectivity
+
 ```bash
 ping -c 3 192.168.20.1  # Gateway test
 ping -c 3 8.8.8.8       # Internet test
@@ -168,6 +210,7 @@ ping -c 3 8.8.8.8       # Internet test
 ### BIND9 Installation and Configuration
 
 #### 3. Install BIND9 Packages
+
 ```bash
 sudo apt install -y bind9 bind9utils bind9-doc dnsutils dns-root-data
 ```
@@ -175,6 +218,7 @@ sudo apt install -y bind9 bind9utils bind9-doc dnsutils dns-root-data
 #### 4. Main BIND9 Configuration
 
 Edit file: `/etc/bind/named.conf.options`
+
 ```bind
 options {
     directory "/var/cache/bind";
@@ -206,6 +250,7 @@ options {
 #### 5. Zone Configuration
 
 Edit file: `/etc/bind/named.conf.local`
+
 ```bind
 // Forward zone for gelani.com
 zone "gelani.com" {
@@ -221,6 +266,7 @@ zone "20.168.192.in-addr.arpa" {
 ```
 
 #### 6. Create Zone Files Directory
+
 ```bash
 sudo mkdir -p /etc/bind/zones
 ```
@@ -228,6 +274,7 @@ sudo mkdir -p /etc/bind/zones
 #### 7. Forward Zone File
 
 Create file: `/etc/bind/zones/db.gelani.com`
+
 ```bind
 ;
 ; BIND data file for gelani.com
@@ -269,6 +316,7 @@ www                     IN      CNAME   gelani.com.
 #### 8. Reverse Zone File
 
 Create file: `/etc/bind/zones/db.192.168.20`
+
 ```bind
 ;
 ; BIND reverse data file for 192.168.20.0/24
@@ -291,6 +339,7 @@ $TTL    604800
 ```
 
 #### 9. Set Proper Permissions
+
 ```bash
 sudo chown root:bind /etc/bind/zones/db.gelani.com
 sudo chown root:bind /etc/bind/zones/db.192.168.20
@@ -299,6 +348,7 @@ sudo chmod 644 /etc/bind/zones/db.192.168.20
 ```
 
 #### 10. Validate Configuration
+
 ```bash
 # Check main configuration
 sudo named-checkconf
@@ -315,6 +365,7 @@ sudo named-checkzone 20.168.192.in-addr.arpa /etc/bind/zones/db.192.168.20
 - Zone files should load without errors
 
 #### 11. Restart and Enable BIND9
+
 ```bash
 sudo systemctl restart bind9
 sudo systemctl enable bind9
@@ -322,6 +373,7 @@ sudo systemctl status bind9
 ```
 
 #### 12. DNS Server Testing (from DNS server itself)
+
 ```bash
 # Test A records
 dig @localhost gelani.com
@@ -355,6 +407,7 @@ dig @localhost gelani.com TXT
 ### System Preparation (web-mail VM)
 
 #### 1. System Updates
+
 ```bash
 sudo apt update
 sudo apt upgrade -y
@@ -367,13 +420,17 @@ sudo apt upgrade -y
 **Solution:** Disable systemd-resolved and create static /etc/resolv.conf.
 
 ##### Step 2.1: Disable Cloud-Init
+
 Create file: `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg`
+
 ```yaml
 network: {config: disabled}
 ```
 
 ##### Step 2.2: Configure Static IP
+
 Create file: `/etc/netplan/01-netcfg.yaml`
+
 ```yaml
 network:
   version: 2
@@ -392,6 +449,7 @@ network:
 ```
 
 ##### Step 2.3: Apply Configuration
+
 ```bash
 sudo chmod 600 /etc/netplan/01-netcfg.yaml
 sudo rm /etc/netplan/50-cloud-init.yaml
@@ -399,34 +457,40 @@ sudo netplan apply
 ```
 
 ##### Step 2.4: Disable systemd-resolved
+
 ```bash
 sudo systemctl stop systemd-resolved
 sudo systemctl disable systemd-resolved
 ```
 
 ##### Step 2.5: Create Static DNS Configuration
+
 ```bash
 sudo rm /etc/resolv.conf
 sudo nano /etc/resolv.conf
 ```
 
 Add content:
+
 ```
 nameserver 192.168.20.20
 nameserver 8.8.8.8
 ```
 
 ##### Step 2.6: Protect resolv.conf from Changes
+
 ```bash
 sudo chattr +i /etc/resolv.conf
 ```
 
 To remove protection later (if needed):
+
 ```bash
 sudo chattr -i /etc/resolv.conf
 ```
 
 ##### Step 2.7: Verify DNS Resolution
+
 ```bash
 dig gelani.com
 nslookup gelani.com
@@ -442,11 +506,13 @@ ping -c 3 gelani.com
 ### Nginx Web Server Installation
 
 #### 3. Install Nginx
+
 ```bash
 sudo apt install -y nginx
 ```
 
 #### 4. Create Website Directory Structure
+
 ```bash
 sudo mkdir -p /var/www/gelani.com/html
 sudo chown -R $USER:$USER /var/www/gelani.com/html
@@ -456,6 +522,7 @@ sudo chmod -R 755 /var/www/gelani.com
 #### 5. Create Website Content
 
 Create file: `/var/www/gelani.com/html/index.html`
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -525,6 +592,7 @@ Create file: `/var/www/gelani.com/html/index.html`
 #### 6. Configure Nginx Virtual Host
 
 Create file: `/etc/nginx/sites-available/gelani.com`
+
 ```nginx
 server {
     listen 80;
@@ -545,12 +613,14 @@ server {
 ```
 
 #### 7. Enable Virtual Host
+
 ```bash
 sudo ln -s /etc/nginx/sites-available/gelani.com /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default  # Remove default site
 ```
 
 #### 8. Test and Restart Nginx
+
 ```bash
 # Test configuration
 sudo nginx -t
@@ -562,6 +632,7 @@ sudo systemctl status nginx
 ```
 
 #### 9. Web Server Testing
+
 ```bash
 # Test from command line
 curl http://gelani.com
@@ -573,11 +644,13 @@ curl -I http://gelani.com  # Check headers
 # Server: nginx/1.18.0
 # Content-Type: text/html
 ```
+
 ### Windows Client Configuration
 
-To enable proper DNS resolution and network connectivity for testing, each Windows 10 Pro client was configured with static IP addresses and custom DNS settings:
+To enable proper DNS resolution and network connectivity for testing, the Windows 10 Pro client was configured with static IP address and custom DNS settings:
 
 **Configuration Steps:**
+
 1. Open **Control Panel** → **Network and Sharing Center** → **Change adapter settings**
 2. Right-click on the active network adapter and select **Properties**
 3. Select **Internet Protocol Version 4 (TCP/IPv4)** and click **Properties**
@@ -588,31 +661,20 @@ To enable proper DNS resolution and network connectivity for testing, each Windo
      - Default Gateway: `192.168.20.1`
      - Preferred DNS Server: `192.168.20.20` (dns-lab server)
      - Alternate DNS Server: `8.8.8.8` (Google DNS as fallback)
-   
-   - **PC-2 (192.168.20.14):**
-     - IP Address: `192.168.20.14`
-     - Subnet Mask: `255.255.255.0`
-     - Default Gateway: `192.168.20.1`
-     - Preferred DNS Server: `192.168.20.20` (dns-lab server)
-     - Alternate DNS Server: `8.8.8.8` (Google DNS as fallback)
 
 5. Click **OK** to apply the settings
 6. Open **Command Prompt** and verify configuration:
+
 ```cmd
-   ipconfig /all
-   nslookup gelani.com
-   ping gelani.com
+ipconfig /all
+nslookup gelani.com
+ping gelani.com
 ```
 
-**Verification Results:**
-- Static IP addresses assigned correctly ✓
-- DNS resolution working via 192.168.20.20 ✓
-- All domain names (gelani.com, www.gelani.com, mail.gelani.com) resolving correctly ✓
-- Network connectivity to gateway and internet confirmed ✓
-
-This configuration ensured that all Windows clients could properly resolve domain names using the custom BIND9 DNS server and access web and mail services within the test environment.
+This configuration ensured that Windows client could properly resolve domain names using the custom BIND9 DNS server and access web and mail services within the test environment.
 
 **Testing from Windows Client:**
+
 1. Configure DNS to use 192.168.20.20
 2. Open browser and navigate to:
    - http://gelani.com
@@ -626,6 +688,7 @@ This configuration ensured that all Windows clients could properly resolve domai
 ### Postfix Installation (SMTP Server)
 
 #### 1. Install Postfix
+
 ```bash
 sudo apt install -y postfix
 ```
@@ -639,6 +702,7 @@ sudo apt install -y postfix
 Edit file: `/etc/postfix/main.cf`
 
 Key configuration settings:
+
 ```
 # Basic settings
 myhostname = mail.gelani.com
@@ -663,6 +727,7 @@ relayhost =
 ```
 
 #### 3. Restart and Enable Postfix
+
 ```bash
 sudo systemctl restart postfix
 sudo systemctl enable postfix
@@ -686,6 +751,7 @@ sudo apt install -y dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd
 ##### Step 5.1: Main Configuration
 
 Edit file: `/etc/dovecot/dovecot.conf`
+
 ```
 # Protocols
 protocols = imap pop3 lmtp
@@ -697,6 +763,7 @@ listen = *, ::
 ##### Step 5.2: Mail Location
 
 Edit file: `/etc/dovecot/conf.d/10-mail.conf`
+
 ```
 # Mail location
 mail_location = maildir:~/Maildir
@@ -710,6 +777,7 @@ namespace inbox {
 ##### Step 5.3: Authentication
 
 Edit file: `/etc/dovecot/conf.d/10-auth.conf`
+
 ```
 # Disable plaintext auth (set to 'no' for testing only)
 disable_plaintext_auth = no
@@ -728,6 +796,7 @@ auth_mechanisms = plain login
 Edit file: `/etc/dovecot/conf.d/10-master.conf`
 
 Find the `service auth` section and add:
+
 ```
 service auth {
   unix_listener /var/spool/postfix/private/auth {
@@ -741,6 +810,7 @@ service auth {
 **Common Error:** Extra closing brace `}` can cause syntax errors. Ensure proper bracket matching.
 
 #### 6. Restart and Enable Dovecot
+
 ```bash
 sudo systemctl restart dovecot
 sudo systemctl enable dovecot
@@ -760,6 +830,7 @@ sudo systemctl status dovecot
 **Solution:** Purge Apache2 and install PHP-FPM for Nginx.
 
 ##### Step 7.1: Remove Apache2 (if installed)
+
 ```bash
 sudo systemctl stop apache2
 sudo apt purge -y apache2 apache2-*
@@ -767,6 +838,7 @@ sudo apt autoremove -y
 ```
 
 ##### Step 7.2: Install PHP-FPM and Extensions
+
 ```bash
 sudo apt install -y php8.1-fpm php8.1-cli php8.1-mysql php8.1-xml \
   php8.1-mbstring php8.1-curl php8.1-gd php8.1-intl php8.1-ldap \
@@ -774,6 +846,7 @@ sudo apt install -y php8.1-fpm php8.1-cli php8.1-mysql php8.1-xml \
 ```
 
 ##### Step 7.3: Start and Enable PHP-FPM
+
 ```bash
 sudo systemctl start php8.1-fpm
 sudo systemctl enable php8.1-fpm
@@ -783,11 +856,13 @@ sudo systemctl status php8.1-fpm
 ### MariaDB Installation
 
 #### 8. Install MariaDB
+
 ```bash
 sudo apt install -y mariadb-server mariadb-client
 ```
 
 #### 9. Secure MariaDB Installation
+
 ```bash
 sudo mysql_secure_installation
 ```
@@ -801,12 +876,14 @@ sudo mysql_secure_installation
 - Reload privilege tables: **Yes**
 
 #### 10. Verify MariaDB
+
 ```bash
 sudo systemctl status mariadb
 sudo mysql -u root
 ```
 
 From MySQL prompt:
+
 ```sql
 SHOW DATABASES;
 EXIT;
@@ -838,6 +915,7 @@ sudo apt install -y roundcube roundcube-core roundcube-mysql
 Edit file: `/etc/roundcube/config.inc.php`
 
 Add/modify these settings:
+
 ```php
 <?php
 
@@ -871,6 +949,7 @@ $config['des_key'] = 'AUTO_GENERATED_KEY_HERE';
 #### 13. Configure Nginx for Roundcube
 
 Create file: `/etc/nginx/sites-available/mail.gelani.com`
+
 ```nginx
 server {
     listen 80;
@@ -908,17 +987,20 @@ server {
 ```
 
 #### 14. Enable Roundcube Virtual Host
+
 ```bash
 sudo ln -s /etc/nginx/sites-available/mail.gelani.com /etc/nginx/sites-enabled/
 ```
 
 #### 15. Set Proper Permissions
+
 ```bash
 sudo chown -R www-data:www-data /var/lib/roundcube
 sudo chmod -R 755 /var/lib/roundcube
 ```
 
 #### 16. Restart All Services
+
 ```bash
 sudo systemctl restart php8.1-fpm
 sudo systemctl restart nginx
@@ -928,6 +1010,7 @@ sudo systemctl restart dovecot
 ```
 
 #### 17. Verify All Services
+
 ```bash
 sudo systemctl status php8.1-fpm
 sudo systemctl status nginx
@@ -947,6 +1030,7 @@ sudo systemctl status dovecot
 **Solution:** Created users with consistent xxx-101 format.
 
 ##### Create Users
+
 ```bash
 # Create users with home directories
 sudo useradd -m -s /bin/bash nahid-101
@@ -960,13 +1044,14 @@ sudo passwd ashfaq-101
 ```
 
 **Note:** After creating users, you can either:
-1. Log in as each user and let the system automatically create necessary directories
+1. Log in as each user and let the system automatically create necessary directories (must use `adduser` command, not `useradd`)
 2. Wait for Roundcube/Dovecot to automatically create the Maildir structure when the user first sends or receives email
 3. Manually create the Maildir structure (optional, shown below)
 
 ##### Rename Existing Users (if needed)
 
 Create bash script for renaming: `/home/ubuntu/rename_user.sh`
+
 ```bash
 #!/bin/bash
 
@@ -990,6 +1075,7 @@ echo "User $OLD_USER renamed to $NEW_USER successfully"
 ```
 
 Usage:
+
 ```bash
 chmod +x rename_user.sh
 ./rename_user.sh fuad-102 fuad-101
@@ -1001,13 +1087,16 @@ chmod +x rename_user.sh
 **Important:** The Maildir structure is **automatically created** by Dovecot when a user first receives or sends an email through Roundcube or any IMAP/POP3 client. Manual creation is **optional** and only needed if you want to pre-configure the mail directories.
 
 ##### Automatic Creation (Recommended)
+
 Simply have each user:
 1. Log into Roundcube webmail (http://mail.gelani.com)
 2. Send or receive their first email
 3. Dovecot will automatically create the Maildir structure with proper permissions
 
 ##### Manual Creation (Optional)
+
 If you prefer to create the Maildir structure manually before the first email:
+
 ```bash
 # Create Maildir for each user (optional)
 sudo -u nahid-101 mkdir -p /home/nahid-101/Maildir/{cur,new,tmp}
@@ -1022,6 +1111,7 @@ sudo -u ubuntu mkdir -p /home/ubuntu/Maildir/{cur,new,tmp}
 - `tmp/` - Temporary storage during message delivery
 
 **Verification:**
+
 ```bash
 # Check if Maildir exists for a user
 ls -la /home/nahid-101/Maildir/
@@ -1036,6 +1126,7 @@ ls -la /home/nahid-101/Maildir/
 ### DNS Resolution Testing
 
 #### From DNS Server (192.168.20.20)
+
 ```bash
 # Test A records
 dig @localhost gelani.com
@@ -1065,6 +1156,7 @@ dig @localhost gelani.com TXT
 - Query time: 0ms (localhost)
 
 #### From Web/Mail Server (192.168.20.15)
+
 ```bash
 dig gelani.com
 nslookup gelani.com
@@ -1084,6 +1176,7 @@ ping -c 3 gelani.com
 - Secondary DNS: 8.8.8.8
 
 **Commands:**
+
 ```cmd
 nslookup gelani.com
 nslookup www.gelani.com
@@ -1097,6 +1190,7 @@ ping gelani.com
 ### Web Server Testing
 
 #### Command Line Testing (from web-mail server)
+
 ```bash
 # Test main domain
 curl http://gelani.com
@@ -1120,7 +1214,7 @@ curl -I http://gelani.com
 - CNAME working (www → gelani.com) ✓
 - Nginx version: 1.18.0 ✓
 
-#### Browser Testing (from Windows clients)
+#### Browser Testing (from Windows client)
 
 **URLs Tested:**
 1. http://gelani.com
@@ -1132,6 +1226,7 @@ curl -I http://gelani.com
 ### Mail Server Testing
 
 #### Service Status Verification
+
 ```bash
 sudo systemctl status postfix
 sudo systemctl status dovecot
@@ -1149,42 +1244,40 @@ sudo systemctl status php8.1-fpm
 
 **URL:** http://mail.gelani.com
 
-**Login Tests:**
-1. nahid-101 / [password] → Success ✓
-2. fuad-101 / [password] → Success ✓
-3. ashfaq-101 / [password] → Success ✓
-4. ubuntu / [password] → Success ✓
-
 **Results:** All users can access webmail ✓
 
 #### Email Testing Matrix
 
 ##### Test 1: Internal Email (nahid-101 → fuad-101)
-**From:** Roundcube web interface
-**Sender:** nahid-101@gelani.com
-**Recipient:** fuad-101@gelani.com
-**Subject:** Test Email 1
+
+**From:** Roundcube web interface  
+**Sender:** nahid-101@gelani.com  
+**Recipient:** fuad-101@gelani.com  
+**Subject:** Test Email 1  
 **Result:** Delivered successfully ✓
 
 ##### Test 2: Internal Email (fuad-101 → ashfaq-101)
-**From:** Roundcube web interface
-**Sender:** fuad-101@gelani.com
-**Recipient:** ashfaq-101@gelani.com
-**Subject:** Test Email 2
+
+**From:** Roundcube web interface  
+**Sender:** fuad-101@gelani.com  
+**Recipient:** ashfaq-101@gelani.com  
+**Subject:** Test Email 2  
 **Result:** Delivered successfully ✓
 
 ##### Test 3: Email from Windows Client (ashfaq-101 → nahid-101)
-**From:** Windows email client (configured with IMAP/SMTP)
-**Sender:** ashfaq-101@gelani.com
-**Recipient:** nahid-101@gelani.com
-**Subject:** Test from Windows
+
+**From:** Windows email client (configured with IMAP/SMTP)  
+**Sender:** ashfaq-101@gelani.com  
+**Recipient:** nahid-101@gelani.com  
+**Subject:** Test from Windows  
 **Result:** Delivered successfully ✓
 
 ##### Test 4: System User Email (ubuntu → nahid-101)
-**From:** Command line (mail command or Roundcube)
-**Sender:** ubuntu@gelani.com
-**Recipient:** nahid-101@gelani.com
-**Subject:** System Test
+
+**From:** Command line (mail command or Roundcube)  
+**Sender:** ubuntu@gelani.com  
+**Recipient:** nahid-101@gelani.com  
+**Subject:** System Test  
 **Result:** Delivered successfully ✓
 
 #### Email Client Configuration (Windows)
@@ -1206,6 +1299,7 @@ sudo systemctl status php8.1-fpm
 **Result:** Email client successfully sends and receives ✓
 
 #### Log Verification
+
 ```bash
 # Check mail logs
 sudo tail -f /var/log/mail.log
@@ -1218,10 +1312,9 @@ sudo tail -f /var/log/dovecot.log
 ```
 
 **Results:**
-- No errors in logs ✓
-- Mail queue empty (all delivered) ✓
-- IMAP connections successful ✓
----
+- ✓ No errors in logs 
+- ✓ Mail queue empty (all delivered)
+- ✓ IMAP connections successful
 
 ## Troubleshooting Guide
 
@@ -1236,6 +1329,7 @@ sudo tail -f /var/log/dovecot.log
 - Network settings revert to cloud-init defaults
 
 **Solution:**
+
 ```bash
 # Disable cloud-init network management
 sudo nano /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
@@ -1253,12 +1347,14 @@ sudo chmod 600 /etc/netplan/01-netcfg.yaml
 **Problem:** Cannot resolve domain names.
 
 **Symptoms:**
+
 ```
 ; <<>> DiG 9.18.28-1~deb12u2-Debian <<>> gelani.com
 ;; connection timed out; no servers could be reached
 ```
 
 **Solution:**
+
 ```bash
 # Check if systemd-resolved is interfering
 sudo systemctl status systemd-resolved
@@ -1283,11 +1379,13 @@ sudo chattr +i /etc/resolv.conf
 **Problem:** Dovecot won't start, showing LMTP error.
 
 **Symptoms:**
+
 ```
 Fatal: service(lmtp) access(/usr/lib/dovecot/lmtp) failed: No such file or directory
 ```
 
 **Solution:**
+
 ```bash
 # Install missing LMTP module
 sudo apt install -y dovecot-lmtpd
@@ -1301,11 +1399,13 @@ sudo systemctl restart dovecot
 **Problem:** Nginx fails to start due to port 80 being in use.
 
 **Symptoms:**
+
 ```
 nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
 ```
 
 **Solution:**
+
 ```bash
 # Check what's using port 80
 sudo lsof -i :80
@@ -1324,11 +1424,13 @@ sudo systemctl restart nginx
 **Problem:** Roundcube installation fails during database setup.
 
 **Symptoms:**
+
 ```
 ERROR 2002 (HY000): Can't connect to local server through socket '/run/mysqld/mysqld.sock'
 ```
 
 **Solution:**
+
 ```bash
 # Ensure MariaDB is running
 sudo systemctl start mariadb
@@ -1343,11 +1445,13 @@ sudo dpkg-reconfigure roundcube-core
 **Problem:** Service fails to start due to syntax errors.
 
 **Symptoms:**
+
 ```
 dovecot: Fatal: Error in configuration file /etc/dovecot/conf.d/10-master.conf line 109: Unexpected '}'
 ```
 
 **Solution:**
+
 ```bash
 # Check configuration syntax
 sudo doveconf -n  # For Dovecot
@@ -1372,6 +1476,7 @@ sudo postfix check  # For Postfix
 - File permission denied
 
 **Solution:**
+
 ```bash
 # Fix web directory permissions
 sudo chown -R www-data:www-data /var/www/gelani.com
@@ -1391,11 +1496,13 @@ sudo chown -R [username]:[username] /home/[username]/Maildir
 **Problem:** Netplan shows permission warnings.
 
 **Symptoms:**
+
 ```
 ** (generate:1234): WARNING **: Permissions for /etc/netplan/01-netcfg.yaml are too open. Netplan configuration should NOT be accessible by others.
 ```
 
 **Solution:**
+
 ```bash
 sudo chmod 600 /etc/netplan/01-netcfg.yaml
 sudo netplan apply
@@ -1406,6 +1513,7 @@ sudo netplan apply
 **Problem:** Emails are not reaching recipients.
 
 **Solution:**
+
 ```bash
 # Check Postfix queue
 sudo postqueue -p
@@ -1437,6 +1545,7 @@ telnet mail.gelani.com 143
 **Problem:** Cannot connect to services from remote machines.
 
 **Solution:**
+
 ```bash
 # Check if UFW is active
 sudo ufw status
@@ -1497,320 +1606,6 @@ tail -f /var/log/nginx/error.log
 
 ---
 
-## Security Considerations
-
-### Current Configuration (Testing Environment)
-
-⚠️ **WARNING:** The current configuration is for **TESTING PURPOSES ONLY** and should NOT be used in production.
-
-#### Security Weaknesses in Current Setup:
-
-1. **No Encryption**
-   - HTTP instead of HTTPS (port 80)
-   - SMTP without TLS (port 25)
-   - IMAP without encryption (port 143)
-   - POP3 without encryption (port 110)
-
-2. **Authentication Issues**
-   - Plain text password authentication enabled
-   - No certificate-based authentication
-   - Weak password policy
-
-3. **Firewall**
-   - UFW disabled for testing
-   - All ports exposed
-   - No rate limiting
-
-4. **Mail Security**
-   - No SPF enforcement (record exists but not enforced)
-   - No DKIM signatures
-   - No DMARC policy
-   - Open relay protection basic only
-
-5. **Access Control**
-   - Broad network access (entire 192.168.20.0/24)
-   - No IP-based restrictions
-   - No fail2ban for brute force protection
-
-### Production Security Requirements
-
-#### 1. SSL/TLS Certificates
-
-**Obtain Certificates:**
-```bash
-# Using Let's Encrypt (for public domains)
-sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d gelani.com -d www.gelani.com -d mail.gelani.com
-```
-
-**Or use self-signed certificates for internal use:**
-```bash
-# Generate self-signed certificate
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-  -keyout /etc/ssl/private/gelani.key \
-  -out /etc/ssl/certs/gelani.crt
-```
-
-#### 2. HTTPS Configuration for Nginx
-
-Update `/etc/nginx/sites-available/gelani.com`:
-```nginx
-server {
-    listen 80;
-    server_name gelani.com www.gelani.com;
-    return 301 https://$server_name$request_uri;
-}
-
-server {
-    listen 443 ssl http2;
-    server_name gelani.com www.gelani.com;
-    
-    ssl_certificate /etc/ssl/certs/gelani.crt;
-    ssl_certificate_key /etc/ssl/private/gelani.key;
-    
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers HIGH:!aNULL:!MD5;
-    ssl_prefer_server_ciphers on;
-    
-    # ... rest of configuration
-}
-```
-
-#### 3. Secure SMTP (SMTPS - Port 465/587)
-
-Update `/etc/postfix/main.cf`:
-```
-# TLS settings
-smtpd_tls_cert_file=/etc/ssl/certs/gelani.crt
-smtpd_tls_key_file=/etc/ssl/private/gelani.key
-smtpd_tls_security_level=may
-smtpd_tls_auth_only=yes
-smtp_tls_security_level=may
-```
-
-Update `/etc/postfix/master.cf`:
-```
-submission inet n       -       y       -       -       smtpd
-  -o syslog_name=postfix/submission
-  -o smtpd_tls_security_level=encrypt
-  -o smtpd_sasl_auth_enable=yes
-  -o smtpd_client_restrictions=permit_sasl_authenticated,reject
-```
-
-#### 4. Secure IMAP (IMAPS - Port 993)
-
-Update `/etc/dovecot/conf.d/10-ssl.conf`:
-```
-ssl = required
-ssl_cert = </etc/ssl/certs/gelani.crt
-ssl_key = </etc/ssl/private/gelani.key
-ssl_protocols = !SSLv3 !TLSv1 !TLSv1.1
-ssl_cipher_list = ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256
-ssl_prefer_server_ciphers = yes
-```
-
-Update `/etc/dovecot/conf.d/10-auth.conf`:
-```
-disable_plaintext_auth = yes
-```
-
-#### 5. Firewall Configuration (UFW)
-
-```bash
-# Enable UFW
-sudo ufw enable
-
-# Allow SSH (if remote access needed)
-sudo ufw allow 22/tcp
-
-# Allow DNS
-sudo ufw allow 53/tcp
-sudo ufw allow 53/udp
-
-# Allow HTTP/HTTPS
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-
-# Allow secure mail ports
-sudo ufw allow 587/tcp  # SMTP submission
-sudo ufw allow 993/tcp  # IMAPS
-sudo ufw allow 995/tcp  # POP3S
-
-# Deny insecure ports
-sudo ufw deny 25/tcp   # SMTP (allow only for server-to-server)
-sudo ufw deny 143/tcp  # IMAP
-sudo ufw deny 110/tcp  # POP3
-
-# Check status
-sudo ufw status verbose
-```
-
-#### 6. Fail2Ban for Brute Force Protection
-
-```bash
-# Install Fail2Ban
-sudo apt install -y fail2ban
-
-# Copy default configuration
-sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-
-# Edit configuration
-sudo nano /etc/fail2ban/jail.local
-```
-
-Add these jails:
-```ini
-[sshd]
-enabled = true
-port = 22
-maxretry = 3
-bantime = 3600
-
-[postfix]
-enabled = true
-port = smtp,465,587
-maxretry = 3
-bantime = 3600
-
-[dovecot]
-enabled = true
-port = pop3,pop3s,imap,imaps
-maxretry = 3
-bantime = 3600
-
-[nginx-http-auth]
-enabled = true
-port = http,https
-maxretry = 3
-bantime = 3600
-```
-
-```bash
-# Start Fail2Ban
-sudo systemctl start fail2ban
-sudo systemctl enable fail2ban
-```
-
-#### 7. DKIM, SPF, and DMARC Configuration
-
-**Install OpenDKIM:**
-```bash
-sudo apt install -y opendkim opendkim-tools
-```
-
-**Generate DKIM keys:**
-```bash
-sudo mkdir -p /etc/opendkim/keys/gelani.com
-sudo opendkim-genkey -D /etc/opendkim/keys/gelani.com/ -d gelani.com -s default
-sudo chown -R opendkim:opendkim /etc/opendkim
-```
-
-**Add to DNS (example):**
-```
-; SPF Record
-gelani.com.   IN   TXT   "v=spf1 mx ip4:192.168.20.15 -all"
-
-; DKIM Record
-default._domainkey.gelani.com.   IN   TXT   "v=DKIM1; k=rsa; p=MIGfMA0GCS..."
-
-; DMARC Record
-_dmarc.gelani.com.   IN   TXT   "v=DMARC1; p=quarantine; rua=mailto:admin@gelani.com"
-```
-
-#### 8. Regular Updates and Monitoring
-
-```bash
-# Enable automatic security updates
-sudo apt install -y unattended-upgrades
-sudo dpkg-reconfigure -plow unattended-upgrades
-
-# Set up log monitoring
-sudo apt install -y logwatch
-sudo logwatch --output mail --mailto admin@gelani.com --detail high
-```
-
-#### 9. Strong Password Policy
-
-```bash
-# Install password quality checking
-sudo apt install -y libpam-pwquality
-
-# Edit PAM configuration
-sudo nano /etc/pam.d/common-password
-```
-
-Add:
-```
-password requisite pam_pwquality.so retry=3 minlen=12 difok=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1
-```
-
-#### 10. Backup Strategy
-
-```bash
-# Create backup script
-sudo nano /usr/local/bin/backup-mail-server.sh
-```
-
-```bash
-#!/bin/bash
-BACKUP_DIR="/backup"
-DATE=$(date +%Y%m%d)
-
-# Backup DNS zones
-tar -czf $BACKUP_DIR/bind-$DATE.tar.gz /etc/bind/zones
-
-# Backup mail data
-tar -czf $BACKUP_DIR/mailboxes-$DATE.tar.gz /home/*/Maildir
-
-# Backup databases
-mysqldump --all-databases > $BACKUP_DIR/mysql-$DATE.sql
-gzip $BACKUP_DIR/mysql-$DATE.sql
-
-# Backup configuration files
-tar -czf $BACKUP_DIR/configs-$DATE.tar.gz \
-  /etc/nginx \
-  /etc/postfix \
-  /etc/dovecot \
-  /etc/roundcube
-
-# Remove backups older than 30 days
-find $BACKUP_DIR -type f -mtime +30 -delete
-```
-
-```bash
-# Make executable
-sudo chmod +x /usr/local/bin/backup-mail-server.sh
-
-# Add to crontab (daily at 2 AM)
-sudo crontab -e
-# Add line:
-# 0 2 * * * /usr/local/bin/backup-mail-server.sh
-```
-
-### Security Checklist for Production
-
-- [ ] SSL/TLS certificates installed and configured
-- [ ] HTTPS enabled for all web services
-- [ ] SMTPS (port 587) enabled for mail submission
-- [ ] IMAPS (port 993) enabled for mail retrieval
-- [ ] Plain text authentication disabled
-- [ ] UFW firewall enabled and configured
-- [ ] Fail2Ban installed and monitoring services
-- [ ] DKIM signatures configured
-- [ ] SPF records validated
-- [ ] DMARC policy implemented
-- [ ] Strong password policy enforced
-- [ ] Regular security updates automated
-- [ ] Backup strategy implemented
-- [ ] Log monitoring active
-- [ ] Intrusion detection system considered
-- [ ] Network access restricted to necessary hosts
-- [ ] Unnecessary services disabled
-- [ ] Root login disabled (SSH)
-- [ ] Regular security audits scheduled
-
----
-
 ## Appendix: Configuration Files
 
 ### Complete Configuration Files Reference
@@ -1818,11 +1613,13 @@ sudo crontab -e
 #### A. DNS Server Configuration Files
 
 **File:** `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg`
+
 ```yaml
 network: {config: disabled}
 ```
 
 **File:** `/etc/netplan/01-netcfg.yaml` (DNS Server)
+
 ```yaml
 network:
   version: 2
@@ -1841,6 +1638,7 @@ network:
 ```
 
 **File:** `/etc/bind/named.conf.options`
+
 ```bind
 options {
     directory "/var/cache/bind";
@@ -1865,6 +1663,7 @@ options {
 ```
 
 **File:** `/etc/bind/named.conf.local`
+
 ```bind
 zone "gelani.com" {
     type master;
@@ -1878,6 +1677,7 @@ zone "20.168.192.in-addr.arpa" {
 ```
 
 **File:** `/etc/bind/zones/db.gelani.com`
+
 ```bind
 $TTL    604800
 @       IN      SOA     ns1.gelani.com. admin.gelani.com. (
@@ -1897,6 +1697,7 @@ www                     IN      CNAME   gelani.com.
 ```
 
 **File:** `/etc/bind/zones/db.192.168.20`
+
 ```bind
 $TTL    604800
 @       IN      SOA     ns1.gelani.com. admin.gelani.com. (
@@ -1915,6 +1716,7 @@ $TTL    604800
 #### B. Web/Mail Server Configuration Files
 
 **File:** `/etc/netplan/01-netcfg.yaml` (Web/Mail Server)
+
 ```yaml
 network:
   version: 2
@@ -1933,12 +1735,14 @@ network:
 ```
 
 **File:** `/etc/resolv.conf`
+
 ```
 nameserver 192.168.20.20
 nameserver 8.8.8.8
 ```
 
 **File:** `/etc/nginx/sites-available/gelani.com`
+
 ```nginx
 server {
     listen 80;
@@ -1959,6 +1763,7 @@ server {
 ```
 
 **File:** `/etc/nginx/sites-available/mail.gelani.com`
+
 ```nginx
 server {
     listen 80;
@@ -1994,6 +1799,7 @@ server {
 ```
 
 **File:** `/etc/postfix/main.cf` (Key Settings)
+
 ```
 myhostname = mail.gelani.com
 mydomain = gelani.com
@@ -2007,12 +1813,14 @@ relayhost =
 ```
 
 **File:** `/etc/dovecot/dovecot.conf` (Key Settings)
+
 ```
 protocols = imap pop3 lmtp
 listen = *, ::
 ```
 
 **File:** `/etc/dovecot/conf.d/10-mail.conf` (Key Settings)
+
 ```
 mail_location = maildir:~/Maildir
 namespace inbox {
@@ -2021,6 +1829,7 @@ namespace inbox {
 ```
 
 **File:** `/etc/dovecot/conf.d/10-auth.conf` (Key Settings)
+
 ```
 disable_plaintext_auth = no
 auth_mechanisms = plain login
@@ -2028,6 +1837,7 @@ auth_mechanisms = plain login
 ```
 
 **File:** `/etc/dovecot/conf.d/10-master.conf` (Postfix Auth Section)
+
 ```
 service auth {
   unix_listener /var/spool/postfix/private/auth {
@@ -2039,6 +1849,7 @@ service auth {
 ```
 
 **File:** `/etc/roundcube/config.inc.php` (Key Settings)
+
 ```php
 <?php
 $config['db_dsnw'] = 'mysql://roundcube:PASSWORD@localhost/roundcube';
@@ -2058,6 +1869,7 @@ $config['des_key'] = 'AUTO_GENERATED_KEY';
 ## Quick Reference Commands
 
 ### Service Management
+
 ```bash
 # Restart all services
 sudo systemctl restart bind9 nginx postfix dovecot mariadb php8.1-fpm
@@ -2070,6 +1882,7 @@ sudo systemctl enable bind9 nginx postfix dovecot mariadb php8.1-fpm
 ```
 
 ### DNS Testing
+
 ```bash
 dig @192.168.20.20 gelani.com
 nslookup gelani.com 192.168.20.20
@@ -2077,6 +1890,7 @@ host gelani.com 192.168.20.20
 ```
 
 ### Web Testing
+
 ```bash
 curl http://gelani.com
 curl http://www.gelani.com
@@ -2084,6 +1898,7 @@ curl http://mail.gelani.com
 ```
 
 ### Mail Testing
+
 ```bash
 # Check mail queue
 sudo postqueue -p
@@ -2096,6 +1911,7 @@ sudo ls -la /home/username/Maildir/new/
 ```
 
 ### Log Monitoring
+
 ```bash
 # Follow all mail logs
 sudo tail -f /var/log/mail.log
@@ -2107,41 +1923,5 @@ sudo tail -f /var/log/nginx/error.log
 # Follow system logs
 sudo tail -f /var/log/syslog
 ```
-
----
-
-## Project Summary
-
-
-### Technical Skills Demonstrated
-- Linux system administration (Ubuntu 22.04)
-- DNS server configuration (BIND9)
-- Web server deployment (Nginx)
-- Mail server setup (Postfix + Dovecot)
-- Database management (MariaDB)
-- PHP application integration (Roundcube)
-- Network troubleshooting
-- Service integration and testing
----
-
-## References
-
-### Documentation Sources
-- BIND9 Administrator Reference Manual
-- Nginx Official Documentation
-- Postfix Documentation
-- Dovecot Wiki
-- Roundcube Documentation
-- Ubuntu Server Guide
-
-### Tools and Technologies
-- **Ubuntu Server:** 22.04 LTS
-- **BIND:** 9.18.28
-- **Nginx:** 1.18.0
-- **Postfix:** 3.6.4
-- **Dovecot:** 2.3.16
-- **MariaDB:** 10.6.22
-- **PHP:** 8.1
-- **Roundcube:** 1.6.0
 
 ---
