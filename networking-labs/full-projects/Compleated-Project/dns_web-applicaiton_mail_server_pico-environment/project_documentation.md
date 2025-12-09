@@ -112,7 +112,7 @@ Complete implementation of integrated DNS, web, and mail server infrastructure o
 #### Testing Environment
 
 - One Windows 10 Pro VM for client testing
-- IP Range: 192.168.20.x
+- IP Address: 192.168.20.13
 
 ### Network Topology
 
@@ -1246,6 +1246,28 @@ sudo systemctl status php8.1-fpm
 
 **Results:** All users can access webmail ✓
 
+**Important Note - Email Address Compatibility:**
+
+Email addresses work with **both domain formats** due to the Postfix `mydestination` configuration in `/etc/postfix/main.cf`:
+```bash
+mydomain = gelani.com
+mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+# This expands to: mail.gelani.com, localhost.gelani.com, localhost, gelani.com
+```
+
+This means both address formats are valid and deliver to the same mailbox:
+- `nahid-101@gelani.com` ✓
+- `nahid-101@mail.gelani.com` ✓
+
+**Tested Email Address Formats:**
+
+| Format | Example | Status |
+|--------|---------|--------|
+| Primary Domain | nahid-101@gelani.com | ✓ Works |
+| Mail Hostname | nahid-101@mail.gelani.com | ✓ Works |
+
+Both formats deliver to the same user mailbox. For all tests below, either format can be used interchangeably.
+
 #### Email Testing Matrix
 
 ##### Test 1: Internal Email (nahid-101 → fuad-101)
@@ -1280,23 +1302,62 @@ sudo systemctl status php8.1-fpm
 **Subject:** System Test  
 **Result:** Delivered successfully ✓
 
-#### Email Client Configuration (Windows)
+---
 
-**IMAP Settings:**
-- Server: mail.gelani.com
-- Port: 143
-- Security: None (testing only)
-- Username: nahid-101
-- Password: [user password]
+### Best Practice Recommendation for Production
 
-**SMTP Settings:**
-- Server: mail.gelani.com
-- Port: 25
-- Security: None (testing only)
-- Username: nahid-101
-- Password: [user password]
+For production deployments, consider standardizing on **one** domain format for email addresses:
 
-**Result:** Email client successfully sends and receives ✓
+#### Option 1: Keep Both Domains (Current Setup)
+
+**Advantages:**
+- ✓ More flexible - users can use either format
+- ✓ Both `@gelani.com` and `@mail.gelani.com` work
+
+**Disadvantages:**
+- ⚠️ Can be confusing for users
+- ⚠️ Harder to communicate the "official" email address
+- ⚠️ Inconsistent business card/signature formats
+
+**Configuration:** No changes needed (current setup)
+
+#### Option 2: Restrict to Primary Domain Only (Recommended)
+
+**Use:** `nahid-101@gelani.com` format only
+
+Edit `/etc/postfix/main.cf`:
+```bash
+# Remove $myhostname to disable mail.gelani.com addresses
+mydestination = localhost.$mydomain, localhost, $mydomain
+```
+
+**Advantages:**
+- ✓ Cleaner: `user@company.com` not `user@mail.company.com`
+- ✓ More professional appearance
+- ✓ Easier to communicate to users and clients
+- ✓ Standard business practice
+
+**This is the most common choice for production environments.**
+
+#### Option 3: Restrict to Mail Hostname Only
+
+**Use:** `nahid-101@mail.gelani.com` format only
+
+Edit `/etc/postfix/main.cf`:
+```bash
+# Remove $mydomain to disable gelani.com addresses
+mydestination = $myhostname, localhost.$mydomain, localhost
+```
+
+**Use Case:** Internal mail servers or when the primary domain is used elsewhere
+
+**After making changes, restart Postfix:**
+```bash
+sudo postfix check
+sudo systemctl restart postfix
+```
+
+**Recommendation:** Most organizations choose **Option 2** for clarity and professionalism. Test thoroughly after any `mydestination` changes to ensure mail delivery continues to work correctly.
 
 #### Log Verification
 
