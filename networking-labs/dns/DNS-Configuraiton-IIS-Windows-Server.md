@@ -70,7 +70,7 @@
        │ External Forwarders:
        │ nslookup google.com 192.168.42.1
        ▼
-[✅ Result]
+   [Result]
        │
        ├─ www.lplmis.com → 192.168.42.11
        ├─ intranet.lplmis.com → 192.168.42.11

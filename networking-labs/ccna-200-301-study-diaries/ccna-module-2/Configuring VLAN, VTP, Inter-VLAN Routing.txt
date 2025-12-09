@@ -1,0 +1,128 @@
+Configuring VLAN, VTP, Inter-VLAN Routing
+=========================================
+Switch stores VLAN information in a database file: vlan.dat
+To view VLAN database: DLSW#show vlan brief
+
+1. Configure Trunk Ports
+------------------------
+DLSW(config)#interface range g1/0/1-5
+DLSW(config-if-range)#switchport mode trunk
+DLSW(config-if-range)#exit
+
+ALSW1(config)#interface range g0/1-2, f0/4
+ALSW1(config-if-range)#switchport mode trunk
+ALSW1(config-if-range)#exit
+
+ALSW2(config)#interface range g0/1-2, f0/5
+ALSW2(config-if-range)#switchport mode trunk
+ALSW2(config-if-range)#exit
+
+2. Configure VTP
+----------------
+To view VTP Status: 	DLSW#show vtp status
+To view VTP Password: 	DLSW#show vtp password
+
+2.1 Configure VTP Server
+------------------------
+DLSW(config)#vtp mode server
+DLSW(config)#vtp domain xyz
+DLSW(config)#vtp password ccna
+
+2.2 Configure VTP Client
+------------------------
+ALSW1(config)#vtp mode client
+ALSW1(config)#vtp domain xyz
+ALSW1(config)#vtp password ccna
+
+ALSW2(config)#vtp mode client
+ALSW2(config)#vtp domain xyz
+ALSW2(config)#vtp password ccna
+
+3. Create VLANs at VTP Server
+-----------------------------
+DLSW(config)#vlan 2
+DLSW(config-vlan)#name sales
+DLSW(config-vlan)#vlan 3
+DLSW(config-vlan)#name marketing
+DLSW(config-vlan)#vlan 4
+DLSW(config-vlan)#name administration
+DLSW(config-vlan)#vlan 5
+DLSW(config-vlan)#name it
+DLSW(config-vlan)#exit
+
+VLAN information should now be propagated to VTP Client switches.
+
+4. Assign switchports to their corresponding VLAN
+-------------------------------------------------
+ALSW1(config)#int range f0/1-2
+ALSW1(config-if-range)#switchport mode access
+ALSW1(config-if-range)#switchport access vlan 2
+ALSW1(config-if-range)#exit
+ALSW1(config)#int f0/3
+ALSW1(config-if)#switchport mode access
+ALSW1(config-if)#switchport access vlan 3
+ALSW1(config-if)#exit
+
+ALSW2(config)#int f0/1
+ALSW2(config-if)#switchport mode access
+ALSW2(config-if)#switchport access vlan 4
+ALSW2(config-if)#exit
+ALSW2(config)#int f0/2
+ALSW2(config-if)#switchport mode access
+ALSW2(config-if)#switchport access vlan 5
+ALSW2(config-if)#exit
+ALSW2(config)#int f0/4
+ALSW2(config-if)#switchport mode access
+ALSW2(config-if)#switchport voice vlan 1
+ALSW2(config-if)#exit
+
+At this point we can communicate within same VLAN. Communication between different VLANs would fail. So we need to configure Inter-VLAN Routing.
+
+5. Configure Inter-VLAN Routing using Router-on-the-stick
+---------------------------------------------------------
+Router(config)#int g0/0/0.1
+Router(config-subif)#encapsulation dot1q 1
+Router(config-subif)#ip address 172.16.1.1 255.255.255.0
+Router(config-subif)#exit
+Router(config)#int g0/0/0.2
+Router(config-subif)#encapsulation dot1Q 2
+Router(config-subif)#ip address 172.16.2.1 255.255.255.0
+Router(config-subif)#exit
+Router(config)#int g0/0/0.3
+Router(config-subif)#encapsulation dot1Q 3
+Router(config-subif)#ip address 172.16.3.1 255.255.255.192
+Router(config-subif)#exit
+Router(config)#int g0/0/0.4
+Router(config-subif)#encapsulation dot1Q 4
+Router(config-subif)#ip address 172.16.4.1 255.255.255.240
+Router(config-subif)#exit
+Router(config)#int g0/0/0.5
+Router(config-subif)#encapsulation dot1Q 5
+Router(config-subif)#ip address 172.16.5.1 255.255.255.248
+Router(config-subif)#exit
+Router(config)#int g0/0/0
+Router(config-if)#no shutdown
+Router(config-if)#exit
+
+Now we can communicate between different VLANs.
+
+Scenario 2: Configuring Inter-VLAN Routing at Multi-layer Switch using SVI
+--------------------------------------------------------------------------
+DLSW(config)#ip routing
+
+DLSW(config)#int vlan 1
+DLSW(config-if)#ip address 172.16.1.1 255.255.255.0
+DLSW(config-if)#no shutdown
+DLSW(config-if)#exit
+DLSW(config)#int vlan 2
+DLSW(config-if)#ip address 172.16.2.1 255.255.255.0
+DLSW(config-if)#exit
+DLSW(config)#int vlan 3
+DLSW(config-if)#ip address 172.16.3.1 255.255.255.192
+DLSW(config-if)#exit
+DLSW(config)#int vlan 4
+DLSW(config-if)#ip address 172.16.4.1 255.255.255.240
+DLSW(config-if)#exit
+DLSW(config)#int vlan 5
+DLSW(config-if)#ip address 172.16.5.1 255.255.255.248
+DLSW(config-if)#exit

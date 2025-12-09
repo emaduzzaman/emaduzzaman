@@ -1,0 +1,24 @@
+Configuring Stateless DHCPv6
+============================
+Router(config)#ipv6 dhcp pool Stateless-DHCPv6-Pool
+Router(config-dhcpv6)#dns-server 2001:4860:4860::8888
+Router(config-dhcpv6)#exit
+
+Router(config)#interface g0/0/0
+Router(config-if)#ipv6 nd other-config-flag 
+Router(config-if)#ipv6 dhcp server Stateless-DHCPv6-Pool
+Router(config-if)#exit
+
+Configuring Stateful DHCPv6
+===========================
+Router(config)#ipv6 dhcp pool Stateful-DHCPv6-Pool
+Router(config-dhcpv6)#address prefix 2001:211:A:1::/64
+Router(config-dhcpv6)#dns-server 2001:4860:4860::8888
+Router(config-dhcpv6)#exit
+
+Router(config)#interface g0/0/0
+Router(config-if)#ipv6 nd managed-config-flag 
+Router(config-if)#ipv6 dhcp server Statelful-DHCPv6-Pool
+Router(config-if)#exit
+
+Router#show ipv6 dhcp binding

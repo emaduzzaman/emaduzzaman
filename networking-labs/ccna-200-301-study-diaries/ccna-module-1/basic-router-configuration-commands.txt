@@ -1,0 +1,168 @@
+Configuration Modes
+====================
+To get help: ?
+<cr>	carriage return -- end of the line -- press enter
+
+	-------------
+	| User EXEC |			Router>enable			Limited view/read only mode
+	-------------
+		|
+	-------------------
+	| Privileged EXEC |		Router#configure terminal	All view/read only mode
+	-------------------
+		|
+	------------------------
+	| Global Configuration |	Router(config)#			Global Configuration mode
+	------------------------
+
+1. Configure Router Hostname
+----------------------------
+Router(config)#hostname Dhaka
+
+2. Configure IP Domain Name
+---------------------------
+Dhaka(config)#ip domain-name dhaka.com
+
+3. Secure the Privileged EXEC Mode
+----------------------------------
+Dhaka(config)#enable password enpass
+Saves the password in plain-text format in the configuration file. So it is visible and not secured.
+
+OR
+
+Dhaka(config)#enable secret enpass
+Saves the password in encrypted-text format in the configuration file. So it is secured. Uses MD5 Hash.
+
+4. Secure all the ways to access the router
+-------------------------------------------
+2 ways to access a router:
+a. Physically using line console 0
+----------------------------------
+Dhaka(config)#line console 0
+Dhaka(config-line)#password maradona
+Dhaka(config-line)#login
+Dhaka(config-line)#exit
+
+b. Remotely using line vty 0 4
+------------------------------
+Dhaka(config)#line vty 0 4
+Dhaka(config-line)#password pele
+Dhaka(config-line)#login
+Dhaka(config-line)#exit
+
+5. Enable password-encryption service
+-------------------------------------
+Dhaka(config)#service password-encryption
+
+This encrypts all the unencrypted passwords in the configuration file using Type 7 algorithm.
+
+6. Configure IP Addressing
+--------------------------
+Dhaka(config)#interface Fa0/0
+Dhaka(config-if)#description Connection to User LAN
+Dhaka(config-if)#ip address 172.16.0.1 255.255.252.0
+Dhaka(config-if)#no shutdown
+Dhaka(config-if)#exit
+
+Dhaka(config)#interface Fa0/1
+Dhaka(config-if)#description Connection to Server LAN
+Dhaka(config-if)#ip address 172.16.4.1 255.255.255.224
+Dhaka(config-if)#no shutdown
+Dhaka(config-if)#exit
+
+To remotely login:
+C:\>telnet 172.16.0.1
+
+At this point, all users are able to login to the router using the common password set at line vty. There is no accountability in this method. To ensure accountability, we need to configure username and password for each user.
+
+7. Configure Local Database and enable in-band authentication
+-------------------------------------------------------------
+Dhaka(config)#username kuddus secret boyati
+Dhaka(config)#username maradona secret pele
+
+Dhaka(config)#line console 0
+Dhaka(config-line)#login local
+Dhaka(config-line)#exit
+Dhaka(config)#line vty 0 4
+Dhaka(config-line)#login local
+Dhaka(config-line)#exit
+
+8. Configure Minimum Password Length
+------------------------------------
+Dhaka(config)#security passwords min-length 8
+
+9. Configure SSH
+----------------
+Dhaka(config)#crypto key generate rsa 
+
+To view the generated key:
+Dhaka#show crypto key mypubkey rsa
+To delete the generated key:
+Dhaka(config)#crypto key zeroize rsa
+
+To remotely login using SSH to the Router:
+C:\>ssh -l kuddus 172.16.0.1
+
+At this point, we can remotely login to the router using both SSH and Telnet.
+
+To enable SSH only:
+Dhaka(config)#line vty 0 4
+Dhaka(config-line)#transport input ssh
+Dhaka(config-line)#exit
+
+Configure Additional SSH Parameters
+-----------------------------------
+Dhaka(config)#ip ssh version 2
+Dhaka(config)#ip ssh authentication-retries 5
+Dhaka(config)#ip ssh time-out 60
+
+10. Configure Banner Message of the Day (MOTD)
+----------------------------------------------
+Dhaka(config)#banner motd #Unauthorized Access Prohibited!#
+
+To view the running-config:
+Dhaka#show running-config
+
+To view the startup-config:
+Dhaka#show startup-config
+
+To save the running-config to startup-config:
+Dhaka#copy running-config startup-config
+
+To save the running-config to TFTP Server:
+Dhaka#copy running-config tftp
+
+==========================
+Basic Switch Configuration
+==========================
+Switch(config)#hostname USW
+USW(config)#banner motd #Unauthorized Access Prohibited!#
+USW(config)#service password-encryption
+USW(config)#enable secret enpass
+USW(config)#line console 0
+USW(config-line)#login local
+USW(config-line)#exit
+USW(config)#line vty 0 4
+USW(config-line)#login local
+USW(config-line)#exit
+USW(config)#username kuddus secret boyati
+USW(config)#interface vlan 1
+USW(config-if)#ip address 172.16.3.254 255.255.252.0
+USW(config-if)#no shutdown
+USW(config)#ip default-gateway 172.16.0.1
+
+Enable IPv6 Unicast Routing
+---------------------------
+Dhaka(config)#ipv6 unicast-routing
+
+Configure IPv6 Address
+----------------------
+Dhaka(config)#int f0/0
+Dhaka(config-if)#ipv6 address 2001:211:A:1::/64
+Dhaka(config-if)#exit
+Dhaka(config)#int f0/1
+Dhaka(config-if)#ipv6 address 2001:211:A:2::/64
+Dhaka(config-if)#exit
+
+
+
