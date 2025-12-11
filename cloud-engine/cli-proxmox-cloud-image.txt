@@ -1,4 +1,4 @@
-root@pve:~# VMID=9000
+root@pve:~# VMID=9000 
 VMNAME="ubuntu24-cloud-template"
 STORAGE="local-lvm"
 BRIDGE="vmbr0"
