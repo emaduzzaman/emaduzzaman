@@ -62,7 +62,277 @@ This repository serves as a structured knowledge base for my professional work a
 
 ---
 # Full Repository Tree
+```
+/Users/kaziemaduzzamangelani/Workplace/emaduzzaman
+├── README.md
+├── cloud-engine
+│   ├── cloud-init
+│   │   ├── cloud-image
+│   │   │   ├── meta-data
+│   │   │   ├── seed.iso
+│   │   │   └── user-data
+│   │   └── userdata-scripts
+│   │       ├── default-user-pass-ssh-enable.yaml
+│   │       └── user-creation-bond-cloud-init.yaml
+│   └── home-lab
+│       ├── Screenshot 2025-12-12 at 3.18.14 PM.png
+│       ├── Screenshot 2025-12-12 at 3.19.05 PM.png
+│       ├── Screenshot 2025-12-12 at 3.19.16 PM.png
+│       └── cli-proxmox-cloud-image.txt
+├── full-projects
+│   └── dns_web-applicaiton_mail_server_openstack-environment
+│       ├── README.md
+│       ├── cli-dns-lab.md
+│       ├── cli-web-mail.md
+│       ├── production-security-hardening-guide.md
+│       ├── project_documentation.md
+│       └── test_result-screenshot
+│           ├── pc-1, ss1.png
+│           ├── pc-1, ss2.png
+│           └── pc-1checking-from-client-windows-10_host.png
+├── networking-labs
+│   ├── Cisco Router Password Recovery Steps.md
+│   ├── ccna-200-301
+│   │   ├── ACL.txt
+│   │   ├── ACL324.pkt
+│   │   ├── Configure Dynamic NAT.txt
+│   │   ├── Configuring DHCPv4.txt
+│   │   ├── Configuring Switchport Security.txt
+│   │   ├── Configuring VLAN, VTP, Inter-VLAN Routing.txt
+│   │   ├── DHCP-configuraiton-notev6.txt
+│   │   ├── Ipsec.txt
+│   │   ├── SM_Solution.txt
+│   │   ├── VLSM Assignment.txt
+│   │   ├── VLSM Example.docx
+│   │   ├── VLSM.png
+│   │   ├── XYZ Company.txt
+│   │   ├── basic-router-configuraiton.pkt
+│   │   ├── basic-router-configuration-commands.txt
+│   │   ├── dhcpv4.pkt
+│   │   ├── dhcpv6.pkt
+│   │   ├── hsrp.pkt
+│   │   ├── ip_addressing.png
+│   │   ├── ipv6.png
+│   │   ├── ipv6_address_assignment.pdf
+│   │   ├── ipv6_is_easy.pdf
+│   │   ├── module-exam
+│   │   │   ├── CCNA3-Skill-Exam-Question.txt
+│   │   │   ├── Module-1_ITN-exam-solution.pka
+│   │   │   ├── Module-2_SRWE-exam-solution .pka
+│   │   │   ├── ccna3.pkt
+│   │   │   └── ccna3_kazi-emaduzzaman-gelani.pkt
+│   │   ├── nat.pkt
+│   │   ├── ospf.pkt
+│   │   ├── ospf_commands.txt
+│   │   ├── sm.pka
+│   │   ├── srwe_answer.pdf
+│   │   ├── vlan-svi.pkt
+│   │   ├── vlan.pkt
+│   │   ├── vlsm_practice.doc
+│   │   ├── vlsm_practice_2.doc
+│   │   ├── vpn.pkt
+│   │   └── wlan.pkt
+│   ├── dns
+│   │   ├── BIND9-recursive-ubuntu 20.04.md
+│   │   └── windows-server 2022-iis-dns-configuration-(recursive + authoritative).md
+│   ├── full-projects
+│   │   └── Compleated-Project
+│   │       └── dns_web-applicaiton_mail_server_pico-environment
+│   ├── load-balancer
+│   │   ├── HAProxy-on proxmox_ve(http traffic).md
+│   │   └── Load-Balancing-on-openstack-AmphoraV2
+│   │       ├── load-balancer-at_layer_7.jpg
+│   │       └── load-balancing-on-pico-public-cloud-amphoraV2.md
+│   └── vpn
+│       ├── packet-tracer-ipsec-topology-config
+│       │   ├── configuration-commads.md
+│       │   └── vpn.pkt
+│       └── wireguard-vpn-gateway-openstack
+│           ├── # WireGuard VPN Server on Pico Public Cl.md
+│           ├── README.md
+│           ├── cli-wireguard.md
+│           ├── configuraiton-files
+│           │   ├── README.md
+│           │   ├── client-configuration-files.md
+│           │   ├── firewall-configuration-files.md
+│           │   ├── helper-scripts.md
+│           │   ├── server-configuration-files.md
+│           │   └── system-configuration-files.md
+│           ├── configuration-files.md
+│           ├── main-documentation.md
+│           └── snaps-vm_creation
+│               ├── netework_creation - 2.png
+│               ├── netework_creation-3.png
+│               ├── network_creation-1.png
+│               ├── server-configuration.png
+│               └── vm-creation -1.png
+├── penguin-scripts
+│   ├── firewall_iptable.sh
+│   ├── installed_apts.sh
+│   ├── linux-sys-info.sh
+│   ├── network_diagnose.sh
+│   ├── remove-known-hosts.sh
+│   ├── repo_cleanup.sh
+│   ├── system-cleaning
+│   │   ├── clean_xrdp_xfce.sh
+│   │   └── remove-bind9.sh
+│   ├── system_monitor.sh
+│   ├── user-management
+│   │   ├── delete_user_everything.sh
+│   │   └── user_sudo.sh
+│   └── volume-management
+│       ├── add_volume.sh
+│       ├── remove_volume.sh
+│       └── volume_status.sh
+├── penguin-system_configuration
+├── snake-scripts
+│   ├── encrypt_pdf.py
+│   ├── folder_structure.py
+│   ├── folder_structure_v2.py
+│   ├── repo-structure-tool_not-compleated.py
+│   ├── subnet_calculator_v1.py
+│   ├── subnet_calculator_v2.py
+│   └── vlsm_planner.py
+├── wincore-scripts
+└── wincore-systems
 
+31 directories, 101 files
+```
+/Users/kaziemaduzzamangelani/Workplace/emaduzzaman
+├── README.md
+├── README.md.tmp
+├── cloud-engine
+│   ├── cloud-init
+│   │   ├── cloud-image
+│   │   │   ├── meta-data
+│   │   │   ├── seed.iso
+│   │   │   └── user-data
+│   │   └── userdata-scripts
+│   │       ├── default-user-pass-ssh-enable.yaml
+│   │       └── user-creation-bond-cloud-init.yaml
+│   └── home-lab
+│       ├── Screenshot 2025-12-12 at 3.18.14 PM.png
+│       ├── Screenshot 2025-12-12 at 3.19.05 PM.png
+│       ├── Screenshot 2025-12-12 at 3.19.16 PM.png
+│       └── cli-proxmox-cloud-image.txt
+├── full-projects
+│   └── dns_web-applicaiton_mail_server_openstack-environment
+│       ├── README.md
+│       ├── cli-dns-lab.md
+│       ├── cli-web-mail.md
+│       ├── production-security-hardening-guide.md
+│       ├── project_documentation.md
+│       └── test_result-screenshot
+│           ├── pc-1, ss1.png
+│           ├── pc-1, ss2.png
+│           └── pc-1checking-from-client-windows-10_host.png
+├── networking-labs
+│   ├── Cisco Router Password Recovery Steps.md
+│   ├── ccna-200-301
+│   │   ├── ACL.txt
+│   │   ├── ACL324.pkt
+│   │   ├── Configure Dynamic NAT.txt
+│   │   ├── Configuring DHCPv4.txt
+│   │   ├── Configuring Switchport Security.txt
+│   │   ├── Configuring VLAN, VTP, Inter-VLAN Routing.txt
+│   │   ├── DHCP-configuraiton-notev6.txt
+│   │   ├── Ipsec.txt
+│   │   ├── SM_Solution.txt
+│   │   ├── VLSM Assignment.txt
+│   │   ├── VLSM Example.docx
+│   │   ├── VLSM.png
+│   │   ├── XYZ Company.txt
+│   │   ├── basic-router-configuraiton.pkt
+│   │   ├── basic-router-configuration-commands.txt
+│   │   ├── dhcpv4.pkt
+│   │   ├── dhcpv6.pkt
+│   │   ├── hsrp.pkt
+│   │   ├── ip_addressing.png
+│   │   ├── ipv6.png
+│   │   ├── ipv6_address_assignment.pdf
+│   │   ├── ipv6_is_easy.pdf
+│   │   ├── module-exam
+│   │   │   ├── CCNA3-Skill-Exam-Question.txt
+│   │   │   ├── Module-1_ITN-exam-solution.pka
+│   │   │   ├── Module-2_SRWE-exam-solution .pka
+│   │   │   ├── ccna3.pkt
+│   │   │   └── ccna3_kazi-emaduzzaman-gelani.pkt
+│   │   ├── nat.pkt
+│   │   ├── ospf.pkt
+│   │   ├── ospf_commands.txt
+│   │   ├── sm.pka
+│   │   ├── srwe_answer.pdf
+│   │   ├── vlan-svi.pkt
+│   │   ├── vlan.pkt
+│   │   ├── vlsm_practice.doc
+│   │   ├── vlsm_practice_2.doc
+│   │   ├── vpn.pkt
+│   │   └── wlan.pkt
+│   ├── dns
+│   │   ├── BIND9-recursive-ubuntu 20.04.md
+│   │   └── windows-server 2022-iis-dns-configuration-(recursive + authoritative).md
+│   ├── full-projects
+│   │   └── Compleated-Project
+│   │       └── dns_web-applicaiton_mail_server_pico-environment
+│   ├── load-balancer
+│   │   ├── HAProxy-on proxmox_ve(http traffic).md
+│   │   └── Load-Balancing-on-openstack-AmphoraV2
+│   │       ├── load-balancer-at_layer_7.jpg
+│   │       └── load-balancing-on-pico-public-cloud-amphoraV2.md
+│   └── vpn
+│       ├── packet-tracer-ipsec-topology-config
+│       │   ├── configuration-commads.md
+│       │   └── vpn.pkt
+│       └── wireguard-vpn-gateway-openstack
+│           ├── # WireGuard VPN Server on Pico Public Cl.md
+│           ├── README.md
+│           ├── cli-wireguard.md
+│           ├── configuraiton-files
+│           │   ├── README.md
+│           │   ├── client-configuration-files.md
+│           │   ├── firewall-configuration-files.md
+│           │   ├── helper-scripts.md
+│           │   ├── server-configuration-files.md
+│           │   └── system-configuration-files.md
+│           ├── configuration-files.md
+│           ├── main-documentation.md
+│           └── snaps-vm_creation
+│               ├── netework_creation - 2.png
+│               ├── netework_creation-3.png
+│               ├── network_creation-1.png
+│               ├── server-configuration.png
+│               └── vm-creation -1.png
+├── penguin-scripts
+│   ├── firewall_iptable.sh
+│   ├── installed_apts.sh
+│   ├── linux-sys-info.sh
+│   ├── network_diagnose.sh
+│   ├── remove-known-hosts.sh
+│   ├── repo_cleanup.sh
+│   ├── system-cleaning
+│   │   ├── clean_xrdp_xfce.sh
+│   │   └── remove-bind9.sh
+│   ├── system_monitor.sh
+│   ├── user-management
+│   │   ├── delete_user_everything.sh
+│   │   └── user_sudo.sh
+│   └── volume-management
+│       ├── add_volume.sh
+│       ├── remove_volume.sh
+│       └── volume_status.sh
+├── penguin-system_configuration
+├── snake-scripts
+│   ├── encrypt_pdf.py
+│   ├── folder_structure.py
+│   ├── folder_structure_v2.py
+│   ├── repo-structure-tool_not-compleated.py
+│   ├── subnet_calculator_v1.py
+│   ├── subnet_calculator_v2.py
+│   └── vlsm_planner.py
+├── wincore-scripts
+└── wincore-systems
+
+31 directories, 102 files
 ```
 emaduzzaman/
 ├── cloud-engine/
