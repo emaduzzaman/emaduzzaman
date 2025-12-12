@@ -1,5 +1,3 @@
----
-
 # Hi, I'm Kazi Emaduzzaman Gelani
 
 I am a Computer Science graduate and currently part of the Technology and Operations team at PICO Public Cloud, a division of Fiber@home Global Limited. My work focuses on cloud infrastructure, networking, system operations, Linux, and automation.
