@@ -1,9 +1,9 @@
 # Production Security Hardening Guide
-## DNS, Web, and Mail Server Infrastructure in PICO PUBLIC Cloud
+## DNS, Web, and Mail Server Infrastructure in OpenStack (PICO PUBLIC Cloud)
 
 ---
 
-## ⚠️ CRITICAL NOTICE
+## CRITICAL NOTICE
 
 **This guide is MANDATORY for production deployments.**
 
@@ -18,7 +18,6 @@ The test environment documented in `DNS-Web-Mail-Server-Project-Documentation.md
 - Intrusion detection and prevention
 - Backup and disaster recovery
 - Monitoring and alerting
-- Security best practices
 
 ---
 
@@ -35,9 +34,6 @@ The test environment documented in `DNS-Web-Mail-Server-Project-Documentation.md
 9. [System Hardening](#system-hardening)
 10. [Backup Strategy](#backup-strategy)
 11. [Monitoring and Alerting](#monitoring-and-alerting)
-12. [Ongoing Maintenance](#ongoing-maintenance)
-13. [Security Checklist](#security-checklist)
-
 ---
 
 ## Pre-Production Security Assessment
@@ -1822,194 +1818,10 @@ sudo crontab -e
 ```
 
 ---
-
-## Ongoing Maintenance
-
-### Daily Tasks
-
-- [ ] Check system logs for errors
-- [ ] Monitor service status
-- [ ] Review Fail2Ban logs
-- [ ] Check mail queue
-
-### Weekly Tasks
-
-- [ ] Review security alerts
-- [ ] Check disk space usage
-- [ ] Review backup logs
-- [ ] Test backup restoration
-- [ ] Update fail2ban rules if needed
-- [ ] Review email authentication reports
-
-### Monthly Tasks
-
-- [ ] Apply system updates (after testing)
-- [ ] Review user accounts (remove inactive)
-- [ ] Audit firewall rules
-- [ ] Check SSL certificate expiry
-- [ ] Review and rotate logs
-- [ ] Performance optimization review
-- [ ] Security audit
-
-### Quarterly Tasks
-
-- [ ] Full security assessment
-- [ ] Disaster recovery drill
-- [ ] Review and update documentation
-- [ ] Password rotation
-- [ ] Review third-party dependencies
-- [ ] Capacity planning review
-
-### Update Procedures
-
-```bash
-# Before updating
-sudo apt update
-sudo apt list --upgradable
-
-# Create snapshot/backup
-sudo /usr/local/bin/backup-mail-server.sh
-
-# Update packages
-sudo apt upgrade -y
-
-# Reboot if kernel updated
-sudo reboot
-
-# After reboot, verify services
-sudo systemctl status bind9 nginx postfix dovecot mariadb php8.1-fpm
-```
-
----
-
-## Security Checklist
-
-### Pre-Production Deployment
-
-- [ ] **SSL/TLS Certificates**
-  - [ ] Certificates obtained and installed
-  - [ ] HTTPS redirect configured
-  - [ ] HSTS headers enabled
-  - [ ] Certificate auto-renewal tested
-
-- [ ] **Web Server (Nginx)**
-  - [ ] HTTPS only (HTTP redirects to HTTPS)
-  - [ ] Security headers configured
-  - [ ] Rate limiting enabled
-  - [ ] Hidden files/directories protected
-  - [ ] SSL configuration hardened
-
-- [ ] **Mail Server**
-  - [ ] SMTPS/Submission (port 587/465) configured
-  - [ ] IMAPS (port 993) configured
-  - [ ] Plain text authentication disabled over non-SSL
-  - [ ] SASL authentication enabled
-  - [ ] Postfix restrictions configured
-
-- [ ] **Email Authentication**
-  - [ ] SPF record published
-  - [ ] DKIM signing enabled
-  - [ ] DMARC policy published
-  - [ ] Test emails passing authentication
-
-- [ ] **DNS Server**
-  - [ ] Recursion limited to trusted networks
-  - [ ] Zone transfers restricted
-  - [ ] DNSSEC enabled (if applicable)
-  - [ ] Rate limiting configured
-  - [ ] Version information hidden
-
-- [ ] **Firewall (UFW)**
-  - [ ] Default deny incoming
-  - [ ] Only necessary ports open
-  - [ ] Rate limiting enabled
-  - [ ] Rules tested and verified
-
-- [ ] **Intrusion Prevention (Fail2Ban)**
-  - [ ] Installed and running
-  - [ ] All critical services protected
-  - [ ] Email notifications configured
-  - [ ] Ban/unban procedures documented
-
-- [ ] **System Hardening**
-  - [ ] SSH hardened (key-only, no root)
-  - [ ] Strong password policy enforced
-  - [ ] Automatic security updates enabled
-  - [ ] Unnecessary services disabled
-  - [ ] Kernel parameters hardened
-
-- [ ] **Backup System**
-  - [ ] Automated backups scheduled
-  - [ ] Backup script tested
-  - [ ] Remote backup configured
-  - [ ] Restore procedures tested
-  - [ ] Retention policy implemented
-
-- [ ] **Monitoring & Alerting**
-  - [ ] Service monitoring configured
-  - [ ] Log monitoring enabled
-  - [ ] Email alerts configured
-  - [ ] Disk space monitoring active
-  - [ ] Performance monitoring enabled
-
-### Post-Deployment Verification
-
-- [ ] **Functionality Tests**
-  - [ ] DNS resolution working
-  - [ ] Website accessible via HTTPS
-  - [ ] Webmail accessible via HTTPS
-  - [ ] Can send email (SMTP)
-  - [ ] Can receive email (SMTP)
-  - [ ] Can read email (IMAP)
-  - [ ] SSL certificates valid
-
-- [ ] **Security Tests**
-  - [ ] SSL/TLS configuration scored (SSL Labs)
-  - [ ] Email authentication passing (mail-tester.com)
-  - [ ] Firewall rules working
-  - [ ] Fail2Ban blocking attacks
-  - [ ] No exposed insecure ports
-  - [ ] Security headers present
-
-- [ ] **Monitoring Tests**
-  - [ ] Alerts being received
-  - [ ] Logs being generated
-  - [ ] Backups completing successfully
-  - [ ] Service monitoring working
-  - [ ] Remote backup syncing
-
-### Ongoing Security Maintenance
-
-- [ ] **Daily**
-  - [ ] Review critical alerts
-  - [ ] Check service status
-  - [ ] Monitor Fail2Ban activity
-
-- [ ] **Weekly**
-  - [ ] Review all security logs
-  - [ ] Check backup completion
-  - [ ] Test backup restoration
-  - [ ] Review email authentication reports
-
-- [ ] **Monthly**
-  - [ ] Apply security updates
-  - [ ] Audit user accounts
-  - [ ] Review firewall rules
-  - [ ] Check certificate expiry
-  - [ ] Security scan
-
-- [ ] **Quarterly**
-  - [ ] Full security audit
-  - [ ] Disaster recovery drill
-  - [ ] Update documentation
-  - [ ] Review incident response plan
-
----
-
 ## Conclusion
 
 This guide provides comprehensive security hardening for DNS, Web, and Mail server infrastructure. Implementing these measures transforms the test environment into a production-ready, secure deployment.
 
-**⚠️ REMEMBER:** Security is not a one-time task, it's an ongoing process. Stay vigilant, stay updated, stay secure.
+**REMEMBER:** Security is not a one-time task, it's an ongoing process. Stay vigilant, stay updated, stay secure.
 
 ---

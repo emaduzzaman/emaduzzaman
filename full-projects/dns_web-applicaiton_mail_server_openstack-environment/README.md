@@ -1,4 +1,4 @@
-# DNS, Web, and Mail Server Project  
+# DNS, Web Server and Mail Server in OpenStack - PICO Public Cloud Environment
 
 ## **Project Summary**
 
@@ -22,9 +22,6 @@ A zone file for **gelani.com** will be created, containing the necessary DNS rec
 | mail        | A     | `<gelani.com Email server IP>`                  |
 | mail        | MX    | Priority: 10, Value: mail.gelani.com            |
 | @           | TXT   | "v=spf1 ip4:<gelani.com Email server IP> -all"  |
-
-Zone files for all team members’ domains will also be added so that each domain resolves correctly within the network.  
-All servers will be configured to use this DNS server as their primary resolver to support consistent and centralized name resolution.
 
 ---
 

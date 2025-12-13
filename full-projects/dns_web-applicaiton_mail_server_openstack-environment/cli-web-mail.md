@@ -1,5 +1,3 @@
-# \#Server Preparaion
-
 ubuntu@web-mail:~$ sudo bash
 
 root@web-mail:/home/ubuntu# sudo apt update \&\& sudo apt upgrade -y

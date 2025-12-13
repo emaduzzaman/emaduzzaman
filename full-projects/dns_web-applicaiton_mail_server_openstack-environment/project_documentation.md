@@ -4,13 +4,13 @@
 
 ## IMPORTANT NOTICE - TESTING ENVIRONMENT ONLY
 
-**This documentation describes a test/lab environment setup and is NOT suitable for production use.**
+**This documentation describes a test environment setup and is NOT suitable for production use.**
 
 This infrastructure was built purely for **testing purposes** in a controlled lab environment.
 
 ### For Production Deployment
 
-If you plan to use this setup in a production environment, you **MUST** refer to the comprehensive security hardening guide:
+If anyone plan to use this setup in a production environment, **MUST** refer to the comprehensive security hardening guide:
 
 [production-security-hardening-guide.md](production-security-hardening-guide.md)
 
@@ -30,7 +30,7 @@ The CLI files contain the raw command history showing exactly how the project wa
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
 1. [Project Overview](#project-overview)
 2. [Infrastructure Details](#infrastructure-details)

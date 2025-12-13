@@ -1,0 +1,190 @@
+root@pve:~# VMID=9000 
+VMNAME="ubuntu24-cloud-template"
+STORAGE="local-lvm"
+BRIDGE="vmbr0"
+CORES=2
+MEMORY=2048
+IMAGE_URL="https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img"
+IMAGE_FILE="/root/noble-server-cloudimg-amd64.img"
+root@pve:~# cd /root
+wget -O "$IMAGE_FILE" "$IMAGE_URL"
+--2025-12-12 01:28:46--  https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
+Resolving cloud-images.ubuntu.com (cloud-images.ubuntu.com)... 185.125.190.40, 185.125.190.37, 2620:2d:4000:1::17, ...
+Connecting to cloud-images.ubuntu.com (cloud-images.ubuntu.com)|185.125.190.40|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 626382336 (597M) [application/octet-stream]
+Saving to: ‘/root/noble-server-cloudimg-amd64.img’
+
+/root/noble-server- 100%[===================>] 597.36M  7.35MB/s    in 63s     
+
+2025-12-12 01:29:50 (9.46 MB/s) - ‘/root/noble-server-cloudimg-amd64.img’ saved [626382336/626382336]
+
+root@pve:~# ls -lh "$IMAGE_FILE"
+-rw-r--r-- 1 root root 598M Dec  6 19:14 /root/noble-server-cloudimg-amd64.img
+root@pve:~# qm create $VMID \
+  --name $VMNAME \
+  --memory $MEMORY \
+  --cores $CORES \
+  --net0 virtio,bridge=$BRIDGE \
+  --agent 1
+parse error in '/etc/pve/datacenter.cfg' - 'firewall': property is not defined in schema and the schema does not allow additional properties
+parse error in '/etc/pve/datacenter.cfg' - 'disable_ws_compression': property is not defined in schema and the schema does not allow additional properties
+root@pve:~# qm list
+      VMID NAME                 STATUS     MEM(MB)    BOOTDISK(GB) PID       
+       100 l                    stopped    2048              32.00 0         
+       101 RHEL-9.7-Instance    running    8192              80.00 11468     
+      9000 ubuntu24-cloud-template stopped    2048               0.00 0         
+root@pve:~# qm importdisk $VMID "$IMAGE_FILE" $STORAGE
+importing disk '/root/noble-server-cloudimg-amd64.img' to VM 9000 ...
+  Logical volume "vm-9000-disk-0" created.
+  Logical volume pve/vm-9000-disk-0 changed.
+transferred 0.0 B of 3.5 GiB (0.00%)
+transferred 35.8 MiB of 3.5 GiB (1.00%)
+transferred 71.7 MiB of 3.5 GiB (2.00%)
+transferred 110.0 MiB of 3.5 GiB (3.07%)
+transferred 145.9 MiB of 3.5 GiB (4.07%)
+transferred 181.7 MiB of 3.5 GiB (5.07%)
+transferred 217.5 MiB of 3.5 GiB (6.07%)
+transferred 253.4 MiB of 3.5 GiB (7.07%)
+transferred 289.2 MiB of 3.5 GiB (8.07%)
+transferred 325.1 MiB of 3.5 GiB (9.07%)
+transferred 360.9 MiB of 3.5 GiB (10.07%)
+transferred 396.7 MiB of 3.5 GiB (11.07%)
+transferred 432.6 MiB of 3.5 GiB (12.07%)
+transferred 468.4 MiB of 3.5 GiB (13.07%)
+transferred 504.3 MiB of 3.5 GiB (14.07%)
+transferred 540.1 MiB of 3.5 GiB (15.07%)
+transferred 575.9 MiB of 3.5 GiB (16.07%)
+transferred 611.8 MiB of 3.5 GiB (17.07%)
+transferred 647.6 MiB of 3.5 GiB (18.07%)
+transferred 683.5 MiB of 3.5 GiB (19.07%)
+transferred 719.3 MiB of 3.5 GiB (20.07%)
+transferred 755.1 MiB of 3.5 GiB (21.07%)
+transferred 791.0 MiB of 3.5 GiB (22.07%)
+transferred 826.8 MiB of 3.5 GiB (23.07%)
+transferred 862.7 MiB of 3.5 GiB (24.07%)
+transferred 898.5 MiB of 3.5 GiB (25.07%)
+transferred 934.3 MiB of 3.5 GiB (26.07%)
+transferred 970.2 MiB of 3.5 GiB (27.07%)
+transferred 1006.0 MiB of 3.5 GiB (28.07%)
+transferred 1.0 GiB of 3.5 GiB (29.07%)
+transferred 1.1 GiB of 3.5 GiB (30.08%)
+transferred 1.1 GiB of 3.5 GiB (31.08%)
+transferred 1.1 GiB of 3.5 GiB (32.08%)
+transferred 1.2 GiB of 3.5 GiB (33.08%)
+transferred 1.2 GiB of 3.5 GiB (34.08%)
+transferred 1.2 GiB of 3.5 GiB (35.08%)
+transferred 1.3 GiB of 3.5 GiB (36.08%)
+transferred 1.3 GiB of 3.5 GiB (37.08%)
+transferred 1.3 GiB of 3.5 GiB (38.08%)
+transferred 1.4 GiB of 3.5 GiB (39.08%)
+transferred 1.4 GiB of 3.5 GiB (40.08%)
+transferred 1.4 GiB of 3.5 GiB (41.08%)
+transferred 1.5 GiB of 3.5 GiB (42.08%)
+transferred 1.5 GiB of 3.5 GiB (43.08%)
+transferred 1.5 GiB of 3.5 GiB (44.08%)
+transferred 1.6 GiB of 3.5 GiB (45.08%)
+transferred 1.6 GiB of 3.5 GiB (46.08%)
+transferred 1.6 GiB of 3.5 GiB (47.08%)
+transferred 1.7 GiB of 3.5 GiB (48.08%)
+transferred 1.7 GiB of 3.5 GiB (49.08%)
+transferred 1.8 GiB of 3.5 GiB (50.08%)
+transferred 1.8 GiB of 3.5 GiB (51.08%)
+transferred 1.8 GiB of 3.5 GiB (52.08%)
+transferred 1.9 GiB of 3.5 GiB (53.08%)
+transferred 1.9 GiB of 3.5 GiB (54.08%)
+transferred 1.9 GiB of 3.5 GiB (55.08%)
+transferred 2.0 GiB of 3.5 GiB (56.08%)
+transferred 2.0 GiB of 3.5 GiB (57.08%)
+transferred 2.0 GiB of 3.5 GiB (58.08%)
+transferred 2.1 GiB of 3.5 GiB (59.08%)
+transferred 2.1 GiB of 3.5 GiB (60.08%)
+transferred 2.1 GiB of 3.5 GiB (61.08%)
+transferred 2.2 GiB of 3.5 GiB (62.08%)
+transferred 2.2 GiB of 3.5 GiB (63.08%)
+transferred 2.2 GiB of 3.5 GiB (64.08%)
+transferred 2.3 GiB of 3.5 GiB (65.08%)
+transferred 2.3 GiB of 3.5 GiB (66.08%)
+transferred 2.3 GiB of 3.5 GiB (67.08%)
+transferred 2.4 GiB of 3.5 GiB (68.08%)
+transferred 2.4 GiB of 3.5 GiB (69.08%)
+transferred 2.5 GiB of 3.5 GiB (70.08%)
+transferred 2.5 GiB of 3.5 GiB (71.08%)
+transferred 2.5 GiB of 3.5 GiB (72.08%)
+transferred 2.6 GiB of 3.5 GiB (73.08%)
+transferred 2.6 GiB of 3.5 GiB (74.08%)
+transferred 2.6 GiB of 3.5 GiB (75.08%)
+transferred 2.7 GiB of 3.5 GiB (76.08%)
+transferred 2.7 GiB of 3.5 GiB (77.08%)
+transferred 2.7 GiB of 3.5 GiB (78.09%)
+transferred 2.8 GiB of 3.5 GiB (79.09%)
+transferred 2.8 GiB of 3.5 GiB (80.09%)
+transferred 2.8 GiB of 3.5 GiB (81.09%)
+transferred 2.9 GiB of 3.5 GiB (82.09%)
+transferred 2.9 GiB of 3.5 GiB (83.09%)
+transferred 2.9 GiB of 3.5 GiB (84.09%)
+transferred 3.0 GiB of 3.5 GiB (85.09%)
+transferred 3.0 GiB of 3.5 GiB (86.09%)
+transferred 3.0 GiB of 3.5 GiB (87.09%)
+transferred 3.1 GiB of 3.5 GiB (88.09%)
+transferred 3.1 GiB of 3.5 GiB (89.09%)
+transferred 3.2 GiB of 3.5 GiB (90.09%)
+transferred 3.2 GiB of 3.5 GiB (91.09%)
+transferred 3.2 GiB of 3.5 GiB (92.09%)
+transferred 3.3 GiB of 3.5 GiB (93.09%)
+transferred 3.3 GiB of 3.5 GiB (94.09%)
+transferred 3.3 GiB of 3.5 GiB (95.09%)
+transferred 3.4 GiB of 3.5 GiB (96.09%)
+transferred 3.4 GiB of 3.5 GiB (97.09%)
+transferred 3.4 GiB of 3.5 GiB (98.09%)
+transferred 3.5 GiB of 3.5 GiB (99.09%)
+transferred 3.5 GiB of 3.5 GiB (100.00%)
+transferred 3.5 GiB of 3.5 GiB (100.00%)
+unused0: successfully imported disk 'local-lvm:vm-9000-disk-0'
+root@pve:~# qm set $VMID --scsihw virtio-scsi-pci --scsi0 $STORAGE:vm-$VMID-disk-0
+update VM 9000: -scsi0 local-lvm:vm-9000-disk-0 -scsihw virtio-scsi-pci
+root@pve:~# qm set $VMID --boot order=scsi0
+update VM 9000: -boot order=scsi0
+root@pve:~# qm set $VMID --ide2 $STORAGE:cloudinit
+update VM 9000: -ide2 local-lvm:cloudinit
+  Logical volume "vm-9000-cloudinit" created.
+  Logical volume pve/vm-9000-cloudinit changed.
+ide2: successfully created disk 'local-lvm:vm-9000-cloudinit,media=cdrom'
+generating cloud-init ISO
+root@pve:~# qm set $VMID \
+  --ciuser emaduzzaman \
+  --cipassword "1234" \
+  --ipconfig0 ip=dhcp
+update VM 9000: -cipassword <hidden> -ciuser emaduzzaman -ipconfig0 ip=dhcp
+root@pve:~# mkdir -p /var/lib/vz/snippets && nano /var/lib/vz/snippets/ubuntu24-custom.yaml
+root@pve:~# cat /var/lib/vz/snippets/ubuntu24-custom.yaml
+#cloud-config
+
+ssh_pwauth: true
+disable_root: true
+
+users:
+  - name: emaduzzaman
+    groups: sudo
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+
+chpasswd:
+  list: |
+    emaduzzaman:1234
+  expire: False
+
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+
+runcmd:
+  - apt-get autoremove -y
+  - apt-get autoclean -y
+  - echo "System updated on first boot by cloud-init" > /etc/motd
+root@pve:~# qm set $VMID --cicustom "user=local:snippets/ubuntu24-custom.yaml"
+update VM 9000: -cicustom user=local:snippets/ubuntu24-custom.yaml
+root@pve:~# qm start $VMID
+generating cloud-init ISO
+root@pve:~# 
