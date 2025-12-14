@@ -10,6 +10,14 @@
 4. [Firewall Configuration Files](#firewall-configuration-files)
 5. [Helper Scripts](#helper-scripts)
 
+
+
+1. [Server Configuration Files](#server-configuration-files)
+2. [Client Configuration Files](#client-configuration-files)
+3. [System Configuration Files](#system-configuration-files)
+4. [Firewall Configuration Files](#firewall-configuration-files)
+5. [Helper Scripts](#helper-scripts)
+
 ---
 
 ## Configuration Files Summary
