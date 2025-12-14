@@ -45,7 +45,7 @@ This WireGuard VPN solution creates a **secure gateway** that allows remote user
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                     INTERNET (Public Network)                        │
+│                     INTERNET (Public Network)                       │
 └────────────────┬────────────────────────────────────────────────────┘
                  │
                  │ Connection via
@@ -53,7 +53,7 @@ This WireGuard VPN solution creates a **secure gateway** that allows remote user
                  │
                  ▼
 ┌────────────────────────────────────────────────────────────────────┐
-│                    WireGuard VPN Server                             │
+│                    WireGuard VPN Server                            │
 │  ┌──────────────────────────────────────────────────────────────┐  │
 │  │  Hostname: wireguard                                         │  │
 │  │  Public IP: 160.191.150.171                                  │  │
@@ -69,31 +69,31 @@ This WireGuard VPN solution creates a **secure gateway** that allows remote user
                  │
                  ▼
 ┌────────────────────────────────────────────────────────────────────┐
-│          Private Cloud Network: 192.168.90.0/27                     │
+│          Private Cloud Network: 192.168.90.0/27                    │
 │  ┌──────────────────────────────────────────────────────────────┐  │
 │  │  Gateway: 192.168.90.1                                       │  │
 │  │  DHCP Range: 192.168.90.2 - 192.168.90.30                    │  │
 │  │  DNS: 8.8.8.8                                                │  │
 │  │  Network Name: wireguard-vpn_192-168-90-0/27                 │  │
 │  └──────────────────────────────────────────────────────────────┘  │
-│                                                                      │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐             │
-│  │   Test VM    │  │   Future VM  │  │   Future VM  │             │
-│  │ 192.168.90.10│  │192.168.90.11 │  │192.168.90.12 │             │
-│  └──────────────┘  └──────────────┘  └──────────────┘             │
-│                                                                      │
+│                                                                    │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐              │
+│  │   Test VM    │  │   Future VM  │  │   Future VM  │              │
+│  │ 192.168.90.10│  │192.168.90.11 │  │192.168.90.12 │              │
+│  └──────────────┘  └──────────────┘  └──────────────┘              │
+│                                                                    │
 └────────────────────────────────────────────────────────────────────┘
 
 
 ┌────────────────────────────────────────────────────────────────────┐
-│                    Remote VPN Clients                               │
-│                                                                      │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐             │
-│  │  Client-101  │  │  Client-102  │  │  Client-N    │             │
-│  │  10.0.0.2/32 │  │  10.0.0.3/32 │  │  10.0.0.N/32 │             │
-│  │  (Windows)   │  │  (MacOS)     │  │  (Linux)     │             │
-│  └──────────────┘  └──────────────┘  └──────────────┘             │
-│                                                                      │
+│                    Remote VPN Clients                              │
+│                                                                    │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐              │
+│  │  Client-101  │  │  Client-102  │  │  Client-N    │              │
+│  │  10.0.0.2/32 │  │  10.0.0.3/32 │  │  10.0.0.N/32 │              │
+│  │  (Windows)   │  │  (MacOS)     │  │  (Linux)     │              │
+│  └──────────────┘  └──────────────┘  └──────────────┘              │
+│                                                                    │
 │  Each client gets assigned a VPN IP in 10.0.0.0/24 network         │
 │  and can access all VMs in 192.168.90.0/27                         │
 └────────────────────────────────────────────────────────────────────┘
@@ -164,10 +164,10 @@ Client receives response
 
 ### Port Configuration
 
-| Port | Protocol | Purpose | Direction |
-|------|----------|---------|-----------|
-| 22 | TCP | SSH Management | Inbound |
-| 51820 | UDP | WireGuard VPN | Inbound |
+| Port  | Protocol |    Purpose    | Direction |
+|-------|----------|---------------|-----------|
+| 22    | TCP      | SSH Management|  Inbound  |
+| 51820 | UDP      | WireGuard VPN |  Inbound  |
 
 ---
 
@@ -177,19 +177,19 @@ Client receives response
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    IP Address Allocation                     │
+│                    IP Address Allocation                    │
 ├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  PUBLIC INTERNET                                             │
+│                                                             │
+│  PUBLIC INTERNET                                            │
 │  └─ 160.191.150.171 (WireGuard Server Public IP)            │
-│                                                              │
+│                                                             │
 │  VPN TUNNEL NETWORK (10.0.0.0/24)                           │
 │  ├─ 10.0.0.1       → WireGuard Server VPN interface         │
 │  ├─ 10.0.0.2       → Client-101 (Windows)                   │
 │  ├─ 10.0.0.3       → Client-102 (reserved)                  │
 │  ├─ 10.0.0.4       → Client-103 (reserved)                  │
 │  └─ 10.0.0.5-254   → Available for future clients           │
-│                                                              │
+│                                                             │
 │  PRIVATE CLOUD NETWORK (192.168.90.0/27)                    │
 │  ├─ 192.168.90.0   → Network address (unusable)             │
 │  ├─ 192.168.90.1   → Gateway (cloud router)                 │
@@ -198,18 +198,18 @@ Client receives response
 │  ├─ 192.168.90.10  → Test VM (Ubuntu)                       │
 │  ├─ 192.168.90.21-30→ Available DHCP pool                   │
 │  └─ 192.168.90.31  → Broadcast address (unusable)           │
-│                                                              │
+│                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ### Routing Table
 
 ```
-Destination         Gateway         Genmask         Interface
-─────────────────────────────────────────────────────────────
-10.0.0.0           0.0.0.0         255.255.255.0   wg0
-192.168.90.0       0.0.0.0         255.255.255.224 ens3
-0.0.0.0            192.168.90.1    0.0.0.0         ens3
+Destination        Gateway         Genmask              Interface
+──────────────────────────────────────────────────────────────────────
+10.0.0.0           0.0.0.0         255.255.255.0         wg0
+192.168.90.0       0.0.0.0         255.255.255.224       ens3
+0.0.0.0            192.168.90.1    0.0.0.0               ens3
 ```
 
 ---
@@ -264,8 +264,6 @@ Rules to Add:
 
 #### 1.3 Create SSH Key Pair
 ```
-Navigation: Compute → Key Pairs → Create Key Pair
-
 Name: wireguard-server
 Key Type: SSH Key
 
@@ -275,15 +273,13 @@ Save to: ~/.ssh/wireguard-server.pem
 
 #### 1.4 Launch Instance
 ```
-Navigation: Compute → Instances → Launch Instance
-
 Details:
   - Instance Name: wireguard
-  - Availability Zone: nova
+  - Availability Zone: 3
   - Count: 1
 
 Source:
-  - Select Boot Source: Image
+  - Boot Source: Image
   - Image: Ubuntu Server 24.04 LTS
   - Size: 20 GB
 
@@ -304,7 +300,7 @@ Key Pair:
 
 #### 1.5 Assign Floating IP
 ```
-Navigation: Network → Floating IPs → Allocate IP
+Navigation: Overview → Floating IPs → Allocate IP
 
 Associate with: wireguard instance
 
@@ -876,7 +872,7 @@ Pinging 10.0.0.1 with 32 bytes of data:
 Reply from 10.0.0.1: bytes=32 time=8ms TTL=64
 ```
 
-**✅ Result: SUCCESS**
+**Result: SUCCESS**
 
 ---
 
@@ -898,7 +894,7 @@ Reply from 192.168.90.10: bytes=32 time=93ms TTL=63
 Reply from 192.168.90.10: bytes=32 time=9ms TTL=63
 ```
 
-**✅ Result: SUCCESS**
+**Result: SUCCESS**
 *Note: Initial high latency is normal due to ARP resolution*
 
 ---
@@ -914,7 +910,7 @@ PS> ssh ubuntu@192.168.90.10
 ubuntu@test-vm:~$
 ```
 
-**✅ Result: SUCCESS**
+**Result: SUCCESS**
 
 ---
 
@@ -935,7 +931,7 @@ PS> ssh ubuntu@192.168.90.20
 # Successfully connected
 ```
 
-**✅ Result: SUCCESS**
+**Result: SUCCESS**
 
 ---
 
