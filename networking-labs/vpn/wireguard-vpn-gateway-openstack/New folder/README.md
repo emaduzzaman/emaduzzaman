@@ -83,16 +83,6 @@ wireguard-vpn-gateway-openstack/
         ├── wireguard-status.sh
         └── backup-wireguard.sh
 ```
-
----
-
-### Prerequisites
-- Ubuntu Server 24.04 LTS VM on OpenStack cloud - PICO Public Cloud
-- 1 vCPU, 2GB RAM, 20GB storage (minimum)
-- Public IP (floating IP) assigned to VM
-- Root or sudo access
----
-
 ## Documentation
 
 - **[Complete Documentation](project-documentation.md)** - Full technical guide with architecture diagrams, troubleshooting, and maintenance procedures
