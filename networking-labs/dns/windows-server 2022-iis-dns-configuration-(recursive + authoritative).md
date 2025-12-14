@@ -1,6 +1,5 @@
 # DNS Configuration (Recursive + Authoritative) Windows Server 2022–with IIS
 
----
 
 ### DNS Server Capabilities
 
