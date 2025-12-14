@@ -1,10 +1,10 @@
 # WireGuard VPN Gateway on OpenStack Cloud - PICO Public Cloud
 
-A production-grade WireGuard VPN gateway implementation on Pico Public Cloud (OpenStack) that provides secure remote access to private cloud infrastructure.
+A production-grade WireGuard VPN gateway implementation on OpenStack (Pico Public Cloud) that provides secure remote access to private cloud infrastructure.
 
 ---
 
-## 🎯 What This Project Does
+## What This Project Does
 
 ### For Non-Technical Users
 This project creates a **secure virtual door** to your private cloud servers. Instead of exposing every server to the internet (which is risky and expensive), you set up one secure gateway. Remote users connect to this gateway through an encrypted tunnel, and then they can access all your private servers safely as if they were sitting in your office.
@@ -20,7 +20,7 @@ Point-to-Site VPN topology with stateless cryptokey routing, zero-trust authenti
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ```
 Internet → WireGuard Gateway (160.191.150.171:51820/UDP)
@@ -43,7 +43,6 @@ Internet → WireGuard Gateway (160.191.150.171:51820/UDP)
 ## Key Features
 
 -  **End-to-End Encryption** - ChaCha20-Poly1305 authenticated encryption
--  **High Performance** - Kernel-space implementation, ~900 Mbps throughput
 -  **Public Key Authentication** - Ed25519 cryptographic keys, no passwords
 -  **Cross-Platform** - Windows, macOS, Linux, Android, iOS clients
 -  **NAT Traversal** - Works behind firewalls and NAT devices
@@ -85,12 +84,6 @@ wireguard-vpn-gateway-openstack/
 ```
 
 ---
-
-### Prerequisites
-- Ubuntu Server 24.04 LTS VM on OpenStack cloud - PICO Public Cloud
-- 1 vCPU, 2GB RAM, 20GB storage (minimum)
-- Public IP (floating IP) assigned to VM
-- Root or sudo access
 ---
 
 ## Documentation
@@ -99,7 +92,6 @@ wireguard-vpn-gateway-openstack/
 - **[CLI Session Log](cli-wireguard.md)** - Actual terminal used during setup
 - **[Configuration Files](configuration-files/)** - All config files with detailed comments
 
----
 
 ## 🔧 Technical Specifications
 
@@ -128,16 +120,3 @@ wireguard-vpn-gateway-openstack/
 - **SSH Key Authentication** - No password-based access
 - **Network Isolation** - Private VMs completely isolated from internet
 - **Allowlist Authorization** - Per-peer IP assignment and access control
-
----
-
-## Performance Metrics
-
-- **Throughput:** ~900 Mbps on 1 Gbps link
-- **Latency:** +2-3ms overhead (cryptographic processing)
-- **Handshake:** <100ms initial connection
-- **CPU Usage:** <5% under normal load (1-10 clients)
-- **Memory:** <200MB RAM usage
-- **Concurrent Connections:** Tested with 1 client, supports 250+
-
----

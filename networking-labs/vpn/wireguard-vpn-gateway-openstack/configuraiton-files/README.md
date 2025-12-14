@@ -1,10 +1,10 @@
 # WireGuard VPN Configuration Files for Quick Deployment
 ## Contents
-[Server Configuration Files](./server-configuration-files.md)
-[Client Configuration Files](./client-configuration-files.md)
-[System Configuration Files](./system-configuration-files.md)
-[Firewall Configuration Files](./firewall-configuration-files.md)
-[Helper Scripts](./helper-scripts.md)
+1. [Server Configuration Files](./server-configuration-files.md)
+2. [Client Configuration Files](./client-configuration-files.md)
+3. [System Configuration Files](./system-configuration-files.md)
+4. [Firewall Configuration Files](./firewall-configuration-files.md)
+5. [Helper Scripts](./helper-scripts.md)
 
 ## Configuration Files Summary
 
