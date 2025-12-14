@@ -1,24 +1,10 @@
-# WireGuard VPN Configuration Files Reference
-## All Configuration Files for Quick Deployment
-
----
-
+# WireGuard VPN Configuration Files for Quick Deployment
 ## Contents
-1. [Server Configuration Files](#server-configuration-files)
-2. [Client Configuration Files](#client-configuration-files)
-3. [System Configuration Files](#system-configuration-files)
-4. [Firewall Configuration Files](#firewall-configuration-files)
-5. [Helper Scripts](#helper-scripts)
-
-
-
-1. [Server Configuration Files](#server-configuration-files)
-2. [Client Configuration Files](#client-configuration-files)
-3. [System Configuration Files](#system-configuration-files)
-4. [Firewall Configuration Files](#firewall-configuration-files)
-5. [Helper Scripts](#helper-scripts)
-
----
+1. [Server Configuration Files](./server-configuration-files.md)
+2. [Client Configuration Files](./client-configuration-files.md)
+3. [System Configuration Files](./system-configuration-files.md)
+4. [Firewall Configuration Files](./firewall-configuration-files.md)
+5. [Helper Scripts](./helper-scripts.md)
 
 ## Configuration Files Summary
 
@@ -44,8 +30,6 @@
 - [ ] `/root/wireguard-scripts/restore-wireguard.sh`
 - [ ] `/root/iptables-rules-wireguard.sh`
 - [ ] `/root/iptables-flush.sh`
-
----
 
 ## Important Notes
 
@@ -77,5 +61,3 @@ chmod 600 /etc/wireguard/*.key
 chmod +x /root/wireguard-scripts/*.sh
 chmod +x /root/*.sh
 ```
-
----
