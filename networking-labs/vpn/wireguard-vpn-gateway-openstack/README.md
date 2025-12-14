@@ -56,44 +56,30 @@ Internet → WireGuard Gateway (160.191.150.171:51820/UDP)
 
 ```
 wireguard-vpn-gateway-openstack/
-├── README.md                          # This file
-├── snaps-vm_creation/                 # Screenshots of VM creation in Pico Cloud
-│   ├── 01-network-creation.png
-│   ├── 02-security-group.png
-│   ├── 03-instance-launch.png
-│   └── 04-floating-ip.png
-├── cli-wireguard.md                   # Complete terminal session logs
-├── project-documentation.md           # Comprehensive technical documentation
-└── configuration-files/               # All configuration files
-    ├── server/
-    │   ├── wg0.conf
-    │   ├── wg0-production.conf
-    │   └── sysctl.conf
-    ├── client/
-    │   ├── client-101.conf
-    │   ├── client-102.conf
-    │   └── client-full-tunnel.conf
-    ├── firewall/
-    │   ├── iptables-rules-wireguard.sh
-    │   └── rules.v4
-    └── scripts/
-        ├── generate-client-keys.sh
-        ├── add-client-to-server.sh
-        ├── wireguard-status.sh
-        └── backup-wireguard.sh
-```
+├── README.md                                                               # This file – main project overview
+├── snaps-vm_creation-OpenStack-PICO-Cloud/                                 # VM creation and setup screenshots - OpenStack (PICO Public Cloud)
+├── cli-wireguard.txt                                                       # Complete terminal session logs showing how WireGuard was configured
+├── project-documentation.md                                                # Comprehensive technical documentation
+└── configuration-files/                                                    # All WireGuard configuration reference files
+    ├── README.md                                                           # Entry point for configuration files documentation
+    ├── server-configuration-files.md                                       # Server-side WireGuard configuration and tuning
+    ├── client-configuration-files.md                                       # Client-side WireGuard configuration
+    ├── firewall-configuration-files.md                                     # Firewall (iptables/ufw) rules for WireGuard VPN
+    ├── system-configuration-files.md                                       # System-level settings 
+    └── helper-scripts.md                                                   # Helper and automation scripts for WireGuard management
 
----
+
+```
 ---
 
 ## Documentation
 
 - **[Complete Documentation](project-documentation.md)** - Full technical guide with architecture diagrams, troubleshooting, and maintenance procedures
-- **[CLI Session Log](cli-wireguard.md)** - Actual terminal used during setup
-- **[Configuration Files](configuration-files/)** - All config files with detailed comments
+- **[CLI Session Log](cli-wireguard.txt)** - Actual terminal used during setup
+- **[Configuration Files](configuraiton-files/)** - All config files with detailed comments
 
 
-## 🔧 Technical Specifications
+## Technical Specifications
 
 | Component | Specification |
 |-----------|---------------|
@@ -110,7 +96,6 @@ wireguard-vpn-gateway-openstack/
 | **Key Exchange** | Curve25519 |
 | **Authentication** | Ed25519 signatures |
 
----
 
 ## Security Features
 
