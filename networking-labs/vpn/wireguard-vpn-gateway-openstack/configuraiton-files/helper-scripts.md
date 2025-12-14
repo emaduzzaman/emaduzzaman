@@ -1,4 +1,4 @@
-## 5. Helper Scripts
+## Helper Scripts
 
 ### File: `generate-client-keys.sh`
 **Location:** `/root/wireguard-scripts/generate-client-keys.sh`  

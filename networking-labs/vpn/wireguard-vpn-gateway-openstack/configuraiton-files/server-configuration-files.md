@@ -1,4 +1,4 @@
-## 1. Server Configuration Files
+## Server Configuration Files
 
 ### File: `wg0.conf`
 **Location:** `/etc/wireguard/wg0.conf`  
