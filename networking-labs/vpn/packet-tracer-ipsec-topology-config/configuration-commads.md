@@ -74,7 +74,7 @@ This project demonstrates a Site-to-Site VPN tunnel between two branch offices (
                                     |
                                     |
                                 [Internet]
-                                 8.8.8.0/8
+                                8.8.8.0/8
 ```
 
 ---

@@ -66,9 +66,9 @@ This project demonstrates setting up a recursive DNS resolver using BIND9 on Ubu
 ### System Requirements
 
 - Ubuntu 20.04 LTS Server
-- Minimum 1 CPU core
-- Minimum 1 GB RAM
-- 10 GB disk space
+- 1 CPU core
+- 1 GB RAM
+- 20 GB disk space
 - Static IP address configured
 - Root or sudo access
 - Network connectivity
