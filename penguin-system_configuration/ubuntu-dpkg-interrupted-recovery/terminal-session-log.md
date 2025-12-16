@@ -1,3 +1,4 @@
+```bash
 emaduzzaman@ubuntu:~$ sudo apt update
 Hit:1 http://security.ubuntu.com/ubuntu noble-security InRelease                                       
 Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease                                                 
