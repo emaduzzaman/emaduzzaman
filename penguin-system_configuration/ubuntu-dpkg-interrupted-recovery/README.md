@@ -1,6 +1,6 @@
 # Ubuntu dpkg Interrupted Recovery
 
-## 📌 Problem Statement
+## Problem Statement
 While performing a system upgrade on **Ubuntu 24.04 (Noble)** using `apt`, the package manager failed with the following error:
 
 ```bash
@@ -8,6 +8,12 @@ E: dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to cor
 ```
 
 This error indicates that a previous package installation or upgrade process was interrupted, leaving the dpkg database in an inconsistent state. The system refused to proceed with any package operations until this issue was resolved.
+
+## System Information
+
+- **OS**: Ubuntu 24.04 LTS (Noble Numbat)
+- **Kernel**: 6.8.0-88-generic → 6.8.0-90-generic
+- **Package Manager**: apt/dpkg
 
 ### Symptoms
 - Unable to run `sudo apt upgrade`
@@ -59,7 +65,7 @@ Finally, proceed with the system upgrade that was originally attempted.
 
 ---
 
-## 📊 Result
+## Result
 
 After following these steps, the system successfully:
 - Upgraded 13 packages
@@ -71,7 +77,7 @@ The upgrade included critical security updates and kernel upgrades from version 
 
 ---
 
-## 🔍 Root Cause
+## Root Cause
 
 The dpkg interruption typically occurs due to:
 - System crash or power failure during package installation
@@ -81,7 +87,7 @@ The dpkg interruption typically occurs due to:
 
 ---
 
-## 💡 Prevention Tips
+## Prevention Tips
 
 1. **Avoid interrupting package operations** - Let apt/dpkg processes complete
 2. **Ensure stable power supply** during system updates
@@ -91,7 +97,7 @@ The dpkg interruption typically occurs due to:
 
 ---
 
-## 📝 Notes
+## Notes
 
 - Always check the `/var/lib/dpkg/updates/` directory if dpkg errors occur
 - The `dpkg --configure -a` command is safe to run and won't damage your system
@@ -99,18 +105,3 @@ The dpkg interruption typically occurs due to:
 - Keep backups before performing major system upgrades
 
 ---
-
-## 🖥️ System Information
-
-- **OS**: Ubuntu 24.04 LTS (Noble Numbat)
-- **Kernel**: 6.8.0-88-generic → 6.8.0-90-generic
-- **Package Manager**: apt/dpkg
-- **Issue Date**: December 13, 2024
-
----
-
-## 📚 References
-
-- [Ubuntu dpkg Documentation](https://manpages.ubuntu.com/manpages/noble/man1/dpkg.1.html)
-- [APT User Guide](https://www.debian.org/doc/manuals/apt-guide/)
-- [Ubuntu Package Management](https://help.ubuntu.com/community/AptGet/Howto)
