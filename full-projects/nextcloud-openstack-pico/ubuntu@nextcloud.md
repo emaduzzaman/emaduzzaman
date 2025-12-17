@@ -1,3 +1,4 @@
+```
 ubuntu@nextcloud:~$ sudo apt update && sudo apt upgrade -y
 Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
 Hit:2 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy InRelease
@@ -9799,3 +9800,709 @@ Created symlink /etc/systemd/system/multi-user.target.wants/minio.service → /e
 root@nextcloud:/usr/local/bin# systemctl start minio
 root@nextcloud:/usr/local/bin#
 
+root@nextcloud:/usr/local/bin# #issue occured this error in the gui of nextcloud: Error while trying to create admin account: An exception occurred in the driver: SQLSTATE[HY000] [1045] Access denied for user'nextcloud'@'localhost' (using password: YES)
+root@nextcloud:/usr/local/bin# systemctl status mysql
+● mariadb.service - MariaDB 10.6.22 database server
+     Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-12-15 09:27:45 UTC; 1h 29min ago
+       Docs: man:mariadbd(8)
+             https://mariadb.com/kb/en/library/systemd/
+   Main PID: 2769 (mariadbd)
+     Status: "Taking your SQL requests now..."
+      Tasks: 9 (limit: 62530)
+     Memory: 61.8M
+        CPU: 728ms
+     CGroup: /system.slice/mariadb.service
+             └─2769 /usr/sbin/mariadbd
+
+Dec 15 09:27:45 nextcloud mariadbd[2769]: Version: '10.6.22-MariaDB-0ubuntu0.22.04.1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Ubuntu 22.04
+Dec 15 09:27:45 nextcloud systemd[1]: Started MariaDB 10.6.22 database server.
+Dec 15 09:27:45 nextcloud /etc/mysql/debian-start[2788]: Looking for 'mariadb' as: /usr/bin/mariadb
+Dec 15 09:27:45 nextcloud /etc/mysql/debian-start[2788]: Looking for 'mariadb-check' as: /usr/bin/mariadb-check
+Dec 15 09:27:45 nextcloud /etc/mysql/debian-start[2788]: This installation of MariaDB is already upgraded to 10.6.22-MariaDB.
+Dec 15 09:27:45 nextcloud /etc/mysql/debian-start[2788]: There is no need to run mysql_upgrade again.
+Dec 15 09:27:45 nextcloud /etc/mysql/debian-start[2788]: You can use --force if you still want to run mysql_upgrade
+Dec 15 09:27:45 nextcloud /etc/mysql/debian-start[2796]: Checking for insecure root accounts.
+Dec 15 09:27:45 nextcloud /etc/mysql/debian-start[2800]: Triggering myisam-recover for all MyISAM tables and aria-recover for all Aria tables
+Dec 15 10:54:35 nextcloud mariadbd[2769]: 2025-12-15 10:54:35 39 [Warning] Access denied for user 'nextcloud'@'localhost' (using password: YES)
+root@nextcloud:/usr/local/bin# sudo mysql
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 40
+Server version: 10.6.22-MariaDB-0ubuntu0.22.04.1 Ubuntu 22.04
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SELECT user, host FROM mysql.user;
++-------------+-----------+
+| User        | Host      |
++-------------+-----------+
+| mariadb.sys | localhost |
+| mysql       | localhost |
+| nextcloud   | localhost |
+| root        | localhost |
++-------------+-----------+
+4 rows in set (0.001 sec)
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| nextcloud          |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.000 sec)
+
+MariaDB [(none)]> SHOW GRANTS FOR 'nextcloud'@'localhost';
++------------------------------------------------------------------------------------------------------------------+
+| Grants for nextcloud@localhost                                                                                   |
++------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `nextcloud`@`localhost` IDENTIFIED BY PASSWORD '*14E791F367BC45FECEE759C40AE9622C47625E69' |
+| GRANT ALL PRIVILEGES ON `nextcloud`.* TO `nextcloud`@`localhost`                                                 |
++------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [(none)]> EXIT;
+Bye
+root@nextcloud:/usr/local/bin# mysql -u nextcloud -p -h localhost nextcloud
+Enter password:
+ERROR 1045 (28000): Access denied for user 'nextcloud'@'localhost' (using password: YES)
+root@nextcloud:/usr/local/bin# sudo mysql
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 42
+Server version: 10.6.22-MariaDB-0ubuntu0.22.04.1 Ubuntu 22.04
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> DROP USER IF EXISTS 'nextcloud'@'localhost';
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [(none)]> CREATE USER 'nextcloud'@'localhost'
+    -> IDENTIFIED VIA mysql_native_password
+    -> USING PASSWORD('Nc12345!');
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [(none)]> SHOW GRANTS FOR 'nextcloud'@'localhost';
++------------------------------------------------------------------------------------------------------------------+
+| Grants for nextcloud@localhost                                                                                   |
++------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `nextcloud`@`localhost` IDENTIFIED BY PASSWORD '*64EC5F650633D04A3D778C98317570EBEEF5AE3C' |
+| GRANT ALL PRIVILEGES ON `nextcloud`.* TO `nextcloud`@`localhost`                                                 |
++------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.000 sec)
+
+MariaDB [(none)]> EXIT;
+Bye
+root@nextcloud:/usr/local/bin# mysql -u nextcloud -p -h localhost nextcloud
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 43
+Server version: 10.6.22-MariaDB-0ubuntu0.22.04.1 Ubuntu 22.04
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [nextcloud]> EXIT;
+Bye
+root@nextcloud:/usr/local/bin# #new error occures after doing this and the instilation click : error 500 Internal Server Error
+nginx/1.18.0 (Ubuntu)
+bash: syntax error near unexpected token `Ubuntu'
+root@nextcloud:/usr/local/bin# sudo tail -n 50 /var/log/nginx/error.log
+2025/12/15 09:27:45 [notice] 2862#2862: using inherited sockets from "6;7;"
+2025/12/15 09:39:15 [notice] 21109#21109: signal process started
+2025/12/15 10:40:31 [error] 21110#21110: *13 rewrite or internal redirection cycle while internally redirecting to "/index.php/SDK/webLanguage", client: 89.42.231.244, server: 160.191.150.238, request: "GET /SDK/webLanguage HTTP/1.1", host: "160.191.150.238:80"
+2025/12/15 11:08:27 [error] 21110#21110: *22 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 11:08:28 [error] 21110#21110: *24 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 11:08:48 [error] 21110#21110: *25 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 11:08:48 [error] 21110#21110: *26 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 11:08:49 [error] 21110#21110: *27 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 11:08:49 [error] 21110#21110: *28 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+root@nextcloud:/usr/local/bin# sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+sudo mv /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bak
+root@nextcloud:/usr/local/bin# sudo nano /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# cat /etc/nginx/sites-available/nextcloud.conf
+upstream php-handler {
+    server unix:/run/php/php8.1-fpm.sock;
+}
+
+server {
+    listen 80;
+    server_name  _;
+
+    root /var/www/nextcloud/;
+
+    client_max_body_size 10240M;
+    fastcgi_buffers 64 4K;
+
+    index index.php index.html /index.php$request_uri;
+
+    location / {
+        rewrite ^ /index.php$request_uri;
+    }
+
+    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+        deny all;
+    }
+
+    location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console) {
+        deny all;
+    }
+
+    location ~ \.php(?:$|/) {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param HTTPS off;
+        fastcgi_pass php-handler;
+        fastcgi_intercept_errors on;
+    }
+
+    location ~* \.(?:css|js|woff|svg|gif)$ {
+        try_files $uri /index.php$request_uri;
+        access_log off;
+        expires 6M;
+    }
+
+    location ~* \.(?:png|html|ttf|ico|jpg|jpeg)$ {
+        try_files $uri /index.php$request_uri;
+        access_log off;
+        expires 6M;
+    }
+}
+root@nextcloud:/usr/local/bin# sudo ln -s /etc/nginx/sites-available/nextcloud.conf /etc/nginx/sites-enabled/
+sudo nginx -t
+nginx: [emerg] open() "/etc/nginx/sites-enabled/default.bak" failed (2: No such file or directory) in /etc/nginx/nginx.conf:60
+nginx: configuration file /etc/nginx/nginx.conf test failed
+root@nextcloud:/usr/local/bin# ls -l /etc/nginx/sites-enabled/
+total 0
+lrwxrwxrwx 1 root root 34 Dec 15 09:27 default.bak -> /etc/nginx/sites-available/default
+lrwxrwxrwx 1 root root 36 Dec 15 09:39 nextcloud -> /etc/nginx/sites-available/nextcloud
+lrwxrwxrwx 1 root root 41 Dec 15 11:13 nextcloud.conf -> /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# sudo rm /etc/nginx/sites-enabled/default.bak
+root@nextcloud:/usr/local/bin# sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+root@nextcloud:/usr/local/bin# sudo systemctl restart php8.1-fpm
+root@nextcloud:/usr/local/bin# sudo systemctl restart nginx
+root@nextcloud:/usr/local/bin# #the issue is not fix yet: 500 Internal Server Error
+nginx/1.18.0 (Ubuntu)
+bash: syntax error near unexpected token `Ubuntu'
+root@nextcloud:/usr/local/bin# sudo chown -R www-data:www-data /var/www/nextcloud/
+root@nextcloud:/usr/local/bin# sudo find /var/www/nextcloud/ -type d -exec chmod 750 {} \;
+root@nextcloud:/usr/local/bin# ^C
+root@nextcloud:/usr/local/bin# sudo find /var/www/nextcloud/ -type d -exec chmod 750 {} \;
+root@nextcloud:/usr/local/bin# sudo find /var/www/nextcloud/ -type f -exec chmod 640 {} \;
+root@nextcloud:/usr/local/bin# sudo systemctl status php8.1-fpm
+● php8.1-fpm.service - The PHP 8.1 FastCGI Process Manager
+     Loaded: loaded (/lib/systemd/system/php8.1-fpm.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-12-15 11:14:29 UTC; 1h 53min ago
+       Docs: man:php-fpm8.1(8)
+    Process: 22181 ExecStartPost=/usr/lib/php/php-fpm-socket-helper install /run/php/php-fpm.sock /etc/php/8.1/fpm/pool.d/www.conf 81 (code=exited, status=0/SUCCESS)
+   Main PID: 22178 (php-fpm8.1)
+     Status: "Processes active: 0, idle: 2, Requests: 6, slow: 0, Traffic: 0req/sec"
+      Tasks: 3 (limit: 9474)
+     Memory: 48.9M
+        CPU: 1.079s
+     CGroup: /system.slice/php8.1-fpm.service
+             ├─22178 "php-fpm: master process (/etc/php/8.1/fpm/php-fpm.conf)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─22179 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+             └─22180 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+
+Dec 15 11:14:29 nextcloud systemd[1]: Starting The PHP 8.1 FastCGI Process Manager...
+Dec 15 11:14:29 nextcloud systemd[1]: Started The PHP 8.1 FastCGI Process Manager.
+...skipping...
+● php8.1-fpm.service - The PHP 8.1 FastCGI Process Manager
+     Loaded: loaded (/lib/systemd/system/php8.1-fpm.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-12-15 11:14:29 UTC; 1h 53min ago
+       Docs: man:php-fpm8.1(8)
+    Process: 22181 ExecStartPost=/usr/lib/php/php-fpm-socket-helper install /run/php/php-fpm.sock /etc/php/8.1/fpm/pool.d/www.conf 81 (code=exited, status=0/SUCCESS)
+   Main PID: 22178 (php-fpm8.1)
+     Status: "Processes active: 0, idle: 2, Requests: 6, slow: 0, Traffic: 0req/sec"
+      Tasks: 3 (limit: 9474)
+     Memory: 48.9M
+        CPU: 1.079s
+     CGroup: /system.slice/php8.1-fpm.service
+             ├─22178 "php-fpm: master process (/etc/php/8.1/fpm/php-fpm.conf)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─22179 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+             └─22180 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+
+Dec 15 11:14:29 nextcloud systemd[1]: Starting The PHP 8.1 FastCGI Process Manager...
+Dec 15 11:14:29 nextcloud systemd[1]: Started The PHP 8.1 FastCGI Process Manager.
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+root@nextcloud:/usr/local/bin# sudo systemctl status php8.1-fpm
+● php8.1-fpm.service - The PHP 8.1 FastCGI Process Manager
+     Loaded: loaded (/lib/systemd/system/php8.1-fpm.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-12-15 11:14:29 UTC; 1h 53min ago
+       Docs: man:php-fpm8.1(8)
+    Process: 22181 ExecStartPost=/usr/lib/php/php-fpm-socket-helper install /run/php/php-fpm.sock /etc/php/8.1/fpm/pool.d/www.conf 81 (code=exited, status=0/SUCCESS)
+   Main PID: 22178 (php-fpm8.1)
+     Status: "Processes active: 0, idle: 2, Requests: 6, slow: 0, Traffic: 0req/sec"
+      Tasks: 3 (limit: 9474)
+     Memory: 48.9M
+        CPU: 1.080s
+     CGroup: /system.slice/php8.1-fpm.service
+             ├─22178 "php-fpm: master process (/etc/php/8.1/fpm/php-fpm.conf)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─22179 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+             └─22180 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+
+Dec 15 11:14:29 nextcloud systemd[1]: Starting The PHP 8.1 FastCGI Process Manager...
+Dec 15 11:14:29 nextcloud systemd[1]: Started The PHP 8.1 FastCGI Process Manager.
+
+root@nextcloud:/usr/local/bin# sudo systemctl status php8.1-fpm
+● php8.1-fpm.service - The PHP 8.1 FastCGI Process Manager
+     Loaded: loaded (/lib/systemd/system/php8.1-fpm.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-12-15 11:14:29 UTC; 1h 53min ago
+       Docs: man:php-fpm8.1(8)
+    Process: 22181 ExecStartPost=/usr/lib/php/php-fpm-socket-helper install /run/php/php-fpm.sock /etc/php/8.1/fpm/pool.d/www.conf 81 (code=exited, status=0/SUCCESS)
+   Main PID: 22178 (php-fpm8.1)
+     Status: "Processes active: 0, idle: 2, Requests: 6, slow: 0, Traffic: 0req/sec"
+      Tasks: 3 (limit: 9474)
+     Memory: 48.9M
+        CPU: 1.080s
+     CGroup: /system.slice/php8.1-fpm.service
+             ├─22178 "php-fpm: master process (/etc/php/8.1/fpm/php-fpm.conf)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─22179 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+             └─22180 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+
+Dec 15 11:14:29 nextcloud systemd[1]: Starting The PHP 8.1 FastCGI Process Manager...
+Dec 15 11:14:29 nextcloud systemd[1]: Started The PHP 8.1 FastCGI Process Manager.
+...skipping...
+● php8.1-fpm.service - The PHP 8.1 FastCGI Process Manager
+     Loaded: loaded (/lib/systemd/system/php8.1-fpm.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-12-15 11:14:29 UTC; 1h 53min ago
+       Docs: man:php-fpm8.1(8)
+    Process: 22181 ExecStartPost=/usr/lib/php/php-fpm-socket-helper install /run/php/php-fpm.sock /etc/php/8.1/fpm/pool.d/www.conf 81 (code=exited, status=0/SUCCESS)
+   Main PID: 22178 (php-fpm8.1)
+     Status: "Processes active: 0, idle: 2, Requests: 6, slow: 0, Traffic: 0req/sec"
+      Tasks: 3 (limit: 9474)
+     Memory: 48.9M
+        CPU: 1.080s
+     CGroup: /system.slice/php8.1-fpm.service
+             ├─22178 "php-fpm: master process (/etc/php/8.1/fpm/php-fpm.conf)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─22179 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+             └─22180 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+
+Dec 15 11:14:29 nextcloud systemd[1]: Starting The PHP 8.1 FastCGI Process Manager...
+Dec 15 11:14:29 nextcloud systemd[1]: Started The PHP 8.1 FastCGI Process Manager.
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+root@nextcloud:/usr/local/bin# sudo apt update
+Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Hit:2 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Fetched 129 kB in 2s (64.5 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+root@nextcloud:/usr/local/bin# sudo apt install php8.1-gd php8.1-mysql php8.1-curl php8.1-xml php8.1-zip php8.1-mbstring php8.1-bcmath php8.1-gmp php8.1-intl php8.1-imagick php8.1-bz2 php8.1-sqlite3 -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+php8.1-imagick is already the newest version (3.6.0-4ubuntu1).
+php8.1-imagick set to manually installed.
+php8.1-curl is already the newest version (8.1.2-1ubuntu2.22).
+php8.1-curl set to manually installed.
+php8.1-gd is already the newest version (8.1.2-1ubuntu2.22).
+php8.1-gd set to manually installed.
+php8.1-mbstring is already the newest version (8.1.2-1ubuntu2.22).
+php8.1-mbstring set to manually installed.
+php8.1-mysql is already the newest version (8.1.2-1ubuntu2.22).
+php8.1-mysql set to manually installed.
+php8.1-xml is already the newest version (8.1.2-1ubuntu2.22).
+php8.1-xml set to manually installed.
+php8.1-bcmath is already the newest version (8.1.2-1ubuntu2.22).
+php8.1-bcmath set to manually installed.
+php8.1-intl is already the newest version (8.1.2-1ubuntu2.22).
+php8.1-intl set to manually installed.
+php8.1-zip is already the newest version (8.1.2-1ubuntu2.22).
+php8.1-zip set to manually installed.
+The following NEW packages will be installed:
+  php8.1-bz2 php8.1-gmp php8.1-sqlite3
+0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+Need to get 66.4 kB of archives.
+After this operation, 303 kB of additional disk space will be used.
+Get:1 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 php8.1-bz2 amd64 8.1.2-1ubuntu2.22 [11.5 kB]
+Get:2 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 php8.1-gmp amd64 8.1.2-1ubuntu2.22 [22.6 kB]
+Get:3 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 php8.1-sqlite3 amd64 8.1.2-1ubuntu2.22 [32.3 kB]
+Fetched 66.4 kB in 1s (55.0 kB/s)
+Selecting previously unselected package php8.1-bz2.
+(Reading database ... 97406 files and directories currently installed.)
+Preparing to unpack .../php8.1-bz2_8.1.2-1ubuntu2.22_amd64.deb ...
+Unpacking php8.1-bz2 (8.1.2-1ubuntu2.22) ...
+Selecting previously unselected package php8.1-gmp.
+Preparing to unpack .../php8.1-gmp_8.1.2-1ubuntu2.22_amd64.deb ...
+Unpacking php8.1-gmp (8.1.2-1ubuntu2.22) ...
+Selecting previously unselected package php8.1-sqlite3.
+Preparing to unpack .../php8.1-sqlite3_8.1.2-1ubuntu2.22_amd64.deb ...
+Unpacking php8.1-sqlite3 (8.1.2-1ubuntu2.22) ...
+Setting up php8.1-gmp (8.1.2-1ubuntu2.22) ...
+
+Creating config file /etc/php/8.1/mods-available/gmp.ini with new version
+Setting up php8.1-bz2 (8.1.2-1ubuntu2.22) ...
+
+Creating config file /etc/php/8.1/mods-available/bz2.ini with new version
+Setting up php8.1-sqlite3 (8.1.2-1ubuntu2.22) ...
+
+Creating config file /etc/php/8.1/mods-available/sqlite3.ini with new version
+
+Creating config file /etc/php/8.1/mods-available/pdo_sqlite.ini with new version
+Processing triggers for php8.1-fpm (8.1.2-1ubuntu2.22) ...
+Processing triggers for php8.1-cli (8.1.2-1ubuntu2.22) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+root@nextcloud:/usr/local/bin# sudo systemctl restart php8.1-fpm
+root@nextcloud:/usr/local/bin# sudo tail -n 50 /var/log/nginx/error.log
+2025/12/15 09:27:45 [notice] 2862#2862: using inherited sockets from "6;7;"
+2025/12/15 09:39:15 [notice] 21109#21109: signal process started
+2025/12/15 10:40:31 [error] 21110#21110: *13 rewrite or internal redirection cycle while internally redirecting to "/index.php/SDK/webLanguage", client: 89.42.231.244, server: 160.191.150.238, request: "GET /SDK/webLanguage HTTP/1.1", host: "160.191.150.238:80"
+2025/12/15 11:08:27 [error] 21110#21110: *22 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 11:08:28 [error] 21110#21110: *24 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 11:08:48 [error] 21110#21110: *25 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 11:08:48 [error] 21110#21110: *26 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 11:08:49 [error] 21110#21110: *27 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 11:08:49 [error] 21110#21110: *28 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 11:13:43 [emerg] 22157#22157: open() "/etc/nginx/sites-enabled/default.bak" failed (2: No such file or directory) in /etc/nginx/nginx.conf:60
+2025/12/15 11:14:23 [error] 21110#21110: *31 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 43.153.10.13, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238"
+2025/12/15 11:21:12 [error] 22196#22196: *1 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 185.180.140.4, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/"
+2025/12/15 11:27:12 [error] 22196#22196: *5 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 43.135.133.241, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238:80", referrer: "http://160.191.150.238:80"
+2025/12/15 11:44:00 [error] 22196#22196: *6 rewrite or internal redirection cycle while internally redirecting to "/index.php/cgi-bin/luci/;stok=/locale", client: 193.142.147.209, server: 160.191.150.238, request: "GET /cgi-bin/luci/;stok=/locale HTTP/1.1", host: "160.191.150.238:80"
+2025/12/15 12:35:47 [error] 22196#22196: *10 rewrite or internal redirection cycle while internally redirecting to "/index.php/SDK/webLanguage", client: 204.76.203.214, server: 160.191.150.238, request: "GET /SDK/webLanguage HTTP/1.1", host: "160.191.150.238:80"
+2025/12/15 12:46:29 [error] 22196#22196: *15 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 162.142.125.118, server: 160.191.150.238, request: "GET/index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/15 12:46:36 [error] 22196#22196: *16 rewrite or internal redirection cycle while internally redirecting to "/index.php/ReportServer", client: 135.237.125.146, server: 160.191.150.238, request: "GET /ReportServer HTTP/1.1", host: "160.191.150.238"
+2025/12/15 12:46:44 [error] 22196#22196: *18 rewrite or internal redirection cycle while internally redirecting to "/index.php/sitemap.xml", client: 162.142.125.118, server: 160.191.150.238, request: "GET /sitemap.xml HTTP/1.1", host: "160.191.150.238"
+2025/12/15 12:58:47 [error] 22196#22196: *21 rewrite or internal redirection cycle while internally redirecting to "/index.php/cgi-bin/login", client: 87.121.84.181, server: 160.191.150.238, request: "POST /cgi-bin/login HTTP/1.0", host: "160.191.150.238:80"
+2025/12/15 13:04:58 [error] 22196#22196: *22 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 13:05:00 [error] 22196#22196: *23 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 13:05:00 [error] 22196#22196: *24 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 13:05:01 [error] 22196#22196: *25 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 13:05:01 [error] 22196#22196: *26 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 13:05:29 [error] 22196#22196: *27 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/apps/dashboard/", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/apps/dashboard/ HTTP/1.1", host: "160.191.150.238"
+2025/12/15 13:05:30 [error] 22196#22196: *29 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/apps/dashboard/"
+root@nextcloud:/usr/local/bin# sudo tail -n 50 /var/log/nginx/error.log
+2025/12/15 09:27:45 [notice] 2862#2862: using inherited sockets from "6;7;"
+2025/12/15 09:39:15 [notice] 21109#21109: signal process started
+2025/12/15 10:40:31 [error] 21110#21110: *13 rewrite or internal redirection cycle while internally redirecting to "/index.php/SDK/webLanguage", client: 89.42.231.244, server: 160.191.150.238, request: "GET /SDK/webLanguage HTTP/1.1", host: "160.191.150.238:80"
+2025/12/15 11:08:27 [error] 21110#21110: *22 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 11:08:28 [error] 21110#21110: *24 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 11:08:48 [error] 21110#21110: *25 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 11:08:48 [error] 21110#21110: *26 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 11:08:49 [error] 21110#21110: *27 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 11:08:49 [error] 21110#21110: *28 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 11:13:43 [emerg] 22157#22157: open() "/etc/nginx/sites-enabled/default.bak" failed (2: No such file or directory) in /etc/nginx/nginx.conf:60
+2025/12/15 11:14:23 [error] 21110#21110: *31 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 43.153.10.13, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238"
+2025/12/15 11:21:12 [error] 22196#22196: *1 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 185.180.140.4, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/"
+2025/12/15 11:27:12 [error] 22196#22196: *5 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 43.135.133.241, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238:80", referrer: "http://160.191.150.238:80"
+2025/12/15 11:44:00 [error] 22196#22196: *6 rewrite or internal redirection cycle while internally redirecting to "/index.php/cgi-bin/luci/;stok=/locale", client: 193.142.147.209, server: 160.191.150.238, request: "GET /cgi-bin/luci/;stok=/locale HTTP/1.1", host: "160.191.150.238:80"
+2025/12/15 12:35:47 [error] 22196#22196: *10 rewrite or internal redirection cycle while internally redirecting to "/index.php/SDK/webLanguage", client: 204.76.203.214, server: 160.191.150.238, request: "GET /SDK/webLanguage HTTP/1.1", host: "160.191.150.238:80"
+2025/12/15 12:46:29 [error] 22196#22196: *15 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 162.142.125.118, server: 160.191.150.238, request: "GET/index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/15 12:46:36 [error] 22196#22196: *16 rewrite or internal redirection cycle while internally redirecting to "/index.php/ReportServer", client: 135.237.125.146, server: 160.191.150.238, request: "GET /ReportServer HTTP/1.1", host: "160.191.150.238"
+2025/12/15 12:46:44 [error] 22196#22196: *18 rewrite or internal redirection cycle while internally redirecting to "/index.php/sitemap.xml", client: 162.142.125.118, server: 160.191.150.238, request: "GET /sitemap.xml HTTP/1.1", host: "160.191.150.238"
+2025/12/15 12:58:47 [error] 22196#22196: *21 rewrite or internal redirection cycle while internally redirecting to "/index.php/cgi-bin/login", client: 87.121.84.181, server: 160.191.150.238, request: "POST /cgi-bin/login HTTP/1.0", host: "160.191.150.238:80"
+2025/12/15 13:04:58 [error] 22196#22196: *22 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 13:05:00 [error] 22196#22196: *23 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 13:05:00 [error] 22196#22196: *24 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 13:05:01 [error] 22196#22196: *25 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/core/apps/recommended", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/core/apps/recommended HTTP/1.1", host: "160.191.150.238"
+2025/12/15 13:05:01 [error] 22196#22196: *26 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/core/apps/recommended"
+2025/12/15 13:05:29 [error] 22196#22196: *27 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/apps/dashboard/", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/apps/dashboard/ HTTP/1.1", host: "160.191.150.238"
+2025/12/15 13:05:30 [error] 22196#22196: *29 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/apps/dashboard/"
+root@nextcloud:/usr/local/bin# sudo chown -R www-data:www-data /mnt/nextcloud-data
+root@nextcloud:/usr/local/bin# sudo chmod -R 750 /mnt/nextcloud-data
+root@nextcloud:/usr/local/bin# #this is the error maybe lets solve this shit: rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/…"
+root@nextcloud:/usr/local/bin# sudo nano /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# cat /etc/nginx/sites-available/nextcloud.conf
+upstream php-handler {
+    server unix:/run/php/php8.1-fpm.sock;
+}
+
+server {
+    listen 80;
+    server_name  _;
+
+    root /var/www/nextcloud/;
+
+    client_max_body_size 10240M;
+    fastcgi_buffers 64 4K;
+
+    index index.php index.html /index.php$request_uri;
+
+    location / {
+        rewrite ^ /index.php$request_uri;
+    }
+
+    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+        deny all;
+    }
+
+    location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console) {
+        deny all;
+    }
+
+    location ~ \.php(?:$|/) {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param HTTPS off;
+        fastcgi_pass php-handler;
+        fastcgi_intercept_errors on;
+    }
+
+    location ~* \.(?:css|js|woff|svg|gif)$ {
+        try_files $uri /index.php$request_uri;
+        access_log off;
+        expires 6M;
+    }
+
+    location ~* \.(?:png|html|ttf|ico|jpg|jpeg)$ {
+        try_files $uri /index.php$request_uri;
+        access_log off;
+        expires 6M;
+    }
+}
+root@nextcloud:/usr/local/bin# > /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# sudo nano /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# sudo nano /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+root@nextcloud:/usr/local/bin# sudo systemctl restart php8.1-fpm
+root@nextcloud:/usr/local/bin# sudo systemctl restart nginx
+root@nextcloud:/usr/local/bin# nano /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# cat /etc/nginx/sites-available/nextcloud.conf
+upstream php-handler {
+    server unix:/run/php/php8.1-fpm.sock;
+}
+
+server {
+    listen 80;
+    server_name _;
+
+    root /var/www/nextcloud/;
+
+    client_max_body_size 10240M;
+    fastcgi_buffers 64 4K;
+
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+        deny all;
+    }
+
+    location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console) {
+        deny all;
+    }
+
+    location ~ \.php(?:$|/) {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param HTTPS off;
+        fastcgi_pass php-handler;
+        fastcgi_intercept_errors on;
+    }
+
+    location ~* \.(?:css|js|woff|svg|gif|png|html|ttf|ico|jpg|jpeg)$ {
+        try_files $uri /index.php?$query_string;
+        access_log off;
+        expires 6M;
+    }
+}
+root@nextcloud:/usr/local/bin# > /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# nano /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+root@nextcloud:/usr/local/bin# sudo systemctl restart php8.1-fpm
+root@nextcloud:/usr/local/bin# sudo systemctl restart nginx
+root@nextcloud:/usr/local/bin# sudo cp /etc/nginx/sites-available/nextcloud.conf /etc/nginx/sites-available/nextcloud.conf.bak
+root@nextcloud:/usr/local/bin# sudo nano /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# > /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# sudo nano /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+root@nextcloud:/usr/local/bin# sudo systemctl restart php8.1-fpm
+root@nextcloud:/usr/local/bin# sudo systemctl restart nginx
+root@nextcloud:/usr/local/bin# sudo ufw status
+Status: inactive
+root@nextcloud:/usr/local/bin# v
+v: command not found
+root@nextcloud:/usr/local/bin# sudo systemctl status nginx
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-12-15 13:39:34 UTC; 1min 2s ago
+       Docs: man:nginx(8)
+    Process: 56583 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 56584 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+   Main PID: 56585 (nginx)
+      Tasks: 5 (limit: 9474)
+     Memory: 5.0M
+        CPU: 24ms
+     CGroup: /system.slice/nginx.service
+             ├─56585 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"
+             ├─56586 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─56587 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─56588 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             └─56589 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+
+Dec 15 13:39:34 nextcloud systemd[1]: Starting A high performance web server and a reverse proxy server...
+Dec 15 13:39:34 nextcloud systemd[1]: Started A high performance web server and a reverse proxy server.
+root@nextcloud:/usr/local/bin# sudo systemctl restart nginx
+root@nextcloud:/usr/local/bin# sudo systemctl status php8.1-fpm
+● php8.1-fpm.service - The PHP 8.1 FastCGI Process Manager
+     Loaded: loaded (/lib/systemd/system/php8.1-fpm.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-12-15 13:39:31 UTC; 1min 16s ago
+       Docs: man:php-fpm8.1(8)
+    Process: 56574 ExecStartPost=/usr/lib/php/php-fpm-socket-helper install /run/php/php-fpm.sock /etc/php/8.1/fpm/pool.d/www.conf 81 (code=exited, status=0/SUCCESS)
+   Main PID: 56571 (php-fpm8.1)
+     Status: "Processes active: 0, idle: 2, Requests: 1, slow: 0, Traffic: 0req/sec"
+      Tasks: 3 (limit: 9474)
+     Memory: 42.0M
+        CPU: 581ms
+     CGroup: /system.slice/php8.1-fpm.service
+             ├─56571 "php-fpm: master process (/etc/php/8.1/fpm/php-fpm.conf)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─56572 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+             └─56573 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
+
+Dec 15 13:39:31 nextcloud systemd[1]: Starting The PHP 8.1 FastCGI Process Manager...
+Dec 15 13:39:31 nextcloud systemd[1]: Started The PHP 8.1 FastCGI Process Manager.
+
+root@nextcloud:/usr/local/bin# sudo systemctl restart php8.1-fpm
+root@nextcloud:/usr/local/bin# sudo chown -R www-data:www-data /mnt/nextcloud-data
+root@nextcloud:/usr/local/bin# sudo chmod -R 750 /mnt/nextcloud-data
+root@nextcloud:/usr/local/bin# curl -I http://localhost
+HTTP/1.1 302 Found
+Server: nginx/1.18.0 (Ubuntu)
+Date: Mon, 15 Dec 2025 13:41:03 GMT
+Content-Type: text/html; charset=UTF-8
+Connection: keep-alive
+Set-Cookie: oc_sessionPassphrase=ZZuFu98lyXoF%2F8MKLGnRH8Xm%2Bmy3WZagPjehcRyfiO3xahjM6AO%2FRWmmYLPvzc4VRaF99qgZwVTQRa2eY8xh2IsVS2GZq5Ov3inC%2FHmIa5yzochTOVqeJ871eQTAKSOn; path=/; HttpOnly; SameSite=Lax
+Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-wUuapOVcmCTo7x+3ExE+Vf1dloh4bnRrSBCmPostmWU='; style-src 'self' 'unsafe-inline'; frame-src *; img-src * data: blob:; font-src 'self' data:; media-src *; connect-src *; object-src 'none'; base-uri 'self';
+Referrer-Policy: no-referrer
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-Robots-Tag: noindex, nofollow
+Set-Cookie: nc_sameSiteCookielax=true; path=/; httponly;expires=Fri, 31-Dec-2100 23:59:59 GMT; SameSite=lax
+Set-Cookie: nc_sameSiteCookiestrict=true; path=/; httponly;expires=Fri, 31-Dec-2100 23:59:59 GMT; SameSite=strict
+Set-Cookie: oc1alrzetxgb=7f8r9tq2cduqn76qo566ijuvkb; path=/; HttpOnly; SameSite=Lax
+Location: http://localhost/index.php/login
+
+root@nextcloud:/usr/local/bin# sudo nano /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# sudo nano /var/www/nextcloud/config/config.php
+root@nextcloud:/usr/local/bin# sudo nano /var/www/nextcloud/config/config.php
+root@nextcloud:/usr/local/bin# > /var/www/nextcloud/config/config.php
+root@nextcloud:/usr/local/bin# sudo nano /var/www/nextcloud/config/config.php
+root@nextcloud:/usr/local/bin# nano /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# > /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# nano /etc/nginx/sites-available/nextcloud.conf
+root@nextcloud:/usr/local/bin# sudo nginx -t
+nginx: [warn] conflicting server name "160.191.150.238" on 0.0.0.0:80, ignored
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+root@nextcloud:/usr/local/bin# sudo systemctl restart php8.1-fpm
+root@nextcloud:/usr/local/bin# sudo systemctl restart nginx
+root@nextcloud:/usr/local/bin#
+
+```
