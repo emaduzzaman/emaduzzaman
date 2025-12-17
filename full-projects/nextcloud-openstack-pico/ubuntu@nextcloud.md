@@ -10505,4 +10505,454 @@ root@nextcloud:/usr/local/bin# sudo systemctl restart php8.1-fpm
 root@nextcloud:/usr/local/bin# sudo systemctl restart nginx
 root@nextcloud:/usr/local/bin#
 
+
+ubuntu@nextcloud:~$ sudo apt update && sudo apt upgrade -y
+Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:2 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy InRelease
+Get:3 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:4 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:5 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [93.6 kB]
+Get:6 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [34.1 kB]
+Get:7 http://kkr-prd01-az3.clouds.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [672 B]
+Fetched 384 kB in 3s (130 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+Get more security updates through Ubuntu Pro with 'esm-apps' enabled:
+  redis-server libheif1 libmagickwand-6.q16-6 redis-tools
+  libmagickcore-6.q16-6 imagemagick-6-common libde265-0
+Learn more about Ubuntu Pro at https://ubuntu.com/pro
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+ubuntu@nextcloud:~$ systemctl status php8.1-fpm
+● php8.1-fpm.service - The PHP 8.1 FastCGI Process Manager
+     Loaded: loaded (/lib/systemd/system/php8.1-fpm.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2025-12-17 08:07:55 UTC; 5h 24min ago
+       Docs: man:php-fpm8.1(8)
+   Main PID: 644 (php-fpm8.1)
+     Status: "Processes active: 0, idle: 2, Requests: 14, slow: 0, Traffic: 0req/sec"
+      Tasks: 3 (limit: 9474)
+     Memory: 79.9M
+        CPU: 1.753s
+     CGroup: /system.slice/php8.1-fpm.service
+             ├─644 "php-fpm: master process (/etc/php/8.1/fpm/php-fpm.conf)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─801 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ">
+             └─803 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ">
+
+Dec 17 08:07:54 nextcloud systemd[1]: Starting The PHP 8.1 FastCGI Process Manager...
+Dec 17 08:07:55 nextcloud systemd[1]: Started The PHP 8.1 FastCGI Process Manager.
+
+ubuntu@nextcloud:~$ server unix:/run/php/php8.1-fpm.sock;
+Command 'server' not found, did you mean:
+  command 'serveo' from snap serveo (0.0.10)
+  command 'serve' from snap serve (0.3.0)
+  command 'jserver' from deb freewnn-jserver (1.1.1~a021+cvs20130302-7build1)
+  command 'semver' from deb node-semver (7.3.5+~7.3.8-1)
+  command 'cserver' from deb freewnn-cserver (1.1.1~a021+cvs20130302-7build1)
+  command 'kserver' from deb freewnn-kserver (1.1.1~a021+cvs20130302-7build1)
+See 'snap info <snapname>' for additional versions.
+ubuntu@nextcloud:~$ ls -l /run/php/
+total 4
+lrwxrwxrwx 1 root     root     30 Dec 17 08:07 php-fpm.sock -> /etc/alternatives/php-fpm.sock
+-rw-r--r-- 1 root     root      3 Dec 17 08:07 php8.1-fpm.pid
+srw-rw---- 1 www-data www-data  0 Dec 17 08:07 php8.1-fpm.sock
+ubuntu@nextcloud:~$ ls -l /run/php/
+total 4
+lrwxrwxrwx 1 root     root     30 Dec 17 08:07 php-fpm.sock -> /etc/alternatives/php-fpm.sock
+-rw-r--r-- 1 root     root      3 Dec 17 08:07 php8.1-fpm.pid
+srw-rw---- 1 www-data www-data  0 Dec 17 08:07 php8.1-fpm.sock
+ubuntu@nextcloud:~$ sudo nano /var/www/nextcloud/info.php
+ubuntu@nextcloud:~$ cat /var/www/nextcloud/info.php
+cat: /var/www/nextcloud/info.php: Permission denied
+ubuntu@nextcloud:~$ sudo cat /var/www/nextcloud/info.php
+<?php phpinfo(); ?>
+ubuntu@nextcloud:~$ sudo chown -R www-data:www-data /var/www/nextcloud
+ubuntu@nextcloud:~$ sudo find /var/www/nextcloud -type d -exec chmod 755 {} \;
+ubuntu@nextcloud:~$ sudo find /var/www/nextcloud -type f -exec chmod 644 {} \;
+
+
+
+^C
+ubuntu@nextcloud:~$ sudo find /var/www/nextcloud -type f -exec chmod 644 {} \;
+ubuntu@nextcloud:~$ sudo nginx -t
+nginx: [warn] conflicting server name "160.191.150.238" on 0.0.0.0:80, ignored
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+ubuntu@nextcloud:~$ sudo systemctl restart nginx
+ubuntu@nextcloud:~$ sudo systemctl restart php8.1-fpm
+ubuntu@nextcloud:~$ sudo tail -n 50 /var/log/php8.1-fpm.log
+[15-Dec-2025 13:08:48] NOTICE: Terminating ...
+[15-Dec-2025 13:08:48] NOTICE: exiting, bye-bye!
+[15-Dec-2025 13:08:48] NOTICE: fpm is running, pid 56068
+[15-Dec-2025 13:08:48] NOTICE: ready to handle connections
+[15-Dec-2025 13:08:48] NOTICE: systemd monitor interval set to 10000ms
+[15-Dec-2025 13:08:56] NOTICE: Terminating ...
+[15-Dec-2025 13:08:56] NOTICE: exiting, bye-bye!
+[15-Dec-2025 13:08:56] NOTICE: fpm is running, pid 56149
+[15-Dec-2025 13:08:56] NOTICE: ready to handle connections
+[15-Dec-2025 13:08:56] NOTICE: systemd monitor interval set to 10000ms
+[15-Dec-2025 13:36:30] NOTICE: Terminating ...
+[15-Dec-2025 13:36:30] NOTICE: exiting, bye-bye!
+[15-Dec-2025 13:36:30] NOTICE: fpm is running, pid 56424
+[15-Dec-2025 13:36:30] NOTICE: ready to handle connections
+[15-Dec-2025 13:36:30] NOTICE: systemd monitor interval set to 10000ms
+[15-Dec-2025 13:38:20] NOTICE: Terminating ...
+[15-Dec-2025 13:38:20] NOTICE: exiting, bye-bye!
+[15-Dec-2025 13:38:20] NOTICE: fpm is running, pid 56475
+[15-Dec-2025 13:38:20] NOTICE: ready to handle connections
+[15-Dec-2025 13:38:20] NOTICE: systemd monitor interval set to 10000ms
+[15-Dec-2025 13:39:31] NOTICE: Terminating ...
+[15-Dec-2025 13:39:31] NOTICE: exiting, bye-bye!
+[15-Dec-2025 13:39:31] NOTICE: fpm is running, pid 56571
+[15-Dec-2025 13:39:31] NOTICE: ready to handle connections
+[15-Dec-2025 13:39:31] NOTICE: systemd monitor interval set to 10000ms
+[15-Dec-2025 13:40:52] NOTICE: Terminating ...
+[15-Dec-2025 13:40:52] NOTICE: exiting, bye-bye!
+[15-Dec-2025 13:40:52] NOTICE: fpm is running, pid 56652
+[15-Dec-2025 13:40:52] NOTICE: ready to handle connections
+[15-Dec-2025 13:40:52] NOTICE: systemd monitor interval set to 10000ms
+[15-Dec-2025 13:46:46] NOTICE: Terminating ...
+[15-Dec-2025 13:46:46] NOTICE: exiting, bye-bye!
+[15-Dec-2025 13:46:46] NOTICE: fpm is running, pid 56744
+[15-Dec-2025 13:46:46] NOTICE: ready to handle connections
+[15-Dec-2025 13:46:46] NOTICE: systemd monitor interval set to 10000ms
+[15-Dec-2025 13:52:20] NOTICE: Terminating ...
+[15-Dec-2025 13:52:20] NOTICE: exiting, bye-bye!
+[17-Dec-2025 06:49:59] NOTICE: fpm is running, pid 642
+[17-Dec-2025 06:49:59] NOTICE: ready to handle connections
+[17-Dec-2025 06:49:59] NOTICE: systemd monitor interval set to 10000ms
+[17-Dec-2025 06:50:41] NOTICE: Terminating ...
+[17-Dec-2025 06:50:41] NOTICE: exiting, bye-bye!
+[17-Dec-2025 08:07:55] NOTICE: fpm is running, pid 644
+[17-Dec-2025 08:07:55] NOTICE: ready to handle connections
+[17-Dec-2025 08:07:55] NOTICE: systemd monitor interval set to 10000ms
+[17-Dec-2025 13:35:59] NOTICE: Terminating ...
+[17-Dec-2025 13:35:59] NOTICE: exiting, bye-bye!
+[17-Dec-2025 13:35:59] NOTICE: fpm is running, pid 46408
+[17-Dec-2025 13:35:59] NOTICE: ready to handle connections
+[17-Dec-2025 13:35:59] NOTICE: systemd monitor interval set to 10000ms
+ubuntu@nextcloud:~$ sudo tail -n 50 /var/log/syslog | grep php
+Dec 17 13:09:01 nextcloud CRON[3507]: (root) CMD (  [ -x /usr/lib/php/sessionclean ] && if [ ! -d /run/systemd/system ]; then /usr/lib/php/sessionclean; fi)
+Dec 17 13:09:07 nextcloud systemd[1]: Starting Clean php session files...
+Dec 17 13:09:07 nextcloud systemd[1]: phpsessionclean.service: Deactivated successfully.
+Dec 17 13:09:07 nextcloud systemd[1]: Finished Clean php session files.
+Dec 17 13:35:59 nextcloud systemd[1]: php8.1-fpm.service: Deactivated successfully.
+Dec 17 13:35:59 nextcloud systemd[1]: php8.1-fpm.service: Consumed 1.780s CPU time.
+ubuntu@nextcloud:~$ sudo tail -n 50 /var/www/nextcloud/data/nextcloud.log
+ubuntu@nextcloud:~$ ls -l /var/www/nextcloud/data/
+total 0
+-rw-r--r-- 1 www-data www-data 0 Dec 15 10:54 index.html
+-rw-r--r-- 1 www-data www-data 0 Dec 15 09:46 nextcloud.log
+ubuntu@nextcloud:~$ sudo nano /etc/nginx/sites-available/nextcloud
+ubuntu@nextcloud:~$ ls -l /run/php/
+total 4
+lrwxrwxrwx 1 root     root     30 Dec 17 08:07 php-fpm.sock -> /etc/alternatives/php-fpm.sock
+-rw-r--r-- 1 root     root      5 Dec 17 13:35 php8.1-fpm.pid
+srw-rw---- 1 www-data www-data  0 Dec 17 13:35 php8.1-fpm.sock
+ubuntu@nextcloud:~$ sudo chown -R www-data:www-data /var/www/nextcloud
+ubuntu@nextcloud:~$ sudo find /var/www/nextcloud -type d -exec chmod 750 {} \;
+ubuntu@nextcloud:~$ sudo find /var/www/nextcloud -type f -exec chmod 640 {} \;
+ubuntu@nextcloud:~$ sudo tail -n 50 /var/log/nginx/error.log
+2025/12/17 09:45:26 [error] 720#720: *14 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 206.168.34.42, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 09:45:30 [error] 720#720: *16 rewrite or internal redirection cycle while internally redirecting to "/index.php/security.txt", client: 206.168.34.42, server: 160.191.150.238, request: "GET /security.txt HTTP/1.1", host: "160.191.150.238"
+2025/12/17 10:09:52 [error] 720#720: *22 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 206.168.34.51, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 10:10:10 [error] 720#720: *24 rewrite or internal redirection cycle while internally redirecting to "/index.php/security.txt", client: 206.168.34.51, server: 160.191.150.238, request: "GET /security.txt HTTP/1.1", host: "160.191.150.238"
+2025/12/17 10:10:21 [error] 720#720: *25 rewrite or internal redirection cycle while internally redirecting to "/index.php/login.asp", client: 95.214.55.71, server: 160.191.150.238, request: "GET /login.asp HTTP/1.1", host: "160.191.150.238:80"
+2025/12/17 10:12:12 [error] 720#720: *28 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 35.203.210.66, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238:80", referrer: "http://160.191.150.238:80/"
+2025/12/17 10:14:37 [error] 720#720: *31 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 43.154.127.188, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238"
+2025/12/17 10:39:04 [error] 720#720: *34 rewrite or internal redirection cycle while internally redirecting to "/index.php/druid/index.html", client: 20.169.81.111, server: 160.191.150.238, request: "GET /druid/index.html HTTP/1.1", host: "160.191.150.238"
+2025/12/17 11:28:34 [error] 720#720: *39 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 195.24.236.148, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 11:38:34 [error] 720#720: *41 rewrite or internal redirection cycle while internally redirecting to "/index.php/page/style/index.css", client: 95.214.55.71, server: 160.191.150.238, request: "GET /page/style/index.css HTTP/1.1", host: "160.191.150.238:80"
+2025/12/17 12:21:20 [error] 720#720: *42 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 195.24.236.148, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 12:37:56 [error] 720#720: *49 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 45.79.128.205, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/"
+2025/12/17 12:47:03 [error] 720#720: *51 rewrite or internal redirection cycle while internally redirecting to "/index.php/.env", client: 78.153.140.203, server: 160.191.150.238, request: "GET /.env HTTP/1.1", host: "160.191.150.238"
+2025/12/17 12:47:03 [error] 720#720: *52 rewrite or internal redirection cycle while internally redirecting to "/index.php/api/.env", client: 78.153.140.203, server: 160.191.150.238, request: "GET /api/.env HTTP/1.1", host: "160.191.150.238"
+2025/12/17 12:47:04 [error] 720#720: *53 rewrite or internal redirection cycle while internally redirecting to "/index.php/backend/.env", client: 78.153.140.203, server: 160.191.150.238, request: "GET /backend/.env HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:28:19 [error] 720#720: *55 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:28:20 [error] 720#720: *57 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:46 [error] 720#720: *58 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:46 [error] 720#720: *59 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:47 [error] 720#720: *60 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:47 [error] 720#720: *61 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:48 [error] 720#720: *62 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:48 [error] 720#720: *63 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:49 [error] 720#720: *64 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:49 [error] 720#720: *65 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:50 [error] 720#720: *66 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:50 [error] 720#720: *67 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:50 [error] 720#720: *68 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:50 [error] 720#720: *69 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:50 [error] 720#720: *70 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:50 [error] 720#720: *71 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:50 [error] 720#720: *72 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:50 [error] 720#720: *73 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:35:49 [warn] 46388#46388: conflicting server name "160.191.150.238" on 0.0.0.0:80, ignored
+2025/12/17 13:35:55 [warn] 46394#46394: conflicting server name "160.191.150.238" on 0.0.0.0:80, ignored
+2025/12/17 13:35:55 [warn] 46395#46395: conflicting server name "160.191.150.238" on 0.0.0.0:80, ignored
+2025/12/17 13:36:23 [error] 46397#46397: *1 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:23 [error] 46397#46397: *2 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:24 [error] 46397#46397: *3 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:24 [error] 46397#46397: *4 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:24 [error] 46397#46397: *5 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:24 [error] 46397#46397: *6 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:24 [error] 46397#46397: *7 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:25 [error] 46397#46397: *8 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:26 [error] 46397#46397: *9 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:26 [error] 46397#46397: *10 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:26 [error] 46397#46397: *11 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:26 [error] 46397#46397: *12 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:32 [error] 46397#46397: *13 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:32 [error] 46397#46397: *15 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+ubuntu@nextcloud:~$ ls /etc/nginx/sites-enabled/
+nextcloud  nextcloud.conf
+ubuntu@nextcloud:~$ sudo unlink /etc/nginx/sites-enabled/default
+sudo systemctl reload nginx
+unlink: cannot unlink '/etc/nginx/sites-enabled/default': No such file or directory
+ubuntu@nextcloud:~$ sudo tail -n 50 /var/log/nginx/error.log
+2025/12/17 10:09:52 [error] 720#720: *22 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 206.168.34.51, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 10:10:10 [error] 720#720: *24 rewrite or internal redirection cycle while internally redirecting to "/index.php/security.txt", client: 206.168.34.51, server: 160.191.150.238, request: "GET /security.txt HTTP/1.1", host: "160.191.150.238"
+2025/12/17 10:10:21 [error] 720#720: *25 rewrite or internal redirection cycle while internally redirecting to "/index.php/login.asp", client: 95.214.55.71, server: 160.191.150.238, request: "GET /login.asp HTTP/1.1", host: "160.191.150.238:80"
+2025/12/17 10:12:12 [error] 720#720: *28 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 35.203.210.66, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238:80", referrer: "http://160.191.150.238:80/"
+2025/12/17 10:14:37 [error] 720#720: *31 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 43.154.127.188, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238"
+2025/12/17 10:39:04 [error] 720#720: *34 rewrite or internal redirection cycle while internally redirecting to "/index.php/druid/index.html", client: 20.169.81.111, server: 160.191.150.238, request: "GET /druid/index.html HTTP/1.1", host: "160.191.150.238"
+2025/12/17 11:28:34 [error] 720#720: *39 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 195.24.236.148, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 11:38:34 [error] 720#720: *41 rewrite or internal redirection cycle while internally redirecting to "/index.php/page/style/index.css", client: 95.214.55.71, server: 160.191.150.238, request: "GET /page/style/index.css HTTP/1.1", host: "160.191.150.238:80"
+2025/12/17 12:21:20 [error] 720#720: *42 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 195.24.236.148, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 12:37:56 [error] 720#720: *49 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 45.79.128.205, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/"
+2025/12/17 12:47:03 [error] 720#720: *51 rewrite or internal redirection cycle while internally redirecting to "/index.php/.env", client: 78.153.140.203, server: 160.191.150.238, request: "GET /.env HTTP/1.1", host: "160.191.150.238"
+2025/12/17 12:47:03 [error] 720#720: *52 rewrite or internal redirection cycle while internally redirecting to "/index.php/api/.env", client: 78.153.140.203, server: 160.191.150.238, request: "GET /api/.env HTTP/1.1", host: "160.191.150.238"
+2025/12/17 12:47:04 [error] 720#720: *53 rewrite or internal redirection cycle while internally redirecting to "/index.php/backend/.env", client: 78.153.140.203, server: 160.191.150.238, request: "GET /backend/.env HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:28:19 [error] 720#720: *55 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:28:20 [error] 720#720: *57 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:46 [error] 720#720: *58 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:46 [error] 720#720: *59 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:47 [error] 720#720: *60 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:47 [error] 720#720: *61 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:48 [error] 720#720: *62 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:48 [error] 720#720: *63 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:49 [error] 720#720: *64 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:49 [error] 720#720: *65 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:50 [error] 720#720: *66 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:50 [error] 720#720: *67 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:50 [error] 720#720: *68 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:50 [error] 720#720: *69 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:50 [error] 720#720: *70 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:50 [error] 720#720: *71 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:33:50 [error] 720#720: *72 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:33:50 [error] 720#720: *73 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:35:49 [warn] 46388#46388: conflicting server name "160.191.150.238" on 0.0.0.0:80, ignored
+2025/12/17 13:35:55 [warn] 46394#46394: conflicting server name "160.191.150.238" on 0.0.0.0:80, ignored
+2025/12/17 13:35:55 [warn] 46395#46395: conflicting server name "160.191.150.238" on 0.0.0.0:80, ignored
+2025/12/17 13:36:23 [error] 46397#46397: *1 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:23 [error] 46397#46397: *2 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:24 [error] 46397#46397: *3 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:24 [error] 46397#46397: *4 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:24 [error] 46397#46397: *5 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:24 [error] 46397#46397: *6 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:24 [error] 46397#46397: *7 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:25 [error] 46397#46397: *8 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:26 [error] 46397#46397: *9 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:26 [error] 46397#46397: *10 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:26 [error] 46397#46397: *11 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:26 [error] 46397#46397: *12 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:36:32 [error] 46397#46397: *13 rewrite or internal redirection cycle while internally redirecting to "/index.php/index.php/login", client: 103.229.83.244, server: 160.191.150.238, request: "GET /index.php/login HTTP/1.1", host: "160.191.150.238"
+2025/12/17 13:36:32 [error] 46397#46397: *15 rewrite or internal redirection cycle while internally redirecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favicon.ico HTTP/1.1", host: "160.191.150.238", referrer: "http://160.191.150.238/index.php/login"
+2025/12/17 13:40:29 [warn] 74338#74338: conflicting server name "160.191.150.238" on 0.0.0.0:80, ignored
+2025/12/17 13:40:29 [notice] 74338#74338: signal process started
+ubuntu@nextcloud:~$ ls -l /run/php/
+total 4
+lrwxrwxrwx 1 root     root     30 Dec 17 08:07 php-fpm.sock -> /etc/alternatives/php-fpm.sock
+-rw-r--r-- 1 root     root      5 Dec 17 13:35 php8.1-fpm.pid
+srw-rw---- 1 www-data www-data  0 Dec 17 13:35 php8.1-fpm.sock
+ubuntu@nextcloud:~$ cat /etc/nginx/sites-available/nextcloud
+server {
+    listen 80;
+    server_name 160.191.150.238;
+
+    root /var/www/nextcloud;
+    index index.php index.html;
+
+    client_max_body_size 10G;
+
+    location / {
+        try_files $uri $uri/ /index.php$request_uri;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+ubuntu@nextcloud:~$ ubuntu@nextcloud:~$ systemctl status php8.1-fpm
+● php8.1-fpm.service - The PHP 8.1 FastCGI Process Manager
+     Loaded: loaded (/lib/systemd/system/php8.1-fpm.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2025-12-17 08:07:55 UTC; 5h 24min ago
+       Docs: man:php-fpm8.1(8)
+   Main PID: 644 (php-fpm8.1)
+     Status: "Processes active: 0, idle: 2, Requests: 14, slow: 0, Traffic: 0req/sec"
+      Tasks: 3 (limit: 9474)
+     Memory: 79.9M
+        CPU: 1.753s
+     CGroup: /system.slice/php8.1-fpm.service
+             ├─644 "php-fpm: master process (/etc/php/8.1/fpm/php-fpm.conf)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─801 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ">
+             └─803 "php-fpm: pool www" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ">
+
+Dec 17 08:07:54 nextcloud systemd[1]: Starting The PHP 8.1 FastCGI Process Manager...
+Dec 17 08:07:55 nextcloud systemd[1]: Started The PHP 8.1 FastCGI Process Manager.
+
+ubuntu@nextcloud:~$ server unix:/run/php/php8.1-fpm.sock;
+Command 'server' not found, did you mean:
+  command 'serveo' from snap serveo (0.0.10)
+  command 'serve' from snap serve (0.3.0)
+  command 'jserver' from deb freewnn-jserver (1.1.1~a021+cvs20130302-7build1)
+  command 'semver' from deb node-semver (7.3.5+~7.3.8-1)
+  command 'cserver' from deb freewnn-cserver (1.1.1~a021+cvs20130302-7build1)
+  command 'kserver' from deb freewnn-kserver (1.1.1~a021+cvs20130302-7build1)
+See 'snap info <snapname>' for additional versions.
+ubuntu@nextcloud:~$ ls -l /run/php/
+total 4
+lrwxrwxrwx 1 root     root     30 Dec 17 08:07 php-fpm.sock -> /etc/alternatives/php-fpm.sock
+-rw-r--r-- 1 root     root      3 Dec 17 08:07 php8.1-fpm.pid
+srw-rw---- 1 www-data www-data  0 Dec 17 08:07 php8.1-fpm.sock
+ubuntu@nextcloud:~$ ls -l /run/php/
+total 4
+lrwxrwxrwx 1 root     root     30 Dec 17 08:07 php-fpm.sock -> /etc/alternatives/php-fpm.sock
+-rw-r--r-- 1 root     root      3 Dec 17 08:07 php8.1-fpm.pid
+srw-rw---- 1 www-data www-data  0 Dec 17 08:07 php8.1-fpm.sock
+ubuntu@nextcloud:~$ sudo nano /var/www/nextcloud/info.php
+ubuntu@nextcloud:~$ cat /var/www/nextcloud/info.php
+cat: /var/www/nextcloud/info.php: Permission denied
+ubuntu@nextcloud:~$ sudo cat /var/www/nextcloud/info.php
+<?php phpinfo(); ?>
+ubuntu@nextcloud:~$ sudo chown -R www-data:www-data /var/www/nextcloud
+ubuntu@nextcloud:~$ sudo find /var/www/nextcloud -type d -exec chmod 755 {} \;
+ubuntu@nextcloud:~$ sudo find /var/www/nextcloud -type f -exec chmod 644 {} \;
+
+
+
+^C
+ubuntu@nextcloud:~$ sudo find /var/www/nextcloud -type f -exec chmod 644 {} \;
+^Cuntu@nextcloud:~$t {nix:/run/php/php8.1-fpm.sock;;extcloudck /etc/alternatives/php-fpm.sock80, ignoredrecting to "/index.php/favicon.ico", client: 103.229.83.244, server: 160.191.150.238, request: "GET /favi
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ ^C
+ubuntu@nextcloud:~$ sudo nano /etc/nginx/sites-available/nextcloud
+ubuntu@nextcloud:~$ > /etc/nginx/sites-available/nextcloud
+-bash: /etc/nginx/sites-available/nextcloud: Permission denied
+ubuntu@nextcloud:~$ sudo > /etc/nginx/sites-available/nextcloud
+-bash: /etc/nginx/sites-available/nextcloud: Permission denied
+ubuntu@nextcloud:~$ sudo bash
+root@nextcloud:/home/ubuntu# > sudo nano /etc/nginx/sites-available/nextcloud
+root@nextcloud:/home/ubuntu# cat /etc/nginx/sites-availabl
+cat: /etc/nginx/sites-availabl: No such file or directory
+root@nextcloud:/home/ubuntu# sudo nano /etc/nginx/sites-available/nextcloud
+root@nextcloud:/home/ubuntu# sudo cat /etc/nginx/sites-available/nextcloud
+server {
+    listen 80;
+    server_name 160.191.150.238;
+
+    root /var/www/nextcloud;
+    index index.php index.html;
+
+    client_max_body_size 10G;
+
+    location / {
+        try_files $uri $uri/ /index.php$request_uri;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+root@nextcloud:/home/ubuntu# sudo nano /etc/nginx/sites-available/nextcloud
+root@nextcloud:/home/ubuntu# cat /etc/nginx/sites-available/nextcloud
+server {
+    listen 80;
+    server_name 160.191.150.238;
+
+    root /var/www/nextcloud;
+    index index.php index.html /index.php$request_uri;
+
+    client_max_body_size 10G;
+    fastcgi_buffers 64 4K;
+
+    add_header Referrer-Policy "no-referrer" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+
+    location = /robots.txt {
+        allow all;
+        log_not_found off;
+        access_log off;
+    }
+
+    location = /.well-known/carddav {
+        return 301 $scheme://$host/remote.php/dav;
+    }
+
+    location = /.well-known/caldav {
+        return 301 $scheme://$host/remote.php/dav;
+    }
+
+    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+        deny all;
+    }
+
+    location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console) {
+        deny all;
+    }
+
+    location / {
+        rewrite ^ /index.php$request_uri;
+    }
+
+    location ~ \.php(?:$|/) {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ \.(?:css|js|svg|gif|png|jpg|ico|woff2?)$ {
+        try_files $uri /index.php$request_uri;
+        access_log off;
+        expires 6M;
+    }
+}
+root@nextcloud:/home/ubuntu# sudo rm /etc/nginx/sites-enabled/nextcloud.conf
+root@nextcloud:/home/ubuntu# ls /etc/nginx/sites-enabled/
+nextcloud
+root@nextcloud:/home/ubuntu# sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+root@nextcloud:/home/ubuntu# sudo systemctl reload nginx
+root@nextcloud:/home/ubuntu# sudo systemctl restart php8.1-fpm
+root@nextcloud:/home/ubuntu#
+
+
 ```
