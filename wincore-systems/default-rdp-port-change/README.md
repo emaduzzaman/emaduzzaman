@@ -1,6 +1,6 @@
 # Short Guide to Change the Default RDP Port on Windows Systems
 
-This guide will walk you through changing the default RDP port 3389 to a custom port and then allowing that port in the inbound firewall rule.
+This guide will walk through changing the default RDP port 3389 to a custom port and then allowing that port in the inbound firewall rule.
 
 ---
 
@@ -118,4 +118,5 @@ When connecting via RDP, use the following format:
 
 ```
 Example: Computer: 192.168.1.100:50465
+
 ```
