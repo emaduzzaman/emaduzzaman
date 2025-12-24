@@ -103,7 +103,7 @@ Select **Allow the connection** → Click **Next**
 ![Description](ss/step-13.png)
 ---
 
-## ✅ Configuration Complete
+## Configuration Complete
 
 - Changed the RDP port from 3389 to 50465
 - Created a firewall rule to allow connections on the new port
