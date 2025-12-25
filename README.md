@@ -6,8 +6,10 @@ Before this role, I worked as a Solution Engineer at Huawei Technologies Banglad
 
 I have completed CCNA and AWS Solutions Architect training, and I work extensively with Linux systems and cloud environments. RHCSA is also part of my skill set. This repository organizes my projects, labs, configurations, and scripting tools that support my daily engineering work and continuous learning.
 
-LinkedIn: [https://www.linkedin.com/in/emaduzzaman](https://www.linkedin.com/in/emaduzzaman)  
-Credly: [https://www.credly.com/users/kazi-emaduzzaman-gelani](https://www.credly.com/users/kazi-emaduzzaman-gelani)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/emaduzzaman)
+[![Credly](https://img.shields.io/badge/Credly-Certifications-orange?logo=credly&logoColor=white)](https://www.credly.com/users/kazi-emaduzzaman-gelani)
+[![Medium](https://img.shields.io/badge/Medium-About-black?logo=medium&logoColor=white)](https://emaduzzaman-gelani.medium.com/about)
+
 
 ---
 
