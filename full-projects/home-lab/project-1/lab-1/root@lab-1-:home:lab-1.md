@@ -1028,7 +1028,90 @@ Dec 28 18:18:57 lab-1 casaos[16788]: {"time":"2025-12-28T18:18:57.012600492Z","i
 
 root@lab-1:/home/lab-1# 
 
+Welcome to Ubuntu 24.04.3 LTS (GNU/Linux 6.8.0-90-generic x86_64)
 
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Dec 31 11:14:14 AM UTC 2025
+
+  System load:  0.0                Processes:              177
+  Usage of /:   54.8% of 18.53GB   Users logged in:        0
+  Memory usage: 25%                IPv4 address for ens18: 192.168.10.10
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+6 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+Last login: Sun Dec 28 17:59:27 2025 from 192.168.10.91
+lab-1@lab-1:~$ sudo apt update
+[sudo] password for lab-1: 
+Hit:1 https://download.docker.com/linux/ubuntu noble InRelease
+Hit:2 http://bd.archive.ubuntu.com/ubuntu noble InRelease                      
+Get:3 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]      
+Get:4 http://bd.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:5 http://security.ubuntu.com/ubuntu noble-security/main amd64 Components [21.5 kB]
+Get:6 http://bd.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:7 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Components [208 B]
+Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Components [71.5 kB]
+Get:9 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+Get:10 http://bd.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [175 kB]
+Get:11 http://bd.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+Get:12 http://bd.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [378 kB]
+Get:13 http://bd.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:14 http://bd.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [7284 B]
+Get:15 http://bd.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+Get:16 http://bd.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
+Get:17 http://bd.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+Fetched 1044 kB in 4s (242 kB/s)                                        
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+lab-1@lab-1:~$ sudo apt upgrade -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+Get more security updates through Ubuntu Pro with 'esm-apps' enabled:
+  libmagickcore-6.q16-7t64 imagemagick libmagickcore-6.q16-7-extra
+  imagemagick-6.q16 imagemagick-6-common libmagickwand-6.q16-7t64
+Learn more about Ubuntu Pro at https://ubuntu.com/pro
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+lab-1@lab-1:~$ sudo systemctl status ufw
+● ufw.service - Uncomplicated firewall
+     Loaded: loaded (/usr/lib/systemd/system/ufw.service; enabled; preset: enab>
+     Active: active (exited) since Wed 2025-12-31 09:23:41 UTC; 1h 54min ago
+       Docs: man:ufw(8)
+    Process: 557 ExecStart=/usr/lib/ufw/ufw-init start quiet (code=exited, stat>
+   Main PID: 557 (code=exited, status=0/SUCCESS)
+        CPU: 5ms
+
+Dec 31 09:23:41 lab-1 systemd[1]: Starting ufw.service - Uncomplicated firewall>
+Dec 31 09:23:41 lab-1 systemd[1]: Finished ufw.service - Uncomplicated firewall.
+
+lab-1@lab-1:~$ sudo ufw status verbose
+Status: inactive
+lab-1@lab-1:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+lab-1@lab-1:~$ sudo ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+lab-1@lab-1:~$ 
 
 
 
