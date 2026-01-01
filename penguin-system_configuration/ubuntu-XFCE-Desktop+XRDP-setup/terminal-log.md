@@ -1,4 +1,4 @@
-'''
+```
 The authenticity of host '160.191.150.171 (160.191.150.171)' can't be established.
 ED25519 key fingerprint is SHA256:/0bTnR3ZV7VfastGtYtK1nRJ/Q1xud5JV8KdT1HFh6Y.
 This key is not known by any other names.
@@ -7436,4 +7436,4 @@ Broadcast message from root@pc-3 on pts/1 (Tue 2025-12-09 07:18:10 UTC):
 
 The system will reboot now!
 
-'''
+```
