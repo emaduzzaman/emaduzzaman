@@ -18,6 +18,7 @@ I have completed CCNA and AWS Solutions Architect training, and I work extensive
 This repository contains the tools, configurations, labs, and projects that I work on regularly.
 The complete folder tree is available here: [Jump to Full Repository Tree](#full-repository-tree)
 
+[penguin-scripts](penguin-scripts)
 ### 1. penguin-scripts
 
 Shell scripts for Linux distributions, including automation tools and day-to-day system management helpers.
