@@ -5,6 +5,16 @@
 In this project, a full DNS setup (both recursive and authoritative), along with Web and Mail services using virtual hosts on one server, will be implemented using two virtual machines. A complete local service environment will be configured and tested to ensure proper name resolution, website hosting, and internal email functionality.
 
 ---
+## Project Documentation Structure
+
+The following files and directories provide detailed documentation, implementation steps, and verification evidence for this project:
+
+- **[project-documentation.md](project-documentation.md)** – Main project documentation
+- **[production-security-hardening-guide.md](production-security-hardening-guide.md)** – Security guidelines for production deployment
+- **[cli-dns-lab.md](cli-dns-lab.md)** – Command-line history and actual implementation steps for DNS server
+- **[cli-web-mail.md](cli-web-mail.md)** – Command-line history and actual implementation steps for Web/Mail server
+- **[test_result-screenshots](test_result-screenshots/)** – Screenshots and validation evidence for Web/Mail server testing
+- **[README.md](README.md)** – Brief summary of the project scope and overall implementation overview
 
 ## **1. DNS Server (BIND)**
 
