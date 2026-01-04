@@ -1,6 +1,5 @@
-# DNS, Web, and Mail Server Infrastructure Project in PICO PUBLIC CLOUD
+# DNS, Web, and Mail Server Infrastructure Project in Open-Stack (PICO PUBLIC CLOUD)
 
----
 
 ## IMPORTANT NOTICE - TESTING ENVIRONMENT ONLY
 
