@@ -9,7 +9,7 @@ In this project, a full DNS setup (both recursive and authoritative), along with
 
 The following files and directories provide detailed documentation, implementation steps, and verification evidence for this project:
 
-- **[project_documentation.md](project-documentation.md)** – Main project documentation
+- **[project_documentation.md](project_documentation.md)** – Main project documentation
 - **[production-security-hardening-guide.md](production-security-hardening-guide.md)** – Security guidelines for production deployment
 - **[cli-dns-lab.md](cli-dns-lab.md)** – Command-line history and actual implementation steps for DNS server
 - **[cli-web-mail.md](cli-web-mail.md)** – Command-line history and actual implementation steps for Web/Mail server
