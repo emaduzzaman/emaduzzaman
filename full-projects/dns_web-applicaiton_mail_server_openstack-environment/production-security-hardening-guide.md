@@ -1,13 +1,13 @@
 # Production Security Hardening Guide
+
 ## DNS, Web, and Mail Server Infrastructure in OpenStack (PICO PUBLIC Cloud)
 
----
 
 ## CRITICAL NOTICE
 
 **This guide is MANDATORY for production deployments.**
 
-The test environment documented in `DNS-Web-Mail-Server-Project-Documentation.md` contains multiple security vulnerabilities and is **NOT safe for production use**. Before deploying any mail, web, or DNS server to production, you **MUST** implement all security measures outlined in this guide.
+The test environment documented in [project_documentation.md](project_documentation.md) contains multiple security vulnerabilities and is **NOT safe for production use**. Before deploying any mail, web, or DNS server to production, you **MUST** implement all security measures outlined in this guide.
 
 ### What This Guide Covers
 
@@ -117,7 +117,7 @@ sudo systemctl status certbot.timer
 
 **Use Case:** Internal-only deployments where Let's Encrypt is not feasible.
 
-**⚠️ WARNING:** Self-signed certificates will trigger browser warnings and are NOT suitable for public-facing services.
+**WARNING:** Self-signed certificates will trigger browser warnings and are NOT suitable for public-facing services.
 
 #### Generate Self-Signed Certificate
 

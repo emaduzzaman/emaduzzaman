@@ -6,6 +6,7 @@
 **This documentation describes a test environment setup and is NOT suitable for production use.**
 
 This infrastructure was built purely for **testing purposes** in a controlled lab environment.
+All test results are located in the [test_result](test_result-screenshots/)
 
 ### For Production Deployment
 
@@ -1300,9 +1301,9 @@ For production deployments, consider standardizing on **one** domain format for 
 - ✓ Both `@gelani.com` and `@mail.gelani.com` work
 
 **Disadvantages:**
-- ⚠️ Can be confusing for users
-- ⚠️ Harder to communicate the "official" email address
-- ⚠️ Inconsistent business card/signature formats
+- Can be confusing for users
+- Harder to communicate the "official" email address
+- Inconsistent business card/signature formats
 
 **Configuration:** No changes needed (current setup)
 

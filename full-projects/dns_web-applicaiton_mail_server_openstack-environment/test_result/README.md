@@ -1,4 +1,4 @@
-# Network & Mail Server Test Results
+# Test Results
 
 This folder contains verification results for the internal mail server **mail.gelani.com** running on the local network.  
 The tests were performed from client machine **PC-1** to confirm connectivity, DNS resolution, and web access.
@@ -56,15 +56,3 @@ Click to view:
 [pc-1_ss3_ping_test.png](pc-1_ss3_ping_test.png)
 
 ---
-
-## Test Summary
-
-| Test | Result |
-|------|--------|
-| IP configuration | ✔ Correct |
-| DNS resolution | ✔ mail.gelani.com → 192.168.20.15 |
-| Network connectivity | ✔ 0% packet loss |
-| Webmail access | ✔ Working |
-
-
-All tests confirm that **mail.gelani.com** is reachable and functioning correctly from **PC-1** on the internal network.
