@@ -54,21 +54,6 @@ A complete mail system will be deployed by installing and configuring the follow
 Multiple users will be created, and local email functionality will be enabled to allow messages to be sent and received within the internal network.  
 DNS records from the DNS server will support routing and delivery of mail between users and servers in the environment.
 
----
-
-## **Project Documentation Structure**
-
-The project repository contains the following documentation and resources:
-
-- **project-documentation.md** – Main project documentation  
-- **production-security-hardening-guide.md** – Security guidelines for production deployment  
-- **cli-dns-lab.md** – Command-line history and actual implementation steps for the DNS server  
-- **cli-web-mail.md** – Command-line history and actual implementation steps for the Web and Mail server  
-- **test_result-screenshots/** – Screenshots and command-line output showing test results  
-- **README.md** – Brief summary of the project scope and overall implementation overview  
-
----
-
 ## **Status**
 
 This project provides a fully functional DNS, web hosting, and email communication setup within a controlled network environment for testing and demonstration.
