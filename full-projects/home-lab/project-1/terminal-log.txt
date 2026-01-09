@@ -1,0 +1,354 @@
+root@pve:~# lsblk
+NAME                 MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda                    8:0    0 223.6G  0 disk 
+├─sda1                 8:1    0  1007K  0 part 
+├─sda2                 8:2    0     1G  0 part /boot/efi
+└─sda3                 8:3    0 222.6G  0 part 
+  ├─pve-swap         252:0    0     8G  0 lvm  [SWAP]
+  ├─pve-root         252:1    0  65.6G  0 lvm  /
+  ├─pve-data_tmeta   252:2    0   1.3G  0 lvm  
+  │ └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+  │   └─pve-data     252:5    0 146.3G  1 lvm  
+  └─pve-data_tdata   252:3    0 146.3G  0 lvm  
+    └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+      └─pve-data     252:5    0 146.3G  1 lvm  
+sdb                    8:16   0 931.5G  0 disk 
+├─sdb1                 8:17   0   200M  0 part 
+└─sdb2                 8:18   0 931.3G  0 part 
+root@pve:~# wipefs -a /dev/sdb
+/dev/sdb: 8 bytes were erased at offset 0x00000200 (gpt): 45 46 49 20 50 41 52 54
+/dev/sdb: 8 bytes were erased at offset 0xe8e0db5e00 (gpt): 45 46 49 20 50 41 52 54
+/dev/sdb: 2 bytes were erased at offset 0x000001fe (PMBR): 55 aa
+/dev/sdb: calling ioctl to re-read partition table: Success
+root@pve:~# sgdisk --zap-all /dev/sdb
+Creating new GPT entries in memory.
+GPT data structures destroyed! You may now partition the disk using fdisk or
+other utilities.
+root@pve:~# lsblk
+NAME                 MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda                    8:0    0 223.6G  0 disk 
+├─sda1                 8:1    0  1007K  0 part 
+├─sda2                 8:2    0     1G  0 part /boot/efi
+└─sda3                 8:3    0 222.6G  0 part 
+  ├─pve-swap         252:0    0     8G  0 lvm  [SWAP]
+  ├─pve-root         252:1    0  65.6G  0 lvm  /
+  ├─pve-data_tmeta   252:2    0   1.3G  0 lvm  
+  │ └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+  │   └─pve-data     252:5    0 146.3G  1 lvm  
+  └─pve-data_tdata   252:3    0 146.3G  0 lvm  
+    └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+      └─pve-data     252:5    0 146.3G  1 lvm  
+sdb                    8:16   0 931.5G  0 disk 
+root@pve:~# fdisk /dev/sdb
+
+Welcome to fdisk (util-linux 2.41).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table.
+Created a new DOS (MBR) disklabel with disk identifier 0x24f189ce.
+
+Command (m for help): m
+
+Help:
+
+  DOS (MBR)
+   a   toggle a bootable flag
+   b   edit nested BSD disklabel
+   c   toggle the dos compatibility flag
+
+  Generic
+   d   delete a partition
+   F   list free unpartitioned space
+   l   list known partition types
+   n   add a new partition
+   p   print the partition table
+   t   change a partition type
+   v   verify the partition table
+   i   print information about a partition
+   e   resize a partition
+   T   discard (trim) sectors
+
+  Misc
+   m   print this menu
+   u   change display/entry units
+   x   extra functionality (experts only)
+
+  Script
+   I   load disk layout from sfdisk script file
+   O   dump disk layout to sfdisk script file
+
+  Save & Exit
+   w   write table to disk and exit
+   q   quit without saving changes
+
+  Create a new label
+   g   create a new empty GPT partition table
+   G   create a new empty SGI (IRIX) partition table
+   o   create a new empty MBR (DOS) partition table
+   s   create a new empty Sun partition table
+
+
+Command (m for help): 
+All unwritten changes will be lost, do you really want to quit? (y/n)
+Command (m for help): 
+All unwritten changes will be lost, do you really want to quit? (y/n)
+Command (m for help): 
+All unwritten changes will be lost, do you really want to quit? (y/n)
+Command (m for help): 
+All unwritten changes will be lost, do you really want to quit? (y/n)
+Command (m for help): 
+All unwritten changes will be lost, do you really want to quit? (y/n)
+Command (m for help): n
+Partition type
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (1-4, default 1): 
+First sector (2048-1953525167, default 2048): 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-1953525167, default 1953525167): 
+
+Created a new partition 1 of type 'Linux' and of size 931.5 GiB.
+
+Command (m for help): wq
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+root@pve:~# lsblk
+NAME                 MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda                    8:0    0 223.6G  0 disk 
+├─sda1                 8:1    0  1007K  0 part 
+├─sda2                 8:2    0     1G  0 part /boot/efi
+└─sda3                 8:3    0 222.6G  0 part 
+  ├─pve-swap         252:0    0     8G  0 lvm  [SWAP]
+  ├─pve-root         252:1    0  65.6G  0 lvm  /
+  ├─pve-data_tmeta   252:2    0   1.3G  0 lvm  
+  │ └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+  │   └─pve-data     252:5    0 146.3G  1 lvm  
+  └─pve-data_tdata   252:3    0 146.3G  0 lvm  
+    └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+      └─pve-data     252:5    0 146.3G  1 lvm  
+sdb                    8:16   0 931.5G  0 disk 
+└─sdb1                 8:17   0 931.5G  0 part 
+root@pve:~# mkfs.ext4 -L DATA_DISK /dev/sdb1
+mke2fs 1.47.2 (1-Jan-2025)
+Creating filesystem with 244190390 4k blocks and 61054976 inodes
+Filesystem UUID: d03a0280-82fe-401e-bbcc-bf6dc4a279d5
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (262144 blocks): 
+done
+Writing superblocks and filesystem accounting information: done     
+
+root@pve:~# 
+root@pve:~# 
+root@pve:~# 
+root@pve:~# 
+root@pve:~# blkid /dev/sdb1
+/dev/sdb1: LABEL="DATA_DISK" UUID="d03a0280-82fe-401e-bbcc-bf6dc4a279d5" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="24f189ce-01"
+root@pve:~# mkdir -p /mnt/data
+root@pve:~# mount /dev/sdb1 /mnt/data
+root@pve:~# df -h | grep sdb
+/dev/sdb1             916G  2.1M  870G   1% /mnt/data
+root@pve:~# mkfs.ext4 -L DATA_DISK /dev/sdb1
+mke2fs 1.47.2 (1-Jan-2025)
+/dev/sdb1 is mounted; will not make a filesystem here!
+root@pve:~# umount /dev/sdb1 2>/dev/null
+root@pve:~# wipefs -a /dev/sdb
+/dev/sdb: 2 bytes were erased at offset 0x000001fe (dos): 55 aa
+/dev/sdb: calling ioctl to re-read partition table: Success
+root@pve:~# wipefs /dev/sdb
+root@pve:~# sgdisk --zap-all /dev/sdb
+Creating new GPT entries in memory.
+GPT data structures destroyed! You may now partition the disk using fdisk or
+other utilities.
+root@pve:~# partprobe /dev/sdb
+-bash: partprobe: command not found
+root@pve:~# lsblk
+NAME                 MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda                    8:0    0 223.6G  0 disk 
+├─sda1                 8:1    0  1007K  0 part 
+├─sda2                 8:2    0     1G  0 part /boot/efi
+└─sda3                 8:3    0 222.6G  0 part 
+  ├─pve-swap         252:0    0     8G  0 lvm  [SWAP]
+  ├─pve-root         252:1    0  65.6G  0 lvm  /
+  ├─pve-data_tmeta   252:2    0   1.3G  0 lvm  
+  │ └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+  │   └─pve-data     252:5    0 146.3G  1 lvm  
+  └─pve-data_tdata   252:3    0 146.3G  0 lvm  
+    └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+      └─pve-data     252:5    0 146.3G  1 lvm  
+sdb                    8:16   0 931.5G  0 disk 
+root@pve:~# dd if=/dev/zero of=/dev/sdb bs=1M count=100
+100+0 records in
+100+0 records out
+104857600 bytes (105 MB, 100 MiB) copied, 0.889986 s, 118 MB/s
+root@pve:~# parted /dev/sdb --script mklabel gpt
+-bash: parted: command not found
+root@pve:~# apt update
+Hit:1 http://security.debian.org/debian-security trixie-security InRelease
+Hit:2 http://deb.debian.org/debian trixie InRelease          
+Hit:3 http://deb.debian.org/debian trixie-updates InRelease  
+Hit:4 http://download.proxmox.com/debian/pve trixie InRelease
+18 packages can be upgraded. Run 'apt list --upgradable' to see them.
+root@pve:~# apt install parted -y
+Installing:                      
+  parted
+
+Installing dependencies:
+  libparted2t64
+
+Suggested packages:
+  libparted-dev  libparted-i18n  parted-doc
+
+Summary:
+  Upgrading: 0, Installing: 2, Removing: 0, Not Upgrading: 18
+  Download size: 340 kB
+  Space needed: 683 kB / 8,905 MB available
+
+Get:1 http://deb.debian.org/debian trixie/main amd64 libparted2t64 amd64 3.6-5 [300 kB]
+Get:2 http://deb.debian.org/debian trixie/main amd64 parted amd64 3.6-5 [40.2 kB]
+Fetched 340 kB in 0s (987 kB/s)   
+Selecting previously unselected package libparted2t64:amd64.
+(Reading database ... 60135 files and directories currently installed.)
+Preparing to unpack .../libparted2t64_3.6-5_amd64.deb ...
+Adding 'diversion of /lib/x86_64-linux-gnu/libparted.so.2 to /lib/x86_64-linux-gnu/libparted.so.2.usr-is-merged by libparted2t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libparted.so.2.0.5 to /lib/x86_64-linux-gnu/libparted.so.2.0.5.usr-is-merged by libparted2t64'
+Unpacking libparted2t64:amd64 (3.6-5) ...
+Selecting previously unselected package parted.
+Preparing to unpack .../parted_3.6-5_amd64.deb ...
+Unpacking parted (3.6-5) ...
+Setting up libparted2t64:amd64 (3.6-5) ...
+Removing 'diversion of /lib/x86_64-linux-gnu/libparted.so.2 to /lib/x86_64-linux-gnu/libparted.so.2.usr-is-merged by libparted2t64'
+Removing 'diversion of /lib/x86_64-linux-gnu/libparted.so.2.0.5 to /lib/x86_64-linux-gnu/libparted.so.2.0.5.usr-is-merged by libparted2t64'
+Setting up parted (3.6-5) ...
+Processing triggers for libc-bin (2.41-12) ...
+Processing triggers for man-db (2.13.1-1) ...
+root@pve:~# parted /dev/sdb --script mklabel gpt
+root@pve:~# lsblk
+NAME                 MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda                    8:0    0 223.6G  0 disk 
+├─sda1                 8:1    0  1007K  0 part 
+├─sda2                 8:2    0     1G  0 part /boot/efi
+└─sda3                 8:3    0 222.6G  0 part 
+  ├─pve-swap         252:0    0     8G  0 lvm  [SWAP]
+  ├─pve-root         252:1    0  65.6G  0 lvm  /
+  ├─pve-data_tmeta   252:2    0   1.3G  0 lvm  
+  │ └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+  │   └─pve-data     252:5    0 146.3G  1 lvm  
+  └─pve-data_tdata   252:3    0 146.3G  0 lvm  
+    └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+      └─pve-data     252:5    0 146.3G  1 lvm  
+sdb                    8:16   0 931.5G  0 disk 
+root@pve:~# parted /dev/sdb --script mkpart primary ext4 0% 100%
+root@pve:~# lsblk
+NAME                 MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda                    8:0    0 223.6G  0 disk 
+├─sda1                 8:1    0  1007K  0 part 
+├─sda2                 8:2    0     1G  0 part /boot/efi
+└─sda3                 8:3    0 222.6G  0 part 
+  ├─pve-swap         252:0    0     8G  0 lvm  [SWAP]
+  ├─pve-root         252:1    0  65.6G  0 lvm  /
+  ├─pve-data_tmeta   252:2    0   1.3G  0 lvm  
+  │ └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+  │   └─pve-data     252:5    0 146.3G  1 lvm  
+  └─pve-data_tdata   252:3    0 146.3G  0 lvm  
+    └─pve-data-tpool 252:4    0 146.3G  0 lvm  
+      └─pve-data     252:5    0 146.3G  1 lvm  
+sdb                    8:16   0 931.5G  0 disk 
+└─sdb1                 8:17   0 931.5G  0 part 
+root@pve:~# mkfs.ext4 -L USB_DATA /dev/sdb1
+mke2fs 1.47.2 (1-Jan-2025)
+Creating filesystem with 244190208 4k blocks and 61054976 inodes
+Filesystem UUID: 9af32f2b-0880-4ac7-9112-c77052a12f1c
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information: done     
+
+root@pve:~# mkfs.ext4 -L USB_DATA /dev/sdb1
+mke2fs 1.47.2 (1-Jan-2025)
+/dev/sdb1 contains a ext4 file system labelled 'USB_DATA'
+	created on Sat Jan 10 01:16:27 2026
+Proceed anyway? (y,N) y
+Creating filesystem with 244190208 4k blocks and 61054976 inodes
+Filesystem UUID: 45a80ae4-b01a-4954-8403-72b8856cc888
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+	102400000, 214990848
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (262144 blocks): 
+done
+Writing superblocks and filesystem accounting information: done     
+
+root@pve:~# 
+root@pve:~# mkdir -p /mnt/data
+root@pve:~# mount -o defaults,noatime,nodiratime /dev/sdb1 /mnt/data    
+root@pve:~# df -h | grep usb
+root@pve:~# df -h | grep data
+/dev/sdb1             916G  2.1M  870G   1% /mnt/data
+root@pve:~# blkid /dev/sdb1
+/dev/sdb1: LABEL="USB_DATA" UUID="45a80ae4-b01a-4954-8403-72b8856cc888" BLOCK_SIZE="4096" TYPE="ext4" PARTLABEL="primary" PARTUUID="5401757a-16aa-4a79-a212-e39210f9f4ab"
+root@pve:~# nano /etc/fstab
+root@pve:~# mount -a
+mount: /mnt/usb-data: mount point does not exist.
+       dmesg(1) may have more information after failed mount system call.
+mount: (hint) your fstab has been modified, but systemd still uses
+       the old version; use 'systemctl daemon-reload' to reload.
+root@pve:~# nano /etc/fstab
+root@pve:~# mount -a
+mount: /mnt/usb-data: mount point does not exist.
+       dmesg(1) may have more information after failed mount system call.
+mount: (hint) your fstab has been modified, but systemd still uses
+       the old version; use 'systemctl daemon-reload' to reload.
+root@pve:~# cat /etc/fstab
+# <file system> <mount point> <type> <options> <dump> <pass>
+/dev/pve/root / ext4 errors=remount-ro 0 1
+UUID=AF70-BC86 /boot/efi vfat defaults 0 1
+/dev/pve/swap none swap sw 0 0
+proc /proc proc defaults 0 0
+UUID=45a80ae4-b01a-4954-8403-72b8856cc888  /mnt/usb-data  ext4  defaults,noatime,nodiratime,nofail,x-systemd.device-timeout=10  0  2
+
+
+
+#UUID="45a80ae4-b01a-4954-8403-72b8856cc888
+root@pve:~# nano /etc/fstab
+root@pve:~# cat /etc/fstab
+# <file system> <mount point> <type> <options> <dump> <pass>
+/dev/pve/root / ext4 errors=remount-ro 0 1
+UUID=AF70-BC86 /boot/efi vfat defaults 0 1
+/dev/pve/swap none swap sw 0 0
+proc /proc proc defaults 0 0
+UUID=45a80ae4-b01a-4954-8403-72b8856cc888  /mnt/data  ext4  defaults,noatime,nodiratime,nofail,x-systemd.device-timeout=10  0  2
+
+
+
+#UUID="45a80ae4-b01a-4954-8403-72b8856cc888
+root@pve:~# cat /etc/fstab
+# <file system> <mount point> <type> <options> <dump> <pass>
+/dev/pve/root / ext4 errors=remount-ro 0 1
+UUID=AF70-BC86 /boot/efi vfat defaults 0 1
+/dev/pve/swap none swap sw 0 0
+proc /proc proc defaults 0 0
+UUID=45a80ae4-b01a-4954-8403-72b8856cc888  /mnt/data  ext4  defaults,noatime,nodiratime,nofail,x-systemd.device-timeout=10  0  2
+
+
+
+#UUID="45a80ae4-b01a-4954-8403-72b8856cc888
+root@pve:~# mount -a
+root@pve:~# mount -a
+root@pve:~# 
