@@ -14,21 +14,6 @@ If anyone plan to use this setup in a production environment, **MUST** refer to 
 [production-security-hardening-guide.md](production-security-hardening-guide.md)
 
 
-### Additional Resources
-
-This documentation is part of a complete project repository that includes:
-
-- **project-documentation.md** (This file) - Main project documentation
-- **production-security-hardening-guide.md** - Security guidelines for production deployment
-- **cli-dns-lab.md** - Command-line history and actual implementation steps for DNS server
-- **cli-web-mail.md** - Command-line history and actual implementation steps for Web/Mail server
-- **test_result-screenshots** - Command-line history and actual implementation steps for Web/Mail server
-- **README.md** - Brief summary of the project scope and overall implementation overview
-
-The CLI files contain the raw command history showing exactly how the project was implemented, including troubleshooting steps and real-time problem-solving.
-
----
-
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
@@ -47,7 +32,7 @@ The CLI files contain the raw command history showing exactly how the project wa
 
 ### Summary
 
-Complete implementation of integrated DNS, web, and mail server infrastructure on Pico Public Cloud for the **gelani.com** domain (gelani.com is a fictitious domain used for illustrative purposes). The project involves deploying two Ubuntu Server 22.04 VMs in a 192.168.20.0/24 subnet with full service integration and comprehensive testing.
+Complete implementation of integrated DNS, web, and mail server infrastructure on an OpenStack-Based Local Cloud (Pico Public Cloud) for the **gelani.com** domain (gelani.com is a fictitious domain used for illustrative purposes). The project involves deploying two Ubuntu Server 22.04 VMs in a 192.168.20.0/24 subnet with full service integration and comprehensive testing.
 
 ### Domain Information
 
@@ -82,6 +67,7 @@ Complete implementation of integrated DNS, web, and mail server infrastructure o
 ### Virtual Machines
 
 #### VM 1: dns-lab (DNS Server)
+**Terminal Log:** [cli-dns-lab.md](cli-dns-lab.md)
 
 - **CPU:** 2 Cores
 - **RAM:** 4 GB
@@ -91,6 +77,7 @@ Complete implementation of integrated DNS, web, and mail server infrastructure o
 - **Services:** BIND9 DNS Server
 
 #### VM 2: web-mail (Web & Mail Server)
+**Terminal Log:** [cli-web-mail.md](cli-web-mail.md)
 
 - **CPU:** 4 Cores
 - **RAM:** 8 GB
