@@ -1,4 +1,4 @@
-# DNS, Web Server and Mail Server in OpenStack - PICO Public Cloud Environment
+# DNS, Web Server and Mail Server in OpenStack (PICO Public Cloud Environment)
 
 ## **Project Summary**
 
