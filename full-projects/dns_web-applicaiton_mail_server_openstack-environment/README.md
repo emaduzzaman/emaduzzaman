@@ -13,7 +13,7 @@ The following files and directories provide detailed documentation, implementati
 - **[production-security-hardening-guide](production-security-hardening-guide.md)** – Security guidelines for production deployment
 - **[cli-dns-lab](cli-dns-lab.md)** – Command-line history and actual implementation steps for DNS server
 - **[cli-web-mail](cli-web-mail.md)** – Command-line history and actual implementation steps for Web/Mail server
-- **[test_result](test_result-screenshots/)** – Screenshots and validation evidence for Web/Mail server testing
+- **[test_result](test_result/)** – Screenshots and validation evidence for Web/Mail server testing
 - **[README](README.md)** – Brief summary of the project scope and overall implementation overview
 
 ## **1. DNS Server (BIND)**
