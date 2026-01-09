@@ -1,7 +1,7 @@
+
+
+```
 #Preparing the Virtual Machine
-
-
-
 
 ubuntu@dns-lab:~$ sudo apt update
 
@@ -2392,6 +2392,4 @@ gelani.com.             604800  IN      A       192.168.20.15
 
 
 root@dns-lab:/etc/bind/zones#
-
-
-
+```

@@ -1,3 +1,4 @@
+```
 ubuntu@web-mail:~$ sudo bash
 
 root@web-mail:/home/ubuntu# sudo apt update \&\& sudo apt upgrade -y
@@ -8402,5 +8403,4 @@ nahid-101:x:1001:1001:,,,:/home/nahid-101:/bin/bash
 ashfaq-101:x:1003:1003:,,,:/home/ashfaq-101:/bin/bash
 fuad-101:x:1002:1002:,,,:/home/fuad-101:/bin/bash
 root@web-mail:/home/ubuntu#
-
-
+```
