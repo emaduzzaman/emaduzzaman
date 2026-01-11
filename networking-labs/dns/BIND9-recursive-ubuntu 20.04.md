@@ -1,4 +1,59 @@
-# BIND9 Recursive DNS Server on Ubuntu 20.04
+emaduzzaman/
+├── cloud-engine/
+│   ├── SAA-C03/
+│   └── cloud-init/
+│       ├── cloud-image-utils/
+│       ├── template-creation (ubuntu-24.04) _on proxmox-VE/
+│       └── userdata-scripts/
+├── full-projects/
+│   ├── dns_web-applicaiton_mail_server_openstack-environment/
+│   │   ├── terminal-logs/
+│   │   └── test_result/
+│   ├── home-lab/
+│   │   └── project-1/
+│   │       ├── lab-1/
+│   │       ├── lab-10/
+│   │       ├── lab-11/
+│   │       ├── lab-15/
+│   │       ├── lab-20/
+│   │       └── main-enviroment/
+│   ├── nextcloud-openstack-pico/
+│   │   └── screenshort/
+│   └── ownCloud-openstack/
+├── networking-labs/
+│   ├── ccna-200-301/
+│   │   ├── configurations/
+│   │   ├── module-exam-solutions/
+│   │   ├── packet-tracker-practice-files/
+│   │   └── solution-guides&assignements/
+│   ├── dns/
+│   ├── load-balancer/
+│   │   └── Load-Balancing-on-openstack-AmphoraV2/
+│   ├── vpn/
+│   │   ├── packet-tracer-ipsec-topology-config/
+│   │   └── wireguard-vpn-gateway-openstack/
+│   │       ├── configuraiton-files/
+│   │       └── snaps-vm_creation-OpenStack-PICO-Cloud/
+│   └── waf/
+├── penguin-scripts/
+│   ├── mac-automation/
+│   ├── network-config---automation/
+│   │   ├── automated-static-ip-101/
+│   │   └── network_diagnosis-101/
+│   ├── system-config---automation/
+│   │   └── full-applicaiton-cleaner/
+│   ├── user-management/
+│   └── volume-management/
+├── penguin-system_configuration/
+│   ├── EX200/
+│   ├── configuring-a-static-ip-address-with-netplan-on-ubuntu/
+│   ├── setting-static-ip-on-ubuntu_VM/
+│   ├── ubuntu-XFCE-Desktop+XRDP-setup/
+│   └── ubuntu-dpkg-interrupted-recovery/
+├── snake-scripts/
+└── wincore-systems/
+    └── default-rdp-port-change/
+        └── ss/# BIND9 Recursive DNS Server on Ubuntu 20.04
 
 ## Table of Contents
 
