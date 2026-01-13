@@ -56,11 +56,11 @@ Internet → WireGuard Gateway (160.191.150.171:51820/UDP)
 
 ```
 wireguard-vpn-gateway-openstack/
-├── README.md                                                               # This file – main project overview
-├── snaps-vm_creation-OpenStack-PICO-Cloud/                                 # VM creation and setup screenshots - OpenStack (PICO Public Cloud)
-├── cli-wireguard.txt                                                       # Complete terminal session logs showing how WireGuard was configured
-├── project-documentation.md                                                # Comprehensive technical documentation
-└── configuration-files/                                                    # All WireGuard configuration reference files
+├── README.md                                                                                       # This file – main project overview
+├── [snaps-vm_creation-OpenStack-PICO-Cloud](snaps-vm_creation-OpenStack-PICO-Cloud)               # VM creation and setup screenshots - OpenStack (PICO Public Cloud)
+├── cli-wireguard.txt                                                                               # Complete terminal session logs showing how WireGuard was configured
+├── project-documentation.md                                                                        # Comprehensive technical documentation
+└── configuration-files/                                                                            # All WireGuard configuration reference files
     ├── README.md                                                           # Entry point for configuration files documentation
     ├── server-configuration-files.md                                       # Server-side WireGuard configuration and tuning
     ├── client-configuration-files.md                                       # Client-side WireGuard configuration
