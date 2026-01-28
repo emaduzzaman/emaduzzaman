@@ -1,4 +1,5 @@
-root@KAZI-EMADUZZAMAN-2700:~# ssh ubuntu@192.168.95.93
+```
+root@KAZI-EMADUZZAMAN:~# ssh ubuntu@192.168.95.93
 The authenticity of host '192.168.95.93 (192.168.95.93)' can't be established.
 ED25519 key fingerprint is SHA256:c2OeWOBIkW9ZNBh4MRPe1uS9dpW9Va3GvNEwOTFAea0.
 This key is not known by any other names.
@@ -88,3 +89,5 @@ Run 'do-release-upgrade' to upgrade to it.
 
 Last login: Mon Jan 19 10:58:13 2026 from 192.168.95.86
 ubuntu@gelani-lab-1:~$
+
+```
