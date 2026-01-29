@@ -2002,6 +2002,8 @@ ubuntu@gelani-mon-1:~$ ip a
 ubuntu@gelani-mon-1:~$
 
 
+
+
 ```
 
 
