@@ -4149,6 +4149,286 @@ No Server found for ceph-boot-vm-1
 ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server show ceph-boot-vm-1 -c status -c OS-EXT-STS:vm_state -c OS-EXT-STS:task_state
 No Server found for ceph-boot-vm-1
 ubuntu@gelani-lab-1:/opt/stack/devstack$ 
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack volume service list
++------------------+-------------------+------+---------+-------+-------------------+---------+---------------+
+| Binary           | Host              | Zone | Status  | State | Updated At        | Cluster | Backend State |
++------------------+-------------------+------+---------+-------+-------------------+---------+---------------+
+| cinder-scheduler | gelani-lab-1      | nova | enabled | up    | 2026-01-          | None    | None          |
+|                  |                   |      |         |       | 31T19:21:06.00000 |         |               |
+|                  |                   |      |         |       | 0                 |         |               |
+| cinder-volume    | gelani-           | nova | enabled | down  | 2026-01-          | None    | None          |
+|                  | lab-1@lvmdriver-1 |      |         |       | 31T13:58:17.00000 |         |               |
+|                  |                   |      |         |       | 0                 |         |               |
+| cinder-volume    | gelani-lab-1@ceph | nova | enabled | up    | 2026-01-          | None    | None          |
+|                  |                   |      |         |       | 31T19:21:04.00000 |         |               |
+|                  |                   |      |         |       | 0                 |         |               |
++------------------+-------------------+------+---------+-------+-------------------+---------+---------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack volume type list
+openstack volume type show ceph
++--------------------------------------+-------------+-----------+
+| ID                                   | Name        | Is Public |
++--------------------------------------+-------------+-----------+
+| b612d2b3-a3d9-4063-84ec-64a58b2c4411 | ceph        | True      |
+| 77b0e4a9-b93d-437f-b732-2fdae0731d30 | lvmdriver-1 | True      |
+| d05b7e56-8ca4-41d4-8ac5-e4d14a291df9 | __DEFAULT__ | True      |
++--------------------------------------+-------------+-----------+
++--------------------+--------------------------------------+
+| Field              | Value                                |
++--------------------+--------------------------------------+
+| access_project_ids | None                                 |
+| description        | None                                 |
+| id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411 |
+| is_public          | True                                 |
+| name               | ceph                                 |
+| properties         | volume_backend_name='ceph'           |
+| qos_specs_id       | None                                 |
++--------------------+--------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack volume type show ceph -c properties
++------------+----------------------------+
+| Field      | Value                      |
++------------+----------------------------+
+| properties | volume_backend_name='ceph' |
++------------+----------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack volume create --type ceph --size 1 ceph-vol-test
+openstack volume show ceph-vol-test -c id -c status -c type
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-01-31T19:22:47.732568           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | d6169e05-f29b-405c-a9b9-67eebf618d2c |
+| multiattach                    | False                                |
+| name                           | ceph-vol-test                        |
+| os-vol-host-attr:host          | None                                 |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | None                                 |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 1                                    |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | creating                             |
+| type                           | ceph                                 |
+| updated_at                     | None                                 |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d     |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411 |
++--------------------------------+--------------------------------------+
++--------+--------------------------------------+
+| Field  | Value                                |
++--------+--------------------------------------+
+| id     | d6169e05-f29b-405c-a9b9-67eebf618d2c |
+| status | available                            |
+| type   | ceph                                 |
++--------+--------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack volume show ceph-vol-test -c id -c status -c type
++--------+--------------------------------------+
+| Field  | Value                                |
++--------+--------------------------------------+
+| id     | d6169e05-f29b-405c-a9b9-67eebf618d2c |
+| status | available                            |
+| type   | ceph                                 |
++--------+--------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ VOL_ID=$(openstack volume show ceph-vol-test -f value -c id)
+sudo rbd -p volume ls | grep $VOL_ID
+volume-d6169e05-f29b-405c-a9b9-67eebf618d2c
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server create \
+  --flavor 1 \
+  --network af7ee1c4-02c6-438b-8784-93690f664a47 \
+  --boot-from-volume 5 \
+  --image cirros \
+  ceph-boot-vm-1
+No Image found for cirros
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server show ceph-boot-vm-1 -c status -c OS-EXT-STS:vm_state -c OS-EXT-STS:task_state
+No Server found for ceph-boot-vm-1
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server show ceph-boot-vm-1 -c status -c OS-EXT-STS:vm_state -c OS-EXT-STS:task_state
+No Server found for ceph-boot-vm-1
+ubuntu@gelani-lab-1:/opt/stack/devstack$ 
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server list -f value -c ID | while read id; do
+  openstack server delete "$id"
+done
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server list
+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack volume list
++--------------------------------------+---------------+-----------+------+-------------+
+| ID                                   | Name          | Status    | Size | Attached to |
++--------------------------------------+---------------+-----------+------+-------------+
+| d6169e05-f29b-405c-a9b9-67eebf618d2c | ceph-vol-test | available |    1 |             |
++--------------------------------------+---------------+-----------+------+-------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack volume delete --purge d6169e05-f29b-405c-a9b9-67eebf618d2c
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack volume list
+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo rbd -p volume ls
+ubuntu@gelani-lab-1:/opt/stack/devstack$ No Image found for cirros
+No: command not found
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo rbd -p volume ls
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack image list
++--------------------------------------+---------------------------------+--------+
+| ID                                   | Name                            | Status |
++--------------------------------------+---------------------------------+--------+
+| 0fcd1b67-931f-4417-a407-b887577fda9f | Fedora-Cloud-Base-37-1.7.x86_64 | active |
+| d3d0c59e-4eef-4932-b6dd-e436b761c6be | cirros-0.6.3-x86_64-disk        | active |
+| b6e575cd-c986-4098-a75f-136eafa50af2 | ubuntu                          | active |
++--------------------------------------+---------------------------------+--------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack network list
++--------------------------------------+----------+----------------------------------------------------+
+| ID                                   | Name     | Subnets                                            |
++--------------------------------------+----------+----------------------------------------------------+
+| 172b9757-3f94-4b3a-8588-aaef9f5d94e3 | public   | 0f51c1e9-b2bb-4546-a208-2f911e514369,              |
+|                                      |          | 17c9de01-9f5b-422c-b9ce-53cc4a3f2cdc               |
+| 34be5cb2-fc34-4a8b-b337-41595e361e6d | heat-net | 6914f2f9-8d4e-4138-8a06-b8bbd45bb3bb               |
+| 68a7ad34-b3e9-48a4-a3cc-c178a4d89ddd | shared   | 13063700-83a4-402f-8cc9-0ca93ac96bf6               |
+| af7ee1c4-02c6-438b-8784-93690f664a47 | private  | 6adea907-730d-4318-98d5-1908d2d013fc,              |
+|                                      |          | ee882e21-e946-48f8-9873-826e2c5e68b8               |
++--------------------------------------+----------+----------------------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server create \
+  --flavor m1.tiny \
+  --network ee882e21-e946-48f8-9873-826e2c5e68b8  \
+  --boot-from-volume 5 \
+  --image "ubuntu" \
+  ceph-vm-1
+No Network found for ee882e21-e946-48f8-9873-826e2c5e68b8
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server create   --flavor m1.tiny   --network 6adea907-730d-4318-98d5-1908d2d013fc,    --boot-from-volume 5   --image "ubuntu"   ceph-vm-1
+usage: openstack server create [-h] [-f {json,shell,table,value,yaml}] [-c COLUMN] [--noindent] [--prefix PREFIX]
+                               [--max-width <integer>] [--fit-width] [--print-empty] --flavor <flavor>
+                               [--image <image> | --image-property <key=value> | --volume <volume> | --snapshot <snapshot>]
+                               [--boot-from-volume <volume-size>] [--block-device-mapping <dev-name=mapping>]
+                               [--block-device <block-device>] [--swap <swap>]
+                               [--ephemeral <size=size[,format=format]>] [--network <network>] [--port <port>]
+                               [--no-network] [--auto-network]
+                               [--nic <net-id=net-uuid,port-id=port-uuid,v4-fixed-ip=ip-addr,v6-fixed-ip=ip-addr,tag=tag,auto,none>]
+                               [--password <password>] [--no-security-group | --security-group <security-group>]
+                               [--key-name <key-name>] [--property <key=value>]
+                               [--file <dest-filename=source-filename>] [--user-data <user-data>]
+                               [--description <description>] [--availability-zone <zone-name>] [--host <host>]
+                               [--hypervisor-hostname <hypervisor-hostname>] [--server-group <server-group>]
+                               [--hint <key=value>]
+                               [--use-config-drive | --no-config-drive | --config-drive <config-drive-volume>|True]
+                               [--min <count>] [--max <count>] [--tag <tag>] [--hostname <hostname>] [--wait]
+                               [--trusted-image-cert <trusted-cert-id>]
+                               <server-name>
+openstack server create: error: argument --network: Invalid argument 6adea907-730d-4318-98d5-1908d2d013fc,; characters ',' and '=' are not allowed
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server create   --flavor m1.tiny   --network 6adea907-730d-4318-98d5-1908d2d013fc    --boot-from-volume 5   --image "ubuntu"   ceph-vm-1
+No Network found for 6adea907-730d-4318-98d5-1908d2d013fc
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack subnet show 6adea907-730d-4318-98d5-1908d2d013fc -c network_id -c name -f yaml
+name: private-subnet
+network_id: af7ee1c4-02c6-438b-8784-93690f664a47
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server create \
+  --flavor m1.tiny \
+  --network private \
+  --boot-from-volume 5 \
+  --image ubuntu \
+  ceph-vm-1
++-------------------------------------+-----------------------------------------------------------------------------+
+| Field                               | Value                                                                       |
++-------------------------------------+-----------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                      |
+| OS-EXT-AZ:availability_zone         | None                                                                        |
+| OS-EXT-SRV-ATTR:host                | None                                                                        |
+| OS-EXT-SRV-ATTR:hostname            | ceph-vm-1                                                                   |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                        |
+| OS-EXT-SRV-ATTR:instance_name       | None                                                                        |
+| OS-EXT-SRV-ATTR:kernel_id           | None                                                                        |
+| OS-EXT-SRV-ATTR:launch_index        | None                                                                        |
+| OS-EXT-SRV-ATTR:ramdisk_id          | None                                                                        |
+| OS-EXT-SRV-ATTR:reservation_id      | r-2n00lvjf                                                                  |
+| OS-EXT-SRV-ATTR:root_device_name    | None                                                                        |
+| OS-EXT-SRV-ATTR:user_data           | None                                                                        |
+| OS-EXT-STS:power_state              | N/A                                                                         |
+| OS-EXT-STS:task_state               | scheduling                                                                  |
+| OS-EXT-STS:vm_state                 | building                                                                    |
+| OS-SRV-USG:launched_at              | None                                                                        |
+| OS-SRV-USG:terminated_at            | None                                                                        |
+| accessIPv4                          | None                                                                        |
+| accessIPv6                          | None                                                                        |
+| addresses                           | N/A                                                                         |
+| adminPass                           | bNzUSivtqC2a                                                                |
+| config_drive                        | None                                                                        |
+| created                             | 2026-01-31T19:36:38Z                                                        |
+| description                         | None                                                                        |
+| flavor                              | description=, disk='1', ephemeral='0', extra_specs.hw_rng:allowed='True',   |
+|                                     | id='m1.tiny', is_disabled=, is_public='True', location=, name='m1.tiny',    |
+|                                     | original_name='m1.tiny', ram='512', rxtx_factor=, swap='0', vcpus='1'       |
+| hostId                              | None                                                                        |
+| host_status                         | None                                                                        |
+| id                                  | a854d59a-25b5-4103-a0ac-62aa14105877                                        |
+| image                               | N/A (booted from volume)                                                    |
+| key_name                            | None                                                                        |
+| locked                              | None                                                                        |
+| locked_reason                       | None                                                                        |
+| name                                | ceph-vm-1                                                                   |
+| pinned_availability_zone            | None                                                                        |
+| progress                            | None                                                                        |
+| project_id                          | 9fb44e4466264364b4ac3eb936bdc4c2                                            |
+| properties                          | None                                                                        |
+| scheduler_hints                     |                                                                             |
+| security_groups                     | name='default'                                                              |
+| server_groups                       | None                                                                        |
+| status                              | BUILD                                                                       |
+| tags                                |                                                                             |
+| trusted_image_certificates          | None                                                                        |
+| updated                             | 2026-01-31T19:36:38Z                                                        |
+| user_id                             | 09805ebaab704a8cbf99fdc8a0c1859d                                            |
+| volumes_attached                    |                                                                             |
++-------------------------------------+-----------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server show ceph-vm-1 \
+  -c status \
+  -c OS-EXT-STS:vm_state \
+  -c OS-EXT-STS:task_state
++-----------------------+----------------------+
+| Field                 | Value                |
++-----------------------+----------------------+
+| OS-EXT-STS:task_state | block_device_mapping |
+| OS-EXT-STS:vm_state   | building             |
+| status                | BUILD                |
++-----------------------+----------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server show ceph-vm-1   -c status   -c OS-EXT-STS:vm_state   -c OS-EXT-STS:task_state
++-----------------------+----------------------+
+| Field                 | Value                |
++-----------------------+----------------------+
+| OS-EXT-STS:task_state | block_device_mapping |
+| OS-EXT-STS:vm_state   | building             |
+| status                | BUILD                |
++-----------------------+----------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server show ceph-vm-1   -c status   -c OS-EXT-STS:vm_state   -c OS-EXT-STS:task_state
++-----------------------+--------+
+| Field                 | Value  |
++-----------------------+--------+
+| OS-EXT-STS:task_state | None   |
+| OS-EXT-STS:vm_state   | active |
+| status                | ACTIVE |
++-----------------------+--------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server show ceph-vm-1   -c status   -c OS-EXT-STS:vm_state   -c OS-EXT-STS:task_state
++-----------------------+--------+
+| Field                 | Value  |
++-----------------------+--------+
+| OS-EXT-STS:task_state | None   |
+| OS-EXT-STS:vm_state   | active |
+| status                | ACTIVE |
++-----------------------+--------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack volume list
++--------------------------------------+------+--------+------+------------------------------------+
+| ID                                   | Name | Status | Size | Attached to                        |
++--------------------------------------+------+--------+------+------------------------------------+
+| 5f2f64e1-6b28-41bf-88b2-e17204dbfbb0 |      | in-use |    5 | Attached to ceph-vm-1 on /dev/vda  |
++--------------------------------------+------+--------+------+------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ VOL_ID=$(openstack volume list -f value -c ID)
+sudo rbd -p volume ls | grep $VOL_ID
+volume-5f2f64e1-6b28-41bf-88b2-e17204dbfbb0
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo ls /var/lib/nova/instances
+ls: cannot access '/var/lib/nova/instances': No such file or directory
+ubuntu@gelani-lab-1:/opt/stack/devstack$ 
 
 
 `` 
