@@ -998,7 +998,7 @@ Unknown options: ubuntu-22.04.qcow2
 emaduzzaman@emaduzzaman:~/Desktop$ ls
 'all the log'                               image001.png                                                                                       pico-gelani.xlsx
  ceph                                      'jammy-server-cloudimg-amd64.img ubuntu-22.04.qcow2'                                                README.md.bak
- d684b69b-f314-44fc-8816-b2eb1614ab14.png  'JSR-IPSec VPN Configuration.pdf'                                                                   Screenshot_20260128_181204.png
+ d684b69b-f314-44fc-8816-b2eb1614ab14.png                                                                    Screenshot_20260128_181204.png
  FortiClient_SSL_VPN_Setup_Guide.docx      'Open Source k0rdent Kubernetes-Native Platform Engineering for Greater Enterprise Agility .pptx'   SERVER-VPN1_02-2700_SERVER-VPN1.ovpn
  Gelani_wg_latest.txt                       openstack                                                                                         'Simple and Secure Multi-Cluster, Multi-Cloud Kubernetes with k0rdent and Calico.pptx'
 emaduzzaman@emaduzzaman:~/Desktop$ aws --profile ceph-s3 \
