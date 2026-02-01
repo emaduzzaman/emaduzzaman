@@ -4655,6 +4655,1532 @@ ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server stop ceph-vm-1
 openstack volume snapshot create test-snap --volume 5f2f64e1-6b28-41bf-88b2-e17204dbfbb0
 BadRequestException: 400: Client Error for url: http://192.168.95.93/volume/v3/snapshots, Invalid volume: Volume 5f2f64e1-6b28-41bf-88b2-e17204dbfbb0 status must be available, but current status is: in-use.
 ubuntu@gelani-lab-1:/opt/stack/devstack$ 
+ubuntu@gelani-lab-1:/opt/stack/devstack$ source openrc admin admin
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack token issue
++------------+------------------------------------------------------------------------------------------------------+
+| Field      | Value                                                                                                |
++------------+------------------------------------------------------------------------------------------------------+
+| expires    | 2026-02-01T06:11:48+0000                                                                             |
+| id         | gAAAAABpfuCU-VfyYK6jK1p4pdOGzwJDq7Tlb4ZHxkYxIh-wXwrDL_cZHqpjo0UIuNrUY9Kuive02pJEuRkodeqwQNnGG2P6rnws |
+|            | 1lvPr5tOiGUqCOwMCoCI0RsxE_17HT4fMfIGnA6th4QCE0akQcvxvLNItxMAmIamJHDiI_eiBCUp7hjJsiE                  |
+| project_id | 9fb44e4466264364b4ac3eb936bdc4c2                                                                     |
+| user_id    | 09805ebaab704a8cbf99fdc8a0c1859d                                                                     |
++------------+------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo egrep -n "^\[glance_store\]|\[rbd\]|stores|default_store|rbd_store_pool|rbd_store_user|rbd_store_ceph_conf" /etc/glance/glance-api.conf
+46:#stores = rbd
+47:#default_store = rbd
+49:[glance_store]
+51:stores = rbd
+52:default_store = rbd
+54:[rbd]
+55:rbd_store_pool = images
+56:rbd_store_user = glance
+57:rbd_store_ceph_conf = /etc/ceph/ceph.conf
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo ceph -s --name client.glance --keyring /etc/ceph/ceph.client.glance.keyring
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 1.31k objects, 4.0 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack image list
++--------------------------------------+---------------------------------+--------+
+| ID                                   | Name                            | Status |
++--------------------------------------+---------------------------------+--------+
+| 0fcd1b67-931f-4417-a407-b887577fda9f | Fedora-Cloud-Base-37-1.7.x86_64 | active |
+| d3d0c59e-4eef-4932-b6dd-e436b761c6be | cirros-0.6.3-x86_64-disk        | active |
+| b6e575cd-c986-4098-a75f-136eafa50af2 | ubuntu                          | active |
++--------------------------------------+---------------------------------+--------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo rbd -p images ls
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack image show b6e575cd-c986-4098-a75f-136eafa50af2 -c id -c name -c status -c size -c properties
++------------+------------------------------------------------------------------------------------------------------+
+| Field      | Value                                                                                                |
++------------+------------------------------------------------------------------------------------------------------+
+| id         | b6e575cd-c986-4098-a75f-136eafa50af2                                                                 |
+| name       | ubuntu                                                                                               |
+| properties | os_hash_algo='sha512', os_hash_value='bdbfbec178ed26e088e095b72445cdd5a896dcc9e5c0f00862698aec4fa29c |
+|            | 3c37e3d2392597043f5ed23c9bca346744bea3065979d88130a37bf27562891f3c', os_hidden='False'               |
+| size       | 688868864                                                                                            |
+| status     | active                                                                                               |
++------------+------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo rbd -p images ls
+ubuntu@gelani-lab-1:/opt/stack/devstack$ 
+
+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack image create ubuntu-ceph-test \
+  --file /home/emaduzzaman/Desktop/jammy-server-cloudimg-amd64.qcow2 \
+  --disk-format qcow2 \
+  --container-format bare \
+  --public
+'/home/emaduzzaman/Desktop/jammy-server-cloudimg-amd64.qcow2' is not a valid file
+ubuntu@gelani-lab-1:/opt/stack/devstack$ source openrc admin admin
+ubuntu@gelani-lab-1:/opt/stack/devstack$ source openrc admin admin
+ubuntu@gelani-lab-1:/opt/stack/devstack$ source openrc admin admin
+ubuntu@gelani-lab-1:/opt/stack/devstack$ mkdir -p ~/images
+ubuntu@gelani-lab-1:/opt/stack/devstack$ cd ~/images
+ubuntu@gelani-lab-1:~/images$ wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+--2026-02-01 06:32:57--  https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+Resolving cloud-images.ubuntu.com (cloud-images.ubuntu.com)... 185.125.190.37, 185.125.190.40, 2620:2d:4000:1::17, ...
+Connecting to cloud-images.ubuntu.com (cloud-images.ubuntu.com)|185.125.190.37|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 688868864 (657M) [application/octet-stream]
+Saving to: ‘jammy-server-cloudimg-amd64.img’
+
+jammy-server-cloudimg-amd64.img                            100%[========================================================================================================================================>] 656.96M  14.9MB/s    in 57s     
+
+2026-02-01 06:33:55 (11.6 MB/s) - ‘jammy-server-cloudimg-amd64.img’ saved [688868864/688868864]
+
+ubuntu@gelani-lab-1:~/images$ qemu-img info jammy-server-cloudimg-amd64.img
+image: jammy-server-cloudimg-amd64.img
+file format: qcow2
+virtual size: 2.2 GiB (2361393152 bytes)
+disk size: 657 MiB
+cluster_size: 65536
+Format specific information:
+    compat: 0.10
+    compression type: zlib
+    refcount bits: 16
+ubuntu@gelani-lab-1:~/images$ openstack image create ubuntu-22-ceph \
+  --file jammy-server-cloudimg-amd64.img \
+  --disk-format qcow2 \
+  --container-format bare \
+  --public
+HttpException: 502: Server Error for url: http://192.168.95.93/image/v2/images/a31a2665-6099-4267-8479-df178ccaecda/file, 502 Bad Gateway: Bad Gateway: The proxy server received an invalid: response from an upstream server.: Apache/2.4.52 (Ubuntu) Server at 192.168.95.93 Port 80
+ubuntu@gelani-lab-1:~/images$ cd /opt/stack/devstack
+ubuntu@gelani-lab-1:/opt/stack/devstack$ source openrc admin admin
+ubuntu@gelani-lab-1:/opt/stack/devstack$ cd ~/images
+ubuntu@gelani-lab-1:~/images$ wget -O cirros.img https://download.cirros-cloud.net/0.6.3/cirros-0.6.3-x86_64-disk.img
+--2026-02-01 06:46:33--  https://download.cirros-cloud.net/0.6.3/cirros-0.6.3-x86_64-disk.img
+Resolving download.cirros-cloud.net (download.cirros-cloud.net)... 69.163.176.183, 2607:f298:6:a014::c3e:9bd6
+Connecting to download.cirros-cloud.net (download.cirros-cloud.net)|69.163.176.183|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img [following]
+--2026-02-01 06:46:34--  https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img
+Resolving github.com (github.com)... 20.205.243.166
+Connecting to github.com (github.com)|20.205.243.166|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://release-assets.githubusercontent.com/github-production-release-asset/219785102/6f5bab50-4c03-4330-a8c6-7b6cb1564e3f?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-02-01T07%3A40%3A47Z&rscd=attachment%3B+filename%3Dcirros-0.6.3-x86_64-disk.img&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-02-01T06%3A40%3A34Z&ske=2026-02-01T07%3A40%3A47Z&sks=b&skv=2018-11-09&sig=t9xZC%2BIUqP0PE2Z8xo8FWczjrE26GhGzzxgOCxd6lpw%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2OTkzMDE5NSwibmJmIjoxNzY5OTI4Mzk1LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.Tt2OeBlY-XMSRp-Cl5340wo6B1s53FhcbqakcBKxvyw&response-content-disposition=attachment%3B%20filename%3Dcirros-0.6.3-x86_64-disk.img&response-content-type=application%2Foctet-stream [following]
+--2026-02-01 06:46:35--  https://release-assets.githubusercontent.com/github-production-release-asset/219785102/6f5bab50-4c03-4330-a8c6-7b6cb1564e3f?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-02-01T07%3A40%3A47Z&rscd=attachment%3B+filename%3Dcirros-0.6.3-x86_64-disk.img&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-02-01T06%3A40%3A34Z&ske=2026-02-01T07%3A40%3A47Z&sks=b&skv=2018-11-09&sig=t9xZC%2BIUqP0PE2Z8xo8FWczjrE26GhGzzxgOCxd6lpw%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2OTkzMDE5NSwibmJmIjoxNzY5OTI4Mzk1LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.Tt2OeBlY-XMSRp-Cl5340wo6B1s53FhcbqakcBKxvyw&response-content-disposition=attachment%3B%20filename%3Dcirros-0.6.3-x86_64-disk.img&response-content-type=application%2Foctet-stream
+Resolving release-assets.githubusercontent.com (release-assets.githubusercontent.com)... 185.199.108.133, 185.199.111.133, 185.199.110.133, ...
+Connecting to release-assets.githubusercontent.com (release-assets.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 21692416 (21M) [application/octet-stream]
+Saving to: ‘cirros.img’
+
+cirros.img                                                 100%[========================================================================================================================================>]  20.69M  34.6MB/s    in 0.6s    
+
+2026-02-01 06:46:36 (34.6 MB/s) - ‘cirros.img’ saved [21692416/21692416]
+
+ubuntu@gelani-lab-1:~/images$ openstack image create cirros-test \
+  --file cirros.img \
+  --disk-format qcow2 \
+  --container-format bare \
+  --public
+HttpException: 502: Server Error for url: http://192.168.95.93/image/v2/images/480a4ca9-944e-48e3-83d2-ebc145c15430/file, 502 Bad Gateway: Bad Gateway: The proxy server received an invalid: response from an upstream server.: Apache/2.4.52 (Ubuntu) Server at 192.168.95.93 Port 80
+ubuntu@gelani-lab-1:~/images$ sudo grep -R --line-number "ProxyPass.*image\|/image" /etc/apache2/sites-enabled /etc/apache2/conf-enabled 2>/dev/null
+/etc/apache2/sites-enabled/glance-api.conf:3:ProxyPass "/image" "http://127.0.0.1:60999" retry=0 acquire=1 
+ubuntu@gelani-lab-1:~/images$ sudo ss -ltnp | egrep ':9292|:80'
+LISTEN 0      511                *:80               *:*    users:(("apache2",pid=1933024,fd=4),("apache2",pid=1931547,fd=4),("apache2",pid=1931546,fd=4),("apache2",pid=1931542,fd=4))                   
+ubuntu@gelani-lab-1:~/images$ curl -sS -v http://127.0.0.1:9292/ | head
+*   Trying 127.0.0.1:9292...
+* connect to 127.0.0.1 port 9292 failed: Connection refused
+* Failed to connect to 127.0.0.1 port 9292 after 0 ms: Connection refused
+* Closing connection 0
+curl: (7) Failed to connect to 127.0.0.1 port 9292 after 0 ms: Connection refused
+ubuntu@gelani-lab-1:~/images$ curl -sS -v http://127.0.0.1:9292/v2/ | head
+*   Trying 127.0.0.1:9292...
+* connect to 127.0.0.1 port 9292 failed: Connection refused
+* Failed to connect to 127.0.0.1 port 9292 after 0 ms: Connection refused
+* Closing connection 0
+curl: (7) Failed to connect to 127.0.0.1 port 9292 after 0 ms: Connection refused
+ubuntu@gelani-lab-1:~/images$ sudo tail -n 200 /var/log/apache2/error.log
+[Sat Jan 31 12:43:56.981913 2026] [mpm_event:notice] [pid 1931542:tid 140162999977856] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sat Jan 31 12:43:56.982364 2026] [core:notice] [pid 1931542:tid 140162999977856] AH00094: Command line: '/usr/sbin/apache2'
+ubuntu@gelani-lab-1:~/images$ sudo tail -n 200 /opt/stack/logs/g-api.log 2>/dev/null || true
+ubuntu@gelani-lab-1:~/images$ sudo journalctl -u devstack@g-api -n 200 --no-pager 2>/dev/null || true
+Feb 01 06:36:01 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG glance.api.middleware.version_negotiation [None req-6ecb60fa-5d8f-4501-9980-ca8212bc13ae service ceilometer] Matched version: v2 {{(pid=1940636) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 06:36:01 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG glance.api.middleware.version_negotiation [None req-6ecb60fa-5d8f-4501-9980-ca8212bc13ae service ceilometer] new path /v2/images {{(pid=1940636) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 06:36:01 gelani-lab-1 devstack@g-api.service[1940636]: [pid: 1940636|app: 0|req: 148/593] 127.0.0.1 () {40 vars in 776 bytes} [Sun Feb  1 06:36:01 2026] POST /v2/images => generated 761 bytes in 399 msecs (HTTP/1.1 201) 6 headers in 314 bytes (1 switches on core 0)
+Feb 01 06:36:01 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.api.middleware.version_negotiation [None req-0510c1fc-b18e-4ac5-9d31-246a3ac68e40 service ceilometer] Determining version of request: PUT /v2/images/a31a2665-6099-4267-8479-df178ccaecda/file Accept:  {{(pid=1940634) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 06:36:01 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.api.middleware.version_negotiation [None req-0510c1fc-b18e-4ac5-9d31-246a3ac68e40 service ceilometer] Using url versioning {{(pid=1940634) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 06:36:01 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.api.middleware.version_negotiation [None req-0510c1fc-b18e-4ac5-9d31-246a3ac68e40 service ceilometer] Matched version: v2 {{(pid=1940634) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 06:36:01 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.api.middleware.version_negotiation [None req-0510c1fc-b18e-4ac5-9d31-246a3ac68e40 service ceilometer] new path /v2/images/a31a2665-6099-4267-8479-df178ccaecda/file {{(pid=1940634) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: INFO glance.api.v2.image_data [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Unable to create trust: no such option collect_timing in group [keystone_authtoken] Use the existing user token.
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.location [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Enabling in-flight format inspection for qcow2 {{(pid=1940634) set_data /opt/stack/glance/glance/location.py:616}}
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance_store.backend [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Attempting to import store rbd {{(pid=1940634) _load_store /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/backend.py:215}}
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance_store.capabilities [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Store glance_store._drivers.rbd.Store doesn't support updating dynamic storage capabilities. Please overwrite 'update_capabilities' method of the store to implement updating logics if needed. {{(pid=1940634) update_capabilities /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/capabilities.py:91}}
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance_store.driver [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Late loading location class glance_store._drivers.rbd.StoreLocation {{(pid=1940634) get_store_location_class /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/driver.py:134}}
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance_store.location [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Registering scheme rbd with {'store': <glance_store._drivers.rbd.Store object at 0x7f720bf0f970>, 'location_class': <class 'glance_store._drivers.rbd.StoreLocation'>, 'store_entry': 'rbd'} {{(pid=1940634) register_scheme_map /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/location.py:146}}
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance_store._drivers.rbd [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Error connecting to ceph cluster.: rados.OSError: [errno 95] error connecting to the cluster
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance_store._drivers.rbd Traceback (most recent call last):
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance_store._drivers.rbd   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 315, in get_connection
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance_store._drivers.rbd     client.connect()
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance_store._drivers.rbd   File "rados.pyx", line 689, in rados.Rados.connect
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance_store._drivers.rbd rados.OSError: [errno 95] error connecting to the cluster
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance_store._drivers.rbd 
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.api.v2.image_data [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Failed to upload image data due to internal error: glance_store.exceptions.BackendException
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Caught error: : glance_store.exceptions.BackendException
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi Traceback (most recent call last):
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 315, in get_connection
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     client.connect()
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "rados.pyx", line 689, in rados.Rados.connect
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi rados.OSError: [errno 95] error connecting to the cluster
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi 
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi During handling of the above exception, another exception occurred:
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi 
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi Traceback (most recent call last):
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/common/wsgi.py", line 1178, in __call__
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     action_result = self.dispatch(self.controller, action,
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/common/wsgi.py", line 1219, in dispatch
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     return method(*args, **kwargs)
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/common/utils.py", line 411, in wrapped
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     return func(self, req, *args, **kwargs)
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/api/v2/image_data.py", line 312, in upload
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     with excutils.save_and_reraise_exception():
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 256, in __exit__
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     self.force_reraise()
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 222, in force_reraise
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     raise self.value
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/api/v2/image_data.py", line 161, in upload
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     image.set_data(data, size, backend=backend)
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/notifier.py", line 488, in set_data
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     with excutils.save_and_reraise_exception():
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 256, in __exit__
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     self.force_reraise()
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 222, in force_reraise
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     raise self.value
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/notifier.py", line 442, in set_data
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     self.repo.set_data(data, size, backend=backend,
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/quota/__init__.py", line 321, in set_data
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     self.image.set_data(data, size=size, backend=backend,
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/location.py", line 625, in set_data
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     self._upload_to_store(data, verifier, backend, size)
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/location.py", line 531, in _upload_to_store
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     loc_meta) = self.store_api.add_to_backend_with_multihash(
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/backend.py", line 488, in add_to_backend_with_multihash
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     return store_add_to_backend_with_multihash(
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/backend.py", line 465, in store_add_to_backend_with_multihash
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     (location, size, checksum, multihash, metadata) = store.add(
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/driver.py", line 295, in add_adapter
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     metadata_dict) = store_add_fun(*args, **kwargs)
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/capabilities.py", line 176, in op_checker
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     return store_op_fun(store, *args, **kwargs)
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 560, in add
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     with self.get_connection(conffile=self.conf_file,
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     return next(self.gen)
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 325, in get_connection
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi     raise exceptions.BackendException()
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi glance_store.exceptions.BackendException
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: ERROR glance.common.wsgi 
+Feb 01 06:36:02 gelani-lab-1 devstack@g-api.service[1940634]: [pid: 1940634|app: 0|req: 150/594] 127.0.0.1 () {40 vars in 870 bytes} [Sun Feb  1 06:36:01 2026] PUT /v2/images/a31a2665-6099-4267-8479-df178ccaecda/file => generated 114 bytes in 578 msecs (HTTP/1.1 500) 4 headers in 185 bytes (1 switches on core 0)
+Feb 01 06:36:03 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-be8c72b0-6c75-4da9-8783-e42c7bd73c81 service ceilometer] Determining version of request: DELETE /v2/images/a31a2665-6099-4267-8479-df178ccaecda Accept: */* {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 06:36:03 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-be8c72b0-6c75-4da9-8783-e42c7bd73c81 service ceilometer] Using url versioning {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 06:36:03 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-be8c72b0-6c75-4da9-8783-e42c7bd73c81 service ceilometer] Matched version: v2 {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 06:36:03 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-be8c72b0-6c75-4da9-8783-e42c7bd73c81 service ceilometer] new path /v2/images/a31a2665-6099-4267-8479-df178ccaecda {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 06:36:03 gelani-lab-1 devstack@g-api.service[1940637]: WARNING glance.api.v2.images [None req-dbc6cbcb-1262-4869-9543-1d57b70fc098 admin admin] After upload to backend, deletion of staged image data has failed because it cannot be found at /tmp/staging//a31a2665-6099-4267-8479-df178ccaecda
+Feb 01 06:36:03 gelani-lab-1 devstack@g-api.service[1940637]: [pid: 1940637|app: 0|req: 149/595] 127.0.0.1 () {38 vars in 818 bytes} [Sun Feb  1 06:36:03 2026] DELETE /v2/images/a31a2665-6099-4267-8479-df178ccaecda => generated 0 bytes in 67 msecs (HTTP/1.1 204) 4 headers in 171 bytes (1 switches on core 0)
+Feb 01 06:36:11 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG dbcounter [-] [1940636] Writing DB stats glance:SELECT=4,glance:INSERT=4 {{(pid=1940636) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 06:36:12 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG dbcounter [-] [1940634] Writing DB stats glance:SELECT=17,glance:UPDATE=2 {{(pid=1940634) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 06:36:13 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG dbcounter [-] [1940637] Writing DB stats glance:SELECT=11,glance:UPDATE=8 {{(pid=1940637) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 06:39:02 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance.api.middleware.version_negotiation [None req-28d1e257-7a0c-4f60-a0cc-d066b08cde3a service ceilometer] Determining version of request: GET /v2/images Accept: */* {{(pid=1940635) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 06:39:02 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance.api.middleware.version_negotiation [None req-28d1e257-7a0c-4f60-a0cc-d066b08cde3a service ceilometer] Using url versioning {{(pid=1940635) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 06:39:02 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance.api.middleware.version_negotiation [None req-28d1e257-7a0c-4f60-a0cc-d066b08cde3a service ceilometer] Matched version: v2 {{(pid=1940635) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 06:39:02 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance.api.middleware.version_negotiation [None req-28d1e257-7a0c-4f60-a0cc-d066b08cde3a service ceilometer] new path /v2/images {{(pid=1940635) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 06:39:02 gelani-lab-1 devstack@g-api.service[1940635]: [pid: 1940635|app: 0|req: 149/596] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 06:39:02 2026] GET /v2/images?limit=200 => generated 2837 bytes in 12 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 06:39:12 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG dbcounter [-] [1940635] Writing DB stats glance:SELECT=1 {{(pid=1940635) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 06:44:02 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG glance.api.middleware.version_negotiation [None req-afd1e466-f43c-4b43-873a-97c8be9e8b36 admin admin] Determining version of request: GET /v2/images Accept: */* {{(pid=1940636) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 06:44:02 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG glance.api.middleware.version_negotiation [None req-afd1e466-f43c-4b43-873a-97c8be9e8b36 admin admin] Using url versioning {{(pid=1940636) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 06:44:02 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG glance.api.middleware.version_negotiation [None req-afd1e466-f43c-4b43-873a-97c8be9e8b36 admin admin] Matched version: v2 {{(pid=1940636) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 06:44:02 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG glance.api.middleware.version_negotiation [None req-afd1e466-f43c-4b43-873a-97c8be9e8b36 admin admin] new path /v2/images {{(pid=1940636) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 06:44:02 gelani-lab-1 devstack@g-api.service[1940636]: [pid: 1940636|app: 0|req: 149/597] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 06:44:02 2026] GET /v2/images?limit=200 => generated 2837 bytes in 70 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 06:44:12 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG dbcounter [-] [1940636] Writing DB stats glance:SELECT=1 {{(pid=1940636) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 06:46:56 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.api.middleware.version_negotiation [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Determining version of request: GET / Accept: application/json {{(pid=1940634) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 06:46:56 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.api.middleware.version_negotiation [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Using url versioning {{(pid=1940634) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 06:46:56 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.api.middleware.version_negotiation [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Unknown version. Returning version choices. {{(pid=1940634) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 06:46:56 gelani-lab-1 devstack@g-api.service[1940634]: [pid: 1940634|app: 0|req: 151/598] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 06:46:56 2026] GET / => generated 1433 bytes in 2 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 06:46:56 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-dbc6cbcb-1262-4869-9543-1d57b70fc098 admin admin] Determining version of request: POST /v2/images Accept: */* {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 06:46:56 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-dbc6cbcb-1262-4869-9543-1d57b70fc098 admin admin] Using url versioning {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 06:46:56 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-dbc6cbcb-1262-4869-9543-1d57b70fc098 admin admin] Matched version: v2 {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 06:46:56 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-dbc6cbcb-1262-4869-9543-1d57b70fc098 admin admin] new path /v2/images {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940637]: [pid: 1940637|app: 0|req: 150/599] 127.0.0.1 () {40 vars in 776 bytes} [Sun Feb  1 06:46:56 2026] POST /v2/images => generated 755 bytes in 381 msecs (HTTP/1.1 201) 6 headers in 314 bytes (1 switches on core 0)
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance.api.middleware.version_negotiation [None req-4c446e6e-d77c-44c1-97b8-ca7a79a1fc11 service ceilometer] Determining version of request: PUT /v2/images/480a4ca9-944e-48e3-83d2-ebc145c15430/file Accept:  {{(pid=1940635) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance.api.middleware.version_negotiation [None req-4c446e6e-d77c-44c1-97b8-ca7a79a1fc11 service ceilometer] Using url versioning {{(pid=1940635) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance.api.middleware.version_negotiation [None req-4c446e6e-d77c-44c1-97b8-ca7a79a1fc11 service ceilometer] Matched version: v2 {{(pid=1940635) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance.api.middleware.version_negotiation [None req-4c446e6e-d77c-44c1-97b8-ca7a79a1fc11 service ceilometer] new path /v2/images/480a4ca9-944e-48e3-83d2-ebc145c15430/file {{(pid=1940635) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: INFO glance.api.v2.image_data [None req-1e1d56c6-7290-4df4-bc08-b60e67b2d29d admin admin] Unable to create trust: no such option collect_timing in group [keystone_authtoken] Use the existing user token.
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance.location [None req-1e1d56c6-7290-4df4-bc08-b60e67b2d29d admin admin] Enabling in-flight format inspection for qcow2 {{(pid=1940635) set_data /opt/stack/glance/glance/location.py:616}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance_store.backend [None req-1e1d56c6-7290-4df4-bc08-b60e67b2d29d admin admin] Attempting to import store rbd {{(pid=1940635) _load_store /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/backend.py:215}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance_store.capabilities [None req-1e1d56c6-7290-4df4-bc08-b60e67b2d29d admin admin] Store glance_store._drivers.rbd.Store doesn't support updating dynamic storage capabilities. Please overwrite 'update_capabilities' method of the store to implement updating logics if needed. {{(pid=1940635) update_capabilities /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/capabilities.py:91}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance_store.driver [None req-1e1d56c6-7290-4df4-bc08-b60e67b2d29d admin admin] Late loading location class glance_store._drivers.rbd.StoreLocation {{(pid=1940635) get_store_location_class /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/driver.py:134}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG glance_store.location [None req-1e1d56c6-7290-4df4-bc08-b60e67b2d29d admin admin] Registering scheme rbd with {'store': <glance_store._drivers.rbd.Store object at 0x7f720bf463b0>, 'location_class': <class 'glance_store._drivers.rbd.StoreLocation'>, 'store_entry': 'rbd'} {{(pid=1940635) register_scheme_map /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/location.py:146}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance_store._drivers.rbd [None req-1e1d56c6-7290-4df4-bc08-b60e67b2d29d admin admin] Error connecting to ceph cluster.: rados.OSError: [errno 95] error connecting to the cluster
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance_store._drivers.rbd Traceback (most recent call last):
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance_store._drivers.rbd   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 315, in get_connection
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance_store._drivers.rbd     client.connect()
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance_store._drivers.rbd   File "rados.pyx", line 689, in rados.Rados.connect
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance_store._drivers.rbd rados.OSError: [errno 95] error connecting to the cluster
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance_store._drivers.rbd 
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.api.v2.image_data [None req-1e1d56c6-7290-4df4-bc08-b60e67b2d29d admin admin] Failed to upload image data due to internal error: glance_store.exceptions.BackendException
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi [None req-1e1d56c6-7290-4df4-bc08-b60e67b2d29d admin admin] Caught error: : glance_store.exceptions.BackendException
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi Traceback (most recent call last):
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 315, in get_connection
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     client.connect()
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "rados.pyx", line 689, in rados.Rados.connect
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi rados.OSError: [errno 95] error connecting to the cluster
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi 
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi During handling of the above exception, another exception occurred:
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi 
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi Traceback (most recent call last):
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/common/wsgi.py", line 1178, in __call__
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     action_result = self.dispatch(self.controller, action,
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/common/wsgi.py", line 1219, in dispatch
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     return method(*args, **kwargs)
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/common/utils.py", line 411, in wrapped
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     return func(self, req, *args, **kwargs)
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/api/v2/image_data.py", line 312, in upload
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     with excutils.save_and_reraise_exception():
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 256, in __exit__
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     self.force_reraise()
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 222, in force_reraise
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     raise self.value
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/api/v2/image_data.py", line 161, in upload
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     image.set_data(data, size, backend=backend)
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/notifier.py", line 488, in set_data
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     with excutils.save_and_reraise_exception():
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 256, in __exit__
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     self.force_reraise()
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 222, in force_reraise
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     raise self.value
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/notifier.py", line 442, in set_data
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     self.repo.set_data(data, size, backend=backend,
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/quota/__init__.py", line 321, in set_data
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     self.image.set_data(data, size=size, backend=backend,
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/location.py", line 625, in set_data
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     self._upload_to_store(data, verifier, backend, size)
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/location.py", line 531, in _upload_to_store
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     loc_meta) = self.store_api.add_to_backend_with_multihash(
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/backend.py", line 488, in add_to_backend_with_multihash
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     return store_add_to_backend_with_multihash(
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/backend.py", line 465, in store_add_to_backend_with_multihash
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     (location, size, checksum, multihash, metadata) = store.add(
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/driver.py", line 295, in add_adapter
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     metadata_dict) = store_add_fun(*args, **kwargs)
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/capabilities.py", line 176, in op_checker
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     return store_op_fun(store, *args, **kwargs)
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 560, in add
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     with self.get_connection(conffile=self.conf_file,
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     return next(self.gen)
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 325, in get_connection
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi     raise exceptions.BackendException()
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi glance_store.exceptions.BackendException
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: ERROR glance.common.wsgi 
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940635]: [pid: 1940635|app: 0|req: 150/600] 127.0.0.1 () {40 vars in 869 bytes} [Sun Feb  1 06:46:57 2026] PUT /v2/images/480a4ca9-944e-48e3-83d2-ebc145c15430/file => generated 114 bytes in 616 msecs (HTTP/1.1 500) 4 headers in 185 bytes (1 switches on core 0)
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG glance.api.middleware.version_negotiation [None req-4ed110fb-0b5a-4d5f-9a07-68b197de21b2 service ceilometer] Determining version of request: DELETE /v2/images/480a4ca9-944e-48e3-83d2-ebc145c15430 Accept: */* {{(pid=1940636) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG glance.api.middleware.version_negotiation [None req-4ed110fb-0b5a-4d5f-9a07-68b197de21b2 service ceilometer] Using url versioning {{(pid=1940636) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG glance.api.middleware.version_negotiation [None req-4ed110fb-0b5a-4d5f-9a07-68b197de21b2 service ceilometer] Matched version: v2 {{(pid=1940636) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG glance.api.middleware.version_negotiation [None req-4ed110fb-0b5a-4d5f-9a07-68b197de21b2 service ceilometer] new path /v2/images/480a4ca9-944e-48e3-83d2-ebc145c15430 {{(pid=1940636) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940636]: WARNING glance.api.v2.images [None req-59a315af-6e6c-454a-80b6-0faa3048f983 admin admin] After upload to backend, deletion of staged image data has failed because it cannot be found at /tmp/staging//480a4ca9-944e-48e3-83d2-ebc145c15430
+Feb 01 06:46:57 gelani-lab-1 devstack@g-api.service[1940636]: [pid: 1940636|app: 0|req: 150/601] 127.0.0.1 () {38 vars in 818 bytes} [Sun Feb  1 06:46:57 2026] DELETE /v2/images/480a4ca9-944e-48e3-83d2-ebc145c15430 => generated 0 bytes in 54 msecs (HTTP/1.1 204) 4 headers in 171 bytes (1 switches on core 0)
+Feb 01 06:47:07 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG dbcounter [-] [1940637] Writing DB stats glance:SELECT=4,glance:INSERT=4 {{(pid=1940637) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 06:47:07 gelani-lab-1 devstack@g-api.service[1940635]: DEBUG dbcounter [-] [1940635] Writing DB stats glance:SELECT=17,glance:UPDATE=2 {{(pid=1940635) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 06:47:07 gelani-lab-1 devstack@g-api.service[1940636]: DEBUG dbcounter [-] [1940636] Writing DB stats glance:SELECT=11,glance:UPDATE=8 {{(pid=1940636) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 06:49:02 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.api.middleware.version_negotiation [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Determining version of request: GET /v2/images Accept: */* {{(pid=1940634) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 06:49:02 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.api.middleware.version_negotiation [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Using url versioning {{(pid=1940634) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 06:49:02 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.api.middleware.version_negotiation [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] Matched version: v2 {{(pid=1940634) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 06:49:02 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG glance.api.middleware.version_negotiation [None req-50e409e5-4eb8-4c21-963d-cd3a1183014a admin admin] new path /v2/images {{(pid=1940634) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 06:49:02 gelani-lab-1 devstack@g-api.service[1940634]: [pid: 1940634|app: 0|req: 152/602] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 06:49:02 2026] GET /v2/images?limit=200 => generated 2837 bytes in 66 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 06:49:12 gelani-lab-1 devstack@g-api.service[1940634]: DEBUG dbcounter [-] [1940634] Writing DB stats glance:SELECT=1 {{(pid=1940634) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 06:54:02 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-47c4cd13-20e3-4d5e-b247-c79ff36a0298 admin admin] Determining version of request: GET /v2/images Accept: */* {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 06:54:02 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-47c4cd13-20e3-4d5e-b247-c79ff36a0298 admin admin] Using url versioning {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 06:54:02 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-47c4cd13-20e3-4d5e-b247-c79ff36a0298 admin admin] Matched version: v2 {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 06:54:02 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG glance.api.middleware.version_negotiation [None req-47c4cd13-20e3-4d5e-b247-c79ff36a0298 admin admin] new path /v2/images {{(pid=1940637) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 06:54:02 gelani-lab-1 devstack@g-api.service[1940637]: [pid: 1940637|app: 0|req: 151/603] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 06:54:02 2026] GET /v2/images?limit=200 => generated 2837 bytes in 29 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 06:54:12 gelani-lab-1 devstack@g-api.service[1940637]: DEBUG dbcounter [-] [1940637] Writing DB stats glance:SELECT=1 {{(pid=1940637) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+ubuntu@gelani-lab-1:~/images$ sudo journalctl -u apache2 -n 200 --no-pager
+-- No entries --
+ubuntu@gelani-lab-1:~/images$ sudo ls -l /etc/ceph/ceph.conf /etc/ceph/ceph.client.glance.keyring
+sudo ceph auth get client.glance
+sudo ceph -s --name client.glance --keyring /etc/ceph/ceph.client.glance.keyring
+-rw------- 1 ubuntu ubuntu  64 Jan 31 13:14 /etc/ceph/ceph.client.glance.keyring
+-rw-r--r-- 1 root   stack  141 Jan 31 13:14 /etc/ceph/ceph.conf
+[client.glance]
+        key = AQCSt31pXEu5OhAAHZHDOR1T1NifPNVEfOTjwA==
+        caps mon = "profile rbd"
+        caps osd = "profile rbd pool=images"
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 4d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 1.33k objects, 4.0 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+  io:
+    client:   341 B/s rd, 341 B/s wr, 0 op/s rd, 0 op/s wr
+ 
+ubuntu@gelani-lab-1:~/images$ sudo ceph osd pool ls | grep -E '^images$' || echo "images pool missing"
+sudo rbd -p images ls
+images
+ubuntu@gelani-lab-1:~/images$ # Try service restart (works on many devstack setups)
+sudo systemctl restart devstack@g-api 2>/dev/null || true
+
+# Always restart apache proxy too
+sudo systemctl restart apache2
+ubuntu@gelani-lab-1:~/images$ sudo ss -ltnp | egrep ':9292|:80'
+curl -sS http://127.0.0.1:9292/v2/ | head
+LISTEN 0      511                *:80               *:*    users:(("apache2",pid=2073853,fd=4),("apache2",pid=2073852,fd=4),("apache2",pid=2073848,fd=4))                                                
+curl: (7) Failed to connect to 127.0.0.1 port 9292 after 0 ms: Connection refused
+ubuntu@gelani-lab-1:~/images$ 
+
+ubuntu@gelani-lab-1:~/images$ openstack image create ubuntu-22-ceph \
+  --file /home/ubuntu/images/jammy-server-cloudimg-amd64.img \
+  --disk-format qcow2 \
+  --container-format bare \
+  --public
+HttpException: 502: Server Error for url: http://192.168.95.93/image/v2/images/ff4bed8b-1038-4279-8b0b-535b092d3e8d/file, 502 Bad Gateway: Bad Gateway: The proxy server received an invalid: response from an upstream server.: Apache/2.4.52 (Ubuntu) Server at 192.168.95.93 Port 80
+ubuntu@gelani-lab-1:~/images$ sudo nano /etc/apache2/apache2.conf
+ubuntu@gelani-lab-1:~/images$ sudo cat /etc/apache2/apache2.conf 
+# This is the main Apache server configuration file.  It contains the
+# configuration directives that give the server its instructions.
+# See http://httpd.apache.org/docs/2.4/ for detailed information about
+# the directives and /usr/share/doc/apache2/README.Debian about Debian specific
+# hints.
+#
+#
+# Summary of how the Apache 2 configuration works in Debian:
+# The Apache 2 web server configuration in Debian is quite different to
+# upstream's suggested way to configure the web server. This is because Debian's
+# default Apache2 installation attempts to make adding and removing modules,
+# virtual hosts, and extra configuration directives as flexible as possible, in
+# order to make automating the changes and administering the server as easy as
+# possible.
+
+# It is split into several files forming the configuration hierarchy outlined
+# below, all located in the /etc/apache2/ directory:
+#
+#       /etc/apache2/
+#       |-- apache2.conf
+#       |       `--  ports.conf
+#       |-- mods-enabled
+#       |       |-- *.load
+#       |       `-- *.conf
+#       |-- conf-enabled
+#       |       `-- *.conf
+#       `-- sites-enabled
+#               `-- *.conf
+#
+#
+# * apache2.conf is the main configuration file (this file). It puts the pieces
+#   together by including all remaining configuration files when starting up the
+#   web server.
+#
+# * ports.conf is always included from the main configuration file. It is
+#   supposed to determine listening ports for incoming connections which can be
+#   customized anytime.
+#
+# * Configuration files in the mods-enabled/, conf-enabled/ and sites-enabled/
+#   directories contain particular configuration snippets which manage modules,
+#   global configuration fragments, or virtual host configurations,
+#   respectively.
+#
+#   They are activated by symlinking available configuration files from their
+#   respective *-available/ counterparts. These should be managed by using our
+#   helpers a2enmod/a2dismod, a2ensite/a2dissite and a2enconf/a2disconf. See
+#   their respective man pages for detailed information.
+#
+# * The binary is called apache2. Due to the use of environment variables, in
+#   the default configuration, apache2 needs to be started/stopped with
+#   /etc/init.d/apache2 or apache2ctl. Calling /usr/bin/apache2 directly will not
+#   work with the default configuration.
+
+
+# Global configuration
+#
+
+#
+# ServerRoot: The top of the directory tree under which the server's
+# configuration, error, and log files are kept.
+#
+# NOTE!  If you intend to place this on an NFS (or otherwise network)
+# mounted filesystem then please read the Mutex documentation (available
+# at <URL:http://httpd.apache.org/docs/2.4/mod/core.html#mutex>);
+# you will save yourself a lot of trouble.
+#
+# Do NOT add a slash at the end of the directory path.
+#
+#ServerRoot "/etc/apache2"
+
+#
+# The accept serialization lock file MUST BE STORED ON A LOCAL DISK.
+#
+#Mutex file:${APACHE_LOCK_DIR} default
+
+#
+# The directory where shm and other runtime files will be stored.
+#
+
+DefaultRuntimeDir ${APACHE_RUN_DIR}
+
+#
+# PidFile: The file in which the server should record its process
+# identification number when it starts.
+# This needs to be set in /etc/apache2/envvars
+#
+PidFile ${APACHE_PID_FILE}
+
+#
+# Timeout: The number of seconds before receives and sends time out.
+#
+Timeout 300
+
+#
+# KeepAlive: Whether or not to allow persistent connections (more than
+# one request per connection). Set to "Off" to deactivate.
+#
+KeepAlive On
+
+#
+# MaxKeepAliveRequests: The maximum number of requests to allow
+# during a persistent connection. Set to 0 to allow an unlimited amount.
+# We recommend you leave this number high, for maximum performance.
+#
+MaxKeepAliveRequests 100
+
+#
+# KeepAliveTimeout: Number of seconds to wait for the next request from the
+# same client on the same connection.
+#
+KeepAliveTimeout 5
+
+
+# These need to be set in /etc/apache2/envvars
+User ${APACHE_RUN_USER}
+Group ${APACHE_RUN_GROUP}
+
+#
+# HostnameLookups: Log the names of clients or just their IP addresses
+# e.g., www.apache.org (on) or 204.62.129.132 (off).
+# The default is off because it'd be overall better for the net if people
+# had to knowingly turn this feature on, since enabling it means that
+# each client request will result in AT LEAST one lookup request to the
+# nameserver.
+#
+HostnameLookups Off
+
+# ErrorLog: The location of the error log file.
+# If you do not specify an ErrorLog directive within a <VirtualHost>
+# container, error messages relating to that virtual host will be
+# logged here.  If you *do* define an error logfile for a <VirtualHost>
+# container, that host's errors will be logged there and not here.
+#
+ErrorLog ${APACHE_LOG_DIR}/error.log
+
+#
+# LogLevel: Control the severity of messages logged to the error_log.
+# Available values: trace8, ..., trace1, debug, info, notice, warn,
+# error, crit, alert, emerg.
+# It is also possible to configure the log level for particular modules, e.g.
+# "LogLevel info ssl:warn"
+#
+LogLevel warn
+
+# Include module configuration:
+IncludeOptional mods-enabled/*.load
+IncludeOptional mods-enabled/*.conf
+
+# Include list of ports to listen on
+Include ports.conf
+
+
+# Sets the default security model of the Apache2 HTTPD server. It does
+# not allow access to the root filesystem outside of /usr/share and /var/www.
+# The former is used by web applications packaged in Debian,
+# the latter may be used for local directories served by the web server. If
+# your system is serving content from a sub-directory in /srv you must allow
+# access here, or in any related virtual host.
+<Directory />
+        Options FollowSymLinks
+        AllowOverride None
+        Require all denied
+</Directory>
+
+<Directory /usr/share>
+        AllowOverride None
+        Require all granted
+</Directory>
+
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+
+#<Directory /srv/>
+#       Options Indexes FollowSymLinks
+#       AllowOverride None
+#       Require all granted
+#</Directory>
+
+
+
+
+# AccessFileName: The name of the file to look for in each directory
+# for additional configuration directives.  See also the AllowOverride
+# directive.
+#
+AccessFileName .htaccess
+
+#
+# The following lines prevent .htaccess and .htpasswd files from being
+# viewed by Web clients.
+#
+<FilesMatch "^\.ht">
+        Require all denied
+</FilesMatch>
+
+
+#
+# The following directives define some format nicknames for use with
+# a CustomLog directive.
+#
+# These deviate from the Common Log Format definitions in that they use %O
+# (the actual bytes sent including headers) instead of %b (the size of the
+# requested file), because the latter makes it impossible to detect partial
+# requests.
+#
+# Note that the use of %{X-Forwarded-For}i instead of %h is not recommended.
+# Use mod_remoteip instead.
+#
+LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
+LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
+LogFormat "%h %l %u %t \"%r\" %>s %O" common
+LogFormat "%{Referer}i -> %U" referer
+LogFormat "%{User-agent}i" agent
+
+# Include of directories ignores editors' and dpkg's backup files,
+# see README.Debian for details.
+
+# Include generic snippets of statements
+IncludeOptional conf-enabled/*.conf
+
+# Include the virtual host configurations:
+IncludeOptional sites-enabled/*.conf
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+
+
+# Allow large Glance image uploads
+LimitRequestBody 0
+Timeout 600
+ProxyTimeout 600
+ubuntu@gelani-lab-1:~/images$ sudo nano /etc/apache2/apache2.conf
+ubuntu@gelani-lab-1:~/images$ sudo systemctl restart apache2
+sudo systemctl restart devstack@g-api
+ubuntu@gelani-lab-1:~/images$ systemctl status devstack@g-api --no-pager
+● devstack@g-api.service - Devstack devstack@g-api.service
+     Loaded: loaded (/etc/systemd/system/devstack@g-api.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2026-02-01 08:05:08 UTC; 6s ago
+   Main PID: 2082407 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 13 (limit: 38457)
+     Memory: 428.0M
+        CPU: 7.653s
+     CGroup: /system.slice/system-devstack.slice/devstack@g-api.service
+             ├─2082407 "glance-apiuWSGI master"
+             ├─2082408 "glance-apiuWSGI worker 1"
+             ├─2082409 "glance-apiuWSGI worker 2"
+             ├─2082410 "glance-apiuWSGI worker 3"
+             └─2082411 "glance-apiuWSGI worker 4"
+
+Feb 01 08:05:10 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.common.config [None req-44411fdd-8d0b-47a4-b045-333e747f81a7 None None] database.slave_connection      = **** {{(pid=2082410) log_opt_values /o…fig/cfg.py:2824}}
+Feb 01 08:05:10 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.common.config [None req-44411fdd-8d0b-47a4-b045-333e747f81a7 None None] database.sqlite_synchronous    = True {{(pid=2082410) log_opt_values /o…fig/cfg.py:2824}}
+Feb 01 08:05:10 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.common.config [None req-44411fdd-8d0b-47a4-b045-333e747f81a7 None None] database.use_db_reconnect      = False {{(pid=2082410) log_opt_values /…fig/cfg.py:2824}}
+Feb 01 08:05:10 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.common.config [None req-44411fdd-8d0b-47a4-b045-333e747f81a7 None None] healthcheck.allowed_source_ranges = [] {{(pid=2082410) log_opt_values /…fig/cfg.py:2824}}
+Feb 01 08:05:10 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.common.config [None req-44411fdd-8d0b-47a4-b045-333e747f81a7 None None] healthcheck.backends           = ['disable_by_file'] {{(pid=2082410) lo…fig/cfg.py:2824}}
+Feb 01 08:05:10 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.common.config [None req-44411fdd-8d0b-47a4-b045-333e747f81a7 None None] healthcheck.detailed           = False {{(pid=2082410) log_opt_values /…fig/cfg.py:2824}}
+Feb 01 08:05:10 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.common.config [None req-44411fdd-8d0b-47a4-b045-333e747f81a7 None None] healthcheck.disable_by_file_path = None {{(pid=2082410) log_opt_values …fig/cfg.py:2824}}
+Feb 01 08:05:10 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.common.config [None req-44411fdd-8d0b-47a4-b045-333e747f81a7 None None] healthcheck.ignore_proxied_requests = False {{(pid=2082410) log_opt_val…fig/cfg.py:2824}}
+Feb 01 08:05:10 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.common.config [None req-44411fdd-8d0b-47a4-b045-333e747f81a7 None None] ***********************************************************************…fig/cfg.py:2828}}
+Feb 01 08:05:10 gelani-lab-1 devstack@g-api.service[2082410]: WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x564d4f145fa0 pid: 2082410 (default app)
+Hint: Some lines were ellipsized, use -l to show in full.
+ubuntu@gelani-lab-1:~/images$ sudo -u stack ceph -s \
+  --name client.glance \
+  --keyring /etc/ceph/ceph.client.glance.keyring
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 4d)
+    mgr: gelani-mon-1.gzltah(active, since 3d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 4d), 6 in (since 4d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 1.33k objects, 4.0 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+  io:
+    client:   32 KiB/s rd, 0 B/s wr, 31 op/s rd, 21 op/s wr
+ 
+ubuntu@gelani-lab-1:~/images$ cd /home/ubuntu/images
+source /opt/stack/devstack/openrc admin admin
+
+openstack image create ubuntu-22-ceph \
+  --file jammy-server-cloudimg-amd64.img \
+  --disk-format qcow2 \
+  --container-format bare \
+  --public
+HttpException: 502: Server Error for url: http://192.168.95.93/image/v2/images/8806a0e3-7093-4c76-929f-f2e2d785ee3e/file, 502 Bad Gateway: Bad Gateway: The proxy server received an invalid: response from an upstream server.: Apache/2.4.52 (Ubuntu) Server at 192.168.95.93 Port 80
+ubuntu@gelani-lab-1:~/images$ 
+ubuntu@gelani-lab-1:~/images$ source /opt/stack/devstack/openrc admin admin
+
+openstack image create ubuntu-22-ceph \
+  --disk-format qcow2 \
+  --container-format bare \
+  --public
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field            | Value                                                                                                                                              |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| container_format | bare                                                                                                                                               |
+| created_at       | 2026-02-01T08:16:13Z                                                                                                                               |
+| disk_format      | qcow2                                                                                                                                              |
+| file             | /v2/images/b96ddc2b-bfd4-4533-90ac-bb42bc0af7bb/file                                                                                               |
+| id               | b96ddc2b-bfd4-4533-90ac-bb42bc0af7bb                                                                                                               |
+| min_disk         | 0                                                                                                                                                  |
+| min_ram          | 0                                                                                                                                                  |
+| name             | ubuntu-22-ceph                                                                                                                                     |
+| owner            | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                   |
+| properties       | os_hidden='False', owner_specified.openstack.md5='', owner_specified.openstack.object='images/ubuntu-22-ceph', owner_specified.openstack.sha256='' |
+| protected        | False                                                                                                                                              |
+| schema           | /v2/schemas/image                                                                                                                                  |
+| status           | queued                                                                                                                                             |
+| tags             |                                                                                                                                                    |
+| updated_at       | 2026-02-01T08:16:13Z                                                                                                                               |
+| visibility       | public                                                                                                                                             |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/images$ openstack image list
++--------------------------------------+---------------------------------+--------+
+| ID                                   | Name                            | Status |
++--------------------------------------+---------------------------------+--------+
+| 0fcd1b67-931f-4417-a407-b887577fda9f | Fedora-Cloud-Base-37-1.7.x86_64 | active |
+| d3d0c59e-4eef-4932-b6dd-e436b761c6be | cirros-0.6.3-x86_64-disk        | active |
+| b6e575cd-c986-4098-a75f-136eafa50af2 | ubuntu                          | active |
+| b96ddc2b-bfd4-4533-90ac-bb42bc0af7bb | ubuntu-22-ceph                  | queued |
++--------------------------------------+---------------------------------+--------+
+ubuntu@gelani-lab-1:~/images$ openstack image stage ubuntu-22-ceph \
+  --file /home/ubuntu/images/jammy-server-cloudimg-amd64.img
+ubuntu@gelani-lab-1:~/images$ openstack image import ubuntu-22-ceph \
+  --import-method glance-direct
+usage: openstack image import [-h] [-f {json,shell,table,value,yaml}] [-c COLUMN] [--noindent] [--prefix PREFIX] [--max-width <integer>] [--fit-width] [--print-empty] [--method <method>] [--uri <uri>] [--remote-image <REMOTE_IMAGE>]
+                              [--remote-region <REMOTE_GLANCE_REGION>] [--remote-service-interface <REMOTE_SERVICE_INTERFACE>] [--store [<STORE> ...] | --all-stores ALL_STORES] [--allow-failure | --disallow-failure] [--wait]
+                              <image>
+openstack image import: error: unrecognized arguments: --import-method glance-direct
+ubuntu@gelani-lab-1:~/images$ openstack image import ubuntu-22-ceph \
+  --method glance-direct \
+  --wait
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field            | Value                                                                                                                                              |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| container_format | bare                                                                                                                                               |
+| created_at       | 2026-02-01T08:16:13Z                                                                                                                               |
+| disk_format      | qcow2                                                                                                                                              |
+| file             | /v2/images/b96ddc2b-bfd4-4533-90ac-bb42bc0af7bb/file                                                                                               |
+| id               | b96ddc2b-bfd4-4533-90ac-bb42bc0af7bb                                                                                                               |
+| min_disk         | 0                                                                                                                                                  |
+| min_ram          | 0                                                                                                                                                  |
+| name             | ubuntu-22-ceph                                                                                                                                     |
+| owner            | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                   |
+| properties       | os_hidden='False', owner_specified.openstack.md5='', owner_specified.openstack.object='images/ubuntu-22-ceph', owner_specified.openstack.sha256='' |
+| protected        | False                                                                                                                                              |
+| schema           | /v2/schemas/image                                                                                                                                  |
+| size             | 688868864                                                                                                                                          |
+| status           | uploading                                                                                                                                          |
+| tags             |                                                                                                                                                    |
+| updated_at       | 2026-02-01T08:16:40Z                                                                                                                               |
+| visibility       | public                                                                                                                                             |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ 
+
+
+
+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 4d)
+    mgr: gelani-mon-1.gzltah(active, since 3d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 4d), 6 in (since 4d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 1.33k objects, 4.0 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+  io:
+    client:   4.0 KiB/s rd, 0 B/s wr, 3 op/s rd, 2 op/s wr
+ 
+ubuntu@gelani-lab-1:~/images$ sudo rbd -p images ls
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | uploading |
++--------+-----------+
+ubuntu@gelani-lab-1:~/images$ ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 4d)
+    mgr: gelani-mon-1.gzltah(active, since 3d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 4d), 6 in (since 4d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 1.33k objects, 4.0 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+ubuntu@gelani-lab-1:~/images$ ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 4d)
+    mgr: gelani-mon-1.gzltah(active, since 3d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 4d), 6 in (since 4d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 1.33k objects, 4.0 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+ubuntu@gelani-lab-1:~/images$ sudo rbd -p images ls
+ubuntu@gelani-lab-1:~/images$ sudo journalctl -u devstack@g-api -n 200 --no-pager
+Feb 01 08:25:54 gelani-lab-1 devstack@g-api.service[2082411]: [pid: 2082411|app: 0|req: 15/58] 127.0.0.1 () {36 vars in 752 bytes} [Sun Feb  1 08:25:54 2026] GET /v2/images/ubuntu-22-ceph => generated 159 bytes in 26 msecs (HTTP/1.1 404) 4 headers in 172 bytes (1 switches on core 0)
+Feb 01 08:25:54 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-aedd7e29-3fd7-40da-a19b-8beb575aed14 admin admin] Determining version of request: GET /v2/images Accept: application/json {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:25:54 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-aedd7e29-3fd7-40da-a19b-8beb575aed14 admin admin] Using url versioning {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:25:54 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-aedd7e29-3fd7-40da-a19b-8beb575aed14 admin admin] Matched version: v2 {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:25:54 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-aedd7e29-3fd7-40da-a19b-8beb575aed14 admin admin] new path /v2/images {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:25:54 gelani-lab-1 devstack@g-api.service[2082408]: [pid: 2082408|app: 0|req: 15/59] 127.0.0.1 () {36 vars in 774 bytes} [Sun Feb  1 08:25:54 2026] GET /v2/images?name=ubuntu-22-ceph => generated 858 bytes in 11 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-30d7b164-e421-40a4-9f8e-362fc4d68f4a admin admin] Determining version of request: GET / Accept: application/json {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-30d7b164-e421-40a4-9f8e-362fc4d68f4a admin admin] Using url versioning {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-30d7b164-e421-40a4-9f8e-362fc4d68f4a admin admin] Unknown version. Returning version choices. {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082410]: [pid: 2082410|app: 0|req: 15/60] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 08:25:58 2026] GET / => generated 1433 bytes in 1 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-a8712934-2f3d-4e26-aed4-fa194b4bde10 service ceilometer] Determining version of request: GET /v2/images/ubuntu-22-ceph Accept: */* {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-a8712934-2f3d-4e26-aed4-fa194b4bde10 service ceilometer] Using url versioning {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-a8712934-2f3d-4e26-aed4-fa194b4bde10 service ceilometer] Matched version: v2 {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-a8712934-2f3d-4e26-aed4-fa194b4bde10 service ceilometer] new path /v2/images/ubuntu-22-ceph {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.db.sqlalchemy.api [None req-69e8c0fd-3565-4a32-9a92-cd3d7559ff01 admin admin] No image found with ID ubuntu-22-ceph {{(pid=2082409) _image_get /opt/stack/glance/glance/db/sqlalchemy/api.py:303}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082409]: [pid: 2082409|app: 0|req: 16/61] 127.0.0.1 () {36 vars in 752 bytes} [Sun Feb  1 08:25:58 2026] GET /v2/images/ubuntu-22-ceph => generated 159 bytes in 23 msecs (HTTP/1.1 404) 4 headers in 172 bytes (1 switches on core 0)
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-51ae4bd8-3ee8-4448-8082-9fe6bb347f4d admin admin] Determining version of request: GET /v2/images Accept: application/json {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-51ae4bd8-3ee8-4448-8082-9fe6bb347f4d admin admin] Using url versioning {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-51ae4bd8-3ee8-4448-8082-9fe6bb347f4d admin admin] Matched version: v2 {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-51ae4bd8-3ee8-4448-8082-9fe6bb347f4d admin admin] new path /v2/images {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:25:58 gelani-lab-1 devstack@g-api.service[2082411]: [pid: 2082411|app: 0|req: 16/62] 127.0.0.1 () {36 vars in 774 bytes} [Sun Feb  1 08:25:58 2026] GET /v2/images?name=ubuntu-22-ceph => generated 858 bytes in 10 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 08:26:04 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG dbcounter [-] [2082408] Writing DB stats glance:SELECT=1 {{(pid=2082408) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:26:08 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG dbcounter [-] [2082409] Writing DB stats glance:SELECT=1 {{(pid=2082409) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:26:08 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG dbcounter [-] [2082411] Writing DB stats glance:SELECT=2 {{(pid=2082411) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Determining version of request: GET / Accept: application/json {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Using url versioning {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Unknown version. Returning version choices. {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082408]: [pid: 2082408|app: 0|req: 16/63] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 08:28:48 2026] GET / => generated 1433 bytes in 1 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-30d7b164-e421-40a4-9f8e-362fc4d68f4a admin admin] Determining version of request: GET /v2/images/ubuntu-22-ceph Accept: */* {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-30d7b164-e421-40a4-9f8e-362fc4d68f4a admin admin] Using url versioning {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-30d7b164-e421-40a4-9f8e-362fc4d68f4a admin admin] Matched version: v2 {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-30d7b164-e421-40a4-9f8e-362fc4d68f4a admin admin] new path /v2/images/ubuntu-22-ceph {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.db.sqlalchemy.api [None req-deb0c1bb-f2be-4a7e-bb4c-4e916be33dc6 admin admin] No image found with ID ubuntu-22-ceph {{(pid=2082410) _image_get /opt/stack/glance/glance/db/sqlalchemy/api.py:303}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082410]: [pid: 2082410|app: 0|req: 16/64] 127.0.0.1 () {36 vars in 752 bytes} [Sun Feb  1 08:28:48 2026] GET /v2/images/ubuntu-22-ceph => generated 159 bytes in 62 msecs (HTTP/1.1 404) 4 headers in 172 bytes (1 switches on core 0)
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-69e8c0fd-3565-4a32-9a92-cd3d7559ff01 admin admin] Determining version of request: GET /v2/images Accept: application/json {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-69e8c0fd-3565-4a32-9a92-cd3d7559ff01 admin admin] Using url versioning {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-69e8c0fd-3565-4a32-9a92-cd3d7559ff01 admin admin] Matched version: v2 {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-69e8c0fd-3565-4a32-9a92-cd3d7559ff01 admin admin] new path /v2/images {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:28:48 gelani-lab-1 devstack@g-api.service[2082409]: [pid: 2082409|app: 0|req: 17/65] 127.0.0.1 () {36 vars in 774 bytes} [Sun Feb  1 08:28:48 2026] GET /v2/images?name=ubuntu-22-ceph => generated 858 bytes in 10 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 08:28:58 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG dbcounter [-] [2082410] Writing DB stats glance:SELECT=1 {{(pid=2082410) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:28:58 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG dbcounter [-] [2082409] Writing DB stats glance:SELECT=1 {{(pid=2082409) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:29:02 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-56eec1c0-36bd-4c19-8731-a92404ef6827 admin admin] Determining version of request: GET /v2/images Accept: */* {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:29:02 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-56eec1c0-36bd-4c19-8731-a92404ef6827 admin admin] Using url versioning {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:29:02 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-56eec1c0-36bd-4c19-8731-a92404ef6827 admin admin] Matched version: v2 {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:29:02 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-56eec1c0-36bd-4c19-8731-a92404ef6827 admin admin] new path /v2/images {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:29:02 gelani-lab-1 devstack@g-api.service[2082411]: [pid: 2082411|app: 0|req: 17/66] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 08:29:02 2026] GET /v2/images?limit=200 => generated 3608 bytes in 92 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 08:29:12 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG dbcounter [-] [2082411] Writing DB stats glance:SELECT=1 {{(pid=2082411) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Determining version of request: GET / Accept: application/json {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Using url versioning {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Unknown version. Returning version choices. {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082408]: [pid: 2082408|app: 0|req: 17/67] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 08:32:43 2026] GET / => generated 1433 bytes in 2 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-deb0c1bb-f2be-4a7e-bb4c-4e916be33dc6 admin admin] Determining version of request: GET /v2/images/ubuntu-22-ceph Accept: */* {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-deb0c1bb-f2be-4a7e-bb4c-4e916be33dc6 admin admin] Using url versioning {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-deb0c1bb-f2be-4a7e-bb4c-4e916be33dc6 admin admin] Matched version: v2 {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-deb0c1bb-f2be-4a7e-bb4c-4e916be33dc6 admin admin] new path /v2/images/ubuntu-22-ceph {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.db.sqlalchemy.api [None req-6f122fd9-6fa0-45de-b295-d4194c23dc0d admin admin] No image found with ID ubuntu-22-ceph {{(pid=2082410) _image_get /opt/stack/glance/glance/db/sqlalchemy/api.py:303}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082410]: [pid: 2082410|app: 0|req: 17/68] 127.0.0.1 () {36 vars in 752 bytes} [Sun Feb  1 08:32:43 2026] GET /v2/images/ubuntu-22-ceph => generated 159 bytes in 30 msecs (HTTP/1.1 404) 4 headers in 172 bytes (1 switches on core 0)
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-db0a0c38-a9c3-4df8-9b10-e95d90085bbd admin admin] Determining version of request: GET /v2/images Accept: application/json {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-db0a0c38-a9c3-4df8-9b10-e95d90085bbd admin admin] Using url versioning {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-db0a0c38-a9c3-4df8-9b10-e95d90085bbd admin admin] Matched version: v2 {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-db0a0c38-a9c3-4df8-9b10-e95d90085bbd admin admin] new path /v2/images {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:32:43 gelani-lab-1 devstack@g-api.service[2082409]: [pid: 2082409|app: 0|req: 18/69] 127.0.0.1 () {36 vars in 774 bytes} [Sun Feb  1 08:32:43 2026] GET /v2/images?name=ubuntu-22-ceph => generated 858 bytes in 10 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 08:32:53 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG dbcounter [-] [2082410] Writing DB stats glance:SELECT=1 {{(pid=2082410) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:32:53 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG dbcounter [-] [2082409] Writing DB stats glance:SELECT=1 {{(pid=2082409) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:34:02 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-53cd616c-774c-4e00-a29f-bd6d49e057f9 service ceilometer] Determining version of request: GET /v2/images Accept: */* {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:34:02 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-53cd616c-774c-4e00-a29f-bd6d49e057f9 service ceilometer] Using url versioning {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:34:02 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-53cd616c-774c-4e00-a29f-bd6d49e057f9 service ceilometer] Matched version: v2 {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:34:02 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-53cd616c-774c-4e00-a29f-bd6d49e057f9 service ceilometer] new path /v2/images {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:34:02 gelani-lab-1 devstack@g-api.service[2082411]: [pid: 2082411|app: 0|req: 18/70] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 08:34:02 2026] GET /v2/images?limit=200 => generated 3608 bytes in 41 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 08:34:12 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG dbcounter [-] [2082411] Writing DB stats glance:SELECT=1 {{(pid=2082411) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Determining version of request: GET / Accept: application/json {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Using url versioning {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Unknown version. Returning version choices. {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082408]: [pid: 2082408|app: 0|req: 18/71] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 08:34:28 2026] GET / => generated 1433 bytes in 1 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-6f122fd9-6fa0-45de-b295-d4194c23dc0d admin admin] Determining version of request: GET /v2/images/ubuntu-22-ceph Accept: */* {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-6f122fd9-6fa0-45de-b295-d4194c23dc0d admin admin] Using url versioning {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-6f122fd9-6fa0-45de-b295-d4194c23dc0d admin admin] Matched version: v2 {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-6f122fd9-6fa0-45de-b295-d4194c23dc0d admin admin] new path /v2/images/ubuntu-22-ceph {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.db.sqlalchemy.api [None req-c092a867-c365-47b9-8cb0-849086463e9c admin admin] No image found with ID ubuntu-22-ceph {{(pid=2082410) _image_get /opt/stack/glance/glance/db/sqlalchemy/api.py:303}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082410]: [pid: 2082410|app: 0|req: 18/72] 127.0.0.1 () {36 vars in 752 bytes} [Sun Feb  1 08:34:28 2026] GET /v2/images/ubuntu-22-ceph => generated 159 bytes in 27 msecs (HTTP/1.1 404) 4 headers in 172 bytes (1 switches on core 0)
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-7401e9a8-f671-48a2-b43a-4a10fc75a985 admin admin] Determining version of request: GET /v2/images Accept: application/json {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-7401e9a8-f671-48a2-b43a-4a10fc75a985 admin admin] Using url versioning {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-7401e9a8-f671-48a2-b43a-4a10fc75a985 admin admin] Matched version: v2 {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-7401e9a8-f671-48a2-b43a-4a10fc75a985 admin admin] new path /v2/images {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:34:28 gelani-lab-1 devstack@g-api.service[2082409]: [pid: 2082409|app: 0|req: 19/73] 127.0.0.1 () {36 vars in 774 bytes} [Sun Feb  1 08:34:28 2026] GET /v2/images?name=ubuntu-22-ceph => generated 858 bytes in 11 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-900d71b3-a108-45b8-a2b5-c16227ae33a6 service ceilometer] Determining version of request: GET / Accept: application/json {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-900d71b3-a108-45b8-a2b5-c16227ae33a6 service ceilometer] Using url versioning {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-900d71b3-a108-45b8-a2b5-c16227ae33a6 service ceilometer] Unknown version. Returning version choices. {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082411]: [pid: 2082411|app: 0|req: 19/74] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 08:34:31 2026] GET / => generated 1433 bytes in 1 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Determining version of request: GET /v2/images/ubuntu-22-ceph Accept: */* {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Using url versioning {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] Matched version: v2 {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-29e235e6-9fce-495f-8121-88c54ed0aa61 admin admin] new path /v2/images/ubuntu-22-ceph {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.db.sqlalchemy.api [None req-e3158dcd-0c8f-44f5-95e7-0c7eaa30abf1 admin admin] No image found with ID ubuntu-22-ceph {{(pid=2082408) _image_get /opt/stack/glance/glance/db/sqlalchemy/api.py:303}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082408]: [pid: 2082408|app: 0|req: 19/75] 127.0.0.1 () {36 vars in 752 bytes} [Sun Feb  1 08:34:31 2026] GET /v2/images/ubuntu-22-ceph => generated 159 bytes in 29 msecs (HTTP/1.1 404) 4 headers in 172 bytes (1 switches on core 0)
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-c092a867-c365-47b9-8cb0-849086463e9c admin admin] Determining version of request: GET /v2/images Accept: application/json {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-c092a867-c365-47b9-8cb0-849086463e9c admin admin] Using url versioning {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-c092a867-c365-47b9-8cb0-849086463e9c admin admin] Matched version: v2 {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-c092a867-c365-47b9-8cb0-849086463e9c admin admin] new path /v2/images {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:34:31 gelani-lab-1 devstack@g-api.service[2082410]: [pid: 2082410|app: 0|req: 19/76] 127.0.0.1 () {36 vars in 774 bytes} [Sun Feb  1 08:34:31 2026] GET /v2/images?name=ubuntu-22-ceph => generated 858 bytes in 9 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 08:34:38 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG dbcounter [-] [2082409] Writing DB stats glance:SELECT=1 {{(pid=2082409) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:34:41 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG dbcounter [-] [2082408] Writing DB stats glance:SELECT=1 {{(pid=2082408) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:34:41 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG dbcounter [-] [2082410] Writing DB stats glance:SELECT=2 {{(pid=2082410) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-12231641-c24c-4a18-853b-da2312dcee93 admin admin] Determining version of request: GET / Accept: application/json {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-12231641-c24c-4a18-853b-da2312dcee93 admin admin] Using url versioning {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-12231641-c24c-4a18-853b-da2312dcee93 admin admin] Unknown version. Returning version choices. {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082409]: [pid: 2082409|app: 0|req: 20/77] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 08:37:29 2026] GET / => generated 1433 bytes in 1 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-900d71b3-a108-45b8-a2b5-c16227ae33a6 service ceilometer] Determining version of request: GET /v2/images/ubuntu-22-ceph Accept: */* {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-900d71b3-a108-45b8-a2b5-c16227ae33a6 service ceilometer] Using url versioning {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-900d71b3-a108-45b8-a2b5-c16227ae33a6 service ceilometer] Matched version: v2 {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-900d71b3-a108-45b8-a2b5-c16227ae33a6 service ceilometer] new path /v2/images/ubuntu-22-ceph {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.db.sqlalchemy.api [None req-d52f53ae-31a0-4e12-b209-3cd0f7352df6 admin admin] No image found with ID ubuntu-22-ceph {{(pid=2082411) _image_get /opt/stack/glance/glance/db/sqlalchemy/api.py:303}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082411]: [pid: 2082411|app: 0|req: 20/78] 127.0.0.1 () {36 vars in 752 bytes} [Sun Feb  1 08:37:29 2026] GET /v2/images/ubuntu-22-ceph => generated 159 bytes in 26 msecs (HTTP/1.1 404) 4 headers in 172 bytes (1 switches on core 0)
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-e3158dcd-0c8f-44f5-95e7-0c7eaa30abf1 admin admin] Determining version of request: GET /v2/images Accept: application/json {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-e3158dcd-0c8f-44f5-95e7-0c7eaa30abf1 admin admin] Using url versioning {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-e3158dcd-0c8f-44f5-95e7-0c7eaa30abf1 admin admin] Matched version: v2 {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-e3158dcd-0c8f-44f5-95e7-0c7eaa30abf1 admin admin] new path /v2/images {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:37:29 gelani-lab-1 devstack@g-api.service[2082408]: [pid: 2082408|app: 0|req: 20/79] 127.0.0.1 () {36 vars in 774 bytes} [Sun Feb  1 08:37:29 2026] GET /v2/images?name=ubuntu-22-ceph => generated 858 bytes in 10 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 08:37:39 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG dbcounter [-] [2082411] Writing DB stats glance:SELECT=1 {{(pid=2082411) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:37:39 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG dbcounter [-] [2082408] Writing DB stats glance:SELECT=1 {{(pid=2082408) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-18358788-76a4-48c4-8c1a-ab29c718e14e admin admin] Determining version of request: GET / Accept: application/json {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-18358788-76a4-48c4-8c1a-ab29c718e14e admin admin] Using url versioning {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-18358788-76a4-48c4-8c1a-ab29c718e14e admin admin] Unknown version. Returning version choices. {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082410]: [pid: 2082410|app: 0|req: 20/80] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 08:38:19 2026] GET / => generated 1433 bytes in 1 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-12231641-c24c-4a18-853b-da2312dcee93 admin admin] Determining version of request: GET /v2/images/ubuntu-22-ceph Accept: */* {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-12231641-c24c-4a18-853b-da2312dcee93 admin admin] Using url versioning {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-12231641-c24c-4a18-853b-da2312dcee93 admin admin] Matched version: v2 {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-12231641-c24c-4a18-853b-da2312dcee93 admin admin] new path /v2/images/ubuntu-22-ceph {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.db.sqlalchemy.api [None req-bdf42276-f6f6-4c39-b5e7-e52850b11e82 admin admin] No image found with ID ubuntu-22-ceph {{(pid=2082409) _image_get /opt/stack/glance/glance/db/sqlalchemy/api.py:303}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082409]: [pid: 2082409|app: 0|req: 21/81] 127.0.0.1 () {36 vars in 752 bytes} [Sun Feb  1 08:38:19 2026] GET /v2/images/ubuntu-22-ceph => generated 159 bytes in 30 msecs (HTTP/1.1 404) 4 headers in 172 bytes (1 switches on core 0)
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-d52f53ae-31a0-4e12-b209-3cd0f7352df6 admin admin] Determining version of request: GET /v2/images Accept: application/json {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-d52f53ae-31a0-4e12-b209-3cd0f7352df6 admin admin] Using url versioning {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-d52f53ae-31a0-4e12-b209-3cd0f7352df6 admin admin] Matched version: v2 {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-d52f53ae-31a0-4e12-b209-3cd0f7352df6 admin admin] new path /v2/images {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:38:19 gelani-lab-1 devstack@g-api.service[2082411]: [pid: 2082411|app: 0|req: 21/82] 127.0.0.1 () {36 vars in 774 bytes} [Sun Feb  1 08:38:19 2026] GET /v2/images?name=ubuntu-22-ceph => generated 858 bytes in 9 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 08:38:29 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG dbcounter [-] [2082409] Writing DB stats glance:SELECT=1 {{(pid=2082409) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:38:29 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG dbcounter [-] [2082411] Writing DB stats glance:SELECT=1 {{(pid=2082411) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:39:02 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-a35a4392-5363-4bf4-83b2-2c05e86d972f admin admin] Determining version of request: GET /v2/images Accept: */* {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:39:02 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-a35a4392-5363-4bf4-83b2-2c05e86d972f admin admin] Using url versioning {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:39:02 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-a35a4392-5363-4bf4-83b2-2c05e86d972f admin admin] Matched version: v2 {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:39:02 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-a35a4392-5363-4bf4-83b2-2c05e86d972f admin admin] new path /v2/images {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:39:02 gelani-lab-1 devstack@g-api.service[2082408]: [pid: 2082408|app: 0|req: 21/83] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 08:39:02 2026] GET /v2/images?limit=200 => generated 3608 bytes in 11 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 08:39:12 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG dbcounter [-] [2082408] Writing DB stats glance:SELECT=1 {{(pid=2082408) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-18358788-76a4-48c4-8c1a-ab29c718e14e admin admin] Determining version of request: GET / Accept: application/json {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-18358788-76a4-48c4-8c1a-ab29c718e14e admin admin] Using url versioning {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-18358788-76a4-48c4-8c1a-ab29c718e14e admin admin] Unknown version. Returning version choices. {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082410]: [pid: 2082410|app: 0|req: 21/84] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 08:41:06 2026] GET / => generated 1433 bytes in 1 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-bdf42276-f6f6-4c39-b5e7-e52850b11e82 admin admin] Determining version of request: GET /v2/images/ubuntu-22-ceph Accept: */* {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-bdf42276-f6f6-4c39-b5e7-e52850b11e82 admin admin] Using url versioning {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-bdf42276-f6f6-4c39-b5e7-e52850b11e82 admin admin] Matched version: v2 {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-bdf42276-f6f6-4c39-b5e7-e52850b11e82 admin admin] new path /v2/images/ubuntu-22-ceph {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.db.sqlalchemy.api [None req-f6220996-b00d-43cb-928b-1911a1d43e57 admin admin] No image found with ID ubuntu-22-ceph {{(pid=2082409) _image_get /opt/stack/glance/glance/db/sqlalchemy/api.py:303}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082409]: [pid: 2082409|app: 0|req: 22/85] 127.0.0.1 () {36 vars in 752 bytes} [Sun Feb  1 08:41:06 2026] GET /v2/images/ubuntu-22-ceph => generated 159 bytes in 59 msecs (HTTP/1.1 404) 4 headers in 172 bytes (1 switches on core 0)
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-463af202-3a6b-473e-9c0d-4db46f420e9a admin admin] Determining version of request: GET /v2/images Accept: application/json {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-463af202-3a6b-473e-9c0d-4db46f420e9a admin admin] Using url versioning {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-463af202-3a6b-473e-9c0d-4db46f420e9a admin admin] Matched version: v2 {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-463af202-3a6b-473e-9c0d-4db46f420e9a admin admin] new path /v2/images {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:41:06 gelani-lab-1 devstack@g-api.service[2082411]: [pid: 2082411|app: 0|req: 22/86] 127.0.0.1 () {36 vars in 774 bytes} [Sun Feb  1 08:41:06 2026] GET /v2/images?name=ubuntu-22-ceph => generated 858 bytes in 9 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 08:41:16 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG dbcounter [-] [2082409] Writing DB stats glance:SELECT=1 {{(pid=2082409) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:41:16 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG dbcounter [-] [2082411] Writing DB stats glance:SELECT=1 {{(pid=2082411) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-44c05710-5a58-4d0a-9425-812b622a1d80 service ceilometer] Determining version of request: GET / Accept: application/json {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-44c05710-5a58-4d0a-9425-812b622a1d80 service ceilometer] Using url versioning {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-44c05710-5a58-4d0a-9425-812b622a1d80 service ceilometer] Unknown version. Returning version choices. {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082408]: [pid: 2082408|app: 0|req: 22/87] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 08:41:46 2026] GET / => generated 1433 bytes in 1 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-18358788-76a4-48c4-8c1a-ab29c718e14e admin admin] Determining version of request: GET /v2/images/ubuntu-22-ceph Accept: */* {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-18358788-76a4-48c4-8c1a-ab29c718e14e admin admin] Using url versioning {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-18358788-76a4-48c4-8c1a-ab29c718e14e admin admin] Matched version: v2 {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-18358788-76a4-48c4-8c1a-ab29c718e14e admin admin] new path /v2/images/ubuntu-22-ceph {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.db.sqlalchemy.api [None req-9e07ec51-3e38-48af-98a9-1ee73515a79d admin admin] No image found with ID ubuntu-22-ceph {{(pid=2082410) _image_get /opt/stack/glance/glance/db/sqlalchemy/api.py:303}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082410]: [pid: 2082410|app: 0|req: 22/88] 127.0.0.1 () {36 vars in 752 bytes} [Sun Feb  1 08:41:46 2026] GET /v2/images/ubuntu-22-ceph => generated 159 bytes in 26 msecs (HTTP/1.1 404) 4 headers in 172 bytes (1 switches on core 0)
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-f6220996-b00d-43cb-928b-1911a1d43e57 admin admin] Determining version of request: GET /v2/images Accept: application/json {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-f6220996-b00d-43cb-928b-1911a1d43e57 admin admin] Using url versioning {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-f6220996-b00d-43cb-928b-1911a1d43e57 admin admin] Matched version: v2 {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-f6220996-b00d-43cb-928b-1911a1d43e57 admin admin] new path /v2/images {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:41:46 gelani-lab-1 devstack@g-api.service[2082409]: [pid: 2082409|app: 0|req: 23/89] 127.0.0.1 () {36 vars in 774 bytes} [Sun Feb  1 08:41:46 2026] GET /v2/images?name=ubuntu-22-ceph => generated 858 bytes in 9 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 08:41:56 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG dbcounter [-] [2082410] Writing DB stats glance:SELECT=1 {{(pid=2082410) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:41:56 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG dbcounter [-] [2082409] Writing DB stats glance:SELECT=1 {{(pid=2082409) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-7a168f30-6671-448d-994e-3285395c850c admin admin] Determining version of request: GET / Accept: application/json {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-7a168f30-6671-448d-994e-3285395c850c admin admin] Using url versioning {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082411]: DEBUG glance.api.middleware.version_negotiation [None req-7a168f30-6671-448d-994e-3285395c850c admin admin] Unknown version. Returning version choices. {{(pid=2082411) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082411]: [pid: 2082411|app: 0|req: 23/90] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 08:43:03 2026] GET / => generated 1433 bytes in 1 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-44c05710-5a58-4d0a-9425-812b622a1d80 service ceilometer] Determining version of request: GET /v2/images/ubuntu-22-ceph Accept: */* {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-44c05710-5a58-4d0a-9425-812b622a1d80 service ceilometer] Using url versioning {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-44c05710-5a58-4d0a-9425-812b622a1d80 service ceilometer] Matched version: v2 {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.api.middleware.version_negotiation [None req-44c05710-5a58-4d0a-9425-812b622a1d80 service ceilometer] new path /v2/images/ubuntu-22-ceph {{(pid=2082408) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG glance.db.sqlalchemy.api [None req-d917c81b-fa1a-477c-a86a-a9bfc960e8d7 admin admin] No image found with ID ubuntu-22-ceph {{(pid=2082408) _image_get /opt/stack/glance/glance/db/sqlalchemy/api.py:303}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082408]: [pid: 2082408|app: 0|req: 23/91] 127.0.0.1 () {36 vars in 752 bytes} [Sun Feb  1 08:43:03 2026] GET /v2/images/ubuntu-22-ceph => generated 159 bytes in 26 msecs (HTTP/1.1 404) 4 headers in 172 bytes (1 switches on core 0)
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-9e07ec51-3e38-48af-98a9-1ee73515a79d admin admin] Determining version of request: GET /v2/images Accept: application/json {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-9e07ec51-3e38-48af-98a9-1ee73515a79d admin admin] Using url versioning {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-9e07ec51-3e38-48af-98a9-1ee73515a79d admin admin] Matched version: v2 {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG glance.api.middleware.version_negotiation [None req-9e07ec51-3e38-48af-98a9-1ee73515a79d admin admin] new path /v2/images {{(pid=2082410) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:43:03 gelani-lab-1 devstack@g-api.service[2082410]: [pid: 2082410|app: 0|req: 23/92] 127.0.0.1 () {36 vars in 774 bytes} [Sun Feb  1 08:43:03 2026] GET /v2/images?name=ubuntu-22-ceph => generated 858 bytes in 9 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 08:43:13 gelani-lab-1 devstack@g-api.service[2082408]: DEBUG dbcounter [-] [2082408] Writing DB stats glance:SELECT=1 {{(pid=2082408) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:43:13 gelani-lab-1 devstack@g-api.service[2082410]: DEBUG dbcounter [-] [2082410] Writing DB stats glance:SELECT=1 {{(pid=2082410) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:44:02 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-07868fa5-f50a-463c-9c03-9c808184562c admin admin] Determining version of request: GET /v2/images Accept: */* {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 08:44:02 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-07868fa5-f50a-463c-9c03-9c808184562c admin admin] Using url versioning {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 08:44:02 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-07868fa5-f50a-463c-9c03-9c808184562c admin admin] Matched version: v2 {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 08:44:02 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG glance.api.middleware.version_negotiation [None req-07868fa5-f50a-463c-9c03-9c808184562c admin admin] new path /v2/images {{(pid=2082409) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 08:44:02 gelani-lab-1 devstack@g-api.service[2082409]: [pid: 2082409|app: 0|req: 24/93] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 08:44:02 2026] GET /v2/images?limit=200 => generated 3608 bytes in 30 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 08:44:12 gelani-lab-1 devstack@g-api.service[2082409]: DEBUG dbcounter [-] [2082409] Writing DB stats glance:SELECT=1 {{(pid=2082409) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+ubuntu@gelani-lab-1:~/images$ sudo tail -n 100 /var/log/apache2/error.log
+[Sat Jan 31 12:43:56.981913 2026] [mpm_event:notice] [pid 1931542:tid 140162999977856] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sat Jan 31 12:43:56.982364 2026] [core:notice] [pid 1931542:tid 140162999977856] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 06:56:45.383592 2026] [mpm_event:notice] [pid 1931542:tid 140162999977856] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 06:56:46.203891 2026] [mpm_event:notice] [pid 2073848:tid 139705946490752] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 06:56:46.204494 2026] [core:notice] [pid 2073848:tid 139705946490752] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 07:06:42.032050 2026] [mpm_event:notice] [pid 2073848:tid 139705946490752] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 07:06:42.155218 2026] [mpm_event:notice] [pid 2075096:tid 140204849092480] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 07:06:42.155382 2026] [core:notice] [pid 2075096:tid 140204849092480] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 08:05:06.767604 2026] [mpm_event:notice] [pid 2075096:tid 140204849092480] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 08:05:07.594722 2026] [mpm_event:notice] [pid 2082306:tid 140028805629824] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 08:05:07.595403 2026] [core:notice] [pid 2082306:tid 140028805629824] AH00094: Command line: '/usr/sbin/apache2'
+ubuntu@gelani-lab-1:~/images$ openstack image delete ubuntu-22-ceph
+ubuntu@gelani-lab-1:~/images$ sudo systemctl restart devstack@g-api
+ubuntu@gelani-lab-1:~/images$ systemctl status devstack@g-api --no-pager
+● devstack@g-api.service - Devstack devstack@g-api.service
+     Loaded: loaded (/etc/systemd/system/devstack@g-api.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2026-02-01 08:48:28 UTC; 30s ago
+   Main PID: 2087585 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 13 (limit: 38457)
+     Memory: 430.0M
+        CPU: 7.785s
+     CGroup: /system.slice/system-devstack.slice/devstack@g-api.service
+             ├─2087585 "glance-apiuWSGI master"
+             ├─2087586 "glance-apiuWSGI worker 1"
+             ├─2087587 "glance-apiuWSGI worker 2"
+             ├─2087588 "glance-apiuWSGI worker 3"
+             └─2087589 "glance-apiuWSGI worker 4"
+
+Feb 01 08:48:30 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.common.config [None req-dacc94d8-0008-44f6-86a2-9c97d8e9e9e6 None None] healthcheck.backends           = ['disable_by_file'] {{(pid=2087589) lo…fig/cfg.py:2824}}
+Feb 01 08:48:30 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.common.config [None req-dacc94d8-0008-44f6-86a2-9c97d8e9e9e6 None None] healthcheck.detailed           = False {{(pid=2087589) log_opt_values /…fig/cfg.py:2824}}
+Feb 01 08:48:30 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.common.config [None req-dacc94d8-0008-44f6-86a2-9c97d8e9e9e6 None None] healthcheck.disable_by_file_path = None {{(pid=2087589) log_opt_values …fig/cfg.py:2824}}
+Feb 01 08:48:30 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.common.config [None req-dacc94d8-0008-44f6-86a2-9c97d8e9e9e6 None None] healthcheck.ignore_proxied_requests = False {{(pid=2087589) log_opt_val…fig/cfg.py:2824}}
+Feb 01 08:48:30 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.common.config [None req-dacc94d8-0008-44f6-86a2-9c97d8e9e9e6 None None] ***********************************************************************…fig/cfg.py:2828}}
+Feb 01 08:48:30 gelani-lab-1 devstack@g-api.service[2087589]: WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x561c3c2f0fa0 pid: 2087589 (default app)
+Feb 01 08:48:40 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG dbcounter [-] [2087586] Writing DB stats glance:INSERT=4 {{(pid=2087586) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:48:40 gelani-lab-1 devstack@g-api.service[2087588]: DEBUG dbcounter [-] [2087588] Writing DB stats glance:INSERT=4 {{(pid=2087588) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:48:40 gelani-lab-1 devstack@g-api.service[2087587]: DEBUG dbcounter [-] [2087587] Writing DB stats glance:INSERT=4 {{(pid=2087587) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 08:48:40 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG dbcounter [-] [2087589] Writing DB stats glance:INSERT=4 {{(pid=2087589) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Hint: Some lines were ellipsized, use -l to show in full.
+ubuntu@gelani-lab-1:~/images$ openstack image create ubuntu-22-ceph \
+  --file /home/ubuntu/images/jammy-server-cloudimg-amd64.img \
+  --disk-format qcow2 \
+  --container-format bare \
+  --public
+HttpException: 502: Server Error for url: http://192.168.95.93/image/v2/images/c8898b55-514c-453a-9573-920ca7934a21/file, 502 Bad Gateway: Bad Gateway: The proxy server received an invalid: response from an upstream server.: Apache/2.4.52 (Ubuntu) Server at 192.168.95.93 Port 80
+ubuntu@gelani-lab-1:~/images$ 
+
+
+ubuntu@gelani-lab-1:~/images$ sudo -u glance rbd -p images ls \
+  --conf /etc/ceph/ceph.conf \
+  --keyring /etc/ceph/ceph.client.glance.keyring
+sudo: unknown user glance
+sudo: error initializing audit plugin sudoers_audit
+ubuntu@gelani-lab-1:~/images$ sudo ceph auth get client.glance
+[client.glance]
+        key = AQCSt31pXEu5OhAAHZHDOR1T1NifPNVEfOTjwA==
+        caps mon = "profile rbd"
+        caps osd = "profile rbd pool=images"
+ubuntu@gelani-lab-1:~/images$ sudo ceph osd pool ls | grep images
+images
+ubuntu@gelani-lab-1:~/images$ openstack image delete ubuntu-22-ceph
+Multi Backend support not enabled.
+ubuntu@gelani-lab-1:~/images$ openstack image list
++--------------------------------------+---------------------------------+--------+
+| ID                                   | Name                            | Status |
++--------------------------------------+---------------------------------+--------+
+| 0fcd1b67-931f-4417-a407-b887577fda9f | Fedora-Cloud-Base-37-1.7.x86_64 | active |
+| d3d0c59e-4eef-4932-b6dd-e436b761c6be | cirros-0.6.3-x86_64-disk        | active |
+| b6e575cd-c986-4098-a75f-136eafa50af2 | ubuntu                          | active |
++--------------------------------------+---------------------------------+--------+
+ubuntu@gelani-lab-1:~/images$ openstack image create ubuntu-22-ceph \
+  --disk-format qcow2 \
+  --container-format bare \
+  --file jammy-server-cloudimg-amd64.img \
+  --public \
+  --progress
+[=============================>] 100%
+HttpException: 502: Server Error for url: http://192.168.95.93/image/v2/images/2c6bf609-c7db-406b-a079-fe9637737792/file, 502 Bad Gateway: Bad Gateway: The proxy server received an invalid: response from an upstream server.: Apache/2.4.52 (Ubuntu) Server at 192.168.95.93 Port 80
+ubuntu@gelani-lab-1:~/images$ openstack image show ubuntu-22-ceph -c status -c size
+No Image found for ubuntu-22-ceph
+ubuntu@gelani-lab-1:~/images$ 
+
+ubuntu@gelani-lab-1:~/images$ sudo -u stack rbd -p images ls --conf /etc/ceph/ceph.conf --keyring /etc/ceph/ceph.client.glance.keyring
+2026-02-01T09:29:52.664+0000 7f0b943cb640 -1 monclient(hunting): handle_auth_bad_method server allowed_methods [2] but i only support [2,1]
+
+2026-02-01T09:29:52.664+0000 7f0b9562d640 -1 monclient(hunting): handle_auth_bad_method server allowed_methods [2] but i only support [2,1]
+
+rbd: couldn't connect to the cluster!
+rbd: listing images failed: (13) Permission denied
+ubuntu@gelani-lab-1:~/images$ openstack image show b6e575cd-c986-4098-a75f-136eafa50af2 -c name -c properties
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field      | Value                                                                                                                                                                                      |
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| name       | ubuntu                                                                                                                                                                                     |
+| properties | os_hash_algo='sha512', os_hash_value='bdbfbec178ed26e088e095b72445cdd5a896dcc9e5c0f00862698aec4fa29c3c37e3d2392597043f5ed23c9bca346744bea3065979d88130a37bf27562891f3c', os_hidden='False' |
++------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/images$ sudo rbd -p images ls
+ubuntu@gelani-lab-1:~/images$ sudo systemctl status devstack@g-api --no-pager
+sudo journalctl -u devstack@g-api --since "30 minutes ago" --no-pager | tail -n 200
+● devstack@g-api.service - Devstack devstack@g-api.service
+     Loaded: loaded (/etc/systemd/system/devstack@g-api.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2026-02-01 08:48:28 UTC; 42min ago
+   Main PID: 2087585 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 27 (limit: 38457)
+     Memory: 445.9M
+        CPU: 9.447s
+     CGroup: /system.slice/system-devstack.slice/devstack@g-api.service
+             ├─2087585 "glance-apiuWSGI master"
+             ├─2087586 "glance-apiuWSGI worker 1"
+             ├─2087587 "glance-apiuWSGI worker 2"
+             ├─2087588 "glance-apiuWSGI worker 3"
+             └─2087589 "glance-apiuWSGI worker 4"
+
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.api.middleware.version_negotiation [None req-d440698d-ae58-4bed-a09e-6301d84f8320 service ceilometer] Determining version of request: GET / Acc…gotiation.py:44}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.api.middleware.version_negotiation [None req-d440698d-ae58-4bed-a09e-6301d84f8320 service ceilometer] Using url versioning {{(pid=2087589) proc…gotiation.py:57}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.api.middleware.version_negotiation [None req-d440698d-ae58-4bed-a09e-6301d84f8320 service ceilometer] Unknown version. Returning version choice…gotiation.py:64}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087589]: [pid: 2087589|app: 0|req: 7/28] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 09:30:44 2026] GET / => generated 1433 bytes in 1 msecs (HTTP/1.1 300) 3 hea…itches on core 0)
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-9c8d63f8-f20c-49fc-9963-312ddd0e0b34 service ceilometer] Determining version of request: GET /v2/images/b6e575cd-c9…
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-9c8d63f8-f20c-49fc-9963-312ddd0e0b34 service ceilometer] Using url versioning {{(pid=2087586) proc…gotiation.py:57}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-9c8d63f8-f20c-49fc-9963-312ddd0e0b34 service ceilometer] Matched version: v2 {{(pid=2087586) proce…gotiation.py:69}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-9c8d63f8-f20c-49fc-9963-312ddd0e0b34 service ceilometer] new path /v2/images/b6e575cd-c986-4098-a7…gotiation.py:70}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087586]: [pid: 2087586|app: 0|req: 8/29] 127.0.0.1 () {36 vars in 796 bytes} [Sun Feb  1 09:30:44 2026] GET /v2/images/b6e575cd-c986-4098-a75f-136eafa50af2 => genera…itches on core 0)
+Feb 01 09:30:54 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG dbcounter [-] [2087586] Writing DB stats glance:SELECT=2 {{(pid=2087586) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Hint: Some lines were ellipsized, use -l to show in full.
+Feb 01 09:04:01 gelani-lab-1 devstack@g-api.service[2087588]: DEBUG glance.api.middleware.version_negotiation [None req-3fb601bd-aa88-41d5-b45f-1521aa4c4125 admin admin] Determining version of request: GET /v2/images Accept: */* {{(pid=2087588) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:04:01 gelani-lab-1 devstack@g-api.service[2087588]: DEBUG glance.api.middleware.version_negotiation [None req-3fb601bd-aa88-41d5-b45f-1521aa4c4125 admin admin] Using url versioning {{(pid=2087588) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:04:01 gelani-lab-1 devstack@g-api.service[2087588]: DEBUG glance.api.middleware.version_negotiation [None req-3fb601bd-aa88-41d5-b45f-1521aa4c4125 admin admin] Matched version: v2 {{(pid=2087588) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 09:04:01 gelani-lab-1 devstack@g-api.service[2087588]: DEBUG glance.api.middleware.version_negotiation [None req-3fb601bd-aa88-41d5-b45f-1521aa4c4125 admin admin] new path /v2/images {{(pid=2087588) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 09:04:01 gelani-lab-1 devstack@g-api.service[2087588]: [pid: 2087588|app: 0|req: 6/22] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 09:04:01 2026] GET /v2/images?limit=200 => generated 2837 bytes in 10 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 09:04:11 gelani-lab-1 devstack@g-api.service[2087588]: DEBUG dbcounter [-] [2087588] Writing DB stats glance:SELECT=1 {{(pid=2087588) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 09:09:02 gelani-lab-1 devstack@g-api.service[2087587]: DEBUG glance.api.middleware.version_negotiation [None req-2f464759-2ade-42ec-8cec-a78374e95c20 admin admin] Determining version of request: GET /v2/images Accept: */* {{(pid=2087587) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:09:02 gelani-lab-1 devstack@g-api.service[2087587]: DEBUG glance.api.middleware.version_negotiation [None req-2f464759-2ade-42ec-8cec-a78374e95c20 admin admin] Using url versioning {{(pid=2087587) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:09:02 gelani-lab-1 devstack@g-api.service[2087587]: DEBUG glance.api.middleware.version_negotiation [None req-2f464759-2ade-42ec-8cec-a78374e95c20 admin admin] Matched version: v2 {{(pid=2087587) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 09:09:02 gelani-lab-1 devstack@g-api.service[2087587]: DEBUG glance.api.middleware.version_negotiation [None req-2f464759-2ade-42ec-8cec-a78374e95c20 admin admin] new path /v2/images {{(pid=2087587) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 09:09:02 gelani-lab-1 devstack@g-api.service[2087587]: [pid: 2087587|app: 0|req: 6/23] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 09:09:02 2026] GET /v2/images?limit=200 => generated 2837 bytes in 75 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 09:09:12 gelani-lab-1 devstack@g-api.service[2087587]: DEBUG dbcounter [-] [2087587] Writing DB stats glance:SELECT=1 {{(pid=2087587) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 09:14:02 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.api.middleware.version_negotiation [None req-081f6b51-3755-4e45-807d-0250f06f08d5 admin admin] Determining version of request: GET /v2/images Accept: */* {{(pid=2087589) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:14:02 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.api.middleware.version_negotiation [None req-081f6b51-3755-4e45-807d-0250f06f08d5 admin admin] Using url versioning {{(pid=2087589) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:14:02 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.api.middleware.version_negotiation [None req-081f6b51-3755-4e45-807d-0250f06f08d5 admin admin] Matched version: v2 {{(pid=2087589) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 09:14:02 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.api.middleware.version_negotiation [None req-081f6b51-3755-4e45-807d-0250f06f08d5 admin admin] new path /v2/images {{(pid=2087589) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 09:14:02 gelani-lab-1 devstack@g-api.service[2087589]: [pid: 2087589|app: 0|req: 6/24] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 09:14:02 2026] GET /v2/images?limit=200 => generated 2837 bytes in 42 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 09:14:12 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG dbcounter [-] [2087589] Writing DB stats glance:SELECT=1 {{(pid=2087589) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 09:19:02 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-c861bf18-14a4-4da1-9d66-9c3d5e1d1795 service ceilometer] Determining version of request: GET /v2/images Accept: */* {{(pid=2087586) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:19:02 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-c861bf18-14a4-4da1-9d66-9c3d5e1d1795 service ceilometer] Using url versioning {{(pid=2087586) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:19:02 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-c861bf18-14a4-4da1-9d66-9c3d5e1d1795 service ceilometer] Matched version: v2 {{(pid=2087586) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 09:19:02 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-c861bf18-14a4-4da1-9d66-9c3d5e1d1795 service ceilometer] new path /v2/images {{(pid=2087586) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 09:19:02 gelani-lab-1 devstack@g-api.service[2087586]: [pid: 2087586|app: 0|req: 7/25] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 09:19:02 2026] GET /v2/images?limit=200 => generated 2837 bytes in 73 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 09:19:12 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG dbcounter [-] [2087586] Writing DB stats glance:SELECT=1 {{(pid=2087586) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 09:24:02 gelani-lab-1 devstack@g-api.service[2087588]: DEBUG glance.api.middleware.version_negotiation [None req-abba17f3-5d4e-42df-8c3f-a6cbaff422c5 service ceilometer] Determining version of request: GET /v2/images Accept: */* {{(pid=2087588) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:24:02 gelani-lab-1 devstack@g-api.service[2087588]: DEBUG glance.api.middleware.version_negotiation [None req-abba17f3-5d4e-42df-8c3f-a6cbaff422c5 service ceilometer] Using url versioning {{(pid=2087588) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:24:02 gelani-lab-1 devstack@g-api.service[2087588]: DEBUG glance.api.middleware.version_negotiation [None req-abba17f3-5d4e-42df-8c3f-a6cbaff422c5 service ceilometer] Matched version: v2 {{(pid=2087588) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 09:24:02 gelani-lab-1 devstack@g-api.service[2087588]: DEBUG glance.api.middleware.version_negotiation [None req-abba17f3-5d4e-42df-8c3f-a6cbaff422c5 service ceilometer] new path /v2/images {{(pid=2087588) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 09:24:02 gelani-lab-1 devstack@g-api.service[2087588]: [pid: 2087588|app: 0|req: 7/26] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 09:24:02 2026] GET /v2/images?limit=200 => generated 2837 bytes in 17 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 09:24:12 gelani-lab-1 devstack@g-api.service[2087588]: DEBUG dbcounter [-] [2087588] Writing DB stats glance:SELECT=1 {{(pid=2087588) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 09:29:02 gelani-lab-1 devstack@g-api.service[2087587]: DEBUG glance.api.middleware.version_negotiation [None req-9e10593d-dc47-4de9-bb57-ad1b749e58a8 service ceilometer] Determining version of request: GET /v2/images Accept: */* {{(pid=2087587) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:29:02 gelani-lab-1 devstack@g-api.service[2087587]: DEBUG glance.api.middleware.version_negotiation [None req-9e10593d-dc47-4de9-bb57-ad1b749e58a8 service ceilometer] Using url versioning {{(pid=2087587) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:29:02 gelani-lab-1 devstack@g-api.service[2087587]: DEBUG glance.api.middleware.version_negotiation [None req-9e10593d-dc47-4de9-bb57-ad1b749e58a8 service ceilometer] Matched version: v2 {{(pid=2087587) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 09:29:02 gelani-lab-1 devstack@g-api.service[2087587]: DEBUG glance.api.middleware.version_negotiation [None req-9e10593d-dc47-4de9-bb57-ad1b749e58a8 service ceilometer] new path /v2/images {{(pid=2087587) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 09:29:02 gelani-lab-1 devstack@g-api.service[2087587]: [pid: 2087587|app: 0|req: 7/27] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 09:29:02 2026] GET /v2/images?limit=200 => generated 2837 bytes in 37 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 09:29:12 gelani-lab-1 devstack@g-api.service[2087587]: DEBUG dbcounter [-] [2087587] Writing DB stats glance:SELECT=1 {{(pid=2087587) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.api.middleware.version_negotiation [None req-d440698d-ae58-4bed-a09e-6301d84f8320 service ceilometer] Determining version of request: GET / Accept: application/json {{(pid=2087589) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.api.middleware.version_negotiation [None req-d440698d-ae58-4bed-a09e-6301d84f8320 service ceilometer] Using url versioning {{(pid=2087589) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087589]: DEBUG glance.api.middleware.version_negotiation [None req-d440698d-ae58-4bed-a09e-6301d84f8320 service ceilometer] Unknown version. Returning version choices. {{(pid=2087589) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087589]: [pid: 2087589|app: 0|req: 7/28] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 09:30:44 2026] GET / => generated 1433 bytes in 1 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-9c8d63f8-f20c-49fc-9963-312ddd0e0b34 service ceilometer] Determining version of request: GET /v2/images/b6e575cd-c986-4098-a75f-136eafa50af2 Accept: */* {{(pid=2087586) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-9c8d63f8-f20c-49fc-9963-312ddd0e0b34 service ceilometer] Using url versioning {{(pid=2087586) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-9c8d63f8-f20c-49fc-9963-312ddd0e0b34 service ceilometer] Matched version: v2 {{(pid=2087586) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG glance.api.middleware.version_negotiation [None req-9c8d63f8-f20c-49fc-9963-312ddd0e0b34 service ceilometer] new path /v2/images/b6e575cd-c986-4098-a75f-136eafa50af2 {{(pid=2087586) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 09:30:44 gelani-lab-1 devstack@g-api.service[2087586]: [pid: 2087586|app: 0|req: 8/29] 127.0.0.1 () {36 vars in 796 bytes} [Sun Feb  1 09:30:44 2026] GET /v2/images/b6e575cd-c986-4098-a75f-136eafa50af2 => generated 786 bytes in 76 msecs (HTTP/1.1 200) 4 headers in 157 bytes (1 switches on core 0)
+Feb 01 09:30:54 gelani-lab-1 devstack@g-api.service[2087586]: DEBUG dbcounter [-] [2087586] Writing DB stats glance:SELECT=2 {{(pid=2087586) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+ubuntu@gelani-lab-1:~/images$ sudo tail -n 200 /var/log/apache2/error.log
+sudo tail -n 200 /var/log/apache2/other_vhosts_access.log
+[Sat Jan 31 12:43:56.981913 2026] [mpm_event:notice] [pid 1931542:tid 140162999977856] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sat Jan 31 12:43:56.982364 2026] [core:notice] [pid 1931542:tid 140162999977856] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 06:56:45.383592 2026] [mpm_event:notice] [pid 1931542:tid 140162999977856] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 06:56:46.203891 2026] [mpm_event:notice] [pid 2073848:tid 139705946490752] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 06:56:46.204494 2026] [core:notice] [pid 2073848:tid 139705946490752] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 07:06:42.032050 2026] [mpm_event:notice] [pid 2073848:tid 139705946490752] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 07:06:42.155218 2026] [mpm_event:notice] [pid 2075096:tid 140204849092480] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 07:06:42.155382 2026] [core:notice] [pid 2075096:tid 140204849092480] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 08:05:06.767604 2026] [mpm_event:notice] [pid 2075096:tid 140204849092480] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 08:05:07.594722 2026] [mpm_event:notice] [pid 2082306:tid 140028805629824] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 08:05:07.595403 2026] [core:notice] [pid 2082306:tid 140028805629824] AH00094: Command line: '/usr/sbin/apache2'
+ubuntu@gelani-lab-1:~/images$ sudo tee /etc/apache2/conf-available/glance-timeouts.conf >/dev/null <<'EOF'
+ProxyTimeout 600
+Timeout 600
+EOF
+sudo a2enconf glance-timeouts
+sudo systemctl restart apache2
+sudo systemctl restart devstack@g-api
+Enabling conf glance-timeouts.
+To activate the new configuration, you need to run:
+  systemctl reload apache2
+ubuntu@gelani-lab-1:~/images$ cd ~/images
+openstack image create cirros-ceph-test \
+  --disk-format qcow2 \
+  --container-format bare \
+  --file cirros.img \
+  --public \
+  --progress
+[=============================>] 100%
+HttpException: 502: Server Error for url: http://192.168.95.93/image/v2/images/a0134bfa-8d0d-4484-8ebb-cf3e680df280/file, 502 Bad Gateway: Bad Gateway: The proxy server received an invalid: response from an upstream server.: Apache/2.4.52 (Ubuntu) Server at 192.168.95.93 Port 80
+ubuntu@gelani-lab-1:~/images$ sudo tail -n 80 /var/log/apache2/error.log
+[Sat Jan 31 12:43:56.981913 2026] [mpm_event:notice] [pid 1931542:tid 140162999977856] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sat Jan 31 12:43:56.982364 2026] [core:notice] [pid 1931542:tid 140162999977856] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 06:56:45.383592 2026] [mpm_event:notice] [pid 1931542:tid 140162999977856] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 06:56:46.203891 2026] [mpm_event:notice] [pid 2073848:tid 139705946490752] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 06:56:46.204494 2026] [core:notice] [pid 2073848:tid 139705946490752] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 07:06:42.032050 2026] [mpm_event:notice] [pid 2073848:tid 139705946490752] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 07:06:42.155218 2026] [mpm_event:notice] [pid 2075096:tid 140204849092480] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 07:06:42.155382 2026] [core:notice] [pid 2075096:tid 140204849092480] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 08:05:06.767604 2026] [mpm_event:notice] [pid 2075096:tid 140204849092480] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 08:05:07.594722 2026] [mpm_event:notice] [pid 2082306:tid 140028805629824] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 08:05:07.595403 2026] [core:notice] [pid 2082306:tid 140028805629824] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 09:31:15.261112 2026] [mpm_event:notice] [pid 2082306:tid 140028805629824] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 09:31:16.065441 2026] [mpm_event:notice] [pid 2093136:tid 140329723168640] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 09:31:16.066022 2026] [core:notice] [pid 2093136:tid 140329723168640] AH00094: Command line: '/usr/sbin/apache2'
+ubuntu@gelani-lab-1:~/images$ sudo journalctl -u devstack@g-api --since "30 minutes ago" --no-pager | tail -n 120
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] database.mysql_wsrep_sync_wait = None {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] database.max_retries           = 10 {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] database.pool_timeout          = None {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] database.mysql_sql_mode        = TRADITIONAL {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] database.mysql_wsrep_sync_wait = None {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] database.retry_interval        = 10 {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] database.pool_timeout          = None {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] database.slave_connection      = **** {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] database.retry_interval        = 10 {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] database.slave_connection      = **** {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] database.sqlite_synchronous    = True {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] database.sqlite_synchronous    = True {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] database.use_db_reconnect      = False {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] database.use_db_reconnect      = False {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] healthcheck.allowed_source_ranges = [] {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] healthcheck.allowed_source_ranges = [] {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] healthcheck.backends           = ['disable_by_file'] {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] healthcheck.backends           = ['disable_by_file'] {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] healthcheck.detailed           = False {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] healthcheck.detailed           = False {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] healthcheck.disable_by_file_path = None {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] healthcheck.disable_by_file_path = None {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] healthcheck.ignore_proxied_requests = False {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.common.config [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] ******************************************************************************** {{(pid=2093239) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2828}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] healthcheck.ignore_proxied_requests = False {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.common.config [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] ******************************************************************************** {{(pid=2093241) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2828}}
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093239]: WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x561e12a6afa0 pid: 2093239 (default app)
+Feb 01 09:31:19 gelani-lab-1 devstack@g-api.service[2093241]: WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x561e12a6afa0 pid: 2093241 (default app)
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093242]: DEBUG glance.api.middleware.version_negotiation [None req-d7151324-0391-49a4-8ef7-7605add66e9b None None] Determining version of request: GET / Accept: application/json {{(pid=2093242) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093242]: DEBUG glance.api.middleware.version_negotiation [None req-d7151324-0391-49a4-8ef7-7605add66e9b None None] Using url versioning {{(pid=2093242) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093242]: DEBUG glance.api.middleware.version_negotiation [None req-d7151324-0391-49a4-8ef7-7605add66e9b None None] Unknown version. Returning version choices. {{(pid=2093242) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:64}}
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093242]: [pid: 2093242|app: 0|req: 1/1] 127.0.0.1 () {34 vars in 513 bytes} [Sun Feb  1 09:31:24 2026] GET / => generated 1433 bytes in 2 msecs (HTTP/1.1 300) 3 headers in 106 bytes (1 switches on core 0)
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093240]: DEBUG glance.api.middleware.version_negotiation [None req-c9d5706b-bc82-4765-bd17-a920924b85b0 None None] Determining version of request: POST /v2/images Accept: */* {{(pid=2093240) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093240]: DEBUG glance.api.middleware.version_negotiation [None req-c9d5706b-bc82-4765-bd17-a920924b85b0 None None] Using url versioning {{(pid=2093240) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093240]: DEBUG glance.api.middleware.version_negotiation [None req-c9d5706b-bc82-4765-bd17-a920924b85b0 None None] Matched version: v2 {{(pid=2093240) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093240]: DEBUG glance.api.middleware.version_negotiation [None req-c9d5706b-bc82-4765-bd17-a920924b85b0 None None] new path /v2/images {{(pid=2093240) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093240]: [pid: 2093240|app: 0|req: 1/2] 127.0.0.1 () {40 vars in 776 bytes} [Sun Feb  1 09:31:24 2026] POST /v2/images => generated 765 bytes in 419 msecs (HTTP/1.1 201) 6 headers in 314 bytes (1 switches on core 0)
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.api.middleware.version_negotiation [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] Determining version of request: PUT /v2/images/a0134bfa-8d0d-4484-8ebb-cf3e680df280/file Accept:  {{(pid=2093239) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.api.middleware.version_negotiation [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] Using url versioning {{(pid=2093239) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.api.middleware.version_negotiation [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] Matched version: v2 {{(pid=2093239) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.api.middleware.version_negotiation [None req-6129271b-630d-4e26-a0cd-0f5449442583 None None] new path /v2/images/a0134bfa-8d0d-4484-8ebb-cf3e680df280/file {{(pid=2093239) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 09:31:24 gelani-lab-1 devstack@g-api.service[2093239]: INFO glance.api.v2.image_data [None req-5ff03c66-a124-419f-8262-e15f74eb30b7 admin admin] Unable to create trust: no such option collect_timing in group [keystone_authtoken] Use the existing user token.
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance.location [None req-5ff03c66-a124-419f-8262-e15f74eb30b7 admin admin] Enabling in-flight format inspection for qcow2 {{(pid=2093239) set_data /opt/stack/glance/glance/location.py:616}}
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance_store.backend [None req-5ff03c66-a124-419f-8262-e15f74eb30b7 admin admin] Attempting to import store rbd {{(pid=2093239) _load_store /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/backend.py:215}}
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance_store.capabilities [None req-5ff03c66-a124-419f-8262-e15f74eb30b7 admin admin] Store glance_store._drivers.rbd.Store doesn't support updating dynamic storage capabilities. Please overwrite 'update_capabilities' method of the store to implement updating logics if needed. {{(pid=2093239) update_capabilities /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/capabilities.py:91}}
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance_store.driver [None req-5ff03c66-a124-419f-8262-e15f74eb30b7 admin admin] Late loading location class glance_store._drivers.rbd.StoreLocation {{(pid=2093239) get_store_location_class /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/driver.py:134}}
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG glance_store.location [None req-5ff03c66-a124-419f-8262-e15f74eb30b7 admin admin] Registering scheme rbd with {'store': <glance_store._drivers.rbd.Store object at 0x7fe0dee9eb30>, 'location_class': <class 'glance_store._drivers.rbd.StoreLocation'>, 'store_entry': 'rbd'} {{(pid=2093239) register_scheme_map /opt/stack/data/venv/lib/python3.10/site-packages/glance_store/location.py:146}}
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance_store._drivers.rbd [None req-5ff03c66-a124-419f-8262-e15f74eb30b7 admin admin] Error connecting to ceph cluster.: rados.OSError: [errno 95] error connecting to the cluster
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance_store._drivers.rbd Traceback (most recent call last):
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance_store._drivers.rbd   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 315, in get_connection
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance_store._drivers.rbd     client.connect()
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance_store._drivers.rbd   File "rados.pyx", line 689, in rados.Rados.connect
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance_store._drivers.rbd rados.OSError: [errno 95] error connecting to the cluster
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance_store._drivers.rbd 
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.api.v2.image_data [None req-5ff03c66-a124-419f-8262-e15f74eb30b7 admin admin] Failed to upload image data due to internal error: glance_store.exceptions.BackendException
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi [None req-5ff03c66-a124-419f-8262-e15f74eb30b7 admin admin] Caught error: : glance_store.exceptions.BackendException
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi Traceback (most recent call last):
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 315, in get_connection
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     client.connect()
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "rados.pyx", line 689, in rados.Rados.connect
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi rados.OSError: [errno 95] error connecting to the cluster
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi 
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi During handling of the above exception, another exception occurred:
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi 
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi Traceback (most recent call last):
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/common/wsgi.py", line 1178, in __call__
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     action_result = self.dispatch(self.controller, action,
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/common/wsgi.py", line 1219, in dispatch
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     return method(*args, **kwargs)
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/common/utils.py", line 411, in wrapped
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     return func(self, req, *args, **kwargs)
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/api/v2/image_data.py", line 312, in upload
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     with excutils.save_and_reraise_exception():
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 256, in __exit__
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     self.force_reraise()
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 222, in force_reraise
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     raise self.value
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/api/v2/image_data.py", line 161, in upload
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     image.set_data(data, size, backend=backend)
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/notifier.py", line 488, in set_data
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     with excutils.save_and_reraise_exception():
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 256, in __exit__
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     self.force_reraise()
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_utils/excutils.py", line 222, in force_reraise
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     raise self.value
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/notifier.py", line 442, in set_data
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     self.repo.set_data(data, size, backend=backend,
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/quota/__init__.py", line 321, in set_data
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     self.image.set_data(data, size=size, backend=backend,
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/location.py", line 625, in set_data
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     self._upload_to_store(data, verifier, backend, size)
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/glance/glance/location.py", line 531, in _upload_to_store
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     loc_meta) = self.store_api.add_to_backend_with_multihash(
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/backend.py", line 488, in add_to_backend_with_multihash
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     return store_add_to_backend_with_multihash(
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/backend.py", line 465, in store_add_to_backend_with_multihash
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     (location, size, checksum, multihash, metadata) = store.add(
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/driver.py", line 295, in add_adapter
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     metadata_dict) = store_add_fun(*args, **kwargs)
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/capabilities.py", line 176, in op_checker
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     return store_op_fun(store, *args, **kwargs)
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 560, in add
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     with self.get_connection(conffile=self.conf_file,
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/usr/lib/python3.10/contextlib.py", line 135, in __enter__
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     return next(self.gen)
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi   File "/opt/stack/data/venv/lib/python3.10/site-packages/glance_store/_drivers/rbd.py", line 325, in get_connection
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi     raise exceptions.BackendException()
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi glance_store.exceptions.BackendException
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: ERROR glance.common.wsgi 
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093239]: [pid: 2093239|app: 0|req: 1/3] 127.0.0.1 () {40 vars in 869 bytes} [Sun Feb  1 09:31:24 2026] PUT /v2/images/a0134bfa-8d0d-4484-8ebb-cf3e680df280/file => generated 114 bytes in 590 msecs (HTTP/1.1 500) 4 headers in 185 bytes (1 switches on core 0)
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.api.middleware.version_negotiation [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] Determining version of request: DELETE /v2/images/a0134bfa-8d0d-4484-8ebb-cf3e680df280 Accept: */* {{(pid=2093241) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.api.middleware.version_negotiation [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] Using url versioning {{(pid=2093241) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.api.middleware.version_negotiation [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] Matched version: v2 {{(pid=2093241) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG glance.api.middleware.version_negotiation [None req-6c31d9ff-d68f-44f9-a727-6415799c763c None None] new path /v2/images/a0134bfa-8d0d-4484-8ebb-cf3e680df280 {{(pid=2093241) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093241]: WARNING glance.api.v2.images [None req-1eaf9ac1-86f9-4bab-abf9-f1e82748425f admin admin] After upload to backend, deletion of staged image data has failed because it cannot be found at /tmp/staging//a0134bfa-8d0d-4484-8ebb-cf3e680df280
+Feb 01 09:31:25 gelani-lab-1 devstack@g-api.service[2093241]: [pid: 2093241|app: 0|req: 1/4] 127.0.0.1 () {38 vars in 818 bytes} [Sun Feb  1 09:31:25 2026] DELETE /v2/images/a0134bfa-8d0d-4484-8ebb-cf3e680df280 => generated 0 bytes in 88 msecs (HTTP/1.1 204) 4 headers in 171 bytes (1 switches on core 0)
+Feb 01 09:31:29 gelani-lab-1 devstack@g-api.service[2093242]: DEBUG dbcounter [-] [2093242] Writing DB stats glance:INSERT=4 {{(pid=2093242) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 09:31:34 gelani-lab-1 devstack@g-api.service[2093240]: DEBUG dbcounter [-] [2093240] Writing DB stats glance:INSERT=8,glance:SELECT=4 {{(pid=2093240) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 09:31:35 gelani-lab-1 devstack@g-api.service[2093239]: DEBUG dbcounter [-] [2093239] Writing DB stats glance:INSERT=4,glance:SELECT=17,glance:UPDATE=2 {{(pid=2093239) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 09:31:35 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG dbcounter [-] [2093241] Writing DB stats glance:INSERT=4,glance:SELECT=11,glance:UPDATE=8 {{(pid=2093241) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+ubuntu@gelani-lab-1:~/images$ sudo rbd -p images ls
+ubuntu@gelani-lab-1:~/images$ 
 
 
 `` 
