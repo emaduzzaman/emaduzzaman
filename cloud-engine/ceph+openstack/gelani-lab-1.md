@@ -4430,5 +4430,231 @@ ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo ls /var/lib/nova/instances
 ls: cannot access '/var/lib/nova/instances': No such file or directory
 ubuntu@gelani-lab-1:/opt/stack/devstack$ 
 
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ubuntu@192.168.95.93's password: 
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-164-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Feb  1 03:50:02 UTC 2026
+
+  System load:  0.19               Processes:             440
+  Usage of /:   79.3% of 48.27GB   Users logged in:       0
+  Memory usage: 46%                IPv4 address for ens3: 192.168.95.93
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+9 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+New release '24.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+*** System restart required ***
+Last login: Sat Jan 31 12:42:36 2026 from 192.168.95.86
+ubuntu@gelani-lab-1:~$ openstack server show ceph-vm-1 -c status
+Missing value auth-url required for auth plugin password
+ubuntu@gelani-lab-1:~$ cd /opt/stack/devstack
+ubuntu@gelani-lab-1:/opt/stack/devstack$ source openrc admin admin
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack token issue
++------------+------------------------------------------------------------------------------------------------------+
+| Field      | Value                                                                                                |
++------------+------------------------------------------------------------------------------------------------------+
+| expires    | 2026-02-01T04:54:00+0000                                                                             |
+| id         | gAAAAABpfs5YqHRtG7zavOL9D0toNS5Rp9Pyqy73MGlzL73835fLz5YtpJXA61WakxNk5IgNxTSTpyA37nin13FFAC_S8yvyN714 |
+|            | LivlkfI_7FzEeVRMJAdP0jgn7Ramd-mQPxPJqFdk_7FUDmlDVfof9e2h9JVcWL7IXISObSWqa_fQ1apDSm4                  |
+| project_id | 9fb44e4466264364b4ac3eb936bdc4c2                                                                     |
+| user_id    | 09805ebaab704a8cbf99fdc8a0c1859d                                                                     |
++------------+------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server show ceph-vm-1 -c status
++--------+--------+
+| Field  | Value  |
++--------+--------+
+| status | ACTIVE |
++--------+--------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack volume show 5f2f64e1-6b28-41bf-88b2-e17204dbfbb0
++--------------------------------+----------------------------------------------------------------------------------+
+| Field                          | Value                                                                            |
++--------------------------------+----------------------------------------------------------------------------------+
+| attachments                    | [{'id': '5f2f64e1-6b28-41bf-88b2-e17204dbfbb0', 'attachment_id':                 |
+|                                | '8c61e4b3-b988-4d15-a9f6-c02710dc4bb8', 'volume_id':                             |
+|                                | '5f2f64e1-6b28-41bf-88b2-e17204dbfbb0', 'server_id':                             |
+|                                | 'a854d59a-25b5-4103-a0ac-62aa14105877', 'host_name': 'gelani-lab-1', 'device':   |
+|                                | '/dev/vda', 'attached_at': '2026-01-31T19:37:00.000000'}]                        |
+| availability_zone              | nova                                                                             |
+| backup_id                      | None                                                                             |
+| bootable                       | True                                                                             |
+| cluster_name                   | None                                                                             |
+| consumes_quota                 | True                                                                             |
+| created_at                     | 2026-01-31T19:36:44.000000                                                       |
+| description                    |                                                                                  |
+| encrypted                      | False                                                                            |
+| group_id                       | None                                                                             |
+| id                             | 5f2f64e1-6b28-41bf-88b2-e17204dbfbb0                                             |
+| multiattach                    | False                                                                            |
+| name                           |                                                                                  |
+| os-vol-host-attr:host          | gelani-lab-1@ceph#ceph                                                           |
+| os-vol-mig-status-attr:migstat | None                                                                             |
+| os-vol-mig-status-attr:name_id | None                                                                             |
+| os-vol-tenant-attr:tenant_id   | 9fb44e4466264364b4ac3eb936bdc4c2                                                 |
+| properties                     |                                                                                  |
+| provider_id                    | None                                                                             |
+| replication_status             | None                                                                             |
+| service_uuid                   | 62a0e87e-7f48-49a0-a409-c1c84ec1207a                                             |
+| shared_targets                 | False                                                                            |
+| size                           | 5                                                                                |
+| snapshot_id                    | None                                                                             |
+| source_volid                   | None                                                                             |
+| status                         | in-use                                                                           |
+| type                           | ceph                                                                             |
+| updated_at                     | 2026-01-31T19:37:01.000000                                                       |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d                                                 |
+| volume_image_metadata          | {'signature_verified': 'False', 'image_id':                                      |
+|                                | 'b6e575cd-c986-4098-a75f-136eafa50af2', 'image_name': 'ubuntu', 'checksum':      |
+|                                | 'feae9da27c50da7f45bfcca6b1f8aae0', 'container_format': 'bare', 'disk_format':   |
+|                                | 'qcow2', 'min_disk': '0', 'min_ram': '0', 'size': '688868864'}                   |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411                                             |
++--------------------------------+----------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo rbd info volume/volume-5f2f64e1-6b28-41bf-88b2-e17204dbfbb0
+rbd image 'volume-5f2f64e1-6b28-41bf-88b2-e17204dbfbb0':
+        size 5 GiB in 1280 objects
+        order 22 (4 MiB objects)
+        snapshot_count: 0
+        id: 6e5c3df30923
+        block_name_prefix: rbd_data.6e5c3df30923
+        format: 2
+        features: layering, exclusive-lock, object-map, fast-diff, deep-flatten
+        op_features: 
+        flags: 
+        create_timestamp: Sat Jan 31 19:36:52 2026
+        access_timestamp: Sun Feb  1 03:54:02 2026
+        modify_timestamp: Sun Feb  1 03:35:01 2026
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo journalctl -u devstack@n-cpu -n 50 --no-pager
+Feb 01 03:54:36 gelani-lab-1 nova-compute[1978305]: DEBUG nova.virt.libvirt.driver [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] skipping disk /dev/sdb (vda) as it is a volume {{(pid=1978305) _get_instance_disk_info_from_config /opt/stack/nova/nova/virt/libvirt/driver.py:12194}}
+Feb 01 03:54:36 gelani-lab-1 nova-compute[1978305]: DEBUG nova.virt.libvirt.driver [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] skipping disk /dev/sda (vda) as it is a volume {{(pid=1978305) _get_instance_disk_info_from_config /opt/stack/nova/nova/virt/libvirt/driver.py:12194}}
+Feb 01 03:54:36 gelani-lab-1 nova-compute[1978305]: WARNING nova.virt.libvirt.driver [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] This host appears to have multiple sockets per NUMA node. The `socket` PCI NUMA affinity will not be supported.
+Feb 01 03:54:36 gelani-lab-1 nova-compute[1978305]: DEBUG oslo_concurrency.processutils [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Running cmd (subprocess): env LANG=C uptime {{(pid=1978305) execute /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/processutils.py:349}}
+Feb 01 03:54:36 gelani-lab-1 nova-compute[1978305]: DEBUG oslo_concurrency.processutils [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] CMD "env LANG=C uptime" returned: 0 in 0.018s {{(pid=1978305) execute /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/processutils.py:372}}
+Feb 01 03:54:36 gelani-lab-1 nova-compute[1978305]: DEBUG nova.compute.resource_tracker [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Hypervisor/Node resource view: name=gelani-lab-1 free_ram=17055MB free_disk=9.93985366821289GB free_vcpus=12 pci_devices=[{"dev_id": "pci_0000_00_01_3", "address": "0000:00:01.3", "product_id": "7113", "vendor_id": "8086", "numa_node": null, "label": "label_8086_7113", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_04_0", "address": "0000:00:04.0", "product_id": "1003", "vendor_id": "1af4", "numa_node": null, "label": "label_1af4_1003", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_07_0", "address": "0000:00:07.0", "product_id": "1005", "vendor_id": "1af4", "numa_node": null, "label": "label_1af4_1005", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_01_0", "address": "0000:00:01.0", "product_id": "7000", "vendor_id": "8086", "numa_node": null, "label": "label_8086_7000", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_00_0", "address": "0000:00:00.0", "product_id": "1237", "vendor_id": "8086", "numa_node": null, "label": "label_8086_1237", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_05_0", "address": "0000:00:05.0", "product_id": "1001", "vendor_id": "1af4", "numa_node": null, "label": "label_1af4_1001", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_06_0", "address": "0000:00:06.0", "product_id": "1002", "vendor_id": "1af4", "numa_node": null, "label": "label_1af4_1002", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_01_2", "address": "0000:00:01.2", "product_id": "7020", "vendor_id": "8086", "numa_node": null, "label": "label_8086_7020", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_01_1", "address": "0000:00:01.1", "product_id": "7010", "vendor_id": "8086", "numa_node": null, "label": "label_8086_7010", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_02_0", "address": "0000:00:02.0", "product_id": "0100", "vendor_id": "1b36", "numa_node": null, "label": "label_1b36_0100", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_03_0", "address": "0000:00:03.0", "product_id": "1000", "vendor_id": "1af4", "numa_node": null, "label": "label_1af4_1000", "dev_type": "type-PCI"}] {{(pid=1978305) _report_hypervisor_resource_view /opt/stack/nova/nova/compute/resource_tracker.py:1136}}
+Feb 01 03:54:36 gelani-lab-1 nova-compute[1978305]: DEBUG oslo_concurrency.lockutils [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Acquiring lock "compute_resources" by "nova.compute.resource_tracker.ResourceTracker._update_available_resource" {{(pid=1978305) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:405}}
+Feb 01 03:54:36 gelani-lab-1 nova-compute[1978305]: DEBUG oslo_concurrency.lockutils [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Lock "compute_resources" acquired by "nova.compute.resource_tracker.ResourceTracker._update_available_resource" :: waited 0.000s {{(pid=1978305) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:410}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG nova.compute.resource_tracker [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Instance 1a155fc3-49dd-44be-853d-e19221446b64 actively managed on this compute host and has allocations in placement: {'resources': {'MEMORY_MB': 128, 'VCPU': 1}}. {{(pid=1978305) _remove_deleted_instances_allocations /opt/stack/nova/nova/compute/resource_tracker.py:1740}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG nova.compute.resource_tracker [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Instance c0c53027-178e-4ac8-9ac9-955d0c6dc606 actively managed on this compute host and has allocations in placement: {'resources': {'MEMORY_MB': 2048, 'VCPU': 2}}. {{(pid=1978305) _remove_deleted_instances_allocations /opt/stack/nova/nova/compute/resource_tracker.py:1740}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG nova.compute.resource_tracker [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Instance a854d59a-25b5-4103-a0ac-62aa14105877 actively managed on this compute host and has allocations in placement: {'resources': {'MEMORY_MB': 512, 'VCPU': 1}}. {{(pid=1978305) _remove_deleted_instances_allocations /opt/stack/nova/nova/compute/resource_tracker.py:1740}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG nova.compute.resource_tracker [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Total usable vcpus: 16, total allocated vcpus: 4 {{(pid=1978305) _report_final_resource_view /opt/stack/nova/nova/compute/resource_tracker.py:1159}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG nova.compute.resource_tracker [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Final resource view: name=gelani-lab-1 phys_ram=32089MB used_ram=3200MB phys_disk=48GB used_disk=0GB total_vcpus=16 used_vcpus=4 pci_stats=[] stats={'failed_builds': '0', 'uptime': ' 03:54:36 up 12 days, 15:05,  1 user,  load average: 0.26, 0.26, 0.36\n', 'num_instances': '3', 'num_vm_active': '3', 'num_task_None': '3', 'num_os_type_None': '3', 'num_proj_6e0c493b7e814bb392ca7ea299c182de': '2', 'io_workload': '0', 'num_proj_9fb44e4466264364b4ac3eb936bdc4c2': '1'} {{(pid=1978305) _report_final_resource_view /opt/stack/nova/nova/compute/resource_tracker.py:1168}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG nova.compute.provider_tree [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Inventory has not changed in ProviderTree for provider: ba2ec314-9891-498b-82cc-7a5f896382bf {{(pid=1978305) update_inventory /opt/stack/nova/nova/compute/provider_tree.py:180}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] 4999-ms timeout {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:248}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] 0-ms timeout {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:248}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: idle 5003 ms, sending inactivity probe {{(pid=1978305) run /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:117}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: entering IDLE {{(pid=1978305) _transition /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:519}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] [POLLIN] on fd 17 {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:263}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: entering ACTIVE {{(pid=1978305) _transition /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:519}}
+Feb 01 03:54:37 gelani-lab-1 nova-compute[1978305]: DEBUG nova.scheduler.client.report [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Inventory has not changed for provider ba2ec314-9891-498b-82cc-7a5f896382bf based on inventory data: {'VCPU': {'total': 16, 'reserved': 0, 'min_unit': 1, 'max_unit': 16, 'step_size': 1, 'allocation_ratio': 4.0}, 'MEMORY_MB': {'total': 32089, 'reserved': 512, 'min_unit': 1, 'max_unit': 32089, 'step_size': 1, 'allocation_ratio': 1.0}, 'DISK_GB': {'total': 48, 'reserved': 0, 'min_unit': 1, 'max_unit': 48, 'step_size': 1, 'allocation_ratio': 1.0}} {{(pid=1978305) set_inventory_for_provider /opt/stack/nova/nova/scheduler/client/report.py:958}}
+Feb 01 03:54:38 gelani-lab-1 nova-compute[1978305]: DEBUG nova.compute.resource_tracker [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Compute_service record updated for gelani-lab-1:gelani-lab-1 {{(pid=1978305) _update_available_resource /opt/stack/nova/nova/compute/resource_tracker.py:1097}}
+Feb 01 03:54:38 gelani-lab-1 nova-compute[1978305]: DEBUG oslo_concurrency.lockutils [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Lock "compute_resources" "released" by "nova.compute.resource_tracker.ResourceTracker._update_available_resource" :: held 2.177s {{(pid=1978305) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:424}}
+Feb 01 03:54:42 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] 4999-ms timeout {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:248}}
+Feb 01 03:54:42 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] 0-ms timeout {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:248}}
+Feb 01 03:54:42 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: idle 5002 ms, sending inactivity probe {{(pid=1978305) run /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:117}}
+Feb 01 03:54:42 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: entering IDLE {{(pid=1978305) _transition /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:519}}
+Feb 01 03:54:42 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] [POLLIN] on fd 17 {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:263}}
+Feb 01 03:54:42 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: entering ACTIVE {{(pid=1978305) _transition /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:519}}
+Feb 01 03:54:45 gelani-lab-1 nova-compute[1978305]: DEBUG oslo_service.periodic_task [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Running periodic task ComputeManager._poll_volume_usage {{(pid=1978305) run_periodic_tasks /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/periodic_task.py:210}}
+Feb 01 03:54:47 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] 4999-ms timeout {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:248}}
+Feb 01 03:54:47 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] 0-ms timeout {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:248}}
+Feb 01 03:54:47 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: idle 5002 ms, sending inactivity probe {{(pid=1978305) run /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:117}}
+Feb 01 03:54:47 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: entering IDLE {{(pid=1978305) _transition /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:519}}
+Feb 01 03:54:47 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] [POLLIN] on fd 17 {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:263}}
+Feb 01 03:54:47 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: entering ACTIVE {{(pid=1978305) _transition /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:519}}
+Feb 01 03:54:52 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] 4999-ms timeout {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:248}}
+Feb 01 03:54:52 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] 0-ms timeout {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:248}}
+Feb 01 03:54:52 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: idle 5003 ms, sending inactivity probe {{(pid=1978305) run /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:117}}
+Feb 01 03:54:52 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: entering IDLE {{(pid=1978305) _transition /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:519}}
+Feb 01 03:54:52 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] [POLLIN] on fd 17 {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:263}}
+Feb 01 03:54:52 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: entering ACTIVE {{(pid=1978305) _transition /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:519}}
+Feb 01 03:54:55 gelani-lab-1 nova-compute[1978305]: DEBUG oslo_service.periodic_task [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Running periodic task ComputeManager._poll_rebooting_instances {{(pid=1978305) run_periodic_tasks /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/periodic_task.py:210}}
+Feb 01 03:54:57 gelani-lab-1 nova-compute[1978305]: DEBUG oslo_service.periodic_task [None req-ef851cd6-4016-463b-b8be-964805fd3df5 None None] Running periodic task ComputeManager._sync_scheduler_instance_info {{(pid=1978305) run_periodic_tasks /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/periodic_task.py:210}}
+Feb 01 03:54:57 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] 4999-ms timeout {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:248}}
+Feb 01 03:54:57 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] 0-ms timeout {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:248}}
+Feb 01 03:54:57 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: idle 5003 ms, sending inactivity probe {{(pid=1978305) run /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:117}}
+Feb 01 03:54:57 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: entering IDLE {{(pid=1978305) _transition /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:519}}
+Feb 01 03:54:57 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] [POLLIN] on fd 17 {{(pid=1978305) __log_wakeup /opt/stack/data/venv/lib/python3.10/site-packages/ovs/poller.py:263}}
+Feb 01 03:54:57 gelani-lab-1 nova-compute[1978305]: DEBUG ovsdbapp.backend.ovs_idl.vlog [-] tcp:127.0.0.1:6640: entering ACTIVE {{(pid=1978305) _transition /opt/stack/data/venv/lib/python3.10/site-packages/ovs/reconnect.py:519}}
+ubuntu@gelani-lab-1:/opt/stack/devstack$ 
+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server create \
+  --flavor m1.tiny \
+  --network private \
+  --boot-from-volume 5 \
+  --image ubuntu \
+  ceph-vm-2
++-------------------------------------+-----------------------------------------------------------------------------+
+| Field                               | Value                                                                       |
++-------------------------------------+-----------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                      |
+| OS-EXT-AZ:availability_zone         | None                                                                        |
+| OS-EXT-SRV-ATTR:host                | None                                                                        |
+| OS-EXT-SRV-ATTR:hostname            | ceph-vm-2                                                                   |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                        |
+| OS-EXT-SRV-ATTR:instance_name       | None                                                                        |
+| OS-EXT-SRV-ATTR:kernel_id           | None                                                                        |
+| OS-EXT-SRV-ATTR:launch_index        | None                                                                        |
+| OS-EXT-SRV-ATTR:ramdisk_id          | None                                                                        |
+| OS-EXT-SRV-ATTR:reservation_id      | r-mwi4rioa                                                                  |
+| OS-EXT-SRV-ATTR:root_device_name    | None                                                                        |
+| OS-EXT-SRV-ATTR:user_data           | None                                                                        |
+| OS-EXT-STS:power_state              | N/A                                                                         |
+| OS-EXT-STS:task_state               | scheduling                                                                  |
+| OS-EXT-STS:vm_state                 | building                                                                    |
+| OS-SRV-USG:launched_at              | None                                                                        |
+| OS-SRV-USG:terminated_at            | None                                                                        |
+| accessIPv4                          | None                                                                        |
+| accessIPv6                          | None                                                                        |
+| addresses                           | N/A                                                                         |
+| adminPass                           | G4aMHvDvLztC                                                                |
+| config_drive                        | None                                                                        |
+| created                             | 2026-02-01T03:55:49Z                                                        |
+| description                         | None                                                                        |
+| flavor                              | description=, disk='1', ephemeral='0', extra_specs.hw_rng:allowed='True',   |
+|                                     | id='m1.tiny', is_disabled=, is_public='True', location=, name='m1.tiny',    |
+|                                     | original_name='m1.tiny', ram='512', rxtx_factor=, swap='0', vcpus='1'       |
+| hostId                              | None                                                                        |
+| host_status                         | None                                                                        |
+| id                                  | 2e34a5ce-c9f4-4046-af18-a981c37a2921                                        |
+| image                               | N/A (booted from volume)                                                    |
+| key_name                            | None                                                                        |
+| locked                              | None                                                                        |
+| locked_reason                       | None                                                                        |
+| name                                | ceph-vm-2                                                                   |
+| pinned_availability_zone            | None                                                                        |
+| progress                            | None                                                                        |
+| project_id                          | 9fb44e4466264364b4ac3eb936bdc4c2                                            |
+| properties                          | None                                                                        |
+| scheduler_hints                     |                                                                             |
+| security_groups                     | name='default'                                                              |
+| server_groups                       | None                                                                        |
+| status                              | BUILD                                                                       |
+| tags                                |                                                                             |
+| trusted_image_certificates          | None                                                                        |
+| updated                             | 2026-02-01T03:55:49Z                                                        |
+| user_id                             | 09805ebaab704a8cbf99fdc8a0c1859d                                            |
+| volumes_attached                    |                                                                             |
++-------------------------------------+-----------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server stop ceph-vm-1
+openstack volume snapshot create test-snap --volume 5f2f64e1-6b28-41bf-88b2-e17204dbfbb0
+BadRequestException: 400: Client Error for url: http://192.168.95.93/volume/v3/snapshots, Invalid volume: Volume 5f2f64e1-6b28-41bf-88b2-e17204dbfbb0 status must be available, but current status is: in-use.
+ubuntu@gelani-lab-1:/opt/stack/devstack$ 
+
 
 `` 

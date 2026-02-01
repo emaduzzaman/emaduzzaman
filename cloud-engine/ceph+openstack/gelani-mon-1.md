@@ -136,5 +136,846 @@ unable to get monitor info from DNS SRV with service name: ceph-mon
 [errno 2] RADOS object not found (error connecting to the cluster)
 root@gelani-mon-1:/# sudo cephadm ls
 ERROR: No container engine binary found (podman or docker). Try run `apt/dnf/yum/zypper install <container engine>`
-root@gelani-mon-1:/# 
+root@gelani-mon-1:/# client_loop: send disconnect: Broken pipe
+emaduzzaman@emaduzzaman:~$ which docker
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.19
+ubuntu@192.168.95.19's password: 
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-164-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sat Jan 31 12:35:14 UTC 2026
+
+  System load:  0.05               Processes:             146
+  Usage of /:   16.9% of 38.58GB   Users logged in:       0
+  Memory usage: 50%                IPv4 address for ens3: 192.168.95.19
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+8 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+2 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+New release '24.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Sat Jan 31 07:54:41 2026 from 192.168.95.86
+ubuntu@gelani-mon-1:~$ which docker
+/usr/bin/docker
+ubuntu@gelani-mon-1:~$ docker --version
+Docker version 28.2.2, build 28.2.2-0ubuntu1~22.04.1
+ubuntu@gelani-mon-1:~$ docker --version
+Docker version 28.2.2, build 28.2.2-0ubuntu1~22.04.1
+ubuntu@gelani-mon-1:~$ sudo systemctl status docker
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2026-01-28 05:58:20 UTC; 3 days ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 1818 (dockerd)
+      Tasks: 21
+     Memory: 462.5M
+        CPU: 4min 1.676s
+     CGroup: /system.slice/docker.service
+             └─1818 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Jan 31 10:05:55 gelani-mon-1 dockerd[1818]: time="2026-01-31T10:05:55.366446028Z" level=info msg="ignoring event" co>
+Jan 31 10:36:37 gelani-mon-1 dockerd[1818]: time="2026-01-31T10:36:37.117307377Z" level=info msg="ignoring event" co>
+Jan 31 10:36:38 gelani-mon-1 dockerd[1818]: time="2026-01-31T10:36:38.258404195Z" level=info msg="ignoring event" co>
+Jan 31 10:43:20 gelani-mon-1 dockerd[1818]: time="2026-01-31T10:43:20.348044555Z" level=info msg="ignoring event" co>
+Jan 31 11:07:19 gelani-mon-1 dockerd[1818]: time="2026-01-31T11:07:19.670897358Z" level=info msg="ignoring event" co>
+Jan 31 11:07:20 gelani-mon-1 dockerd[1818]: time="2026-01-31T11:07:20.718169302Z" level=info msg="ignoring event" co>
+Jan 31 11:38:02 gelani-mon-1 dockerd[1818]: time="2026-01-31T11:38:02.432231294Z" level=info msg="ignoring event" co>
+Jan 31 11:38:03 gelani-mon-1 dockerd[1818]: time="2026-01-31T11:38:03.472748971Z" level=info msg="ignoring event" co>
+Jan 31 12:08:45 gelani-mon-1 dockerd[1818]: time="2026-01-31T12:08:45.269159960Z" level=info msg="ignoring event" co>
+Jan 31 12:08:46 gelani-mon-1 dockerd[1818]: time="2026-01-31T12:08:46.343441610Z" level=info msg="ignoring event" co>
+
+ubuntu@gelani-mon-1:~$ sudo cephadm
+No command specified; pass -h or --help for usage
+ubuntu@gelani-mon-1:~$ sudo cephadm ls
+[
+    {
+        "style": "cephadm:v1",
+        "name": "grafana.gelani-mon-1",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@grafana.gelani-mon-1",
+        "enabled": true,
+        "state": "running",
+        "service_name": "grafana",
+        "ports": [
+            3000
+        ],
+        "ip": null,
+        "deployed_by": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "rank": null,
+        "rank_generation": null,
+        "extra_container_args": null,
+        "extra_entrypoint_args": null,
+        "memory_request": null,
+        "memory_limit": null,
+        "container_id": "d3212a8fe771d61c7153b9bdde32993c225687d0b414954c01712936aecb910e",
+        "container_image_name": "quay.io/ceph/ceph-grafana:9.4.7",
+        "container_image_id": "954c08fa618887fe9a6fe572ae541197c77e625b05f4193df7898f5ac649ada9",
+        "container_image_digests": [
+            "quay.io/ceph/ceph-grafana@sha256:97d919ad919187a9b924574c2480be30f840d252447bc0a91ff5213f3cf7f4b1"
+        ],
+        "memory_usage": 86759178,
+        "cpu_percentage": "3.11%",
+        "version": "9.4.7",
+        "started": "2026-01-28T06:03:50.879003Z",
+        "created": "2026-01-28T06:02:58.191193Z",
+        "deployed": "2026-01-28T06:02:57.695190Z",
+        "configured": "2026-01-28T06:03:50.607419Z"
+    },
+    {
+        "style": "cephadm:v1",
+        "name": "alertmanager.gelani-mon-1",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@alertmanager.gelani-mon-1",
+        "enabled": true,
+        "state": "running",
+        "service_name": "alertmanager",
+        "ports": [
+            9093,
+            9094
+        ],
+        "ip": null,
+        "deployed_by": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "rank": null,
+        "rank_generation": null,
+        "extra_container_args": null,
+        "extra_entrypoint_args": null,
+        "memory_request": null,
+        "memory_limit": null,
+        "container_id": "cb53c3eb0871bb512a3d6ac791818427411457af96835bd8f99d6e184377bac0",
+        "container_image_name": "quay.io/prometheus/alertmanager:v0.25.0",
+        "container_image_id": "c8568f914cd25b2062c44e9f79f9c18da6e3b85fe0c47a12a2191c61426c2b19",
+        "container_image_digests": [
+            "quay.io/prometheus/alertmanager@sha256:fd4d9a3dd1fd0125108417be21be917f19cc76262347086509a0d43f29b80e98"
+        ],
+        "memory_usage": 15770583,
+        "cpu_percentage": "0.06%",
+        "version": "0.25.0",
+        "started": "2026-01-28T06:42:22.711536Z",
+        "created": "2026-01-28T06:01:39.754853Z",
+        "deployed": "2026-01-28T06:01:39.214851Z",
+        "configured": "2026-01-28T06:42:22.434511Z"
+    },
+    {
+        "style": "cephadm:v1",
+        "name": "mgr.gelani-mon-1.gzltah",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mgr.gelani-mon-1.gzltah",
+        "enabled": true,
+        "state": "running",
+        "service_name": "mgr",
+        "memory_request": null,
+        "memory_limit": null,
+        "ports": [
+            9283,
+            8765,
+            8443
+        ],
+        "container_id": "504af1640bd600d05b3556589c158176c831f9d9946e50607d01a2ed5a1132c8",
+        "container_image_name": "quay.io/ceph/ceph:v17",
+        "container_image_id": "259b3556651452e4de35111bd226d7a17fe902360c7e9e49a4e5da686ffb71c1",
+        "container_image_digests": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "memory_usage": 596325171,
+        "cpu_percentage": "0.17%",
+        "version": "17.2.8",
+        "started": "2026-01-28T06:00:44.373377Z",
+        "created": "2026-01-28T06:00:44.322613Z",
+        "deployed": "2026-01-28T06:00:43.870611Z",
+        "configured": "2026-01-28T06:42:11.158417Z"
+    },
+    {
+        "style": "cephadm:v1",
+        "name": "node-exporter.gelani-mon-1",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@node-exporter.gelani-mon-1",
+        "enabled": true,
+        "state": "running",
+        "service_name": "node-exporter",
+        "ports": [
+            9100
+        ],
+        "ip": null,
+        "deployed_by": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "rank": null,
+        "rank_generation": null,
+        "extra_container_args": null,
+        "extra_entrypoint_args": null,
+        "memory_request": null,
+        "memory_limit": null,
+        "container_id": "cb7a32fb0b5f07056a9d93fec510473250b25a339761caddb4f4998d73488c75",
+        "container_image_name": "quay.io/prometheus/node-exporter:v1.5.0",
+        "container_image_id": "0da6a335fe1356545476b749c68f022c897de3a2139e8f0054f6937349ee2b83",
+        "container_image_digests": [
+            "quay.io/prometheus/node-exporter@sha256:39c642b2b337e38c18e80266fb14383754178202f40103646337722a594d984c"
+        ],
+        "memory_usage": 10034872,
+        "cpu_percentage": "0.00%",
+        "version": "1.5.0",
+        "started": "2026-01-28T06:01:40.445161Z",
+        "created": "2026-01-28T06:01:30.166811Z",
+        "deployed": "2026-01-28T06:01:29.670809Z",
+        "configured": "2026-01-28T06:01:30.166811Z"
+    },
+    {
+        "style": "cephadm:v1",
+        "name": "prometheus.gelani-mon-1",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@prometheus.gelani-mon-1",
+        "enabled": true,
+        "state": "running",
+        "service_name": "prometheus",
+        "ports": [
+            9095
+        ],
+        "ip": null,
+        "deployed_by": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "rank": null,
+        "rank_generation": null,
+        "extra_container_args": null,
+        "extra_entrypoint_args": null,
+        "memory_request": null,
+        "memory_limit": null,
+        "container_id": "64264f6645d72bbbd9c45933ee8e8913810e45138f64a35983217743cad0229c",
+        "container_image_name": "quay.io/prometheus/prometheus:v2.43.0",
+        "container_image_id": "a07b618ecd1dce142bce4c52f0e80982eaf1f14265a2415c2d35978ccaa0a464",
+        "container_image_digests": [
+            "quay.io/prometheus/prometheus@sha256:f5c29683a301d4e5427fb0d985f794b1f743498310a4eadee75e85f5dba73a6d"
+        ],
+        "memory_usage": 97590968,
+        "cpu_percentage": "4.48%",
+        "version": "2.43.0",
+        "started": "2026-01-28T06:42:23.582857Z",
+        "created": "2026-01-28T06:03:36.683359Z",
+        "deployed": "2026-01-28T06:03:36.179357Z",
+        "configured": "2026-01-28T06:42:23.334519Z"
+    },
+    {
+        "style": "cephadm:v1",
+        "name": "crash.gelani-mon-1",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@crash.gelani-mon-1",
+        "enabled": true,
+        "state": "running",
+        "service_name": "crash",
+        "ports": [],
+        "ip": null,
+        "deployed_by": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "rank": null,
+        "rank_generation": null,
+        "extra_container_args": null,
+        "extra_entrypoint_args": null,
+        "memory_request": null,
+        "memory_limit": null,
+        "container_id": "8dfbc6d6774da32799d09cc8eb1606c5dc652ac78901f11c394f500ce666bf16",
+        "container_image_name": "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f",
+        "container_image_id": "259b3556651452e4de35111bd226d7a17fe902360c7e9e49a4e5da686ffb71c1",
+        "container_image_digests": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "memory_usage": 7557087,
+        "cpu_percentage": "0.00%",
+        "version": "17.2.8",
+        "started": "2026-01-28T06:01:29.467207Z",
+        "created": "2026-01-28T06:01:29.382808Z",
+        "deployed": "2026-01-28T06:01:28.866806Z",
+        "configured": "2026-01-28T06:42:11.598421Z"
+    },
+    {
+        "style": "cephadm:v1",
+        "name": "rgw.gelani.gelani-mon-1.cceitw",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@rgw.gelani.gelani-mon-1.cceitw",
+        "enabled": true,
+        "state": "running",
+        "service_name": "rgw.gelani",
+        "ports": [
+            7480
+        ],
+        "ip": null,
+        "deployed_by": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "rank": null,
+        "rank_generation": null,
+        "extra_container_args": null,
+        "extra_entrypoint_args": null,
+        "memory_request": null,
+        "memory_limit": null,
+        "container_id": "268d7d785ba53fe8b5ccc972917a0341c38c663877794b11514c62ad365fb136",
+        "container_image_name": "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f",
+        "container_image_id": "259b3556651452e4de35111bd226d7a17fe902360c7e9e49a4e5da686ffb71c1",
+        "container_image_digests": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "memory_usage": 275880345,
+        "cpu_percentage": "0.14%",
+        "version": "17.2.8",
+        "started": "2026-01-29T06:40:43.243943Z",
+        "created": "2026-01-29T06:40:43.169950Z",
+        "deployed": "2026-01-29T06:40:42.669946Z",
+        "configured": "2026-01-29T06:40:43.169950Z"
+    },
+    {
+        "style": "cephadm:v1",
+        "name": "mon.gelani-mon-1",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mon.gelani-mon-1",
+        "enabled": true,
+        "state": "running",
+        "service_name": "mon",
+        "memory_request": null,
+        "memory_limit": null,
+        "ports": [],
+        "container_id": "42ffb7d672628deb2c905b635e955551ad073730baa38a3a089e6154d668e810",
+        "container_image_name": "quay.io/ceph/ceph:v17",
+        "container_image_id": "259b3556651452e4de35111bd226d7a17fe902360c7e9e49a4e5da686ffb71c1",
+        "container_image_digests": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "memory_usage": 456549990,
+        "cpu_percentage": "0.67%",
+        "version": "17.2.8",
+        "started": "2026-01-28T06:00:43.148594Z",
+        "created": "2026-01-28T06:00:41.518601Z",
+        "deployed": "2026-01-28T06:00:40.370596Z",
+        "configured": "2026-01-28T06:42:12.034425Z"
+    }
+]
+ubuntu@gelani-mon-1:~$ sudo cephadm shell
+Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+Using ceph image with id '259b35566514' and tag 'v17' created on 2024-11-26 00:45:38 +0000 UTC
+quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f
+root@gelani-mon-1:/# ceph -s
+unable to get monitor info from DNS SRV with service name: ceph-mon
+[errno 2] RADOS object not found (error connecting to the cluster)
+root@gelani-mon-1:/# exit
+exit
+ubuntu@gelani-mon-1:~$ sudo ls -l /etc/ceph/
+total 16
+-rw------- 1 root root 151 Jan 29 06:56 ceph.client.admin.keyring
+-rw-r--r-- 1 root root 281 Jan 29 06:56 ceph.conf
+-rw-r--r-- 1 root ceph 595 Jan 28 06:01 ceph.pub
+-rw-r--r-- 1 root ceph  92 Aug 21 11:33 rbdmap
+ubuntu@gelani-mon-1:~$ sudo tee /etc/ceph/ceph.conf >/dev/null <<'EOF'
+[global]
+fsid = a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+mon_host = 192.168.95.19,192.168.95.240,192.168.95.221
+public_network = 192.168.95.0/24
+EOF
+ubuntu@gelani-mon-1:~$ sudo chmod 644 /etc/ceph/ceph.conf
+ubuntu@gelani-mon-1:~$ sudo ls -l /etc/ceph/ceph.client.admin.keyring
+-rw------- 1 root root 151 Jan 29 06:56 /etc/ceph/ceph.client.admin.keyring
+ubuntu@gelani-mon-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_WARN
+            Degraded data redundancy: 423/1289 objects degraded (32.816%), 106 pgs degraded, 224 pgs undersized
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 433 objects, 657 MiB
+    usage:   3.0 GiB used, 177 GiB / 180 GiB avail
+    pgs:     423/1289 objects degraded (32.816%)
+             241 active+clean
+             118 active+undersized
+             106 active+undersized+degraded
+ 
+ubuntu@gelani-mon-1:~$ sudo ceph osd pool ls detail | egrep 'pool|size'
+pool 1 '.mgr' replicated size 2 min_size 1 crush_rule 0 object_hash rjenkins pg_num 1 pgp_num 1 autoscale_mode on last_change 23 flags hashpspool stripe_width 0 pg_num_max 32 pg_num_min 1 application mgr
+pool 2 'volume' replicated size 2 min_size 1 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 32 autoscale_mode on last_change 50 flags hashpspool,selfmanaged_snaps stripe_width 0 application rbd
+pool 3 'images' replicated size 2 min_size 1 crush_rule 0 object_hash rjenkins pg_num 16 pgp_num 16 autoscale_mode on last_change 53 flags hashpspool,selfmanaged_snaps stripe_width 0 application rbd
+pool 4 'vms' replicated size 2 min_size 1 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 32 autoscale_mode on last_change 56 flags hashpspool,selfmanaged_snaps stripe_width 0 application rbd
+pool 5 'backups' replicated size 2 min_size 1 crush_rule 0 object_hash rjenkins pg_num 16 pgp_num 16 autoscale_mode on last_change 59 flags hashpspool,selfmanaged_snaps stripe_width 0 application rbd
+pool 6 'rgw.meta' replicated size 2 min_size 1 crush_rule 0 object_hash rjenkins pg_num 16 pgp_num 16 autoscale_mode on last_change 89 flags hashpspool stripe_width 0 application rgw
+pool 7 'rgw.control' replicated size 2 min_size 1 crush_rule 0 object_hash rjenkins pg_num 16 pgp_num 16 autoscale_mode on last_change 90 flags hashpspool stripe_width 0 application rgw
+pool 8 'rgw.log' replicated size 2 min_size 1 crush_rule 0 object_hash rjenkins pg_num 16 pgp_num 16 autoscale_mode on last_change 91 flags hashpspool stripe_width 0 application rgw
+pool 9 'rgw.buckets.data' replicated size 2 min_size 1 crush_rule 0 object_hash rjenkins pg_num 64 pgp_num 64 autoscale_mode on last_change 92 flags hashpspool stripe_width 0 application rgw
+pool 10 'rgw.buckets.index' replicated size 2 min_size 1 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 32 autoscale_mode on last_change 93 flags hashpspool stripe_width 0 application rgw
+pool 11 '.rgw.root' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 1 pgp_num_target 32 autoscale_mode on last_change 98 lfor 0/0/98 flags hashpspool stripe_width 0 application rgw
+pool 12 'gelani-zone.rgw.log' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 1 pgp_num_target 32 autoscale_mode on last_change 106 lfor 0/0/106 flags hashpspool stripe_width 0 application rgw
+pool 13 'gelani-zone.rgw.control' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 1 pgp_num_target 32 autoscale_mode on last_change 108 lfor 0/0/108 flags hashpspool stripe_width 0 application rgw
+pool 14 'gelani-zone.rgw.meta' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 1 pgp_num_target 32 autoscale_mode on last_change 108 lfor 0/0/108 flags hashpspool stripe_width 0 pg_autoscale_bias 4 application rgw
+pool 15 'gelani-zone.rgw.buckets.index' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 1 pgp_num_target 32 autoscale_mode on last_change 117 lfor 0/0/117 flags hashpspool stripe_width 0 pg_autoscale_bias 4 application rgw
+pool 16 'gelani-zone.rgw.buckets.data' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 1 pgp_num_target 32 autoscale_mode on last_change 119 lfor 0/0/119 flags hashpspool stripe_width 0 application rgw
+pool 17 'gelani-zone.rgw.buckets.non-ec' replicated size 3 min_size 2 crush_rule 0 object_hash rjenkins pg_num 32 pgp_num 1 pgp_num_target 32 autoscale_mode on last_change 125 lfor 0/0/125 flags hashpspool stripe_width 0 application rgw
+ubuntu@gelani-mon-1:~$ sudo ceph config set global osd_pool_default_size 2
+ubuntu@gelani-mon-1:~$ sudo ceph config set global osd_pool_default_min_size 1
+ubuntu@gelani-mon-1:~$ for p in $(sudo ceph osd pool ls); do
+  echo "Setting pool $p size=2 min_size=1"
+  sudo ceph osd pool set "$p" size 2
+  sudo ceph osd pool set "$p" min_size 1
+done
+Setting pool .mgr size=2 min_size=1
+set pool 1 size to 2
+set pool 1 min_size to 1
+Setting pool volume size=2 min_size=1
+set pool 2 size to 2
+set pool 2 min_size to 1
+Setting pool images size=2 min_size=1
+set pool 3 size to 2
+set pool 3 min_size to 1
+Setting pool vms size=2 min_size=1
+set pool 4 size to 2
+set pool 4 min_size to 1
+Setting pool backups size=2 min_size=1
+set pool 5 size to 2
+set pool 5 min_size to 1
+Setting pool rgw.meta size=2 min_size=1
+set pool 6 size to 2
+set pool 6 min_size to 1
+Setting pool rgw.control size=2 min_size=1
+set pool 7 size to 2
+set pool 7 min_size to 1
+Setting pool rgw.log size=2 min_size=1
+set pool 8 size to 2
+set pool 8 min_size to 1
+Setting pool rgw.buckets.data size=2 min_size=1
+set pool 9 size to 2
+set pool 9 min_size to 1
+Setting pool rgw.buckets.index size=2 min_size=1
+set pool 10 size to 2
+set pool 10 min_size to 1
+Setting pool .rgw.root size=2 min_size=1
+set pool 11 size to 2
+set pool 11 min_size to 1
+Setting pool gelani-zone.rgw.log size=2 min_size=1
+set pool 12 size to 2
+set pool 12 min_size to 1
+Setting pool gelani-zone.rgw.control size=2 min_size=1
+set pool 13 size to 2
+set pool 13 min_size to 1
+Setting pool gelani-zone.rgw.meta size=2 min_size=1
+set pool 14 size to 2
+set pool 14 min_size to 1
+Setting pool gelani-zone.rgw.buckets.index size=2 min_size=1
+set pool 15 size to 2
+set pool 15 min_size to 1
+Setting pool gelani-zone.rgw.buckets.data size=2 min_size=1
+set pool 16 size to 2
+set pool 16 min_size to 1
+Setting pool gelani-zone.rgw.buckets.non-ec size=2 min_size=1
+set pool 17 size to 2
+set pool 17 min_size to 1
+ubuntu@gelani-mon-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_WARN
+            Reduced data availability: 1 pg peering
+            Degraded data redundancy: 44/830 objects degraded (5.301%), 4 pgs degraded
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d); 7 remapped pgs
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 415 objects, 561 MiB
+    usage:   3.1 GiB used, 177 GiB / 180 GiB avail
+    pgs:     2.151% pgs not active
+             44/830 objects degraded (5.301%)
+             53/830 objects misplaced (6.386%)
+             444 active+clean
+             10  peering
+             4   active+remapped+backfill_wait
+             4   active+recovery_wait+degraded
+             2   active+recovering
+             1   active+remapped
+ 
+ubuntu@gelani-mon-1:~$ sudo ceph health detail
+HEALTH_OK
+ubuntu@gelani-mon-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d); 1 remapped pgs
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 442 objects, 657 MiB
+    usage:   3.0 GiB used, 177 GiB / 180 GiB avail
+    pgs:     464 active+clean
+             1   active+clean+remapped
+ 
+ubuntu@gelani-mon-1:~$ sudo ceph health detail
+HEALTH_OK
+ubuntu@gelani-mon-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 434 objects, 657 MiB
+    usage:   3.0 GiB used, 177 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+ubuntu@gelani-mon-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 432 objects, 657 MiB
+    usage:   3.0 GiB used, 177 GiB / 180 GiB avail
+    pgs:     0.215% pgs not active
+             464 active+clean
+             1   peering
+ 
+ubuntu@gelani-mon-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 432 objects, 657 MiB
+    usage:   3.0 GiB used, 177 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+  io:
+    recovery: 1024 KiB/s, 0 objects/s
+ 
+ubuntu@gelani-mon-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 432 objects, 657 MiB
+    usage:   3.0 GiB used, 177 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+ubuntu@gelani-mon-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 432 objects, 657 MiB
+    usage:   3.0 GiB used, 177 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+  io:
+    client:   32 KiB/s rd, 0 B/s wr, 31 op/s rd, 21 op/s wr
+ 
+ubuntu@gelani-mon-1:~$ [global]
+fsid = a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+mon_host = 192.168.95.19,192.168.95.240,192.168.95.221
+public_network = 192.168.95.0/24
+[global]: command not found
+Command 'fsid' not found, did you mean:
+  command 'fnid' from deb id-utils (4.6.28-20200521ss15dab)
+  command 'fid' from deb id-utils (4.6.28-20200521ss15dab)
+  command 'ssid' from deb suckless-tools (46-1)
+  command 'vsid' from deb vice (3.6.1+dfsg-2)
+Try: sudo apt install <deb name>
+mon_host: command not found
+public_network: command not found
+ubuntu@gelani-mon-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 432 objects, 657 MiB
+    usage:   3.1 GiB used, 177 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+ubuntu@gelani-mon-1:~$ sudo scp /etc/ceph/ceph.conf ubuntu@192.168.95.93:/tmp/ceph.conf
+sudo scp /etc/ceph/ceph.client.glance.keyring ubuntu@192.168.95.93:/tmp/
+sudo scp /etc/ceph/ceph.client.cinder.keyring ubuntu@192.168.95.93:/tmp/
+sudo scp /etc/ceph/ceph.client.nova.keyring ubuntu@192.168.95.93:/tmp/
+The authenticity of host '192.168.95.93 (192.168.95.93)' can't be established.
+ED25519 key fingerprint is SHA256:c2OeWOBIkW9ZNBh4MRPe1uS9dpW9Va3GvNEwOTFAea0.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.95.93' (ED25519) to the list of known hosts.
+ubuntu@192.168.95.93's password: 
+ceph.conf                                                                          100%  141   393.1KB/s   00:00    
+ubuntu@192.168.95.93's password: 
+/etc/ceph/ceph.client.glance.keyring: No such file or directory
+ubuntu@192.168.95.93's password: 
+Permission denied, please try again.
+ubuntu@192.168.95.93's password: 
+Permission denied, please try again.
+ubuntu@192.168.95.93's password: 
+/etc/ceph/ceph.client.cinder.keyring: No such file or directory
+ubuntu@192.168.95.93's password: 
+/etc/ceph/ceph.client.nova.keyring: No such file or directory
+ubuntu@gelani-mon-1:~$ sudo ls -lh /etc/ceph/
+total 16K
+-rw------- 1 root root 151 Jan 29 06:56 ceph.client.admin.keyring
+-rw-r--r-- 1 root root 141 Jan 31 12:40 ceph.conf
+-rw-r--r-- 1 root ceph 595 Jan 28 06:01 ceph.pub
+-rw-r--r-- 1 root ceph  92 Aug 21 11:33 rbdmap
+ubuntu@gelani-mon-1:~$ sudo ls -lh /etc/ceph/ceph.client.*.keyring
+-rw------- 1 root root 151 Jan 29 06:56 /etc/ceph/ceph.client.admin.keyring
+ubuntu@gelani-mon-1:~$ sudo cephadm shell
+Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+Using ceph image with id '259b35566514' and tag 'v17' created on 2024-11-26 00:45:38 +0000 UTC
+quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f
+root@gelani-mon-1:/# ceph auth get-or-create client.glance \
+  mon "profile rbd" \
+  osd "profile rbd pool=images" \
+  -o /tmp/ceph.client.glance.keyring
+
+ceph auth get-or-create client.cinder \
+  mon "profile rbd" \
+  osd "profile rbd pool=volume, profile rbd pool=vms, profile rbd pool=backups, profile rbd pool=images" \
+  -o /tmp/ceph.client.cinder.keyring
+
+ceph auth get-or-create client.nova \
+  mon "profile rbd" \
+  osd "profile rbd pool=vms" \
+  -o /tmp/ceph.client.nova.keyring
+unable to get monitor info from DNS SRV with service name: ceph-mon
+2026-01-31T13:10:28.764+0000 7f2a463f7640 -1 failed for service _ceph-mon._tcp
+
+2026-01-31T13:10:28.764+0000 7f2a463f7640 -1 monclient: get_monmap_and_config cannot identify monitors to contact
+[errno 2] RADOS object not found (error connecting to the cluster)
+unable to get monitor info from DNS SRV with service name: ceph-mon
+2026-01-31T13:10:29.020+0000 7f854db97640 -1 failed for service _ceph-mon._tcp
+
+2026-01-31T13:10:29.020+0000 7f854db97640 -1 monclient: get_monmap_and_config cannot identify monitors to contact
+
+[errno 2] RADOS object not found (error connecting to the cluster)
+unable to get monitor info from DNS SRV with service name: ceph-mon
+2026-01-31T13:10:29.292+0000 7fb22ab35640 -1 failed for service _ceph-mon._tcp
+
+2026-01-31T13:10:29.292+0000 7fb22ab35640 -1 monclient: get_monmap_and_config cannot identify monitors to contact
+
+[errno 2] RADOS object not found (error connecting to the cluster)
+root@gelani-mon-1:/# exit
+exit
+ubuntu@gelani-mon-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 432 objects, 657 MiB
+    usage:   3.1 GiB used, 177 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+ubuntu@gelani-mon-1:~$ sudo ceph auth get-or-create client.glance \
+  mon "profile rbd" \
+  osd "profile rbd pool=images" \
+  -o /etc/ceph/ceph.client.glance.keyring
+
+sudo ceph auth get-or-create client.cinder \
+  mon "profile rbd" \
+  osd "profile rbd pool=volume, profile rbd pool=vms, profile rbd pool=backups, profile rbd pool=images" \
+  -o /etc/ceph/ceph.client.cinder.keyring
+
+sudo ceph auth get-or-create client.nova \
+  mon "profile rbd" \
+  osd "profile rbd pool=vms" \
+  -o /etc/ceph/ceph.client.nova.keyring
+ubuntu@gelani-mon-1:~$ sudo ls -lh /etc/ceph/ceph.client.{glance,cinder,nova}.keyring
+-rw-r--r-- 1 root root 64 Jan 31 13:12 /etc/ceph/ceph.client.cinder.keyring
+-rw-r--r-- 1 root root 64 Jan 31 13:12 /etc/ceph/ceph.client.glance.keyring
+-rw-r--r-- 1 root root 62 Jan 31 13:12 /etc/ceph/ceph.client.nova.keyring
+ubuntu@gelani-mon-1:~$ sudo scp /etc/ceph/ceph.conf ubuntu@192.168.95.93:/tmp/ceph.conf
+sudo scp /etc/ceph/ceph.client.glance.keyring ubuntu@192.168.95.93:/tmp/
+sudo scp /etc/ceph/ceph.client.cinder.keyring ubuntu@192.168.95.93:/tmp/
+sudo scp /etc/ceph/ceph.client.nova.keyring ubuntu@192.168.95.93:/tmp/
+ubuntu@192.168.95.93's password: 
+ceph.conf                                                                          100%  141   426.6KB/s   00:00    
+ubuntu@192.168.95.93's password: 
+ceph.client.glance.keyring                                                         100%   64   161.1KB/s   00:00    
+ubuntu@192.168.95.93's password: 
+ceph.client.cinder.keyring                                                         100%   64   163.6KB/s   00:00    
+ubuntu@192.168.95.93's password: 
+ceph.client.nova.keyring                                                           100%   62   133.8KB/s   00:00    
+ubuntu@gelani-mon-1:~$ ^C
+ubuntu@gelani-mon-1:~$ sudo scp /etc/ceph/ceph.client.admin.keyring ubuntu@192.168.95.93:/tmp/
+ubuntu@192.168.95.93's password: 
+ceph.client.admin.keyring                                                                                                                                                                                 100%  151   373.9KB/s   00:00    
+ubuntu@gelani-mon-1:~$ sudo mv /tmp/ceph.client.admin.keyring /etc/ceph/
+sudo chmod 600 /etc/ceph/ceph.client.admin.keyring
+sudo ceph -s
+mv: cannot stat '/tmp/ceph.client.admin.keyring': No such file or directory
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 432 objects, 657 MiB
+    usage:   3.1 GiB used, 177 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+ubuntu@gelani-mon-1:~$ cd /opt/stack/devstack
+-bash: cd: /opt/stack/devstack: No such file or directory
+ubuntu@gelani-mon-1:~$ source openrc admin admin
+-bash: openrc: No such file or directory
+ubuntu@gelani-mon-1:~$ sudo ls -l /opt/stack/devstack/openrc
+sudo ls -l /opt/stack/devstack/openrc.sh
+sudo ls -l /opt/stack/devstack/stackrc
+ls: cannot access '/opt/stack/devstack/openrc': No such file or directory
+ls: cannot access '/opt/stack/devstack/openrc.sh': No such file or directory
+ls: cannot access '/opt/stack/devstack/stackrc': No such file or directory
+ubuntu@gelani-mon-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 3d)
+    mgr: gelani-mon-1.gzltah(active, since 2d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 3d), 6 in (since 3d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 432 objects, 657 MiB
+    usage:   3.1 GiB used, 177 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+ubuntu@gelani-mon-1:~$ sudo rbd -p volume ls
+ubuntu@gelani-mon-1:~$ sudo apt install -y ceph-common
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ceph-common is already the newest version (17.2.9-0ubuntu0.22.04.1).
+0 upgraded, 0 newly installed, 0 to remove and 7 not upgraded.
+ubuntu@gelani-mon-1:~$ sudo rbd -p volume ls
+ubuntu@gelani-mon-1:~$ sudo cephadm shell
+rbd -p volume ls
+Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+Using ceph image with id '259b35566514' and tag 'v17' created on 2024-11-26 00:45:38 +0000 UTC
+quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f
+root@gelani-mon-1:/# client_loop: send disconnect: Broken pipe
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.19
+ubuntu@192.168.95.19's password: 
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-164-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Feb  1 03:50:15 UTC 2026
+
+  System load:  0.05               Processes:             145
+  Usage of /:   17.6% of 38.58GB   Users logged in:       0
+  Memory usage: 51%                IPv4 address for ens3: 192.168.95.19
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+8 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+2 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+New release '24.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Sat Jan 31 12:35:14 2026 from 192.168.95.86
+ubuntu@gelani-mon-1:~$ 
+
 ``` 
