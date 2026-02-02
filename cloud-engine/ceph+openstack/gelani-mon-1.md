@@ -1515,4 +1515,404 @@ unable to get monitor info from DNS SRV with service name: ceph-mon
 [errno 2] RADOS object not found (error connecting to the cluster)
 root@gelani-mon-1:/# 
 
+
+ubuntu@gelani-mon-1:~$ sudo -s
+FSID=a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+
+# show what cephadm thinks exists
+cephadm ls | head -n 50
+
+# find the config file cephadm mentioned
+ls -l /var/lib/ceph/$FSID/mon.*/*config* 2>/dev/null || true
+ls -l /var/lib/ceph/$FSID/mon.*/*/config 2>/dev/null || true
+find /var/lib/ceph/$FSID -maxdepth 4 -type f -name "config" | head
+
+# find admin keyring
+find /etc/ceph /var/lib/ceph/$FSID -maxdepth 4 -type f -name "*admin*keyring*" 2>/dev/null
+root@gelani-mon-1:/home/ubuntu# FSID=a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+root@gelani-mon-1:/home/ubuntu# cephadm ls | head -n 50
+[
+    {
+        "style": "cephadm:v1",
+        "name": "grafana.gelani-mon-1",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@grafana.gelani-mon-1",
+        "enabled": true,
+        "state": "running",
+        "service_name": "grafana",
+        "ports": [
+            3000
+        ],
+        "ip": null,
+        "deployed_by": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "rank": null,
+        "rank_generation": null,
+        "extra_container_args": null,
+        "extra_entrypoint_args": null,
+        "memory_request": null,
+        "memory_limit": null,
+        "container_id": "d3212a8fe771d61c7153b9bdde32993c225687d0b414954c01712936aecb910e",
+        "container_image_name": "quay.io/ceph/ceph-grafana:9.4.7",
+        "container_image_id": "954c08fa618887fe9a6fe572ae541197c77e625b05f4193df7898f5ac649ada9",
+        "container_image_digests": [
+            "quay.io/ceph/ceph-grafana@sha256:97d919ad919187a9b924574c2480be30f840d252447bc0a91ff5213f3cf7f4b1"
+        ],
+        "memory_usage": 87535124,
+        "cpu_percentage": "1.06%",
+        "version": "9.4.7",
+        "started": "2026-01-28T06:03:50.879003Z",
+        "created": "2026-01-28T06:02:58.191193Z",
+        "deployed": "2026-01-28T06:02:57.695190Z",
+        "configured": "2026-01-28T06:03:50.607419Z"
+    },
+    {
+        "style": "cephadm:v1",
+        "name": "alertmanager.gelani-mon-1",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@alertmanager.gelani-mon-1",
+        "enabled": true,
+        "state": "running",
+        "service_name": "alertmanager",
+        "ports": [
+            9093,
+            9094
+        ],
+        "ip": null,
+        "deployed_by": [
+root@gelani-mon-1:/home/ubuntu# ls -l /var/lib/ceph/$FSID/mon.*/*config* 2>/dev/null || true
+ls -l /var/lib/ceph/$FSID/mon.*/*/config 2>/dev/null || true
+find /var/lib/ceph/$FSID -maxdepth 4 -type f -name "config" | head
+-rw------- 1 167 167  0 Jan 31 08:19 /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+-rw------- 1 167 167 38 Jan 28 06:42 /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/unit.configured
+/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mgr.gelani-mon-1.gzltah/config
+/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/crash.gelani-mon-1/config
+/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/rgw.gelani.gelani-mon-1.cceitw/config
+/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+root@gelani-mon-1:/home/ubuntu# find /etc/ceph /var/lib/ceph/$FSID -maxdepth 4 -type f -name "*admin*keyring*" 2>/dev/null
+/etc/ceph/ceph.client.admin.keyring
+/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/config/ceph.client.admin.keyring
+root@gelani-mon-1:/home/ubuntu# sudo cephadm shell -- \
+  ceph -c /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config \
+      -k /etc/ceph/ceph.client.admin.keyring \
+  -s
+Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+Using ceph image with id '259b35566514' and tag 'v17' created on 2024-11-26 00:45:38 +0000 UTC
+quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f
+Error initializing cluster client: ObjectNotFound('RADOS object not found (error calling conf_read_file)')
+root@gelani-mon-1:/home/ubuntu# sudo cephadm shell -- \
+  ceph -c /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config \
+      -k /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/client.admin.keyring \
+  -s
+Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+Using ceph image with id '259b35566514' and tag 'v17' created on 2024-11-26 00:45:38 +0000 UTC
+quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f
+Error initializing cluster client: ObjectNotFound('RADOS object not found (error calling conf_read_file)')
+root@gelani-mon-1:/home/ubuntu# exit
+exit
+ERROR: cephadm should be run as root
+find: ‘/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e’: Permission denied
+/etc/ceph/ceph.client.admin.keyring
+ubuntu@gelani-mon-1:~$ sudo cephadm shell -- \
+  ceph -c /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config \
+      -k /etc/ceph/ceph.client.admin.keyring \
+  -s
+Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+Using ceph image with id '259b35566514' and tag 'v17' created on 2024-11-26 00:45:38 +0000 UTC
+quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f
+Error initializing cluster client: ObjectNotFound('RADOS object not found (error calling conf_read_file)')
+ubuntu@gelani-mon-1:~$ sudo cephadm shell -- \
+  ceph -c /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config \
+      -k /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/client.admin.keyring \
+  -s
+Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+Using ceph image with id '259b35566514' and tag 'v17' created on 2024-11-26 00:45:38 +0000 UTC
+quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f
+Error initializing cluster client: ObjectNotFound('RADOS object not found (error calling conf_read_file)')
+ubuntu@gelani-mon-1:~$ client_loop: send disconnect: Broken pipe
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.19
+^C
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.19
+ubuntu@192.168.95.19's password: 
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-164-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Feb  2 05:57:11 UTC 2026
+
+  System load:  0.04               Processes:             146
+  Usage of /:   18.6% of 38.58GB   Users logged in:       0
+  Memory usage: 51%                IPv4 address for ens3: 192.168.95.19
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+2 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+*** System restart required ***
+Last login: Sun Feb  1 03:50:15 2026 from 192.168.95.86
+ubuntu@gelani-mon-1:~$ sudo apt update sudo apt upgrade -y
+E: The update command takes no arguments
+ubuntu@gelani-mon-1:~$ sudo apt update &&  sudo apt upgrade -y
+Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease               
+Get:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:4 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1,014 kB]
+Get:5 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:6 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [3,188 kB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [223 kB]
+Get:8 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1,250 kB]
+Fetched 6,059 kB in 4s (1,530 kB/s)                    
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+3 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+Get another security update through Ubuntu Pro with 'esm-apps' enabled:
+  containerd
+Learn more about Ubuntu Pro at https://ubuntu.com/pro
+The following packages will be upgraded:
+  ubuntu-minimal ubuntu-server ubuntu-standard
+3 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 8,664 B of archives.
+After this operation, 0 B of additional disk space will be used.
+Get:1 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-minimal amd64 1.481.5 [2,900 B]
+Get:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-standard amd64 1.481.5 [2,920 B]
+Get:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-server amd64 1.481.5 [2,844 B]
+Fetched 8,664 B in 1s (7,602 B/s)
+(Reading database ... 95026 files and directories currently installed.)
+Preparing to unpack .../ubuntu-minimal_1.481.5_amd64.deb ...
+Unpacking ubuntu-minimal (1.481.5) over (1.481.4) ...
+Preparing to unpack .../ubuntu-standard_1.481.5_amd64.deb ...
+Unpacking ubuntu-standard (1.481.5) over (1.481.4) ...
+Preparing to unpack .../ubuntu-server_1.481.5_amd64.deb ...
+Unpacking ubuntu-server (1.481.5) over (1.481.4) ...
+Setting up ubuntu-minimal (1.481.5) ...
+Setting up ubuntu-standard (1.481.5) ...
+Setting up ubuntu-server (1.481.5) ...
+Scanning processes...                                                                                                                                                                                                                       
+Scanning linux images...                                                                                                                                                                                                                    
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@gelani-mon-1:~$ sudo cephadm ls | egrep -i "mon|mgr|osd" | head -n 50
+sudo ls -l /etc/ceph
+sudo find /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e -maxdepth 3 -name config -o -name "*admin*keyring*"
+        "name": "grafana.gelani-mon-1",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@grafana.gelani-mon-1",
+        "name": "alertmanager.gelani-mon-1",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@alertmanager.gelani-mon-1",
+        "name": "mgr.gelani-mon-1.gzltah",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mgr.gelani-mon-1.gzltah",
+        "service_name": "mgr",
+        "name": "node-exporter.gelani-mon-1",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@node-exporter.gelani-mon-1",
+        "name": "prometheus.gelani-mon-1",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@prometheus.gelani-mon-1",
+        "name": "crash.gelani-mon-1",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@crash.gelani-mon-1",
+        "name": "rgw.gelani.gelani-mon-1.cceitw",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@rgw.gelani.gelani-mon-1.cceitw",
+        "name": "mon.gelani-mon-1",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mon.gelani-mon-1",
+        "service_name": "mon",
+total 28
+-rw------- 1 root root 151 Jan 29 06:56 ceph.client.admin.keyring
+-rw-r--r-- 1 root root  64 Jan 31 13:12 ceph.client.cinder.keyring
+-rw-r----- 1 root root  64 Jan 31 13:12 ceph.client.glance.keyring
+-rw-r--r-- 1 root root  62 Jan 31 13:12 ceph.client.nova.keyring
+-rw-r--r-- 1 root root 141 Jan 31 12:40 ceph.conf
+-rw-r--r-- 1 root ceph 595 Jan 28 06:01 ceph.pub
+-rw-r--r-- 1 root ceph  92 Aug 21 11:33 rbdmap
+/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mgr.gelani-mon-1.gzltah/config
+/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/config
+/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/config/ceph.client.admin.keyring
+/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/crash.gelani-mon-1/config
+/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/rgw.gelani.gelani-mon-1.cceitw/config
+/var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+ubuntu@gelani-mon-1:~$ 
+
+ubuntu@gelani-mon-1:~$ sudo cephadm shell -- ceph -c /etc/ceph/ceph.conf -k /etc/ceph/ceph.client.admin.keyring -s
+Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+Using ceph image with id '259b35566514' and tag 'v17' created on 2024-11-26 00:45:38 +0000 UTC
+quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f
+2026-02-02T06:16:00.912+0000 7f605aac7640 -1 auth: unable to find a keyring on /etc/ceph/ceph.client.admin.keyring: (2) No such file or directory
+2026-02-02T06:16:00.912+0000 7f605aac7640 -1 AuthRegistry(0x7f6054061140) no keyring found at /etc/ceph/ceph.client.admin.keyring, disabling cephx
+unable to get monitor info from DNS SRV with service name: ceph-mon
+2026-02-02T06:16:01.096+0000 7f605aac7640 -1 failed for service _ceph-mon._tcp
+2026-02-02T06:16:01.096+0000 7f605aac7640 -1 monclient: get_monmap_and_config cannot identify monitors to contact
+[errno 2] RADOS object not found (error connecting to the cluster)
+ubuntu@gelani-mon-1:~$ sudo cephadm shell -- ceph orch ps --daemon-type mon
+Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+Using ceph image with id '259b35566514' and tag 'v17' created on 2024-11-26 00:45:38 +0000 UTC
+quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f
+unable to get monitor info from DNS SRV with service name: 2026-02-02T06:16:21.825+0000 7f70489c3640 -1 failed for service _ceph-mon._tcp
+ceph-mon
+[errno 2] RADOS object not found (error connecting to the cluster)
+2026-02-02T06:16:21.825+0000 7f70489c3640 -1 monclient: get_monmap_and_config cannot identify monitors to contact
+ubuntu@gelani-mon-1:~$ sudo ceph -c /etc/ceph/ceph.conf -k /etc/ceph/ceph.client.admin.keyring -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 18h)
+    mgr: gelani-mon-1.gzltah(active, since 3d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 4d), 6 in (since 4d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 1.33k objects, 4.1 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+  io:
+    client:   32 KiB/s rd, 0 B/s wr, 31 op/s rd, 21 op/s wr
+ 
+ubuntu@gelani-mon-1:~$ sudo cephadm shell -- ceph -s
+Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
+Using ceph image with id '259b35566514' and tag 'v17' created on 2024-11-26 00:45:38 +0000 UTC
+quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f
+unable to get monitor info from DNS SRV with service name: ceph-mon
+2026-02-02T06:17:39.797+0000 7fd5a6d36640 -1 failed for service _ceph-mon._tcp
+2026-02-02T06:17:39.797+0000 7fd5a6d36640 -1 monclient: get_monmap_and_config cannot identify monitors to contact
+[errno 2] RADOS object not found (error connecting to the cluster)
+ubuntu@gelani-mon-1:~$ sudo ceph -c /etc/ceph/ceph.conf -k /etc/ceph/ceph.client.admin.keyring -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 18h)
+    mgr: gelani-mon-1.gzltah(active, since 3d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 4d), 6 in (since 4d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 1.33k objects, 4.1 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+ubuntu@gelani-mon-1:~$ sudo systemctl restart ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mon.gelani-mon-1
+ubuntu@gelani-mon-1:~$ sudo systemctl restart ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mon.gelani-mon-1
+ubuntu@gelani-mon-1:~$ sudo systemctl status  ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mon.gelani-mon-1 --no-pager
+● ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mon.gelani-mon-1.service - Ceph mon.gelani-mon-1 for a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+     Loaded: loaded (/etc/systemd/system/ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-02-02 06:24:22 UTC; 34s ago
+   Main PID: 715739 (bash)
+      Tasks: 10 (limit: 4643)
+     Memory: 8.6M
+        CPU: 56ms
+     CGroup: /system.slice/system-ceph\x2da9625cff\x2dfc0e\x2d11f0\x2da1f6\x2d6998182b0a5e.slice/ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mon.gelani-mon-1.service
+             ├─715739 /bin/bash /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/unit.run
+             └─715756 /usr/bin/docker run --rm --ipc=host --stop-signal=SIGTERM --ulimit nofile=1048576 --net=host --entrypoint /usr/bin/ceph-mon --privileged --group-add=disk --init --name ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e-mon…
+
+Feb 02 06:24:44 gelani-mon-1 bash[715756]: debug 2026-02-02T06:24:44.628+0000 7fce7487b640  0 log_channel(audit) log [DBG] : from='mgr.15189 192.168.95.19:0/2181611709' entity='mgr.gelani-mon-1.gzltah' cmd=[{"prefix"… "json"}]: dispatch
+Feb 02 06:24:44 gelani-mon-1 bash[715756]: cluster 2026-02-02T06:24:44.606759+0000 mgr.gelani-mon-1.gzltah (mgr.15189) 172287 : cluster [DBG] pgmap v171957: 465 pgs: 465 active+clean; 4.1 GiB data, 10 GiB used, 170 GiB / 180 GiB avail
+Feb 02 06:24:44 gelani-mon-1 bash[715756]: audit 2026-02-02T06:24:44.632747+0000 mon.gelani-mon-1 (mon.0) 23 : audit [DBG] from='mgr.15189 192.168.95.19:0/2181611709' entity='mgr.gelani-mon-1.gzltah' cmd=[{"prefix": … "json"}]: dispatch
+Feb 02 06:24:44 gelani-mon-1 bash[715756]: audit 2026-02-02T06:24:44.874602+0000 mon.gelani-mon-3 (mon.2) 1740 : audit [DBG] from='client.? 192.168.95.93:0/2377146107' entity='client.cinder' cmd=[{"prefix":"df", "for…:"json"}]: dispatch
+Feb 02 06:24:44 gelani-mon-1 bash[715756]: audit 2026-02-02T06:24:44.876075+0000 mon.gelani-mon-3 (mon.2) 1741 : audit [DBG] from='client.? 192.168.95.93:0/2377146107' entity='client.cinder' cmd=[{"prefix":"osd pool …:"json"}]: dispatch
+Feb 02 06:24:47 gelani-mon-1 bash[715756]: cluster 2026-02-02T06:24:46.607935+0000 mgr.gelani-mon-1.gzltah (mgr.15189) 172288 : cluster [DBG] pgmap v171958: 465 pgs: 465 active+clean; 4.1 GiB data, 10 GiB used, 170 GiB / 180 GiB avail
+Feb 02 06:24:49 gelani-mon-1 bash[715756]: cluster 2026-02-02T06:24:48.608330+0000 mgr.gelani-mon-1.gzltah (mgr.15189) 172289 : cluster [DBG] pgmap v171959: 465 pgs: 465 active+clean; 4.1 GiB data, 10 GiB used, 170 GiB / 180 GiB avail
+Feb 02 06:24:51 gelani-mon-1 bash[715756]: cluster 2026-02-02T06:24:50.609623+0000 mgr.gelani-mon-1.gzltah (mgr.15189) 172290 : cluster [DBG] pgmap v171960: 465 pgs: 465 active+clean; 4.1 GiB data, 10 GiB used, 170 GiB / 180 GiB avail
+Feb 02 06:24:53 gelani-mon-1 bash[715756]: cluster 2026-02-02T06:24:52.610063+0000 mgr.gelani-mon-1.gzltah (mgr.15189) 172291 : cluster [DBG] pgmap v171961: 465 pgs: 465 active+clean; 4.1 GiB data, 10 GiB used, 170 GiB / 180 GiB avail
+Feb 02 06:24:55 gelani-mon-1 bash[715756]: cluster 2026-02-02T06:24:54.610481+0000 mgr.gelani-mon-1.gzltah (mgr.15189) 172292 : cluster [DBG] pgmap v171962: 465 pgs: 465 active+clean; 4.1 GiB data, 10 GiB used, 170 GiB / 180 GiB avail
+Hint: Some lines were ellipsized, use -l to show in full.
+ubuntu@gelani-mon-1:~$ systemctl list-units --type=service | grep -E "ceph-.*@mon\.|ceph-.*@mgr\.|ceph-.*@osd\."
+  ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mgr.gelani-mon-1.gzltah.service        loaded active running Ceph mgr.gelani-mon-1.gzltah for a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+  ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mon.gelani-mon-1.service               loaded active running Ceph mon.gelani-mon-1 for a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+ubuntu@gelani-mon-1:~$ sudo cephadm ls | head -n 60
+[
+    {
+        "style": "cephadm:v1",
+        "name": "grafana.gelani-mon-1",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@grafana.gelani-mon-1",
+        "enabled": true,
+        "state": "running",
+        "service_name": "grafana",
+        "ports": [
+            3000
+        ],
+        "ip": null,
+        "deployed_by": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "rank": null,
+        "rank_generation": null,
+        "extra_container_args": null,
+        "extra_entrypoint_args": null,
+        "memory_request": null,
+        "memory_limit": null,
+        "container_id": "d3212a8fe771d61c7153b9bdde32993c225687d0b414954c01712936aecb910e",
+        "container_image_name": "quay.io/ceph/ceph-grafana:9.4.7",
+        "container_image_id": "954c08fa618887fe9a6fe572ae541197c77e625b05f4193df7898f5ac649ada9",
+        "container_image_digests": [
+            "quay.io/ceph/ceph-grafana@sha256:97d919ad919187a9b924574c2480be30f840d252447bc0a91ff5213f3cf7f4b1"
+        ],
+        "memory_usage": 88132812,
+        "cpu_percentage": "0.01%",
+        "version": "9.4.7",
+        "started": "2026-01-28T06:03:50.879003Z",
+        "created": "2026-01-28T06:02:58.191193Z",
+        "deployed": "2026-01-28T06:02:57.695190Z",
+        "configured": "2026-01-28T06:03:50.607419Z"
+    },
+    {
+        "style": "cephadm:v1",
+        "name": "alertmanager.gelani-mon-1",
+        "fsid": "a9625cff-fc0e-11f0-a1f6-6998182b0a5e",
+        "systemd_unit": "ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@alertmanager.gelani-mon-1",
+        "enabled": true,
+        "state": "running",
+        "service_name": "alertmanager",
+        "ports": [
+            9093,
+            9094
+        ],
+        "ip": null,
+        "deployed_by": [
+            "quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f"
+        ],
+        "rank": null,
+        "rank_generation": null,
+        "extra_container_args": null,
+        "extra_entrypoint_args": null,
+        "memory_request": null,
+        "memory_limit": null,
+        "container_id": "cb53c3eb0871bb512a3d6ac791818427411457af96835bd8f99d6e184377bac0",
+        "container_image_name": "quay.io/prometheus/alertmanager:v0.25.0",
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>
+BrokenPipeError: [Errno 32] Broken pipe
+ubuntu@gelani-mon-1:~$ 
+
 ``` 
