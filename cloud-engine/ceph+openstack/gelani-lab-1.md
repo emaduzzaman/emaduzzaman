@@ -6182,5 +6182,489 @@ Feb 01 09:31:35 gelani-lab-1 devstack@g-api.service[2093241]: DEBUG dbcounter [-
 ubuntu@gelani-lab-1:~/images$ sudo rbd -p images ls
 ubuntu@gelani-lab-1:~/images$ 
 
+ubuntu@gelani-lab-1:~/images$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 4d)
+    mgr: gelani-mon-1.gzltah(active, since 3d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 4d), 6 in (since 4d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 1.33k objects, 4.0 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+ubuntu@gelani-lab-1:~/images$ sudo ceph auth del client.glance
+ubuntu@gelani-lab-1:~/images$ sudo ceph auth get-or-create client.glance \
+  mon 'profile rbd' \
+  osd 'profile rbd pool=images' \
+  -o /etc/ceph/ceph.client.glance.keyring
+ubuntu@gelani-lab-1:~/images$ sudo ceph auth get client.glance
+[client.glance]
+        key = AQACIH9p3dkgORAA58hFBmGzUTXcVTMfH2l5nA==
+        caps mon = "profile rbd"
+        caps osd = "profile rbd pool=images"
+ubuntu@gelani-lab-1:~/images$ sudo chown root:glance /etc/ceph/ceph.client.glance.keyring
+chown: invalid group: ‘root:glance’
+ubuntu@gelani-lab-1:~/images$ ps -ef | egrep 'glance-api|uwsgi.*glance|apache2.*glance' | grep -v egrep
+stack    2093237       1  0 09:31 ?        00:00:00 glance-apiuWSGI master
+stack    2093239 2093237  0 09:31 ?        00:00:02 glance-apiuWSGI worker 1
+stack    2093240 2093237  0 09:31 ?        00:00:02 glance-apiuWSGI worker 2
+stack    2093241 2093237  0 09:31 ?        00:00:02 glance-apiuWSGI worker 3
+stack    2093242 2093237  0 09:31 ?        00:00:01 glance-apiuWSGI worker 4
+ubuntu   2094877 2048213  0 09:45 pts/1    00:00:00 grep -E --color=auto glance-api|uwsgi.*glance|apache2.*glance
+ubuntu@gelani-lab-1:~/images$ sudo chown root:stack /etc/ceph/ceph.client.glance.keyring
+ubuntu@gelani-lab-1:~/images$ sudo chmod 640 /etc/ceph/ceph.client.glance.keyring
+ubuntu@gelani-lab-1:~/images$ sudo chmod 644 /etc/ceph/ceph.conf
+ubuntu@gelani-lab-1:~/images$ sudo systemctl restart devstack@g-api
+ubuntu@gelani-lab-1:~/images$ sudo systemctl restart apache2
+ubuntu@gelani-lab-1:~/images$ sudo -u stack rbd -p images ls
+2026-02-01T09:46:44.206+0000 7fe9b79274c0 -1 auth: unable to find a keyring on /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin: (2) No such file or directory
+
+2026-02-01T09:46:44.206+0000 7fe9b79274c0 -1 AuthRegistry(0x55b949f9b168) no keyring found at /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin, disabling cephx
+
+2026-02-01T09:46:44.206+0000 7fe9b79274c0 -1 auth: unable to find a keyring on /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin: (2) No such file or directory
+
+2026-02-01T09:46:44.206+0000 7fe9b79274c0 -1 AuthRegistry(0x7ffca453a0f0) no keyring found at /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin, disabling cephx
+
+2026-02-01T09:46:44.210+0000 7fe9b645a640 -1 monclient(hunting): handle_auth_bad_method server allowed_methods [2] but i only support [1]
+
+2026-02-01T09:46:44.210+0000 7fe9b79274c0 -1 monclient: authenticate NOTE: no keyring found; disabled cephx authentication
+
+rbd: couldn't connect to the cluster!
+rbd: listing images failed: (95) Operation not supported
+ubuntu@gelani-lab-1:~/images$ ps -ef | egrep 'glance-api|devstack@g-api|uwsgi.*glance|apache2' | grep -v egrep
+www-data 1323620       1  0 Jan27 ?        00:00:11 /usr/bin/htcacheclean -d 120 -p /var/cache/apache2/mod_cache_disk -l 300M -n
+stack    2094996       1  0 09:46 ?        00:00:00 glance-apiuWSGI master
+stack    2094998 2094996  1 09:46 ?        00:00:01 glance-apiuWSGI worker 1
+stack    2094999 2094996  1 09:46 ?        00:00:01 glance-apiuWSGI worker 2
+stack    2095000 2094996  1 09:46 ?        00:00:02 glance-apiuWSGI worker 3
+stack    2095001 2094996  1 09:46 ?        00:00:01 glance-apiuWSGI worker 4
+root     2095034       1  0 09:46 ?        00:00:00 /usr/sbin/apache2 -k start
+www-data 2095038 2095034  0 09:46 ?        00:00:00 /usr/sbin/apache2 -k start
+www-data 2095039 2095034  0 09:46 ?        00:00:00 /usr/sbin/apache2 -k start
+ubuntu   2095459 2048213  0 09:49 pts/1    00:00:00 grep -E --color=auto glance-api|devstack@g-api|uwsgi.*glance|apache2
+ubuntu@gelani-lab-1:~/images$ sudo chown root:stack /etc/ceph/ceph.client.glance.keyring
+sudo chmod 640 /etc/ceph/ceph.client.glance.keyring
+sudo chmod 644 /etc/ceph/ceph.conf
+ubuntu@gelani-lab-1:~/images$ sudo -u stack rbd -p images ls
+2026-02-01T09:55:23.102+0000 7f86755ba4c0 -1 auth: unable to find a keyring on /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin: (2) No such file or directory
+
+2026-02-01T09:55:23.102+0000 7f86755ba4c0 -1 AuthRegistry(0x55c80f749168) no keyring found at /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin, disabling cephx
+
+2026-02-01T09:55:23.102+0000 7f86755ba4c0 -1 auth: unable to find a keyring on /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin: (2) No such file or directory
+
+2026-02-01T09:55:23.102+0000 7f86755ba4c0 -1 AuthRegistry(0x7ffffd3927f0) no keyring found at /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin, disabling cephx
+
+2026-02-01T09:55:23.110+0000 7f867534f640 -1 monclient(hunting): handle_auth_bad_method server allowed_methods [2] but i only support [1]
+
+2026-02-01T09:55:23.110+0000 7f86740ed640 -1 monclient(hunting): handle_auth_bad_method server allowed_methods [2] but i only support [1]
+
+2026-02-01T09:55:23.110+0000 7f86755ba4c0 -1 monclient: authenticate NOTE: no keyring found; disabled cephx authentication
+
+rbd: couldn't connect to the cluster!
+rbd: listing images failed: (13) Permission denied
+ubuntu@gelani-lab-1:~/images$ sudo -u stack rbd -p images ls
+2026-02-01T09:55:34.490+0000 7f5da2a844c0 -1 auth: unable to find a keyring on /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin: (2) No such file or directory
+
+2026-02-01T09:55:34.490+0000 7f5da2a844c0 -1 AuthRegistry(0x56031d452168) no keyring found at /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin, disabling cephx
+
+2026-02-01T09:55:34.490+0000 7f5da2a844c0 -1 auth: unable to find a keyring on /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin: (2) No such file or directory
+
+2026-02-01T09:55:34.490+0000 7f5da2a844c0 -1 AuthRegistry(0x7fff7f019710) no keyring found at /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin, disabling cephx
+
+2026-02-01T09:55:34.494+0000 7f5da2819640 -1 monclient(hunting): handle_auth_bad_method server allowed_methods [2] but i only support [1]
+
+2026-02-01T09:55:34.494+0000 7f5da15b7640 -1 monclient(hunting): handle_auth_bad_method server allowed_methods [2] but i only support [1]
+
+2026-02-01T09:55:34.494+0000 7f5da0db6640 -1 monclient(hunting): handle_auth_bad_method server allowed_methods [2] but i only support [1]
+
+2026-02-01T09:55:34.494+0000 7f5da2a844c0 -1 monclient: authenticate NOTE: no keyring found; disabled cephx authentication
+
+rbd: couldn't connect to the cluster!
+rbd: listing images failed: (13) Permission denied
+ubuntu@gelani-lab-1:~/images$ sudo -u stack rbd -p images ls \
+  --id glance \
+  --conf /etc/ceph/ceph.conf \
+  --keyring /etc/ceph/ceph.client.glance.keyring
+ubuntu@gelani-lab-1:~/images$ sudo chown root:stack /etc/ceph/ceph.client.glance.keyring /etc/ceph/ceph.conf
+ubuntu@gelani-lab-1:~/images$ sudo chmod 640 /etc/ceph/ceph.client.glance.keyring
+ubuntu@gelani-lab-1:~/images$ sudo chmod 644 /etc/ceph/ceph.conf
+ubuntu@gelani-lab-1:~/images$ sudo -u stack rbd -p images ls --id glance --conf /etc/ceph/ceph.conf --keyring /etc/ceph/ceph.client.glance.keyring
+ubuntu@gelani-lab-1:~/images$ sudo tee -a /etc/ceph/ceph.conf >/dev/null <<'EOF'
+
+[client.glance]
+keyring = /etc/ceph/ceph.client.glance.keyring
+EOF
+ubuntu@gelani-lab-1:~/images$ sudo -u stack rbd -p images ls --id glance --conf /etc/ceph/ceph.conf
+ubuntu@gelani-lab-1:~/images$ sudo systemctl restart devstack@g-api
+ubuntu@gelani-lab-1:~/images$ sudo systemctl restart apache2
+
+
+ubuntu@gelani-lab-1:~/images$ ls -l /etc/ceph/ceph.client.glance.keyring /etc/ceph/ceph.conf
+sudo -u stack ceph -s --id glance --conf /etc/ceph/ceph.conf --keyring /etc/ceph/ceph.client.glance.keyring
+sudo journalctl -u devstack@g-api -n 120 --no-pager
+sudo tail -n 80 /var/log/apache2/error.log
+-rw-r----- 1 root stack  64 Feb  1 09:42 /etc/ceph/ceph.client.glance.keyring
+-rw-r--r-- 1 root stack 270 Feb  1 10:03 /etc/ceph/ceph.conf
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 4d)
+    mgr: gelani-mon-1.gzltah(active, since 3d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 4d), 6 in (since 4d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 1.33k objects, 4.0 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+  io:
+    client:   170 B/s rd, 85 B/s wr, 0 op/s rd, 0 op/s wr
+ 
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.split_loggers       = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.status_code_retries = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.status_code_retry_delay = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.system_scope        = all {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.timeout             = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.trust_id            = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.user_domain_id      = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.user_domain_name    = Default {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.user_id             = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.username            = glance {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.valid_interfaces    = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.version             = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_notifications.driver = ['messagingv2'] {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_notifications.retry = -1 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_notifications.topics = ['notifications'] {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_notifications.transport_url = **** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.amqp_auto_delete = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.amqp_durable_queues = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.conn_pool_min_size = 2 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.conn_pool_ttl = 1200 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.direct_mandatory_flag = True {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.enable_cancel_on_failover = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.heartbeat_in_pthread = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.heartbeat_rate = 3 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.heartbeat_timeout_threshold = 60 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.hostname = gelani-lab-1 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.kombu_compression = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.kombu_failover_strategy = round-robin {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.kombu_missing_consumer_retry_timeout = 60 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.kombu_reconnect_delay = 1.0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.kombu_reconnect_splay = 0.0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.processname = uwsgi {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_ha_queues = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_interval_max = 30 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_login_method = AMQPLAIN {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_qos_prefetch_count = 0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_quorum_delivery_limit = 0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_quorum_max_memory_bytes = 0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_quorum_max_memory_length = 0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_quorum_queue = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_retry_backoff = 2 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_retry_interval = 1 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_stream_fanout = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_transient_queues_ttl = 1800 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_transient_quorum_queue = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rpc_conn_pool_size = 30 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl      = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl_ca_file =  {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl_cert_file =  {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl_enforce_fips_mode = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl_key_file =  {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl_version =  {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.use_queue_manager = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] key_manager.backend            = barbican {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] key_manager.fixed_key          = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.auth_endpoint         = http://localhost/identity/v3 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.barbican_api_version  = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.barbican_endpoint     = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.barbican_endpoint_type = public {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.barbican_region_name  = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.cafile                = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.certfile              = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.collect_timing        = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.insecure              = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.keyfile               = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.number_of_retries     = 60 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.retry_delay           = 1 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.send_service_user_token = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.split_loggers         = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.timeout               = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.verify_ssl            = True {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.verify_ssl_path       = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.auth_section = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.auth_type = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.cafile   = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.certfile = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.collect_timing = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.insecure = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.keyfile  = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.split_loggers = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.timeout  = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.asyncio_connection    = **** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.asyncio_slave_connection = **** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.backend               = sqlalchemy {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.connection            = **** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.connection_debug      = 0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.connection_parameters =  {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.connection_recycle_time = 3600 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.connection_trace      = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.db_inc_retry_interval = True {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.db_max_retries        = 20 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.db_max_retry_interval = 10 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.db_retry_interval     = 1 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.max_overflow          = 50 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.max_pool_size         = 5 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.max_retries           = 10 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.mysql_sql_mode        = TRADITIONAL {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.mysql_wsrep_sync_wait = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.pool_timeout          = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.retry_interval        = 10 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.slave_connection      = **** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.sqlite_synchronous    = True {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.use_db_reconnect      = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] healthcheck.allowed_source_ranges = [] {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] healthcheck.backends           = ['disable_by_file'] {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] healthcheck.detailed           = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] healthcheck.disable_by_file_path = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] healthcheck.ignore_proxied_requests = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] ******************************************************************************** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2828}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x564f80d3efa0 pid: 2097473 (default app)
+Feb 01 10:03:42 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG dbcounter [-] [2097474] Writing DB stats glance:INSERT=4 {{(pid=2097474) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 10:03:42 gelani-lab-1 devstack@g-api.service[2097475]: DEBUG dbcounter [-] [2097475] Writing DB stats glance:INSERT=4 {{(pid=2097475) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 10:03:42 gelani-lab-1 devstack@g-api.service[2097476]: DEBUG dbcounter [-] [2097476] Writing DB stats glance:INSERT=4 {{(pid=2097476) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 10:03:43 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG dbcounter [-] [2097473] Writing DB stats glance:INSERT=4 {{(pid=2097473) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 10:04:02 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG glance.api.middleware.version_negotiation [None req-21f6f455-4543-4ad2-acea-201950f11792 None None] Determining version of request: GET /v2/images Accept: */* {{(pid=2097474) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 10:04:02 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG glance.api.middleware.version_negotiation [None req-21f6f455-4543-4ad2-acea-201950f11792 None None] Using url versioning {{(pid=2097474) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 10:04:02 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG glance.api.middleware.version_negotiation [None req-21f6f455-4543-4ad2-acea-201950f11792 None None] Matched version: v2 {{(pid=2097474) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 10:04:02 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG glance.api.middleware.version_negotiation [None req-21f6f455-4543-4ad2-acea-201950f11792 None None] new path /v2/images {{(pid=2097474) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 10:04:02 gelani-lab-1 devstack@g-api.service[2097474]: [pid: 2097474|app: 0|req: 1/1] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 10:04:02 2026] GET /v2/images?limit=200 => generated 2837 bytes in 111 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 10:04:12 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG dbcounter [-] [2097474] Writing DB stats glance:SELECT=1 {{(pid=2097474) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+[Sat Jan 31 12:43:56.981913 2026] [mpm_event:notice] [pid 1931542:tid 140162999977856] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sat Jan 31 12:43:56.982364 2026] [core:notice] [pid 1931542:tid 140162999977856] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 06:56:45.383592 2026] [mpm_event:notice] [pid 1931542:tid 140162999977856] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 06:56:46.203891 2026] [mpm_event:notice] [pid 2073848:tid 139705946490752] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 06:56:46.204494 2026] [core:notice] [pid 2073848:tid 139705946490752] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 07:06:42.032050 2026] [mpm_event:notice] [pid 2073848:tid 139705946490752] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 07:06:42.155218 2026] [mpm_event:notice] [pid 2075096:tid 140204849092480] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 07:06:42.155382 2026] [core:notice] [pid 2075096:tid 140204849092480] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 08:05:06.767604 2026] [mpm_event:notice] [pid 2075096:tid 140204849092480] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 08:05:07.594722 2026] [mpm_event:notice] [pid 2082306:tid 140028805629824] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 08:05:07.595403 2026] [core:notice] [pid 2082306:tid 140028805629824] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 09:31:15.261112 2026] [mpm_event:notice] [pid 2082306:tid 140028805629824] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 09:31:16.065441 2026] [mpm_event:notice] [pid 2093136:tid 140329723168640] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 09:31:16.066022 2026] [core:notice] [pid 2093136:tid 140329723168640] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 09:46:37.861514 2026] [mpm_event:notice] [pid 2093136:tid 140329723168640] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 09:46:37.979915 2026] [mpm_event:notice] [pid 2095034:tid 140438449633152] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 09:46:37.980422 2026] [core:notice] [pid 2095034:tid 140438449633152] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 10:03:35.841567 2026] [mpm_event:notice] [pid 2095034:tid 140438449633152] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 10:03:35.939360 2026] [mpm_event:notice] [pid 2097509:tid 140201341536128] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 10:03:35.939470 2026] [core:notice] [pid 2097509:tid 140201341536128] AH00094: Command line: '/usr/sbin/apache2'
+ubuntu@gelani-lab-1:~/images$ 
+
+
+ubuntu@gelani-lab-1:~/images$ ls -l /etc/ceph/ceph.client.glance.keyring /etc/ceph/ceph.conf
+sudo -u stack ceph -s --id glance --conf /etc/ceph/ceph.conf --keyring /etc/ceph/ceph.client.glance.keyring
+sudo journalctl -u devstack@g-api -n 120 --no-pager
+sudo tail -n 80 /var/log/apache2/error.log
+-rw-r----- 1 root stack  64 Feb  1 09:42 /etc/ceph/ceph.client.glance.keyring
+-rw-r--r-- 1 root stack 270 Feb  1 10:03 /etc/ceph/ceph.conf
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+ 
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 4d)
+    mgr: gelani-mon-1.gzltah(active, since 3d), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 4d), 6 in (since 4d)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+ 
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 1.33k objects, 4.0 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+ 
+  io:
+    client:   170 B/s rd, 85 B/s wr, 0 op/s rd, 0 op/s wr
+ 
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.split_loggers       = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.status_code_retries = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.status_code_retry_delay = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.system_scope        = all {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.timeout             = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.trust_id            = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.user_domain_id      = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.user_domain_name    = Default {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.user_id             = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.username            = glance {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.valid_interfaces    = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_limit.version             = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_notifications.driver = ['messagingv2'] {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_notifications.retry = -1 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_notifications.topics = ['notifications'] {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_notifications.transport_url = **** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.amqp_auto_delete = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.amqp_durable_queues = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.conn_pool_min_size = 2 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.conn_pool_ttl = 1200 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.direct_mandatory_flag = True {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.enable_cancel_on_failover = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.heartbeat_in_pthread = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.heartbeat_rate = 3 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.heartbeat_timeout_threshold = 60 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.hostname = gelani-lab-1 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.kombu_compression = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.kombu_failover_strategy = round-robin {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.kombu_missing_consumer_retry_timeout = 60 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.kombu_reconnect_delay = 1.0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.kombu_reconnect_splay = 0.0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.processname = uwsgi {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_ha_queues = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_interval_max = 30 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_login_method = AMQPLAIN {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_qos_prefetch_count = 0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_quorum_delivery_limit = 0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_quorum_max_memory_bytes = 0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_quorum_max_memory_length = 0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_quorum_queue = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_retry_backoff = 2 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_retry_interval = 1 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_stream_fanout = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_transient_queues_ttl = 1800 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rabbit_transient_quorum_queue = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.rpc_conn_pool_size = 30 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl      = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl_ca_file =  {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl_cert_file =  {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl_enforce_fips_mode = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl_key_file =  {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.ssl_version =  {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] oslo_messaging_rabbit.use_queue_manager = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] key_manager.backend            = barbican {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] key_manager.fixed_key          = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.auth_endpoint         = http://localhost/identity/v3 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.barbican_api_version  = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.barbican_endpoint     = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.barbican_endpoint_type = public {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.barbican_region_name  = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.cafile                = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.certfile              = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.collect_timing        = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.insecure              = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.keyfile               = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.number_of_retries     = 60 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.retry_delay           = 1 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.send_service_user_token = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.split_loggers         = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.timeout               = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.verify_ssl            = True {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican.verify_ssl_path       = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.auth_section = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.auth_type = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.cafile   = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.certfile = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.collect_timing = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.insecure = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.keyfile  = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.split_loggers = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] barbican_service_user.timeout  = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.asyncio_connection    = **** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.asyncio_slave_connection = **** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.backend               = sqlalchemy {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.connection            = **** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.connection_debug      = 0 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.connection_parameters =  {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.connection_recycle_time = 3600 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.connection_trace      = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.db_inc_retry_interval = True {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.db_max_retries        = 20 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.db_max_retry_interval = 10 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.db_retry_interval     = 1 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.max_overflow          = 50 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.max_pool_size         = 5 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.max_retries           = 10 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.mysql_sql_mode        = TRADITIONAL {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.mysql_wsrep_sync_wait = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.pool_timeout          = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.retry_interval        = 10 {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.slave_connection      = **** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.sqlite_synchronous    = True {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] database.use_db_reconnect      = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] healthcheck.allowed_source_ranges = [] {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] healthcheck.backends           = ['disable_by_file'] {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] healthcheck.detailed           = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] healthcheck.disable_by_file_path = None {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] healthcheck.ignore_proxied_requests = False {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG glance.common.config [None req-b1313d2c-a19f-4f7f-a3bc-2776b8d9ba50 None None] ******************************************************************************** {{(pid=2097473) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2828}}
+Feb 01 10:03:33 gelani-lab-1 devstack@g-api.service[2097473]: WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x564f80d3efa0 pid: 2097473 (default app)
+Feb 01 10:03:42 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG dbcounter [-] [2097474] Writing DB stats glance:INSERT=4 {{(pid=2097474) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 10:03:42 gelani-lab-1 devstack@g-api.service[2097475]: DEBUG dbcounter [-] [2097475] Writing DB stats glance:INSERT=4 {{(pid=2097475) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 10:03:42 gelani-lab-1 devstack@g-api.service[2097476]: DEBUG dbcounter [-] [2097476] Writing DB stats glance:INSERT=4 {{(pid=2097476) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 10:03:43 gelani-lab-1 devstack@g-api.service[2097473]: DEBUG dbcounter [-] [2097473] Writing DB stats glance:INSERT=4 {{(pid=2097473) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Feb 01 10:04:02 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG glance.api.middleware.version_negotiation [None req-21f6f455-4543-4ad2-acea-201950f11792 None None] Determining version of request: GET /v2/images Accept: */* {{(pid=2097474) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Feb 01 10:04:02 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG glance.api.middleware.version_negotiation [None req-21f6f455-4543-4ad2-acea-201950f11792 None None] Using url versioning {{(pid=2097474) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Feb 01 10:04:02 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG glance.api.middleware.version_negotiation [None req-21f6f455-4543-4ad2-acea-201950f11792 None None] Matched version: v2 {{(pid=2097474) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Feb 01 10:04:02 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG glance.api.middleware.version_negotiation [None req-21f6f455-4543-4ad2-acea-201950f11792 None None] new path /v2/images {{(pid=2097474) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Feb 01 10:04:02 gelani-lab-1 devstack@g-api.service[2097474]: [pid: 2097474|app: 0|req: 1/1] 127.0.0.1 () {38 vars in 722 bytes} [Sun Feb  1 10:04:02 2026] GET /v2/images?limit=200 => generated 2837 bytes in 111 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Feb 01 10:04:12 gelani-lab-1 devstack@g-api.service[2097474]: DEBUG dbcounter [-] [2097474] Writing DB stats glance:SELECT=1 {{(pid=2097474) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+[Sat Jan 31 12:43:56.981913 2026] [mpm_event:notice] [pid 1931542:tid 140162999977856] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sat Jan 31 12:43:56.982364 2026] [core:notice] [pid 1931542:tid 140162999977856] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 06:56:45.383592 2026] [mpm_event:notice] [pid 1931542:tid 140162999977856] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 06:56:46.203891 2026] [mpm_event:notice] [pid 2073848:tid 139705946490752] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 06:56:46.204494 2026] [core:notice] [pid 2073848:tid 139705946490752] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 07:06:42.032050 2026] [mpm_event:notice] [pid 2073848:tid 139705946490752] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 07:06:42.155218 2026] [mpm_event:notice] [pid 2075096:tid 140204849092480] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 07:06:42.155382 2026] [core:notice] [pid 2075096:tid 140204849092480] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 08:05:06.767604 2026] [mpm_event:notice] [pid 2075096:tid 140204849092480] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 08:05:07.594722 2026] [mpm_event:notice] [pid 2082306:tid 140028805629824] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 08:05:07.595403 2026] [core:notice] [pid 2082306:tid 140028805629824] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 09:31:15.261112 2026] [mpm_event:notice] [pid 2082306:tid 140028805629824] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 09:31:16.065441 2026] [mpm_event:notice] [pid 2093136:tid 140329723168640] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 09:31:16.066022 2026] [core:notice] [pid 2093136:tid 140329723168640] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 09:46:37.861514 2026] [mpm_event:notice] [pid 2093136:tid 140329723168640] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 09:46:37.979915 2026] [mpm_event:notice] [pid 2095034:tid 140438449633152] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 09:46:37.980422 2026] [core:notice] [pid 2095034:tid 140438449633152] AH00094: Command line: '/usr/sbin/apache2'
+[Sun Feb 01 10:03:35.841567 2026] [mpm_event:notice] [pid 2095034:tid 140438449633152] AH00492: caught SIGWINCH, shutting down gracefully
+[Sun Feb 01 10:03:35.939360 2026] [mpm_event:notice] [pid 2097509:tid 140201341536128] AH00489: Apache/2.4.52 (Ubuntu) mod_wsgi/4.9.0 Python/3.10 configured -- resuming normal operations
+[Sun Feb 01 10:03:35.939470 2026] [core:notice] [pid 2097509:tid 140201341536128] AH00094: Command line: '/usr/sbin/apache2'
+ubuntu@gelani-lab-1:~/images$ 
+ubuntu@gelani-lab-1:~/images$ sudo chown root:stack /etc/ceph/ceph.client.glance.keyring
+sudo chmod 640 /etc/ceph/ceph.client.glance.keyring
+
+sudo chown root:stack /etc/ceph/ceph.conf
+sudo chmod 644 /etc/ceph/ceph.conf
+ubuntu@gelani-lab-1:~/images$ sudo ceph auth get client.glance
+[client.glance]
+        key = AQACIH9p3dkgORAA58hFBmGzUTXcVTMfH2l5nA==
+        caps mon = "profile rbd"
+        caps osd = "profile rbd pool=images"
+ubuntu@gelani-lab-1:~/images$ sudo -u stack rbd -p images ls \
+  --conf /etc/ceph/ceph.conf \
+  --keyring /etc/ceph/ceph.client.glance.keyring
+2026-02-01T10:16:27.880+0000 7fc70efd3640 -1 monclient(hunting): handle_auth_bad_method server allowed_methods [2] but i only support [2,1]
+
+rbd: couldn't connect to the cluster!
+rbd: listing images failed: (1) Operation not permitted
+ubuntu@gelani-lab-1:~/images$ sudo -u stack rbd -p images ls \
+  --conf /etc/ceph/ceph.conf \
+  --keyring /etc/ceph/ceph.client.glance.keyring
+2026-02-01T10:16:37.240+0000 7f58f295d640 -1 monclient(hunting): handle_auth_bad_method server allowed_methods [2] but i only support [2,1]
+
+rbd: couldn't connect to the cluster!
+rbd: listing images failed: (13) Permission denied
+ubuntu@gelani-lab-1:~/images$ 
+
 
 `` 
