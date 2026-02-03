@@ -8793,6 +8793,1986 @@ ubuntu@gelani-lab-1:~$ sudo -u stack rbd -c /etc/ceph/ceph.conf \
 ubuntu@gelani-lab-1:~$ 
 
 
+#The moment of truth: creating a vm from ceph
+ubuntu@gelani-lab-1:~$ rbd -p images ls
+354c47fc-908e-4497-a104-7cdfac4ae169
+515a9c85-ab86-4ac2-a5aa-b28eb73815f6
+ubuntu@gelani-lab-1:~$ rbd rm images/354c47fc-908e-4497-a104-7cdfac4ae169
+
+Removing image: 0% complete...failed.
+rbd: image has snapshots - these must be deleted with 'rbd snap purge' before the image can be removed.
+ubuntu@gelani-lab-1:~$ rbd snap purge/354c47fc-908e-4497-a104-7cdfac4ae169
+error: unknown option 'snap purge/354c47fc-908e-4497-a104-7cdfac4ae169'
+
+usage: rbd <command> ...
+
+Command-line interface for managing Ceph RBD images.
+
+Positional arguments:
+  <command>
+    bench                             Simple benchmark.
+    children                          Display children of an image or its
+                                      snapshot.
+    clone                             Clone a snapshot into a CoW child image.
+    config global get                 Get a global-level configuration override.
+    config global list (... ls)       List global-level configuration overrides.
+    config global remove (... rm)     Remove a global-level configuration
+                                      override.
+    config global set                 Set a global-level configuration override.
+    config image get                  Get an image-level configuration override.
+    config image list (... ls)        List image-level configuration overrides.
+    config image remove (... rm)      Remove an image-level configuration
+                                      override.
+    config image set                  Set an image-level configuration override.
+    config pool get                   Get a pool-level configuration override.
+    config pool list (... ls)         List pool-level configuration overrides.
+    config pool remove (... rm)       Remove a pool-level configuration
+                                      override.
+    config pool set                   Set a pool-level configuration override.
+    copy (cp)                         Copy src image to dest.
+    create                            Create an empty image.
+    deep copy (deep cp)               Deep copy (including snapshots) src image
+                                      to dest.
+    device attach                     Attach image to device.
+    device detach                     Detach image from device.
+    device list (showmapped)          List mapped rbd images.
+    device map (map)                  Map an image to a block device.
+    device unmap (unmap)              Unmap a rbd device.
+    diff                              Print extents that differ since a
+                                      previous snap, or image creation.
+    disk-usage (du)                   Show disk usage stats for pool, image or
+                                      snapshot.
+    encryption format                 Format image to an encrypted format.
+    export                            Export image to file.
+    export-diff                       Export incremental diff to file.
+    feature disable                   Disable the specified image feature.
+    feature enable                    Enable the specified image feature.
+    flatten                           Fill clone with parent data (make it
+                                      independent).
+    group create                      Create a group.
+    group image add                   Add an image to a group.
+    group image list (... ls)         List images in a group.
+    group image remove (... rm)       Remove an image from a group.
+    group list (group ls)             List rbd groups.
+    group remove (group rm)           Delete a group.
+    group rename                      Rename a group within its pool or
+                                      namespace.
+    group snap create                 Make a snapshot of a group.
+    group snap list (... ls)          List snapshots of a group.
+    group snap remove (... rm)        Remove a snapshot from a group.
+    group snap rename                 Rename group's snapshot.
+    group snap rollback               Rollback group to snapshot.
+    image-meta get                    Image metadata get the value associated
+                                      with the key.
+    image-meta list (image-meta ls)   Image metadata list keys with values.
+    image-meta remove (image-meta rm) Image metadata remove the key and value
+                                      associated.
+    image-meta set                    Image metadata set key with value.
+    import                            Import image from file.
+    import-diff                       Import an incremental diff.
+    info                              Show information about image size,
+                                      striping, etc.
+    journal client disconnect         Flag image journal client as disconnected.
+    journal export                    Export image journal.
+    journal import                    Import image journal.
+    journal info                      Show information about image journal.
+    journal inspect                   Inspect image journal for structural
+                                      errors.
+    journal reset                     Reset image journal.
+    journal status                    Show status of image journal.
+    list (ls)                         List rbd images.
+    lock add                          Take a lock on an image.
+    lock list (lock ls)               Show locks held on an image.
+    lock remove (lock rm)             Release a lock on an image.
+    merge-diff                        Merge two diff exports together.
+    migration abort                   Cancel interrupted image migration.
+    migration commit                  Commit image migration.
+    migration execute                 Execute image migration.
+    migration prepare                 Prepare image migration.
+    mirror image demote               Demote an image to non-primary for RBD
+                                      mirroring.
+    mirror image disable              Disable RBD mirroring for an image.
+    mirror image enable               Enable RBD mirroring for an image.
+    mirror image promote              Promote an image to primary for RBD
+                                      mirroring.
+    mirror image resync               Force resync to primary image for RBD
+                                      mirroring.
+    mirror image snapshot             Create RBD mirroring image snapshot.
+    mirror image status               Show RBD mirroring status for an image.
+    mirror pool demote                Demote all primary images in a pool or
+                                      namespace.
+    mirror pool disable               Disable RBD mirroring in a pool or
+                                      namespace.
+    mirror pool enable                Enable RBD mirroring in a pool or
+                                      namespace.
+    mirror pool info                  Show mirroring configuration for a pool
+                                      or namespace.
+    mirror pool peer add              Add a mirroring peer to a pool.
+    mirror pool peer bootstrap create Create a peer bootstrap token to import
+                                      in a remote cluster
+    mirror pool peer bootstrap import Import a peer bootstrap token created
+                                      from a remote cluster
+    mirror pool peer remove           Remove a mirroring peer from a pool.
+    mirror pool peer set              Update mirroring peer settings.
+    mirror pool promote               Promote all non-primary images in a pool
+                                      or namespace.
+    mirror pool status                Show status for all mirrored images in a
+                                      pool or namespace.
+    mirror snapshot schedule add      Add mirror snapshot schedule.
+    mirror snapshot schedule list (... ls)
+                                      List mirror snapshot schedule.
+    mirror snapshot schedule remove (... rm)
+                                      Remove mirror snapshot schedule.
+    mirror snapshot schedule status   Show mirror snapshot schedule status.
+    namespace create                  Create an RBD image namespace.
+    namespace list (namespace ls)     List RBD image namespaces.
+    namespace remove (namespace rm)   Remove an RBD image namespace.
+    object-map check                  Verify the object map is correct.
+    object-map rebuild                Rebuild an invalid object map.
+    perf image iostat                 Display image IO statistics.
+    perf image iotop                  Display a top-like IO monitor.
+    persistent-cache flush            Flush persistent cache.
+    persistent-cache invalidate       Invalidate (discard) existing / dirty
+                                      persistent cache.
+    pool init                         Initialize pool for use by RBD.
+    pool stats                        Display pool statistics.
+    remove (rm)                       Delete an image.
+    rename (mv)                       Rename an image within its pool or
+                                      namespace.
+    resize                            Resize (expand or shrink) image.
+    snap create (snap add)            Create a snapshot.
+    snap limit clear                  Remove snapshot limit.
+    snap limit set                    Limit the number of snapshots.
+    snap list (snap ls)               Dump list of image snapshots.
+    snap protect                      Prevent a snapshot from being deleted.
+    snap purge                        Delete all unprotected snapshots.
+    snap remove (snap rm)             Delete a snapshot.
+    snap rename                       Rename a snapshot.
+    snap rollback (snap revert)       Rollback image to snapshot.
+    snap unprotect                    Allow a snapshot to be deleted.
+    sparsify                          Reclaim space for zeroed image extents.
+    status                            Show the status of this image.
+    trash list (trash ls)             List trash images.
+    trash move (trash mv)             Move an image to the trash.
+    trash purge                       Remove all expired images from trash.
+    trash purge schedule add          Add trash purge schedule.
+    trash purge schedule list (... ls)
+                                      List trash purge schedule.
+    trash purge schedule remove (... rm)
+                                      Remove trash purge schedule.
+    trash purge schedule status       Show trash purge schedule status.
+    trash remove (trash rm)           Remove an image from trash.
+    trash restore                     Restore an image from trash.
+    watch                             Watch events on image.
+
+Optional arguments:
+  -c [ --conf ] arg                   path to cluster configuration
+  --cluster arg                       cluster name
+  --id arg                            client id (without 'client.' prefix)
+  -n [ --name ] arg                   client name
+  -m [ --mon_host ] arg               monitor host
+  -K [ --keyfile ] arg                path to secret key
+  -k [ --keyring ] arg                path to keyring
+
+See 'rbd help <command>' for help on a specific command.
+ubuntu@gelani-lab-1:~$ rbd snap ls images/354c47fc-908e-4497-a104-7cdfac4ae169
+SNAPID  NAME  SIZE    PROTECTED  TIMESTAMP               
+     4  snap  21 MiB  yes        Mon Feb  2 14:57:26 2026
+ubuntu@gelani-lab-1:~$ rbd snap purge images/354c47fc-908e-4497-a104-7cdfac4ae169
+rbd: error removing snapshot(s) 'snap', which is protected - these must be unprotected with `rbd snap unprotect`.
+Removing all snapshots: 0% complete...failed.
+ubuntu@gelani-lab-1:~$ rbd snap unprotect images/354c47fc-908e-4497-a104-7cdfac4ae169@snap
+ubuntu@gelani-lab-1:~$ rbd snap rm images/354c47fc-908e-4497-a104-7cdfac4ae169@snap
+Removing snap: 100% complete...done.
+ubuntu@gelani-lab-1:~$ rbd rm images/354c47fc-908e-4497-a104-7cdfac4ae169
+Removing image: 100% complete...done.
+ubuntu@gelani-lab-1:~$ openstack volume create \
+  --image cirros-ceph-test \
+  --size 2 \
+  --type ceph \
+  cirros-root-vol
+More than one Image exists with the name 'cirros-ceph-test'.
+ubuntu@gelani-lab-1:~$ openstack image list | grep cirros-ceph-test
+| 515a9c85-ab86-4ac2-a5aa-b28eb73815f6 | cirros-ceph-test                | active |
+| 354c47fc-908e-4497-a104-7cdfac4ae169 | cirros-ceph-test                | active |
+ubuntu@gelani-lab-1:~$ openstack volume create \
+  --image 515a9c85-ab86-4ac2-a5aa-b28eb73815f6 \
+  --size 2 \
+  --type ceph \
+  cirros-root-vol
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-02-02T15:25:27.174036           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | ca6c402b-4f70-4d5e-87cd-160b352722a9 |
+| multiattach                    | False                                |
+| name                           | cirros-root-vol                      |
+| os-vol-host-attr:host          | None                                 |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | None                                 |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 2                                    |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | creating                             |
+| type                           | ceph                                 |
+| updated_at                     | None                                 |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d     |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411 |
++--------------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume show cirros-root-vol
++--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                          | Value                                                                                                                                                                                                   |
++--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| attachments                    | []                                                                                                                                                                                                      |
+| availability_zone              | nova                                                                                                                                                                                                    |
+| backup_id                      | None                                                                                                                                                                                                    |
+| bootable                       | True                                                                                                                                                                                                    |
+| cluster_name                   | None                                                                                                                                                                                                    |
+| consumes_quota                 | True                                                                                                                                                                                                    |
+| created_at                     | 2026-02-02T15:25:27.000000                                                                                                                                                                              |
+| description                    | None                                                                                                                                                                                                    |
+| encrypted                      | False                                                                                                                                                                                                   |
+| group_id                       | None                                                                                                                                                                                                    |
+| id                             | ca6c402b-4f70-4d5e-87cd-160b352722a9                                                                                                                                                                    |
+| multiattach                    | False                                                                                                                                                                                                   |
+| name                           | cirros-root-vol                                                                                                                                                                                         |
+| os-vol-host-attr:host          | gelani-lab-1@ceph#ceph                                                                                                                                                                                  |
+| os-vol-mig-status-attr:migstat | None                                                                                                                                                                                                    |
+| os-vol-mig-status-attr:name_id | None                                                                                                                                                                                                    |
+| os-vol-tenant-attr:tenant_id   | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                        |
+| properties                     |                                                                                                                                                                                                         |
+| provider_id                    | None                                                                                                                                                                                                    |
+| replication_status             | None                                                                                                                                                                                                    |
+| service_uuid                   | 62a0e87e-7f48-49a0-a409-c1c84ec1207a                                                                                                                                                                    |
+| shared_targets                 | False                                                                                                                                                                                                   |
+| size                           | 2                                                                                                                                                                                                       |
+| snapshot_id                    | None                                                                                                                                                                                                    |
+| source_volid                   | None                                                                                                                                                                                                    |
+| status                         | available                                                                                                                                                                                               |
+| type                           | ceph                                                                                                                                                                                                    |
+| updated_at                     | 2026-02-02T15:25:31.000000                                                                                                                                                                              |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d                                                                                                                                                                        |
+| volume_image_metadata          | {'signature_verified': 'False', 'owner_specified.openstack.md5': '', 'owner_specified.openstack.object': 'images/cirros-ceph-test', 'owner_specified.openstack.sha256': '', 'image_id':                 |
+|                                | '515a9c85-ab86-4ac2-a5aa-b28eb73815f6', 'image_name': 'cirros-ceph-test', 'checksum': '87617e24a5e30cb3b87fda8c0764838f', 'container_format': 'bare', 'disk_format': 'qcow2', 'min_disk': '0',          |
+|                                | 'min_ram': '0', 'size': '21692416'}                                                                                                                                                                     |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411                                                                                                                                                                    |
++--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack flavor list
++--------------------------------------+---------------+-------+------+-----------+-------+-----------+
+| ID                                   | Name          |   RAM | Disk | Ephemeral | VCPUs | Is Public |
++--------------------------------------+---------------+-------+------+-----------+-------+-----------+
+| 1                                    | m1.tiny       |   512 |    1 |         0 |     1 | True      |
+| 2                                    | m1.small      |  2048 |   20 |         0 |     1 | True      |
+| 3                                    | m1.medium     |  4096 |   40 |         0 |     2 | True      |
+| 3f30f309-3592-4282-bb86-69ecd0fe465a | m1.heat_micro |   128 |    1 |         0 |     1 | True      |
+| 4                                    | m1.large      |  8192 |   80 |         0 |     4 | True      |
+| 42                                   | m1.nano       |   192 |    1 |         0 |     1 | True      |
+| 5                                    | m1.xlarge     | 16384 |  160 |         0 |     8 | True      |
+| 84                                   | m1.micro      |   256 |    1 |         0 |     1 | True      |
+| c1                                   | cirros256     |   256 |    1 |         0 |     1 | True      |
+| d1                                   | ds512M        |   512 |    5 |         0 |     1 | True      |
+| d2                                   | ds1G          |  1024 |   10 |         0 |     1 | True      |
+| d3                                   | ds2G          |  2048 |   10 |         0 |     2 | True      |
+| d4                                   | ds4G          |  4096 |   20 |         0 |     4 | True      |
+| e6319e09-0735-4a00-af5b-11ea038cc588 | m1.heat_int   |  1024 |   10 |         0 |     2 | True      |
++--------------------------------------+---------------+-------+------+-----------+-------+-----------+
+ubuntu@gelani-lab-1:~$ openstack network list
++--------------------------------------+----------+----------------------------------------------------------------------------+
+| ID                                   | Name     | Subnets                                                                    |
++--------------------------------------+----------+----------------------------------------------------------------------------+
+| 172b9757-3f94-4b3a-8588-aaef9f5d94e3 | public   | 0f51c1e9-b2bb-4546-a208-2f911e514369, 17c9de01-9f5b-422c-b9ce-53cc4a3f2cdc |
+| 34be5cb2-fc34-4a8b-b337-41595e361e6d | heat-net | 6914f2f9-8d4e-4138-8a06-b8bbd45bb3bb                                       |
+| 68a7ad34-b3e9-48a4-a3cc-c178a4d89ddd | shared   | 13063700-83a4-402f-8cc9-0ca93ac96bf6                                       |
+| af7ee1c4-02c6-438b-8784-93690f664a47 | private  | 6adea907-730d-4318-98d5-1908d2d013fc, ee882e21-e946-48f8-9873-826e2c5e68b8 |
++--------------------------------------+----------+----------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack server create \
+  --flavor m1.small \
+  --volume cirros-root-vol \
+  --network private \
+  cirros-ceph-vm
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                                                              |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:host                | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:hostname            | cirros-ceph-vm                                                                                                                                                                                     |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:instance_name       | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:kernel_id           | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:launch_index        | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:ramdisk_id          | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:reservation_id      | r-v2gsy4w4                                                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:user_data           | None                                                                                                                                                                                               |
+| OS-EXT-STS:power_state              | N/A                                                                                                                                                                                                |
+| OS-EXT-STS:task_state               | scheduling                                                                                                                                                                                         |
+| OS-EXT-STS:vm_state                 | building                                                                                                                                                                                           |
+| OS-SRV-USG:launched_at              | None                                                                                                                                                                                               |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                                                               |
+| accessIPv4                          | None                                                                                                                                                                                               |
+| accessIPv6                          | None                                                                                                                                                                                               |
+| addresses                           | N/A                                                                                                                                                                                                |
+| adminPass                           | BrFVu9oW64ou                                                                                                                                                                                       |
+| config_drive                        | None                                                                                                                                                                                               |
+| created                             | 2026-02-02T15:26:22Z                                                                                                                                                                               |
+| description                         | None                                                                                                                                                                                               |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small', original_name='m1.small', ram='2048',        |
+|                                     | rxtx_factor=, swap='0', vcpus='1'                                                                                                                                                                  |
+| hostId                              | None                                                                                                                                                                                               |
+| host_status                         | None                                                                                                                                                                                               |
+| id                                  | 83643058-b0e6-477a-a9e5-3e1fc02e2bae                                                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                                                           |
+| key_name                            | None                                                                                                                                                                                               |
+| locked                              | None                                                                                                                                                                                               |
+| locked_reason                       | None                                                                                                                                                                                               |
+| name                                | cirros-ceph-vm                                                                                                                                                                                     |
+| pinned_availability_zone            | None                                                                                                                                                                                               |
+| progress                            | None                                                                                                                                                                                               |
+| project_id                          | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                   |
+| properties                          | None                                                                                                                                                                                               |
+| scheduler_hints                     |                                                                                                                                                                                                    |
+| security_groups                     | name='default'                                                                                                                                                                                     |
+| server_groups                       | None                                                                                                                                                                                               |
+| status                              | BUILD                                                                                                                                                                                              |
+| tags                                |                                                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                                                               |
+| updated                             | 2026-02-02T15:26:21Z                                                                                                                                                                               |
+| user_id                             | 09805ebaab704a8cbf99fdc8a0c1859d                                                                                                                                                                   |
+| volumes_attached                    |                                                                                                                                                                                                    |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack server show cirros-ceph-vm
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                                                              |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         | nova                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:host                | gelani-lab-1                                                                                                                                                                                       |
+| OS-EXT-SRV-ATTR:hostname            | cirros-ceph-vm                                                                                                                                                                                     |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | gelani-lab-1                                                                                                                                                                                       |
+| OS-EXT-SRV-ATTR:instance_name       | instance-0000000d                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:kernel_id           |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:launch_index        | 0                                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:ramdisk_id          |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:reservation_id      | r-v2gsy4w4                                                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | /dev/vda                                                                                                                                                                                           |
+| OS-EXT-SRV-ATTR:user_data           | None                                                                                                                                                                                               |
+| OS-EXT-STS:power_state              | NOSTATE                                                                                                                                                                                            |
+| OS-EXT-STS:task_state               | spawning                                                                                                                                                                                           |
+| OS-EXT-STS:vm_state                 | building                                                                                                                                                                                           |
+| OS-SRV-USG:launched_at              | None                                                                                                                                                                                               |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                                                               |
+| accessIPv4                          |                                                                                                                                                                                                    |
+| accessIPv6                          |                                                                                                                                                                                                    |
+| addresses                           |                                                                                                                                                                                                    |
+| config_drive                        |                                                                                                                                                                                                    |
+| created                             | 2026-02-02T15:26:21Z                                                                                                                                                                               |
+| description                         | None                                                                                                                                                                                               |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small', original_name='m1.small', ram='2048',        |
+|                                     | rxtx_factor=, swap='0', vcpus='1'                                                                                                                                                                  |
+| hostId                              | 1a9b341366ed487e3339a9c39458983be209eda548d47c346dcbc484                                                                                                                                           |
+| host_status                         | UP                                                                                                                                                                                                 |
+| id                                  | 83643058-b0e6-477a-a9e5-3e1fc02e2bae                                                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                                                           |
+| key_name                            | None                                                                                                                                                                                               |
+| locked                              | False                                                                                                                                                                                              |
+| locked_reason                       | None                                                                                                                                                                                               |
+| name                                | cirros-ceph-vm                                                                                                                                                                                     |
+| pinned_availability_zone            | None                                                                                                                                                                                               |
+| progress                            | 0                                                                                                                                                                                                  |
+| project_id                          | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                   |
+| properties                          |                                                                                                                                                                                                    |
+| scheduler_hints                     |                                                                                                                                                                                                    |
+| security_groups                     | name='default'                                                                                                                                                                                     |
+| server_groups                       | None                                                                                                                                                                                               |
+| status                              | BUILD                                                                                                                                                                                              |
+| tags                                |                                                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                                                               |
+| updated                             | 2026-02-02T15:26:30Z                                                                                                                                                                               |
+| user_id                             | 09805ebaab704a8cbf99fdc8a0c1859d                                                                                                                                                                   |
+| volumes_attached                    | delete_on_termination='False', id='ca6c402b-4f70-4d5e-87cd-160b352722a9'                                                                                                                           |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack server show cirros-ceph-vm
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                                                              |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         | nova                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:host                | gelani-lab-1                                                                                                                                                                                       |
+| OS-EXT-SRV-ATTR:hostname            | cirros-ceph-vm                                                                                                                                                                                     |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | gelani-lab-1                                                                                                                                                                                       |
+| OS-EXT-SRV-ATTR:instance_name       | instance-0000000d                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:kernel_id           |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:launch_index        | 0                                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:ramdisk_id          |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:reservation_id      | r-v2gsy4w4                                                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | /dev/vda                                                                                                                                                                                           |
+| OS-EXT-SRV-ATTR:user_data           | None                                                                                                                                                                                               |
+| OS-EXT-STS:power_state              | Running                                                                                                                                                                                            |
+| OS-EXT-STS:task_state               | None                                                                                                                                                                                               |
+| OS-EXT-STS:vm_state                 | active                                                                                                                                                                                             |
+| OS-SRV-USG:launched_at              | 2026-02-02T15:26:34.000000                                                                                                                                                                         |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                                                               |
+| accessIPv4                          |                                                                                                                                                                                                    |
+| accessIPv6                          |                                                                                                                                                                                                    |
+| addresses                           | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b                                                                                                                                            |
+| config_drive                        |                                                                                                                                                                                                    |
+| created                             | 2026-02-02T15:26:21Z                                                                                                                                                                               |
+| description                         | None                                                                                                                                                                                               |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small', original_name='m1.small', ram='2048',        |
+|                                     | rxtx_factor=, swap='0', vcpus='1'                                                                                                                                                                  |
+| hostId                              | 1a9b341366ed487e3339a9c39458983be209eda548d47c346dcbc484                                                                                                                                           |
+| host_status                         | UP                                                                                                                                                                                                 |
+| id                                  | 83643058-b0e6-477a-a9e5-3e1fc02e2bae                                                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                                                           |
+| key_name                            | None                                                                                                                                                                                               |
+| locked                              | False                                                                                                                                                                                              |
+| locked_reason                       | None                                                                                                                                                                                               |
+| name                                | cirros-ceph-vm                                                                                                                                                                                     |
+| pinned_availability_zone            | None                                                                                                                                                                                               |
+| progress                            | 0                                                                                                                                                                                                  |
+| project_id                          | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                   |
+| properties                          |                                                                                                                                                                                                    |
+| scheduler_hints                     |                                                                                                                                                                                                    |
+| security_groups                     | name='default'                                                                                                                                                                                     |
+| server_groups                       | None                                                                                                                                                                                               |
+| status                              | ACTIVE                                                                                                                                                                                             |
+| tags                                |                                                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                                                               |
+| updated                             | 2026-02-02T15:26:35Z                                                                                                                                                                               |
+| user_id                             | 09805ebaab704a8cbf99fdc8a0c1859d                                                                                                                                                                   |
+| volumes_attached                    | delete_on_termination='False', id='ca6c402b-4f70-4d5e-87cd-160b352722a9'                                                                                                                           |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack server show cirros-ceph-vm -c OS-EXT-SRV-ATTR:host
++----------------------+--------------+
+| Field                | Value        |
++----------------------+--------------+
+| OS-EXT-SRV-ATTR:host | gelani-lab-1 |
++----------------------+--------------+
+ubuntu@gelani-lab-1:~$ sudo reboot
+Connection to 192.168.95.93 closed by remote host.
+Connection to 192.168.95.93 closed.
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ssh: connect to host 192.168.95.93 port 22: Connection refused
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ubuntu@192.168.95.93's password: 
+"System is booting up. Unprivileged users are not permitted to log in yet. Please come back later. For technical details, see pam_nologin(8)."
+Connection closed by 192.168.95.93 port 22
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ubuntu@192.168.95.93's password: 
+"System is booting up. Unprivileged users are not permitted to log in yet. Please come back later. For technical details, see pam_nologin(8)."
+Connection closed by 192.168.95.93 port 22
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.93
+ubuntu@192.168.95.93's password: 
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-168-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Feb  2 15:34:11 UTC 2026
+
+  System load:  0.5                Processes:             410
+  Usage of /:   85.0% of 48.27GB   Users logged in:       0
+  Memory usage: 32%                IPv4 address for ens3: 192.168.95.93
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+9 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+New release '24.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Mon Feb  2 15:34:12 2026
+ubuntu@gelani-lab-1:~$ openstack server show cirros-ceph-vm
+Missing value auth-url required for auth plugin password
+ubuntu@gelani-lab-1:~$ source /opt/stack/devstack/openrc admin admin
+ubuntu@gelani-lab-1:~$ openstack server show cirros-ceph-vm
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                                                              |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         | nova                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:host                | gelani-lab-1                                                                                                                                                                                       |
+| OS-EXT-SRV-ATTR:hostname            | cirros-ceph-vm                                                                                                                                                                                     |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | gelani-lab-1                                                                                                                                                                                       |
+| OS-EXT-SRV-ATTR:instance_name       | instance-0000000d                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:kernel_id           |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:launch_index        | 0                                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:ramdisk_id          |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:reservation_id      | r-v2gsy4w4                                                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | /dev/vda                                                                                                                                                                                           |
+| OS-EXT-SRV-ATTR:user_data           | None                                                                                                                                                                                               |
+| OS-EXT-STS:power_state              | Running                                                                                                                                                                                            |
+| OS-EXT-STS:task_state               | None                                                                                                                                                                                               |
+| OS-EXT-STS:vm_state                 | active                                                                                                                                                                                             |
+| OS-SRV-USG:launched_at              | 2026-02-02T15:26:34.000000                                                                                                                                                                         |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                                                               |
+| accessIPv4                          |                                                                                                                                                                                                    |
+| accessIPv6                          |                                                                                                                                                                                                    |
+| addresses                           | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b                                                                                                                                            |
+| config_drive                        |                                                                                                                                                                                                    |
+| created                             | 2026-02-02T15:26:21Z                                                                                                                                                                               |
+| description                         | None                                                                                                                                                                                               |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small', original_name='m1.small', ram='2048',        |
+|                                     | rxtx_factor=, swap='0', vcpus='1'                                                                                                                                                                  |
+| hostId                              | 1a9b341366ed487e3339a9c39458983be209eda548d47c346dcbc484                                                                                                                                           |
+| host_status                         | UNKNOWN                                                                                                                                                                                            |
+| id                                  | 83643058-b0e6-477a-a9e5-3e1fc02e2bae                                                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                                                           |
+| key_name                            | None                                                                                                                                                                                               |
+| locked                              | False                                                                                                                                                                                              |
+| locked_reason                       | None                                                                                                                                                                                               |
+| name                                | cirros-ceph-vm                                                                                                                                                                                     |
+| pinned_availability_zone            | None                                                                                                                                                                                               |
+| progress                            | 0                                                                                                                                                                                                  |
+| project_id                          | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                   |
+| properties                          |                                                                                                                                                                                                    |
+| scheduler_hints                     |                                                                                                                                                                                                    |
+| security_groups                     | name='default'                                                                                                                                                                                     |
+| server_groups                       | None                                                                                                                                                                                               |
+| status                              | ACTIVE                                                                                                                                                                                             |
+| tags                                |                                                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                                                               |
+| updated                             | 2026-02-02T15:26:35Z                                                                                                                                                                               |
+| user_id                             | 09805ebaab704a8cbf99fdc8a0c1859d                                                                                                                                                                   |
+| volumes_attached                    | delete_on_termination='False', id='ca6c402b-4f70-4d5e-87cd-160b352722a9'                                                                                                                           |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack image create ubuntu-22-ceph \
+  --disk-format qcow2 \
+  --container-format bare \
+  --file /home/ubuntu/images/jammy-server-cloudimg-amd64.img \
+  --public \
+  --progress
+[=============================>] 100%
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field            | Value                                                                                                                                                                                                                 |
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checksum         | feae9da27c50da7f45bfcca6b1f8aae0                                                                                                                                                                                      |
+| container_format | bare                                                                                                                                                                                                                  |
+| created_at       | 2026-02-02T16:38:15Z                                                                                                                                                                                                  |
+| disk_format      | qcow2                                                                                                                                                                                                                 |
+| file             | /v2/images/75ff6d03-2d86-4a2e-9ecf-95136fa76565/file                                                                                                                                                                  |
+| id               | 75ff6d03-2d86-4a2e-9ecf-95136fa76565                                                                                                                                                                                  |
+| min_disk         | 0                                                                                                                                                                                                                     |
+| min_ram          | 0                                                                                                                                                                                                                     |
+| name             | ubuntu-22-ceph                                                                                                                                                                                                        |
+| owner            | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                                      |
+| properties       | os_hash_algo='sha512', os_hash_value='bdbfbec178ed26e088e095b72445cdd5a896dcc9e5c0f00862698aec4fa29c3c37e3d2392597043f5ed23c9bca346744bea3065979d88130a37bf27562891f3c', os_hidden='False',                           |
+|                  | owner_specified.openstack.md5='', owner_specified.openstack.object='images/ubuntu-22-ceph', owner_specified.openstack.sha256=''                                                                                       |
+| protected        | False                                                                                                                                                                                                                 |
+| schema           | /v2/schemas/image                                                                                                                                                                                                     |
+| size             | 688868864                                                                                                                                                                                                             |
+| status           | active                                                                                                                                                                                                                |
+| tags             |                                                                                                                                                                                                                       |
+| updated_at       | 2026-02-02T16:38:22Z                                                                                                                                                                                                  |
+| virtual_size     | 2361393152                                                                                                                                                                                                            |
+| visibility       | public                                                                                                                                                                                                                |
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | active    |
++--------+-----------+
+ubuntu@gelani-lab-1:~$ openstack volume create \
+  --image ubuntu-22-ceph \
+  --size 20 \
+  --type ceph \
+  ubuntu-22-root-vol
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-02-02T16:38:50.581285           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | 5c3f1e9b-0944-46b3-9fdf-7472562f6a93 |
+| multiattach                    | False                                |
+| name                           | ubuntu-22-root-vol                   |
+| os-vol-host-attr:host          | None                                 |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | None                                 |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 20                                   |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | creating                             |
+| type                           | ceph                                 |
+| updated_at                     | None                                 |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d     |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411 |
++--------------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume show ubuntu-22-root-vol
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-02-02T16:38:51.000000           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | 5c3f1e9b-0944-46b3-9fdf-7472562f6a93 |
+| multiattach                    | False                                |
+| name                           | ubuntu-22-root-vol                   |
+| os-vol-host-attr:host          | gelani-lab-1@ceph#ceph               |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | 9fb44e4466264364b4ac3eb936bdc4c2     |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 20                                   |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | creating                             |
+| type                           | ceph                                 |
+| updated_at                     | 2026-02-02T16:38:51.000000           |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d     |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411 |
++--------------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume show ubuntu-22-root-vol
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-02-02T16:38:51.000000           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | 5c3f1e9b-0944-46b3-9fdf-7472562f6a93 |
+| multiattach                    | False                                |
+| name                           | ubuntu-22-root-vol                   |
+| os-vol-host-attr:host          | gelani-lab-1@ceph#ceph               |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | 9fb44e4466264364b4ac3eb936bdc4c2     |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 20                                   |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | downloading                          |
+| type                           | ceph                                 |
+| updated_at                     | 2026-02-02T16:39:06.000000           |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d     |
+| volume_image_metadata          | {'signature_verified': 'False'}      |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411 |
++--------------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume show ubuntu-22-root-vol
++--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                          | Value                                                                                                                                                                                                   |
++--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| attachments                    | []                                                                                                                                                                                                      |
+| availability_zone              | nova                                                                                                                                                                                                    |
+| backup_id                      | None                                                                                                                                                                                                    |
+| bootable                       | True                                                                                                                                                                                                    |
+| cluster_name                   | None                                                                                                                                                                                                    |
+| consumes_quota                 | True                                                                                                                                                                                                    |
+| created_at                     | 2026-02-02T16:38:51.000000                                                                                                                                                                              |
+| description                    | None                                                                                                                                                                                                    |
+| encrypted                      | False                                                                                                                                                                                                   |
+| group_id                       | None                                                                                                                                                                                                    |
+| id                             | 5c3f1e9b-0944-46b3-9fdf-7472562f6a93                                                                                                                                                                    |
+| multiattach                    | False                                                                                                                                                                                                   |
+| name                           | ubuntu-22-root-vol                                                                                                                                                                                      |
+| os-vol-host-attr:host          | gelani-lab-1@ceph#ceph                                                                                                                                                                                  |
+| os-vol-mig-status-attr:migstat | None                                                                                                                                                                                                    |
+| os-vol-mig-status-attr:name_id | None                                                                                                                                                                                                    |
+| os-vol-tenant-attr:tenant_id   | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                        |
+| properties                     |                                                                                                                                                                                                         |
+| provider_id                    | None                                                                                                                                                                                                    |
+| replication_status             | None                                                                                                                                                                                                    |
+| service_uuid                   | 62a0e87e-7f48-49a0-a409-c1c84ec1207a                                                                                                                                                                    |
+| shared_targets                 | False                                                                                                                                                                                                   |
+| size                           | 20                                                                                                                                                                                                      |
+| snapshot_id                    | None                                                                                                                                                                                                    |
+| source_volid                   | None                                                                                                                                                                                                    |
+| status                         | available                                                                                                                                                                                               |
+| type                           | ceph                                                                                                                                                                                                    |
+| updated_at                     | 2026-02-02T16:39:17.000000                                                                                                                                                                              |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d                                                                                                                                                                        |
+| volume_image_metadata          | {'signature_verified': 'False', 'owner_specified.openstack.md5': '', 'owner_specified.openstack.object': 'images/ubuntu-22-ceph', 'owner_specified.openstack.sha256': '', 'image_id':                   |
+|                                | '75ff6d03-2d86-4a2e-9ecf-95136fa76565', 'image_name': 'ubuntu-22-ceph', 'checksum': 'feae9da27c50da7f45bfcca6b1f8aae0', 'container_format': 'bare', 'disk_format': 'qcow2', 'min_disk': '0', 'min_ram': |
+|                                | '0', 'size': '688868864'}                                                                                                                                                                               |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411                                                                                                                                                                    |
++--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack network list
++--------------------------------------+----------+----------------------------------------------------------------------------+
+| ID                                   | Name     | Subnets                                                                    |
++--------------------------------------+----------+----------------------------------------------------------------------------+
+| 172b9757-3f94-4b3a-8588-aaef9f5d94e3 | public   | 0f51c1e9-b2bb-4546-a208-2f911e514369, 17c9de01-9f5b-422c-b9ce-53cc4a3f2cdc |
+| 34be5cb2-fc34-4a8b-b337-41595e361e6d | heat-net | 6914f2f9-8d4e-4138-8a06-b8bbd45bb3bb                                       |
+| 68a7ad34-b3e9-48a4-a3cc-c178a4d89ddd | shared   | 13063700-83a4-402f-8cc9-0ca93ac96bf6                                       |
+| af7ee1c4-02c6-438b-8784-93690f664a47 | private  | 6adea907-730d-4318-98d5-1908d2d013fc, ee882e21-e946-48f8-9873-826e2c5e68b8 |
++--------------------------------------+----------+----------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack server create \
+  --flavor m1.small \
+  --volume ubuntu-22-root-vol \
+  --network private \
+  ubuntu-22-ceph-vm
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                                                              |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:host                | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:hostname            | ubuntu-22-ceph-vm                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:instance_name       | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:kernel_id           | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:launch_index        | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:ramdisk_id          | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:reservation_id      | r-uikf010n                                                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:user_data           | None                                                                                                                                                                                               |
+| OS-EXT-STS:power_state              | N/A                                                                                                                                                                                                |
+| OS-EXT-STS:task_state               | scheduling                                                                                                                                                                                         |
+| OS-EXT-STS:vm_state                 | building                                                                                                                                                                                           |
+| OS-SRV-USG:launched_at              | None                                                                                                                                                                                               |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                                                               |
+| accessIPv4                          | None                                                                                                                                                                                               |
+| accessIPv6                          | None                                                                                                                                                                                               |
+| addresses                           | N/A                                                                                                                                                                                                |
+| adminPass                           | JUegECjsrEE9                                                                                                                                                                                       |
+| config_drive                        | None                                                                                                                                                                                               |
+| created                             | 2026-02-02T16:39:48Z                                                                                                                                                                               |
+| description                         | None                                                                                                                                                                                               |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small', original_name='m1.small', ram='2048',        |
+|                                     | rxtx_factor=, swap='0', vcpus='1'                                                                                                                                                                  |
+| hostId                              | None                                                                                                                                                                                               |
+| host_status                         | None                                                                                                                                                                                               |
+| id                                  | fbbf4603-a19c-4b64-b004-5a268e767137                                                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                                                           |
+| key_name                            | None                                                                                                                                                                                               |
+| locked                              | None                                                                                                                                                                                               |
+| locked_reason                       | None                                                                                                                                                                                               |
+| name                                | ubuntu-22-ceph-vm                                                                                                                                                                                  |
+| pinned_availability_zone            | None                                                                                                                                                                                               |
+| progress                            | None                                                                                                                                                                                               |
+| project_id                          | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                   |
+| properties                          | None                                                                                                                                                                                               |
+| scheduler_hints                     |                                                                                                                                                                                                    |
+| security_groups                     | name='default'                                                                                                                                                                                     |
+| server_groups                       | None                                                                                                                                                                                               |
+| status                              | BUILD                                                                                                                                                                                              |
+| tags                                |                                                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                                                               |
+| updated                             | 2026-02-02T16:39:47Z                                                                                                                                                                               |
+| user_id                             | 09805ebaab704a8cbf99fdc8a0c1859d                                                                                                                                                                   |
+| volumes_attached                    |                                                                                                                                                                                                    |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                                                              |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:host                | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:hostname            | ubuntu-22-ceph-vm                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:instance_name       | instance-00000001                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:kernel_id           |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:launch_index        | 0                                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:ramdisk_id          |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:reservation_id      | r-uikf010n                                                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:user_data           | None                                                                                                                                                                                               |
+| OS-EXT-STS:power_state              | NOSTATE                                                                                                                                                                                            |
+| OS-EXT-STS:task_state               | None                                                                                                                                                                                               |
+| OS-EXT-STS:vm_state                 | error                                                                                                                                                                                              |
+| OS-SRV-USG:launched_at              | None                                                                                                                                                                                               |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                                                               |
+| accessIPv4                          |                                                                                                                                                                                                    |
+| accessIPv6                          |                                                                                                                                                                                                    |
+| addresses                           |                                                                                                                                                                                                    |
+| config_drive                        |                                                                                                                                                                                                    |
+| created                             | 2026-02-02T16:39:47Z                                                                                                                                                                               |
+| description                         | None                                                                                                                                                                                               |
+| fault                               | {'code': 500, 'created': '2026-02-02T16:39:48Z', 'message': 'No valid host was found. There are not enough hosts available.', 'details': 'Traceback (most recent call last):\n  File               |
+|                                     | "/opt/stack/nova/nova/conductor/manager.py", line 1655, in schedule_and_build_instances\n    host_lists = self._schedule_instances(context, request_specs[0],\n  File                              |
+|                                     | "/opt/stack/nova/nova/conductor/manager.py", line 943, in _schedule_instances\n    host_lists = self.query_client.select_destinations(\n  File "/opt/stack/nova/nova/scheduler/client/query.py",   |
+|                                     | line 41, in select_destinations\n    return self.scheduler_rpcapi.select_destinations(context, spec_obj,\n  File "/opt/stack/nova/nova/scheduler/rpcapi.py", line 160, in select_destinations\n    |
+|                                     | return cctxt.call(ctxt, \'select_destinations\', **msg_args)\n  File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/rpc/client.py", line 180, in call\n    result =             |
+|                                     | self.transport._send(\n  File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/transport.py", line 123, in _send\n    return self._driver.send(target, ctxt, message,\n  File     |
+|                                     | "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/_drivers/amqpdriver.py", line 800, in send\n    return self._send(target, ctxt, message, wait_for_reply, timeout,\n  File        |
+|                                     | "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/_drivers/amqpdriver.py", line 792, in _send\n    raise result\nnova.exception_Remote.NoValidHost_Remote: No valid host was       |
+|                                     | found. There are not enough hosts available.\nTraceback (most recent call last):\n\n  File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/rpc/server.py", line 269, in inner\n  |
+|                                     | return func(*args, **kwargs)\n\n  File "/opt/stack/nova/nova/scheduler/manager.py", line 269, in select_destinations\n    selections = self._select_destinations(\n\n  File                        |
+|                                     | "/opt/stack/nova/nova/scheduler/manager.py", line 296, in _select_destinations\n    selections = self._schedule(\n\n  File "/opt/stack/nova/nova/scheduler/manager.py", line 497, in _schedule\n   |
+|                                     | self._ensure_sufficient_hosts(\n\n  File "/opt/stack/nova/nova/scheduler/manager.py", line 544, in _ensure_sufficient_hosts\n    raise                                                             |
+|                                     | exception.NoValidHost(reason=reason)\n\nnova.exception.NoValidHost: No valid host was found. There are not enough hosts available.\n\n'}                                                           |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small', original_name='m1.small', ram='2048',        |
+|                                     | rxtx_factor=, swap='0', vcpus='1'                                                                                                                                                                  |
+| hostId                              |                                                                                                                                                                                                    |
+| host_status                         |                                                                                                                                                                                                    |
+| id                                  | fbbf4603-a19c-4b64-b004-5a268e767137                                                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                                                           |
+| key_name                            | None                                                                                                                                                                                               |
+| locked                              | False                                                                                                                                                                                              |
+| locked_reason                       | None                                                                                                                                                                                               |
+| name                                | ubuntu-22-ceph-vm                                                                                                                                                                                  |
+| pinned_availability_zone            | None                                                                                                                                                                                               |
+| progress                            | None                                                                                                                                                                                               |
+| project_id                          | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                   |
+| properties                          |                                                                                                                                                                                                    |
+| scheduler_hints                     |                                                                                                                                                                                                    |
+| server_groups                       | None                                                                                                                                                                                               |
+| status                              | ERROR                                                                                                                                                                                              |
+| tags                                |                                                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                                                               |
+| updated                             | 2026-02-02T16:39:48Z                                                                                                                                                                               |
+| user_id                             | 09805ebaab704a8cbf99fdc8a0c1859d                                                                                                                                                                   |
+| volumes_attached                    | delete_on_termination='False', id='5c3f1e9b-0944-46b3-9fdf-7472562f6a93'                                                                                                                           |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ 
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                                                              |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:host                | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:hostname            | ubuntu-22-ceph-vm                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:instance_name       | instance-00000001                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:kernel_id           |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:launch_index        | 0                                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:ramdisk_id          |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:reservation_id      | r-uikf010n                                                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:user_data           | None                                                                                                                                                                                               |
+| OS-EXT-STS:power_state              | NOSTATE                                                                                                                                                                                            |
+| OS-EXT-STS:task_state               | None                                                                                                                                                                                               |
+| OS-EXT-STS:vm_state                 | error                                                                                                                                                                                              |
+| OS-SRV-USG:launched_at              | None                                                                                                                                                                                               |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                                                               |
+| accessIPv4                          |                                                                                                                                                                                                    |
+| accessIPv6                          |                                                                                                                                                                                                    |
+| addresses                           |                                                                                                                                                                                                    |
+| config_drive                        |                                                                                                                                                                                                    |
+| created                             | 2026-02-02T16:39:47Z                                                                                                                                                                               |
+| description                         | None                                                                                                                                                                                               |
+| fault                               | {'code': 500, 'created': '2026-02-02T16:39:48Z', 'message': 'No valid host was found. There are not enough hosts available.', 'details': 'Traceback (most recent call last):\n  File               |
+|                                     | "/opt/stack/nova/nova/conductor/manager.py", line 1655, in schedule_and_build_instances\n    host_lists = self._schedule_instances(context, request_specs[0],\n  File                              |
+|                                     | "/opt/stack/nova/nova/conductor/manager.py", line 943, in _schedule_instances\n    host_lists = self.query_client.select_destinations(\n  File "/opt/stack/nova/nova/scheduler/client/query.py",   |
+|                                     | line 41, in select_destinations\n    return self.scheduler_rpcapi.select_destinations(context, spec_obj,\n  File "/opt/stack/nova/nova/scheduler/rpcapi.py", line 160, in select_destinations\n    |
+|                                     | return cctxt.call(ctxt, \'select_destinations\', **msg_args)\n  File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/rpc/client.py", line 180, in call\n    result =             |
+|                                     | self.transport._send(\n  File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/transport.py", line 123, in _send\n    return self._driver.send(target, ctxt, message,\n  File     |
+|                                     | "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/_drivers/amqpdriver.py", line 800, in send\n    return self._send(target, ctxt, message, wait_for_reply, timeout,\n  File        |
+|                                     | "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/_drivers/amqpdriver.py", line 792, in _send\n    raise result\nnova.exception_Remote.NoValidHost_Remote: No valid host was       |
+|                                     | found. There are not enough hosts available.\nTraceback (most recent call last):\n\n  File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/rpc/server.py", line 269, in inner\n  |
+|                                     | return func(*args, **kwargs)\n\n  File "/opt/stack/nova/nova/scheduler/manager.py", line 269, in select_destinations\n    selections = self._select_destinations(\n\n  File                        |
+|                                     | "/opt/stack/nova/nova/scheduler/manager.py", line 296, in _select_destinations\n    selections = self._schedule(\n\n  File "/opt/stack/nova/nova/scheduler/manager.py", line 497, in _schedule\n   |
+|                                     | self._ensure_sufficient_hosts(\n\n  File "/opt/stack/nova/nova/scheduler/manager.py", line 544, in _ensure_sufficient_hosts\n    raise                                                             |
+|                                     | exception.NoValidHost(reason=reason)\n\nnova.exception.NoValidHost: No valid host was found. There are not enough hosts available.\n\n'}                                                           |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small', original_name='m1.small', ram='2048',        |
+|                                     | rxtx_factor=, swap='0', vcpus='1'                                                                                                                                                                  |
+| hostId                              |                                                                                                                                                                                                    |
+| host_status                         |                                                                                                                                                                                                    |
+| id                                  | fbbf4603-a19c-4b64-b004-5a268e767137                                                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                                                           |
+| key_name                            | None                                                                                                                                                                                               |
+| locked                              | False                                                                                                                                                                                              |
+| locked_reason                       | None                                                                                                                                                                                               |
+| name                                | ubuntu-22-ceph-vm                                                                                                                                                                                  |
+| pinned_availability_zone            | None                                                                                                                                                                                               |
+| progress                            | None                                                                                                                                                                                               |
+| project_id                          | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                   |
+| properties                          |                                                                                                                                                                                                    |
+| scheduler_hints                     |                                                                                                                                                                                                    |
+| server_groups                       | None                                                                                                                                                                                               |
+| status                              | ERROR                                                                                                                                                                                              |
+| tags                                |                                                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                                                               |
+| updated                             | 2026-02-02T16:39:48Z                                                                                                                                                                               |
+| user_id                             | 09805ebaab704a8cbf99fdc8a0c1859d                                                                                                                                                                   |
+| volumes_attached                    | delete_on_termination='False', id='5c3f1e9b-0944-46b3-9fdf-7472562f6a93'                                                                                                                           |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume create   --image ubuntu-22-ceph-latest   --size 20   --type ceph   ubuntu-22-root-vol
+No Image found for ubuntu-22-ceph-latest
+ubuntu@gelani-lab-1:~$ openstack volume create   --image ubuntu-22-ceph-latest   --size 20   --type ceph   ubuntu-22-root-vol
+No Image found for ubuntu-22-ceph-latest
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                                                              |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:host                | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:hostname            | ubuntu-22-ceph-vm                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:instance_name       | instance-00000001                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:kernel_id           |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:launch_index        | 0                                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:ramdisk_id          |                                                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:reservation_id      | r-uikf010n                                                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:user_data           | None                                                                                                                                                                                               |
+| OS-EXT-STS:power_state              | NOSTATE                                                                                                                                                                                            |
+| OS-EXT-STS:task_state               | None                                                                                                                                                                                               |
+| OS-EXT-STS:vm_state                 | error                                                                                                                                                                                              |
+| OS-SRV-USG:launched_at              | None                                                                                                                                                                                               |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                                                               |
+| accessIPv4                          |                                                                                                                                                                                                    |
+| accessIPv6                          |                                                                                                                                                                                                    |
+| addresses                           |                                                                                                                                                                                                    |
+| config_drive                        |                                                                                                                                                                                                    |
+| created                             | 2026-02-02T16:39:47Z                                                                                                                                                                               |
+| description                         | None                                                                                                                                                                                               |
+| fault                               | {'code': 500, 'created': '2026-02-02T16:39:48Z', 'message': 'No valid host was found. There are not enough hosts available.', 'details': 'Traceback (most recent call last):\n  File               |
+|                                     | "/opt/stack/nova/nova/conductor/manager.py", line 1655, in schedule_and_build_instances\n    host_lists = self._schedule_instances(context, request_specs[0],\n  File                              |
+|                                     | "/opt/stack/nova/nova/conductor/manager.py", line 943, in _schedule_instances\n    host_lists = self.query_client.select_destinations(\n  File "/opt/stack/nova/nova/scheduler/client/query.py",   |
+|                                     | line 41, in select_destinations\n    return self.scheduler_rpcapi.select_destinations(context, spec_obj,\n  File "/opt/stack/nova/nova/scheduler/rpcapi.py", line 160, in select_destinations\n    |
+|                                     | return cctxt.call(ctxt, \'select_destinations\', **msg_args)\n  File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/rpc/client.py", line 180, in call\n    result =             |
+|                                     | self.transport._send(\n  File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/transport.py", line 123, in _send\n    return self._driver.send(target, ctxt, message,\n  File     |
+|                                     | "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/_drivers/amqpdriver.py", line 800, in send\n    return self._send(target, ctxt, message, wait_for_reply, timeout,\n  File        |
+|                                     | "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/_drivers/amqpdriver.py", line 792, in _send\n    raise result\nnova.exception_Remote.NoValidHost_Remote: No valid host was       |
+|                                     | found. There are not enough hosts available.\nTraceback (most recent call last):\n\n  File "/opt/stack/data/venv/lib/python3.10/site-packages/oslo_messaging/rpc/server.py", line 269, in inner\n  |
+|                                     | return func(*args, **kwargs)\n\n  File "/opt/stack/nova/nova/scheduler/manager.py", line 269, in select_destinations\n    selections = self._select_destinations(\n\n  File                        |
+|                                     | "/opt/stack/nova/nova/scheduler/manager.py", line 296, in _select_destinations\n    selections = self._schedule(\n\n  File "/opt/stack/nova/nova/scheduler/manager.py", line 497, in _schedule\n   |
+|                                     | self._ensure_sufficient_hosts(\n\n  File "/opt/stack/nova/nova/scheduler/manager.py", line 544, in _ensure_sufficient_hosts\n    raise                                                             |
+|                                     | exception.NoValidHost(reason=reason)\n\nnova.exception.NoValidHost: No valid host was found. There are not enough hosts available.\n\n'}                                                           |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small', original_name='m1.small', ram='2048',        |
+|                                     | rxtx_factor=, swap='0', vcpus='1'                                                                                                                                                                  |
+| hostId                              |                                                                                                                                                                                                    |
+| host_status                         |                                                                                                                                                                                                    |
+| id                                  | fbbf4603-a19c-4b64-b004-5a268e767137                                                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                                                           |
+| key_name                            | None                                                                                                                                                                                               |
+| locked                              | False                                                                                                                                                                                              |
+| locked_reason                       | None                                                                                                                                                                                               |
+| name                                | ubuntu-22-ceph-vm                                                                                                                                                                                  |
+| pinned_availability_zone            | None                                                                                                                                                                                               |
+| progress                            | None                                                                                                                                                                                               |
+| project_id                          | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                   |
+| properties                          |                                                                                                                                                                                                    |
+| scheduler_hints                     |                                                                                                                                                                                                    |
+| server_groups                       | None                                                                                                                                                                                               |
+| status                              | ERROR                                                                                                                                                                                              |
+| tags                                |                                                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                                                               |
+| updated                             | 2026-02-02T16:39:48Z                                                                                                                                                                               |
+| user_id                             | 09805ebaab704a8cbf99fdc8a0c1859d                                                                                                                                                                   |
+| volumes_attached                    | delete_on_termination='False', id='5c3f1e9b-0944-46b3-9fdf-7472562f6a93'                                                                                                                           |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack server create   --flavor m1.small   --volume ubuntu-22-root-vol   --network private   ubuntu-22-ceph-vm-01
+BadRequestException: 400: Client Error for url: http://192.168.95.93/compute/v2.1/servers, Invalid volume: Invalid input received: Invalid volume: Volume 5c3f1e9b-0944-46b3-9fdf-7472562f6a93 status must be available or downloading to reserve, but the current status is reserved. (HTTP 400) (Request-ID: req-26e35f06-285f-465b-9505-e9d2537c2b7d)
+ubuntu@gelani-lab-1:~$ 
+
+
+
+ubuntu@gelani-lab-1:~$ openstack server delete ubuntu-22-ceph-vm
+Missing value auth-url required for auth plugin password
+ubuntu@gelani-lab-1:~$ source /opt/stack/devstack/openrc admin admin
+ubuntu@gelani-lab-1:~$ openstack server delete ubuntu-22-ceph-vm
+ubuntu@gelani-lab-1:~$ openstack volume delete ubuntu-22-root-vol
+ubuntu@gelani-lab-1:~$ openstack volume list
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+| ID                                   | Name            | Status | Size | Attached to                                   |
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol | in-use |    2 | Attached to cirros-ceph-vm on /dev/vda        |
+| 305da66f-634d-4ad1-a22c-ebd03e7a232d |                 | in-use |   10 | Attached to ceph-backend-vm-test on /dev/vda  |
+| 528aefa4-3422-49e8-bd72-93c2a32cdc85 |                 | in-use |    5 | Attached to ceph-vm-2 on /dev/vda             |
+| 5f2f64e1-6b28-41bf-88b2-e17204dbfbb0 |                 | in-use |    5 | Attached to ceph-vm-1 on /dev/vda             |
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack image delete ubuntu-22-ceph
+ubuntu@gelani-lab-1:~$ openstack compute service list
++--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
+| ID                                   | Binary         | Host         | Zone     | Status  | State | Updated At                 |
++--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
+| bfadc076-b3e7-43a5-bff2-8ad6b455b3d6 | nova-scheduler | gelani-lab-1 | internal | enabled | up    | 2026-02-03T03:04:14.000000 |
+| acf0ff1f-9b72-4ba3-96e8-9cbc03442f22 | nova-conductor | gelani-lab-1 | internal | enabled | up    | 2026-02-03T03:04:14.000000 |
+| 117e4279-c655-4134-b738-a72492bd1342 | nova-conductor | gelani-lab-1 | internal | enabled | up    | 2026-02-03T03:04:36.000000 |
+| f7e97b80-41d8-4bf1-ac93-37154597ceae | nova-compute   | gelani-lab-1 | nova     | enabled | down  | 2026-02-02T15:25:53.000000 |
++--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
+ubuntu@gelani-lab-1:~$ openstack hypervisor list
++--------------------------------------+---------------------+-----------------+---------------+-------+
+| ID                                   | Hypervisor Hostname | Hypervisor Type | Host IP       | State |
++--------------------------------------+---------------------+-----------------+---------------+-------+
+| ba2ec314-9891-498b-82cc-7a5f896382bf | gelani-lab-1        | QEMU            | 192.168.95.93 | down  |
++--------------------------------------+---------------------+-----------------+---------------+-------+
+ubuntu@gelani-lab-1:~$ sudo systemctl restart libvirtd
+ubuntu@gelani-lab-1:~$ sudo systemctl status libvirtd
+● libvirtd.service - Virtualization daemon
+     Loaded: loaded (/lib/systemd/system/libvirtd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2026-02-03 03:05:24 UTC; 6s ago
+TriggeredBy: ● libvirtd-ro.socket
+             ● libvirtd-admin.socket
+             ● libvirtd.socket
+       Docs: man:libvirtd(8)
+             https://libvirt.org
+   Main PID: 93903 (libvirtd)
+      Tasks: 21 (limit: 32768)
+     Memory: 61.3M
+        CPU: 648ms
+     CGroup: /system.slice/libvirtd.service
+             ├─ 4692 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+             ├─ 4693 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+             └─93903 /usr/sbin/libvirtd
+
+Feb 03 03:05:24 gelani-lab-1 systemd[1]: Starting Virtualization daemon...
+Feb 03 03:05:24 gelani-lab-1 libvirtd[93903]: 2026-02-03 03:05:24.096+0000: 93903: info : libvirt version: 8.0.0, package: 1ubuntu7.15 (Marc Deslauriers <marc.deslauriers@ubuntu.com> Mon, 08 Dec 2025 13:08:06 -0500)
+Feb 03 03:05:24 gelani-lab-1 libvirtd[93903]: 2026-02-03 03:05:24.096+0000: 93903: info : hostname: gelani-lab-1
+Feb 03 03:05:24 gelani-lab-1 libvirtd[93903]: 2026-02-03 03:05:24.096+0000: 93903: debug : virLogParseOutputs:1641 : outputs=1:file:/var/log/libvirt/libvirtd.log
+Feb 03 03:05:24 gelani-lab-1 libvirtd[93903]: 2026-02-03 03:05:24.096+0000: 93903: debug : virLogParseOutput:1488 : output=1:file:/var/log/libvirt/libvirtd.log
+Feb 03 03:05:24 gelani-lab-1 systemd[1]: Started Virtualization daemon.
+Feb 03 03:05:24 gelani-lab-1 dnsmasq[4692]: read /etc/hosts - 9 names
+Feb 03 03:05:24 gelani-lab-1 dnsmasq[4692]: read /var/lib/libvirt/dnsmasq/default.addnhosts - 0 names
+Feb 03 03:05:24 gelani-lab-1 dnsmasq-dhcp[4692]: read /var/lib/libvirt/dnsmasq/default.hostsfile
+ubuntu@gelani-lab-1:~$ sudo systemctl restart devstack@n-cpu
+ubuntu@gelani-lab-1:~$ sudo systemctl status devstack@n-cpu
+● devstack@n-cpu.service - Devstack devstack@n-cpu.service
+     Loaded: loaded (/etc/systemd/system/devstack@n-cpu.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2026-02-03 03:05:53 UTC; 7s ago
+   Main PID: 94080 (nova-compute)
+      Tasks: 22 (limit: 38457)
+     Memory: 128.7M
+        CPU: 2.346s
+     CGroup: /system.slice/system-devstack.slice/devstack@n-cpu.service
+             └─94080 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf
+
+Feb 03 03:05:57 gelani-lab-1 nova-compute[94080]: </cpu>
+Feb 03 03:05:57 gelani-lab-1 nova-compute[94080]:  {{(pid=94080) _compare_cpu /opt/stack/nova/nova/virt/libvirt/driver.py:10974}}
+Feb 03 03:05:57 gelani-lab-1 nova-compute[94080]: INFO nova.virt.node [None req-917936af-17fd-451a-80a8-ea5e2e057978 None None] Determined node identity ba2ec314-9891-498b-82cc-7a5f896382bf from /opt/stack/data/nova/compute_id
+Feb 03 03:05:57 gelani-lab-1 nova-compute[94080]: INFO nova.virt.node [None req-917936af-17fd-451a-80a8-ea5e2e057978 None None] Determined node identity ba2ec314-9891-498b-82cc-7a5f896382bf from /opt/stack/data/nova/compute_id
+Feb 03 03:05:58 gelani-lab-1 nova-compute[94080]: DEBUG nova.compute.manager [None req-917936af-17fd-451a-80a8-ea5e2e057978 None None] Verified node ba2ec314-9891-498b-82cc-7a5f896382bf matches my host gelani-lab-1 {{(pid=94080) _check>
+Feb 03 03:05:58 gelani-lab-1 nova-compute[94080]: DEBUG nova.objects.instance [None req-917936af-17fd-451a-80a8-ea5e2e057978 None None] Lazy-loading 'flavor' on Instance uuid 1a155fc3-49dd-44be-853d-e19221446b64 {{(pid=94080) obj_load_>
+Feb 03 03:05:59 gelani-lab-1 nova-compute[94080]: DEBUG nova.objects.instance [None req-917936af-17fd-451a-80a8-ea5e2e057978 None None] Lazy-loading 'system_metadata' on Instance uuid 1a155fc3-49dd-44be-853d-e19221446b64 {{(pid=94080) >
+Feb 03 03:05:59 gelani-lab-1 nova-compute[94080]: DEBUG nova.objects.base [None req-917936af-17fd-451a-80a8-ea5e2e057978 None None] Object Instance<1a155fc3-49dd-44be-853d-e19221446b64> lazy-loaded attributes: flavor,system_metadata {{>
+Feb 03 03:05:59 gelani-lab-1 nova-compute[94080]: DEBUG nova.objects.instance [None req-917936af-17fd-451a-80a8-ea5e2e057978 None None] Lazy-loading 'flavor' on Instance uuid c0c53027-178e-4ac8-9ac9-955d0c6dc606 {{(pid=94080) obj_load_>
+Feb 03 03:06:00 gelani-lab-1 nova-compute[94080]: DEBUG nova.objects.instance [None req-917936af-17fd-451a-80a8-ea5e2e057978 None None] Lazy-loading 'system_metadata' on Instance uuid c0c53027-178e-4ac8-9ac9-955d0c6dc606 {{(pid=94080) >
+
+ubuntu@gelani-lab-1:~$ sudo systemctl restart devstack@n-sch
+ubuntu@gelani-lab-1:~$ source /opt/stack/devstack/openrc admin admin
+ubuntu@gelani-lab-1:~$ openstack compute service list
++--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
+| ID                                   | Binary         | Host         | Zone     | Status  | State | Updated At                 |
++--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
+| bfadc076-b3e7-43a5-bff2-8ad6b455b3d6 | nova-scheduler | gelani-lab-1 | internal | enabled | up    | 2026-02-03T03:06:23.000000 |
+| acf0ff1f-9b72-4ba3-96e8-9cbc03442f22 | nova-conductor | gelani-lab-1 | internal | enabled | up    | 2026-02-03T03:06:14.000000 |
+| 117e4279-c655-4134-b738-a72492bd1342 | nova-conductor | gelani-lab-1 | internal | enabled | up    | 2026-02-03T03:06:36.000000 |
+| f7e97b80-41d8-4bf1-ac93-37154597ceae | nova-compute   | gelani-lab-1 | nova     | enabled | up    | 2026-02-03T03:06:20.000000 |
++--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume create \
+  --image ubuntu-22-ceph \
+  --size 20 \
+  --type ceph \
+  ubuntu-22-root-vol
+No Image found for ubuntu-22-ceph
+ubuntu@gelani-lab-1:~$ openstack volume create   --image ubuntu-22-ceph   --size 20   --type ceph   ubuntu-22-root-vol
+No Image found for ubuntu-22-ceph
+ubuntu@gelani-lab-1:~$ openstack image list
++--------------------------------------+---------------------------------+--------+
+| ID                                   | Name                            | Status |
++--------------------------------------+---------------------------------+--------+
+| 0fcd1b67-931f-4417-a407-b887577fda9f | Fedora-Cloud-Base-37-1.7.x86_64 | active |
+| d3d0c59e-4eef-4932-b6dd-e436b761c6be | cirros-0.6.3-x86_64-disk        | active |
+| 515a9c85-ab86-4ac2-a5aa-b28eb73815f6 | cirros-ceph-test                | active |
+| 354c47fc-908e-4497-a104-7cdfac4ae169 | cirros-ceph-test                | active |
+| b6e575cd-c986-4098-a75f-136eafa50af2 | ubuntu                          | active |
++--------------------------------------+---------------------------------+--------+
+ubuntu@gelani-lab-1:~$ openstack image create ubuntu-22-ceph \
+  --disk-format qcow2 \
+  --container-format bare \
+  --file /home/ubuntu/images/jammy-server-cloudimg-amd64.img \
+  --public \
+  --progress
+[=============================>] 100%
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field            | Value                                                                                                                                                                                                                 |
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checksum         | feae9da27c50da7f45bfcca6b1f8aae0                                                                                                                                                                                      |
+| container_format | bare                                                                                                                                                                                                                  |
+| created_at       | 2026-02-03T03:45:58Z                                                                                                                                                                                                  |
+| disk_format      | qcow2                                                                                                                                                                                                                 |
+| file             | /v2/images/04b01821-5c83-415e-9010-cd597df1312f/file                                                                                                                                                                  |
+| id               | 04b01821-5c83-415e-9010-cd597df1312f                                                                                                                                                                                  |
+| min_disk         | 0                                                                                                                                                                                                                     |
+| min_ram          | 0                                                                                                                                                                                                                     |
+| name             | ubuntu-22-ceph                                                                                                                                                                                                        |
+| owner            | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                                      |
+| properties       | os_hash_algo='sha512', os_hash_value='bdbfbec178ed26e088e095b72445cdd5a896dcc9e5c0f00862698aec4fa29c3c37e3d2392597043f5ed23c9bca346744bea3065979d88130a37bf27562891f3c', os_hidden='False',                           |
+|                  | owner_specified.openstack.md5='', owner_specified.openstack.object='images/ubuntu-22-ceph', owner_specified.openstack.sha256=''                                                                                       |
+| protected        | False                                                                                                                                                                                                                 |
+| schema           | /v2/schemas/image                                                                                                                                                                                                     |
+| size             | 688868864                                                                                                                                                                                                             |
+| status           | active                                                                                                                                                                                                                |
+| tags             |                                                                                                                                                                                                                       |
+| updated_at       | 2026-02-03T03:46:06Z                                                                                                                                                                                                  |
+| virtual_size     | 2361393152                                                                                                                                                                                                            |
+| visibility       | public                                                                                                                                                                                                                |
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack image show ubuntu-22-ceph -c status -c size
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| size   | 688868864 |
+| status | active    |
++--------+-----------+
+ubuntu@gelani-lab-1:~$ openstack volume create \
+  --image ubuntu-22-ceph \
+  --size 20 \
+  --type ceph \
+  ubuntu-22-root-vol
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-02-03T03:46:26.031849           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | 3e0bc39e-5359-404b-9b94-20473636e32c |
+| multiattach                    | False                                |
+| name                           | ubuntu-22-root-vol                   |
+| os-vol-host-attr:host          | None                                 |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | None                                 |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 20                                   |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | creating                             |
+| type                           | ceph                                 |
+| updated_at                     | None                                 |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d     |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411 |
++--------------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume create   --image ubuntu-22-ceph   --size 20   --type ceph   ubuntu-22-root-vol
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-02-03T03:46:37.718401           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | 06b300e5-994d-4596-bd60-7ec22a900d6a |
+| multiattach                    | False                                |
+| name                           | ubuntu-22-root-vol                   |
+| os-vol-host-attr:host          | None                                 |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | None                                 |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 20                                   |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | creating                             |
+| type                           | ceph                                 |
+| updated_at                     | None                                 |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d     |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411 |
++--------------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume create   --image ubuntu-22-ceph   --size 20   --type ceph   ubuntu-22-root-vol
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-02-03T03:48:54.431240           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | c7f2b5ed-cd9d-409f-b6e9-e681ab80ea56 |
+| multiattach                    | False                                |
+| name                           | ubuntu-22-root-vol                   |
+| os-vol-host-attr:host          | None                                 |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | None                                 |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 20                                   |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | creating                             |
+| type                           | ceph                                 |
+| updated_at                     | None                                 |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d     |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411 |
++--------------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~$ 
+ubuntu@gelani-lab-1:~$ openstack volume create   --image ubuntu-22-ceph   --size 20   --type ceph   ubuntu-22-root-vol
+HttpException: 413: Client Error for url: http://192.168.95.93/volume/v3/volumes, VolumeLimitExceeded: Maximum number of volumes allowed (10) exceeded for quota 'volumes'.
+ubuntu@gelani-lab-1:~$
+
+ubuntu@gelani-lab-1:~$ openstack server list
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| ID                                   | Name                 | Status  | Networks                                                | Image                    | Flavor   |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| 83643058-b0e6-477a-a9e5-3e1fc02e2bae | cirros-ceph-vm       | SHUTOFF | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b | N/A (booted from volume) | m1.small |
+| 3f7da104-e963-4fc7-816c-54d25bcce15b | ceph-backend-vm-test | SHUTOFF | shared=192.168.233.187                                  | N/A (booted from volume) | m1.micro |
+| 2e34a5ce-c9f4-4046-af18-a981c37a2921 | ceph-vm-2            | SHUTOFF | private=10.0.0.30, fdf9:52f7:7011:0:f816:3eff:fe8f:a6d4 | N/A (booted from volume) | m1.tiny  |
+| a854d59a-25b5-4103-a0ac-62aa14105877 | ceph-vm-1            | SHUTOFF | private=10.0.0.26, fdf9:52f7:7011:0:f816:3eff:feca:fc43 | N/A (booted from volume) | m1.tiny  |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~$ openstack server delete ceph-vm-1
+ubuntu@gelani-lab-1:~$ openstack server list
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| ID                                   | Name                 | Status  | Networks                                                | Image                    | Flavor   |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| 83643058-b0e6-477a-a9e5-3e1fc02e2bae | cirros-ceph-vm       | SHUTOFF | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b | N/A (booted from volume) | m1.small |
+| 3f7da104-e963-4fc7-816c-54d25bcce15b | ceph-backend-vm-test | SHUTOFF | shared=192.168.233.187                                  | N/A (booted from volume) | m1.micro |
+| 2e34a5ce-c9f4-4046-af18-a981c37a2921 | ceph-vm-2            | SHUTOFF | private=10.0.0.30, fdf9:52f7:7011:0:f816:3eff:fe8f:a6d4 | N/A (booted from volume) | m1.tiny  |
+| a854d59a-25b5-4103-a0ac-62aa14105877 | ceph-vm-1            | SHUTOFF |                                                         | N/A (booted from volume) | m1.tiny  |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~$ openstack server list
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| ID                                   | Name                 | Status  | Networks                                                | Image                    | Flavor   |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| 83643058-b0e6-477a-a9e5-3e1fc02e2bae | cirros-ceph-vm       | SHUTOFF | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b | N/A (booted from volume) | m1.small |
+| 3f7da104-e963-4fc7-816c-54d25bcce15b | ceph-backend-vm-test | SHUTOFF | shared=192.168.233.187                                  | N/A (booted from volume) | m1.micro |
+| 2e34a5ce-c9f4-4046-af18-a981c37a2921 | ceph-vm-2            | SHUTOFF | private=10.0.0.30, fdf9:52f7:7011:0:f816:3eff:fe8f:a6d4 | N/A (booted from volume) | m1.tiny  |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~$ openstack server delete ceph-vm-2
+ubuntu@gelani-lab-1:~$ openstack server delete ceph-vm-1
+Failed to delete server with name or ID 'ceph-vm-1': No Server found for ceph-vm-1
+1 of 1 servers failed to delete.
+ubuntu@gelani-lab-1:~$ openstack server list
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| ID                                   | Name                 | Status  | Networks                                                | Image                    | Flavor   |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| 83643058-b0e6-477a-a9e5-3e1fc02e2bae | cirros-ceph-vm       | SHUTOFF | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b | N/A (booted from volume) | m1.small |
+| 3f7da104-e963-4fc7-816c-54d25bcce15b | ceph-backend-vm-test | SHUTOFF | shared=192.168.233.187                                  | N/A (booted from volume) | m1.micro |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~$ openstack volume list
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+| ID                                   | Name               | Status    | Size | Attached to                                   |
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+| ce36e431-da00-4acc-bd50-2db47fbe66af | ubuntu-22-root-vol | available |   20 |                                               |
+| ec0ed295-ee3e-484e-85cc-1cbb980c8899 | ubuntu-22-root-vol | available |   20 |                                               |
+| 1a74f991-54b6-44ae-ba3c-a786eba5fa84 | ubuntu-22-root-vol | available |   20 |                                               |
+| c7f2b5ed-cd9d-409f-b6e9-e681ab80ea56 | ubuntu-22-root-vol | available |   20 |                                               |
+| 06b300e5-994d-4596-bd60-7ec22a900d6a | ubuntu-22-root-vol | available |   20 |                                               |
+| 3e0bc39e-5359-404b-9b94-20473636e32c | ubuntu-22-root-vol | available |   20 |                                               |
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol    | in-use    |    2 | Attached to cirros-ceph-vm on /dev/vda        |
+| 305da66f-634d-4ad1-a22c-ebd03e7a232d |                    | in-use    |   10 | Attached to ceph-backend-vm-test on /dev/vda  |
+| 528aefa4-3422-49e8-bd72-93c2a32cdc85 |                    | available |    5 |                                               |
+| 5f2f64e1-6b28-41bf-88b2-e17204dbfbb0 |                    | available |    5 |                                               |
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume delete 5f2f64e1-6b28-41bf-88b2-e17204dbfbb0
+ubuntu@gelani-lab-1:~$ openstack volume delete 528aefa4-3422-49e8-bd72-93c2a32cdc85
+ubuntu@gelani-lab-1:~$ openstack volume list
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+| ID                                   | Name               | Status    | Size | Attached to                                   |
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+| ce36e431-da00-4acc-bd50-2db47fbe66af | ubuntu-22-root-vol | available |   20 |                                               |
+| ec0ed295-ee3e-484e-85cc-1cbb980c8899 | ubuntu-22-root-vol | available |   20 |                                               |
+| 1a74f991-54b6-44ae-ba3c-a786eba5fa84 | ubuntu-22-root-vol | available |   20 |                                               |
+| c7f2b5ed-cd9d-409f-b6e9-e681ab80ea56 | ubuntu-22-root-vol | available |   20 |                                               |
+| 06b300e5-994d-4596-bd60-7ec22a900d6a | ubuntu-22-root-vol | available |   20 |                                               |
+| 3e0bc39e-5359-404b-9b94-20473636e32c | ubuntu-22-root-vol | available |   20 |                                               |
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol    | in-use    |    2 | Attached to cirros-ceph-vm on /dev/vda        |
+| 305da66f-634d-4ad1-a22c-ebd03e7a232d |                    | in-use    |   10 | Attached to ceph-backend-vm-test on /dev/vda  |
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume delete ce36e431-da00-4acc-bd50-2db47fbe66af ec0ed295-ee3e-484e-85cc-1cbb980c8899 1a74f991-54b6-44ae-ba3c-a786eba5fa84
+ubuntu@gelani-lab-1:~$ openstack volume list
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+| ID                                   | Name               | Status    | Size | Attached to                                   |
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+| c7f2b5ed-cd9d-409f-b6e9-e681ab80ea56 | ubuntu-22-root-vol | available |   20 |                                               |
+| 06b300e5-994d-4596-bd60-7ec22a900d6a | ubuntu-22-root-vol | available |   20 |                                               |
+| 3e0bc39e-5359-404b-9b94-20473636e32c | ubuntu-22-root-vol | available |   20 |                                               |
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol    | in-use    |    2 | Attached to cirros-ceph-vm on /dev/vda        |
+| 305da66f-634d-4ad1-a22c-ebd03e7a232d |                    | in-use    |   10 | Attached to ceph-backend-vm-test on /dev/vda  |
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume list
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+| ID                                   | Name               | Status    | Size | Attached to                                   |
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+| c7f2b5ed-cd9d-409f-b6e9-e681ab80ea56 | ubuntu-22-root-vol | available |   20 |                                               |
+| 06b300e5-994d-4596-bd60-7ec22a900d6a | ubuntu-22-root-vol | available |   20 |                                               |
+| 3e0bc39e-5359-404b-9b94-20473636e32c | ubuntu-22-root-vol | available |   20 |                                               |
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol    | in-use    |    2 | Attached to cirros-ceph-vm on /dev/vda        |
+| 305da66f-634d-4ad1-a22c-ebd03e7a232d |                    | in-use    |   10 | Attached to ceph-backend-vm-test on /dev/vda  |
++--------------------------------------+--------------------+-----------+------+-----------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume delete c7f2b5ed-cd9d-409f-b6e9-e681ab80ea56 06b300e5-994d-4596-bd60-7ec22a900d6a 3e0bc39e-5359-404b-9b94-20473636e32c
+ubuntu@gelani-lab-1:~$ openstack volume list
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+| ID                                   | Name            | Status | Size | Attached to                                   |
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol | in-use |    2 | Attached to cirros-ceph-vm on /dev/vda        |
+| 305da66f-634d-4ad1-a22c-ebd03e7a232d |                 | in-use |   10 | Attached to ceph-backend-vm-test on /dev/vda  |
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack quota show admin
++-----------------------+-------+
+| Resource              | Limit |
++-----------------------+-------+
+| cores                 |    20 |
+| instances             |    10 |
+| ram                   | 51200 |
+| fixed_ips             |  None |
+| networks              |   100 |
+| volumes               |    10 |
+| snapshots             |    10 |
+| gigabytes             |  1000 |
+| backups               |    10 |
+| volumes_ceph          |    -1 |
+| gigabytes_ceph        |    -1 |
+| snapshots_ceph        |    -1 |
+| volumes_lvmdriver-1   |    -1 |
+| gigabytes_lvmdriver-1 |    -1 |
+| snapshots_lvmdriver-1 |    -1 |
+| volumes___DEFAULT__   |    -1 |
+| gigabytes___DEFAULT__ |    -1 |
+| snapshots___DEFAULT__ |    -1 |
+| groups                |    10 |
+| check_limit           |  None |
+| health_monitors       |  None |
+| listeners             |  None |
+| load_balancers        |  None |
+| l7_policies           |  None |
+| pools                 |  None |
+| ports                 |   500 |
+| project_id            |  None |
+| rbac_policies         |    10 |
+| routers               |    10 |
+| subnets               |   100 |
+| subnet_pools          |    -1 |
+| injected-file-size    | 10240 |
+| injected-path-size    |   255 |
+| injected-files        |     5 |
+| key-pairs             |   100 |
+| properties            |   128 |
+| server-group-members  |    10 |
+| server-groups         |    10 |
+| floating-ips          |    50 |
+| secgroup-rules        |   100 |
+| secgroups             |    10 |
+| backup-gigabytes      |  1000 |
+| per-volume-gigabytes  |    -1 |
++-----------------------+-------+
+ubuntu@gelani-lab-1:~$ openstack server list
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| ID                                   | Name                 | Status  | Networks                                                | Image                    | Flavor   |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| 83643058-b0e6-477a-a9e5-3e1fc02e2bae | cirros-ceph-vm       | SHUTOFF | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b | N/A (booted from volume) | m1.small |
+| 3f7da104-e963-4fc7-816c-54d25bcce15b | ceph-backend-vm-test | SHUTOFF | shared=192.168.233.187                                  | N/A (booted from volume) | m1.micro |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~$ openstack server remove ceph-backend-vm-test 3f7da104-e963-4fc7-816c-54d25bcce15b
+openstack: 'server remove ceph-backend-vm-test 3f7da104-e963-4fc7-816c-54d25bcce15b' is not an openstack command. See 'openstack --help'.
+Did you mean one of these?
+  server add fixed ip
+  server add floating ip
+  server add network
+  server add port
+  server add security group
+  server add volume
+  server backup create
+  server create
+  server delete
+  server dump create
+  server evacuate
+  server event list
+  server event show
+  server group create
+  server group delete
+  server group list
+  server group show
+  server image create
+  server list
+  server lock
+  server migrate
+  server migrate confirm
+  server migrate revert
+  server migration abort
+  server migration confirm
+  server migration force complete
+  server migration list
+  server migration revert
+  server migration show
+  server pause
+  server reboot
+  server rebuild
+  server remove fixed ip
+  server remove floating ip
+  server remove network
+  server remove port
+  server remove security group
+  server remove volume
+  server rescue
+  server resize
+  server resize confirm
+  server resize revert
+  server restore
+  server resume
+  server set
+  server shelve
+  server show
+  server ssh
+  server start
+  server stop
+  server suspend
+  server unlock
+  server unpause
+  server unrescue
+  server unset
+  server unshelve
+  server volume list
+  server volume set
+  server volume update
+  service create
+  service delete
+  service list
+  service provider create
+  service provider delete
+  service provider list
+  service provider set
+  service provider show
+  service set
+  service show
+ubuntu@gelani-lab-1:~$ openstack volume list
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+| ID                                   | Name            | Status | Size | Attached to                                   |
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol | in-use |    2 | Attached to cirros-ceph-vm on /dev/vda        |
+| 305da66f-634d-4ad1-a22c-ebd03e7a232d |                 | in-use |   10 | Attached to ceph-backend-vm-test on /dev/vda  |
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack server remove 3f7da104-e963-4fc7-816c-54d25bcce15b 305da66f-634d-4ad1-a22c-ebd03e7a232d
+openstack: 'server remove 3f7da104-e963-4fc7-816c-54d25bcce15b 305da66f-634d-4ad1-a22c-ebd03e7a232d' is not an openstack command. See 'openstack --help'.
+Did you mean one of these?
+  server add fixed ip
+  server add floating ip
+  server add network
+  server add port
+  server add security group
+  server add volume
+  server backup create
+  server create
+  server delete
+  server dump create
+  server evacuate
+  server event list
+  server event show
+  server group create
+  server group delete
+  server group list
+  server group show
+  server image create
+  server list
+  server lock
+  server migrate
+  server migrate confirm
+  server migrate revert
+  server migration abort
+  server migration confirm
+  server migration force complete
+  server migration list
+  server migration revert
+  server migration show
+  server pause
+  server reboot
+  server rebuild
+  server remove fixed ip
+  server remove floating ip
+  server remove network
+  server remove port
+  server remove security group
+  server remove volume
+  server rescue
+  server resize
+  server resize confirm
+  server resize revert
+  server restore
+  server resume
+  server set
+  server shelve
+  server show
+  server ssh
+  server start
+  server stop
+  server suspend
+  server unlock
+  server unpause
+  server unrescue
+  server unset
+  server unshelve
+  server volume list
+  server volume set
+  server volume update
+  service create
+  service delete
+  service list
+  service provider create
+  service provider delete
+  service provider list
+  service provider set
+  service provider show
+  service set
+  service show
+ubuntu@gelani-lab-1:~$ openstack server remove ceph-backend-vm-test 305da66f-634d-4ad1-a22c-ebd03e7a232d
+openstack: 'server remove ceph-backend-vm-test 305da66f-634d-4ad1-a22c-ebd03e7a232d' is not an openstack command. See 'openstack --help'.
+Did you mean one of these?
+  server add fixed ip
+  server add floating ip
+  server add network
+  server add port
+  server add security group
+  server add volume
+  server backup create
+  server create
+  server delete
+  server dump create
+  server evacuate
+  server event list
+  server event show
+  server group create
+  server group delete
+  server group list
+  server group show
+  server image create
+  server list
+  server lock
+  server migrate
+  server migrate confirm
+  server migrate revert
+  server migration abort
+  server migration confirm
+  server migration force complete
+  server migration list
+  server migration revert
+  server migration show
+  server pause
+  server reboot
+  server rebuild
+  server remove fixed ip
+  server remove floating ip
+  server remove network
+  server remove port
+  server remove security group
+  server remove volume
+  server rescue
+  server resize
+  server resize confirm
+  server resize revert
+  server restore
+  server resume
+  server set
+  server shelve
+  server show
+  server ssh
+  server start
+  server stop
+  server suspend
+  server unlock
+  server unpause
+  server unrescue
+  server unset
+  server unshelve
+  server volume list
+  server volume set
+  server volume update
+  service create
+  service delete
+  service list
+  service provider create
+  service provider delete
+  service provider list
+  service provider set
+  service provider show
+  service set
+  service show
+ubuntu@gelani-lab-1:~$ openstack volume list
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+| ID                                   | Name            | Status | Size | Attached to                                   |
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol | in-use |    2 | Attached to cirros-ceph-vm on /dev/vda        |
+| 305da66f-634d-4ad1-a22c-ebd03e7a232d |                 | in-use |   10 | Attached to ceph-backend-vm-test on /dev/vda  |
++--------------------------------------+-----------------+--------+------+-----------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack server remove 3f7da104-e963-4fc7-816c-54d25bcce15b 305da66f-634d-4ad1-a22c-ebd03e7a232d
+openstack: 'server remove 3f7da104-e963-4fc7-816c-54d25bcce15b 305da66f-634d-4ad1-a22c-ebd03e7a232d' is not an openstack command. See 'openstack --help'.
+Did you mean one of these?
+  server add fixed ip
+  server add floating ip
+  server add network
+  server add port
+  server add security group
+  server add volume
+  server backup create
+  server create
+  server delete
+  server dump create
+  server evacuate
+  server event list
+  server event show
+  server group create
+  server group delete
+  server group list
+  server group show
+  server image create
+  server list
+  server lock
+  server migrate
+  server migrate confirm
+  server migrate revert
+  server migration abort
+  server migration confirm
+  server migration force complete
+  server migration list
+  server migration revert
+  server migration show
+  server pause
+  server reboot
+  server rebuild
+  server remove fixed ip
+  server remove floating ip
+  server remove network
+  server remove port
+  server remove security group
+  server remove volume
+  server rescue
+  server resize
+  server resize confirm
+  server resize revert
+  server restore
+  server resume
+  server set
+  server shelve
+  server show
+  server ssh
+  server start
+  server stop
+  server suspend
+  server unlock
+  server unpause
+  server unrescue
+  server unset
+  server unshelve
+  server volume list
+  server volume set
+  server volume update
+  service create
+  service delete
+  service list
+  service provider create
+  service provider delete
+  service provider list
+  service provider set
+  service provider show
+  service set
+  service show
+ubuntu@gelani-lab-1:~$ openstack server list
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| ID                                   | Name                 | Status  | Networks                                                | Image                    | Flavor   |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| 83643058-b0e6-477a-a9e5-3e1fc02e2bae | cirros-ceph-vm       | SHUTOFF | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b | N/A (booted from volume) | m1.small |
+| 3f7da104-e963-4fc7-816c-54d25bcce15b | ceph-backend-vm-test | SHUTOFF | shared=192.168.233.187                                  | N/A (booted from volume) | m1.micro |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~$ openstack server delete 3f7da104-e963-4fc7-816c-54d25bcce15b
+ubuntu@gelani-lab-1:~$ openstack server list
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| ID                                   | Name                 | Status  | Networks                                                | Image                    | Flavor   |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| 83643058-b0e6-477a-a9e5-3e1fc02e2bae | cirros-ceph-vm       | SHUTOFF | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b | N/A (booted from volume) | m1.small |
+| 3f7da104-e963-4fc7-816c-54d25bcce15b | ceph-backend-vm-test | DELETED |                                                         | N/A (booted from volume) | m1.micro |
++--------------------------------------+----------------------+---------+---------------------------------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~$ openstack server list
++--------------------------------------+----------------+---------+---------------------------------------------------------+--------------------------+----------+
+| ID                                   | Name           | Status  | Networks                                                | Image                    | Flavor   |
++--------------------------------------+----------------+---------+---------------------------------------------------------+--------------------------+----------+
+| 83643058-b0e6-477a-a9e5-3e1fc02e2bae | cirros-ceph-vm | SHUTOFF | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b | N/A (booted from volume) | m1.small |
++--------------------------------------+----------------+---------+---------------------------------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~$ openstack volume list
++--------------------------------------+-----------------+-----------+------+-----------------------------------------+
+| ID                                   | Name            | Status    | Size | Attached to                             |
++--------------------------------------+-----------------+-----------+------+-----------------------------------------+
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol | in-use    |    2 | Attached to cirros-ceph-vm on /dev/vda  |
+| 305da66f-634d-4ad1-a22c-ebd03e7a232d |                 | available |   10 |                                         |
++--------------------------------------+-----------------+-----------+------+-----------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume delete 3f7da104-e963-4fc7-816c-54d25bcce15b
+Failed to delete volume with name or ID '3f7da104-e963-4fc7-816c-54d25bcce15b': No Volume found for 3f7da104-e963-4fc7-816c-54d25bcce15b
+1 of 1 volumes failed to delete.
+ubuntu@gelani-lab-1:~$ openstack volume list
++--------------------------------------+-----------------+-----------+------+-----------------------------------------+
+| ID                                   | Name            | Status    | Size | Attached to                             |
++--------------------------------------+-----------------+-----------+------+-----------------------------------------+
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol | in-use    |    2 | Attached to cirros-ceph-vm on /dev/vda  |
+| 305da66f-634d-4ad1-a22c-ebd03e7a232d |                 | available |   10 |                                         |
++--------------------------------------+-----------------+-----------+------+-----------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume delete 305da66f-634d-4ad1-a22c-ebd03e7a232d
+ubuntu@gelani-lab-1:~$ openstack volume list
++--------------------------------------+-----------------+--------+------+-----------------------------------------+
+| ID                                   | Name            | Status | Size | Attached to                             |
++--------------------------------------+-----------------+--------+------+-----------------------------------------+
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol | in-use |    2 | Attached to cirros-ceph-vm on /dev/vda  |
++--------------------------------------+-----------------+--------+------+-----------------------------------------+
+ubuntu@gelani-lab-1:~$ 
+ubuntu@gelani-lab-1:~$ openstack quota set   --volumes 50   --gigabytes 1000   admin
+ubuntu@gelani-lab-1:~$ openstack quota show admin
++-----------------------+-------+
+| Resource              | Limit |
++-----------------------+-------+
+| cores                 |    20 |
+| instances             |    10 |
+| ram                   | 51200 |
+| fixed_ips             |  None |
+| networks              |   100 |
+| volumes               |    50 |
+| snapshots             |    10 |
+| gigabytes             |  1000 |
+| backups               |    10 |
+| volumes_ceph          |    -1 |
+| gigabytes_ceph        |    -1 |
+| snapshots_ceph        |    -1 |
+| volumes_lvmdriver-1   |    -1 |
+| gigabytes_lvmdriver-1 |    -1 |
+| snapshots_lvmdriver-1 |    -1 |
+| volumes___DEFAULT__   |    -1 |
+| gigabytes___DEFAULT__ |    -1 |
+| snapshots___DEFAULT__ |    -1 |
+| groups                |    10 |
+| check_limit           |  None |
+| health_monitors       |  None |
+| listeners             |  None |
+| load_balancers        |  None |
+| l7_policies           |  None |
+| pools                 |  None |
+| ports                 |   500 |
+| project_id            |  None |
+| rbac_policies         |    10 |
+| routers               |    10 |
+| subnets               |   100 |
+| subnet_pools          |    -1 |
+| injected-file-size    | 10240 |
+| injected-path-size    |   255 |
+| injected-files        |     5 |
+| key-pairs             |   100 |
+| properties            |   128 |
+| server-group-members  |    10 |
+| server-groups         |    10 |
+| floating-ips          |    50 |
+| secgroup-rules        |   100 |
+| secgroups             |    10 |
+| backup-gigabytes      |  1000 |
+| per-volume-gigabytes  |    -1 |
++-----------------------+-------+
+ubuntu@gelani-lab-1:~$ openstack volume create \
+  --image ubuntu-22-ceph \
+  --size 20 \
+  --type ceph \
+  ubuntu-22-root-vol
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-02-03T04:55:39.448824           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | 116739e7-d1a7-408b-ba83-3ccda377cefa |
+| multiattach                    | False                                |
+| name                           | ubuntu-22-root-vol                   |
+| os-vol-host-attr:host          | None                                 |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | None                                 |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 20                                   |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | creating                             |
+| type                           | ceph                                 |
+| updated_at                     | None                                 |
+| user_id                        | 09805ebaab704a8cbf99fdc8a0c1859d     |
+| volume_type_id                 | b612d2b3-a3d9-4063-84ec-64a58b2c4411 |
++--------------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack volume show ubuntu-22-root-vol -c status
++--------+-----------+
+| Field  | Value     |
++--------+-----------+
+| status | available |
++--------+-----------+
+ubuntu@gelani-lab-1:~$ openstack server create \
+  --flavor m1.small \
+  --volume ubuntu-22-root-vol \
+  --network private \
+  ubuntu-22-ceph-vm
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                                                              |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:host                | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:hostname            | ubuntu-22-ceph-vm                                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:instance_name       | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:kernel_id           | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:launch_index        | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:ramdisk_id          | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:reservation_id      | r-h3f2ue7p                                                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:user_data           | None                                                                                                                                                                                               |
+| OS-EXT-STS:power_state              | N/A                                                                                                                                                                                                |
+| OS-EXT-STS:task_state               | scheduling                                                                                                                                                                                         |
+| OS-EXT-STS:vm_state                 | building                                                                                                                                                                                           |
+| OS-SRV-USG:launched_at              | None                                                                                                                                                                                               |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                                                               |
+| accessIPv4                          | None                                                                                                                                                                                               |
+| accessIPv6                          | None                                                                                                                                                                                               |
+| addresses                           | N/A                                                                                                                                                                                                |
+| adminPass                           | ESq4ntf2edUs                                                                                                                                                                                       |
+| config_drive                        | None                                                                                                                                                                                               |
+| created                             | 2026-02-03T04:56:17Z                                                                                                                                                                               |
+| description                         | None                                                                                                                                                                                               |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small', original_name='m1.small', ram='2048',        |
+|                                     | rxtx_factor=, swap='0', vcpus='1'                                                                                                                                                                  |
+| hostId                              | None                                                                                                                                                                                               |
+| host_status                         | None                                                                                                                                                                                               |
+| id                                  | 8abf5864-c67d-4229-90af-f21e6f31b0b3                                                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                                                           |
+| key_name                            | None                                                                                                                                                                                               |
+| locked                              | None                                                                                                                                                                                               |
+| locked_reason                       | None                                                                                                                                                                                               |
+| name                                | ubuntu-22-ceph-vm                                                                                                                                                                                  |
+| pinned_availability_zone            | None                                                                                                                                                                                               |
+| progress                            | None                                                                                                                                                                                               |
+| project_id                          | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                   |
+| properties                          | None                                                                                                                                                                                               |
+| scheduler_hints                     |                                                                                                                                                                                                    |
+| security_groups                     | name='default'                                                                                                                                                                                     |
+| server_groups                       | None                                                                                                                                                                                               |
+| status                              | BUILD                                                                                                                                                                                              |
+| tags                                |                                                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                                                               |
+| updated                             | 2026-02-03T04:56:17Z                                                                                                                                                                               |
+| user_id                             | 09805ebaab704a8cbf99fdc8a0c1859d                                                                                                                                                                   |
+| volumes_attached                    |                                                                                                                                                                                                    |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ 
+ubuntu@gelani-lab-1:~$ openstack server list
++--------------------------------------+-------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| ID                                   | Name              | Status  | Networks                                                | Image                    | Flavor   |
++--------------------------------------+-------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| 8abf5864-c67d-4229-90af-f21e6f31b0b3 | ubuntu-22-ceph-vm | ACTIVE  | private=10.0.0.9, fdf9:52f7:7011:0:f816:3eff:fe1b:3637  | N/A (booted from volume) | m1.small |
+| 83643058-b0e6-477a-a9e5-3e1fc02e2bae | cirros-ceph-vm    | SHUTOFF | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b | N/A (booted from volume) | m1.small |
++--------------------------------------+-------------------+---------+---------------------------------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~$ 
 
 
 
