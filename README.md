@@ -1,65 +1,92 @@
 # Hi, I'm Kazi Emaduzzaman Gelani
 
-I am a Computer Science graduate and currently part of the Technology and Operations team at PICO Public Cloud, a division of Fiber@home Global Limited. My work focuses on cloud infrastructure, networking, system operations, Linux, and automation.
+Cloud & Infrastructure Engineer focused on **platform engineering, cloud infrastructure, networking, Linux systems, and automation**.
 
-Before this role, I worked as a Solution Engineer at Huawei Technologies Bangladesh Ltd. in the South Asia Data Center Sales and Solution team, where I gained experience with Huawei server and storage products. I started my career as an intern at Banglalink Digital Communications in the Digital Business division.
-
-I have completed CCNA and AWS Solutions Architect training, and I work extensively with Linux systems and cloud environments. RHCSA is also part of my skill set. This repository organizes my projects, labs, configurations, and scripting tools that support my daily engineering work and continuous learning.
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/emaduzzaman)
-[![Credly](https://img.shields.io/badge/Credly-Certifications-orange?logo=credly&logoColor=white)](https://www.credly.com/users/kazi-emaduzzaman-gelani)
-[![Medium](https://img.shields.io/badge/Medium-About-black?logo=medium&logoColor=white)](https://emaduzzaman-gelani.medium.com/about)
+I currently work in the **Technology & Operations team at PICO Public Cloud (Fiber@home Global Limited)**, where I support customers in designing, deploying, and operating infrastructure on the PICO Public Cloud platform. My work involves customer onboarding, cloud resource setup, and troubleshooting issues across compute, networking, storage, and Linux systems.
 
 
----
+Previously, I worked as a **Solution Engineer at Huawei Technologies Bangladesh Ltd.**, supporting South Asia data center solutions with hands-on exposure to enterprise servers and storage systems.
 
-# Repository Structure
+This repository is my **engineering workspace** — a structured, continuously updated record of my projects, labs, configurations, and tooling.
 
-This repository contains the tools, configurations, labs, and projects that I work on regularly.
-The complete folder tree is available here: [Jump to Full Repository Tree](#full-repository-tree)
-
-### 1. [penguin-scripts](penguin-scripts)
-
-Shell scripts for Linux distributions, including automation tools and day-to-day system management helpers.
-
-### 2. [full-projects](full-projects)
-
-Complete end-to-end solutions, such as DNS, web servers, mail servers, multi-service setups, and environment-wide deployments.
-
-### 3. [penguin-system_configuration](penguin-system_configuration)
-
-Linux OS configuration files, system-level adjustments, service configurations, and platform-specific settings.
-
-### 4. [snake-scripts](snake-scripts)
-
-Python scripts used for automation, operational tooling, utilities, and network/IP calculations.
-
-### 5. [wincore-systems](wincore-systems)
-
-Documentation and configurations for Windows systems, including troubleshooting, registry changes, and operational guidelines.
-
-### 6. [networking-labs](networking-labs)
-
-Hands-on networking labs for practice and research. Includes CCNA labs, routing, switching, BGP, DNS, load balancing, VPNs, and protocol testing.
-
-### 7. [wincore-scripts](wincore-scripts)
-
-PowerShell and batch scripts for Windows automation and administrative workflows.
-
-### 8. [cloud-engine](cloud-engine)
-
-Cloud-related assets including cloud-init templates, VM image workflows, automation scripts, and cloud platform lab work.
+🔗 **Profiles**
+- [LinkedIn](https://www.linkedin.com/in/emaduzzaman)
+- [Credly](https://www.credly.com/users/kazi-emaduzzaman-gelani)
+- [Medium](https://emaduzzaman-gelani.medium.com/about)
 
 ---
 
-# Purpose of This Repository
-
-This repository serves as a structured knowledge base for my professional work and technical research. It includes:
-
-* Notes and configurations from real infrastructure environments
-* Reusable system and network configurations
-* Labs and experiments for focused learning
-* Scripts and tools that support daily tasks
-* Complete documented projects and cloud setups
+**Certifications & Training**
+- ✅ CCNA — completed  
+- 🔄 AWS Solutions Architect — in progress  
+- 🔄 RHCSA — in progress  
 
 ---
+
+## Repository Structure
+
+This repository is organized by **intent**, not by technology.
+
+### 🔹 [`platform/`](platform)
+Reusable infrastructure building blocks and platform components.
+
+Includes:
+- OpenStack
+- Ceph
+- Cloud-init & image workflows
+- Storage and compute integrations
+
+---
+
+### 🔹 [`projects/`](projects)
+End-to-end, production-style system designs and deployments.
+
+Examples:
+- Private cloud environments
+- VPN gateways
+- Application platforms on OpenStack
+- Multi-service infrastructure setups
+
+Each project includes documentation, terminal logs, and validation artifacts.
+
+---
+
+### 🔹 [`labs/`](labs)
+Focused learning, experiments, and practice environments.
+
+Includes:
+- Networking labs (CCNA, DNS, VPN, load balancing)
+- Packet Tracer exercises
+- Concept validation before production use
+
+---
+
+### 🔹 [`scripts/`](scripts)
+Automation tools used in daily operations and labs.
+
+- Shell scripts for Linux and macOS
+- Python utilities for networking, subnetting, and tooling
+
+---
+
+### 🔹 [`configs/`](configs)
+System and service configuration references.
+
+- Linux system configurations
+- Windows administration and troubleshooting notes
+
+---
+
+## Purpose of This Repository
+
+This repository serves as:
+- A **technical knowledge base**
+- A **record of real infrastructure work**
+- A **portfolio of cloud and platform engineering projects**
+- A place to track progress through logs, docs, and commits
+
+Everything here reflects **hands-on work**, not theoretical examples.
+
+---
+
+> This repo is actively maintained and evolves with my professional work.
