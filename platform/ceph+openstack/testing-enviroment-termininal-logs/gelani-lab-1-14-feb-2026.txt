@@ -1,0 +1,649 @@
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.19
+ubuntu@192.168.95.19's password:
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-164-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sat Feb 14 09:31:41 UTC 2026
+
+  System load:  0.08               Processes:             145
+  Usage of /:   29.8% of 38.58GB   Users logged in:       0
+  Memory usage: 55%                IPv4 address for ens3: 192.168.95.19
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+2 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+2 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+*** System restart required ***
+Last login: Tue Feb  3 08:52:53 2026 from 192.168.95.86
+ubuntu@gelani-mon-1:~$ sudo apt update && sudo apt upgrade -y
+Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease
+Get:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:4 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Fetched 255 kB in 2s (105 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+2 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+Get another security update through Ubuntu Pro with 'esm-apps' enabled:
+  containerd
+Learn more about Ubuntu Pro at https://ubuntu.com/pro
+The following packages will be upgraded:
+  libldap-2.5-0 libldap-common
+2 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 200 kB of archives.
+After this operation, 0 B of additional disk space will be used.
+Get:1 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libldap-2.5-0 amd64 2.5.20+dfsg-0ubuntu0.22.04.1 [184 kB]
+Get:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libldap-common all 2.5.20+dfsg-0ubuntu0.22.04.1 [16.4 kB]
+Fetched 200 kB in 3s (78.7 kB/s)
+(Reading database ... 95029 files and directories currently installed.)
+Preparing to unpack .../libldap-2.5-0_2.5.20+dfsg-0ubuntu0.22.04.1_amd64.deb ...
+Unpacking libldap-2.5-0:amd64 (2.5.20+dfsg-0ubuntu0.22.04.1) over (2.5.19+dfsg-0ubuntu0.22.04.1) ...
+Preparing to unpack .../libldap-common_2.5.20+dfsg-0ubuntu0.22.04.1_all.deb ...
+Unpacking libldap-common (2.5.20+dfsg-0ubuntu0.22.04.1) over (2.5.19+dfsg-0ubuntu0.22.04.1) ...
+Setting up libldap-common (2.5.20+dfsg-0ubuntu0.22.04.1) ...
+Setting up libldap-2.5-0:amd64 (2.5.20+dfsg-0ubuntu0.22.04.1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.13) ...
+Scanning processes...
+Scanning candidates...
+Scanning linux images...
+
+Restarting services...
+ systemctl restart ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@alertmanager.gelani-mon-1.service ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@crash.gelani-mon-1.service ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@grafana.gelani-mon-1.service ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mgr.gelani-mon-1.gzltah.service ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@mon.gelani-mon-1.service ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@node-exporter.gelani-mon-1.service ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@prometheus.gelani-mon-1.service ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e@rgw.gelani.gelani-mon-1.cceitw.service chrony.service containerd.service cron.service irqbalance.service multipathd.service packagekit.service polkit.service rsyslog.service serial-getty@ttyS0.service snapd.service ssh.service systemd-journald.service systemd-networkd.service systemd-resolved.service systemd-udevd.service uuidd.service
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart getty@tty1.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+ systemctl restart user@1000.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@gelani-mon-1:~$
+ubuntu@gelani-lab-1:~$ source /opt/stack/devstack/openrc admin admin
+ubuntu@gelani-lab-1:~$ sudo systemctl status libvirtd
+● libvirtd.service - Virtualization daemon
+     Loaded: loaded (/lib/systemd/system/libvirtd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2026-02-03 16:24:54 UTC; 1 week 3 days ago
+TriggeredBy: ● libvirtd.socket
+             ● libvirtd-admin.socket
+             ● libvirtd-ro.socket
+       Docs: man:libvirtd(8)
+             https://libvirt.org
+   Main PID: 4367 (libvirtd)
+      Tasks: 21 (limit: 32768)
+     Memory: 80.0M
+        CPU: 50.900s
+     CGroup: /system.slice/libvirtd.service
+             ├─4367 /usr/sbin/libvirtd
+             ├─4639 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+             └─4640 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+
+Notice: journal has been rotated since unit was started, output may be incomplete.
+ubuntu@gelani-lab-1:~$
+ubuntu@gelani-lab-1:~$ openstack flavor list
++--------------------------------------+---------------+-------+------+-----------+-------+-----------+
+| ID                                   | Name          |   RAM | Disk | Ephemeral | VCPUs | Is Public |
++--------------------------------------+---------------+-------+------+-----------+-------+-----------+
+| 1                                    | m1.tiny       |   512 |    1 |         0 |     1 | True      |
+| 2                                    | m1.small      |  2048 |   20 |         0 |     1 | True      |
+| 3                                    | m1.medium     |  4096 |   40 |         0 |     2 | True      |
+| 3f30f309-3592-4282-bb86-69ecd0fe465a | m1.heat_micro |   128 |    1 |         0 |     1 | True      |
+| 4                                    | m1.large      |  8192 |   80 |         0 |     4 | True      |
+| 42                                   | m1.nano       |   192 |    1 |         0 |     1 | True      |
+| 5                                    | m1.xlarge     | 16384 |  160 |         0 |     8 | True      |
+| 84                                   | m1.micro      |   256 |    1 |         0 |     1 | True      |
+| c1                                   | cirros256     |   256 |    1 |         0 |     1 | True      |
+| d1                                   | ds512M        |   512 |    5 |         0 |     1 | True      |
+| d2                                   | ds1G          |  1024 |   10 |         0 |     1 | True      |
+| d3                                   | ds2G          |  2048 |   10 |         0 |     2 | True      |
+| d4                                   | ds4G          |  4096 |   20 |         0 |     4 | True      |
+| e6319e09-0735-4a00-af5b-11ea038cc588 | m1.heat_int   |  1024 |   10 |         0 |     2 | True      |
++--------------------------------------+---------------+-------+------+-----------+-------+-----------+
+ubuntu@gelani-lab-1:~$ openstack server list
++--------------------------------------+-------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| ID                                   | Name              | Status  | Networks                                                | Image                    | Flavor   |
++--------------------------------------+-------------------+---------+---------------------------------------------------------+--------------------------+----------+
+| 8abf5864-c67d-4229-90af-f21e6f31b0b3 | ubuntu-22-ceph-vm | ACTIVE  | private=10.0.0.9, fdf9:52f7:7011:0:f816:3eff:fe1b:3637  | N/A (booted from volume) | m1.small |
+| 83643058-b0e6-477a-a9e5-3e1fc02e2bae | cirros-ceph-vm    | SHUTOFF | private=10.0.0.10, fdf9:52f7:7011:0:f816:3eff:febb:696b | N/A (booted from volume) | m1.small |
++--------------------------------------+-------------------+---------+---------------------------------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~$ openstack server shutdown ubuntu-22-ceph-vm
+openstack: 'server shutdown ubuntu-22-ceph-vm' is not an openstack command. See 'openstack --help'.
+Did you mean one of these?
+  server add fixed ip
+  server add floating ip
+  server add network
+  server add port
+  server add security group
+  server add volume
+  server backup create
+  server create
+  server delete
+  server dump create
+  server evacuate
+  server event list
+  server event show
+  server group create
+  server group delete
+  server group list
+  server group show
+  server image create
+  server list
+  server lock
+  server migrate
+  server migrate confirm
+  server migrate revert
+  server migration abort
+  server migration confirm
+  server migration force complete
+  server migration list
+  server migration revert
+  server migration show
+  server pause
+  server reboot
+  server rebuild
+  server remove fixed ip
+  server remove floating ip
+  server remove network
+  server remove port
+  server remove security group
+  server remove volume
+  server rescue
+  server resize
+  server resize confirm
+  server resize revert
+  server restore
+  server resume
+  server set
+  server shelve
+  server show
+  server ssh
+  server start
+  server stop
+  server suspend
+  server unlock
+  server unpause
+  server unrescue
+  server unset
+  server unshelve
+  server volume list
+  server volume set
+  server volume update
+  service create
+  service delete
+  service list
+  service provider create
+  service provider delete
+  service provider list
+  service provider set
+  service provider show
+  service set
+  service show
+ubuntu@gelani-lab-1:~$ openstack server stop ubuntu-22-ceph-vm
+^Cubuntu@gelani-lab-1:~$ ^C
+ubuntu@gelani-lab-1:~$ ^C
+ubuntu@gelani-lab-1:~$ ^C
+ubuntu@gelani-lab-1:~$ openstack server stop ubuntu-22-ceph-vm
+ConflictException: 409: Client Error for url: http://192.168.95.93/compute/v2.1/servers/8abf5864-c67d-4229-90af-f21e6f31b0b3/action, Cannot 'stop' instance 8abf5864-c67d-4229-90af-f21e6f31b0b3 while it is in task_state powering-off
+ubuntu@gelani-lab-1:~$ openstack server stop 8abf5864-c67d-4229-90af-f21e6f31b0b3
+ConflictException: 409: Client Error for url: http://192.168.95.93/compute/v2.1/servers/8abf5864-c67d-4229-90af-f21e6f31b0b3/action, Cannot 'stop' instance 8abf5864-c67d-4229-90af-f21e6f31b0b3 while it is in task_state powering-off
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c status -c OS-EXT-STS:task_state -c OS-EXT-STS:power_state
++------------------------+--------------+
+| Field                  | Value        |
++------------------------+--------------+
+| OS-EXT-STS:power_state | Running      |
+| OS-EXT-STS:task_state  | powering-off |
+| status                 | ACTIVE       |
++------------------------+--------------+
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c OS-EXT-SRV-ATTR:host -f value
+gelani-lab-1
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c status -c OS-EXT-STS:task_state -c fault
++-----------------------+--------------+
+| Field                 | Value        |
++-----------------------+--------------+
+| OS-EXT-STS:task_state | powering-off |
+| status                | ACTIVE       |
++-----------------------+--------------+
+ubuntu@gelani-lab-1:~$ sudo virsh list --all | grep -i ubuntu
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c status -c OS-EXT-STS:task_state
++-----------------------+--------------+
+| Field                 | Value        |
++-----------------------+--------------+
+| OS-EXT-STS:task_state | powering-off |
+| status                | ACTIVE       |
++-----------------------+--------------+
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c status -c OS-EXT-STS:task_state
++-----------------------+--------------+
+| Field                 | Value        |
++-----------------------+--------------+
+| OS-EXT-STS:task_state | powering-off |
+| status                | ACTIVE       |
++-----------------------+--------------+
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c status -c OS-EXT-STS:task_state
++-----------------------+--------------+
+| Field                 | Value        |
++-----------------------+--------------+
+| OS-EXT-STS:task_state | powering-off |
+| status                | ACTIVE       |
++-----------------------+--------------+
+ubuntu@gelani-lab-1:~$ sudo virsh list --all
+ Id   Name                State
+------------------------------------
+ -    instance-00000001   shut off
+ -    instance-00000002   shut off
+ -    instance-0000000d   shut off
+ -    instance-0000000e   shut off
+
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c status -c OS-EXT-STS:task_state
++-----------------------+--------------+
+| Field                 | Value        |
++-----------------------+--------------+
+| OS-EXT-STS:task_state | powering-off |
+| status                | ACTIVE       |
++-----------------------+--------------+
+ubuntu@gelani-lab-1:~$ openstack server set --state shutoff ubuntu-22-ceph-vm
+usage: openstack server set [-h] [--name <new-name>] [--password PASSWORD | --no-password] [--property <key=value>] [--auto-approve] [--state <state>] [--description <description>] [--tag <tag>] [--hostname <hostname>] <server>
+openstack server set: error: argument --state: invalid choice: 'shutoff' (choose from 'active', 'error')
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c status -c OS-EXT-STS:task_state
++-----------------------+--------------+
+| Field                 | Value        |
++-----------------------+--------------+
+| OS-EXT-STS:task_state | powering-off |
+| status                | ACTIVE       |
++-----------------------+--------------+
+ubuntu@gelani-lab-1:~$ nova reset-state --active ubuntu-22-ceph-vm
+Command 'nova' not found, but can be installed with:
+sudo snap install openstackclients    # version xena, or
+sudo apt  install python3-novaclient  # version 2:17.6.0-0ubuntu1
+See 'snap info openstackclients' for additional versions.
+ubuntu@gelani-lab-1:~$ sudo systemctl restart nova-compute
+~
+Failed to restart nova-compute.service: Unit nova-compute.service not found.
+-bash: /home/ubuntu: Is a directory
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c id -f value
+8abf5864-c67d-4229-90af-f21e6f31b0b3
+ubuntu@gelani-lab-1:~$ sudo virsh list --all | head
+ Id   Name                State
+                               ------------------------------------
+                                                                    -    instance-00000001   shut off
+                                                                                                      -    instance-00000002   shut off
+                                                                                                                                        -    instance-0000000d   shut off
+                                                                                                                                                                          -    instance-0000000e   shut off
+
+                                                                                                                                                                                                           ubuntu@gelani-lab-1:~$ ^C
+ubuntu@gelani-lab-1:~$ ^C
+ubuntu@gelani-lab-1:~$ ^C
+ubuntu@gelani-lab-1:~$ ^C
+ubuntu@gelani-lab-1:~$ ^C
+ubuntu@gelani-lab-1:~$ ^C
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c id -f value
+8abf5864-c67d-4229-90af-f21e6f31b0b3
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c id -f value
+8abf5864-c67d-4229-90af-f21e6f31b0b3
+ubuntu@gelani-lab-1:~$ openstack server show ubuntu-22-ceph-vm -c status -c OS-EXT-STS:task_state
++-----------------------+--------------+
+| Field                 | Value        |
++-----------------------+--------------+
+| OS-EXT-STS:task_state | powering-off |
+| status                | ACTIVE       |
++-----------------------+--------------+
+ubuntu@gelani-lab-1:~$ openstack server stop --force ubuntu-22-ceph-vm
+usage: openstack server stop [-h] [--all-projects] <server> [<server> ...]
+openstack server stop: error: unrecognized arguments: --force
+ubuntu@gelani-lab-1:~$
+ubuntu@gelani-lab-1:~$ sudo nano /etc/systemd/journald.conf
+ubuntu@gelani-lab-1:~$ sudo cat /etc/systemd/journald.conf
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it under the
+#  terms of the GNU Lesser General Public License as published by the Free
+#  Software Foundation; either version 2.1 of the License, or (at your option)
+#  any later version.
+#
+# Entries in this file show the compile time defaults. Local configuration
+# should be created by either modifying this file, or by creating "drop-ins" in
+# the journald.conf.d/ subdirectory. The latter is generally recommended.
+# Defaults can be restored by simply deleting this file and all drop-ins.
+#
+# Use 'systemd-analyze cat-config systemd/journald.conf' to display the full config.
+#
+# See journald.conf(5) for details.
+
+[Journal]
+RateLimitBurst = 0
+#Storage=auto
+#Compress=yes
+#Seal=yes
+#SplitMode=uid
+#SyncIntervalSec=5m
+#RateLimitIntervalSec=30s
+#RateLimitBurst=10000
+#SystemMaxUse=
+#SystemKeepFree=
+#SystemMaxFileSize=
+#SystemMaxFiles=100
+#RuntimeMaxUse=
+#RuntimeKeepFree=
+#RuntimeMaxFileSize=
+#RuntimeMaxFiles=100
+#MaxRetentionSec=
+#MaxFileSec=1month
+#ForwardToSyslog=yes
+#ForwardToKMsg=no
+#ForwardToConsole=no
+#ForwardToWall=yes
+#TTYPath=/dev/console
+#MaxLevelStore=debug
+#MaxLevelSyslog=debug
+#MaxLevelKMsg=notice
+#MaxLevelConsole=info
+#MaxLevelWall=emerg
+#LineMax=48K
+#ReadKMsg=yes
+#Audit=no
+ubuntu@gelani-lab-1:~$ sudo cat /etc/systemd/journald.conf
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it under the
+#  terms of the GNU Lesser General Public License as published by the Free
+#  Software Foundation; either version 2.1 of the License, or (at your option)
+#  any later version.
+#
+# Entries in this file show the compile time defaults. Local configuration
+# should be created by either modifying this file, or by creating "drop-ins" in
+# the journald.conf.d/ subdirectory. The latter is generally recommended.
+# Defaults can be restored by simply deleting this file and all drop-ins.
+#
+# Use 'systemd-analyze cat-config systemd/journald.conf' to display the full config.
+#
+# See journald.conf(5) for details.
+
+[Journal]
+RateLimitBurst = 0
+#Storage=auto
+#Compress=yes
+#Seal=yes
+#SplitMode=uid
+#SyncIntervalSec=5m
+#RateLimitIntervalSec=30s
+#RateLimitBurst=10000
+#SystemMaxUse=
+#SystemKeepFree=
+#SystemMaxFileSize=
+#SystemMaxFiles=100
+#RuntimeMaxUse=
+#RuntimeKeepFree=
+#RuntimeMaxFileSize=
+#RuntimeMaxFiles=100
+#MaxRetentionSec=
+#MaxFileSec=1month
+#ForwardToSyslog=yes
+#ForwardToKMsg=no
+#ForwardToConsole=no
+#ForwardToWall=yes
+#TTYPath=/dev/console
+#MaxLevelStore=debug
+#MaxLevelSyslog=debug
+#MaxLevelKMsg=notice
+#MaxLevelConsole=info
+#MaxLevelWall=emerg
+#LineMax=48K
+#ReadKMsg=yes
+#Audit=no
+ubuntu@gelani-lab-1:~$ sudo nano /etc/systemd/journald.conf
+ubuntu@gelani-lab-1:~$ sudo cat /etc/systemd/journald.conf
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it under the
+#  terms of the GNU Lesser General Public License as published by the Free
+#  Software Foundation; either version 2.1 of the License, or (at your option)
+#  any later version.
+#
+# Entries in this file show the compile time defaults. Local configuration
+# should be created by either modifying this file, or by creating "drop-ins" in
+# the journald.conf.d/ subdirectory. The latter is generally recommended.
+# Defaults can be restored by simply deleting this file and all drop-ins.
+#
+# Use 'systemd-analyze cat-config systemd/journald.conf' to display the full config.
+#
+# See journald.conf(5) for details.
+
+[Journal]
+RateLimitBurst = 0
+#Storage=auto
+#Compress=yes
+#Seal=yes
+#SplitMode=uid
+#SyncIntervalSec=5m
+#RateLimitIntervalSec=30s
+#RateLimitBurst=10000
+#SystemMaxUse=
+#SystemKeepFree=
+#SystemMaxFileSize=
+#SystemMaxFiles=100
+#RuntimeMaxUse=
+#RuntimeKeepFree=
+#RuntimeMaxFileSize=
+#RuntimeMaxFiles=100
+#MaxRetentionSec=
+#MaxFileSec=1month
+#ForwardToSyslog=yes
+#ForwardToKMsg=no
+#ForwardToConsole=no
+#ForwardToWall=yes
+#TTYPath=/dev/console
+#MaxLevelStore=debug
+#MaxLevelSyslog=debug
+#MaxLevelKMsg=notice
+#MaxLevelConsole=info
+#MaxLevelWall=emerg
+#LineMax=48K
+#ReadKMsg=yes
+#Audit=no
+SystemMaxUse=200M
+SystemKeepFree=500M
+SystemMaxFileSize=50M
+RuntimeMaxUse=100M
+ubuntu@gelani-lab-1:~$ sudo systemctl restart systemd-journald
+ubuntu@gelani-lab-1:~$ journalctl --disk-usage
+Archived and active journals take up 160.0M in the file system.
+ubuntu@gelani-lab-1:~$ sudo nano /etc/apt/apt.conf.d/99-autoclean
+ubuntu@gelani-lab-1:~$ cat /etc/logrotate.conf
+# see "man logrotate" for details
+
+# global options do not affect preceding include directives
+
+# rotate log files weekly
+weekly
+
+# use the adm group by default, since this is the owning group
+# of /var/log/syslog.
+su root adm
+
+# keep 4 weeks worth of backlogs
+rotate 4
+
+# create new (empty) log files after rotating old ones
+create
+
+# use date as a suffix of the rotated file
+#dateext
+
+# uncomment this if you want your log files compressed
+#compress
+
+# packages drop log rotation information into this directory
+include /etc/logrotate.d
+
+# system-specific logs may also be configured here.
+ubuntu@gelani-lab-1:~$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           3.2G  1.5M  3.2G   1% /run
+/dev/vda1        49G   21G   29G  42% /
+tmpfs            16G 1000K   16G   1% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs            16G     0   16G   0% /run/qemu
+/dev/vda15      105M  6.1M   99M   6% /boot/efi
+tmpfs           3.2G  4.0K  3.2G   1% /run/user/1000
+ubuntu@gelani-lab-1:~$ sudo du -h / --max-depth=1 | sort -hr
+du: cannot access '/proc/14593/task/14593/fd/4': No such file or directory
+du: cannot access '/proc/14593/task/14593/fdinfo/4': No such file or directory
+du: cannot access '/proc/14593/fd/3': No such file or directory
+du: cannot access '/proc/14593/fdinfo/3': No such file or directory
+22G     /
+9.9G    /opt
+5.6G    /var
+4.1G    /usr
+1.4G    /snap
+680M    /home
+117M    /boot
+12M     /etc
+1.9M    /root
+1.5M    /run
+84K     /tmp
+16K     /lost+found
+4.0K    /srv
+4.0K    /mnt
+4.0K    /media
+0       /sys
+0       /proc
+0       /dev
+ubuntu@gelani-lab-1:~$ sudo systemctl enable ssh
+Synchronizing state of ssh.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable ssh
+ubuntu@gelani-lab-1:~$ openstack compute service list
+Missing value auth-url required for auth plugin password
+ubuntu@gelani-lab-1:~$ source /opt/stack/devstack/openrc admin admin
+ubuntu@gelani-lab-1:~$ openstack compute service list
++--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
+| ID                                   | Binary         | Host         | Zone     | Status  | State | Updated At                 |
++--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
+| bfadc076-b3e7-43a5-bff2-8ad6b455b3d6 | nova-scheduler | gelani-lab-1 | internal | enabled | up    | 2026-02-14T10:55:28.000000 |
+| acf0ff1f-9b72-4ba3-96e8-9cbc03442f22 | nova-conductor | gelani-lab-1 | internal | enabled | up    | 2026-02-14T10:55:26.000000 |
+| 117e4279-c655-4134-b738-a72492bd1342 | nova-conductor | gelani-lab-1 | internal | enabled | up    | 2026-02-14T10:57:01.000000 |
+| f7e97b80-41d8-4bf1-ac93-37154597ceae | nova-compute   | gelani-lab-1 | nova     | enabled | up    | 2026-02-14T10:55:24.000000 |
++--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
+ubuntu@gelani-lab-1:~$ openstack hypervisor list
++--------------------------------------+---------------------+-----------------+---------------+-------+
+| ID                                   | Hypervisor Hostname | Hypervisor Type | Host IP       | State |
++--------------------------------------+---------------------+-----------------+---------------+-------+
+| ba2ec314-9891-498b-82cc-7a5f896382bf | gelani-lab-1        | QEMU            | 192.168.95.93 | up    |
++--------------------------------------+---------------------+-----------------+---------------+-------+
+ubuntu@gelani-lab-1:~$ openstack volume list --long
++--------------------------------------+--------------------+--------+------+------+----------+--------------------------------------------+------------+
+| ID                                   | Name               | Status | Size | Type | Bootable | Attached to                                | Properties |
++--------------------------------------+--------------------+--------+------+------+----------+--------------------------------------------+------------+
+| 116739e7-d1a7-408b-ba83-3ccda377cefa | ubuntu-22-root-vol | in-use |   20 | ceph | true     | Attached to ubuntu-22-ceph-vm on /dev/vda  |            |
+| ca6c402b-4f70-4d5e-87cd-160b352722a9 | cirros-root-vol    | in-use |    2 | ceph | true     | Attached to cirros-ceph-vm on /dev/vda     |            |
++--------------------------------------+--------------------+--------+------+------+----------+--------------------------------------------+------------+
+ubuntu@gelani-lab-1:~$ openstack volume attachment list
++--------------------------------------+--------------------------------------+--------------------------------------+----------+
+| ID                                   | Volume ID                            | Server ID                            | Status   |
++--------------------------------------+--------------------------------------+--------------------------------------+----------+
+| 7fac904d-8fb5-495d-a392-5697bf190854 | 116739e7-d1a7-408b-ba83-3ccda377cefa | 8abf5864-c67d-4229-90af-f21e6f31b0b3 | attached |
+| 89dfcc58-c3d4-4831-b4b2-7ed84964c66a | ca6c402b-4f70-4d5e-87cd-160b352722a9 | 83643058-b0e6-477a-a9e5-3e1fc02e2bae | attached |
++--------------------------------------+--------------------------------------+--------------------------------------+----------+
+ubuntu@gelani-lab-1:~$ sudo virsh list --all
+ Id   Name                State
+------------------------------------
+ 1    instance-0000000d   running
+ -    instance-00000001   shut off
+ -    instance-00000002   shut off
+ -    instance-0000000e   shut off
+
+ubuntu@gelani-lab-1:~$ systemctl list-units --type=service | grep -i nova
+ubuntu@gelani-lab-1:~$ screen -ls
+No Sockets found in /run/screen/S-ubuntu.
+
+ubuntu@gelani-lab-1:~$ sudo ceph -s
+  cluster:
+    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+    health: HEALTH_OK
+
+  services:
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 74m)
+    mgr: gelani-mon-1.gzltah(active, since 74m), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 2w), 6 in (since 2w)
+    rgw: 2 daemons active (2 hosts, 1 zones)
+
+  data:
+    pools:   17 pools, 465 pgs
+    objects: 936 objects, 2.5 GiB
+    usage:   10 GiB used, 170 GiB / 180 GiB avail
+    pgs:     465 active+clean
+
+ubuntu@gelani-lab-1:~$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:102:105::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:103:106:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+syslog:x:104:111::/home/syslog:/usr/sbin/nologin
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+tss:x:106:112:TPM software stack,,,:/var/lib/tpm:/bin/false
+uuidd:x:107:113::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:108:114::/nonexistent:/usr/sbin/nologin
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
+pollinate:x:110:1::/var/cache/pollinate:/bin/false
+landscape:x:111:116::/var/lib/landscape:/usr/sbin/nologin
+fwupd-refresh:x:112:117:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+lxd:x:999:100::/var/snap/lxd/common/lxd:/bin/false
+stack:x:1001:1001::/opt/stack:/bin/bash
+dnsmasq:x:113:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
+haproxy:x:114:123::/var/lib/haproxy:/usr/sbin/nologin
+memcache:x:115:124:Memcached,,,:/nonexistent:/bin/false
+postgres:x:116:125:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash
+pcp:x:998:999:Performance Co-Pilot:/var/lib/pcp:/usr/sbin/nologin
+epmd:x:117:126::/run/epmd:/usr/sbin/nologin
+rabbitmq:x:118:127:RabbitMQ messaging server,,,:/var/lib/rabbitmq:/usr/sbin/nologin
+mysql:x:119:128:MySQL Server,,,:/nonexistent:/bin/false
+systemd-coredump:x:120:129:systemd Core Dumper,,,:/run/systemd:/usr/sbin/nologin
+swtpm:x:121:130:virtual TPM software stack,,,:/var/lib/swtpm:/bin/false
+libvirt-qemu:x:64055:109:Libvirt Qemu,,,:/var/lib/libvirt:/usr/sbin/nologin
+libvirt-dnsmasq:x:122:132:Libvirt Dnsmasq,,,:/var/lib/libvirt/dnsmasq:/usr/sbin/nologin
+redis:x:123:133::/var/lib/redis:/usr/sbin/nologin
+ceph:x:64045:64045:Ceph storage service:/var/lib/ceph:/usr/sbin/nologin
+ubuntu@gelani-lab-1:~$
+
