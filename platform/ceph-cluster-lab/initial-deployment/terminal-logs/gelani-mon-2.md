@@ -1,3 +1,4 @@
+# update & upgrading the system
 ```
 ubuntu@gelani-mon-2:~$ sudo apt update && sudo apt upgrade -y
 Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]                                    
@@ -546,7 +547,17 @@ No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
 ubuntu@gelani-mon-2:~$ 
+```
 
+# done the initial setup for to go further which include:
+* Set correct hostname
+* Add all cluster host mappings to /etc/hosts
+* Update OS & install baseline packages
+* Configure time sync
+* Disable swap (Ceph best practice)
+* Basic firewall sanity
+
+```
 emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.240
 ubuntu@192.168.95.240's password:
 Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-143-generic x86_64)
@@ -814,8 +825,9 @@ gelani-mon-2
 active
 Swap:             0B          0B          0B
 ubuntu@gelani-mon-2:~$
-
-
+```
+# Install container engine
+```
 ubuntu@gelani-mon-2:~$ sudo apt update
 sudo apt install -y docker.io
 sudo systemctl enable --now docker
@@ -907,11 +919,5 @@ ubuntu@gelani-mon-2:~$ docker --version
 systemctl is-active docker
 Docker version 28.2.2, build 28.2.2-0ubuntu1~22.04.1
 active
-ubuntu@gelani-mon-2:~$
-ubuntu@gelani-mon-2:~$
-ubuntu@gelani-mon-2:~$
-ubuntu@gelani-mon-2:~$
-
-
 
 ```

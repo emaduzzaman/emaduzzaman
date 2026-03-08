@@ -1,3 +1,4 @@
+# Phase-1 Base OS Preparation
 ```
 emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.105
 ubuntu@192.168.95.105's password: 
@@ -166,6 +167,10 @@ ubuntu@gelani-osd-1:~$ getent hosts gelani-mon-1 gelani-mon-2 gelani-mon-3 gelan
 192.168.95.221  gelani-mon-3
 192.168.95.105  gelani-osd-1
 192.168.95.250  gelani-osd-2
+```
+
+# Update OS & install baseline packages
+```
 ubuntu@gelani-osd-1:~$ sudo apt update && sudo apt -y upgrade && sudo apt -y install chrony curl gnupg lsb-release ca-certificates vim nano jq
 Hit:1 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease
 Get:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]

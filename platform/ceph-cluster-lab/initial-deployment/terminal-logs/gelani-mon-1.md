@@ -1,12 +1,6 @@
+# Phase-1 Base OS Preparation
+## Set correct hostname on each VM
 ```
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ 
-
 emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.19
 ubuntu@192.168.95.19's password:
 Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-143-generic x86_64)
@@ -42,6 +36,7 @@ Run 'do-release-upgrade' to upgrade to it.
 
 
 Last login: Wed Jan 28 04:14:47 2026 from 192.168.95.86
+
 ubuntu@gelani-mon-1:~$ sudo hostnamectl set-hostname gelani-mon-1
 ubuntu@gelani-mon-1:~$ hostnamectl
  Static hostname: gelani-mon-1
@@ -58,6 +53,10 @@ Operating System: Ubuntu 22.04.5 LTS
 ubuntu@gelani-mon-1:~$ sudo hostnamectl set-hostname gelani-mon-1
 ubuntu@gelani-mon-1:~$ hostnamectl --static
 gelani-mon-1
+```
+
+## Add all cluster host mappings to /etc/hosts (all 5 VMs)
+```
 ubuntu@gelani-mon-1:~$ sudo tee -a /etc/hosts >/dev/null <<'EOF'
 
 # Ceph lab nodes (private)
@@ -73,6 +72,12 @@ ubuntu@gelani-mon-1:~$ getent hosts gelani-mon-1 gelani-mon-2 gelani-mon-3 gelan
 192.168.95.221  gelani-mon-3
 192.168.95.105  gelani-osd-1
 192.168.95.250  gelani-osd-2
+```
+---
+
+## Update OS & install baseline packages
+
+```
 ubuntu@gelani-mon-1:~$ sudo apt update && sudo apt -y upgrade && sudo apt -y install chrony curl gnupg lsb-release ca-certificates vim nano jq
 Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
 Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease
@@ -701,6 +706,9 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
+```
+## Configure time sync (chrony)
+```
 ubuntu@gelani-mon-1:~$ sudo systemctl enable --now chrony && chronyc tracking
 Synchronizing state of chrony.service with SysV service script with /lib/systemd/systemd-sysv-install.
 Executing: /lib/systemd/systemd-sysv-install enable chrony
@@ -717,8 +725,13 @@ Root delay      : 0.142862663 seconds
 Root dispersion : 34.749912262 seconds
 Update interval : 1.9 seconds
 Leap status     : Normal
+```
+
+## Disable swap (Ceph best practice)
+```
 ubuntu@gelani-mon-1:~$ sudo swapoff -a &&  sudo sed -i.bak '/\sswap\s/ s/^/#/' /etc/fstab && free -h | grep -i swap
 Swap:             0B          0B          0B
+
 ubuntu@gelani-mon-1:~$ echo "== $(hostname) ==";
 ip -br a | grep -E 'UP|UNKNOWN' | head -n 2;
 chronyc tracking | head -n 5;
@@ -747,18 +760,28 @@ Residual freq   : +0.128 ppm
 Skew            : 8.789 ppm
 Root delay      : 0.146669805 seconds
 Swap:             0B          0B          0B
-ubuntu@gelani-mon-1:~$
+```
 
+## firewall sanity
+
+``` 
 ubuntu@gelani-mon-1:~$ sudo ufw status
 Status: inactive
-ubuntu@gelani-mon-1:~$
 
+```
+**Phase-1 is compleated**
 
+# Phase-2 Ceph Bootstrap (cephadm)
+## restart and check if the system is ready for the installation
+
+```
 ubuntu@gelani-mon-1:~$ sudo reboot
 Connection to 192.168.95.19 closed by remote host.
 Connection to 192.168.95.19 closed.
+
 emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.19
 ubuntu@192.168.95.19's password:
+
 Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-164-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -787,7 +810,6 @@ See https://ubuntu.com/esm or run: sudo pro status
 New release '24.04.3 LTS' available.
 Run 'do-release-upgrade' to upgrade to it.
 
-
 Last login: Wed Jan 28 04:51:21 2026 from 192.168.95.86
 ubuntu@gelani-mon-1:~$ hostname && uptime && systemctl is-active chrony &&  free -h | grep -i swap
 gelani-mon-1
@@ -811,6 +833,10 @@ OK
 OK
 == gelani-osd-2 ==
 OK
+```
+
+## Install cephadm (bootstrap tool)
+```
 ubuntu@gelani-mon-1:~$ sudo apt update && sudo apt install -y cephadm
 Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
 Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease
@@ -940,8 +966,16 @@ RuntimeError: Event loop is closed
 
 ubuntu@gelani-mon-1:~$ sudo cephadm version
 ceph version 17.2.8 (f817ceb7f187defb1d021d6328fa833eb8e943b3) quincy (stable)
+```
+
+## Prepare Ceph config directory
+```
 ubuntu@gelani-mon-1:~$ sudo mkdir -p /etc/ceph
 ubuntu@gelani-mon-1:~$ sudo chmod 755 /etc/ceph
+```
+
+## Bootstrap the Ceph cluster (MOST IMPORTANT STEP); This is where Ceph is born
+```
 ubuntu@gelani-mon-1:~$ sudo cephadm bootstrap \
   --mon-ip 192.168.95.19 \
   --cluster-network 192.168.95.0/24 \
@@ -1044,10 +1078,11 @@ For more information see:
         https://docs.ceph.com/docs/master/mgr/telemetry/
 
 Bootstrap complete.
-ubuntu@gelani-mon-1:~$
+```
 
 
-
+## Load Ceph CLI environment
+```
 ubuntu@gelani-mon-1:~$ source /etc/profile.d/cephadm.sh
 -bash: /etc/profile.d/cephadm.sh: No such file or directory
 ubuntu@gelani-mon-1:~$ ceph -s
@@ -1055,63 +1090,12 @@ Command 'ceph' not found, but can be installed with:
 sudo snap install microceph    # version 18.2.4+snapc9f2b08f92, or
 sudo apt  install ceph-common  # version 17.2.9-0ubuntu0.22.04.1
 See 'snap info microceph' for additional versions.
-ubuntu@gelani-mon-1:~$ sudo cephadm shell -- ceph -s
-Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
-Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
-Using ceph image with id '259b35566514' and tag 'v17' created on 2024-11-26 00:45:38 +0000 UTC
-quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf423d7326f
-  cluster:
-    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
-    health: HEALTH_WARN
-            OSD count 0 < osd_pool_default_size 3
+```
 
-  services:
-    mon: 1 daemons, quorum gelani-mon-1 (age 3m)
-    mgr: gelani-mon-1.gzltah(active, since 23s)
-    osd: 0 osds: 0 up, 0 in
+***Got an error! need to run the CLI through cephadm,or install ceph-common locally***
 
-  data:
-    pools:   0 pools, 0 pgs
-    objects: 0 objects, 0 B
-    usage:   0 B used, 0 B / 0 B avail
-    pgs:
-
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ sudo chmod 755 /etc/ceph^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
-ubuntu@gelani-mon-1:~$ ^C
+### Use Ceph CLI the correct way
+```
 ubuntu@gelani-mon-1:~$ sudo cephadm shell -- ceph -s
 Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
 Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
@@ -1149,6 +1133,10 @@ quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf
 HOST          ADDR           LABELS  STATUS
 gelani-mon-1  192.168.95.19  _admin
 1 hosts in cluster
+```
+
+### Update the system
+```
 ubuntu@gelani-mon-1:~$ sudo apt update
 Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
 Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease
@@ -1159,6 +1147,10 @@ Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
 All packages are up to date.
+```
+
+### Install Ceph CLI on the host (makes life easier)
+```
 ubuntu@gelani-mon-1:~$ sudo apt install -y ceph-common
 Reading package lists... Done
 Building dependency tree... Done
@@ -1358,6 +1350,7 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
 ubuntu@gelani-mon-1:~$ sudo cephadm shell -- ceph -s
 Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
 Inferring config /var/lib/ceph/a9625cff-fc0e-11f0-a1f6-6998182b0a5e/mon.gelani-mon-1/config
@@ -1387,9 +1380,10 @@ quay.io/ceph/ceph@sha256:a0f373aaaf5a5ca5c4379c09da24c771b8266a09dc9e2181f90eacf
 Backend: cephadm
 Available: Yes
 Paused: No
-ubuntu@gelani-mon-1:~$
+```
 
-
+## quick check & add the other nodes to the cluster: 
+```
 ubuntu@gelani-mon-1:~$ source /etc/profile.d/cephadm.sh
 -bash: /etc/profile.d/cephadm.sh: No such file or directory
 ubuntu@gelani-mon-1:~$ ceph -s
@@ -1477,14 +1471,59 @@ Log: Opening SSH connection to 192.168.95.240, port 22
 [conn=1] Auth failed for user ubuntu
 [conn=1] Connection failure: Permission denied
 [conn=1] Aborting connection
+```
 
+### now two problem identified
+#### Explanition:
+
+* Problem 1: ceph without sudo (keyring permission)
+***This can be solved by Give ubuntu access to ceph admin files***
+```
+sudo usermod -aG ceph ubuntu
+sudo chgrp -R ceph /etc/ceph
+sudo chmod 750 /etc/ceph
+sudo chmod 640 /etc/ceph/ceph.client.admin.keyring /etc/ceph/ceph.conf
+newgrp ceph
+```
+
+* Problem 2: “Permission denied” when adding host
+***This is the big one:***
+```
+Auth failed for user ubuntu
+```
+Meaning:
+* Cephadm tried to SSH from gelani-mon-1 → gelani-mon-2
+* It connected to port 22
+* But it couldn’t authenticate as ubuntu 
+
+***Why this happens:***
+
+**During bootstrap, Ceph created a keypair:**
+
+*public key: /etc/ceph/ceph.pub*
+
+*private key: used internally by cephadm*
+
+*But that public key is only added to localhost at bootstrap time*
+
+**We must add it to the other nodes’ ~ubuntu/.ssh/authorized_keys**
+
+## Now fixing two problem: ceph without sudo (keyring permission) & Permission denied” when adding host
+## Give ubuntu access to ceph admin files:
+```
 ubuntu@gelani-mon-1:~$ sudo usermod -aG ceph ubuntu
 sudo chgrp -R ceph /etc/ceph
 sudo chmod 750 /etc/ceph
 sudo chmod 640 /etc/ceph/ceph.client.admin.keyring /etc/ceph/ceph.conf
 newgrp ceph
+```
+## view cephadm public key
+```
 ubuntu@gelani-mon-1:~$ sudo cat /etc/ceph/ceph.pub
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDIY+S1RBeTGW84TOOfuyebyasCrrM4xVKbQsJKOMHIEfuoaIz+wTGioRcMRQ8hT6k+5+KNXz5NPejvZvTbNCjDMpiq1VpHVfr0SDo+CoEPMw0vh1dB8+piD1aR0brWnABwf6geRFHjOW1CZTuAOteZmQ4Qk9/ebwKfNbNIrLHtIirRx+UdwboZMUX8nJaxtQqXV9jMMa5saHPtGlx8auf4MWTn/iWvk7/oYn5/ITq+mqwRFlDstT0UmomhamjhdMJbnt/LBfynHTzs4g2SFjbjf4UGzrPR15n2kCwT1ZBkjD2rde7d9pZedWfdXprOHEtLqf4SjTyJS6pC3Og+fw2TQkb31jJGl5ukM5guvrFJRu2JAW29kX4WLcSoYRnLD+WJiBVh73KXa9hFnnD5bza12xxZ0GHsLTIw7EwHyFNQbj45SlPgV5fdwSnpQkSbgc0mHLnairXYVSgzR/s38Wq0280VIq7dVU4JYvrbWK3dfrbstHgFzOyqrjD62GRKvos= ceph-a9625cff-fc0e-11f0-a1f6-6998182b0a5e
+```
+###  Add key to gelani-mon-2
+```
 ubuntu@gelani-mon-1:~$ sudo ssh-copy-id -f -i /etc/ceph/ceph.pub ubuntu@192.168.95.240
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/etc/ceph/ceph.pub"
 The authenticity of host '192.168.95.240 (192.168.95.240)' can't be established.
@@ -1497,7 +1536,11 @@ Number of key(s) added: 1
 
 Now try logging into the machine, with:   "ssh 'ubuntu@192.168.95.240'"
 and check to make sure that only the key(s) you wanted were added.
+```
 
+### Add key to gelani-mon-2
+
+```
 ubuntu@gelani-mon-1:~$ sudo ssh-copy-id -f -i /etc/ceph/ceph.pub ubuntu@192.168.95.221
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/etc/ceph/ceph.pub"
 The authenticity of host '192.168.95.221 (192.168.95.221)' can't be established.
@@ -1511,6 +1554,10 @@ Number of key(s) added: 1
 Now try logging into the machine, with:   "ssh 'ubuntu@192.168.95.221'"
 and check to make sure that only the key(s) you wanted were added.
 
+```
+
+### Add key to gelani-osd-1
+```
 ubuntu@gelani-mon-1:~$ sudo ssh-copy-id -f -i /etc/ceph/ceph.pub ubuntu@192.168.95.105
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/etc/ceph/ceph.pub"
 The authenticity of host '192.168.95.105 (192.168.95.105)' can't be established.
@@ -1524,6 +1571,10 @@ Number of key(s) added: 1
 Now try logging into the machine, with:   "ssh 'ubuntu@192.168.95.105'"
 and check to make sure that only the key(s) you wanted were added.
 
+```
+
+### Add key to gelani-osd-1
+```
 ubuntu@gelani-mon-1:~$ sudo ssh-copy-id -f -i /etc/ceph/ceph.pub ubuntu@192.168.95.250
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/etc/ceph/ceph.pub"
 The authenticity of host '192.168.95.250 (192.168.95.250)' can't be established.
@@ -1538,11 +1589,18 @@ Number of key(s) added: 1
 
 Now try logging into the machine, with:   "ssh 'ubuntu@192.168.95.250'"
 and check to make sure that only the key(s) you wanted were added.
+```
 
+### Test SSH (must work before orch host add)
+```
 ubuntu@gelani-mon-1:~$ sudo ssh -i /etc/ceph/ceph.key ubuntu@192.168.95.240 "hostname"
 Warning: Identity file /etc/ceph/ceph.key not accessible: No such file or directory.
 ubuntu@192.168.95.240's password:
 gelani-mon-2
+```
+
+### Now re-run host add commands (use sudo) 
+```
 ubuntu@gelani-mon-1:~$ sudo ceph orch host add gelani-mon-2 192.168.95.240
 sudo ceph orch host add gelani-mon-3 192.168.95.221
 sudo ceph orch host add gelani-osd-1 192.168.95.105
@@ -1575,29 +1633,10 @@ ubuntu@gelani-mon-1:~$ sudo ceph orch host ls
 HOST          ADDR           LABELS  STATUS
 gelani-mon-1  192.168.95.19  _admin
 1 hosts in cluster
-ubuntu@gelani-mon-1:~$ sudo ssh ubuntu@192.168.95.240 "hostname"
-ubuntu@192.168.95.240's password:
-gelani-mon-2
-ubuntu@gelani-mon-1:~$ sudo ssh ubuntu@192.168.95.221 "hostname"
-ubuntu@192.168.95.221's password:
-gelani-mon-3
-ubuntu@gelani-mon-1:~$ sudo ssh ubuntu@192.168.95.105 "hostname
->
-> ^C
-ubuntu@gelani-mon-1:~$ sudo ssh ubuntu@192.168.95.105 "hostname"
-ubuntu@192.168.95.105's password:
-gelani-osd-1
-ubuntu@gelani-mon-1:~$ sudo ssh ubuntu@192.168.95.250 "hostname"
-ubuntu@192.168.95.250's password:
-gelani-osd-2
-ubuntu@gelani-mon-1:~$ sudo ceph orch host add gelani-mon-2 192.168.95.240
-Added host 'gelani-mon-2' with addr '192.168.95.240'
-ubuntu@gelani-mon-1:~$ sudo ceph orch host add gelani-mon-3 192.168.95.221
-sudo ceph orch host add gelani-osd-1 192.168.95.105
-sudo ceph orch host add gelani-osd-2 192.168.95.250
-Added host 'gelani-mon-3' with addr '192.168.95.221'
-Added host 'gelani-osd-1' with addr '192.168.95.105'
-Added host 'gelani-osd-2' with addr '192.168.95.250'
+```
+
+### Quick Check and understand currect system scenario
+```
 ubuntu@gelani-mon-1:~$ sudo ceph orch host ls
 HOST          ADDR            LABELS  STATUS
 gelani-mon-1  192.168.95.19   _admin
@@ -1630,6 +1669,86 @@ gelani-mon-3  192.168.95.221
 gelani-osd-1  192.168.95.105
 gelani-osd-2  192.168.95.250
 5 hosts in cluster
+```
+#### The showing error is simple and common cause other 4 VMs don’t have a container engine yet
+
+***log shows the host checks are passing for:***
+
+* systemctl
+* lvcreate
+* chrony
+* hostname
+
+***Only failing on: No container engine binary found (podman or docker)***
+
+### Fixing Plan:
+
+***1. Install container engine on ALL 4 remaining nodes***
+
+* `gelani-mon-2`
+* `gelani-mon-3`
+* `gelani-osd-1`
+* `gelani-osd-2`
+
+
+***2. Ensure cephadm can SSH without password (important)***
+
+***3. Add hosts again (from gelani-mon-1)***
+
+
+#### Ensure cephadm can SSH without password (important)
+```
+ubuntu@gelani-mon-1:~$ sudo ssh ubuntu@192.168.95.240 "hostname"
+ubuntu@192.168.95.240's password:
+gelani-mon-2
+ubuntu@gelani-mon-1:~$ sudo ssh ubuntu@192.168.95.221 "hostname"
+ubuntu@192.168.95.221's password:
+gelani-mon-3
+ubuntu@gelani-mon-1:~$ sudo ssh ubuntu@192.168.95.105 "hostname
+>
+> ^C
+ubuntu@gelani-mon-1:~$ sudo ssh ubuntu@192.168.95.105 "hostname"
+ubuntu@192.168.95.105's password:
+gelani-osd-1
+ubuntu@gelani-mon-1:~$ sudo ssh ubuntu@192.168.95.250 "hostname"
+ubuntu@192.168.95.250's password:
+gelani-osd-2
+```
+
+#### Add hosts again since Docker is installed on all 4 nodes
+```
+ubuntu@gelani-mon-1:~$ sudo ceph orch host add gelani-mon-2 192.168.95.240
+Added host 'gelani-mon-2' with addr '192.168.95.240'
+ubuntu@gelani-mon-1:~$ sudo ceph orch host add gelani-mon-3 192.168.95.221
+sudo ceph orch host add gelani-osd-1 192.168.95.105
+sudo ceph orch host add gelani-osd-2 192.168.95.250
+Added host 'gelani-mon-3' with addr '192.168.95.221'
+Added host 'gelani-osd-1' with addr '192.168.95.105'
+Added host 'gelani-osd-2' with addr '192.168.95.250'
+
+ubuntu@gelani-mon-1:~$ sudo ceph orch host ls
+HOST          ADDR            LABELS  STATUS  
+gelani-mon-1  192.168.95.19   _admin          
+gelani-mon-2  192.168.95.240                  
+gelani-mon-3  192.168.95.221                  
+gelani-osd-1  192.168.95.105                  
+gelani-osd-2  192.168.95.250                  
+5 hosts in cluster
+```
+
+**Quick Explinition:**
+
+Only gelani-mon-1 has Docker because during bootstrap, cephadm checked and found Docker there.
+
+The other nodes are fresh Ubuntu and don’t have:
+
+* docker
+* podman
+
+So cephadm refuses to add them because it can’t deploy containers there.
+
+## Now deploy MONs to all 3 monitor nodes & Checking
+```
 ubuntu@gelani-mon-1:~$ ceph orch apply mon --placement="gelani-mon-1,gelani-mon-2,gelani-mon-3"
 Scheduled mon update...
 ubuntu@gelani-mon-1:~$ ceph mon dump
@@ -1669,40 +1788,6 @@ ubuntu@gelani-mon-1:~$ ceph -s
     usage:   0 B used, 0 B / 0 B avail
     pgs:
 
-ubuntu@gelani-mon-1:~$ ceph -s
-ceph orch host ls
-ceph mon stat
-ceph mgr stat
-  cluster:
-    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
-    health: HEALTH_WARN
-            OSD count 0 < osd_pool_default_size 3
-
-  services:
-    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 2m)
-    mgr: gelani-mon-1.gzltah(active, since 41m), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
-    osd: 0 osds: 0 up, 0 in
-
-  data:
-    pools:   0 pools, 0 pgs
-    objects: 0 objects, 0 B
-    usage:   0 B used, 0 B / 0 B avail
-    pgs:
-
-HOST          ADDR            LABELS  STATUS
-gelani-mon-1  192.168.95.19   _admin
-gelani-mon-2  192.168.95.240
-gelani-mon-3  192.168.95.221
-gelani-osd-1  192.168.95.105
-gelani-osd-2  192.168.95.250
-5 hosts in cluster
-e7: 3 mons at {gelani-mon-1=[v2:192.168.95.19:3300/0,v1:192.168.95.19:6789/0],gelani-mon-2=[v2:192.168.95.240:3300/0,v1:192.168.95.240:6789/0],gelani-mon-3=[v2:192.168.95.221:3300/0,v1:192.168.95.221:6789/0]} removed_ranks: {2} disallowed_leaders: {}, election epoch 30, leader 0 gelani-mon-1, quorum 0,1,2 gelani-mon-1,gelani-mon-2,gelani-mon-3
-{
-    "epoch": 19,
-    "available": true,
-    "active_name": "gelani-mon-1.gzltah",
-    "num_standby": 2
-}
 ubuntu@gelani-mon-1:~$ sudo ceph -s
 sudo ceph mon stat
 sudo ceph mgr stat
@@ -1740,88 +1825,116 @@ mgr.gelani-mon-1.gzltah  gelani-mon-1  *:9283,8765,8443  running (51m)     8m ag
 mgr.gelani-mon-2.qkfion  gelani-mon-2  *:8443,9283       running (14m)    87s ago  14m     389M        -  17.2.8   259b35566514  d3054ea2d4a9
 mgr.gelani-mon-3.scuoto  gelani-mon-3  *:8443,9283       running (9m)      9m ago   9m     217M        -  17.2.8   259b35566514  af0ec19488b6
 ubuntu@gelani-mon-1:~$
+```
+### Currect Status:
+* MON quorum: 3/3 (gelani-mon-1,2,3)
+* MGR HA: 1 active + 2 standbys
+* Orchestrator: working (hosts added, daemons running)
+* HEALTH_WARN: only because 0 OSDs (expected) 
+* ceph orch ps shows MON/MGR containers running on correct hosts 
+---
 
+# Phase-3 OSD Deployment (Storage Comes Online)
+***Goal of Phase-3***, By the end of this phase, 
 
-ubuntu@gelani-mon-1:~$ sudo ceph -s
+* Real OSDs created from raw disks
+* Data replication working (size = 3)
+* HEALTH_WARN → expected warnings only
+* A real Ceph storage backend with use ONLY the extra disks (vdb vdc vdd)
+* Never touch OS disks (vda)
+* Not create pools yet (next phase)
+```
+ubuntu@gelani-mon-1:~$ sudo ceph orch device ls
+sudo ceph orch ps --daemon_type osd
+sudo ceph -s
+sudo ceph osd tree
+HOST          PATH      TYPE  DEVICE ID              SIZE  AVAILABLE  REFRESHED  REJECT REASONS                                                           
+gelani-osd-1  /dev/vdb  hdd   f859f231-8a97-4a4c-9  30.0G  No         112s ago   Has a FileSystem, Insufficient space (<10 extents) on vgs, LVM detected  
+gelani-osd-1  /dev/vdc  hdd   c6e07ade-b12c-41c2-a  30.0G  No         112s ago   Has a FileSystem, Insufficient space (<10 extents) on vgs, LVM detected  
+gelani-osd-1  /dev/vdd  hdd   17de368e-6d11-4f17-9  30.0G  No         112s ago   Has a FileSystem, Insufficient space (<10 extents) on vgs, LVM detected  
+gelani-osd-2  /dev/vdb  hdd   554a847f-0eb4-4883-a  30.0G  No         112s ago   Has a FileSystem, Insufficient space (<10 extents) on vgs, LVM detected  
+gelani-osd-2  /dev/vdc  hdd   c0fef5b3-1b2f-4c77-8  30.0G  No         112s ago   Has a FileSystem, Insufficient space (<10 extents) on vgs, LVM detected  
+gelani-osd-2  /dev/vdd  hdd   22800252-bf00-4a96-a  30.0G  No         112s ago   Has a FileSystem, Insufficient space (<10 extents) on vgs, LVM detected  
+NAME   HOST          PORTS  STATUS        REFRESHED  AGE  MEM USE  MEM LIM  VERSION  IMAGE ID      CONTAINER ID  
+osd.0  gelani-osd-1         running (2m)    29s ago   2m    50.5M    1467M  17.2.8   259b35566514  42c01f74309f  
+osd.1  gelani-osd-2         running (2m)    29s ago   2m    48.8M    1467M  17.2.8   259b35566514  92f44406d0e7  
+osd.2  gelani-osd-1         running (2m)    29s ago   2m    48.1M    1467M  17.2.8   259b35566514  b0737b207da9  
+osd.3  gelani-osd-2         running (2m)    29s ago   2m    49.4M    1467M  17.2.8   259b35566514  7e4bdeba3444  
+osd.4  gelani-osd-1         running (2m)    29s ago   2m    48.8M    1467M  17.2.8   259b35566514  ff68cae9eca8  
+osd.5  gelani-osd-2         running (2m)    29s ago   2m    49.1M    1467M  17.2.8   259b35566514  3c10992e97cd  
   cluster:
     id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
     health: HEALTH_WARN
             Degraded data redundancy: 2/6 objects degraded (33.333%), 1 pg degraded, 1 pg undersized
-
+ 
   services:
-    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 42m)
-    mgr: gelani-mon-1.gzltah(active, since 80m), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
-    osd: 6 osds: 6 up (since 5m), 6 in (since 5m)
-
+    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 38m)
+    mgr: gelani-mon-1.gzltah(active, since 77m), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
+    osd: 6 osds: 6 up (since 2m), 6 in (since 2m)
+ 
   data:
     pools:   1 pools, 1 pgs
     objects: 2 objects, 449 KiB
     usage:   2.9 GiB used, 177 GiB / 180 GiB avail
     pgs:     2/6 objects degraded (33.333%)
              1 active+undersized+degraded
+ 
+ID  CLASS  WEIGHT   TYPE NAME              STATUS  REWEIGHT  PRI-AFF
+-1         0.17578  root default                                    
+-3         0.08789      host gelani-osd-1                           
+ 0    hdd  0.02930          osd.0              up   1.00000  1.00000
+ 2    hdd  0.02930          osd.2              up   1.00000  1.00000
+ 4    hdd  0.02930          osd.4              up   1.00000  1.00000
+-5         0.08789      host gelani-osd-2                           
+ 1    hdd  0.02930          osd.1              up   1.00000  1.00000
+ 3    hdd  0.02930          osd.3              up   1.00000  1.00000
+ 5    hdd  0.02930          osd.5              up   1.00000  1.00000
+ubuntu@gelani-mon-1:~$ 
+```
+## Phase-3 OSD Deployment Status
+### OSD Deployment
+- Total **6 OSDs deployed**
+- **6 OSDs up**
+- **6 OSDs in**
+- OSDs are evenly distributed across both hosts.
+### CRUSH Tree Layout
+The CRUSH hierarchy shows proper distribution of OSDs across hosts:
+- **gelani-osd-1**
+  - osd.0
+  - osd.2
+  - osd.4
+- **gelani-osd-2**
+  - osd.1
+  - osd.3
+  - osd.5
+This confirms that OSD placement across the cluster nodes is balanced.
+### `ceph orch device ls` showing `AVAILABLE: No`
+This is **expected behavior after OSD deployment**.
+Once Ceph consumes the disks to create OSDs, it initializes them using **LVM and BlueStore**. Because of this, the devices may show:
+- `Has a FileSystem`
+- `LVM detected`
+- `Insufficient space on vgs`
+- `AVAILABLE: No`
 
-ubuntu@gelani-mon-1:~$ sudo ceph -s
-sudo ceph health detail
-  cluster:
-    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
-    health: HEALTH_WARN
-            Degraded data redundancy: 2/6 objects degraded (33.333%), 1 pg degraded, 1 pg undersized
+These messages simply indicate that the disks are **already in use by Ceph** and cannot be used again for new OSDs.
 
-  services:
-    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 42m)
-    mgr: gelani-mon-1.gzltah(active, since 81m), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
-    osd: 6 osds: 6 up (since 5m), 6 in (since 6m)
+### Cluster Health Warning
+The cluster currently shows:
+`HEALTH_WARN: degraded/undersized`
+This is **normal immediately after adding OSDs**.
+Current status:
+- 1 pool
+- 1 placement group (PG)
+- 2 objects
+- 1 PG marked as undersized/degraded
+Ceph is still **replicating and rebalancing initial internal objects**, so temporary warnings may appear.
+### Actual Cluster State
+The important indicators confirm that the cluster is functioning correctly:
+- **OSDs:** 6 up / 6 in
+- **Distribution:** balanced across hosts
+- **CRUSH tree:** correct
 
-  data:
-    pools:   1 pools, 1 pgs
-    objects: 2 objects, 449 KiB
-    usage:   2.9 GiB used, 177 GiB / 180 GiB avail
-    pgs:     2/6 objects degraded (33.333%)
-             1 active+undersized+degraded
-
-HEALTH_WARN Degraded data redundancy: 2/6 objects degraded (33.333%), 1 pg degraded, 1 pg undersized
-[WRN] PG_DEGRADED: Degraded data redundancy: 2/6 objects degraded (33.333%), 1 pg degraded, 1 pg undersized
-    pg 1.0 is stuck undersized for 5m, current state active+undersized+degraded, last acting [1,0]
-ubuntu@gelani-mon-1:~$ sudo ceph -s
-  cluster:
-    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
-    health: HEALTH_WARN
-            Degraded data redundancy: 2/6 objects degraded (33.333%), 1 pg degraded, 1 pg undersized
-
-  services:
-    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 114m)
-    mgr: gelani-mon-1.gzltah(active, since 2h), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
-    osd: 6 osds: 6 up (since 77m), 6 in (since 77m)
-
-  data:
-    pools:   1 pools, 1 pgs
-    objects: 2 objects, 449 KiB
-    usage:   2.9 GiB used, 177 GiB / 180 GiB avail
-    pgs:     2/6 objects degraded (33.333%)
-             1 active+undersized+degraded
-
-ubuntu@gelani-mon-1:~$ sudo ceph -s
-sudo ceph health detail
-  cluster:
-    id:     a9625cff-fc0e-11f0-a1f6-6998182b0a5e
-    health: HEALTH_WARN
-            Degraded data redundancy: 2/6 objects degraded (33.333%), 1 pg degraded, 1 pg undersized
-
-  services:
-    mon: 3 daemons, quorum gelani-mon-1,gelani-mon-2,gelani-mon-3 (age 114m)
-    mgr: gelani-mon-1.gzltah(active, since 2h), standbys: gelani-mon-2.qkfion, gelani-mon-3.scuoto
-    osd: 6 osds: 6 up (since 77m), 6 in (since 78m)
-
-  data:
-    pools:   1 pools, 1 pgs
-    objects: 2 objects, 449 KiB
-    usage:   2.9 GiB used, 177 GiB / 180 GiB avail
-    pgs:     2/6 objects degraded (33.333%)
-             1 active+undersized+degraded
-
-HEALTH_WARN Degraded data redundancy: 2/6 objects degraded (33.333%), 1 pg degraded, 1 pg undersized
-[WRN] PG_DEGRADED: Degraded data redundancy: 2/6 objects degraded (33.333%), 1 pg degraded, 1 pg undersized
-    pg 1.0 is stuck undersized for 77m, current state active+undersized+degraded, last acting [1,0]
+```
 ubuntu@gelani-mon-1:~$ sudo ceph osd stat
 sudo ceph pg stat
 sudo ceph df
@@ -1846,8 +1959,26 @@ ID  CLASS  WEIGHT   REWEIGHT  SIZE     RAW USE  DATA     OMAP    META     AVAIL 
                        TOTAL  180 GiB  2.9 GiB  1.9 MiB  10 KiB  1.7 GiB  177 GiB  1.60
 MIN/MAX VAR: 0.59/1.41  STDDEV: 0.65
 ubuntu@gelani-mon-1:~$
-ubuntu@gelani-mon-1:~$ sudo ceph osd pool get .mgr size
-size: 3
+```
+
+### Issue: PG stuck `undersized + degraded`
+The only pool currently present is **`.mgr`** with the default **replication size = 3**.
+However, the cluster has only **2 failure domains (hosts)**:
+* gelani-osd-1
+* gelani-osd-2
+Ceph’s default **CRUSH rule** places replicas on different hosts. Since there are only **2 hosts**, Ceph cannot place **3 replicas**, so the PG remains stuck:
+`pg 1.0 ... last acting [1,0]`
+Only **2 replicas are possible**, causing the PG to stay **undersized and degraded**.
+---
+#### Solution
+Fix the issue by either:
+* **Adding a 3rd OSD host**, or
+* **Reducing replication size to 2** (recommended for a 2-node lab)
+Run on **gelani-mon-1**:
+`ceph osd pool set .mgr size 2`
+
+```
+
 ubuntu@gelani-mon-1:~$ sudo ceph osd pool get .mgr size
 size: 3
 ubuntu@gelani-mon-1:~$ sudo ceph osd pool get .mgr size 2
@@ -1877,7 +2008,37 @@ ubuntu@gelani-mon-1:~$ sudo ceph -s
 ubuntu@gelani-mon-1:~$ sudo ceph health detail
 HEALTH_OK
 ubuntu@gelani-mon-1:~$
+```
+## Final Thoght about Phase-3
 
+**Important Note (OpenStack Pools)**
+
+* Current cluster has **2 OSD hosts**, so pool **replication size should be set to 2** for pools such as:
+
+  * volumes
+  * images
+  * VMs
+  * backups
+
+* A **replication size = 3** requires **at least 3 failure domains (hosts)**.
+  With only 2 hosts, pools configured with **size=3** may remain **undersized or degraded**.
+
+**Recommended Long-Term Setup**
+
+* Add **OSD host #3**
+* Then change pool **replication size back to 3** for proper production-level redundancy.
+
+# Phase 4— Create OpenStack-ready type Pools (RBD) 
+
+## Pool Replication Settings (Current Cluster)
+
+Since the cluster currently has 2 OSD hosts, the following pool settings are used: **size = 2** and **min_size = 1** ,
+
+These settings allow the pool to function correctly with two failure domains.
+
+When a 3rd OSD host is added, pool replication can be updated to: **size = 3**
+
+```
 ubuntu@gelani-mon-1:~$ sudo ceph osd pool create volume 32
 pool 'volume' created
 ubuntu@gelani-mon-1:~$ sudo ceph osd pool create images 16
@@ -1947,6 +2108,7 @@ ubuntu@gelani-mon-1:~$ sudo ceph -s
     usage:   1.7 GiB used, 178 GiB / 180 GiB avail
     pgs:     97 active+clean
 
+
 ubuntu@gelani-mon-1:~$ sudo ceph osd pool application get volume
 {
     "rbd": {}
@@ -2000,9 +2162,6 @@ ubuntu@gelani-mon-1:~$ ip a
     inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
        valid_lft forever preferred_lft forever
 ubuntu@gelani-mon-1:~$
-
-
-
 
 ```
 

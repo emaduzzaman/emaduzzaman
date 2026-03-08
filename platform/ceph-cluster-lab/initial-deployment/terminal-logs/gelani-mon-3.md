@@ -1,3 +1,4 @@
+# update & upgrading the system
 ```
 emaduzzaman@emaduzzaman:~$ ssh ubuntu@gelani-mon-3
 ssh: Could not resolve hostname gelani-mon-3: Temporary failure in name resolution
@@ -596,9 +597,16 @@ No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
 ubuntu@gelani-mon-3:~$ 
+```
+# done the initial setup for to go further which include:
+* Set correct hostname
+* Add all cluster host mappings to /etc/hosts
+* Update OS & install baseline packages
+* Configure time sync
+* Disable swap (Ceph best practice)
+* Basic firewall sanity
 
-
-
+```
 emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.221
 ubuntu@192.168.95.221's password:
 Permission denied, please try again.
