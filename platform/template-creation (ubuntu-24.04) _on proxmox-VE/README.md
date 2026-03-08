@@ -232,7 +232,7 @@ The system will:
 
 ## Screenshots
 
-![Proxmox VE Screenshot - Ubuntu 24.04 Template Running](proxmox_console.png)
+![Proxmox VE Screenshot - Ubuntu 24.04 Template Running](test-results/proxmox_console-vm-from-temp.png)
 *Screenshot showing the Ubuntu 24.04 cloud template running in Proxmox VE with noVNC console logged in*
 
 ---
