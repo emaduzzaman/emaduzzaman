@@ -1,5 +1,3 @@
-
-
 ```
 ubuntu@dns-lab:~$ sudo apt update
 
