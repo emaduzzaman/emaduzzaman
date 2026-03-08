@@ -1,0 +1,9339 @@
+```
+root@KAZI-EMADUZZAMAN-2700:~# ssh ubuntu@192.168.95.93
+The authenticity of host '192.168.95.93 (192.168.95.93)' can't be established.
+ED25519 key fingerprint is SHA256:c2OeWOBIkW9ZNBh4MRPe1uS9dpW9Va3GvNEwOTFAea0.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.95.93' (ED25519) to the list of known hosts.
+ubuntu@192.168.95.93's password:
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-143-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Jan 19 10:58:13 UTC 2026
+
+  System load:  0.16              Processes:             224
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 0%                IPv4 address for ens3: 192.168.95.93
+  Swap usage:   0%
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@gelani-lab-1:~$ sudo bash
+root@gelani-lab-1:/home/ubuntu# passwd ubuntu
+New password:
+Retype new password:
+Sorry, passwords do not match.
+passwd: Authentication token manipulation error
+passwd: password unchanged
+root@gelani-lab-1:/home/ubuntu# passwd ubuntu
+New password:
+Retype new password:
+passwd: password updated successfully
+root@gelani-lab-1:/home/ubuntu# exit
+exit
+ubuntu@gelani-lab-1:~$ exit
+logout
+Connection to 192.168.95.93 closed.
+root@KAZI-EMADUZZAMAN-2700:~# ssh ubuntu@192.168.95.93
+ubuntu@192.168.95.93's password:
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-143-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Jan 19 10:58:13 UTC 2026
+
+  System load:  0.16              Processes:             224
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 0%                IPv4 address for ens3: 192.168.95.93
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '24.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Mon Jan 19 10:58:13 2026 from 192.168.95.86
+ubuntu@gelani-lab-1:~$
+ubuntu@gelani-lab-1:~$ sudo apt update && sudo apt upgrade -y
+Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease
+Get:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:4 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [2903 kB]
+Get:5 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:6 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [14.1 MB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [418 kB]
+Get:8 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [14.1 kB]
+Get:9 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [4883 kB]
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [917 kB]
+Get:11 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 c-n-f Metadata [652 B]
+Get:12 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1009 kB]
+Get:13 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/universe Translation-en [5652 kB]
+Get:14 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [222 kB]
+Get:15 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [22.4 kB]
+Get:16 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [50.5 kB]
+Get:17 http://security.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [10.2 kB]
+Get:18 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 c-n-f Metadata [376 B]
+Get:19 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/universe amd64 c-n-f Metadata [286 kB]
+Get:20 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [217 kB]
+Get:21 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/multiverse Translation-en [112 kB]
+Get:22 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/multiverse amd64 c-n-f Metadata [8372 B]
+Get:23 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [3163 kB]
+Get:24 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [485 kB]
+Get:25 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [19.1 kB]
+Get:26 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [5043 kB]
+Get:27 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [944 kB]
+Get:28 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 c-n-f Metadata [644 B]
+Get:29 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1246 kB]
+Get:30 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [311 kB]
+Get:31 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [30.1 kB]
+Get:32 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [57.6 kB]
+Get:33 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [13.2 kB]
+Get:34 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [600 B]
+Get:35 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [69.4 kB]
+Get:36 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.5 kB]
+Get:37 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/main amd64 c-n-f Metadata [412 B]
+Get:38 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:39 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [31.7 kB]
+Get:40 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.9 kB]
+Get:41 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [672 B]
+Get:42 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 42.6 MB in 8s (5522 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+92 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+The following NEW packages will be installed:
+  linux-headers-5.15.0-164 linux-headers-5.15.0-164-generic linux-image-5.15.0-164-generic linux-modules-5.15.0-164-generic
+The following packages will be upgraded:
+  apparmor apport bind9-dnsutils bind9-host bind9-libs binutils binutils-common binutils-x86-64-linux-gnu cloud-init curl dirmngr distro-info-data dpkg gcc-12-base git git-man gnupg gnupg-l10n gnupg-utils
+  gpg gpg-agent gpg-wks-client gpg-wks-server gpgconf gpgsm gpgv iputils-ping iputils-tracepath klibc-utils landscape-common libapparmor1 libbinutils libc-bin libc6 libctf-nobfd0 libctf0 libcurl3-gnutls
+  libcurl4 libgcc-s1 libglib2.0-0 libglib2.0-bin libglib2.0-data libgnutls30 libklibc libnss-systemd libpam-systemd libperl5.34 libpng16-16 libpython3.10 libpython3.10-minimal libpython3.10-stdlib
+  libsodium23 libsqlite3-0 libssh-4 libssl3 libstdc++6 libsystemd0 libtasn1-6 libudev1 libudisks2-0 libxml2 libxslt1.1 linux-headers-generic linux-headers-virtual linux-image-virtual linux-virtual locales
+  needrestart open-vm-tools openssl perl perl-base perl-modules-5.34 powermgmt-base python-apt-common python3-apport python3-apt python3-attr python3-problem-report python3-urllib3 python3.10
+  python3.10-minimal snapd sosreport systemd systemd-hwe-hwdb systemd-sysv systemd-timesyncd ubuntu-advantage-tools ubuntu-pro-client ubuntu-pro-client-l10n udev
+92 upgraded, 4 newly installed, 0 to remove and 0 not upgraded.
+70 standard LTS security updates
+Need to get 139 MB of archives.
+After this operation, 244 MB of additional disk space will be used.
+Get:1 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 dpkg amd64 1.21.1ubuntu2.6 [1239 kB]
+Get:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libperl5.34 amd64 5.34.0-3ubuntu1.5 [4797 kB]
+Get:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 perl amd64 5.34.0-3ubuntu1.5 [232 kB]
+Get:4 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 perl-base amd64 5.34.0-3ubuntu1.5 [1761 kB]
+Get:5 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 perl-modules-5.34 all 5.34.0-3ubuntu1.5 [2977 kB]
+Get:6 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gcc-12-base amd64 12.3.0-1ubuntu1~22.04.2 [20.6 kB]
+Get:7 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgcc-s1 amd64 12.3.0-1ubuntu1~22.04.2 [53.9 kB]
+Get:8 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libstdc++6 amd64 12.3.0-1ubuntu1~22.04.2 [699 kB]
+Get:9 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libc6 amd64 2.35-0ubuntu3.11 [3235 kB]
+Get:10 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libc-bin amd64 2.35-0ubuntu3.11 [706 kB]
+Get:11 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnss-systemd amd64 249.11-0ubuntu3.17 [133 kB]
+Get:12 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libsystemd0 amd64 249.11-0ubuntu3.17 [317 kB]
+Get:13 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 systemd-timesyncd amd64 249.11-0ubuntu3.17 [31.2 kB]
+Get:14 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 systemd-sysv amd64 249.11-0ubuntu3.17 [10.5 kB]
+Get:15 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpam-systemd amd64 249.11-0ubuntu3.17 [203 kB]
+Get:16 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 systemd amd64 249.11-0ubuntu3.17 [4583 kB]
+Get:17 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 udev amd64 249.11-0ubuntu3.17 [1557 kB]
+Get:18 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libudev1 amd64 249.11-0ubuntu3.17 [76.7 kB]
+Get:19 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libapparmor1 amd64 3.0.4-2ubuntu2.5 [39.6 kB]
+Get:20 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libtasn1-6 amd64 4.18.0-4ubuntu0.2 [43.6 kB]
+Get:21 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgnutls30 amd64 3.7.3-4ubuntu1.7 [967 kB]
+Get:22 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libssl3 amd64 3.0.2-0ubuntu1.20 [1905 kB]
+Get:23 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10 amd64 3.10.12-1~22.04.13 [1949 kB]
+Get:24 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10 amd64 3.10.12-1~22.04.13 [508 kB]
+Get:25 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-stdlib amd64 3.10.12-1~22.04.13 [1850 kB]
+Get:26 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10-minimal amd64 3.10.12-1~22.04.13 [2272 kB]
+Get:27 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-minimal amd64 3.10.12-1~22.04.13 [815 kB]
+Get:28 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libsqlite3-0 amd64 3.37.2-2ubuntu0.5 [643 kB]
+Get:29 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libglib2.0-data all 2.72.4-0ubuntu2.7 [5178 B]
+Get:30 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libglib2.0-bin amd64 2.72.4-0ubuntu2.7 [80.9 kB]
+Get:31 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libglib2.0-0 amd64 2.72.4-0ubuntu2.7 [1467 kB]
+Get:32 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxml2 amd64 2.9.13+dfsg-1ubuntu0.10 [764 kB]
+Get:33 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 open-vm-tools amd64 2:12.3.5-3~ubuntu0.22.04.3 [747 kB]
+Get:34 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-wks-client amd64 2.2.27-3ubuntu2.5 [62.7 kB]
+Get:35 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 dirmngr amd64 2.2.27-3ubuntu2.5 [293 kB]
+Get:36 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-wks-server amd64 2.2.27-3ubuntu2.5 [57.6 kB]
+Get:37 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gnupg-utils amd64 2.2.27-3ubuntu2.5 [309 kB]
+Get:38 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-agent amd64 2.2.27-3ubuntu2.5 [209 kB]
+Get:39 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg amd64 2.2.27-3ubuntu2.5 [519 kB]
+Get:40 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpgconf amd64 2.2.27-3ubuntu2.5 [94.3 kB]
+Get:41 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gnupg-l10n all 2.2.27-3ubuntu2.5 [54.5 kB]
+Get:42 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gnupg all 2.2.27-3ubuntu2.5 [315 kB]
+Get:43 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpgsm amd64 2.2.27-3ubuntu2.5 [197 kB]
+Get:44 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpgv amd64 2.2.27-3ubuntu2.5 [137 kB]
+Get:45 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 distro-info-data all 0.52ubuntu0.11 [5444 B]
+Get:46 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 iputils-ping amd64 3:20211215-1ubuntu0.1 [43.0 kB]
+Get:47 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 locales all 2.35-0ubuntu3.11 [4247 kB]
+Get:48 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 openssl amd64 3.0.2-0ubuntu1.20 [1185 kB]
+Get:49 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python-apt-common all 2.4.0ubuntu4.1 [14.7 kB]
+Get:50 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-apt amd64 2.4.0ubuntu4.1 [164 kB]
+Get:51 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-pro-client-l10n amd64 37.1ubuntu0~22.04 [20.7 kB]
+Get:52 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-pro-client amd64 37.1ubuntu0~22.04 [238 kB]
+Get:53 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-advantage-tools all 37.1ubuntu0~22.04 [10.9 kB]
+Get:54 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 apparmor amd64 3.0.4-2ubuntu2.5 [599 kB]
+Get:55 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 bind9-dnsutils amd64 1:9.18.39-0ubuntu0.22.04.2 [158 kB]
+Get:56 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 bind9-host amd64 1:9.18.39-0ubuntu0.22.04.2 [52.5 kB]
+Get:57 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 bind9-libs amd64 1:9.18.39-0ubuntu0.22.04.2 [1262 kB]
+Get:58 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 iputils-tracepath amd64 3:20211215-1ubuntu0.1 [14.2 kB]
+Get:59 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpng16-16 amd64 1.6.37-3ubuntu0.3 [192 kB]
+Get:60 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 powermgmt-base all 1.36ubuntu0.22.04.1 [7736 B]
+Get:61 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-problem-report all 2.20.11-0ubuntu82.10 [11.4 kB]
+Get:62 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-apport all 2.20.11-0ubuntu82.10 [89.0 kB]
+Get:63 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 apport all 2.20.11-0ubuntu82.10 [135 kB]
+Get:64 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libctf0 amd64 2.38-4ubuntu2.12 [103 kB]
+Get:65 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libctf-nobfd0 amd64 2.38-4ubuntu2.12 [108 kB]
+Get:66 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 binutils-x86-64-linux-gnu amd64 2.38-4ubuntu2.12 [2324 kB]
+Get:67 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libbinutils amd64 2.38-4ubuntu2.12 [663 kB]
+Get:68 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 binutils amd64 2.38-4ubuntu2.12 [3184 B]
+Get:69 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 binutils-common amd64 2.38-4ubuntu2.12 [223 kB]
+Get:70 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libssh-4 amd64 0.9.6-2ubuntu0.22.04.5 [187 kB]
+Get:71 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 curl amd64 7.81.0-1ubuntu1.21 [194 kB]
+Get:72 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4 amd64 7.81.0-1ubuntu1.21 [290 kB]
+Get:73 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl3-gnutls amd64 7.81.0-1ubuntu1.21 [284 kB]
+Get:74 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 git-man all 1:2.34.1-1ubuntu1.15 [955 kB]
+Get:75 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 git amd64 1:2.34.1-1ubuntu1.15 [3166 kB]
+Get:76 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 klibc-utils amd64 2.0.10-4ubuntu0.2 [100.0 kB]
+Get:77 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libklibc amd64 2.0.10-4ubuntu0.2 [46.0 kB]
+Get:78 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 landscape-common amd64 23.02-0ubuntu1~22.04.7 [88.9 kB]
+Get:79 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libsodium23 amd64 1.0.18-1ubuntu0.22.04.1 [164 kB]
+Get:80 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libudisks2-0 amd64 2.9.4-1ubuntu2.3 [167 kB]
+Get:81 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxslt1.1 amd64 1.1.34-4ubuntu0.22.04.5 [165 kB]
+Get:82 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 linux-headers-5.15.0-164 all 5.15.0-164.174 [12.4 MB]
+Get:83 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 linux-headers-5.15.0-164-generic amd64 5.15.0-164.174 [2828 kB]
+Get:84 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 linux-modules-5.15.0-164-generic amd64 5.15.0-164.174 [22.7 MB]
+Get:85 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 linux-image-5.15.0-164-generic amd64 5.15.0-164.174 [11.6 MB]
+Get:86 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 linux-virtual amd64 5.15.0.164.159 [1656 B]
+Get:87 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 linux-image-virtual amd64 5.15.0.164.159 [2432 B]
+Get:88 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 linux-headers-virtual amd64 5.15.0.164.159 [1634 B]
+Get:89 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 linux-headers-generic amd64 5.15.0.164.159 [2334 B]
+Get:90 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 needrestart all 3.5-5ubuntu2.5 [45.5 kB]
+Get:91 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-attr all 21.2.0-1ubuntu1 [43.9 kB]
+Get:92 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-urllib3 all 1.26.5-1~exp1ubuntu0.5 [98.6 kB]
+Get:93 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 snapd amd64 2.73+ubuntu22.04 [32.3 MB]
+Get:94 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 sosreport amd64 4.9.2-0ubuntu0~22.04.1 [367 kB]
+Get:95 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 systemd-hwe-hwdb all 249.11.6 [3668 B]
+Get:96 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 cloud-init all 25.2-0ubuntu1~22.04.1 [586 kB]
+Fetched 139 MB in 21s (6571 kB/s)
+Extracting templates from packages: 100%
+Preconfiguring packages ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../dpkg_1.21.1ubuntu2.6_amd64.deb ...
+Unpacking dpkg (1.21.1ubuntu2.6) over (1.21.1ubuntu2.3) ...
+Setting up dpkg (1.21.1ubuntu2.6) ...
+dpkg-db-backup.service is a disabled or a static unit not running, not starting it.
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../libperl5.34_5.34.0-3ubuntu1.5_amd64.deb ...
+Unpacking libperl5.34:amd64 (5.34.0-3ubuntu1.5) over (5.34.0-3ubuntu1.4) ...
+Preparing to unpack .../perl_5.34.0-3ubuntu1.5_amd64.deb ...
+Unpacking perl (5.34.0-3ubuntu1.5) over (5.34.0-3ubuntu1.4) ...
+Preparing to unpack .../perl-base_5.34.0-3ubuntu1.5_amd64.deb ...
+Unpacking perl-base (5.34.0-3ubuntu1.5) over (5.34.0-3ubuntu1.4) ...
+Setting up perl-base (5.34.0-3ubuntu1.5) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../perl-modules-5.34_5.34.0-3ubuntu1.5_all.deb ...
+Unpacking perl-modules-5.34 (5.34.0-3ubuntu1.5) over (5.34.0-3ubuntu1.4) ...
+Preparing to unpack .../gcc-12-base_12.3.0-1ubuntu1~22.04.2_amd64.deb ...
+Unpacking gcc-12-base:amd64 (12.3.0-1ubuntu1~22.04.2) over (12.3.0-1ubuntu1~22.04) ...
+Setting up gcc-12-base:amd64 (12.3.0-1ubuntu1~22.04.2) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../libgcc-s1_12.3.0-1ubuntu1~22.04.2_amd64.deb ...
+Unpacking libgcc-s1:amd64 (12.3.0-1ubuntu1~22.04.2) over (12.3.0-1ubuntu1~22.04) ...
+Setting up libgcc-s1:amd64 (12.3.0-1ubuntu1~22.04.2) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../libstdc++6_12.3.0-1ubuntu1~22.04.2_amd64.deb ...
+Unpacking libstdc++6:amd64 (12.3.0-1ubuntu1~22.04.2) over (12.3.0-1ubuntu1~22.04) ...
+Setting up libstdc++6:amd64 (12.3.0-1ubuntu1~22.04.2) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../libc6_2.35-0ubuntu3.11_amd64.deb ...
+Unpacking libc6:amd64 (2.35-0ubuntu3.11) over (2.35-0ubuntu3.10) ...
+Setting up libc6:amd64 (2.35-0ubuntu3.11) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../libc-bin_2.35-0ubuntu3.11_amd64.deb ...
+Unpacking libc-bin (2.35-0ubuntu3.11) over (2.35-0ubuntu3.10) ...
+Setting up libc-bin (2.35-0ubuntu3.11) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../libnss-systemd_249.11-0ubuntu3.17_amd64.deb ...
+Unpacking libnss-systemd:amd64 (249.11-0ubuntu3.17) over (249.11-0ubuntu3.16) ...
+Preparing to unpack .../libsystemd0_249.11-0ubuntu3.17_amd64.deb ...
+Unpacking libsystemd0:amd64 (249.11-0ubuntu3.17) over (249.11-0ubuntu3.16) ...
+Setting up libsystemd0:amd64 (249.11-0ubuntu3.17) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../0-systemd-timesyncd_249.11-0ubuntu3.17_amd64.deb ...
+Unpacking systemd-timesyncd (249.11-0ubuntu3.17) over (249.11-0ubuntu3.16) ...
+Preparing to unpack .../1-systemd-sysv_249.11-0ubuntu3.17_amd64.deb ...
+Unpacking systemd-sysv (249.11-0ubuntu3.17) over (249.11-0ubuntu3.16) ...
+Preparing to unpack .../2-libpam-systemd_249.11-0ubuntu3.17_amd64.deb ...
+Unpacking libpam-systemd:amd64 (249.11-0ubuntu3.17) over (249.11-0ubuntu3.16) ...
+Preparing to unpack .../3-systemd_249.11-0ubuntu3.17_amd64.deb ...
+Unpacking systemd (249.11-0ubuntu3.17) over (249.11-0ubuntu3.16) ...
+Preparing to unpack .../4-udev_249.11-0ubuntu3.17_amd64.deb ...
+Unpacking udev (249.11-0ubuntu3.17) over (249.11-0ubuntu3.16) ...
+Preparing to unpack .../5-libudev1_249.11-0ubuntu3.17_amd64.deb ...
+Unpacking libudev1:amd64 (249.11-0ubuntu3.17) over (249.11-0ubuntu3.16) ...
+Setting up libudev1:amd64 (249.11-0ubuntu3.17) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../libapparmor1_3.0.4-2ubuntu2.5_amd64.deb ...
+Unpacking libapparmor1:amd64 (3.0.4-2ubuntu2.5) over (3.0.4-2ubuntu2.4) ...
+Preparing to unpack .../libtasn1-6_4.18.0-4ubuntu0.2_amd64.deb ...
+Unpacking libtasn1-6:amd64 (4.18.0-4ubuntu0.2) over (4.18.0-4ubuntu0.1) ...
+Setting up libtasn1-6:amd64 (4.18.0-4ubuntu0.2) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../libgnutls30_3.7.3-4ubuntu1.7_amd64.deb ...
+Unpacking libgnutls30:amd64 (3.7.3-4ubuntu1.7) over (3.7.3-4ubuntu1.6) ...
+Setting up libgnutls30:amd64 (3.7.3-4ubuntu1.7) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../libssl3_3.0.2-0ubuntu1.20_amd64.deb ...
+Unpacking libssl3:amd64 (3.0.2-0ubuntu1.20) over (3.0.2-0ubuntu1.19) ...
+Setting up libssl3:amd64 (3.0.2-0ubuntu1.20) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../00-libpython3.10_3.10.12-1~22.04.13_amd64.deb ...
+Unpacking libpython3.10:amd64 (3.10.12-1~22.04.13) over (3.10.12-1~22.04.10) ...
+Preparing to unpack .../01-python3.10_3.10.12-1~22.04.13_amd64.deb ...
+Unpacking python3.10 (3.10.12-1~22.04.13) over (3.10.12-1~22.04.10) ...
+Preparing to unpack .../02-libpython3.10-stdlib_3.10.12-1~22.04.13_amd64.deb ...
+Unpacking libpython3.10-stdlib:amd64 (3.10.12-1~22.04.13) over (3.10.12-1~22.04.10) ...
+Preparing to unpack .../03-python3.10-minimal_3.10.12-1~22.04.13_amd64.deb ...
+Unpacking python3.10-minimal (3.10.12-1~22.04.13) over (3.10.12-1~22.04.10) ...
+Preparing to unpack .../04-libpython3.10-minimal_3.10.12-1~22.04.13_amd64.deb ...
+Unpacking libpython3.10-minimal:amd64 (3.10.12-1~22.04.13) over (3.10.12-1~22.04.10) ...
+Preparing to unpack .../05-libsqlite3-0_3.37.2-2ubuntu0.5_amd64.deb ...
+Unpacking libsqlite3-0:amd64 (3.37.2-2ubuntu0.5) over (3.37.2-2ubuntu0.4) ...
+Preparing to unpack .../06-libglib2.0-data_2.72.4-0ubuntu2.7_all.deb ...
+Unpacking libglib2.0-data (2.72.4-0ubuntu2.7) over (2.72.4-0ubuntu2.5) ...
+Preparing to unpack .../07-libglib2.0-bin_2.72.4-0ubuntu2.7_amd64.deb ...
+Unpacking libglib2.0-bin (2.72.4-0ubuntu2.7) over (2.72.4-0ubuntu2.5) ...
+Preparing to unpack .../08-libglib2.0-0_2.72.4-0ubuntu2.7_amd64.deb ...
+Unpacking libglib2.0-0:amd64 (2.72.4-0ubuntu2.7) over (2.72.4-0ubuntu2.5) ...
+Preparing to unpack .../09-libxml2_2.9.13+dfsg-1ubuntu0.10_amd64.deb ...
+Unpacking libxml2:amd64 (2.9.13+dfsg-1ubuntu0.10) over (2.9.13+dfsg-1ubuntu0.7) ...
+Preparing to unpack .../10-open-vm-tools_2%3a12.3.5-3~ubuntu0.22.04.3_amd64.deb ...
+Unpacking open-vm-tools (2:12.3.5-3~ubuntu0.22.04.3) over (2:12.3.5-3~ubuntu0.22.04.2) ...
+Preparing to unpack .../11-gpg-wks-client_2.2.27-3ubuntu2.5_amd64.deb ...
+Unpacking gpg-wks-client (2.2.27-3ubuntu2.5) over (2.2.27-3ubuntu2.3) ...
+Preparing to unpack .../12-dirmngr_2.2.27-3ubuntu2.5_amd64.deb ...
+Unpacking dirmngr (2.2.27-3ubuntu2.5) over (2.2.27-3ubuntu2.3) ...
+Preparing to unpack .../13-gpg-wks-server_2.2.27-3ubuntu2.5_amd64.deb ...
+Unpacking gpg-wks-server (2.2.27-3ubuntu2.5) over (2.2.27-3ubuntu2.3) ...
+Preparing to unpack .../14-gnupg-utils_2.2.27-3ubuntu2.5_amd64.deb ...
+Unpacking gnupg-utils (2.2.27-3ubuntu2.5) over (2.2.27-3ubuntu2.3) ...
+Preparing to unpack .../15-gpg-agent_2.2.27-3ubuntu2.5_amd64.deb ...
+Unpacking gpg-agent (2.2.27-3ubuntu2.5) over (2.2.27-3ubuntu2.3) ...
+Preparing to unpack .../16-gpg_2.2.27-3ubuntu2.5_amd64.deb ...
+Unpacking gpg (2.2.27-3ubuntu2.5) over (2.2.27-3ubuntu2.3) ...
+Preparing to unpack .../17-gpgconf_2.2.27-3ubuntu2.5_amd64.deb ...
+Unpacking gpgconf (2.2.27-3ubuntu2.5) over (2.2.27-3ubuntu2.3) ...
+Preparing to unpack .../18-gnupg-l10n_2.2.27-3ubuntu2.5_all.deb ...
+Unpacking gnupg-l10n (2.2.27-3ubuntu2.5) over (2.2.27-3ubuntu2.3) ...
+Preparing to unpack .../19-gnupg_2.2.27-3ubuntu2.5_all.deb ...
+Unpacking gnupg (2.2.27-3ubuntu2.5) over (2.2.27-3ubuntu2.3) ...
+Preparing to unpack .../20-gpgsm_2.2.27-3ubuntu2.5_amd64.deb ...
+Unpacking gpgsm (2.2.27-3ubuntu2.5) over (2.2.27-3ubuntu2.3) ...
+Preparing to unpack .../21-gpgv_2.2.27-3ubuntu2.5_amd64.deb ...
+Unpacking gpgv (2.2.27-3ubuntu2.5) over (2.2.27-3ubuntu2.3) ...
+Setting up gpgv (2.2.27-3ubuntu2.5) ...
+(Reading database ... 64592 files and directories currently installed.)
+Preparing to unpack .../00-distro-info-data_0.52ubuntu0.11_all.deb ...
+Unpacking distro-info-data (0.52ubuntu0.11) over (0.52ubuntu0.9) ...
+Preparing to unpack .../01-iputils-ping_3%3a20211215-1ubuntu0.1_amd64.deb ...
+Unpacking iputils-ping (3:20211215-1ubuntu0.1) over (3:20211215-1) ...
+Preparing to unpack .../02-locales_2.35-0ubuntu3.11_all.deb ...
+Unpacking locales (2.35-0ubuntu3.11) over (2.35-0ubuntu3.10) ...
+Preparing to unpack .../03-openssl_3.0.2-0ubuntu1.20_amd64.deb ...
+Unpacking openssl (3.0.2-0ubuntu1.20) over (3.0.2-0ubuntu1.19) ...
+Preparing to unpack .../04-python-apt-common_2.4.0ubuntu4.1_all.deb ...
+Unpacking python-apt-common (2.4.0ubuntu4.1) over (2.4.0ubuntu4) ...
+Preparing to unpack .../05-python3-apt_2.4.0ubuntu4.1_amd64.deb ...
+Unpacking python3-apt (2.4.0ubuntu4.1) over (2.4.0ubuntu4) ...
+Preparing to unpack .../06-ubuntu-pro-client-l10n_37.1ubuntu0~22.04_amd64.deb ...
+Unpacking ubuntu-pro-client-l10n (37.1ubuntu0~22.04) over (35.1ubuntu0~22.04) ...
+Preparing to unpack .../07-ubuntu-pro-client_37.1ubuntu0~22.04_amd64.deb ...
+Unpacking ubuntu-pro-client (37.1ubuntu0~22.04) over (35.1ubuntu0~22.04) ...
+Preparing to unpack .../08-ubuntu-advantage-tools_37.1ubuntu0~22.04_all.deb ...
+Unpacking ubuntu-advantage-tools (37.1ubuntu0~22.04) over (35.1ubuntu0~22.04) ...
+Preparing to unpack .../09-apparmor_3.0.4-2ubuntu2.5_amd64.deb ...
+Unpacking apparmor (3.0.4-2ubuntu2.5) over (3.0.4-2ubuntu2.4) ...
+Preparing to unpack .../10-bind9-dnsutils_1%3a9.18.39-0ubuntu0.22.04.2_amd64.deb ...
+Unpacking bind9-dnsutils (1:9.18.39-0ubuntu0.22.04.2) over (1:9.18.30-0ubuntu0.22.04.2) ...
+Preparing to unpack .../11-bind9-host_1%3a9.18.39-0ubuntu0.22.04.2_amd64.deb ...
+Unpacking bind9-host (1:9.18.39-0ubuntu0.22.04.2) over (1:9.18.30-0ubuntu0.22.04.2) ...
+Preparing to unpack .../12-bind9-libs_1%3a9.18.39-0ubuntu0.22.04.2_amd64.deb ...
+Unpacking bind9-libs:amd64 (1:9.18.39-0ubuntu0.22.04.2) over (1:9.18.30-0ubuntu0.22.04.2) ...
+Preparing to unpack .../13-iputils-tracepath_3%3a20211215-1ubuntu0.1_amd64.deb ...
+Unpacking iputils-tracepath (3:20211215-1ubuntu0.1) over (3:20211215-1) ...
+Preparing to unpack .../14-libpng16-16_1.6.37-3ubuntu0.3_amd64.deb ...
+Unpacking libpng16-16:amd64 (1.6.37-3ubuntu0.3) over (1.6.37-3build5) ...
+Preparing to unpack .../15-powermgmt-base_1.36ubuntu0.22.04.1_all.deb ...
+Unpacking powermgmt-base (1.36ubuntu0.22.04.1) over (1.36) ...
+Preparing to unpack .../16-python3-problem-report_2.20.11-0ubuntu82.10_all.deb ...
+Unpacking python3-problem-report (2.20.11-0ubuntu82.10) over (2.20.11-0ubuntu82.8) ...
+Preparing to unpack .../17-python3-apport_2.20.11-0ubuntu82.10_all.deb ...
+Unpacking python3-apport (2.20.11-0ubuntu82.10) over (2.20.11-0ubuntu82.8) ...
+Preparing to unpack .../18-apport_2.20.11-0ubuntu82.10_all.deb ...
+Unpacking apport (2.20.11-0ubuntu82.10) over (2.20.11-0ubuntu82.8) ...
+Preparing to unpack .../19-libctf0_2.38-4ubuntu2.12_amd64.deb ...
+Unpacking libctf0:amd64 (2.38-4ubuntu2.12) over (2.38-4ubuntu2.8) ...
+Preparing to unpack .../20-libctf-nobfd0_2.38-4ubuntu2.12_amd64.deb ...
+Unpacking libctf-nobfd0:amd64 (2.38-4ubuntu2.12) over (2.38-4ubuntu2.8) ...
+Preparing to unpack .../21-binutils-x86-64-linux-gnu_2.38-4ubuntu2.12_amd64.deb ...
+Unpacking binutils-x86-64-linux-gnu (2.38-4ubuntu2.12) over (2.38-4ubuntu2.8) ...
+Preparing to unpack .../22-libbinutils_2.38-4ubuntu2.12_amd64.deb ...
+Unpacking libbinutils:amd64 (2.38-4ubuntu2.12) over (2.38-4ubuntu2.8) ...
+Preparing to unpack .../23-binutils_2.38-4ubuntu2.12_amd64.deb ...
+Unpacking binutils (2.38-4ubuntu2.12) over (2.38-4ubuntu2.8) ...
+Preparing to unpack .../24-binutils-common_2.38-4ubuntu2.12_amd64.deb ...
+Unpacking binutils-common:amd64 (2.38-4ubuntu2.12) over (2.38-4ubuntu2.8) ...
+Preparing to unpack .../25-libssh-4_0.9.6-2ubuntu0.22.04.5_amd64.deb ...
+Unpacking libssh-4:amd64 (0.9.6-2ubuntu0.22.04.5) over (0.9.6-2ubuntu0.22.04.3) ...
+Preparing to unpack .../26-curl_7.81.0-1ubuntu1.21_amd64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.21) over (7.81.0-1ubuntu1.20) ...
+Preparing to unpack .../27-libcurl4_7.81.0-1ubuntu1.21_amd64.deb ...
+Unpacking libcurl4:amd64 (7.81.0-1ubuntu1.21) over (7.81.0-1ubuntu1.20) ...
+Preparing to unpack .../28-libcurl3-gnutls_7.81.0-1ubuntu1.21_amd64.deb ...
+Unpacking libcurl3-gnutls:amd64 (7.81.0-1ubuntu1.21) over (7.81.0-1ubuntu1.20) ...
+Preparing to unpack .../29-git-man_1%3a2.34.1-1ubuntu1.15_all.deb ...
+Unpacking git-man (1:2.34.1-1ubuntu1.15) over (1:2.34.1-1ubuntu1.12) ...
+Preparing to unpack .../30-git_1%3a2.34.1-1ubuntu1.15_amd64.deb ...
+Unpacking git (1:2.34.1-1ubuntu1.15) over (1:2.34.1-1ubuntu1.12) ...
+Preparing to unpack .../31-klibc-utils_2.0.10-4ubuntu0.2_amd64.deb ...
+Unpacking klibc-utils (2.0.10-4ubuntu0.2) over (2.0.10-4ubuntu0.1) ...
+Preparing to unpack .../32-libklibc_2.0.10-4ubuntu0.2_amd64.deb ...
+Unpacking libklibc:amd64 (2.0.10-4ubuntu0.2) over (2.0.10-4ubuntu0.1) ...
+Preparing to unpack .../33-landscape-common_23.02-0ubuntu1~22.04.7_amd64.deb ...
+Unpacking landscape-common (23.02-0ubuntu1~22.04.7) over (23.02-0ubuntu1~22.04.4) ...
+Preparing to unpack .../34-libsodium23_1.0.18-1ubuntu0.22.04.1_amd64.deb ...
+Unpacking libsodium23:amd64 (1.0.18-1ubuntu0.22.04.1) over (1.0.18-1build2) ...
+Preparing to unpack .../35-libudisks2-0_2.9.4-1ubuntu2.3_amd64.deb ...
+Unpacking libudisks2-0:amd64 (2.9.4-1ubuntu2.3) over (2.9.4-1ubuntu2.2) ...
+Preparing to unpack .../36-libxslt1.1_1.1.34-4ubuntu0.22.04.5_amd64.deb ...
+Unpacking libxslt1.1:amd64 (1.1.34-4ubuntu0.22.04.5) over (1.1.34-4ubuntu0.22.04.4) ...
+Selecting previously unselected package linux-headers-5.15.0-164.
+Preparing to unpack .../37-linux-headers-5.15.0-164_5.15.0-164.174_all.deb ...
+Unpacking linux-headers-5.15.0-164 (5.15.0-164.174) ...
+Selecting previously unselected package linux-headers-5.15.0-164-generic.
+Preparing to unpack .../38-linux-headers-5.15.0-164-generic_5.15.0-164.174_amd64.deb ...
+Unpacking linux-headers-5.15.0-164-generic (5.15.0-164.174) ...
+Selecting previously unselected package linux-modules-5.15.0-164-generic.
+Preparing to unpack .../39-linux-modules-5.15.0-164-generic_5.15.0-164.174_amd64.deb ...
+Unpacking linux-modules-5.15.0-164-generic (5.15.0-164.174) ...
+Selecting previously unselected package linux-image-5.15.0-164-generic.
+Preparing to unpack .../40-linux-image-5.15.0-164-generic_5.15.0-164.174_amd64.deb ...
+Unpacking linux-image-5.15.0-164-generic (5.15.0-164.174) ...
+Preparing to unpack .../41-linux-virtual_5.15.0.164.159_amd64.deb ...
+Unpacking linux-virtual (5.15.0.164.159) over (5.15.0.143.138) ...
+Preparing to unpack .../42-linux-image-virtual_5.15.0.164.159_amd64.deb ...
+Unpacking linux-image-virtual (5.15.0.164.159) over (5.15.0.143.138) ...
+Preparing to unpack .../43-linux-headers-virtual_5.15.0.164.159_amd64.deb ...
+Unpacking linux-headers-virtual (5.15.0.164.159) over (5.15.0.143.138) ...
+Preparing to unpack .../44-linux-headers-generic_5.15.0.164.159_amd64.deb ...
+Unpacking linux-headers-generic (5.15.0.164.159) over (5.15.0.143.138) ...
+Preparing to unpack .../45-needrestart_3.5-5ubuntu2.5_all.deb ...
+Unpacking needrestart (3.5-5ubuntu2.5) over (3.5-5ubuntu2.4) ...
+Preparing to unpack .../46-python3-attr_21.2.0-1ubuntu1_all.deb ...
+Unpacking python3-attr (21.2.0-1ubuntu1) over (21.2.0-1) ...
+Preparing to unpack .../47-python3-urllib3_1.26.5-1~exp1ubuntu0.5_all.deb ...
+Unpacking python3-urllib3 (1.26.5-1~exp1ubuntu0.5) over (1.26.5-1~exp1ubuntu0.3) ...
+Preparing to unpack .../48-snapd_2.73+ubuntu22.04_amd64.deb ...
+Unpacking snapd (2.73+ubuntu22.04) over (2.67.1+22.04) ...
+Preparing to unpack .../49-sosreport_4.9.2-0ubuntu0~22.04.1_amd64.deb ...
+Unpacking sosreport (4.9.2-0ubuntu0~22.04.1) over (4.8.2-0ubuntu0~22.04.2) ...
+Preparing to unpack .../50-systemd-hwe-hwdb_249.11.6_all.deb ...
+Unpacking systemd-hwe-hwdb (249.11.6) over (249.11.5) ...
+Preparing to unpack .../51-cloud-init_25.2-0ubuntu1~22.04.1_all.deb ...
+Unpacking cloud-init (25.2-0ubuntu1~22.04.1) over (25.1.2-0ubuntu0~22.04.2) ...
+Setting up powermgmt-base (1.36ubuntu0.22.04.1) ...
+Setting up python3-attr (21.2.0-1ubuntu1) ...
+Setting up libapparmor1:amd64 (3.0.4-2ubuntu2.5) ...
+Setting up libsodium23:amd64 (1.0.18-1ubuntu0.22.04.1) ...
+Setting up cloud-init (25.2-0ubuntu1~22.04.1) ...
+Installing new version of config file /etc/cloud/templates/sources.list.debian.deb822.tmpl ...
+Setting up python3-problem-report (2.20.11-0ubuntu82.10) ...
+Setting up libglib2.0-0:amd64 (2.72.4-0ubuntu2.7) ...
+No schema files found: doing nothing.
+Setting up distro-info-data (0.52ubuntu0.11) ...
+Setting up libsqlite3-0:amd64 (3.37.2-2ubuntu0.5) ...
+Setting up binutils-common:amd64 (2.38-4ubuntu2.12) ...
+Setting up libctf-nobfd0:amd64 (2.38-4ubuntu2.12) ...
+Setting up systemd (249.11-0ubuntu3.17) ...
+Setting up perl-modules-5.34 (5.34.0-3ubuntu1.5) ...
+Setting up locales (2.35-0ubuntu3.11) ...
+Generating locales (this might take a while)...
+  en_US.UTF-8... done
+Generation complete.
+Setting up apparmor (3.0.4-2ubuntu2.5) ...
+Installing new version of config file /etc/apparmor.d/abstractions/dri-enumerate ...
+Installing new version of config file /etc/apparmor.d/abstractions/opencl-intel ...
+Installing new version of config file /etc/apparmor.d/abstractions/opencl-nvidia ...
+Installing new version of config file /etc/apparmor.d/abstractions/opencl-pocl ...
+Installing new version of config file /etc/apparmor.d/abstractions/vulkan ...
+Installing new version of config file /etc/apparmor.d/nvidia_modprobe ...
+Installing new version of config file /etc/apparmor.d/tunables/global ...
+Reloading AppArmor profiles
+Skipping profile in /etc/apparmor.d/disable: usr.sbin.rsyslogd
+Setting up libklibc:amd64 (2.0.10-4ubuntu0.2) ...
+Setting up libglib2.0-data (2.72.4-0ubuntu2.7) ...
+Setting up gnupg-l10n (2.2.27-3ubuntu2.5) ...
+Setting up libpng16-16:amd64 (1.6.37-3ubuntu0.3) ...
+Setting up systemd-timesyncd (249.11-0ubuntu3.17) ...
+Setting up udev (249.11-0ubuntu3.17) ...
+Setting up libpython3.10-minimal:amd64 (3.10.12-1~22.04.13) ...
+Setting up libssh-4:amd64 (0.9.6-2ubuntu0.22.04.5) ...
+Setting up sosreport (4.9.2-0ubuntu0~22.04.1) ...
+Installing new version of config file /etc/sos/sos.conf ...
+Setting up python3-urllib3 (1.26.5-1~exp1ubuntu0.5) ...
+Setting up systemd-hwe-hwdb (249.11.6) ...
+Setting up python-apt-common (2.4.0ubuntu4.1) ...
+Setting up gpgconf (2.2.27-3ubuntu2.5) ...
+Setting up libcurl4:amd64 (7.81.0-1ubuntu1.21) ...
+Setting up git-man (1:2.34.1-1ubuntu1.15) ...
+Setting up curl (7.81.0-1ubuntu1.21) ...
+Setting up libbinutils:amd64 (2.38-4ubuntu2.12) ...
+Setting up klibc-utils (2.0.10-4ubuntu0.2) ...
+Setting up openssl (3.0.2-0ubuntu1.20) ...
+Setting up iputils-ping (3:20211215-1ubuntu0.1) ...
+Setting up libxml2:amd64 (2.9.13+dfsg-1ubuntu0.10) ...
+Setting up gpg (2.2.27-3ubuntu2.5) ...
+Setting up linux-headers-5.15.0-164 (5.15.0-164.174) ...
+Setting up iputils-tracepath (3:20211215-1ubuntu0.1) ...
+Setting up libudisks2-0:amd64 (2.9.4-1ubuntu2.3) ...
+Setting up gnupg-utils (2.2.27-3ubuntu2.5) ...
+Setting up libctf0:amd64 (2.38-4ubuntu2.12) ...
+Setting up snapd (2.73+ubuntu22.04) ...
+Installing new version of config file /etc/apparmor.d/usr.lib.snapd.snap-confine.real ...
+Installing new version of config file /etc/profile.d/apps-bin-path.sh ...
+snapd.failure.service is a disabled or a static unit not running, not starting it.
+snapd.gpio-chardev-setup.target is a disabled or a static unit not running, not starting it.
+snapd.snap-repair.service is a disabled or a static unit not running, not starting it.
+Setting up systemd-sysv (249.11-0ubuntu3.17) ...
+Setting up libperl5.34:amd64 (5.34.0-3ubuntu1.5) ...
+Setting up gpg-agent (2.2.27-3ubuntu2.5) ...
+Setting up bind9-libs:amd64 (1:9.18.39-0ubuntu0.22.04.2) ...
+Setting up python3-apt (2.4.0ubuntu4.1) ...
+Setting up gpgsm (2.2.27-3ubuntu2.5) ...
+Setting up linux-headers-5.15.0-164-generic (5.15.0-164.174) ...
+Setting up libglib2.0-bin (2.72.4-0ubuntu2.7) ...
+Setting up libnss-systemd:amd64 (249.11-0ubuntu3.17) ...
+Setting up libcurl3-gnutls:amd64 (7.81.0-1ubuntu1.21) ...
+Setting up linux-headers-generic (5.15.0.164.159) ...
+Setting up landscape-common (23.02-0ubuntu1~22.04.7) ...
+Setting up python3.10-minimal (3.10.12-1~22.04.13) ...
+Setting up python3-apport (2.20.11-0ubuntu82.10) ...
+Setting up libpython3.10-stdlib:amd64 (3.10.12-1~22.04.13) ...
+Setting up dirmngr (2.2.27-3ubuntu2.5) ...
+Setting up perl (5.34.0-3ubuntu1.5) ...
+Setting up git (1:2.34.1-1ubuntu1.15) ...
+Setting up gpg-wks-server (2.2.27-3ubuntu2.5) ...
+Setting up open-vm-tools (2:12.3.5-3~ubuntu0.22.04.3) ...
+Setting up libxslt1.1:amd64 (1.1.34-4ubuntu0.22.04.5) ...
+Setting up libpam-systemd:amd64 (249.11-0ubuntu3.17) ...
+Setting up bind9-host (1:9.18.39-0ubuntu0.22.04.2) ...
+Setting up ubuntu-pro-client (37.1ubuntu0~22.04) ...
+Installing new version of config file /etc/apparmor.d/ubuntu_pro_apt_news ...
+Installing new version of config file /etc/apparmor.d/ubuntu_pro_esm_cache ...
+Setting up binutils-x86-64-linux-gnu (2.38-4ubuntu2.12) ...
+Setting up ubuntu-pro-client-l10n (37.1ubuntu0~22.04) ...
+Setting up libpython3.10:amd64 (3.10.12-1~22.04.13) ...
+Setting up python3.10 (3.10.12-1~22.04.13) ...
+Setting up linux-headers-virtual (5.15.0.164.159) ...
+Setting up gpg-wks-client (2.2.27-3ubuntu2.5) ...
+Setting up binutils (2.38-4ubuntu2.12) ...
+Setting up apport (2.20.11-0ubuntu82.10) ...
+apport-autoreport.service is a disabled or a static unit, not starting it.
+Setting up gnupg (2.2.27-3ubuntu2.5) ...
+Setting up ubuntu-advantage-tools (37.1ubuntu0~22.04) ...
+Setting up bind9-dnsutils (1:9.18.39-0ubuntu0.22.04.2) ...
+Setting up needrestart (3.5-5ubuntu2.5) ...
+Setting up linux-image-5.15.0-164-generic (5.15.0-164.174) ...
+I: /boot/vmlinuz is now a symlink to vmlinuz-5.15.0-164-generic
+I: /boot/initrd.img is now a symlink to initrd.img-5.15.0-164-generic
+Setting up linux-image-virtual (5.15.0.164.159) ...
+Setting up linux-modules-5.15.0-164-generic (5.15.0-164.174) ...
+Setting up linux-virtual (5.15.0.164.159) ...
+Processing triggers for dbus (1.12.20-2ubuntu4.1) ...
+Processing triggers for install-info (6.8-4build1) ...
+Processing triggers for initramfs-tools (0.140ubuntu13.5) ...
+update-initramfs: Generating /boot/initrd.img-5.15.0-143-generic
+Processing triggers for libc-bin (2.35-0ubuntu3.11) ...
+Processing triggers for rsyslog (8.2112.0-2ubuntu2.2) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for linux-image-5.15.0-164-generic (5.15.0-164.174) ...
+/etc/kernel/postinst.d/initramfs-tools:
+update-initramfs: Generating /boot/initrd.img-5.15.0-164-generic
+/etc/kernel/postinst.d/zz-update-grub:
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/50-cloudimg-settings.cfg'
+Sourcing file `/etc/default/grub.d/init-select.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-5.15.0-164-generic
+Found initrd image: /boot/initrd.img-5.15.0-164-generic
+Found linux image: /boot/vmlinuz-5.15.0-143-generic
+Found initrd image: /boot/initrd.img-5.15.0-143-generic
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+done
+Scanning processes...
+Scanning candidates...
+Scanning linux images...
+
+Restarting services...
+ systemctl restart cron.service irqbalance.service multipathd.service packagekit.service polkit.service serial-getty@ttyS0.service ssh.service
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart getty@tty1.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+ systemctl restart user@1000.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@gelani-lab-1:~$
+ubuntu@gelani-lab-1:~$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+ubuntu@gelani-lab-1:~$
+ubuntu@gelani-lab-1:~$ sudo apt update && sudo apt upgrade -y
+Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+ubuntu@gelani-lab-1:~$
+ubuntu@gelani-lab-1:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 8942 qdisc fq_codel state UP group default qlen 1000
+    link/ether fa:16:3e:f2:4c:48 brd ff:ff:ff:ff:ff:ff
+    altname enp0s3
+    inet 192.168.95.93/24 metric 100 brd 192.168.95.255 scope global dynamic ens3
+       valid_lft 36909sec preferred_lft 36909sec
+    inet6 fe80::f816:3eff:fef2:4c48/64 scope link
+       valid_lft forever preferred_lft forever
+ubuntu@gelani-lab-1:~$ sudo apt install -y git curl vim net-tools
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+curl is already the newest version (7.81.0-1ubuntu1.21).
+curl set to manually installed.
+git is already the newest version (1:2.34.1-1ubuntu1.15).
+git set to manually installed.
+vim is already the newest version (2:8.2.3995-1ubuntu2.24).
+vim set to manually installed.
+The following NEW packages will be installed:
+  net-tools
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 204 kB of archives.
+After this operation, 819 kB of additional disk space will be used.
+Get:1 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 net-tools amd64 1.60+git20181103.0eebece-1ubuntu5.4 [204 kB]
+Fetched 204 kB in 2s (131 kB/s)
+Selecting previously unselected package net-tools.
+(Reading database ... 94196 files and directories currently installed.)
+Preparing to unpack .../net-tools_1.60+git20181103.0eebece-1ubuntu5.4_amd64.deb ...
+Unpacking net-tools (1.60+git20181103.0eebece-1ubuntu5.4) ...
+Setting up net-tools (1.60+git20181103.0eebece-1ubuntu5.4) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning candidates...
+Scanning linux images...
+
+Restarting services...
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart getty@tty1.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+ systemctl restart user@1000.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@gelani-lab-1:~$ sudo apt update && sudo apt upgrade -y
+Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+ubuntu@gelani-lab-1:~$ sudo reboot
+Connection to 192.168.95.93 closed by remote host.
+Connection to 192.168.95.93 closed. 
+root@KAZI-EMADUZZAMAN-2700:~# ssh ubuntu@192.168.95.93
+ubuntu@192.168.95.93's password:
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-164-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Jan 19 12:49:49 UTC 2026
+
+  System load:  0.2               Processes:             222
+  Usage of /:   4.3% of 48.27GB   Users logged in:       0
+  Memory usage: 0%                IPv4 address for ens3: 192.168.95.93
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+New release '24.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Mon Jan 19 10:59:10 2026 from 192.168.95.86
+ubuntu@gelani-lab-1:~$ sudo useradd -s /bin/bash -d /opt/stack -m stack
+ubuntu@gelani-lab-1:~$ sudo chmod +x /opt/stack
+ubuntu@gelani-lab-1:~$ echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
+stack ALL=(ALL) NOPASSWD: ALL
+ubuntu@gelani-lab-1:~$ sudo -u stack -i
+stack@gelani-lab-1:~$ cd /opt/stack
+stack@gelani-lab-1:~$ git clone https://opendev.org/openstack/devstack
+Cloning into 'devstack'...
+remote: Enumerating objects: 52295, done.
+remote: Counting objects: 100% (31725/31725), done.
+remote: Compressing objects: 100% (10788/10788), done.
+remote: Total 52295 (delta 30947), reused 20937 (delta 20937), pack-reused 20570
+Receiving objects: 100% (52295/52295), 9.86 MiB | 3.31 MiB/s, done.
+Resolving deltas: 100% (37129/37129), done.
+stack@gelani-lab-1:~$ cd devstack
+stack@gelani-lab-1:~/devstack$ cp samples/local.conf .
+stack@gelani-lab-1:~/devstack$ vim local.conf
+stack@gelani-lab-1:~/devstack$ cat local.conf
+# Sample ``local.conf`` for user-configurable variables in ``stack.sh``
+
+# NOTE: Copy this file to the root DevStack directory for it to work properly.
+
+# ``local.conf`` is a user-maintained settings file that is sourced from ``stackrc``.
+# This gives it the ability to override any variables set in ``stackrc``.
+# Also, most of the settings in ``stack.sh`` are written to only be set if no
+# value has already been set; this lets ``local.conf`` effectively override the
+# default values.
+
+# This is a collection of some of the settings we have found to be useful
+# in our DevStack development environments. Additional settings are described
+# in https://docs.openstack.org/devstack/latest/configuration.html#local-conf
+# These should be considered as samples and are unsupported DevStack code.
+
+# The ``localrc`` section replaces the old ``localrc`` configuration file.
+# Note that if ``localrc`` is present it will be used in favor of this section.
+[[local|localrc]]
+
+# Minimal Contents
+# ----------------
+
+# While ``stack.sh`` is happy to run without ``localrc``, devlife is better when
+# there are a few minimal variables set:
+
+# If the ``*_PASSWORD`` variables are not set here you will be prompted to enter
+# values for them by ``stack.sh``and they will be added to ``local.conf``.
+ADMIN_PASSWORD=nomoresecret
+DATABASE_PASSWORD=stackdb
+RABBIT_PASSWORD=stackqueue
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+
+# ``HOST_IP`` and ``HOST_IPV6`` should be set manually for best results if
+# the NIC configuration of the host is unusual, i.e. ``eth1`` has the default
+# route but ``eth0`` is the public interface.  They are auto-detected in
+# ``stack.sh`` but often is indeterminate on later runs due to the IP moving
+# from an Ethernet interface to a bridge on the host. Setting it here also
+# makes it available for ``openrc`` to include when setting ``OS_AUTH_URL``.
+# Neither is set by default.
+#HOST_IP=w.x.y.z
+#HOST_IPV6=2001:db8::7
+
+
+# Logging
+# -------
+
+# By default ``stack.sh`` output only goes to the terminal where it runs.  It can
+# be configured to additionally log to a file by setting ``LOGFILE`` to the full
+# path of the destination log file.  A timestamp will be appended to the given name.
+LOGFILE=$DEST/logs/stack.sh.log
+
+# Old log files are automatically removed after 2 days to keep things neat.  Change
+# the number of days by setting ``LOGDAYS``.
+LOGDAYS=2
+
+# Nova logs will be colorized if ``SYSLOG`` is not set; turn this off by setting
+# ``LOG_COLOR`` false.
+#LOG_COLOR=False
+
+
+# Using milestone-proposed branches
+# ---------------------------------
+
+# Uncomment these to grab the milestone-proposed branches from the
+# repos:
+#CINDER_BRANCH=milestone-proposed
+#GLANCE_BRANCH=milestone-proposed
+#HORIZON_BRANCH=milestone-proposed
+#KEYSTONE_BRANCH=milestone-proposed
+#KEYSTONECLIENT_BRANCH=milestone-proposed
+#NOVA_BRANCH=milestone-proposed
+#NOVACLIENT_BRANCH=milestone-proposed
+#NEUTRON_BRANCH=milestone-proposed
+#SWIFT_BRANCH=milestone-proposed
+
+# Using git versions of clients
+# -----------------------------
+# By default clients are installed from pip.  See LIBS_FROM_GIT in
+# stackrc for details on getting clients from specific branches or
+# revisions.  e.g.
+# LIBS_FROM_GIT="python-ironicclient"
+# IRONICCLIENT_BRANCH=refs/changes/44/2.../1
+
+# Swift
+# -----
+
+# Swift is now used as the back-end for the S3-like object store. Setting the
+# hash value is required and you will be prompted for it if Swift is enabled
+# so just set it to something already:
+SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5c2000f5
+
+# For development purposes the default of 3 replicas is usually not required.
+# Set this to 1 to save some resources:
+SWIFT_REPLICAS=1
+
+# The data for Swift is stored by default in (``$DEST/data/swift``),
+# or (``$DATA_DIR/swift``) if ``DATA_DIR`` has been set, and can be
+# moved by setting ``SWIFT_DATA_DIR``. The directory will be created
+# if it does not exist.
+SWIFT_DATA_DIR=$DEST/data
+stack@gelani-lab-1:~/devstack$
+stack@gelani-lab-1:~/devstack$ vim local.conf
+stack@gelani-lab-1:~/devstack$ cat local.conf
+# Sample ``local.conf`` for user-configurable variables in ``stack.sh``
+
+# NOTE: Copy this file to the root DevStack directory for it to work properly.
+
+# ``local.conf`` is a user-maintained settings file that is sourced from ``stackrc``.
+# This gives it the ability to override any variables set in ``stackrc``.
+# Also, most of the settings in ``stack.sh`` are written to only be set if no
+# value has already been set; this lets ``local.conf`` effectively override the
+# default values.
+
+# This is a collection of some of the settings we have found to be useful
+# in our DevStack development environments. Additional settings are described
+# in https://docs.openstack.org/devstack/latest/configuration.html#local-conf
+# These should be considered as samples and are unsupported DevStack code.
+
+# The ``localrc`` section replaces the old ``localrc`` configuration file.
+# Note that if ``localrc`` is present it will be used in favor of this section.
+[[local|localrc]]
+
+stack@gelani-lab-1:~/devstack$ vim local.conf
+stack@gelani-lab-1:~/devstack$ vim local.conf
+stack@gelani-lab-1:~/devstack$ cat local.conf
+# Sample ``local.conf`` for user-configurable variables in ``stack.sh``
+
+# NOTE: Copy this file to the root DevStack directory for it to work properly.
+
+# ``local.conf`` is a user-maintained settings file that is sourced from ``stackrc``.
+# This gives it the ability to override any variables set in ``stackrc``.
+# Also, most of the settings in ``stack.sh`` are written to only be set if no
+# value has already been set; this lets ``local.conf`` effectively override the
+# default values.
+
+# This is a collection of some of the settings we have found to be useful
+# in our DevStack development environments. Additional settings are described
+# in https://docs.openstack.org/devstack/latest/configuration.html#local-conf
+# These should be considered as samples and are unsupported DevStack code.
+
+# The ``localrc`` section replaces the old ``localrc`` configuration file.
+# Note that if ``localrc`` is present it will be used in favor of this section.
+[[local|localrc]]
+
+# Admin password (use same for simplicity)
+ADMIN_PASSWORD=SuperSecret123
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+
+# Host IP (your VM private IP)
+HOST_IP=192.168.95.93
+
+# Enable core OpenStack services
+enable_service key n-api n-sch n-cond n-cpu placement-api
+enable_service g-api
+enable_service q-svc ovn-controller ovn-northd
+
+# Dashboard
+enable_service horizon
+
+# Orchestration (Heat)
+enable_plugin heat https://opendev.org/openstack/heat
+enable_plugin heat-dashboard https://opendev.org/openstack/heat-dashboard
+
+# Telemetry
+CEILOMETER_BACKENDS=gnocchi
+enable_plugin ceilometer https://opendev.org/openstack/ceilometer
+enable_plugin aodh https://opendev.org/openstack/aodh
+enable_plugin gnocchi https://opendev.org/openstack/gnocchi
+
+# Notifications
+CEILOMETER_NOTIFICATION_TOPICS=notifications,profiler
+
+# Networking (OVN)
+Q_AGENT=ovn
+Q_ML2_PLUGIN_MECHANISM_DRIVERS=ovn
+Q_ML2_PLUGIN_TYPE_DRIVERS=geneve,vlan,flat
+
+# Floating IP network
+PUBLIC_INTERFACE=eth0
+FLOATING_RANGE=192.168.95.200/28
+PUBLIC_NETWORK_GATEWAY=192.168.95.1
+
+# Log all services
+LOGFILE=/opt/stack/logs/stack.sh.log
+LOGDAYS=2
+
+stack@gelani-lab-1:~/devstack$ # after run the script 
+stack@gelani-lab-1:~/devstack$ ./stack.sh
++functions-common:run_process:1683         local name=n-spice-cell1
++functions-common:run_process:1685         time_start run_process
++functions-common:time_start:2409          local name=run_process
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828680278
++functions-common:run_process:1686         is_service_enabled n-spice-cell1
++functions-common:is_service_enabled:2079  return 1
++functions-common:run_process:1689         time_stop run_process
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=run_process
++functions-common:time_stop:2430           start_time=1768828680278
++functions-common:time_stop:2432           [[ -z 1768828680278 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828680430
++functions-common:time_stop:2436           elapsed_time=152
++functions-common:time_stop:2437           total=19014
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=19166
++lib/nova:start_nova_console_proxies:1156  run_process n-sproxy-cell1 '/opt/stack/data/venv/bin/nova-serialproxy --config-file /etc/nova/nova_cell1.conf'
++functions-common:run_process:1677         local service=n-sproxy-cell1
++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/nova-serialproxy --config-file /etc/nova/nova_cell1.conf'
++functions-common:run_process:1679         local group=
++functions-common:run_process:1680         local user=
++functions-common:run_process:1681         local env_vars=
++functions-common:run_process:1683         local name=n-sproxy-cell1
++functions-common:run_process:1685         time_start run_process
++functions-common:time_start:2409          local name=run_process
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828680593
++functions-common:run_process:1686         is_service_enabled n-sproxy-cell1
++functions-common:is_service_enabled:2079  return 1
++functions-common:run_process:1689         time_stop run_process
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=run_process
++functions-common:time_stop:2430           start_time=1768828680593
++functions-common:time_stop:2432           [[ -z 1768828680593 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828680766
++functions-common:time_stop:2436           elapsed_time=173
++functions-common:time_stop:2437           total=19166
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=19339
++lib/nova:start_nova_console_proxies:1160  export PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin
++lib/nova:start_nova_console_proxies:1160  PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin
++lib/nova:start_nova:1205                  start_nova_conductor
++lib/nova:start_nova_conductor:1173        [[ superconductor == \s\i\n\g\l\e\c\o\n\d\u\c\t\o\r ]]
++lib/nova:start_nova_conductor:1179        enable_nova_fleet
++lib/nova:enable_nova_fleet:1164           is_service_enabled n-cond
++functions-common:is_service_enabled:2079  return 0
++lib/nova:enable_nova_fleet:1165           enable_service n-super-cond
+++lib/nova:enable_nova_fleet:1166           seq 1 1
++lib/nova:enable_nova_fleet:1166           for i in $(seq 1 $NOVA_NUM_CELLS)
++lib/nova:enable_nova_fleet:1167           enable_service n-cond-cell1
++lib/nova:start_nova_conductor:1180        is_service_enabled n-super-cond
++functions-common:is_service_enabled:2079  return 0
++lib/nova:start_nova_conductor:1181        run_process n-super-cond '/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf'
++functions-common:run_process:1677         local service=n-super-cond
++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf'
++functions-common:run_process:1679         local group=
++functions-common:run_process:1680         local user=
++functions-common:run_process:1681         local env_vars=
++functions-common:run_process:1683         local name=n-super-cond
++functions-common:run_process:1685         time_start run_process
++functions-common:time_start:2409          local name=run_process
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828681186
++functions-common:run_process:1686         is_service_enabled n-super-cond
++functions-common:is_service_enabled:2079  return 0
++functions-common:run_process:1687         _run_under_systemd n-super-cond '/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf' '' '' ''
++functions-common:_run_under_systemd:1631  local service=n-super-cond
++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf'
++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf'
++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf'
++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf'
++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf =~ sudo ]]
++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf =~ ^/ ]]
++functions-common:_run_under_systemd:1637  local systemd_service=devstack@n-super-cond.service
++functions-common:_run_under_systemd:1638  local group=
++functions-common:_run_under_systemd:1639  local user=stack
++functions-common:_run_under_systemd:1640  [[ -z stack ]]
++functions-common:_run_under_systemd:1643  local env_vars=
++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[n-super-cond] ]]
++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf =~ uwsgi ]]
++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@n-super-cond.service '/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf' '' stack ''
++functions-common:write_user_unit_file:1538  local service=devstack@n-super-cond.service
++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf'
++functions-common:write_user_unit_file:1540  local group=
++functions-common:write_user_unit_file:1541  local user=stack
++functions-common:write_user_unit_file:1542  local env_vars=
++functions-common:write_user_unit_file:1543  local extra=
++functions-common:write_user_unit_file:1544  [[ -n '' ]]
++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@n-super-cond.service
++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@n-super-cond.service Unit Description 'Devstack devstack@n-super-cond.service'
++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@n-super-cond.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@n-super-cond.service Service User stack
++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@n-super-cond.service Service ExecStart '/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf'
++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@n-super-cond.service Service KillMode process
++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@n-super-cond.service Service TimeoutStopSec 300
++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@n-super-cond.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
++functions-common:write_user_unit_file:1557  [[ -n '' ]]
++functions-common:write_user_unit_file:1560  [[ -n '' ]]
++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@n-super-cond.service Install WantedBy multi-user.target
++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@n-super-cond.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@n-super-cond.service → /etc/systemd/system/devstack@n-super-cond.service.
++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@n-super-cond.service
++functions-common:run_process:1689         time_stop run_process
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=run_process
++functions-common:time_stop:2430           start_time=1768828681186
++functions-common:time_stop:2432           [[ -z 1768828681186 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828682701
++functions-common:time_stop:2436           elapsed_time=1515
++functions-common:time_stop:2437           total=19339
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=20854
+++lib/nova:start_nova_conductor:1183        seq 1 1
++lib/nova:start_nova_conductor:1183        for i in $(seq 1 $NOVA_NUM_CELLS)
++lib/nova:start_nova_conductor:1184        is_service_enabled n-cond-cell1
++functions-common:is_service_enabled:2079  return 0
++lib/nova:start_nova_conductor:1185        local conf
+++lib/nova:start_nova_conductor:1186        conductor_conf 1
+++lib/nova:conductor_conf:853               local cell=1
+++lib/nova:conductor_conf:854               echo /etc/nova/nova_cell1.conf
++lib/nova:start_nova_conductor:1186        conf=/etc/nova/nova_cell1.conf
++lib/nova:start_nova_conductor:1187        run_process n-cond-cell1 '/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf'
++functions-common:run_process:1677         local service=n-cond-cell1
++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf'
++functions-common:run_process:1679         local group=
++functions-common:run_process:1680         local user=
++functions-common:run_process:1681         local env_vars=
++functions-common:run_process:1683         local name=n-cond-cell1
++functions-common:run_process:1685         time_start run_process
++functions-common:time_start:2409          local name=run_process
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828682925
++functions-common:run_process:1686         is_service_enabled n-cond-cell1
++functions-common:is_service_enabled:2079  return 0
++functions-common:run_process:1687         _run_under_systemd n-cond-cell1 '/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf' '' '' ''
++functions-common:_run_under_systemd:1631  local service=n-cond-cell1
++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf'
++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf'
++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf'
++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf'
++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf =~ sudo ]]
++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf =~ ^/ ]]
++functions-common:_run_under_systemd:1637  local systemd_service=devstack@n-cond-cell1.service
++functions-common:_run_under_systemd:1638  local group=
++functions-common:_run_under_systemd:1639  local user=stack
++functions-common:_run_under_systemd:1640  [[ -z stack ]]
++functions-common:_run_under_systemd:1643  local env_vars=
++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[n-cond-cell1] ]]
++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf =~ uwsgi ]]
++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@n-cond-cell1.service '/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf' '' stack ''
++functions-common:write_user_unit_file:1538  local service=devstack@n-cond-cell1.service
++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf'
++functions-common:write_user_unit_file:1540  local group=
++functions-common:write_user_unit_file:1541  local user=stack
++functions-common:write_user_unit_file:1542  local env_vars=
++functions-common:write_user_unit_file:1543  local extra=
++functions-common:write_user_unit_file:1544  [[ -n '' ]]
++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@n-cond-cell1.service
++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@n-cond-cell1.service Unit Description 'Devstack devstack@n-cond-cell1.service'
++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@n-cond-cell1.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@n-cond-cell1.service Service User stack
++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@n-cond-cell1.service Service ExecStart '/opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf'
++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@n-cond-cell1.service Service KillMode process
++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@n-cond-cell1.service Service TimeoutStopSec 300
++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@n-cond-cell1.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
++functions-common:write_user_unit_file:1557  [[ -n '' ]]
++functions-common:write_user_unit_file:1560  [[ -n '' ]]
++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@n-cond-cell1.service Install WantedBy multi-user.target
++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@n-cond-cell1.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@n-cond-cell1.service → /etc/systemd/system/devstack@n-cond-cell1.service.
++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@n-cond-cell1.service
++functions-common:run_process:1689         time_stop run_process
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=run_process
++functions-common:time_stop:2430           start_time=1768828682925
++functions-common:time_stop:2432           [[ -z 1768828682925 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828684404
++functions-common:time_stop:2436           elapsed_time=1479
++functions-common:time_stop:2437           total=20854
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=22333
++lib/nova:start_nova:1206                  start_nova_compute
++lib/nova:start_nova_compute:1021          local old_path=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin
++lib/nova:start_nova_compute:1022          export PATH=/opt/stack/data/venv/bin:/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin
++lib/nova:start_nova_compute:1022          PATH=/opt/stack/data/venv/bin:/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin
++lib/nova:start_nova_compute:1024          local compute_cell_conf=/etc/nova/nova.conf
++lib/nova:start_nova_compute:1027          cp /etc/nova/nova.conf /etc/nova/nova-cpu.conf
++lib/nova:start_nova_compute:1029          merge_config_file /opt/stack/devstack/local.conf post-config '$NOVA_CPU_CONF'
++inc/meta-config:merge_config_file:83      local file=/opt/stack/devstack/local.conf
++inc/meta-config:merge_config_file:84      local matchgroup=post-config
++inc/meta-config:merge_config_file:85      local 'configfile=$NOVA_CPU_CONF'
++inc/meta-config:merge_config_file:90      local real_configfile
+++inc/meta-config:merge_config_file:91      eval echo '$NOVA_CPU_CONF'
++++inc/meta-config:merge_config_file:91      echo /etc/nova/nova-cpu.conf
++inc/meta-config:merge_config_file:91      real_configfile=/etc/nova/nova-cpu.conf
++inc/meta-config:merge_config_file:92      '[' '!' -f /etc/nova/nova-cpu.conf ']'
++inc/meta-config:merge_config_file:96      get_meta_section /opt/stack/devstack/local.conf post-config '$NOVA_CPU_CONF'
++inc/meta-config:merge_config_file:97      awk -v 'configfile=$NOVA_CPU_CONF' '
+        BEGIN {
+            section = ""
+            last_section = ""
+            section_count = 0
+        }
+        /^\[.+\]/ {
+            gsub("[][]", "", $1);
+            section=$1
+            next
+        }
+        /^ *\#/ {
+            next
+        }
+        /^[^ \t]+/ {
+            # get offset of first = in $0
+            eq_idx = index($0, "=")
+            # extract attr & value from $0
+            attr = substr($0, 1, eq_idx - 1)
+            value = substr($0, eq_idx + 1)
+            # only need to strip trailing whitespace from attr
+            sub(/[ \t]*$/, "", attr)
+            # need to strip leading & trailing whitespace from value
+            sub(/^[ \t]*/, "", value)
+            sub(/[ \t]*$/, "", value)
+
+            # cfg_attr_count: number of config lines per [section, attr]
+            # cfg_attr: three dimensional array to keep all the config lines per [section, attr]
+            # cfg_section: keep the section names in the same order as they appear in local.conf
+            # cfg_sec_attr_name: keep the attr names in the same order as they appear in local.conf
+            if (! (section, attr) in cfg_attr_count) {
+                if (section != last_section) {
+                    cfg_section[section_count++] = section
+                    last_section = section
+                }
+                attr_count = cfg_sec_attr_count[section_count - 1]++
+                cfg_sec_attr_name[section_count - 1, attr_count] = attr
+
+                cfg_attr[section, attr, 0] = value
+                cfg_attr_count[section, attr] = 1
+            } else {
+                lno = cfg_attr_count[section, attr]++
+                cfg_attr[section, attr, lno] = value
+            }
+        }
+        END {
+            # Process each section in order
+            for (sno = 0; sno < section_count; sno++) {
+                section = cfg_section[sno]
+                # The ini routines simply append a config item immediately
+                # after the section header. To keep the same order as defined
+                # in local.conf, invoke the ini routines in the reverse order
+                for (attr_no = cfg_sec_attr_count[sno] - 1; attr_no >=0; attr_no--) {
+                    attr = cfg_sec_attr_name[sno, attr_no]
+                    if (cfg_attr_count[section, attr] == 1)
+                        print "iniset " configfile " " section " " attr " \"" cfg_attr[section, attr, 0] "\""
+                    else {
+                        # For multiline, invoke the ini routines in the reverse order
+                        count = cfg_attr_count[section, attr]
+                        print "inidelete " configfile " " section " " attr
+                        print "iniset " configfile " " section " " attr " \"" cfg_attr[section, attr, count - 1] "\""
+                        for (l = count -2; l >= 0; l--)
+                            print "iniadd_literal " configfile " " section " " attr " \"" cfg_attr[section, attr, l] "\""
+                    }
+                }
+            }
+        }
+    '
++inc/meta-config:merge_config_file:164     read a
+awk: cmd. line:12: warning: regexp escape sequence `\#' is not a known regexp operator
++inc/meta-config:get_meta_section:33       local file=/opt/stack/devstack/local.conf
++inc/meta-config:get_meta_section:34       local matchgroup=post-config
++inc/meta-config:get_meta_section:35       local 'configfile=$NOVA_CPU_CONF'
++inc/meta-config:get_meta_section:37       [[ -r /opt/stack/devstack/local.conf ]]
++inc/meta-config:get_meta_section:38       [[ -z $NOVA_CPU_CONF ]]
++inc/meta-config:get_meta_section:40       awk -v matchgroup=post-config -v 'configfile=$NOVA_CPU_CONF' '
+        BEGIN { group = "" }
+        /^\[\[.+\|.*\]\]/ {
+            gsub("[][]", "", $1);
+            split($1, a, "|");
+            if (a[1] == matchgroup && a[2] == configfile) {
+                group=a[1]
+            } else {
+                group=""
+            }
+            next
+        }
+        {
+            if (group != "")
+                print $0
+        }
+    ' /opt/stack/devstack/local.conf
++lib/nova:start_nova_compute:1031          [[ superconductor == \s\i\n\g\l\e\c\o\n\d\u\c\t\o\r ]]
++lib/nova:start_nova_compute:1038          iniset /etc/nova/nova-cpu.conf workarounds disable_group_policy_check_upcall True
++lib/nova:start_nova_compute:1041          iniset /etc/nova/nova-cpu.conf filter_scheduler track_instance_changes False
++lib/nova:start_nova_compute:1042          iniset_rpc_backend nova /etc/nova/nova-cpu.conf DEFAULT nova_cell1
++lib/rpc_backend:iniset_rpc_backend:144    local package=nova
++lib/rpc_backend:iniset_rpc_backend:145    local file=/etc/nova/nova-cpu.conf
++lib/rpc_backend:iniset_rpc_backend:146    local section=DEFAULT
++lib/rpc_backend:iniset_rpc_backend:147    local virtual_host=nova_cell1
++lib/rpc_backend:iniset_rpc_backend:148    is_service_enabled rabbit
++functions-common:is_service_enabled:2079  return 0
+++lib/rpc_backend:iniset_rpc_backend:149    get_transport_url nova_cell1
+++lib/rpc_backend:get_transport_url:126     local virtual_host=nova_cell1
+++lib/rpc_backend:get_transport_url:127     is_service_enabled rabbit
+++functions-common:is_service_enabled:2079  return 0
+++lib/rpc_backend:get_transport_url:128     echo rabbit://stackrabbit:SuperSecret123@192.168.95.93:5672/nova_cell1
++lib/rpc_backend:iniset_rpc_backend:149    iniset /etc/nova/nova-cpu.conf DEFAULT transport_url rabbit://stackrabbit:SuperSecret123@192.168.95.93:5672/nova_cell1
++lib/rpc_backend:iniset_rpc_backend:150    '[' -n '' ']'
++lib/rpc_backend:iniset_rpc_backend:153    '[' -n '' ']'
++lib/nova:start_nova_compute:1046          inidelete /etc/nova/nova-cpu.conf database connection
++lib/nova:start_nova_compute:1047          inidelete /etc/nova/nova-cpu.conf api_database connection
++lib/nova:start_nova_compute:1052          configure_console_compute
++lib/nova:configure_console_compute:689    local offset
++lib/nova:configure_console_compute:690    offset=0
++lib/nova:configure_console_compute:694    local default_proxyclient_addr
+++lib/nova:configure_console_compute:695    iniget /etc/nova/nova-cpu.conf DEFAULT my_ip
++lib/nova:configure_console_compute:695    default_proxyclient_addr=192.168.95.93
++lib/nova:configure_console_compute:699    is_service_enabled n-cpu
++functions-common:is_service_enabled:2079  return 0
++lib/nova:configure_console_compute:700    '[' False == True ']'
++lib/nova:configure_console_compute:703    vercmp v1.3.0 '<' 1.0.0
++functions:vercmp:640                      local v1=v1.3.0
++functions:vercmp:641                      local 'op=<'
++functions:vercmp:642                      local v2=1.0.0
++functions:vercmp:643                      local result
+++functions:vercmp:647                      sort -V
+++functions:vercmp:647                      head -1
+++functions:vercmp:647                      echo -e 'v1.3.0\n1.0.0'
++functions:vercmp:647                      result=1.0.0
++functions:vercmp:649                      case $op in
++functions:vercmp:659                      '[' v1.3.0 '!=' 1.0.0 ']'
++functions:vercmp:659                      '[' 1.0.0 = v1.3.0 ']'
++functions:vercmp:660                      return
++lib/nova:configure_console_compute:708    NOVNCPROXY_URL=http://192.168.95.93:6080/vnc_lite.html
++lib/nova:configure_console_compute:710    iniset /etc/nova/nova-cpu.conf vnc novncproxy_base_url http://192.168.95.93:6080/vnc_lite.html
++lib/nova:configure_console_compute:711    SPICEHTML5PROXY_URL=http://192.168.95.93:6081/spice_auto.html
++lib/nova:configure_console_compute:712    iniset /etc/nova/nova-cpu.conf spice html5proxy_base_url http://192.168.95.93:6081/spice_auto.html
++lib/nova:configure_console_compute:715    is_service_enabled n-novnc
++functions-common:is_service_enabled:2079  return 0
++lib/nova:configure_console_compute:718    VNCSERVER_LISTEN=0.0.0.0
++lib/nova:configure_console_compute:719    VNCSERVER_PROXYCLIENT_ADDRESS=192.168.95.93
++lib/nova:configure_console_compute:720    iniset /etc/nova/nova-cpu.conf vnc server_listen 0.0.0.0
++lib/nova:configure_console_compute:721    iniset /etc/nova/nova-cpu.conf vnc server_proxyclient_address 192.168.95.93
++lib/nova:configure_console_compute:726    is_service_enabled n-spice
++functions-common:is_service_enabled:2079  return 1
++lib/nova:configure_console_compute:726    '[' False '!=' False ']'
++lib/nova:configure_console_compute:736    is_service_enabled n-sproxy
++functions-common:is_service_enabled:2079  return 1
++lib/nova:configure_console_compute:736    '[' False '!=' False ']'
++lib/nova:start_nova_compute:1056          iniset /etc/nova/nova-cpu.conf DEFAULT reimage_timeout_per_gb 180
++lib/nova:start_nova_compute:1059          '[' -n 127.0.0.1 ']'
++lib/nova:start_nova_compute:1060          iniset /etc/nova/nova-cpu.conf os_vif_ovs ovsdb_connection tcp:127.0.0.1:6640
++lib/nova:start_nova_compute:1064          [[ libvirt == \l\i\b\v\i\r\t ]]
++lib/nova:start_nova_compute:1064          [[ kvm == \q\e\m\u ]]
++lib/nova:start_nova_compute:1068          [[ -n '' ]]
++lib/nova:start_nova_compute:1072          [[ libvirt = \l\i\b\v\i\r\t ]]
++lib/nova:start_nova_compute:1073          '[' 0 -gt 0 ']'
++lib/nova:start_nova_compute:1079          run_process n-cpu '/opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf' libvirt
++functions-common:run_process:1677         local service=n-cpu
++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf'
++functions-common:run_process:1679         local group=libvirt
++functions-common:run_process:1680         local user=
++functions-common:run_process:1681         local env_vars=
++functions-common:run_process:1683         local name=n-cpu
++functions-common:run_process:1685         time_start run_process
++functions-common:time_start:2409          local name=run_process
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828685729
++functions-common:run_process:1686         is_service_enabled n-cpu
++functions-common:is_service_enabled:2079  return 0
++functions-common:run_process:1687         _run_under_systemd n-cpu '/opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf' libvirt '' ''
++functions-common:_run_under_systemd:1631  local service=n-cpu
++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf'
++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf'
++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf'
++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf'
++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf =~ sudo ]]
++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf =~ ^/ ]]
++functions-common:_run_under_systemd:1637  local systemd_service=devstack@n-cpu.service
++functions-common:_run_under_systemd:1638  local group=libvirt
++functions-common:_run_under_systemd:1639  local user=stack
++functions-common:_run_under_systemd:1640  [[ -z stack ]]
++functions-common:_run_under_systemd:1643  local env_vars=
++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[n-cpu] ]]
++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf =~ uwsgi ]]
++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@n-cpu.service '/opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf' libvirt stack ''
++functions-common:write_user_unit_file:1538  local service=devstack@n-cpu.service
++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf'
++functions-common:write_user_unit_file:1540  local group=libvirt
++functions-common:write_user_unit_file:1541  local user=stack
++functions-common:write_user_unit_file:1542  local env_vars=
++functions-common:write_user_unit_file:1543  local extra=
++functions-common:write_user_unit_file:1544  [[ -n libvirt ]]
++functions-common:write_user_unit_file:1545  extra=Group=libvirt
++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@n-cpu.service
++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@n-cpu.service Unit Description 'Devstack devstack@n-cpu.service'
++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@n-cpu.service Service Environment '"PATH=/opt/stack/data/venv/bin:/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@n-cpu.service Service User stack
++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@n-cpu.service Service ExecStart '/opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf'
++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@n-cpu.service Service KillMode process
++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@n-cpu.service Service TimeoutStopSec 300
++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@n-cpu.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
++functions-common:write_user_unit_file:1557  [[ -n '' ]]
++functions-common:write_user_unit_file:1560  [[ -n libvirt ]]
++functions-common:write_user_unit_file:1561  iniset -sudo /etc/systemd/system/devstack@n-cpu.service Service Group libvirt
++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@n-cpu.service Install WantedBy multi-user.target
++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@n-cpu.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@n-cpu.service → /etc/systemd/system/devstack@n-cpu.service.
++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@n-cpu.service
++functions-common:run_process:1689         time_stop run_process
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=run_process
++functions-common:time_stop:2430           start_time=1768828685729
++functions-common:time_stop:2432           [[ -z 1768828685729 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828687212
++functions-common:time_stop:2436           elapsed_time=1483
++functions-common:time_stop:2437           total=22333
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=23816
++lib/nova:start_nova_compute:1110          export PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin
++lib/nova:start_nova_compute:1110          PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin
++lib/nova:start_nova:1207                  is_service_enabled n-api
++functions-common:is_service_enabled:2079  return 0
++lib/nova:start_nova:1209                  echo 'Dumping cells_v2 mapping'
+Dumping cells_v2 mapping
++lib/nova:start_nova:1210                  /opt/stack/data/venv/bin/nova-manage cell_v2 list_cells --verbose
+INFO dbcounter [None req-137591f0-cec8-4060-ba3e-47a98051ba27 None None] Registered counter for database nova_api
+DEBUG dbcounter [-] [125390] Writer thread running {{(pid=125390) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:102}}
++-------+--------------------------------------+-------------------------------------------------------------------+----------------------------------------------------------------------------------------+----------+
+|  Name |                 UUID                 |                           Transport URL                           |                                  Database Connection                                   | Disabled |
++-------+--------------------------------------+-------------------------------------------------------------------+----------------------------------------------------------------------------------------+----------+
+| cell0 | 00000000-0000-0000-0000-000000000000 |                              none:///                             | mysql+pymysql://root:SuperSecret123@127.0.0.1/nova_cell0?charset=utf8&plugin=dbcounter |  False   |
+| cell1 | 98f33c17-3763-4716-b1c3-d1033622122b | rabbit://stackrabbit:SuperSecret123@192.168.95.93:5672/nova_cell1 | mysql+pymysql://root:SuperSecret123@127.0.0.1/nova_cell1?charset=utf8&plugin=dbcounter |  False   |
++-------+--------------------------------------+-------------------------------------------------------------------+----------------------------------------------------------------------------------------+----------+
++./stack.sh:main:1330                      async_runfunc create_flavors
++inc/async:async_runfunc:116               async_run create_flavors create_flavors
++inc/async:async_inner:63                  create_flavors
+[1120 Async create_flavors:125463]: running: create_flavors
++./stack.sh:main:1332                      is_service_enabled cinder
++functions-common:is_service_enabled:2079  return 0
++./stack.sh:main:1333                      echo_summary 'Starting Cinder'
++./stack.sh:echo_summary:438               [[ -t 3 ]]
++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
++./stack.sh:echo_summary:444               echo -e Starting Cinder
++./stack.sh:main:1334                      start_cinder
++lib/cinder:start_cinder:614               local service_port=8776
++lib/cinder:start_cinder:615               local service_protocol=http
++lib/cinder:start_cinder:616               local cinder_url
++lib/cinder:start_cinder:617               '[' lioadm = tgtadm ']'
++lib/cinder:start_cinder:632               [[ key,n-api,n-cpu,n-cond,n-sch,n-novnc,n-api-meta,placement-api,placement-client,g-api,c-sch,c-api,c-vol,ovn-controller,ovn-northd,ovs-vswitchd,ovsdb-server,q-svc,q-ovn-agent,horizon,rabbit,tempest,mysql,etcd3,dstat,h-eng,h-api,h-api-cfn,heat-dashboard,ceilometer-acompute,ceilometer-acentral,ceilometer-anotification,gnocchi-api,gnocchi-metricd,aodh-api,aodh-notifier,aodh-evaluator,aodh-listener,neutron-api,neutron-rpc-server,neutron-periodic-workers,neutron-ovn-maintenance-worker,n-novnc-cell1,n-super-cond,n-cond-cell1 =~ c-api ]]
+++lib/cinder:start_cinder:633               which uwsgi
++lib/cinder:start_cinder:633               run_process c-api '/bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini'
++functions-common:run_process:1677         local service=c-api
++functions-common:run_process:1678         local 'command=/bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini'
++functions-common:run_process:1679         local group=
++functions-common:run_process:1680         local user=
++functions-common:run_process:1681         local env_vars=
++functions-common:run_process:1683         local name=c-api
++functions-common:run_process:1685         time_start run_process
++functions-common:time_start:2409          local name=run_process
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828689605
++functions-common:run_process:1686         is_service_enabled c-api
++functions-common:is_service_enabled:2079  return 0
++functions-common:run_process:1687         _run_under_systemd c-api '/bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini' '' '' ''
++functions-common:_run_under_systemd:1631  local service=c-api
++functions-common:_run_under_systemd:1632  local 'command=/bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini'
++functions-common:_run_under_systemd:1633  local 'cmd=/bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini'
++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini'
++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini'
++functions-common:_common_systemd_pitfalls:1606  [[ /bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini =~ sudo ]]
++functions-common:_common_systemd_pitfalls:1617  [[ ! /bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini =~ ^/ ]]
++functions-common:_run_under_systemd:1637  local systemd_service=devstack@c-api.service
++functions-common:_run_under_systemd:1638  local group=
++functions-common:_run_under_systemd:1639  local user=stack
++functions-common:_run_under_systemd:1640  [[ -z stack ]]
++functions-common:_run_under_systemd:1643  local env_vars=
++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[c-api] ]]
++functions-common:_run_under_systemd:1647  [[ /bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini =~ uwsgi ]]
++functions-common:_run_under_systemd:1648  [[ True == \T\r\u\e ]]
++functions-common:_run_under_systemd:1649  cmd='/bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini --venv /opt/stack/data/venv'
++functions-common:_run_under_systemd:1651  write_uwsgi_user_unit_file devstack@c-api.service '/bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini --venv /opt/stack/data/venv' '' stack ''
++functions-common:write_uwsgi_user_unit_file:1570  local service=devstack@c-api.service
++functions-common:write_uwsgi_user_unit_file:1571  local 'command=/bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini --venv /opt/stack/data/venv'
++functions-common:write_uwsgi_user_unit_file:1572  local group=
++functions-common:write_uwsgi_user_unit_file:1573  local user=stack
++functions-common:write_uwsgi_user_unit_file:1574  local env_vars=
++functions-common:write_uwsgi_user_unit_file:1575  local unitfile=/etc/systemd/system/devstack@c-api.service
++functions-common:write_uwsgi_user_unit_file:1576  mkdir -p /etc/systemd/system
++functions-common:write_uwsgi_user_unit_file:1578  iniset -sudo /etc/systemd/system/devstack@c-api.service Unit Description 'Devstack devstack@c-api.service'
++functions-common:write_uwsgi_user_unit_file:1579  iniset -sudo /etc/systemd/system/devstack@c-api.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
++functions-common:write_uwsgi_user_unit_file:1580  iniset -sudo /etc/systemd/system/devstack@c-api.service Service SyslogIdentifier devstack@c-api.service
++functions-common:write_uwsgi_user_unit_file:1581  iniset -sudo /etc/systemd/system/devstack@c-api.service Service User stack
++functions-common:write_uwsgi_user_unit_file:1582  iniset -sudo /etc/systemd/system/devstack@c-api.service Service ExecStart '/bin/uwsgi --procname-prefix cinder-api --ini /etc/cinder/cinder-api-uwsgi.ini --venv /opt/stack/data/venv'
++functions-common:write_uwsgi_user_unit_file:1583  iniset -sudo /etc/systemd/system/devstack@c-api.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
++functions-common:write_uwsgi_user_unit_file:1584  iniset -sudo /etc/systemd/system/devstack@c-api.service Service Type notify
++functions-common:write_uwsgi_user_unit_file:1585  iniset -sudo /etc/systemd/system/devstack@c-api.service Service KillMode process
++functions-common:write_uwsgi_user_unit_file:1586  iniset -sudo /etc/systemd/system/devstack@c-api.service Service Restart always
++functions-common:write_uwsgi_user_unit_file:1587  iniset -sudo /etc/systemd/system/devstack@c-api.service Service NotifyAccess all
++functions-common:write_uwsgi_user_unit_file:1588  iniset -sudo /etc/systemd/system/devstack@c-api.service Service RestartForceExitStatus 100
++functions-common:write_uwsgi_user_unit_file:1590  [[ -n '' ]]
++functions-common:write_uwsgi_user_unit_file:1593  [[ -n '' ]]
++functions-common:write_uwsgi_user_unit_file:1596  iniset -sudo /etc/systemd/system/devstack@c-api.service Install WantedBy multi-user.target
++functions-common:write_uwsgi_user_unit_file:1599  sudo systemctl daemon-reload
++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@c-api.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@c-api.service → /etc/systemd/system/devstack@c-api.service.
++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@c-api.service
++functions-common:run_process:1689         time_stop run_process
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=run_process
++functions-common:time_stop:2430           start_time=1768828689605
++functions-common:time_stop:2432           [[ -z 1768828689605 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828691387
++functions-common:time_stop:2436           elapsed_time=1782
++functions-common:time_stop:2437           total=23816
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=25598
++lib/cinder:start_cinder:634               cinder_url=http://192.168.95.93/volume/v3
++lib/cinder:start_cinder:637               echo 'Waiting for Cinder API to start...'
+Waiting for Cinder API to start...
++lib/cinder:start_cinder:638               wait_for_service 60 http://192.168.95.93/volume/v3
++functions:wait_for_service:469            local timeout=60
++functions:wait_for_service:470            local url=http://192.168.95.93/volume/v3
++functions:wait_for_service:471            local rval=0
++functions:wait_for_service:472            time_start wait_for_service
++functions-common:time_start:2409          local name=wait_for_service
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828691526
++functions:wait_for_service:473            timeout 60 bash -x
+++::                                        curl -g -k --noproxy '*' -s -o /dev/null -w '%{http_code}' http://192.168.95.93/volume/v3
++::                                        [[ 401 == 503 ]]
++::                                        [[ 0 -eq 7 ]]
++functions:wait_for_service:478            time_stop wait_for_service
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=wait_for_service
++functions-common:time_stop:2430           start_time=1768828691526
++functions-common:time_stop:2432           [[ -z 1768828691526 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828693224
++functions-common:time_stop:2436           elapsed_time=1698
++functions-common:time_stop:2437           total=6743
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=8441
++functions:wait_for_service:479            return 0
++lib/cinder:start_cinder:642               run_process c-sch '/opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf'
++functions-common:run_process:1677         local service=c-sch
++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf'
++functions-common:run_process:1679         local group=
++functions-common:run_process:1680         local user=
++functions-common:run_process:1681         local env_vars=
++functions-common:run_process:1683         local name=c-sch
++functions-common:run_process:1685         time_start run_process
++functions-common:time_start:2409          local name=run_process
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828693369
++functions-common:run_process:1686         is_service_enabled c-sch
++functions-common:is_service_enabled:2079  return 0
++functions-common:run_process:1687         _run_under_systemd c-sch '/opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf' '' '' ''
++functions-common:_run_under_systemd:1631  local service=c-sch
++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf'
++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf'
++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf'
++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf'
++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf =~ sudo ]]
++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf =~ ^/ ]]
++functions-common:_run_under_systemd:1637  local systemd_service=devstack@c-sch.service
++functions-common:_run_under_systemd:1638  local group=
++functions-common:_run_under_systemd:1639  local user=stack
++functions-common:_run_under_systemd:1640  [[ -z stack ]]
++functions-common:_run_under_systemd:1643  local env_vars=
++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[c-sch] ]]
++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf =~ uwsgi ]]
++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@c-sch.service '/opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf' '' stack ''
++functions-common:write_user_unit_file:1538  local service=devstack@c-sch.service
++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf'
++functions-common:write_user_unit_file:1540  local group=
++functions-common:write_user_unit_file:1541  local user=stack
++functions-common:write_user_unit_file:1542  local env_vars=
++functions-common:write_user_unit_file:1543  local extra=
++functions-common:write_user_unit_file:1544  [[ -n '' ]]
++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@c-sch.service
++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@c-sch.service Unit Description 'Devstack devstack@c-sch.service'
++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@c-sch.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@c-sch.service Service User stack
++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@c-sch.service Service ExecStart '/opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf'
++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@c-sch.service Service KillMode process
++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@c-sch.service Service TimeoutStopSec 300
++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@c-sch.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
++functions-common:write_user_unit_file:1557  [[ -n '' ]]
++functions-common:write_user_unit_file:1560  [[ -n '' ]]
++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@c-sch.service Install WantedBy multi-user.target
++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@c-sch.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@c-sch.service → /etc/systemd/system/devstack@c-sch.service.
++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@c-sch.service
++functions-common:run_process:1689         time_stop run_process
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=run_process
++functions-common:time_stop:2430           start_time=1768828693369
++functions-common:time_stop:2432           [[ -z 1768828693369 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828694946
++functions-common:time_stop:2436           elapsed_time=1577
++functions-common:time_stop:2437           total=25598
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=27175
++lib/cinder:start_cinder:647               malloc_tuning='MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
++lib/cinder:start_cinder:648               run_process c-bak '/opt/stack/data/venv/bin/cinder-backup --config-file /etc/cinder/cinder.conf' '' '' 'MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
++functions-common:run_process:1677         local service=c-bak
++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/cinder-backup --config-file /etc/cinder/cinder.conf'
++functions-common:run_process:1679         local group=
++functions-common:run_process:1680         local user=
++functions-common:run_process:1681         local 'env_vars=MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
++functions-common:run_process:1683         local name=c-bak
++functions-common:run_process:1685         time_start run_process
++functions-common:time_start:2409          local name=run_process
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828695084
++functions-common:run_process:1686         is_service_enabled c-bak
++functions-common:is_service_enabled:2079  return 1
++functions-common:run_process:1689         time_stop run_process
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=run_process
++functions-common:time_stop:2430           start_time=1768828695084
++functions-common:time_stop:2432           [[ -z 1768828695084 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828695217
++functions-common:time_stop:2436           elapsed_time=133
++functions-common:time_stop:2437           total=27175
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=27308
++lib/cinder:start_cinder:649               run_process c-vol '/opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf' '' '' 'MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
++functions-common:run_process:1677         local service=c-vol
++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf'
++functions-common:run_process:1679         local group=
++functions-common:run_process:1680         local user=
++functions-common:run_process:1681         local 'env_vars=MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
++functions-common:run_process:1683         local name=c-vol
++functions-common:run_process:1685         time_start run_process
++functions-common:time_start:2409          local name=run_process
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828695343
++functions-common:run_process:1686         is_service_enabled c-vol
++functions-common:is_service_enabled:2079  return 0
++functions-common:run_process:1687         _run_under_systemd c-vol '/opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf' '' '' 'MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
++functions-common:_run_under_systemd:1631  local service=c-vol
++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf'
++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf'
++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf'
++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf'
++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf =~ sudo ]]
++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf =~ ^/ ]]
++functions-common:_run_under_systemd:1637  local systemd_service=devstack@c-vol.service
++functions-common:_run_under_systemd:1638  local group=
++functions-common:_run_under_systemd:1639  local user=stack
++functions-common:_run_under_systemd:1640  [[ -z stack ]]
++functions-common:_run_under_systemd:1643  local 'env_vars=MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[c-vol] ]]
++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf =~ uwsgi ]]
++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@c-vol.service '/opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf' '' stack 'MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
++functions-common:write_user_unit_file:1538  local service=devstack@c-vol.service
++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf'
++functions-common:write_user_unit_file:1540  local group=
++functions-common:write_user_unit_file:1541  local user=stack
++functions-common:write_user_unit_file:1542  local 'env_vars=MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
++functions-common:write_user_unit_file:1543  local extra=
++functions-common:write_user_unit_file:1544  [[ -n '' ]]
++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@c-vol.service
++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@c-vol.service Unit Description 'Devstack devstack@c-vol.service'
++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@c-vol.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@c-vol.service Service User stack
++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@c-vol.service Service ExecStart '/opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf'
++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@c-vol.service Service KillMode process
++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@c-vol.service Service TimeoutStopSec 300
++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@c-vol.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
++functions-common:write_user_unit_file:1557  [[ -n MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144 ]]
++functions-common:write_user_unit_file:1558  iniset -sudo /etc/systemd/system/devstack@c-vol.service Service Environment 'MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
++functions-common:write_user_unit_file:1560  [[ -n '' ]]
++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@c-vol.service Install WantedBy multi-user.target
++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@c-vol.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@c-vol.service → /etc/systemd/system/devstack@c-vol.service.
++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@c-vol.service
++functions-common:run_process:1689         time_stop run_process
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=run_process
++functions-common:time_stop:2430           start_time=1768828695343
++functions-common:time_stop:2432           [[ -z 1768828695343 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828696915
++functions-common:time_stop:2436           elapsed_time=1572
++functions-common:time_stop:2437           total=27308
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=28880
++./stack.sh:main:1335                      create_volume_types
++lib/cinder:create_volume_types:684        is_service_enabled c-api
++functions-common:is_service_enabled:2079  return 0
++lib/cinder:create_volume_types:684        [[ -n lvm:lvmdriver-1 ]]
++lib/cinder:create_volume_types:685        local be be_name
++lib/cinder:create_volume_types:686        for be in ${CINDER_ENABLED_BACKENDS//,/ }
++lib/cinder:create_volume_types:687        be_name=lvmdriver-1
++lib/cinder:create_volume_types:688        create_one_type lvmdriver-1 volume_backend_name lvmdriver-1
++lib/cinder:create_one_type:665            type_name=lvmdriver-1
++lib/cinder:create_one_type:666            property_key=volume_backend_name
++lib/cinder:create_one_type:667            property_value=lvmdriver-1
++lib/cinder:create_one_type:669            is_service_enabled keystone
++functions-common:is_service_enabled:2079  return 0
++lib/cinder:create_one_type:670            openstack --os-region-name=RegionOne volume type create --property volume_backend_name=lvmdriver-1 lvmdriver-1
++-------------+--------------------------------------+
+| Field       | Value                                |
++-------------+--------------------------------------+
+| description | None                                 |
+| id          | 77b0e4a9-b93d-437f-b732-2fdae0731d30 |
+| is_public   | True                                 |
+| name        | lvmdriver-1                          |
+| properties  | volume_backend_name='lvmdriver-1'    |
++-------------+--------------------------------------+
++lib/cinder:create_volume_types:691        [[ False == \T\r\u\e ]]
++lib/cinder:create_volume_types:698        [[ False == \T\r\u\e ]]
++./stack.sh:main:1340                      [[ False == \T\r\u\e ]]
++./stack.sh:main:1348                      is_service_enabled glance
++functions-common:is_service_enabled:2079  return 0
++./stack.sh:main:1349                      echo_summary 'Starting Glance'
++./stack.sh:echo_summary:438               [[ -t 3 ]]
++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
++./stack.sh:echo_summary:444               echo -e Starting Glance
++./stack.sh:main:1350                      start_glance
++lib/glance:start_glance:649               local service_protocol=http
+++lib/glance:start_glance:651               which uwsgi
++lib/glance:start_glance:651               run_process g-api '/bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini'
++functions-common:run_process:1677         local service=g-api
++functions-common:run_process:1678         local 'command=/bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini'
++functions-common:run_process:1679         local group=
++functions-common:run_process:1680         local user=
++functions-common:run_process:1681         local env_vars=
++functions-common:run_process:1683         local name=g-api
++functions-common:run_process:1685         time_start run_process
++functions-common:time_start:2409          local name=run_process
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828699480
++functions-common:run_process:1686         is_service_enabled g-api
++functions-common:is_service_enabled:2079  return 0
++functions-common:run_process:1687         _run_under_systemd g-api '/bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini' '' '' ''
++functions-common:_run_under_systemd:1631  local service=g-api
++functions-common:_run_under_systemd:1632  local 'command=/bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini'
++functions-common:_run_under_systemd:1633  local 'cmd=/bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini'
++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini'
++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini'
++functions-common:_common_systemd_pitfalls:1606  [[ /bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini =~ sudo ]]
++functions-common:_common_systemd_pitfalls:1617  [[ ! /bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini =~ ^/ ]]
++functions-common:_run_under_systemd:1637  local systemd_service=devstack@g-api.service
++functions-common:_run_under_systemd:1638  local group=
++functions-common:_run_under_systemd:1639  local user=stack
++functions-common:_run_under_systemd:1640  [[ -z stack ]]
++functions-common:_run_under_systemd:1643  local env_vars=
++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[g-api] ]]
++functions-common:_run_under_systemd:1647  [[ /bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini =~ uwsgi ]]
++functions-common:_run_under_systemd:1648  [[ True == \T\r\u\e ]]
++functions-common:_run_under_systemd:1649  cmd='/bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini --venv /opt/stack/data/venv'
++functions-common:_run_under_systemd:1651  write_uwsgi_user_unit_file devstack@g-api.service '/bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini --venv /opt/stack/data/venv' '' stack ''
++functions-common:write_uwsgi_user_unit_file:1570  local service=devstack@g-api.service
++functions-common:write_uwsgi_user_unit_file:1571  local 'command=/bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini --venv /opt/stack/data/venv'
++functions-common:write_uwsgi_user_unit_file:1572  local group=
++functions-common:write_uwsgi_user_unit_file:1573  local user=stack
++functions-common:write_uwsgi_user_unit_file:1574  local env_vars=
++functions-common:write_uwsgi_user_unit_file:1575  local unitfile=/etc/systemd/system/devstack@g-api.service
++functions-common:write_uwsgi_user_unit_file:1576  mkdir -p /etc/systemd/system
++functions-common:write_uwsgi_user_unit_file:1578  iniset -sudo /etc/systemd/system/devstack@g-api.service Unit Description 'Devstack devstack@g-api.service'
++functions-common:write_uwsgi_user_unit_file:1579  iniset -sudo /etc/systemd/system/devstack@g-api.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
++functions-common:write_uwsgi_user_unit_file:1580  iniset -sudo /etc/systemd/system/devstack@g-api.service Service SyslogIdentifier devstack@g-api.service
++functions-common:write_uwsgi_user_unit_file:1581  iniset -sudo /etc/systemd/system/devstack@g-api.service Service User stack
++functions-common:write_uwsgi_user_unit_file:1582  iniset -sudo /etc/systemd/system/devstack@g-api.service Service ExecStart '/bin/uwsgi --procname-prefix glance-api --ini /etc/glance/glance-uwsgi.ini --venv /opt/stack/data/venv'
++functions-common:write_uwsgi_user_unit_file:1583  iniset -sudo /etc/systemd/system/devstack@g-api.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
++functions-common:write_uwsgi_user_unit_file:1584  iniset -sudo /etc/systemd/system/devstack@g-api.service Service Type notify
++functions-common:write_uwsgi_user_unit_file:1585  iniset -sudo /etc/systemd/system/devstack@g-api.service Service KillMode process
++functions-common:write_uwsgi_user_unit_file:1586  iniset -sudo /etc/systemd/system/devstack@g-api.service Service Restart always
++functions-common:write_uwsgi_user_unit_file:1587  iniset -sudo /etc/systemd/system/devstack@g-api.service Service NotifyAccess all
++functions-common:write_uwsgi_user_unit_file:1588  iniset -sudo /etc/systemd/system/devstack@g-api.service Service RestartForceExitStatus 100
++functions-common:write_uwsgi_user_unit_file:1590  [[ -n '' ]]
++functions-common:write_uwsgi_user_unit_file:1593  [[ -n '' ]]
++functions-common:write_uwsgi_user_unit_file:1596  iniset -sudo /etc/systemd/system/devstack@g-api.service Install WantedBy multi-user.target
++functions-common:write_uwsgi_user_unit_file:1599  sudo systemctl daemon-reload
++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@g-api.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@g-api.service → /etc/systemd/system/devstack@g-api.service.
++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@g-api.service
++functions-common:run_process:1689         time_stop run_process
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=run_process
++functions-common:time_stop:2430           start_time=1768828699480
++functions-common:time_stop:2432           [[ -z 1768828699480 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828701391
++functions-common:time_stop:2436           elapsed_time=1911
++functions-common:time_stop:2437           total=28880
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=30791
++lib/glance:start_glance:653               is_service_enabled g-api-r
++functions-common:is_service_enabled:2079  return 1
++lib/glance:start_glance:658               echo 'Waiting for g-api (192.168.95.93) to start...'
+Waiting for g-api (192.168.95.93) to start...
++lib/glance:start_glance:659               wait_for_service 60 http://192.168.95.93/image
++functions:wait_for_service:469            local timeout=60
++functions:wait_for_service:470            local url=http://192.168.95.93/image
++functions:wait_for_service:471            local rval=0
++functions:wait_for_service:472            time_start wait_for_service
++functions-common:time_start:2409          local name=wait_for_service
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828701542
++functions:wait_for_service:473            timeout 60 bash -x
+++::                                        curl -g -k --noproxy '*' -s -o /dev/null -w '%{http_code}' http://192.168.95.93/image
++::                                        [[ 300 == 503 ]]
++::                                        [[ 0 -eq 7 ]]
++functions:wait_for_service:478            time_stop wait_for_service
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=wait_for_service
++functions-common:time_stop:2430           start_time=1768828701542
++functions-common:time_stop:2432           [[ -z 1768828701542 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828703207
++functions-common:time_stop:2436           elapsed_time=1665
++functions-common:time_stop:2437           total=8441
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=10106
++functions:wait_for_service:479            return 0
++./stack.sh:main:1364                      is_service_enabled mysql postgresql
++functions-common:is_service_enabled:2079  return 0
++./stack.sh:main:1364                      is_service_enabled glance
++functions-common:is_service_enabled:2079  return 0
++./stack.sh:main:1365                      echo_summary 'Uploading images'
++./stack.sh:echo_summary:438               [[ -t 3 ]]
++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
++./stack.sh:echo_summary:444               echo -e Uploading images
++./stack.sh:main:1367                      for image_url in ${IMAGE_URLS//,/ }
++./stack.sh:main:1368                      upload_image https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img
++functions:upload_image:132                local image_url=https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img
++functions:upload_image:134                local image image_fname image_name
++functions:upload_image:136                local max_attempts=5
++functions:upload_image:139                mkdir -p /opt/stack/devstack/files/images
+++functions:upload_image:140                basename https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img
++functions:upload_image:140                image_fname=cirros-0.6.3-x86_64-disk.img
++functions:upload_image:141                [[ https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img != file* ]]
++functions:upload_image:143                [[ ! -f /opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img ]]
+++functions:upload_image:144                seq 5
++functions:upload_image:144                for attempt in `seq $max_attempts`
++functions:upload_image:145                local rc=0
++functions:upload_image:146                wget --progress=dot:giga -c https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img -O /opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img
+--2026-01-19 13:18:23--  https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img
+Resolving github.com (github.com)... 20.205.243.166
+Connecting to github.com (github.com)|20.205.243.166|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://release-assets.githubusercontent.com/github-production-release-asset/219785102/6f5bab50-4c03-4330-a8c6-7b6cb1564e3f?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-01-19T13%3A57%3A49Z&rscd=attachment%3B+filename%3Dcirros-0.6.3-x86_64-disk.img&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-01-19T12%3A57%3A32Z&ske=2026-01-19T13%3A57%3A49Z&sks=b&skv=2018-11-09&sig=tsmkySqY1Sz8erJ43YX6QCz4MvqU7Z6FFBVmkdddS7U%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2ODgzMDUwMywibmJmIjoxNzY4ODI4NzAzLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.nVFeD34RYy7UCniy0hCCqXlivvLIQ6bjXroi-mvIO34&response-content-disposition=attachment%3B%20filename%3Dcirros-0.6.3-x86_64-disk.img&response-content-type=application%2Foctet-stream [following]
+--2026-01-19 13:18:24--  https://release-assets.githubusercontent.com/github-production-release-asset/219785102/6f5bab50-4c03-4330-a8c6-7b6cb1564e3f?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-01-19T13%3A57%3A49Z&rscd=attachment%3B+filename%3Dcirros-0.6.3-x86_64-disk.img&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-01-19T12%3A57%3A32Z&ske=2026-01-19T13%3A57%3A49Z&sks=b&skv=2018-11-09&sig=tsmkySqY1Sz8erJ43YX6QCz4MvqU7Z6FFBVmkdddS7U%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2ODgzMDUwMywibmJmIjoxNzY4ODI4NzAzLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.nVFeD34RYy7UCniy0hCCqXlivvLIQ6bjXroi-mvIO34&response-content-disposition=attachment%3B%20filename%3Dcirros-0.6.3-x86_64-disk.img&response-content-type=application%2Foctet-stream
+Resolving release-assets.githubusercontent.com (release-assets.githubusercontent.com)... 185.199.109.133, 185.199.111.133, 185.199.108.133, ...
+Connecting to release-assets.githubusercontent.com (release-assets.githubusercontent.com)|185.199.109.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 21692416 (21M) [application/octet-stream]
+Saving to: ‘/opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img’
+
+     0K ........ ........ ....             100% 34.8M=0.6s
+
+2026-01-19 13:18:24 (34.8 MB/s) - ‘/opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img’ saved [21692416/21692416]
+
++functions:upload_image:147                [[ 0 -ne 0 ]]
++functions:upload_image:156                break
++functions:upload_image:160                image=/opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img
++functions:upload_image:174                [[ https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img =~ openvz ]]
++functions:upload_image:181                [[ https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img =~ \.vmdk ]]
++functions:upload_image:295                [[ https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img =~ \.hds ]]
++functions:upload_image:306                local kernel=
++functions:upload_image:307                local ramdisk=
++functions:upload_image:308                local disk_format=
++functions:upload_image:309                local container_format=
++functions:upload_image:310                local unpack=
++functions:upload_image:311                local img_property=
++functions:upload_image:315                [[ libvirt == \l\i\b\v\i\r\t ]]
++functions:upload_image:316                [[ kvm == \q\e\m\u ]]
++functions:upload_image:316                [[ kvm == \k\v\m ]]
++functions:upload_image:317                img_property=hw_rng_model=virtio
++functions:upload_image:321                case "$image_fname" in
+++functions:upload_image:342                basename /opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img .img
++functions:upload_image:342                image_name=cirros-0.6.3-x86_64-disk
++functions:upload_image:343                local format
+++functions:upload_image:344                qemu-img info /opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img
+++functions:upload_image:344                awk '/^file format/ { print $3; exit }'
++functions:upload_image:344                format=qcow2
++functions:upload_image:345                [[ ,qcow2,raw,vdi,vmdk,vpc, =~ ,qcow2, ]]
++functions:upload_image:346                disk_format=qcow2
++functions:upload_image:350                container_format=bare
++functions:upload_image:397                is_arch ppc64le
+++functions-common:is_arch:517              uname -m
++functions-common:is_arch:517              [[ x86_64 == \p\p\c\6\4\l\e ]]
++functions:upload_image:397                is_arch ppc64
+++functions-common:is_arch:517              uname -m
++functions-common:is_arch:517              [[ x86_64 == \p\p\c\6\4 ]]
++functions:upload_image:397                is_arch ppc
+++functions-common:is_arch:517              uname -m
++functions-common:is_arch:517              [[ x86_64 == \p\p\c ]]
++functions:upload_image:401                is_arch aarch64
+++functions-common:is_arch:517              uname -m
++functions-common:is_arch:517              [[ x86_64 == \a\a\r\c\h\6\4 ]]
++functions:upload_image:405                '[' bare = bare ']'
++functions:upload_image:406                '[' '' = zcat ']'
++functions:upload_image:408                '[' '' = bunzip2 ']'
++functions:upload_image:410                '[' '' = unxz ']'
++functions:upload_image:421                _upload_image cirros-0.6.3-x86_64-disk bare qcow2 /opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img hw_rng_model=virtio
++functions:_upload_image:104               local image_name=cirros-0.6.3-x86_64-disk
++functions:_upload_image:105               shift
++functions:_upload_image:106               local container=bare
++functions:_upload_image:107               shift
++functions:_upload_image:108               local disk=qcow2
++functions:_upload_image:109               shift
++functions:_upload_image:110               local image=/opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img
++functions:_upload_image:111               shift
++functions:_upload_image:112               local properties
++functions:_upload_image:113               local useimport
+++functions:_upload_image:115               _image_properties_to_arg hw_rng_model=virtio
+++functions:_image_properties_to_arg:87     local result=
+++functions:_image_properties_to_arg:88     for property in $*
+++functions:_image_properties_to_arg:89     result+=' --property hw_rng_model=virtio'
+++functions:_image_properties_to_arg:91     echo --property hw_rng_model=virtio
++functions:_upload_image:115               properties='--property hw_rng_model=virtio'
++functions:_upload_image:117               [[ False == \T\r\u\e ]]
+++functions:_upload_image:121               readlink -f /opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img
++functions:_upload_image:121               openstack --os-cloud=devstack-admin --os-region-name=RegionOne image create cirros-0.6.3-x86_64-disk --public --container-format bare --disk-format qcow2 --property hw_rng_model=virtio --file /opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img
++inc/async:async_inner:64                  rc=0
+[125463 Async create_flavors:125463]: finished successfully
++------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field            | Value                                                                                                                                                                 |
++------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checksum         | 87617e24a5e30cb3b87fda8c0764838f                                                                                                                                                                 |
+| container_format | bare                                                                                                                                                                 |
+| created_at       | 2026-01-19T13:18:27Z                                                                                                                                                                 |
+| disk_format      | qcow2                                                                                                                                                                 |
+| file             | /v2/images/d3d0c59e-4eef-4932-b6dd-e436b761c6be/file                                                                                                                                                                 |
+| id               | d3d0c59e-4eef-4932-b6dd-e436b761c6be                                                                                                                                                                 |
+| min_disk         | 0                                                                                                                                                                 |
+| min_ram          | 0                                                                                                                                                                 |
+| name             | cirros-0.6.3-x86_64-disk                                                                                                                                                                 |
+| owner            | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                 |
+| properties       | hw_rng_model='virtio', os_hash_algo='sha512', os_hash_value='9a9bce0083a00939ec17c11febbfc767aa211aaa54f51e75c5a8b271a9b5637c77205a518b7a2007cb391d23cceb01e0e4e8d64832317151bc85b734b92a7be0', os_hidden='False', owner_specified.openstack.md5='', owner_specified.openstack.object='images/cirros-0.6.3-x86_64-disk', owner_specified.openstack.sha256='' |
+| protected        | False                                                                                                                                                                 |
+| schema           | /v2/schemas/image                                                                                                                                                                 |
+| size             | 21692416                                                                                                                                                                 |
+| status           | active                                                                                                                                                                 |
+| tags             |                                                                                                                                                                 |
+| updated_at       | 2026-01-19T13:18:28Z                                                                                                                                                                 |
+| virtual_size     | 117440512                                                                                                                                                                 |
+| visibility       | public                                                                                                                                                                 |
++------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++./stack.sh:main:1372                      async_wait create_flavors
+[1120 Async create_flavors:125463]: Waiting for completion of create_flavors running on PID 125463 (2 other jobs running)
+[1120 Async create_flavors:125463]: Signaling child to exit
+WAKEUP
+[1120 Async create_flavors:125463]: Signaled
++lib/nova:create_flavors:1274              is_service_enabled n-api
++functions-common:is_service_enabled:2079  return 0
++lib/nova:create_flavors:1275              grep -q ds512M
++lib/nova:create_flavors:1275              openstack --os-region-name=RegionOne flavor list
++lib/nova:create_flavors:1277              openstack --os-region-name=RegionOne flavor create --id c1 --ram 256 --disk 1 --vcpus 1 --property hw_rng:allowed=True cirros256
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 1                     |
+| id                         | c1                    |
+| name                       | cirros256             |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 256                   |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 1                     |
++----------------------------+-----------------------+
++lib/nova:create_flavors:1278              openstack --os-region-name=RegionOne flavor create --id d1 --ram 512 --disk 5 --vcpus 1 --property hw_rng:allowed=True ds512M
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 5                     |
+| id                         | d1                    |
+| name                       | ds512M                |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 512                   |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 1                     |
++----------------------------+-----------------------+
++lib/nova:create_flavors:1279              openstack --os-region-name=RegionOne flavor create --id d2 --ram 1024 --disk 10 --vcpus 1 --property hw_rng:allowed=True ds1G
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 10                    |
+| id                         | d2                    |
+| name                       | ds1G                  |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 1024                  |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 1                     |
++----------------------------+-----------------------+
++lib/nova:create_flavors:1280              openstack --os-region-name=RegionOne flavor create --id d3 --ram 2048 --disk 10 --vcpus 2 --property hw_rng:allowed=True ds2G
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 10                    |
+| id                         | d3                    |
+| name                       | ds2G                  |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 2048                  |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 2                     |
++----------------------------+-----------------------+
++lib/nova:create_flavors:1281              openstack --os-region-name=RegionOne flavor create --id d4 --ram 4096 --disk 20 --vcpus 4 --property hw_rng:allowed=True ds4G
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 20                    |
+| id                         | d4                    |
+| name                       | ds4G                  |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 4096                  |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 4                     |
++----------------------------+-----------------------+
++lib/nova:create_flavors:1284              grep -q m1.tiny
++lib/nova:create_flavors:1284              openstack --os-region-name=RegionOne flavor list
++lib/nova:create_flavors:1285              openstack --os-region-name=RegionOne flavor create --id 1 --ram 512 --disk 1 --vcpus 1 --property hw_rng:allowed=True m1.tiny
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 1                     |
+| id                         | 1                     |
+| name                       | m1.tiny               |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 512                   |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 1                     |
++----------------------------+-----------------------+
++lib/nova:create_flavors:1286              openstack --os-region-name=RegionOne flavor create --id 2 --ram 2048 --disk 20 --vcpus 1 --property hw_rng:allowed=True m1.small
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 20                    |
+| id                         | 2                     |
+| name                       | m1.small              |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 2048                  |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 1                     |
++----------------------------+-----------------------+
++lib/nova:create_flavors:1287              openstack --os-region-name=RegionOne flavor create --id 3 --ram 4096 --disk 40 --vcpus 2 --property hw_rng:allowed=True m1.medium
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 40                    |
+| id                         | 3                     |
+| name                       | m1.medium             |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 4096                  |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 2                     |
++----------------------------+-----------------------+
++lib/nova:create_flavors:1288              openstack --os-region-name=RegionOne flavor create --id 4 --ram 8192 --disk 80 --vcpus 4 --property hw_rng:allowed=True m1.large
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 80                    |
+| id                         | 4                     |
+| name                       | m1.large              |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 8192                  |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 4                     |
++----------------------------+-----------------------+
++lib/nova:create_flavors:1289              openstack --os-region-name=RegionOne flavor create --id 5 --ram 16384 --disk 160 --vcpus 8 --property hw_rng:allowed=True m1.xlarge
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 160                   |
+| id                         | 5                     |
+| name                       | m1.xlarge             |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 16384                 |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 8                     |
++----------------------------+-----------------------+
+[1120 Async create_flavors:125463]: finished create_flavors with result 0 in 17 seconds
++inc/async:async_wait:197                  return 0
++./stack.sh:main:1374                      is_service_enabled horizon
++functions-common:is_service_enabled:2079  return 0
++./stack.sh:main:1375                      echo_summary 'Starting Horizon'
++./stack.sh:echo_summary:438               [[ -t 3 ]]
++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
++./stack.sh:echo_summary:444               echo -e Starting Horizon
++./stack.sh:main:1376                      init_horizon
++lib/horizon:init_horizon:155              sudo rm -f '/var/log/apache2/horizon_*'
++lib/horizon:init_horizon:158              local django_admin
++lib/horizon:init_horizon:159              type -p django-admin
++lib/horizon:init_horizon:160              django_admin=django-admin
++lib/horizon:init_horizon:166              DJANGO_SETTINGS_MODULE=openstack_dashboard.settings
++lib/horizon:init_horizon:166              django-admin collectstatic --noinput
+/opt/stack/data/venv/lib/python3.10/site-packages/debreach/__init__.py:6: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  version_info = version.StrictVersion(__version__).version
+
+2196 static files copied to '/opt/stack/horizon/static'.
++lib/horizon:init_horizon:167              DJANGO_SETTINGS_MODULE=openstack_dashboard.settings
++lib/horizon:init_horizon:167              django-admin compress --force
+/opt/stack/data/venv/lib/python3.10/site-packages/debreach/__init__.py:6: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  version_info = version.StrictVersion(__version__).version
+Compressing... done
+Compressed 7 block(s) from 12 template(s) for 2 context(s).
++./stack.sh:main:1377                      start_horizon
++lib/horizon:start_horizon:185             restart_apache_server
++lib/apache:restart_apache_server:238      restart_service apache2
++functions-common:restart_service:2307     '[' -x /bin/systemctl ']'
++functions-common:restart_service:2308     sudo /bin/systemctl restart apache2
++./stack.sh:main:1388                      is_service_enabled nova
++functions-common:is_service_enabled:2079  return 0
++./stack.sh:main:1388                      is_service_enabled keystone
++functions-common:is_service_enabled:2079  return 0
++./stack.sh:main:1389                      USERRC_PARAMS='-PA --target-dir /opt/stack/devstack/accrc --os-password SuperSecret123'
++./stack.sh:main:1391                      '[' -f /opt/stack/data/ca-bundle.pem ']'
++./stack.sh:main:1395                      /opt/stack/devstack/tools/create_userrc.sh -PA --target-dir /opt/stack/devstack/accrc --os-password SuperSecret123
++opt/stack/devstack/tools/create_userrc.sh:main:31  ACCOUNT_DIR=./accrc
+++opt/stack/devstack/tools/create_userrc.sh:main:80  getopt -o hPAp:u:r:C: -l os-username:,os-password:,os-tenant-id:,os-tenant-name:,os-project-name:,os-project-id:,os-project-domain-id:,os-project-domain-name:,os-user-domain-id:,os-user-domain-name:,os-auth-url:,target-dir:,heat-url:,skip-project:,os-cacert:,help,debug -- -PA --target-dir /opt/stack/devstack/accrc --os-password SuperSecret123
++opt/stack/devstack/tools/create_userrc.sh:main:80  options=' -P -A --target-dir '\''/opt/stack/devstack/accrc'\'' --os-password '\''SuperSecret123'\'' --'
++opt/stack/devstack/tools/create_userrc.sh:main:84  eval set -- -P -A --target-dir ''\''/opt/stack/devstack/accrc'\''' --os-password ''\''SuperSecret123'\''' --
+++opt/stack/devstack/tools/create_userrc.sh:main:84  set -- -P -A --target-dir /opt/stack/devstack/accrc --os-password SuperSecret123 --
++opt/stack/devstack/tools/create_userrc.sh:main:85  ADDPASS=
++opt/stack/devstack/tools/create_userrc.sh:main:86  HEAT_URL=
++opt/stack/devstack/tools/create_userrc.sh:main:91  SKIP_PROJECT=service
++opt/stack/devstack/tools/create_userrc.sh:main:92  MODE=
++opt/stack/devstack/tools/create_userrc.sh:main:93  ROLE=Member
++opt/stack/devstack/tools/create_userrc.sh:main:94  USER_NAME=
++opt/stack/devstack/tools/create_userrc.sh:main:95  USER_PASS=
++opt/stack/devstack/tools/create_userrc.sh:main:96  '[' 7 -gt 0 ']'
++opt/stack/devstack/tools/create_userrc.sh:main:97  case "$1" in
++opt/stack/devstack/tools/create_userrc.sh:main:119  ADDPASS=yes
++opt/stack/devstack/tools/create_userrc.sh:main:126  shift
++opt/stack/devstack/tools/create_userrc.sh:main:96  '[' 6 -gt 0 ']'
++opt/stack/devstack/tools/create_userrc.sh:main:97  case "$1" in
++opt/stack/devstack/tools/create_userrc.sh:main:118  MODE=all
++opt/stack/devstack/tools/create_userrc.sh:main:126  shift
++opt/stack/devstack/tools/create_userrc.sh:main:96  '[' 5 -gt 0 ']'
++opt/stack/devstack/tools/create_userrc.sh:main:97  case "$1" in
++opt/stack/devstack/tools/create_userrc.sh:main:113  ACCOUNT_DIR=/opt/stack/devstack/accrc
++opt/stack/devstack/tools/create_userrc.sh:main:113  shift
++opt/stack/devstack/tools/create_userrc.sh:main:126  shift
++opt/stack/devstack/tools/create_userrc.sh:main:96  '[' 3 -gt 0 ']'
++opt/stack/devstack/tools/create_userrc.sh:main:97  case "$1" in
++opt/stack/devstack/tools/create_userrc.sh:main:100  export OS_PASSWORD=SuperSecret123
++opt/stack/devstack/tools/create_userrc.sh:main:100  OS_PASSWORD=SuperSecret123
++opt/stack/devstack/tools/create_userrc.sh:main:100  shift
++opt/stack/devstack/tools/create_userrc.sh:main:126  shift
++opt/stack/devstack/tools/create_userrc.sh:main:96  '[' 1 -gt 0 ']'
++opt/stack/devstack/tools/create_userrc.sh:main:97  case "$1" in
++opt/stack/devstack/tools/create_userrc.sh:main:122  shift
++opt/stack/devstack/tools/create_userrc.sh:main:122  break
++opt/stack/devstack/tools/create_userrc.sh:main:129  '[' -z SuperSecret123 ']'
++opt/stack/devstack/tools/create_userrc.sh:main:138  '[' -z '' -a '' ']'
++opt/stack/devstack/tools/create_userrc.sh:main:142  '[' -z '' -a '' ']'
++opt/stack/devstack/tools/create_userrc.sh:main:146  '[' -z '' -a -z '' ']'
++opt/stack/devstack/tools/create_userrc.sh:main:147  export OS_PROJECT_NAME=admin
++opt/stack/devstack/tools/create_userrc.sh:main:147  OS_PROJECT_NAME=admin
++opt/stack/devstack/tools/create_userrc.sh:main:150  '[' -z '' ']'
++opt/stack/devstack/tools/create_userrc.sh:main:151  export OS_USERNAME=admin
++opt/stack/devstack/tools/create_userrc.sh:main:151  OS_USERNAME=admin
++opt/stack/devstack/tools/create_userrc.sh:main:154  '[' -z '' ']'
++opt/stack/devstack/tools/create_userrc.sh:main:155  export OS_AUTH_URL=http://localhost:5000/v3/
++opt/stack/devstack/tools/create_userrc.sh:main:155  OS_AUTH_URL=http://localhost:5000/v3/
++opt/stack/devstack/tools/create_userrc.sh:main:158  '[' -z '' -a -z '' ']'
++opt/stack/devstack/tools/create_userrc.sh:main:160  OS_USER_DOMAIN_ID=default
++opt/stack/devstack/tools/create_userrc.sh:main:163  '[' -z '' -a -z '' ']'
++opt/stack/devstack/tools/create_userrc.sh:main:165  OS_PROJECT_DOMAIN_ID=default
++opt/stack/devstack/tools/create_userrc.sh:main:168  USER_PASS=SuperSecret123
++opt/stack/devstack/tools/create_userrc.sh:main:169  USER_NAME=admin
++opt/stack/devstack/tools/create_userrc.sh:main:171  '[' -z all ']'
++opt/stack/devstack/tools/create_userrc.sh:main:239  '[' all '!=' create ']'
++opt/stack/devstack/tools/create_userrc.sh:main:241  grep ,True
++opt/stack/devstack/tools/create_userrc.sh:main:241  IFS=,
++opt/stack/devstack/tools/create_userrc.sh:main:241  openstack project list --long --quote none -f csv
++opt/stack/devstack/tools/create_userrc.sh:main:241  grep -v service
++opt/stack/devstack/tools/create_userrc.sh:main:241  read project_id project_name desc enabled
+Failed to discover available identity versions when contacting http://localhost:5000/v3/. Attempting to parse version from URL.
+Unable to establish connection to http://localhost:5000/v3/auth/tokens: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /v3/auth/tokens (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fe71388bf40>: Failed to establish a new connection: [Errno 111] Connection refused'))
++./stack.sh:main:1400                      save_stackenv
++functions-common:save_stackenv:63         local tag=
+++functions-common:save_stackenv:65         date +%F-%H%M%S
++functions-common:save_stackenv:65         time_stamp=2026-01-19-131836
++functions-common:save_stackenv:66         echo '# 2026-01-19-131836 '
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo BASE_SQL_CONN=mysql+pymysql://root:SuperSecret123@127.0.0.1
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo DATA_DIR=/opt/stack/data
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo DEST=/opt/stack
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo ENABLED_SERVICES=key,n-api,n-cpu,n-cond,n-sch,n-novnc,n-api-meta,placement-api,placement-client,g-api,c-sch,c-api,c-vol,ovn-controller,ovn-northd,ovs-vswitchd,ovsdb-server,q-svc,q-ovn-agent,horizon,rabbit,tempest,mysql,etcd3,dstat,h-eng,h-api,h-api-cfn,heat-dashboard,ceilometer-acompute,ceilometer-acentral,ceilometer-anotification,gnocchi-api,gnocchi-metricd,aodh-api,aodh-notifier,aodh-evaluator,aodh-listener,neutron-api,neutron-rpc-server,neutron-periodic-workers,neutron-ovn-maintenance-worker,n-novnc-cell1,n-super-cond,n-cond-cell1
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo HOST_IP=192.168.95.93
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo KEYSTONE_SERVICE_URI=http://192.168.95.93/identity
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo LOGFILE=/opt/stack/logs/stack.sh.log.2026-01-19-125748
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo OS_CACERT=
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo SERVICE_HOST=192.168.95.93
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo STACK_USER=stack
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo TLS_IP=
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo HOST_IPV6=::1
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo SERVICE_IP_VERSION=4
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo TUNNEL_ENDPOINT_IP=192.168.95.93
++functions-common:save_stackenv:67         for i in $STACK_ENV_VARS
++functions-common:save_stackenv:68         echo TUNNEL_IP_VERSION=4
++./stack.sh:main:1411                      merge_config_group /opt/stack/devstack/local.conf extra
++inc/meta-config:merge_config_group:171    local localfile=/opt/stack/devstack/local.conf
++inc/meta-config:merge_config_group:171    shift
++inc/meta-config:merge_config_group:172    local matchgroups=extra
++inc/meta-config:merge_config_group:174    [[ -r /opt/stack/devstack/local.conf ]]
++inc/meta-config:merge_config_group:176    local configfile group
++inc/meta-config:merge_config_group:177    for group in $matchgroups
+++inc/meta-config:merge_config_group:178    get_meta_section_files /opt/stack/devstack/local.conf extra
+++inc/meta-config:get_meta_section_files:63  local file=/opt/stack/devstack/local.conf
+++inc/meta-config:get_meta_section_files:64  local matchgroup=extra
+++inc/meta-config:get_meta_section_files:66  [[ -r /opt/stack/devstack/local.conf ]]
+++inc/meta-config:get_meta_section_files:68  awk -v matchgroup=extra '
+        /^\[\[.+\|.*\]\]/ {
+            gsub("[][]", "", $1);
+            split($1, a, "|");
+            if (a[1] == matchgroup)
+                print a[2]
+        }
+    ' /opt/stack/devstack/local.conf
++./stack.sh:main:1418                      run_phase stack extra
++functions-common:run_phase:1851           local mode=stack
++functions-common:run_phase:1852           local phase=extra
++functions-common:run_phase:1853           [[ -d /opt/stack/devstack/extras.d ]]
++functions-common:run_phase:1854           local extra_plugin_file_name
++functions-common:run_phase:1855           for extra_plugin_file_name in $TOP_DIR/extras.d/*.sh
++functions-common:run_phase:1860           local exceptions=80-tempest.sh
++functions-common:run_phase:1861           local extra
+++functions-common:run_phase:1862           basename /opt/stack/devstack/extras.d/80-tempest.sh
++functions-common:run_phase:1862           extra=80-tempest.sh
++functions-common:run_phase:1863           [[ 80-tempest.sh =~ 80-tempest\.sh ]]
++functions-common:run_phase:1867           [[ -r /opt/stack/devstack/extras.d/80-tempest.sh ]]
++functions-common:run_phase:1867           source /opt/stack/devstack/extras.d/80-tempest.sh stack extra
+++extras.d/80-tempest.sh:source:3           is_service_enabled tempest
+++functions-common:is_service_enabled:2079  return 0
+++extras.d/80-tempest.sh:source:4           [[ stack == \s\o\u\r\c\e ]]
+++extras.d/80-tempest.sh:source:7           [[ stack == \s\t\a\c\k ]]
+++extras.d/80-tempest.sh:source:7           [[ extra == \i\n\s\t\a\l\l ]]
+++extras.d/80-tempest.sh:source:10          [[ stack == \s\t\a\c\k ]]
+++extras.d/80-tempest.sh:source:10          [[ extra == \p\o\s\t\-\c\o\n\f\i\g ]]
+++extras.d/80-tempest.sh:source:13          [[ stack == \s\t\a\c\k ]]
+++extras.d/80-tempest.sh:source:13          [[ extra == \e\x\t\r\a ]]
+++extras.d/80-tempest.sh:source:15          :
+++extras.d/80-tempest.sh:source:27          [[ stack == \u\n\s\t\a\c\k ]]
+++extras.d/80-tempest.sh:source:32          [[ stack == \c\l\e\a\n ]]
++functions-common:run_phase:1872           [[ stack == \s\o\u\r\c\e ]]
++functions-common:run_phase:1875           [[ stack == \o\v\e\r\r\i\d\e\_\d\e\f\a\u\l\t\s ]]
++functions-common:run_phase:1878           run_plugins stack extra
++functions-common:run_plugins:1837         local mode=stack
++functions-common:run_plugins:1838         local phase=extra
++functions-common:run_plugins:1840         local plugins=,heat,heat-dashboard,ceilometer,aodh,gnocchi
++functions-common:run_plugins:1841         local plugin
++functions-common:run_plugins:1842         for plugin in ${plugins//,/ }
++functions-common:run_plugins:1843         local dir=/opt/stack/heat
++functions-common:run_plugins:1844         [[ -f /opt/stack/heat/devstack/plugin.sh ]]
++functions-common:run_plugins:1845         source /opt/stack/heat/devstack/plugin.sh stack extra
+++/opt/stack/heat/devstack/plugin.sh:source:7  echo_summary 'heat'\''s plugin.sh was called...'
+++./stack.sh:echo_summary:438               [[ -t 3 ]]
+++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
+++./stack.sh:echo_summary:444               echo -e 'heat'\''s' plugin.sh was called...
+++/opt/stack/heat/devstack/plugin.sh:source:8  source /opt/stack/heat/devstack/lib/heat
+++/opt/stack/heat/devstack/plugin.sh:source:9  set -o posix
+++/opt/stack/heat/devstack/plugin.sh:source:9  set
+ACCOUNT_PORT_BASE=6612
+ADDITIONAL_VENV_PACKAGES=,PyMySQL
+ADMIN_PASSWORD=SuperSecret123
+AGENT_DHCP_BINARY=/opt/stack/data/venv/bin/neutron-dhcp-agent
+AGENT_L3_BINARY=/opt/stack/data/venv/bin/neutron-l3-agent
+AGENT_META_BINARY=/opt/stack/data/venv/bin/neutron-metadata-agent
+AGENT_METERING_BINARY=/opt/stack/data/venv/bin/neutron-metering-agent
+ALEMBIC_BRANCH=main
+ALEMBIC_DIR=/opt/stack/alembic
+ALEMBIC_REPO=https://github.com/sqlalchemy/alembic.git
+AODH_BIN_DIR=/opt/stack/data/venv/bin
+AODH_CONF=/etc/aodh/aodh.conf
+AODH_CONF_DIR=/etc/aodh
+AODH_COORDINATION_URL=
+AODH_DIR=/opt/stack/aodh
+AODH_NOTIFICATION_TOPICS=notifications
+AODH_SERVICE_HOST=192.168.95.93
+AODH_SERVICE_PROTOCOL=http
+AODH_UWSGI=aodh.wsgi.api:application
+AODH_UWSGI_CONF=/etc/aodh/aodh-uwsgi.ini
+APACHE_CONF_DIR=/etc/apache2/sites-available
+APACHE_GROUP=stack
+APACHE_LOCAL_HOST=127.0.0.1
+APACHE_LOG_DIR=/var/log/apache2
+APACHE_NAME=apache2
+APACHE_SETTINGS_DIR=/etc/apache2/conf-enabled
+APACHE_USER=stack
+API_WORKERS=4
+BACKENDS=gnocchi
+BACKING_FILE_SUFFIX=-backing-file
+BASE_SQL_CONN=mysql+pymysql://root:SuperSecret123@127.0.0.1
+BASH=/usr/bin/bash
+BASHOPTS=checkwinsize:cmdhist:complete_fullquote:expand_aliases:extquote:force_fignore:globasciiranges:hostcomplete:interactive_comments:progcomp:promptvars:sourcepath
+BASHPID=1120
+BASH_ALIASES=()
+BASH_ARGC=([0]="0")
+BASH_ARGV=()
+BASH_CMDS=()
+BASH_LINENO=([0]="1845" [1]="1878" [2]="1418" [3]="0")
+BASH_REMATCH=([0]=",tempest,")
+BASH_SOURCE=([0]="/opt/stack/heat/devstack/plugin.sh" [1]="/opt/stack/devstack/functions-common" [2]="/opt/stack/devstack/functions-common" [3]="./stack.sh")
+BASH_VERSINFO=([0]="5" [1]="1" [2]="16" [3]="1" [4]="release" [5]="x86_64-pc-linux-gnu")
+BASH_VERSION='5.1.16(1)-release'
+BINDEP_CMD=/opt/stack/bindep-venv/bin/bindep
+BRANCHLESS_TARGET_BRANCH=master
+BUG_REPORT_URL=https://bugs.launchpad.net/ubuntu/
+BUILD_TIMEOUT=196
+CACHE_BACKEND=dogpile.cache.memcached
+CA_CERT_ARG=
+CEILOMETER_ALARM_AGGREGATION_METHOD=rate:mean
+CEILOMETER_ALARM_GRANULARITY=60
+CEILOMETER_ALARM_METRIC_NAME=cpu
+CEILOMETER_ALARM_THRESHOLD=10000000
+CEILOMETER_BACKEND=gnocchi
+CEILOMETER_BACKENDS=gnocchi
+CEILOMETER_BIN_DIR=/opt/stack/data/venv/bin
+CEILOMETER_CACHE_BACKEND=dogpile.cache.redis
+CEILOMETER_CACHE_URL=redis://localhost:6379
+CEILOMETER_CONF=/etc/ceilometer/ceilometer.conf
+CEILOMETER_CONF_DIR=/etc/ceilometer
+CEILOMETER_COORDINATION_URL=redis://localhost:6379
+CEILOMETER_DIR=/opt/stack/ceilometer
+CEILOMETER_EVENT_ALARM=False
+CEILOMETER_NOTIFICATION_TOPICS=notifications,profiler
+CEILOMETER_PIPELINE_INTERVAL=
+CELLSV2_SETUP=superconductor
+CINDER_ALLOWED_DIRECT_URL_SCHEMES=
+CINDER_API_PASTE_INI=/etc/cinder/api-paste.ini
+CINDER_BACKENDS=/opt/stack/devstack/lib/cinder_backends
+CINDER_BACKUPS=/opt/stack/devstack/lib/cinder_backups
+CINDER_BACKUP_DRIVER=swift
+CINDER_BIN_DIR=/opt/stack/data/venv/bin
+CINDER_BRANCH=master
+CINDER_CACHE_ENABLED_FOR_BACKENDS=lvm:lvmdriver-1
+CINDER_CONF=/etc/cinder/cinder.conf
+CINDER_CONF_DIR=/etc/cinder
+CINDER_DIR=/opt/stack/cinder
+CINDER_DRIVER=default
+CINDER_ENABLED_BACKENDS=lvm:lvmdriver-1
+CINDER_ENFORCE_SCOPE=False
+CINDER_IMG_CACHE_ENABLED=True
+CINDER_IMG_CACHE_SIZE_COUNT=
+CINDER_IMG_CACHE_SIZE_GB=
+CINDER_LVM_TYPE=auto
+CINDER_MY_IP=192.168.95.93
+CINDER_PLUGINS=/opt/stack/devstack/lib/cinder_plugins
+CINDER_REPO=https://opendev.org/openstack/cinder.git
+CINDER_SERVICE_HOST=192.168.95.93
+CINDER_SERVICE_LISTEN_ADDRESS=0.0.0.0
+CINDER_SERVICE_PORT=8776
+CINDER_SERVICE_PORT_INT=18776
+CINDER_SERVICE_PROTOCOL=http
+CINDER_SERVICE_REPORT_INTERVAL=120
+CINDER_STATE_PATH=/opt/stack/data/cinder
+CINDER_TARGET_HELPER=lioadm
+CINDER_TARGET_PORT=3260
+CINDER_TARGET_PREFIX=iqn.2010-10.org.openstack:
+CINDER_TARGET_PROTOCOL=iscsi
+CINDER_UPLOAD_INTERNAL_TENANT=False
+CINDER_UPLOAD_OPTIMIZED=False
+CINDER_UPLOAD_OPTIMIZED_BACKENDS=lvm:lvmdriver-1
+CINDER_USE_SERVICE_TOKEN=True
+CINDER_UWSGI=cinder.wsgi.api:application
+CINDER_UWSGI_CONF=/etc/cinder/cinder-api-uwsgi.ini
+CINDER_VOLUME_CLEAR=zero
+CIRROS_ARCH=x86_64
+CIRROS_VERSION=0.6.3
+CLOUDS_YAML=/etc/openstack/clouds.yaml
+COLUMNS=209
+CONF=/etc/neutron/plugins/ml2/ml2_conf.ini
+CONFIG_AWK_CMD=awk
+CONTAINER_PORT_BASE=6611
+CURL_GET='curl -g'
+CURRENT_LOG_TIME=2026-01-19-125748
+DATABASE_BACKENDS=' mysql postgresql'
+DATABASE_HOST=127.0.0.1
+DATABASE_PASSWORD=SuperSecret123
+DATABASE_QUERY_LOGGING=False
+DATABASE_TYPE=mysql
+DATABASE_USER=root
+DATA_DIR=/opt/stack/data
+DC=([0]="openstack" [1]="org")
+DEBUG_LIBVIRT=True
+DEBUG_LIBVIRT_COREDUMPS=False
+DEFAULT_IMAGE_FILE_NAME=cirros-0.6.3-x86_64-disk.img
+DEFAULT_IMAGE_NAME=cirros-0.6.3-x86_64-disk
+DEFAULT_VIRT_DRIVER=libvirt
+DEFAULT_VOLUME_GROUP_NAME=stack-volumes-default
+DEF_SERVICE_HOST=192.168.95.93
+DEF_SERVICE_LISTEN_ADDRESS=0.0.0.0
+DEF_SERVICE_LOCAL_HOST=127.0.0.1
+DEF_TUNNEL_ENDPOINT_IP=192.168.95.93
+DELTA=1768827587
+DEST=/opt/stack
+DEVSTACK_CERT=/opt/stack/data/devstack-cert.pem
+DEVSTACK_CERT_NAME=devstack-cert
+DEVSTACK_HOSTNAME=localhost
+DEVSTACK_PARALLEL=True
+DEVSTACK_PLUGINS=,heat,heat-dashboard,ceilometer,aodh,gnocchi
+DEVSTACK_SERIES=2026.1
+DEVSTACK_START_TIME=1768827449
+DEVSTACK_VENV=/opt/stack/data/venv
+DIRSTACK=()
+DISTRO=jammy
+DOWNLOAD_DEFAULT_IMAGES=False
+ENABLED_SERVICES=key,n-api,n-cpu,n-cond,n-sch,n-novnc,n-api-meta,placement-api,placement-client,g-api,c-sch,c-api,c-vol,ovn-controller,ovn-northd,ovs-vswitchd,ovsdb-server,q-svc,q-ovn-agent,horizon,rabbit,tempest,mysql,etcd3,dstat,h-eng,h-api,h-api-cfn,heat-dashboard,ceilometer-acompute,ceilometer-acentral,ceilometer-anotification,gnocchi-api,gnocchi-metricd,aodh-api,aodh-notifier,aodh-evaluator,aodh-listener,neutron-api,neutron-rpc-server,neutron-periodic-workers,neutron-ovn-maintenance-worker,n-novnc-cell1,n-super-cond,n-cond-cell1
+ENABLE_CHASSIS_AS_GW=True
+ENABLE_DEBUG_LOG_LEVEL=True
+ENABLE_FEDORA_VIRT_PREVIEW_REPO=False
+ENABLE_HEAT_PLUGINS=
+ENABLE_HTTPD_MOD_WSGI_SERVICES=True
+ENABLE_ISOLATED_METADATA=False
+ENABLE_KSM=True
+ENABLE_KSMTUNED=True
+ENABLE_METADATA_NETWORK=False
+ENABLE_SYSCTL_MEM_TUNING=False
+ENABLE_SYSCTL_NET_TUNING=False
+ENABLE_TENANT_TUNNELS=True
+ENABLE_TENANT_VLANS=False
+ENABLE_VOLUME_MULTIATTACH=False
+ENABLE_ZSWAP=False
+ENFORCE_SCOPE=False
+ERROR_ON_CLONE=False
+ETCD_ARCH=amd64
+ETCD_BIN_DIR=/opt/stack/bin
+ETCD_DATA_DIR=/opt/stack/data/etcd
+ETCD_DOWNLOAD_FILE=etcd-v3.5.21-linux-amd64.tar.gz
+ETCD_DOWNLOAD_LOCATION=https://github.com/etcd-io/etcd/releases/download/v3.5.21/etcd-v3.5.21-linux-amd64.tar.gz
+ETCD_DOWNLOAD_URL=https://github.com/etcd-io/etcd/releases/download
+ETCD_NAME=etcd-v3.5.21-linux-amd64
+ETCD_PEER_PORT=2380
+ETCD_PORT=2379
+ETCD_RAMDISK_MB=512
+ETCD_SHA256=adddda4b06718e68671ffabff2f8cee48488ba61ad82900e639d108f2148501c
+ETCD_SHA256_AMD64=adddda4b06718e68671ffabff2f8cee48488ba61ad82900e639d108f2148501c
+ETCD_SHA256_ARM64=95bf6918623a097c0385b96f139d90248614485e781ec9bee4768dbb6c79c53f
+ETCD_SHA256_PPC64=6fb6ecb3d1b331eb177dc610a8efad3aceb1f836d6aeb439ba0bfac5d5c2a38c
+ETCD_SHA256_S390X=a211a83961ba8a7e94f7d6343ad769e699db21a715ba4f3b68cf31ea28f9c951
+ETCD_SYSTEMD_SERVICE=devstack@etcd.service
+ETCD_USE_RAMDISK=True
+ETCD_VERSION=v3.5.21
+EUID=1001
+EXTERNAL_NETWORK_FLAGS='--external --default'
+EXTRA_CACHE_URLS=,https://github.com/etcd-io/etcd/releases/download/v3.5.21/etcd-v3.5.21-linux-amd64.tar.gz
+EXT_LIST='address-group
+address-scope
+agent
+allowed-address-pairs
+auto-allocated-topology
+availability_zone
+default-subnetpools
+dhcp_agent_scheduler
+dns-integration
+dns-domain-ports
+dns-integration-domain-keywords
+empty-string-filtering
+external-net
+extra_dhcp_opt
+extraroute
+extraroute-atomic
+filter-validation
+floating-ip-port-forwarding-detail
+fip-port-details
+flavors
+floatingip-pools
+router
+enable-default-route-bfd
+enable-default-route-ecmp
+ext-gw-mode
+l3-ha
+external-gateway-multihoming
+l3-flavors
+multi-provider
+net-mtu
+net-mtu-writable
+network_availability_zone
+network-ip-availability
+pagination
+port-device-profile
+port-mac-address-regenerate
+port-numa-affinity-policy
+port-numa-affinity-policy-socket
+binding
+binding-extended
+port-security
+project-id
+provider
+qinq
+quota-check-limit
+quota-check-limit-default
+quotas
+quota_details
+rbac-policies
+rbac-address-scope
+rbac-security-groups
+revision-if-match
+standard-attr-revisions
+router_availability_zone
+router-enable-snat
+security-groups-default-rules
+security-groups-normalized-cidr
+security-groups-remote-address-group
+security-groups-rules-belongs-to-default-sg
+security-groups-shared-filtering
+security-group
+service-type
+sorting
+standard-attr-description
+stateful-security-group
+subnet-dns-publish-fixed-ip
+subnet-external-network
+subnet-service-types
+subnet_allocation
+subnetpool-prefix-ops
+tag-creation
+standard-attr-tag
+standard-attr-timestamp
+vlan-transparent'
+EXT_NET_ID=172b9757-3f94-4b3a-8588-aaef9f5d94e3
+FILES=/opt/stack/devstack/files
+FIXED_KEY=bae3516cc1c0eb18b05440eba8012a4a880a2ee04d584a9c1579445e675b12defdc716ec
+FIXED_RANGE=10.0.0.0/22
+FIXED_RANGE_V6=fdf9:52f7:7011::/64
+FLOATING_RANGE=192.168.95.200/28
+FORCE_CONFIG_DRIVE=False
+FORCE_PREREQ=0
+FUNCNAME=([0]="source" [1]="run_plugins" [2]="run_phase" [3]="main")
+FUNC_DIR=/opt/stack/devstack
+GITBRANCH=([gnocchi]="master" [python-neutronclient]="master" [oslo.utils]="master" [stevedore]="master" [oslo.reports]="master" [osprofiler]="master" [oslo.serialization]="master" [neutron-lib]="master" [ironic-lib]="master" [python-keystoneclient]="master" [os-client-config]="master" [python-novaclient]="master" [oslo.config]="master" [ovsdbapp]="master" [ceilometermiddleware]="master" [oslo.limit]="master" [oslo.concurrency]="master" [os-ken]="master" [oslo.rootwrap]="master" [osc-lib]="master" [keystonemiddleware]="master" [oslo.vmware]="master" [tooz]="master" [oslo.privsep]="master" [oslo.policy]="master" [keystoneauth]="master" [cursive]="master" [heat-dashboard]="master" [python-barbicanclient]="master" [heat]="master" [oslo.db]="master" [osc-placement]="master" [python-glanceclient]="master" [oslo.versionedobjects]="master" [pycadf]="master" [etcd3gw]="master" [pbr]="master" [oslo.log]="master" [os-vif]="master" [taskflow]="master" [oslo.context]="master" [oslo.i18n]="master" [automaton]="master" [oslo.middleware]="master" [castellan]="master" [oslo.messaging]="master" [python-swiftclient]="master" [ceilometer]="master" [aodh]="master" [futurist]="master" [os-brick]="master" [python-brick-cinderclient-ext]="master" [python-ironicclient]="master" [debtcollector]="master" [glance_store]="master" [os-resource-classes]="master" [oslo.cache]="master" [openstacksdk]="master" [cliff]="master" [oslo.service]="master" [python-heatclient]="master" [python-openstackclient]="master" [os-traits]="master" [diskimage-builder]="master" [python-cinderclient]="master" )
+GITDIR=([gnocchi]="/opt/stack/gnocchi" [python-neutronclient]="/opt/stack/python-neutronclient" [oslo.utils]="/opt/stack/oslo.utils" [stevedore]="/opt/stack/stevedore" [oslo.reports]="/opt/stack/oslo.reports"[osprofiler]="/opt/stack/osprofiler" [oslo.serialization]="/opt/stack/oslo.serialization" [neutron-lib]="/opt/stack/neutron-lib" [ironic-lib]="/opt/stack/ironic-lib" [python-keystoneclient]="/opt/stack/python-keystoneclient" [python-aodhclient]="/opt/stack/python-aodhclient" [os-client-config]="/opt/stack/os-client-config" [python-novaclient]="/opt/stack/python-novaclient" [oslo.config]="/opt/stack/oslo.config" [ovsdbapp]="/opt/stack/ovsdbapp" [ceilometermiddleware]="/opt/stack/ceilometermiddleware" [oslo.limit]="/opt/stack/oslo.limit" [oslo.concurrency]="/opt/stack/oslo.concurrency" [oslo.rootwrap]="/opt/stack/oslo.rootwrap" [os-ken]="/opt/stack/os-ken" [osc-lib]="/opt/stack/osc-lib" [keystonemiddleware]="/opt/stack/keystonemiddleware" [oslo.vmware]="/opt/stack/oslo.vmware" [tooz]="/opt/stack/tooz" [oslo.privsep]="/opt/stack/oslo.privsep" [oslo.policy]="/opt/stack/oslo.policy" [keystoneauth]="/opt/stack/keystoneauth" [cursive]="/opt/stack/cursive" [heat-dashboard]="/opt/stack/heat-dashboard" [python-barbicanclient]="/opt/stack/python-barbicanclient" [heat]="/opt/stack/heat" [oslo.db]="/opt/stack/oslo.db" [osc-placement]="/opt/stack/osc-placement" [python-glanceclient]="/opt/stack/python-glanceclient" [oslo.versionedobjects]="/opt/stack/oslo.versionedobjects" [pycadf]="/opt/stack/pycadf" [etcd3gw]="/opt/stack/etcd3gw" [pbr]="/opt/stack/pbr" [oslo.log]="/opt/stack/oslo.log" [os-vif]="/opt/stack/os-vif" [taskflow]="/opt/stack/taskflow" [oslo.context]="/opt/stack/oslo.context" [oslo.i18n]="/opt/stack/oslo.i18n" [automaton]="/opt/stack/automaton" [oslo.middleware]="/opt/stack/oslo.middleware" [castellan]="/opt/stack/castellan" [oslo.messaging]="/opt/stack/oslo.messaging" [python-swiftclient]="/opt/stack/python-swiftclient" [ceilometer]="/opt/stack/ceilometer" [aodh]="/opt/stack/aodh" [futurist]="/opt/stack/futurist" [os-brick]="/opt/stack/os-brick" [python-brick-cinderclient-ext]="/opt/stack/python-brick-cinderclient-ext" [python-ironicclient]="/opt/stack/python-ironicclient" [debtcollector]="/opt/stack/debtcollector" [glance_store]="/opt/stack/glance_store" [os-resource-classes]="/opt/stack/os-resource-classes" [oslo.cache]="/opt/stack/oslo.cache" [openstacksdk]="/opt/stack/openstacksdk" [cliff]="/opt/stack/cliff" [oslo.service]="/opt/stack/oslo.service" [python-heatclient]="/opt/stack/python-heatclient" [python-openstackclient]="/opt/stack/python-openstackclient" [os-traits]="/opt/stack/os-traits" [diskimage-builder]="/opt/stack/diskimage-builder" [python-cinderclient]="/opt/stack/python-cinderclient" )
+GITREPO=([gnocchi]="https://opendev.org/openstack/gnocchi" [python-neutronclient]="https://opendev.org/openstack/python-neutronclient.git" [oslo.utils]="https://opendev.org/openstack/oslo.utils.git" [stevedore]="https://opendev.org/openstack/stevedore.git" [oslo.reports]="https://opendev.org/openstack/oslo.reports.git" [osprofiler]="https://opendev.org/openstack/osprofiler.git" [oslo.serialization]="https://opendev.org/openstack/oslo.serialization.git" [neutron-lib]="https://opendev.org/openstack/neutron-lib.git" [ironic-lib]="https://opendev.org/openstack/ironic-lib.git" [python-keystoneclient]="https://opendev.org/openstack/python-keystoneclient.git" [python-aodhclient]="https://opendev.org/openstack/python-aodhclient.git" [os-client-config]="https://opendev.org/openstack/os-client-config.git" [python-novaclient]="https://opendev.org/openstack/python-novaclient.git" [oslo.config]="https://opendev.org/openstack/oslo.config.git" [ovsdbapp]="https://opendev.org/openstack/ovsdbapp.git" [ceilometermiddleware]="https://opendev.org/openstack/ceilometermiddleware.git" [oslo.limit]="https://opendev.org/openstack/oslo.limit.git" [oslo.concurrency]="https://opendev.org/openstack/oslo.concurrency.git" [os-ken]="https://opendev.org/openstack/os-ken.git" [oslo.rootwrap]="https://opendev.org/openstack/oslo.rootwrap.git" [osc-lib]="https://opendev.org/openstack/osc-lib.git" [keystonemiddleware]="https://opendev.org/openstack/keystonemiddleware.git" [oslo.vmware]="https://opendev.org/openstack/oslo.vmware.git" [tooz]="https://opendev.org/openstack/tooz.git" [oslo.privsep]="https://opendev.org/openstack/oslo.privsep.git" [oslo.policy]="https://opendev.org/openstack/oslo.policy.git" [keystoneauth]="https://opendev.org/openstack/keystoneauth.git" [cursive]="https://opendev.org/openstack/cursive.git" [heat-dashboard]="https://opendev.org/openstack/heat-dashboard" [python-barbicanclient]="https://opendev.org/openstack/python-barbicanclient.git" [heat]="https://opendev.org/openstack/heat" [oslo.db]="https://opendev.org/openstack/oslo.db.git" [osc-placement]="https://opendev.org/openstack/osc-placement.git" [python-glanceclient]="https://opendev.org/openstack/python-glanceclient.git" [oslo.versionedobjects]="https://opendev.org/openstack/oslo.versionedobjects.git" [pycadf]="https://opendev.org/openstack/pycadf.git" [etcd3gw]="https://opendev.org/openstack/etcd3gw.git" [pbr]="https://opendev.org/openstack/pbr.git" [oslo.log]="https://opendev.org/openstack/oslo.log.git" [os-vif]="https://opendev.org/openstack/os-vif.git" [taskflow]="https://opendev.org/openstack/taskflow.git" [oslo.context]="https://opendev.org/openstack/oslo.context.git" [oslo.i18n]="https://opendev.org/openstack/oslo.i18n.git" [automaton]="https://opendev.org/openstack/automaton.git" [oslo.middleware]="https://opendev.org/openstack/oslo.middleware.git" [castellan]="https://opendev.org/openstack/castellan.git" [oslo.messaging]="https://opendev.org/openstack/oslo.messaging.git" [python-swiftclient]="https://opendev.org/openstack/python-swiftclient.git" [ceilometer]="https://opendev.org/openstack/ceilometer" [aodh]="https://opendev.org/openstack/aodh" [futurist]="https://opendev.org/openstack/futurist.git" [os-brick]="https://opendev.org/openstack/os-brick.git" [python-brick-cinderclient-ext]="https://opendev.org/openstack/python-brick-cinderclient-ext.git" [python-ironicclient]="https://opendev.org/openstack/python-ironicclient.git" [debtcollector]="https://opendev.org/openstack/debtcollector.git" [glance_store]="https://opendev.org/openstack/glance_store.git" [os-resource-classes]="https://opendev.org/openstack/os-resource-classes.git" [oslo.cache]="https://opendev.org/openstack/oslo.cache.git" [openstacksdk]="https://opendev.org/openstack/openstacksdk.git" [cliff]="https://opendev.org/openstack/cliff.git" [oslo.service]="https://opendev.org/openstack/oslo.service.git" [python-heatclient]="https://opendev.org/openstack/python-heatclient.git" [python-openstackclient]="https://opendev.org/openstack/python-openstackclient.git" [os-traits]="https://opendev.org/openstack/os-traits.git" [diskimage-builder]="https://opendev.org/openstack/diskimage-builder.git" [python-cinderclient]="https://opendev.org/openstack/python-cinderclient.git" )
+GIT_BASE=https://opendev.org
+GIT_DEPTH=0
+GIT_TIMEOUT=0
+GLANCE_API_CONF=/etc/glance/glance-api.conf
+GLANCE_API_PASTE_INI=/etc/glance/glance-api-paste.ini
+GLANCE_BIN_DIR=/opt/stack/data/venv/bin
+GLANCE_BRANCH=master
+GLANCE_CACHE_CONF=/etc/glance/glance-cache.conf
+GLANCE_CACHE_DIR=/opt/stack/data/glance/cache
+GLANCE_CACHE_DRIVER=centralized_db
+GLANCE_CINDER_DEFAULT_BACKEND=lvmdriver-1
+GLANCE_CONF_DIR=/etc/glance
+GLANCE_DEFAULT_BACKEND=fast
+GLANCE_DIR=/opt/stack/glance
+GLANCE_ENABLE_MULTIPLE_STORES=False
+GLANCE_ENABLE_QUOTAS=True
+GLANCE_ENFORCE_IMAGE_FORMAT=True
+GLANCE_ENFORCE_SCOPE=True
+GLANCE_HOSTPORT=192.168.95.93:9292
+GLANCE_IMAGE_DIR=/opt/stack/data/glance/images
+GLANCE_IMAGE_IMPORT_CONF=/etc/glance/glance-image-import.conf
+GLANCE_LIMIT_IMAGE_SIZE_TOTAL=2000
+GLANCE_LOCK_DIR=/opt/stack/data/glance/locks
+GLANCE_METADEF_DIR=/etc/glance/metadefs
+GLANCE_MULTIPLE_FILE_STORES=fast
+GLANCE_MULTISTORE_FILE_IMAGE_DIR=/opt/stack/data/glance
+GLANCE_NFS_MOUNTPOINT=/opt/stack/data/glance/images/mnt
+GLANCE_REPO=https://opendev.org/openstack/glance.git
+GLANCE_S3_BUCKET_NAME=images
+GLANCE_S3_BUCKET_ON_PUT=True
+GLANCE_S3_DEFAULT_BACKEND=s3_fast
+GLANCE_SCHEMA_JSON=/etc/glance/schema-image.json
+GLANCE_SERVICE_HOST=192.168.95.93
+GLANCE_SERVICE_LISTEN_ADDRESS=0.0.0.0
+GLANCE_SERVICE_PORT=9292
+GLANCE_SERVICE_PORT_INT=19292
+GLANCE_SERVICE_PROTOCOL=http
+GLANCE_SHOW_DIRECT_URL=False
+GLANCE_SHOW_MULTIPLE_LOCATIONS=False
+GLANCE_STAGING_DIR=/opt/stack/data/glance
+GLANCE_STORE_ROOTWRAP_BASE_DIR=/opt/stack/data/venv/etc/glance
+GLANCE_SWIFT_STORE_CONF=/etc/glance/glance-swift-store.conf
+GLANCE_TASKS_DIR=/opt/stack/data/glance
+GLANCE_URL=http://192.168.95.93/image
+GLANCE_USE_IMPORT_WORKFLOW=False
+GLANCE_USE_S3=False
+GLANCE_UWSGI=glance.wsgi.api:application
+GLANCE_UWSGI_CONF=/etc/glance/glance-uwsgi.ini
+GLOBAL_VENV=True
+GNOCCHI_ARCHIVE_POLICY=ceilometer-low
+GNOCCHI_BRANCH=master
+GNOCCHI_CONF=/etc/gnocchi/gnocchi.conf
+GNOCCHI_CONF_DIR=/etc/gnocchi
+GNOCCHI_COORDINATOR_URL=redis://localhost:6379
+GNOCCHI_DIR=/opt/stack/gnocchi
+GNOCCHI_METRICD_PROCESSING_DELAY=5
+GNOCCHI_REPO=https://github.com/gnocchixyz/gnocchi
+GNOCCHI_SERVICE_HOST=192.168.95.93
+GNOCCHI_SERVICE_PROTOCOL=http
+GNOCCHI_UWSGI_FILE=/etc/gnocchi/uwsgi.ini
+GNOCCHI_WSGI=gnocchi.wsgi.api:application
+GROUPS=()
+HEAT_API_CFN_HOST=192.168.95.93
+HEAT_API_HOST=192.168.95.93
+HEAT_API_PASTE_FILE=/etc/heat/api-paste.ini
+HEAT_API_UWSGI=heat.wsgi.api:application
+HEAT_API_UWSGI_CONF=/etc/heat/heat-api-uwsgi.ini
+HEAT_BIN_DIR=/opt/stack/data/venv/bin
+HEAT_CFN_API_UWSGI=heat.wsgi.cfn:application
+HEAT_CFN_API_UWSGI_CONF=/etc/heat/heat-api-cfn-uwsgi.ini
+HEAT_CONF=/etc/heat/heat.conf
+HEAT_CONF_DIR=/etc/heat
+HEAT_DASHBOARD_DIR=/opt/stack/heat-dashboard
+HEAT_DEFERRED_AUTH=
+HEAT_DIR=/opt/stack/heat
+HEAT_ENABLE_ADOPT_ABANDON=False
+HEAT_ENFORCE_SCOPE=True
+HEAT_ENGINE_WORKERS=4
+HEAT_ENV_DIR=/etc/heat/environment.d
+HEAT_PLUGIN_DIR=/opt/stack/data/heat/plugins
+HEAT_SERVICE_USER=heat
+HEAT_STACK_DOMAIN=True
+HEAT_STANDALONE=False
+HEAT_TEMPLATES_DIR=/etc/heat/templates
+HEAT_TRUSTEE_DOMAIN=default
+HEAT_TRUSTEE_PASSWORD=SuperSecret123
+HEAT_TRUSTEE_USER=heat
+HOME=/opt/stack
+HOME_URL=https://www.ubuntu.com/
+HORIZON_APACHE_ROOT=/dashboard
+HORIZON_BRANCH=master
+HORIZON_DIR=/opt/stack/horizon
+HORIZON_REPO=https://opendev.org/openstack/horizon.git
+HORIZON_SETTINGS=/opt/stack/horizon/openstack_dashboard/local/local_settings.py.example
+HOSTNAME=gelani-lab-1
+HOSTTYPE=x86_64
+HOST_IP=192.168.95.93
+HOST_IPV6=::1
+HOST_IP_IFACE=
+I=vni_ranges=1:65536
+ID=ubuntu
+ID_LIKE=debian
+IFS='
+'
+IMAGE_URLS=https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img
+INSTALL_DATABASE_SERVER_PACKAGES=True
+INSTALL_TEMPEST=True
+INSTANCES_PATH=/opt/stack/data/nova/instances
+INSTANCE_NAME_PREFIX=instance-
+INT_CA_DIR=/opt/stack/data/CA/int-ca
+IPV4_ADDRS_SAFE_TO_USE=10.0.0.0/22
+IPV6_ADDRESS_MODE=slaac
+IPV6_ADDRS_SAFE_TO_USE=fdf9:52f7:7011::/56
+IPV6_ENABLED=True
+IPV6_GLOBAL_ID=f9:52f7:7011
+IPV6_PRIVATE_NETWORK_GATEWAY=
+IPV6_PRIVATE_SUBNET_NAME=ipv6-private-subnet
+IPV6_PROVIDER_FIXED_RANGE=
+IPV6_PROVIDER_NETWORK_GATEWAY=
+IPV6_PROVIDER_SUBNET_NAME=provider_net_v6
+IPV6_PUBLIC_NETWORK_GATEWAY=2001:db8::2
+IPV6_PUBLIC_RANGE=2001:db8::/64
+IPV6_PUBLIC_SUBNET_NAME=ipv6-public-subnet
+IPV6_RA_MODE=slaac
+IPV6_ROUTER_GW_IP=2001:db8::1
+IPV6_SUBNET_ATTRIBUTES_ENABLED=True
+IPV6_SUBNET_ID=ee882e21-e946-48f8-9873-826e2c5e68b8
+IP_BRD=
+IP_VERSION=4+6
+IRONIC_PYTHON_AGENT_BRANCH=master
+IRONIC_PYTHON_AGENT_REPO=https://opendev.org/openstack/ironic-python-agent.git
+ISCSID_DEBUG=False
+ISCSID_DEBUG_LEVEL=4
+KEYSTONE_ADMIN_ENDPOINT=False
+KEYSTONE_ASSIGNMENT_BACKEND=sql
+KEYSTONE_AUTH_URI=http://192.168.95.93/identity
+KEYSTONE_AUTH_URI_V3=http://192.168.95.93/identity/v3
+KEYSTONE_BIN_DIR=/opt/stack/data/venv/bin
+KEYSTONE_BRANCH=master
+KEYSTONE_CONF=/etc/keystone/keystone.conf
+KEYSTONE_CONF_DIR=/etc/keystone
+KEYSTONE_DIR=/opt/stack/keystone
+KEYSTONE_ENABLE_CACHE=True
+KEYSTONE_ENFORCE_SCOPE=False
+KEYSTONE_IDENTITY_BACKEND=sql
+KEYSTONE_LOCKOUT_DURATION=10
+KEYSTONE_LOCKOUT_FAILURE_ATTEMPTS=2
+KEYSTONE_PASSWORD_HASH_ROUNDS=4
+KEYSTONE_PUBLIC_UWSGI=keystone.wsgi.api:application
+KEYSTONE_PUBLIC_UWSGI_CONF=/etc/keystone/keystone-uwsgi-public.ini
+KEYSTONE_REGION_NAME=RegionOne
+KEYSTONE_REPO=https://opendev.org/openstack/keystone.git
+KEYSTONE_RESOURCE_BACKEND=sql
+KEYSTONE_ROLE_BACKEND=sql
+KEYSTONE_SECURITY_COMPLIANCE_ENABLED=True
+KEYSTONE_SERVICE_HOST=192.168.95.93
+KEYSTONE_SERVICE_PORT=5000
+KEYSTONE_SERVICE_PORT_INT=5001
+KEYSTONE_SERVICE_PROTOCOL=http
+KEYSTONE_SERVICE_URI=http://192.168.95.93/identity
+KEYSTONE_SERVICE_URI_V3=http://192.168.95.93/identity/v3
+KEYSTONE_TOKEN_FORMAT=fernet
+KEYSTONE_UNIQUE_LAST_PASSWORD_COUNT=2
+KILL_PATH=/usr/bin/kill
+LAST_RUN=0
+LAST_SPINNER_PID=
+LC_ALL=en_US.utf8
+LDAP_BASE_DC=openstack
+LDAP_BASE_DN=dc=openstack,dc=org
+LDAP_DOMAIN=openstack.org
+LDAP_MANAGER_DN=cn=Manager,dc=openstack,dc=org
+LDAP_OLCDB_NUMBER=1
+LDAP_OLCDB_TYPE=mdb
+LDAP_ROOTPW_COMMAND=replace
+LDAP_SERVICE_NAME=slapd
+LDAP_URL=ldap://localhost
+LESSCLOSE='/usr/bin/lesspipe %s %s'
+LESSOPEN='| /usr/bin/lesspipe %s'
+LIBVIRT_CPU_MODE=custom
+LIBVIRT_CPU_MODEL=Nehalem
+LIBVIRT_GROUP=libvirt
+LIBVIRT_TYPE=kvm
+LINENO=395
+LINES=52
+LOCAL_HOSTNAME=gelani-lab-1
+LOGDAYS=2
+LOGDIR=/opt/stack/logs
+LOGFILE=/opt/stack/logs/stack.sh.log.2026-01-19-125748
+LOGFILE_DIR=/opt/stack/logs
+LOGFILE_NAME=stack.sh.log
+LOGNAME=stack
+LOG_COLOR=True
+LRC=localrc
+LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'
+MACHTYPE=x86_64-pc-linux-gnu
+MAIL=/var/mail/stack
+MAX_DB_CONNECTIONS=200
+MEMCACHE_SERVERS=localhost:11211
+METADATA_SERVICE_PORT=8775
+METERING_PLUGIN=neutron.services.metering.metering_plugin.MeteringPlugin
+ML2_L3_PLUGIN=ovn-router
+ML2_VLAN_RANGES=public
+MYSQL_DRIVER=PyMySQL
+MYSQL_GATHER_PERFORMANCE=True
+MYSQL_HOST=127.0.0.1
+MYSQL_REDUCE_MEMORY=True
+MYSQL_SERVICE_NAME=mysql
+MYSQL_USER=root
+NAME=Ubuntu
+NETWORK_API_EXTENSIONS=address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,bgp,bgp_4byte_asn,bgp_dragent_scheduler,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-domain-ports,dns-integration,dns-integration-domain-keywords,empty-string-filtering,enable-default-route-bfd,enable-default-route-ecmp,expose-port-forwarding-in-fip,external-gateway-multihoming,external-net,ext-gw-mode,extra_dhcp_opt,extraroute,extraroute-atomic,filter-validation,fip-port-details,flavors,floatingip-pools,floating-ip-port-forwarding,floating-ip-port-forwarding-description,floating-ip-port-forwarding-detail,floating-ip-port-forwarding-port-ranges,fwaas_v2,l3-flavors,l3-ha,logging,multi-provider,net-mtu,net-mtu-writable,network_availability_zone,network_ha,network-ip-availability,pagination,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-resource-request,port-security,port-trusted-vif,project-id,provider,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-fip,qos-gateway-ip,qos-rules-alias,qos-rule-type-details,qos-rule-type-filter,quota-check-limit,quota-check-limit-default,quota_details,quotas,rbac-address-scope,rbac-policies,rbac-security-groups,router,router_availability_zone,router-enable-snat,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,segment,sorting,standard-attr-description,standard-attr-fwaas-v2,standard-attr-revisions,standard-attr-tag,standard-attr-timestamp,stateful-security-group,subnet_allocation,subnet-dns-publish-fixed-ip,subnet-external-network,subnetpool-prefix-ops,subnet-service-types,tag-creation,tap-mirror,trunk,uplink-status-propagation,uplink-status-propagation-updatable,vlan-transparent,vpnaas,vpn-endpoint-groups
+NETWORK_GATEWAY=
+NET_ID=af7ee1c4-02c6-438b-8784-93690f664a47
+NEUTRON_BIN_DIR=/opt/stack/data/venv/bin
+NEUTRON_BRANCH=master
+NEUTRON_CONF=/etc/neutron/neutron.conf
+NEUTRON_CONF_DIR=/etc/neutron
+NEUTRON_CORE_PLUGIN_CONF=etc/neutron/plugins/ml2/ml2_conf.ini
+NEUTRON_CREATE_INITIAL_NETWORKS=True
+NEUTRON_DHCP_CONF=/etc/neutron/dhcp_agent.ini
+NEUTRON_DIR=/opt/stack/neutron
+NEUTRON_ENDPOINT_SERVICE_NAME=networking
+NEUTRON_ENFORCE_SCOPE=True
+NEUTRON_FWAAS_DIR=/opt/stack/neutron-fwaas
+NEUTRON_L3_CONF=/etc/neutron/l3_agent.ini
+NEUTRON_OVN_AGENT_BINARY=neutron-ovn-agent
+NEUTRON_OVN_BIN_DIR=/opt/stack/data/venv/bin
+NEUTRON_OVN_METADATA_BINARY=neutron-ovn-metadata-agent
+NEUTRON_PORT_SECURITY=True
+NEUTRON_REPO=https://opendev.org/openstack/neutron.git
+NEUTRON_ROOTWRAP=/opt/stack/data/venv/bin/neutron-rootwrap
+NEUTRON_TEST_CONFIG_FILE=/etc/neutron/debug.ini
+NEUTRON_UWSGI=neutron.wsgi.api:application
+NEUTRON_UWSGI_CONF=/etc/neutron/neutron-api-uwsgi.ini
+NOUNSET=
+NOVA_ALLOW_MOVE_TO_SAME_HOST=True
+NOVA_API_DB=nova_api
+NOVA_API_PASTE_INI=/etc/nova/api-paste.ini
+NOVA_BIN_DIR=/opt/stack/data/venv/bin
+NOVA_BRANCH=master
+NOVA_COND_CONF=/etc/nova/nova.conf
+NOVA_CONF=/etc/nova/nova.conf
+NOVA_CONF_DIR=/etc/nova
+NOVA_CONSOLE_PROXY_COMPUTE_TLS=False
+NOVA_CPU_CELL=1
+NOVA_CPU_CONF=/etc/nova/nova-cpu.conf
+NOVA_CPU_UUID=
+NOVA_DIR=/opt/stack/nova
+NOVA_ENABLED_APIS=osapi_compute
+NOVA_ENABLE_CACHE=True
+NOVA_ENFORCE_SCOPE=True
+NOVA_FAKE_CONF=/etc/nova/nova-fake.conf
+NOVA_FILTERS=ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,ServerGroupAntiAffinityFilter,ServerGroupAffinityFilter,SameHostFilter,DifferentHostFilter
+NOVA_INSTANCES_PATH=/opt/stack/data/nova/instances
+NOVA_LIBVIRT_TB_CACHE_SIZE=0
+NOVA_METADATA_UWSGI=nova.wsgi.metadata:application
+NOVA_METADATA_UWSGI_CONF=/etc/nova/nova-metadata-uwsgi.ini
+NOVA_MY_IP=192.168.95.93
+NOVA_NOTIFICATION_FORMAT=unversioned
+NOVA_NUM_CELLS=1
+NOVA_PLUGINS=/opt/stack/devstack/lib/nova_plugins
+NOVA_READY_TIMEOUT=60
+NOVA_REPO=https://opendev.org/openstack/nova.git
+NOVA_SERIAL_ENABLED=False
+NOVA_SERVICE_HOST=192.168.95.93
+NOVA_SERVICE_LISTEN_ADDRESS=0.0.0.0
+NOVA_SERVICE_PORT=8774
+NOVA_SERVICE_PORT_INT=18774
+NOVA_SERVICE_PROTOCOL=http
+NOVA_SERVICE_REPORT_INTERVAL=120
+NOVA_SHUTDOWN_TIMEOUT=0
+NOVA_SPICE_ENABLED=False
+NOVA_STATE_PATH=/opt/stack/data/nova
+NOVA_USE_SERVICE_TOKEN=True
+NOVA_USE_UNIFIED_LIMITS=False
+NOVA_UWSGI=nova.wsgi.osapi_compute:application
+NOVA_UWSGI_CONF=/etc/nova/nova-api-uwsgi.ini
+NOVA_VNC_ENABLED=False
+NOVNCPROXY_URL=http://192.168.95.93:6080/vnc_lite.html
+NOVNC_BRANCH=v1.3.0
+NOVNC_FROM_PACKAGE=False
+NOVNC_REPO=https://github.com/novnc/novnc.git
+NOVNC_WEB_DIR=/opt/stack/novnc
+NOW=1768827587
+NO_UPDATE_REPOS=False
+OBJECT_PORT_BASE=6613
+OFFLINE=False
+OLDPWD=/opt/stack/horizon
+OPENSSL=/usr/bin/openssl
+OPTERR=1
+OPTIND=1
+OPTS=vni_ranges=1:65536
+ORG_NAME=OpenStack
+ORG_UNIT_NAME=DevStack
+OSCWRAP_TIMER_FILE=/tmp/tmp.aRgmAbqUUu
+OSLO_BIN_DIR=/opt/stack/data/venv/bin
+OSTESTIMAGES_BRANCH=master
+OSTESTIMAGES_DIR=/opt/stack/os-test-images
+OSTESTIMAGES_REPO=https://opendev.org/openstack/os-test-images.git
+OSTYPE=linux-gnu
+OS_BRICK_LOCK_PATH=/opt/stack/data/os_brick
+OS_CLOUD=devstack-admin
+OS_VIF_OVS_ISOLATE_VIF=False
+OVN_AGENT_CONF=/etc/neutron/plugins/ml2/ovn_agent.ini
+OVN_AGENT_EXTENSIONS=metadata
+OVN_BRANCH=branch-24.03
+OVN_BRIDGE_MAPPINGS=public:br-ex
+OVN_BUILD_FROM_SOURCE=False
+OVN_BUILD_MODULES=False
+OVN_CONTROLLER_SERVICE=ovn-controller.service
+OVN_CONTROLLER_VTEP_SERVICE=ovn-controller-vtep.service
+OVN_DATADIR=/var/lib/ovn
+OVN_DBS_LOG_LEVEL=info
+OVN_DNS_SERVERS=8.8.8.8
+OVN_GENEVE_OVERHEAD=38
+OVN_IGMP_SNOOPING_ENABLE=False
+OVN_INSTALL_OVS_PYTHON_MODULE=False
+OVN_L3_CREATE_PUBLIC_NETWORK=True
+OVN_L3_SCHEDULER=leastloaded
+OVN_META_CONF=/etc/neutron/neutron_ovn_metadata_agent.ini
+OVN_META_DATA_HOST=192.168.95.93
+OVN_NB_REMOTE=tcp:192.168.95.93:6641
+OVN_NEUTRON_SYNC_MODE=log
+OVN_NORTHD_SERVICE=ovn-central.service
+OVN_PROTO=tcp
+OVN_REPO=https://github.com/ovn-org/ovn.git
+OVN_REPO_NAME=ovn
+OVN_RUNDIR=/var/run/ovn
+OVN_SB_REMOTE=tcp:192.168.95.93:6642
+OVN_SCRIPTDIR=/share/ovn/scripts
+OVN_SHAREDIR=/share/ovn
+OVN_SPLIT_HASH=05bf1dbb98b0635a51f75e268ef8aed27601401d
+OVN_UUID=38a3c1cf-489a-4c92-9b0a-29bcc8fe9f23
+OVSDB_SERVER_LOCAL_HOST=127.0.0.1
+OVSDB_SERVER_SERVICE=ovsdb-server.service
+OVS_BINDIR=/bin
+OVS_BRANCH=branch-3.3
+OVS_BRIDGE=br-int
+OVS_DATADIR=/opt/stack/data/ovs
+OVS_DATAPATH_TYPE=system
+OVS_ENABLE_TUNNELING=True
+OVS_PHYSICAL_BRIDGE=br-ex
+OVS_PREFIX=
+OVS_REPO=https://github.com/openvswitch/ovs.git
+OVS_REPO_NAME=ovs
+OVS_RUNDIR=/var/run/openvswitch
+OVS_SBINDIR=/sbin
+OVS_SCRIPTDIR=/share/openvswitch/scripts
+OVS_SHAREDIR=/share/openvswitch
+OVS_SYSCONFDIR=/etc/openvswitch
+OVS_TUNNEL_BRIDGE=br-tun
+OVS_VSWITCHD_SERVICE=ovs-vswitchd.service
+PACKAGES='apache2
+apache2-dev
+bc
+bsdmainutils
+curl
+g++
+gawk
+gcc
+gettext
+git
+graphviz
+iputils-ping
+libffi-dev
+libjpeg-dev
+libpq-dev
+libssl-dev
+libsystemd-dev
+libxml2-dev
+libxslt1-dev
+libyaml-dev
+lsof
+openssh-server
+openssl
+pkg-config
+psmisc
+python3-dev
+python3-pip
+python3-systemd
+python3-venv
+tar
+tcpdump
+unzip
+uuid-runtime
+wget
+wget
+zlib1g-dev
+libkrb5-dev
+libldap2-dev
+libsasl2-dev
+memcached
+python3-mysqldb
+sqlite3
+conntrack
+curl
+ebtables
+genisoimage
+iptables
+iputils-arping
+kpartx
+libjs-jquery-tablesorter
+parted
+pm-utils
+python3-mysqldb
+socat
+sqlite3
+sudo
+vlan
+lsscsi
+open-iscsi
+cryptsetup
+dosfstools
+genisoimage
+gir1.2-libosinfo-1.0
+netcat-openbsd
+open-iscsi
+qemu-utils
+sg3-utils
+sysfsutils
+lvm2
+qemu-utils
+thin-provisioning-tools
+acl
+dnsmasq-base
+dnsmasq-utils
+ebtables
+haproxy
+iptables
+iputils-arping
+iputils-ping
+postgresql-server-dev-all
+python3-mysqldb
+sqlite3
+sudo
+vlan
+pcp '
+PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin
+PHYSICAL_NETWORK=public
+PIPESTATUS=([0]="0")
+PIP_UPGRADE=False
+PIP_VIRTUAL_ENV=
+PLACEMENT_AUTH_STRATEGY=keystone
+PLACEMENT_BIN_DIR=/opt/stack/data/venv/bin
+PLACEMENT_BRANCH=master
+PLACEMENT_CONF=/etc/placement/placement.conf
+PLACEMENT_CONF_DIR=/etc/placement
+PLACEMENT_DIR=/opt/stack/placement
+PLACEMENT_ENFORCE_SCOPE=False
+PLACEMENT_REPO=https://opendev.org/openstack/placement.git
+PLACEMENT_SERVICE_HOST=192.168.95.93
+PLACEMENT_SERVICE_PROTOCOL=http
+PLACEMENT_UWSGI=placement.wsgi.api:application
+PLACEMENT_UWSGI_CONF=/etc/placement/placement-uwsgi.ini
+POSIXLY_CORRECT=y
+PPID=1077
+PREREQ_RERUN_HOURS=2
+PREREQ_RERUN_MARKER=/opt/stack/devstack/.prereqs
+PREREQ_RERUN_SECONDS=7200
+PRETTY_NAME='Ubuntu 22.04.5 LTS'
+PRIVACY_POLICY_URL=https://www.ubuntu.com/legal/terms-and-policies/privacy-policy
+PRIVATE_NETWORK_NAME=private
+PRIVATE_SUBNET_NAME=private-subnet
+PROVIDER_SUBNET_NAME=provider_net
+PS4='+\[$(tput  setaf 242)\]$(short_source)\[$(tput  sgr0)\] '
+PUBLIC_BRIDGE=br-ex
+PUBLIC_BRIDGE_MTU=1500
+PUBLIC_INTERFACE=eth0
+PUBLIC_NETWORK_GATEWAY=192.168.95.1
+PUBLIC_NETWORK_NAME=public
+PUBLIC_PHYSICAL_NETWORK=public
+PUBLIC_SUBNET_NAME=public-subnet
+PUB_SUBNET_ID=0f51c1e9-b2bb-4546-a208-2f911e514369
+PWD=/opt/stack/devstack
+PYTHON=/opt/stack/data/venv/bin/python3
+PYTHON3_VERSION=3.10
+QEMU_CONF=/etc/libvirt/qemu.conf
+Q_ADMIN_USERNAME=neutron
+Q_AGENT=ovn
+Q_ALLOW_OVERLAPPING_IP=True
+Q_API_PASTE_FILE=/etc/neutron/api-paste.ini
+Q_ASSIGN_GATEWAY_TO_PUBLIC_BRIDGE=True
+Q_AUTH_STRATEGY=keystone
+Q_BUILD_OVS_FROM_GIT=False
+Q_CONF_ROOTWRAP_D=/etc/neutron/rootwrap.d
+Q_DB_NAME=neutron
+Q_DHCP_CONF_FILE=/etc/neutron/dhcp_agent.ini
+Q_DVR_MODE=legacy
+Q_HOST=192.168.95.93
+Q_L3_CONF_FILE=/etc/neutron/l3_agent.ini
+Q_L3_ROUTER_PER_TENANT=True
+Q_LISTEN_ADDRESS=0.0.0.0
+Q_LOG_DRIVER_BURST_LIMIT=25
+Q_LOG_DRIVER_LOG_BASE=acl_log_meter
+Q_LOG_DRIVER_RATE_LIMIT=100
+Q_META_CONF_FILE=/etc/neutron/metadata_agent.ini
+Q_META_DATA_IP=192.168.95.93
+Q_ML2_PLUGIN_EXT_DRIVERS=port_security,qos
+Q_ML2_PLUGIN_FLAT_TYPE_OPTIONS=flat_networks=public,
+Q_ML2_PLUGIN_GENEVE_TYPE_OPTIONS=vni_ranges=1:65536
+Q_ML2_PLUGIN_GRE_TYPE_OPTIONS=tunnel_id_ranges=1:1000
+Q_ML2_PLUGIN_MECHANISM_DRIVERS=ovn
+Q_ML2_PLUGIN_TYPE_DRIVERS=geneve,vlan,flat
+Q_ML2_PLUGIN_VLAN_TYPE_OPTIONS=([0]="network_vlan_ranges=public")
+Q_ML2_PLUGIN_VXLAN_TYPE_OPTIONS=vni_ranges=1:1000
+Q_ML2_TENANT_NETWORK_TYPE=geneve
+Q_NOTIFY_NOVA_PORT_DATA_CHANGES=True
+Q_NOTIFY_NOVA_PORT_STATUS_CHANGES=True
+Q_OVS_USE_VETH=False
+Q_PLUGIN=ml2
+Q_PLUGIN_CLASS=ml2
+Q_PLUGIN_CONF_FILE=etc/neutron/plugins/ml2/ml2_conf.ini
+Q_PLUGIN_CONF_FILENAME=ml2_conf.ini
+Q_PLUGIN_CONF_PATH=etc/neutron/plugins/ml2
+Q_POLICY_FILE=/etc/neutron/policy.json
+Q_PORT=9696
+Q_PORT_INT=19696
+Q_PROTOCOL=http
+Q_PUBLIC_VETH_EX=veth-pub-ex
+Q_PUBLIC_VETH_INT=veth-pub-int
+Q_ROUTER_NAME=router1
+Q_RR_COMMAND='sudo /opt/stack/data/venv/bin/neutron-rootwrap /etc/neutron/rootwrap.conf'
+Q_RR_CONF_FILE=/etc/neutron/rootwrap.conf
+Q_RR_DAEMON_COMMAND='sudo /opt/stack/data/venv/bin/neutron-rootwrap-daemon /etc/neutron/rootwrap.conf'
+Q_SERVICE_PLUGIN_CLASSES=ovn-router
+Q_SRV_EXTRA_OPTS=([0]="tenant_network_types=geneve")
+Q_TUNNEL_TYPES=gre
+Q_USE_PROVIDERNET_FOR_PUBLIC=True
+Q_USE_PUBLIC_VETH=False
+Q_USE_ROOTWRAP=True
+Q_USE_ROOTWRAP_DAEMON=True
+Q_USE_SECGROUP=True
+RABBIT_HOST=192.168.95.93
+RABBIT_PASSWORD=SuperSecret123
+RABBIT_USERID=stackrabbit
+RC_DIR=/opt/stack/devstack
+RECLONE=False
+RECREATE_KEYSTONE_DB=True
+REGION_NAME=RegionOne
+REPOS_UPDATED=True
+REQUIREMENTS_BRANCH=master
+REQUIREMENTS_DIR=/opt/stack/requirements
+REQUIREMENTS_REPO=https://opendev.org/openstack/requirements.git
+RETRY_UPDATE=False
+ROOTWRAP_DAEMON_SUDOER_CMD='/opt/stack/data/venv/bin/neutron-rootwrap-daemon /etc/neutron/rootwrap.conf'
+ROOTWRAP_SUDOER_CMD='/opt/stack/data/venv/bin/neutron-rootwrap /etc/neutron/rootwrap.conf *'
+ROOT_CA_DIR=/opt/stack/data/CA/root-ca
+ROUTER_GW_IP='   192.168.95.202  '
+ROUTER_ID=c52d7d85-0c51-48c2-84e6-e60346626131
+S3_SERVICE_PORT=3333
+SECTION=ml2_type_geneve
+SERVICE_DIR=/opt/stack/status
+SERVICE_DOMAIN_NAME=Default
+SERVICE_GRACEFUL_SHUTDOWN_TIMEOUT=5
+SERVICE_HOST=192.168.95.93
+SERVICE_IP_VERSION=4
+SERVICE_LISTEN_ADDRESS=0.0.0.0
+SERVICE_LOCAL_HOST=127.0.0.1
+SERVICE_PASSWORD=SuperSecret123
+SERVICE_PROJECT_NAME=service
+SERVICE_PROTOCOL=http
+SERVICE_TENANT_NAME=service
+SERVICE_TIMEOUT=60
+SHELL=/bin/bash
+SHLVL=2
+SKIP_EPEL_INSTALL=False
+SKIP_STOP_OVN=False
+SPICEHTML5PROXY_URL=http://192.168.95.93:6081/spice_auto.html
+SPICE_BRANCH=master
+SPICE_REPO=http://anongit.freedesktop.org/git/spice/spice-html5.git
+SQLALCHEMY_BRANCH=main
+SQLALCHEMY_DIR=/opt/stack/sqlalchemy
+SQLALCHEMY_REPO=https://github.com/sqlalchemy/sqlalchemy.git
+SSL_BUNDLE_FILE=/opt/stack/data/ca-bundle.pem
+STACK_ENV_VARS='BASE_SQL_CONN DATA_DIR DEST ENABLED_SERVICES HOST_IP     KEYSTONE_SERVICE_URI     LOGFILE OS_CACERT SERVICE_HOST STACK_USER TLS_IP     HOST_IPV6 SERVICE_IP_VERSION TUNNEL_ENDPOINT_IP TUNNEL_IP_VERSION'
+STACK_GROUP=stack
+STACK_USER=stack
+STUD_CIPHERS='TLSv1+HIGH:!DES:!aNULL:!eNULL:@STRENGTH'
+STUD_PROTO=--tls
+SUBNETPOOL_NAME_V4=shared-default-subnetpool-v4
+SUBNETPOOL_NAME_V6=shared-default-subnetpool-v6
+SUBNETPOOL_PREFIX_V4=10.0.0.0/22
+SUBNETPOOL_PREFIX_V6=fdf9:52f7:7011::/56
+SUBNETPOOL_SIZE_V4=26
+SUBNETPOOL_SIZE_V6=64
+SUBNETPOOL_V4_ID=b752345d-2fe5-4d77-9cbc-d857020c5df4
+SUBNETPOOL_V6_ID=d5f7c950-2879-4584-ba41-2f5de2f4487d
+SUBNET_ID=6adea907-730d-4318-98d5-1908d2d013fc
+SUBUNIT_OUTPUT=/opt/stack/devstack.subunit
+SUDO_COMMAND=/bin/bash
+SUDO_GID=1000
+SUDO_SECURE_PATH_FILE=/etc/sudoers.d/zz-secure-path
+SUDO_UID=1000
+SUDO_USER=ubuntu
+SUMFILE=/opt/stack/logs/stack.sh.log.2026-01-19-125748.summary.2026-01-19-125748
+SUPPORTED_DISTROS='trixie|bookworm|jammy|noble|rhel9|rhel10'
+SUPPORTED_NETWORK_API_EXTENSIONS=address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-integration,empty-string-filtering,external-net,extra_dhcp_opt,filter-validation,multi-provider,network_ha,net-mtu,net-mtu-writable,network_availability_zone,network-ip-availability,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-security,port-trusted-vif,provider,port-resource-request,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-rule-type-details,qos-rule-type-filter,qos-rules-alias,quotas,quota-check-limit,quota-check-limit-default,quota_details,rbac-address-scope,rbac-policies,rbac-security-groups,standard-attr-revisions,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,stateful-security-group,standard-attr-description,subnet_allocation,standard-attr-tag,standard-attr-timestamp,subnetpool-prefix-ops,subnet-external-network,subnet-service-types,tag-creation,trunk,segment,expose-port-forwarding-in-fip,floating-ip-port-forwarding-description,floating-ip-port-forwarding-port-ranges,floating-ip-port-forwarding,vlan-transparent,logging,vpnaas,vpn-endpoint-groups,bgp,bgp_4byte_asn,bgp_dragent_scheduler,fwaas_v2,standard-attr-fwaas-v2,uplink-status-propagation,uplink-status-propagation-updatable,tap-mirror,router,extraroute,extraroute-atomic,ext-gw-mode,floating-ip-port-forwarding-detail,fip-port-details,floatingip-pools,pagination,qos-fip,qos-gateway-ip,sorting,project-id,dns-integration,dns-integration-domain-keywords,dns-domain-ports,subnet-dns-publish-fixed-ip,agent,availability_zone,router_availability_zone,flavors,l3-flavors,external-gateway-multihoming,enable-default-route-bfd,enable-default-route-ecmp,l3-ha,router-enable-snat
+SUPPORT_URL=https://help.ubuntu.com/
+SWIFT_APACHE_WSGI_DIR=/var/www/swift
+SWIFT_BIN_DIR=/opt/stack/data/venv/bin
+SWIFT_BRANCH=master
+SWIFT_CONF_DIR=/etc/swift
+SWIFT_DATA_DIR=/opt/stack/data/swift
+SWIFT_DEFAULT_BIND_PORT=8080
+SWIFT_DEFAULT_BIND_PORT_INT=8081
+SWIFT_DIR=/opt/stack/swift
+SWIFT_DISK_IMAGE=/opt/stack/data/swift/drives/images/swift.img
+SWIFT_ENABLE_TEMPURLS=False
+SWIFT_EXTRAS_MIDDLEWARE='formpost staticweb'
+SWIFT_EXTRAS_MIDDLEWARE_LAST=
+SWIFT_EXTRAS_MIDDLEWARE_NO_AUTH=crossdomain
+SWIFT_LOG_TOKEN_LENGTH=12
+SWIFT_LOOPBACK_DISK_SIZE=6G
+SWIFT_LOOPBACK_DISK_SIZE_DEFAULT=6G
+SWIFT_MAX_FILE_SIZE=5368709122
+SWIFT_MAX_FILE_SIZE_DEFAULT=5368709122
+SWIFT_MAX_HEADER_SIZE=16384
+SWIFT_PARTITION_POWER_SIZE=9
+SWIFT_REPLICAS=1
+SWIFT_REPLICAS_SEQ=1
+SWIFT_REPO=https://opendev.org/openstack/swift.git
+SWIFT_SERVICE_LISTEN_ADDRESS=0.0.0.0
+SWIFT_SERVICE_LOCAL_HOST=127.0.0.1
+SWIFT_SERVICE_PROTOCOL=http
+SWIFT_START_ALL_SERVICES=True
+SWIFT_STORAGE_IPS=
+SWIFT_TEMPURL_KEY=
+SWIFT_USE_MOD_WSGI=False
+SYSLOG=False
+SYSLOG_HOST=192.168.95.93
+SYSLOG_PORT=516
+SYSTEMCTL='sudo systemctl'
+SYSTEMD_DIR=/etc/systemd/system
+TARGET_BRANCH=master
+TARGET_ENABLE_OVN_AGENT=False
+TCPDUMP_ARGS=
+TCPDUMP_OUTPUT=/opt/stack/logs/tcpdump.pcap
+TEMPEST_ALLOW_TENANT_ISOLATION=True
+TEMPEST_BRANCH=master
+TEMPEST_CONCURRENCY=16
+TEMPEST_CONFIG=/opt/stack/tempest/etc/tempest.conf
+TEMPEST_CONFIG_DIR=/opt/stack/tempest/etc
+TEMPEST_DEFAULT_STORAGE_PROTOCOL=iSCSI
+TEMPEST_DEFAULT_VOLUME_VENDOR='Open Source'
+TEMPEST_DIR=/opt/stack/tempest
+TEMPEST_FLAVOR_ALT_RAM=256
+TEMPEST_FLAVOR_RAM=192
+TEMPEST_GLANCE_IMAGE_COUNT=1
+TEMPEST_GLANCE_IMPORT_POLL_INTERVAL=1
+TEMPEST_GLANCE_IMPORT_POLL_LIMIT=12
+TEMPEST_HAS_ADMIN=True
+TEMPEST_PLUGINS=0
+TEMPEST_REPO=https://opendev.org/openstack/tempest.git
+TEMPEST_STATE_PATH=/opt/stack/data/tempest
+TEMPEST_STORAGE_PROTOCOL=iSCSI
+TEMPEST_USE_ISO_IMAGE=False
+TEMPEST_USE_TEST_ACCOUNTS=False
+TEMPEST_VENV_UPPER_CONSTRAINTS=master
+TEMPEST_VOLUME_DRIVER=default
+TEMPEST_VOLUME_VENDOR='Open Source'
+TEMPFILE=/tmp/tmp.K3YGYjNyUU
+TENANT_TUNNEL_RANGES=1:1000
+TENANT_VLAN_RANGE=
+TERM=xterm-256color
+TIMESTAMP_FORMAT=%F-%H%M%S
+TOP_DIR=/opt/stack/devstack
+TPUT_T=
+TRAILING_TARGET_BRANCH=master
+TUNNEL_ENDPOINT_IP=192.168.95.93
+TUNNEL_IP=192.168.95.93
+TUNNEL_IP_VERSION=4
+UBUNTU_CODENAME=jammy
+UBUNTU_RELEASE_BASE_NUM=22
+UID=1001
+ULIMIT_NOFILE=2048
+USER=stack
+USERRC_PARAMS='-PA --target-dir /opt/stack/devstack/accrc --os-password SuperSecret123'
+USER_UNITS=False
+USE_CINDER_FOR_GLANCE=False
+USE_JOURNAL=False
+USE_SUBNETPOOL=True
+USE_VENV=False
+VERBOSE=True
+VERBOSE_NO_TIMESTAMP=True
+VERSION='22.04.5 LTS (Jammy Jellyfish)'
+VERSION_CODENAME=jammy
+VERSION_ID=22.04
+VIF_PLUGGING_IS_FATAL=True
+VIF_PLUGGING_TIMEOUT=300
+VIRTUALENV_CMD='python3 -m venv'
+VIRT_DRIVER=libvirt
+VNCSERVER_LISTEN=0.0.0.0
+VNCSERVER_PROXYCLIENT_ADDRESS=192.168.95.93
+VOLUME_BACKING_FILE_SIZE=30G
+VOLUME_GROUP_NAME=stack-volumes
+VOLUME_NAME_PREFIX=volume-
+VOLUME_TYPE_MULTIATTACH=multiattach
+WORKER_TIMEOUT=80
+WSGI_MODE=uwsgi
+XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
+ZSWAP_COMPRESSOR=lz4
+ZSWAP_ZPOOL=zsmalloc
+_=posix
+_ASYNC_BG_TIME=295899
+_DEFAULT_LVM_INIT=0
+_DEFAULT_PYTHON3_VERSION=3.10
+_DEVSTACK_FUNCTIONS=1
+_DEVSTACK_FUNCTIONS_COMMON=1
+_DEVSTACK_STACKRC=1
+_LOG_COLOR_DEFAULT=True
+_Q_PLUGIN_EXTRA_CONF_PATH=/etc/neutron
+_TIME_BEGIN=1768827449
+_TIME_START=([wait_for_service]="" [async_wait]="" [apt-get]="" [test_with_retry]="" [dbsync]="" [pip_install]="" [apt-get-update]="" [run_process]="" [git_timed]="" )
+_TIME_TOTAL=([wait_for_service]="10106" [async_wait]="79457" [apt-get]="338820" [test_with_retry]="167" [dbsync]="4866" [pip_install]="196302" [apt-get-update]="2791" [run_process]="30791" [git_timed]="277161" )
+_of_args='-v --no-timestamp'
+attempt=1
+backend=postgresql
+be=lvm:lvmdriver-1
+be_name=lvmdriver-1
+be_type=lvm
+db=postgresql
+db_version=8.0.44
+dc=org
+default_v4_route_devs=ens3
+default_v6_route_devs=
+dir=/opt/stack/heat
+disabled_ext=
+dn=,dc=openstack,dc=org
+domain_id=5e6285b17bfd42ad8ac5a1be6f6bb23d
+enabled_ext='address-group
+address-scope
+agent
+allowed-address-pairs
+auto-allocated-topology
+availability_zone
+bgp
+bgp_4byte_asn
+bgp_dragent_scheduler
+binding
+binding-extended
+default-subnetpools
+dhcp_agent_scheduler
+dns-domain-ports
+dns-integration
+dns-integration-domain-keywords
+empty-string-filtering
+enable-default-route-bfd
+enable-default-route-ecmp
+expose-port-forwarding-in-fip
+external-gateway-multihoming
+external-net
+ext-gw-mode
+extra_dhcp_opt
+extraroute
+extraroute-atomic
+filter-validation
+fip-port-details
+flavors
+floatingip-pools
+floating-ip-port-forwarding
+floating-ip-port-forwarding-description
+floating-ip-port-forwarding-detail
+floating-ip-port-forwarding-port-ranges
+fwaas_v2
+l3-flavors
+l3-ha
+logging
+multi-provider
+net-mtu
+net-mtu-writable
+network_availability_zone
+network_ha
+network-ip-availability
+pagination
+port-device-profile
+port-hardware-offload-type
+port-mac-address-regenerate
+port-numa-affinity-policy
+port-numa-affinity-policy-socket
+port-resource-request
+port-security
+port-trusted-vif
+project-id
+provider
+qinq
+qos
+qos-bw-limit-direction
+qos-bw-minimum-ingress
+qos-default
+qos-fip
+qos-gateway-ip
+qos-rules-alias
+qos-rule-type-details
+qos-rule-type-filter
+quota-check-limit
+quota-check-limit-default
+quota_details
+quotas
+rbac-address-scope
+rbac-policies
+rbac-security-groups
+router
+router_availability_zone
+router-enable-snat
+security-group
+security-groups-default-rules
+security-groups-normalized-cidr
+security-groups-remote-address-group
+security-groups-rules-belongs-to-default-sg
+security-groups-shared-filtering
+segment
+sorting
+standard-attr-description
+standard-attr-fwaas-v2
+standard-attr-revisions
+standard-attr-tag
+standard-attr-timestamp
+stateful-security-group
+subnet_allocation
+subnet-dns-publish-fixed-ip
+subnet-external-network
+subnetpool-prefix-ops
+subnet-service-types
+tag-creation
+tap-mirror
+trunk
+uplink-status-propagation
+uplink-status-propagation-updatable
+vlan-transparent
+vpnaas
+vpn-endpoint-groups'
+exceptions=80-tempest.sh
+extensions='address-group
+address-scope
+agent
+allowed-address-pairs
+auto-allocated-topology
+availability_zone
+bgp
+bgp_4byte_asn
+bgp_dragent_scheduler
+binding
+binding-extended
+default-subnetpools
+dhcp_agent_scheduler
+dns-domain-ports
+dns-integration
+dns-integration-domain-keywords
+empty-string-filtering
+enable-default-route-bfd
+enable-default-route-ecmp
+expose-port-forwarding-in-fip
+external-gateway-multihoming
+external-net
+ext-gw-mode
+extra_dhcp_opt
+extraroute
+extraroute-atomic
+filter-validation
+fip-port-details
+flavors
+floatingip-pools
+floating-ip-port-forwarding
+floating-ip-port-forwarding-description
+floating-ip-port-forwarding-detail
+floating-ip-port-forwarding-port-ranges
+fwaas_v2
+l3-flavors
+l3-ha
+logging
+multi-provider
+net-mtu
+net-mtu-writable
+network_availability_zone
+network_ha
+network-ip-availability
+pagination
+port-device-profile
+port-hardware-offload-type
+port-mac-address-regenerate
+port-numa-affinity-policy
+port-numa-affinity-policy-socket
+port-resource-request
+port-security
+port-trusted-vif
+project-id
+provider
+qinq
+qos
+qos-bw-limit-direction
+qos-bw-minimum-ingress
+qos-default
+qos-fip
+qos-gateway-ip
+qos-rules-alias
+qos-rule-type-details
+qos-rule-type-filter
+quota-check-limit
+quota-check-limit-default
+quota_details
+quotas
+rbac-address-scope
+rbac-policies
+rbac-security-groups
+router
+router_availability_zone
+router-enable-snat
+security-group
+security-groups-default-rules
+security-groups-normalized-cidr
+security-groups-remote-address-group
+security-groups-rules-belongs-to-default-sg
+security-groups-shared-filtering
+segment
+sorting
+standard-attr-description
+standard-attr-fwaas-v2
+standard-attr-revisions
+standard-attr-tag
+standard-attr-timestamp
+stateful-security-group
+subnet_allocation
+subnet-dns-publish-fixed-ip
+subnet-external-network
+subnetpool-prefix-ops
+subnet-service-types
+tag-creation
+tap-mirror
+trunk
+uplink-status-propagation
+uplink-status-propagation-updatable
+vlan-transparent
+vpnaas
+vpn-endpoint-groups'
+extra=80-tempest.sh
+extra_plugin_file_name=/opt/stack/devstack/extras.d/80-tempest.sh
+f=/opt/stack/devstack/lib/databases/postgresql
+fips=
+i=TUNNEL_IP_VERSION
+image_url=https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img
+lfile=localrc
+localrc=/opt/stack/devstack/.localrc.password
+logfile=ovsdb-server-sb.log
+malloc_tuning='MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
+max_db_ver=11.6.2
+min_db_ver=11.6.2
+mode=stack
+msg='ENTER A PASSWORD TO USE FOR HORIZON AND KEYSTONE (20 CHARS OR LESS).'
+name=create_flavors
+opt='?'
+os_CODENAME=jammy
+os_PACKAGE=deb
+os_RELEASE=22.04
+os_VENDOR=Ubuntu
+phase=extra
+pkgs=
+plugin=heat
+plugins=,heat,heat-dashboard,ceilometer,aodh,gnocchi
+port=60999
+property_key=volume_backend_name
+property_value=lvmdriver-1
+pw=SuperSecret123
+rootwrap_sudo_cmd='/opt/stack/data/venv/bin/nova-rootwrap-daemon /etc/nova/rootwrap.conf'
+srv=n-sproxy
+supported_ext='address-group
+address-scope
+agent
+allowed-address-pairs
+auto-allocated-topology
+availability_zone
+bgp
+bgp_4byte_asn
+bgp_dragent_scheduler
+binding
+binding-extended
+default-subnetpools
+dhcp_agent_scheduler
+dns-domain-ports
+dns-integration
+dns-integration-domain-keywords
+empty-string-filtering
+enable-default-route-bfd
+enable-default-route-ecmp
+expose-port-forwarding-in-fip
+external-gateway-multihoming
+external-net
+ext-gw-mode
+extra_dhcp_opt
+extraroute
+extraroute-atomic
+filter-validation
+fip-port-details
+flavors
+floatingip-pools
+floating-ip-port-forwarding
+floating-ip-port-forwarding-description
+floating-ip-port-forwarding-detail
+floating-ip-port-forwarding-port-ranges
+fwaas_v2
+l3-flavors
+l3-ha
+logging
+multi-provider
+net-mtu
+net-mtu-writable
+network_availability_zone
+network_ha
+network-ip-availability
+pagination
+port-device-profile
+port-hardware-offload-type
+port-mac-address-regenerate
+port-numa-affinity-policy
+port-numa-affinity-policy-socket
+port-resource-request
+port-security
+port-trusted-vif
+project-id
+provider
+qinq
+qos
+qos-bw-limit-direction
+qos-bw-minimum-ingress
+qos-default
+qos-fip
+qos-gateway-ip
+qos-rules-alias
+qos-rule-type-details
+qos-rule-type-filter
+quota-check-limit
+quota-check-limit-default
+quota_details
+quotas
+rbac-address-scope
+rbac-policies
+rbac-security-groups
+router
+router_availability_zone
+router-enable-snat
+security-group
+security-groups-default-rules
+security-groups-normalized-cidr
+security-groups-remote-address-group
+security-groups-rules-belongs-to-default-sg
+security-groups-shared-filtering
+segment
+sorting
+standard-attr-description
+standard-attr-fwaas-v2
+standard-attr-revisions
+standard-attr-tag
+standard-attr-timestamp
+stateful-security-group
+subnet_allocation
+subnet-dns-publish-fixed-ip
+subnet-external-network
+subnetpool-prefix-ops
+subnet-service-types
+tag-creation
+tap-mirror
+trunk
+uplink-status-propagation
+uplink-status-propagation-updatable
+vlan-transparent
+vpnaas
+vpn-endpoint-groups'
+system_member_user=8d3686c50e0b489a977dbaa420dd8df7
+system_reader_user=00188e0204c842a283c4284685a18a17
+time_stamp=2026-01-19-131836
+type_name=lvmdriver-1
+v=url:redis://localhost:6379
+var=ADMIN_PASSWORD
+++/opt/stack/heat/devstack/plugin.sh:source:11  is_heat_enabled
+++/opt/stack/heat/devstack/lib/heat:is_heat_enabled:91  [[ ,key,n-api,n-cpu,n-cond,n-sch,n-novnc,n-api-meta,placement-api,placement-client,g-api,c-sch,c-api,c-vol,ovn-controller,ovn-northd,ovs-vswitchd,ovsdb-server,q-svc,q-ovn-agent,horizon,rabbit,tempest,mysql,etcd3,dstat,h-eng,h-api,h-api-cfn,heat-dashboard,ceilometer-acompute,ceilometer-acentral,ceilometer-anotification,gnocchi-api,gnocchi-metricd,aodh-api,aodh-notifier,aodh-evaluator,aodh-listener,neutron-api,neutron-rpc-server,neutron-periodic-workers,neutron-ovn-maintenance-worker,n-novnc-cell1,n-super-cond,n-cond-cell1 =~ ,h- ]]
+++/opt/stack/heat/devstack/lib/heat:is_heat_enabled:91  return 0
+++/opt/stack/heat/devstack/plugin.sh:source:12  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat/devstack/plugin.sh:source:12  [[ extra == \i\n\s\t\a\l\l ]]
+++/opt/stack/heat/devstack/plugin.sh:source:19  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat/devstack/plugin.sh:source:19  [[ extra == \t\e\s\t\-\c\o\n\f\i\g ]]
+++/opt/stack/heat/devstack/plugin.sh:source:25  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat/devstack/plugin.sh:source:25  [[ extra == \p\o\s\t\-\c\o\n\f\i\g ]]
+++/opt/stack/heat/devstack/plugin.sh:source:32  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat/devstack/plugin.sh:source:32  [[ extra == \e\x\t\r\a ]]
+++/opt/stack/heat/devstack/plugin.sh:source:34  init_heat
+++/opt/stack/heat/devstack/lib/heat:init_heat:240  is_service_enabled mysql postgresql
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/heat/devstack/lib/heat:init_heat:242  recreate_database heat
+++lib/database:recreate_database:112        local db=heat
+++lib/database:recreate_database:113        recreate_database_mysql heat
+++lib/databases/mysql:recreate_database_mysql:60  local db=heat
+++lib/databases/mysql:recreate_database_mysql:61  mysql -uroot -pSuperSecret123 -h127.0.0.1 -e 'DROP DATABASE IF EXISTS heat;'
+mysql: [Warning] Using a password on the command line interface can be insecure.
+++lib/databases/mysql:recreate_database_mysql:62  mysql -uroot -pSuperSecret123 -h127.0.0.1 -e 'CREATE DATABASE heat CHARACTER SET utf8;'
+mysql: [Warning] Using a password on the command line interface can be insecure.
+++/opt/stack/heat/devstack/lib/heat:init_heat:243  /opt/stack/data/venv/bin/heat-manage db_sync
+INFO dbcounter [-] Registered counter for database heat
+INFO heat.db.migration [-] Applying migration(s)
+INFO alembic.runtime.migration [-] Context impl MySQLImpl.
+INFO alembic.runtime.migration [-] Will assume non-transactional DDL.
+INFO alembic.runtime.migration [-] Running upgrade  -> c6214ca60943, Initial revision
+INFO heat.db.migration [-] Migration(s) applied
+++/opt/stack/heat/devstack/plugin.sh:source:37  echo_summary 'Starting heat'
+++./stack.sh:echo_summary:438               [[ -t 3 ]]
+++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
+++./stack.sh:echo_summary:444               echo -e Starting heat
+++/opt/stack/heat/devstack/plugin.sh:source:38  start_heat
+++/opt/stack/heat/devstack/lib/heat:start_heat:268  run_process h-eng '/opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf'
+++functions-common:run_process:1677         local service=h-eng
+++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=h-eng
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828719659
+++functions-common:run_process:1686         is_service_enabled h-eng
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd h-eng '/opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf' '' '' ''
+++functions-common:_run_under_systemd:1631  local service=h-eng
+++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf'
+++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf'
+++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@h-eng.service
+++functions-common:_run_under_systemd:1638  local group=
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[h-eng] ]]
+++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf =~ uwsgi ]]
+++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@h-eng.service '/opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf' '' stack ''
+++functions-common:write_user_unit_file:1538  local service=devstack@h-eng.service
+++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf'
+++functions-common:write_user_unit_file:1540  local group=
+++functions-common:write_user_unit_file:1541  local user=stack
+++functions-common:write_user_unit_file:1542  local env_vars=
+++functions-common:write_user_unit_file:1543  local extra=
+++functions-common:write_user_unit_file:1544  [[ -n '' ]]
+++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@h-eng.service
+++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
+++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@h-eng.service Unit Description 'Devstack devstack@h-eng.service'
+++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@h-eng.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@h-eng.service Service User stack
+++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@h-eng.service Service ExecStart '/opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf'
+++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@h-eng.service Service KillMode process
+++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@h-eng.service Service TimeoutStopSec 300
+++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@h-eng.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_user_unit_file:1557  [[ -n '' ]]
+++functions-common:write_user_unit_file:1560  [[ -n '' ]]
+++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@h-eng.service Install WantedBy multi-user.target
+++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@h-eng.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@h-eng.service → /etc/systemd/system/devstack@h-eng.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@h-eng.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828719659
+++functions-common:time_stop:2432           [[ -z 1768828719659 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828721042
+++functions-common:time_stop:2436           elapsed_time=1383
+++functions-common:time_stop:2437           total=30791
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=32174
++++/opt/stack/heat/devstack/lib/heat:start_heat:271  which uwsgi
+++/opt/stack/heat/devstack/lib/heat:start_heat:271  run_process h-api '/bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini' ''
+++functions-common:run_process:1677         local service=h-api
+++functions-common:run_process:1678         local 'command=/bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=h-api
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828721158
+++functions-common:run_process:1686         is_service_enabled h-api
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd h-api '/bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini' '' '' ''
+++functions-common:_run_under_systemd:1631  local service=h-api
+++functions-common:_run_under_systemd:1632  local 'command=/bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini'
+++functions-common:_run_under_systemd:1633  local 'cmd=/bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini'
+++functions-common:_common_systemd_pitfalls:1606  [[ /bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@h-api.service
+++functions-common:_run_under_systemd:1638  local group=
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[h-api] ]]
+++functions-common:_run_under_systemd:1647  [[ /bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini =~ uwsgi ]]
+++functions-common:_run_under_systemd:1648  [[ True == \T\r\u\e ]]
+++functions-common:_run_under_systemd:1649  cmd='/bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:_run_under_systemd:1651  write_uwsgi_user_unit_file devstack@h-api.service '/bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini --venv /opt/stack/data/venv' '' stack ''
+++functions-common:write_uwsgi_user_unit_file:1570  local service=devstack@h-api.service
+++functions-common:write_uwsgi_user_unit_file:1571  local 'command=/bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:write_uwsgi_user_unit_file:1572  local group=
+++functions-common:write_uwsgi_user_unit_file:1573  local user=stack
+++functions-common:write_uwsgi_user_unit_file:1574  local env_vars=
+++functions-common:write_uwsgi_user_unit_file:1575  local unitfile=/etc/systemd/system/devstack@h-api.service
+++functions-common:write_uwsgi_user_unit_file:1576  mkdir -p /etc/systemd/system
+++functions-common:write_uwsgi_user_unit_file:1578  iniset -sudo /etc/systemd/system/devstack@h-api.service Unit Description 'Devstack devstack@h-api.service'
+++functions-common:write_uwsgi_user_unit_file:1579  iniset -sudo /etc/systemd/system/devstack@h-api.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_uwsgi_user_unit_file:1580  iniset -sudo /etc/systemd/system/devstack@h-api.service Service SyslogIdentifier devstack@h-api.service
+++functions-common:write_uwsgi_user_unit_file:1581  iniset -sudo /etc/systemd/system/devstack@h-api.service Service User stack
+++functions-common:write_uwsgi_user_unit_file:1582  iniset -sudo /etc/systemd/system/devstack@h-api.service Service ExecStart '/bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:write_uwsgi_user_unit_file:1583  iniset -sudo /etc/systemd/system/devstack@h-api.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_uwsgi_user_unit_file:1584  iniset -sudo /etc/systemd/system/devstack@h-api.service Service Type notify
+++functions-common:write_uwsgi_user_unit_file:1585  iniset -sudo /etc/systemd/system/devstack@h-api.service Service KillMode process
+++functions-common:write_uwsgi_user_unit_file:1586  iniset -sudo /etc/systemd/system/devstack@h-api.service Service Restart always
+++functions-common:write_uwsgi_user_unit_file:1587  iniset -sudo /etc/systemd/system/devstack@h-api.service Service NotifyAccess all
+++functions-common:write_uwsgi_user_unit_file:1588  iniset -sudo /etc/systemd/system/devstack@h-api.service Service RestartForceExitStatus 100
+++functions-common:write_uwsgi_user_unit_file:1590  [[ -n '' ]]
+++functions-common:write_uwsgi_user_unit_file:1593  [[ -n '' ]]
+++functions-common:write_uwsgi_user_unit_file:1596  iniset -sudo /etc/systemd/system/devstack@h-api.service Install WantedBy multi-user.target
+++functions-common:write_uwsgi_user_unit_file:1599  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@h-api.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@h-api.service → /etc/systemd/system/devstack@h-api.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@h-api.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828721158
+++functions-common:time_stop:2432           [[ -z 1768828721158 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828722876
+++functions-common:time_stop:2436           elapsed_time=1718
+++functions-common:time_stop:2437           total=32174
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=33892
++++/opt/stack/heat/devstack/lib/heat:start_heat:272  which uwsgi
+++/opt/stack/heat/devstack/lib/heat:start_heat:272  run_process h-api-cfn '/bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini' ''
+++functions-common:run_process:1677         local service=h-api-cfn
+++functions-common:run_process:1678         local 'command=/bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=h-api-cfn
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828722994
+++functions-common:run_process:1686         is_service_enabled h-api-cfn
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd h-api-cfn '/bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini' '' '' ''
+++functions-common:_run_under_systemd:1631  local service=h-api-cfn
+++functions-common:_run_under_systemd:1632  local 'command=/bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini'
+++functions-common:_run_under_systemd:1633  local 'cmd=/bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini'
+++functions-common:_common_systemd_pitfalls:1606  [[ /bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@h-api-cfn.service
+++functions-common:_run_under_systemd:1638  local group=
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[h-api-cfn] ]]
+++functions-common:_run_under_systemd:1647  [[ /bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini =~ uwsgi ]]
+++functions-common:_run_under_systemd:1648  [[ True == \T\r\u\e ]]
+++functions-common:_run_under_systemd:1649  cmd='/bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:_run_under_systemd:1651  write_uwsgi_user_unit_file devstack@h-api-cfn.service '/bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini --venv /opt/stack/data/venv' '' stack ''
+++functions-common:write_uwsgi_user_unit_file:1570  local service=devstack@h-api-cfn.service
+++functions-common:write_uwsgi_user_unit_file:1571  local 'command=/bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:write_uwsgi_user_unit_file:1572  local group=
+++functions-common:write_uwsgi_user_unit_file:1573  local user=stack
+++functions-common:write_uwsgi_user_unit_file:1574  local env_vars=
+++functions-common:write_uwsgi_user_unit_file:1575  local unitfile=/etc/systemd/system/devstack@h-api-cfn.service
+++functions-common:write_uwsgi_user_unit_file:1576  mkdir -p /etc/systemd/system
+++functions-common:write_uwsgi_user_unit_file:1578  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Unit Description 'Devstack devstack@h-api-cfn.service'
+++functions-common:write_uwsgi_user_unit_file:1579  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_uwsgi_user_unit_file:1580  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Service SyslogIdentifier devstack@h-api-cfn.service
+++functions-common:write_uwsgi_user_unit_file:1581  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Service User stack
+++functions-common:write_uwsgi_user_unit_file:1582  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Service ExecStart '/bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:write_uwsgi_user_unit_file:1583  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_uwsgi_user_unit_file:1584  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Service Type notify
+++functions-common:write_uwsgi_user_unit_file:1585  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Service KillMode process
+++functions-common:write_uwsgi_user_unit_file:1586  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Service Restart always
+++functions-common:write_uwsgi_user_unit_file:1587  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Service NotifyAccess all
+++functions-common:write_uwsgi_user_unit_file:1588  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Service RestartForceExitStatus 100
+++functions-common:write_uwsgi_user_unit_file:1590  [[ -n '' ]]
+++functions-common:write_uwsgi_user_unit_file:1593  [[ -n '' ]]
+++functions-common:write_uwsgi_user_unit_file:1596  iniset -sudo /etc/systemd/system/devstack@h-api-cfn.service Install WantedBy multi-user.target
+++functions-common:write_uwsgi_user_unit_file:1599  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@h-api-cfn.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@h-api-cfn.service → /etc/systemd/system/devstack@h-api-cfn.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@h-api-cfn.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828722994
+++functions-common:time_stop:2432           [[ -z 1768828722994 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828724769
+++functions-common:time_stop:2436           elapsed_time=1775
+++functions-common:time_stop:2437           total=33892
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=35667
+++/opt/stack/heat/devstack/plugin.sh:source:41  [[ stack == \u\n\s\t\a\c\k ]]
+++/opt/stack/heat/devstack/plugin.sh:source:45  [[ stack == \c\l\e\a\n ]]
++functions-common:run_plugins:1842         for plugin in ${plugins//,/ }
++functions-common:run_plugins:1843         local dir=/opt/stack/heat-dashboard
++functions-common:run_plugins:1844         [[ -f /opt/stack/heat-dashboard/devstack/plugin.sh ]]
++functions-common:run_plugins:1845         source /opt/stack/heat-dashboard/devstack/plugin.sh stack extra
+++++/opt/stack/heat-dashboard/devstack/plugin.sh:source:3  dirname /opt/stack/heat-dashboard/devstack/plugin.sh
++++/opt/stack/heat-dashboard/devstack/plugin.sh:source:3  cd /opt/stack/heat-dashboard/devstack/..
++++/opt/stack/heat-dashboard/devstack/plugin.sh:source:3  pwd
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:3  HEAT_DASHBOARD_DIR=/opt/stack/heat-dashboard
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:30  is_service_enabled heat-dashboard
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:32  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:32  [[ extra == \p\r\e\-\i\n\s\t\a\l\l ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:37  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:37  [[ extra == \i\n\s\t\a\l\l ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:42  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:42  [[ extra == \p\o\s\t\-\c\o\n\f\i\g ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:47  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:47  [[ extra == \e\x\t\r\a ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:49  :
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:52  [[ stack == \u\n\s\t\a\c\k ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:57  [[ stack == \c\l\e\a\n ]]
++functions-common:run_plugins:1842         for plugin in ${plugins//,/ }
++functions-common:run_plugins:1843         local dir=/opt/stack/ceilometer
++functions-common:run_plugins:1844         [[ -f /opt/stack/ceilometer/devstack/plugin.sh ]]
++functions-common:run_plugins:1845         source /opt/stack/ceilometer/devstack/plugin.sh stack extra
+++/opt/stack/ceilometer/devstack/plugin.sh:source:46  [[ False = True ]]
++++/opt/stack/ceilometer/devstack/plugin.sh:source:50  get_python_exec_prefix
++++inc/python:get_python_exec_prefix:80      [[ True == \T\r\u\e ]]
++++inc/python:get_python_exec_prefix:81      echo /opt/stack/data/venv/bin
+++/opt/stack/ceilometer/devstack/plugin.sh:source:50  CEILOMETER_BIN_DIR=/opt/stack/data/venv/bin
+++/opt/stack/ceilometer/devstack/plugin.sh:source:319  is_service_enabled ceilometer
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/ceilometer/devstack/plugin.sh:source:320  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:320  [[ extra == \p\r\e\-\i\n\s\t\a\l\l ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:324  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:324  [[ extra == \i\n\s\t\a\l\l ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:328  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:328  [[ extra == \p\o\s\t\-\c\o\n\f\i\g ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:333  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:333  [[ extra == \e\x\t\r\a ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:334  echo_summary 'Initializing Ceilometer'
+++./stack.sh:echo_summary:438               [[ -t 3 ]]
+++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
+++./stack.sh:echo_summary:444               echo -e Initializing Ceilometer
+++/opt/stack/ceilometer/devstack/plugin.sh:source:336  init_ceilometer
+++/opt/stack/ceilometer/devstack/plugin.sh:init_ceilometer:269  :
+++/opt/stack/ceilometer/devstack/plugin.sh:source:338  start_ceilometer
+++/opt/stack/ceilometer/devstack/plugin.sh:start_ceilometer:292  [[ gnocchi =~ gnocchi ]]
++++/opt/stack/ceilometer/devstack/plugin.sh:start_ceilometer:293  which uwsgi
+++/opt/stack/ceilometer/devstack/plugin.sh:start_ceilometer:293  run_process gnocchi-api '/bin/uwsgi --ini /etc/gnocchi/uwsgi.ini' ''
+++functions-common:run_process:1677         local service=gnocchi-api
+++functions-common:run_process:1678         local 'command=/bin/uwsgi --ini /etc/gnocchi/uwsgi.ini'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=gnocchi-api
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828725375
+++functions-common:run_process:1686         is_service_enabled gnocchi-api
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd gnocchi-api '/bin/uwsgi --ini /etc/gnocchi/uwsgi.ini' '' '' ''
+++functions-common:_run_under_systemd:1631  local service=gnocchi-api
+++functions-common:_run_under_systemd:1632  local 'command=/bin/uwsgi --ini /etc/gnocchi/uwsgi.ini'
+++functions-common:_run_under_systemd:1633  local 'cmd=/bin/uwsgi --ini /etc/gnocchi/uwsgi.ini'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/bin/uwsgi --ini /etc/gnocchi/uwsgi.ini'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/bin/uwsgi --ini /etc/gnocchi/uwsgi.ini'
+++functions-common:_common_systemd_pitfalls:1606  [[ /bin/uwsgi --ini /etc/gnocchi/uwsgi.ini =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /bin/uwsgi --ini /etc/gnocchi/uwsgi.ini =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@gnocchi-api.service
+++functions-common:_run_under_systemd:1638  local group=
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[gnocchi-api] ]]
+++functions-common:_run_under_systemd:1647  [[ /bin/uwsgi --ini /etc/gnocchi/uwsgi.ini =~ uwsgi ]]
+++functions-common:_run_under_systemd:1648  [[ True == \T\r\u\e ]]
+++functions-common:_run_under_systemd:1649  cmd='/bin/uwsgi --ini /etc/gnocchi/uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:_run_under_systemd:1651  write_uwsgi_user_unit_file devstack@gnocchi-api.service '/bin/uwsgi --ini /etc/gnocchi/uwsgi.ini --venv /opt/stack/data/venv' '' stack ''
+++functions-common:write_uwsgi_user_unit_file:1570  local service=devstack@gnocchi-api.service
+++functions-common:write_uwsgi_user_unit_file:1571  local 'command=/bin/uwsgi --ini /etc/gnocchi/uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:write_uwsgi_user_unit_file:1572  local group=
+++functions-common:write_uwsgi_user_unit_file:1573  local user=stack
+++functions-common:write_uwsgi_user_unit_file:1574  local env_vars=
+++functions-common:write_uwsgi_user_unit_file:1575  local unitfile=/etc/systemd/system/devstack@gnocchi-api.service
+++functions-common:write_uwsgi_user_unit_file:1576  mkdir -p /etc/systemd/system
+++functions-common:write_uwsgi_user_unit_file:1578  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Unit Description 'Devstack devstack@gnocchi-api.service'
+++functions-common:write_uwsgi_user_unit_file:1579  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_uwsgi_user_unit_file:1580  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Service SyslogIdentifier devstack@gnocchi-api.service
+++functions-common:write_uwsgi_user_unit_file:1581  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Service User stack
+++functions-common:write_uwsgi_user_unit_file:1582  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Service ExecStart '/bin/uwsgi --ini /etc/gnocchi/uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:write_uwsgi_user_unit_file:1583  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_uwsgi_user_unit_file:1584  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Service Type notify
+++functions-common:write_uwsgi_user_unit_file:1585  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Service KillMode process
+++functions-common:write_uwsgi_user_unit_file:1586  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Service Restart always
+++functions-common:write_uwsgi_user_unit_file:1587  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Service NotifyAccess all
+++functions-common:write_uwsgi_user_unit_file:1588  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Service RestartForceExitStatus 100
+++functions-common:write_uwsgi_user_unit_file:1590  [[ -n '' ]]
+++functions-common:write_uwsgi_user_unit_file:1593  [[ -n '' ]]
+++functions-common:write_uwsgi_user_unit_file:1596  iniset -sudo /etc/systemd/system/devstack@gnocchi-api.service Install WantedBy multi-user.target
+++functions-common:write_uwsgi_user_unit_file:1599  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@gnocchi-api.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@gnocchi-api.service → /etc/systemd/system/devstack@gnocchi-api.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@gnocchi-api.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828725375
+++functions-common:time_stop:2432           [[ -z 1768828725375 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828727092
+++functions-common:time_stop:2436           elapsed_time=1717
+++functions-common:time_stop:2437           total=35667
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=37384
+++/opt/stack/ceilometer/devstack/plugin.sh:start_ceilometer:294  run_process gnocchi-metricd '/opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf'
+++functions-common:run_process:1677         local service=gnocchi-metricd
+++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=gnocchi-metricd
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828727270
+++functions-common:run_process:1686         is_service_enabled gnocchi-metricd
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd gnocchi-metricd '/opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf' '' '' ''
+++functions-common:_run_under_systemd:1631  local service=gnocchi-metricd
+++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf'
+++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf'
+++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@gnocchi-metricd.service
+++functions-common:_run_under_systemd:1638  local group=
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[gnocchi-metricd] ]]
+++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf =~ uwsgi ]]
+++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@gnocchi-metricd.service '/opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf' '' stack ''
+++functions-common:write_user_unit_file:1538  local service=devstack@gnocchi-metricd.service
+++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf'
+++functions-common:write_user_unit_file:1540  local group=
+++functions-common:write_user_unit_file:1541  local user=stack
+++functions-common:write_user_unit_file:1542  local env_vars=
+++functions-common:write_user_unit_file:1543  local extra=
+++functions-common:write_user_unit_file:1544  [[ -n '' ]]
+++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@gnocchi-metricd.service
+++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
+++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@gnocchi-metricd.service Unit Description 'Devstack devstack@gnocchi-metricd.service'
+++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@gnocchi-metricd.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@gnocchi-metricd.service Service User stack
+++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@gnocchi-metricd.service Service ExecStart '/opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf'
+++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@gnocchi-metricd.service Service KillMode process
+++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@gnocchi-metricd.service Service TimeoutStopSec 300
+++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@gnocchi-metricd.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_user_unit_file:1557  [[ -n '' ]]
+++functions-common:write_user_unit_file:1560  [[ -n '' ]]
+++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@gnocchi-metricd.service Install WantedBy multi-user.target
+++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@gnocchi-metricd.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@gnocchi-metricd.service → /etc/systemd/system/devstack@gnocchi-metricd.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@gnocchi-metricd.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828727270
+++functions-common:time_stop:2432           [[ -z 1768828727270 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828728713
+++functions-common:time_stop:2436           elapsed_time=1443
+++functions-common:time_stop:2437           total=37384
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=38827
++++/opt/stack/ceilometer/devstack/plugin.sh:start_ceilometer:295  gnocchi_service_url
++++/opt/stack/ceilometer/devstack/plugin.sh:gnocchi_service_url:62  echo http://192.168.95.93/metric
+++/opt/stack/ceilometer/devstack/plugin.sh:start_ceilometer:295  wait_for_service 30 http://192.168.95.93/metric
+++functions:wait_for_service:469            local timeout=30
+++functions:wait_for_service:470            local url=http://192.168.95.93/metric
+++functions:wait_for_service:471            local rval=0
+++functions:wait_for_service:472            time_start wait_for_service
+++functions-common:time_start:2409          local name=wait_for_service
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828728830
+++functions:wait_for_service:473            timeout 30 bash -x
+++::                                        curl -g -k --noproxy '*' -s -o /dev/null -w '%{http_code}' http://192.168.95.93/metric
++::                                        [[ 200 == 503 ]]
++::                                        [[ 0 -eq 7 ]]
+++functions:wait_for_service:478            time_stop wait_for_service
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=wait_for_service
+++functions-common:time_stop:2430           start_time=1768828728830
+++functions-common:time_stop:2432           [[ -z 1768828728830 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828729177
+++functions-common:time_stop:2436           elapsed_time=347
+++functions-common:time_stop:2437           total=10106
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=10453
+++functions:wait_for_service:479            return 0
+++/opt/stack/ceilometer/devstack/plugin.sh:start_ceilometer:296  /opt/stack/data/venv/bin/ceilometer-upgrade
+2026-01-19 13:18:50.043 136151 DEBUG ceilometer.cmd.storage [-] Upgrading Gnocchi resource types upgrade /opt/stack/ceilometer/ceilometer/cmd/storage.py:41
+++/opt/stack/ceilometer/devstack/plugin.sh:start_ceilometer:299  run_process ceilometer-acentral '/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:run_process:1677         local service=ceilometer-acentral
+++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=ceilometer-acentral
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828739814
+++functions-common:run_process:1686         is_service_enabled ceilometer-acentral
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd ceilometer-acentral '/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf' '' '' ''
+++functions-common:_run_under_systemd:1631  local service=ceilometer-acentral
+++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@ceilometer-acentral.service
+++functions-common:_run_under_systemd:1638  local group=
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[ceilometer-acentral] ]]
+++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf =~ uwsgi ]]
+++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@ceilometer-acentral.service '/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf' '' stack ''
+++functions-common:write_user_unit_file:1538  local service=devstack@ceilometer-acentral.service
+++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:write_user_unit_file:1540  local group=
+++functions-common:write_user_unit_file:1541  local user=stack
+++functions-common:write_user_unit_file:1542  local env_vars=
+++functions-common:write_user_unit_file:1543  local extra=
+++functions-common:write_user_unit_file:1544  [[ -n '' ]]
+++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@ceilometer-acentral.service
+++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
+++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@ceilometer-acentral.service Unit Description 'Devstack devstack@ceilometer-acentral.service'
+++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@ceilometer-acentral.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@ceilometer-acentral.service Service User stack
+++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@ceilometer-acentral.service Service ExecStart '/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@ceilometer-acentral.service Service KillMode process
+++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@ceilometer-acentral.service Service TimeoutStopSec 300
+++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@ceilometer-acentral.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_user_unit_file:1557  [[ -n '' ]]
+++functions-common:write_user_unit_file:1560  [[ -n '' ]]
+++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@ceilometer-acentral.service Install WantedBy multi-user.target
+++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@ceilometer-acentral.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@ceilometer-acentral.service → /etc/systemd/system/devstack@ceilometer-acentral.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@ceilometer-acentral.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828739814
+++functions-common:time_stop:2432           [[ -z 1768828739814 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828741193
+++functions-common:time_stop:2436           elapsed_time=1379
+++functions-common:time_stop:2437           total=38827
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=40206
+++/opt/stack/ceilometer/devstack/plugin.sh:start_ceilometer:300  run_process ceilometer-aipmi '/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces ipmi --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:run_process:1677         local service=ceilometer-aipmi
+++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces ipmi --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=ceilometer-aipmi
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828741306
+++functions-common:run_process:1686         is_service_enabled ceilometer-aipmi
+++functions-common:is_service_enabled:2079  return 1
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828741306
+++functions-common:time_stop:2432           [[ -z 1768828741306 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828741423
+++functions-common:time_stop:2436           elapsed_time=117
+++functions-common:time_stop:2437           total=40206
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=40323
+++/opt/stack/ceilometer/devstack/plugin.sh:start_ceilometer:304  run_process ceilometer-anotification '/opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:run_process:1677         local service=ceilometer-anotification
+++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=ceilometer-anotification
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828741533
+++functions-common:run_process:1686         is_service_enabled ceilometer-anotification
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd ceilometer-anotification '/opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf' '' '' ''
+++functions-common:_run_under_systemd:1631  local service=ceilometer-anotification
+++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@ceilometer-anotification.service
+++functions-common:_run_under_systemd:1638  local group=
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[ceilometer-anotification] ]]
+++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf =~ uwsgi ]]
+++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@ceilometer-anotification.service '/opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf' '' stack ''
+++functions-common:write_user_unit_file:1538  local service=devstack@ceilometer-anotification.service
+++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:write_user_unit_file:1540  local group=
+++functions-common:write_user_unit_file:1541  local user=stack
+++functions-common:write_user_unit_file:1542  local env_vars=
+++functions-common:write_user_unit_file:1543  local extra=
+++functions-common:write_user_unit_file:1544  [[ -n '' ]]
+++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@ceilometer-anotification.service
+++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
+++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@ceilometer-anotification.service Unit Description 'Devstack devstack@ceilometer-anotification.service'
+++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@ceilometer-anotification.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@ceilometer-anotification.service Service User stack
+++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@ceilometer-anotification.service Service ExecStart '/opt/stack/data/venv/bin/ceilometer-agent-notification --config-file/etc/ceilometer/ceilometer.conf'
+++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@ceilometer-anotification.service Service KillMode process
+++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@ceilometer-anotification.service Service TimeoutStopSec 300
+++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@ceilometer-anotification.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_user_unit_file:1557  [[ -n '' ]]
+++functions-common:write_user_unit_file:1560  [[ -n '' ]]
+++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@ceilometer-anotification.service Install WantedBy multi-user.target
+++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@ceilometer-anotification.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@ceilometer-anotification.service → /etc/systemd/system/devstack@ceilometer-anotification.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@ceilometer-anotification.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828741533
+++functions-common:time_stop:2432           [[ -z 1768828741533 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828743033
+++functions-common:time_stop:2436           elapsed_time=1500
+++functions-common:time_stop:2437           total=40323
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=41823
+++/opt/stack/ceilometer/devstack/plugin.sh:start_ceilometer:306  run_process ceilometer-acompute '/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf' libvirt
+++functions-common:run_process:1677         local service=ceilometer-acompute
+++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:run_process:1679         local group=libvirt
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=ceilometer-acompute
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828743148
+++functions-common:run_process:1686         is_service_enabled ceilometer-acompute
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd ceilometer-acompute '/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf' libvirt '' ''
+++functions-common:_run_under_systemd:1631  local service=ceilometer-acompute
+++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@ceilometer-acompute.service
+++functions-common:_run_under_systemd:1638  local group=libvirt
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[ceilometer-acompute] ]]
+++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf =~ uwsgi ]]
+++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@ceilometer-acompute.service '/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf' libvirt stack ''
+++functions-common:write_user_unit_file:1538  local service=devstack@ceilometer-acompute.service
+++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:write_user_unit_file:1540  local group=libvirt
+++functions-common:write_user_unit_file:1541  local user=stack
+++functions-common:write_user_unit_file:1542  local env_vars=
+++functions-common:write_user_unit_file:1543  local extra=
+++functions-common:write_user_unit_file:1544  [[ -n libvirt ]]
+++functions-common:write_user_unit_file:1545  extra=Group=libvirt
+++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@ceilometer-acompute.service
+++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
+++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@ceilometer-acompute.service Unit Description 'Devstack devstack@ceilometer-acompute.service'
+++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@ceilometer-acompute.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@ceilometer-acompute.service Service User stack
+++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@ceilometer-acompute.service Service ExecStart '/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf'
+++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@ceilometer-acompute.service Service KillMode process
+++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@ceilometer-acompute.service Service TimeoutStopSec 300
+++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@ceilometer-acompute.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_user_unit_file:1557  [[ -n '' ]]
+++functions-common:write_user_unit_file:1560  [[ -n libvirt ]]
+++functions-common:write_user_unit_file:1561  iniset -sudo /etc/systemd/system/devstack@ceilometer-acompute.service Service Group libvirt
+++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@ceilometer-acompute.service Install WantedBy multi-user.target
+++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@ceilometer-acompute.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@ceilometer-acompute.service → /etc/systemd/system/devstack@ceilometer-acompute.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@ceilometer-acompute.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828743148
+++functions-common:time_stop:2432           [[ -z 1768828743148 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828744659
+++functions-common:time_stop:2436           elapsed_time=1511
+++functions-common:time_stop:2437           total=41823
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=43334
+++/opt/stack/ceilometer/devstack/plugin.sh:source:346  [[ stack == \u\n\s\t\a\c\k ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:351  [[ stack == \c\l\e\a\n ]]
++functions-common:run_plugins:1842         for plugin in ${plugins//,/ }
++functions-common:run_plugins:1843         local dir=/opt/stack/aodh
++functions-common:run_plugins:1844         [[ -f /opt/stack/aodh/devstack/plugin.sh ]]
++functions-common:run_plugins:1845         source /opt/stack/aodh/devstack/plugin.sh stack extra
+++/opt/stack/aodh/devstack/plugin.sh:source:15  [[ False = True ]]
++++/opt/stack/aodh/devstack/plugin.sh:source:19  get_python_exec_prefix
++++inc/python:get_python_exec_prefix:80      [[ True == \T\r\u\e ]]
++++inc/python:get_python_exec_prefix:81      echo /opt/stack/data/venv/bin
+++/opt/stack/aodh/devstack/plugin.sh:source:19  AODH_BIN_DIR=/opt/stack/data/venv/bin
+++/opt/stack/aodh/devstack/plugin.sh:source:190  is_service_enabled aodh
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/aodh/devstack/plugin.sh:source:191  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:191  [[ extra == \p\r\e\-\i\n\s\t\a\l\l ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:195  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:195  [[ extra == \i\n\s\t\a\l\l ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:199  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:199  [[ extra == \p\o\s\t\-\c\o\n\f\i\g ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:202  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:202  [[ extra == \e\x\t\r\a ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:203  echo_summary 'Initializing Aodh'
+++./stack.sh:echo_summary:438               [[ -t 3 ]]
+++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
+++./stack.sh:echo_summary:444               echo -e Initializing Aodh
+++/opt/stack/aodh/devstack/plugin.sh:source:205  init_aodh
+++/opt/stack/aodh/devstack/plugin.sh:init_aodh:125  _aodh_create_accounts
+++/opt/stack/aodh/devstack/plugin.sh:_aodh_create_accounts:59  is_service_enabled aodh-api
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/aodh/devstack/plugin.sh:_aodh_create_accounts:61  create_service_user aodh admin
+++lib/keystone:create_service_user:420      get_or_create_user aodh SuperSecret123 Default
+++functions-common:get_or_create_user:902   local user_id
+++functions-common:get_or_create_user:903   [[ ! -z '' ]]
+++functions-common:get_or_create_user:906   local email=
++++functions-common:get_or_create_user:920   oscwrap --os-cloud devstack-system-admin user create aodh --password SuperSecret123 --domain=Default --or-show -f value -c id
++++functions-common:oscwrap:2468             return 0
+++functions-common:get_or_create_user:918   user_id=d8ea1ce6ab884866b0724bcf14421213
+++functions-common:get_or_create_user:919   echo d8ea1ce6ab884866b0724bcf14421213
+d8ea1ce6ab884866b0724bcf14421213
+++lib/keystone:create_service_user:421      get_or_add_user_project_role service aodh service Default Default
+++functions-common:get_or_add_user_project_role:966  local user_role_id
+++functions-common:get_or_add_user_project_role:967  local domain_args
++++functions-common:get_or_add_user_project_role:969  _get_domain_args Default Default
++++functions-common:_get_domain_args:950     local domain
++++functions-common:_get_domain_args:951     domain=
++++functions-common:_get_domain_args:953     [[ -n Default ]]
++++functions-common:_get_domain_args:954     domain=' --user-domain Default'
++++functions-common:_get_domain_args:956     [[ -n Default ]]
++++functions-common:_get_domain_args:957     domain=' --user-domain Default --project-domain Default'
++++functions-common:_get_domain_args:960     echo --user-domain Default --project-domain Default
+++functions-common:get_or_add_user_project_role:969  domain_args='--user-domain Default --project-domain Default'
+++functions-common:get_or_add_user_project_role:973  openstack --os-cloud devstack-system-admin role add service --user aodh --project service --user-domain Default --project-domain Default
++++functions-common:get_or_add_user_project_role:982  oscwrap --os-cloud devstack-system-admin role assignment list --role service --user aodh --project service --user-domain Default --project-domain Default -c Role -f value
++++functions-common:oscwrap:2468             return 0
+++functions-common:get_or_add_user_project_role:982  user_role_id=dbceb10e5a254e9194bacc132c54d694
+++functions-common:get_or_add_user_project_role:983  echo dbceb10e5a254e9194bacc132c54d694
+dbceb10e5a254e9194bacc132c54d694
+++lib/keystone:create_service_user:423      [[ -n admin ]]
+++lib/keystone:create_service_user:424      get_or_add_user_project_role admin aodh service Default Default
+++functions-common:get_or_add_user_project_role:966  local user_role_id
+++functions-common:get_or_add_user_project_role:967  local domain_args
++++functions-common:get_or_add_user_project_role:969  _get_domain_args Default Default
++++functions-common:_get_domain_args:950     local domain
++++functions-common:_get_domain_args:951     domain=
++++functions-common:_get_domain_args:953     [[ -n Default ]]
++++functions-common:_get_domain_args:954     domain=' --user-domain Default'
++++functions-common:_get_domain_args:956     [[ -n Default ]]
++++functions-common:_get_domain_args:957     domain=' --user-domain Default --project-domain Default'
++++functions-common:_get_domain_args:960     echo --user-domain Default --project-domain Default
+++functions-common:get_or_add_user_project_role:969  domain_args='--user-domain Default --project-domain Default'
+++functions-common:get_or_add_user_project_role:973  openstack --os-cloud devstack-system-admin role add admin --user aodh --project service --user-domain Default --project-domain Default
++++functions-common:get_or_add_user_project_role:982  oscwrap --os-cloud devstack-system-admin role assignment list --role admin --user aodh --project service --user-domain Default --project-domain Default -cRole -f value
++++functions-common:oscwrap:2468             return 0
+++functions-common:get_or_add_user_project_role:982  user_role_id=30f72e56b6f8403db9991d892fbc0708
+++functions-common:get_or_add_user_project_role:983  echo 30f72e56b6f8403db9991d892fbc0708
+30f72e56b6f8403db9991d892fbc0708
+++/opt/stack/aodh/devstack/plugin.sh:_aodh_create_accounts:63  get_or_create_service aodh alarming 'OpenStack Alarming Service'
+++functions-common:get_or_create_service:1058  local service_id
++++functions-common:get_or_create_service:1071  oscwrap --os-cloud devstack-system-admin service show alarming -f value -c id
++++functions-common:get_or_create_service:1073  oscwrap --os-cloud devstack-system-admin service create alarming --name aodh '--description=OpenStack Alarming Service' -f value -c id
++++functions-common:oscwrap:2468             return 0
+++functions-common:get_or_create_service:1069  service_id='
+dcc8c1fbabe34e01b91abca61367cf96'
+++functions-common:get_or_create_service:1070  echo dcc8c1fbabe34e01b91abca61367cf96
+dcc8c1fbabe34e01b91abca61367cf96
++++/opt/stack/aodh/devstack/plugin.sh:_aodh_create_accounts:64  aodh_service_url
++++/opt/stack/aodh/devstack/plugin.sh:aodh_service_url:30  echo http://192.168.95.93/alarming
+++/opt/stack/aodh/devstack/plugin.sh:_aodh_create_accounts:64  get_or_create_endpoint alarming RegionOne http://192.168.95.93/alarming
+++functions-common:get_or_create_endpoint:1102  local public_id
++++functions-common:get_or_create_endpoint:1103  _get_or_create_endpoint_with_interface alarming public http://192.168.95.93/alarming RegionOne
++++functions-common:_get_or_create_endpoint_with_interface:1076  local endpoint_id
+++++functions-common:_get_or_create_endpoint_with_interface:1081  oscwrap --os-cloud devstack-system-admin endpoint list --service alarming --interface public --region RegionOne -c ID -f value
+++++functions-common:oscwrap:2468             return 0
++++functions-common:_get_or_create_endpoint_with_interface:1081  endpoint_id=
++++functions-common:_get_or_create_endpoint_with_interface:1082  [[ -z '' ]]
+++++functions-common:_get_or_create_endpoint_with_interface:1085  oscwrap --os-cloud devstack-system-admin endpoint create alarming public http://192.168.95.93/alarming --region RegionOne -f value -c id
+++++functions-common:oscwrap:2468             return 0
++++functions-common:_get_or_create_endpoint_with_interface:1085  endpoint_id=afe30f4a79b348c18b5d5ff69a74c642
++++functions-common:_get_or_create_endpoint_with_interface:1088  echo afe30f4a79b348c18b5d5ff69a74c642
+++functions-common:get_or_create_endpoint:1103  public_id=afe30f4a79b348c18b5d5ff69a74c642
+++functions-common:get_or_create_endpoint:1105  [[ -n '' ]]
+++functions-common:get_or_create_endpoint:1108  [[ -n '' ]]
+++functions-common:get_or_create_endpoint:1112  echo afe30f4a79b348c18b5d5ff69a74c642
+afe30f4a79b348c18b5d5ff69a74c642
+++/opt/stack/aodh/devstack/plugin.sh:init_aodh:127  recreate_database aodh
+++lib/database:recreate_database:112        local db=aodh
+++lib/database:recreate_database:113        recreate_database_mysql aodh
+++lib/databases/mysql:recreate_database_mysql:60  local db=aodh
+++lib/databases/mysql:recreate_database_mysql:61  mysql -uroot -pSuperSecret123 -h127.0.0.1 -e 'DROP DATABASE IF EXISTS aodh;'
+mysql: [Warning] Using a password on the command line interface can be insecure.
+++lib/databases/mysql:recreate_database_mysql:62  mysql -uroot -pSuperSecret123 -h127.0.0.1 -e 'CREATE DATABASE aodh CHARACTER SET utf8;'
+mysql: [Warning] Using a password on the command line interface can be insecure.
+++/opt/stack/aodh/devstack/plugin.sh:init_aodh:128  /opt/stack/data/venv/bin/aodh-dbsync
+DEBUG aodh.storage [-] looking for 'mysql+pymysql' driver in 'aodh.storage' {{(pid=139471) get_connection_from_config /opt/stack/aodh/aodh/storage/__init__.py:65}}
+INFO dbcounter [-] Registered counter for database aodh
+INFO alembic.runtime.migration [-] Context impl MySQLImpl.
+INFO alembic.runtime.migration [-] Will assume non-transactional DDL.
+DEBUG dbcounter [-] [139471] Writer thread running {{(pid=139471) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:102}}
+INFO alembic.runtime.migration [-] Context impl MySQLImpl.
+INFO alembic.runtime.migration [-] Will assume non-transactional DDL.
+INFO alembic.runtime.migration [-] Running stamp_revision  -> 010
+DEBUG alembic.runtime.migration [-] new branch insert 010 {{(pid=139471) update_to_step /opt/stack/data/venv/lib/python3.10/site-packages/alembic/runtime/migration.py:830}}
+++/opt/stack/aodh/devstack/plugin.sh:source:207  start_aodh
++++/opt/stack/aodh/devstack/plugin.sh:start_aodh:156  which uwsgi
+++/opt/stack/aodh/devstack/plugin.sh:start_aodh:156  run_process aodh-api '/bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini'
+++functions-common:run_process:1677         local service=aodh-api
+++functions-common:run_process:1678         local 'command=/bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=aodh-api
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828762972
+++functions-common:run_process:1686         is_service_enabled aodh-api
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd aodh-api '/bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini' '' '' ''
+++functions-common:_run_under_systemd:1631  local service=aodh-api
+++functions-common:_run_under_systemd:1632  local 'command=/bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini'
+++functions-common:_run_under_systemd:1633  local 'cmd=/bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini'
+++functions-common:_common_systemd_pitfalls:1606  [[ /bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@aodh-api.service
+++functions-common:_run_under_systemd:1638  local group=
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[aodh-api] ]]
+++functions-common:_run_under_systemd:1647  [[ /bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini =~ uwsgi ]]
+++functions-common:_run_under_systemd:1648  [[ True == \T\r\u\e ]]
+++functions-common:_run_under_systemd:1649  cmd='/bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:_run_under_systemd:1651  write_uwsgi_user_unit_file devstack@aodh-api.service '/bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini --venv /opt/stack/data/venv' '' stack ''
+++functions-common:write_uwsgi_user_unit_file:1570  local service=devstack@aodh-api.service
+++functions-common:write_uwsgi_user_unit_file:1571  local 'command=/bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:write_uwsgi_user_unit_file:1572  local group=
+++functions-common:write_uwsgi_user_unit_file:1573  local user=stack
+++functions-common:write_uwsgi_user_unit_file:1574  local env_vars=
+++functions-common:write_uwsgi_user_unit_file:1575  local unitfile=/etc/systemd/system/devstack@aodh-api.service
+++functions-common:write_uwsgi_user_unit_file:1576  mkdir -p /etc/systemd/system
+++functions-common:write_uwsgi_user_unit_file:1578  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Unit Description 'Devstack devstack@aodh-api.service'
+++functions-common:write_uwsgi_user_unit_file:1579  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_uwsgi_user_unit_file:1580  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Service SyslogIdentifier devstack@aodh-api.service
+++functions-common:write_uwsgi_user_unit_file:1581  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Service User stack
+++functions-common:write_uwsgi_user_unit_file:1582  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Service ExecStart '/bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini --venv /opt/stack/data/venv'
+++functions-common:write_uwsgi_user_unit_file:1583  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_uwsgi_user_unit_file:1584  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Service Type notify
+++functions-common:write_uwsgi_user_unit_file:1585  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Service KillMode process
+++functions-common:write_uwsgi_user_unit_file:1586  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Service Restart always
+++functions-common:write_uwsgi_user_unit_file:1587  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Service NotifyAccess all
+++functions-common:write_uwsgi_user_unit_file:1588  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Service RestartForceExitStatus 100
+++functions-common:write_uwsgi_user_unit_file:1590  [[ -n '' ]]
+++functions-common:write_uwsgi_user_unit_file:1593  [[ -n '' ]]
+++functions-common:write_uwsgi_user_unit_file:1596  iniset -sudo /etc/systemd/system/devstack@aodh-api.service Install WantedBy multi-user.target
+++functions-common:write_uwsgi_user_unit_file:1599  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@aodh-api.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@aodh-api.service → /etc/systemd/system/devstack@aodh-api.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@aodh-api.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828762972
+++functions-common:time_stop:2432           [[ -z 1768828762972 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828764720
+++functions-common:time_stop:2436           elapsed_time=1748
+++functions-common:time_stop:2437           total=43334
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=45082
+++/opt/stack/aodh/devstack/plugin.sh:start_aodh:159  is_service_enabled aodh-api
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/aodh/devstack/plugin.sh:start_aodh:160  echo 'Waiting for aodh-api to start...'
+Waiting for aodh-api to start...
++++/opt/stack/aodh/devstack/plugin.sh:start_aodh:161  aodh_service_url
++++/opt/stack/aodh/devstack/plugin.sh:aodh_service_url:30  echo http://192.168.95.93/alarming
+++/opt/stack/aodh/devstack/plugin.sh:start_aodh:161  wait_for_service 60 http://192.168.95.93/alarming/v2/
+++functions:wait_for_service:469            local timeout=60
+++functions:wait_for_service:470            local url=http://192.168.95.93/alarming/v2/
+++functions:wait_for_service:471            local rval=0
+++functions:wait_for_service:472            time_start wait_for_service
+++functions-common:time_start:2409          local name=wait_for_service
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828764877
+++functions:wait_for_service:473            timeout 60 bash -x
+++::                                        curl -g -k --noproxy '*' -s -o /dev/null -w '%{http_code}' http://192.168.95.93/alarming/v2/
++::                                        [[ 401 == 503 ]]
++::                                        [[ 0 -eq 7 ]]
+++functions:wait_for_service:478            time_stop wait_for_service
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=wait_for_service
+++functions-common:time_stop:2430           start_time=1768828764877
+++functions-common:time_stop:2432           [[ -z 1768828764877 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828766334
+++functions-common:time_stop:2436           elapsed_time=1457
+++functions-common:time_stop:2437           total=10453
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=11910
+++functions:wait_for_service:479            return 0
+++/opt/stack/aodh/devstack/plugin.sh:start_aodh:166  run_process aodh-notifier '/opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf'
+++functions-common:run_process:1677         local service=aodh-notifier
+++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=aodh-notifier
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828766446
+++functions-common:run_process:1686         is_service_enabled aodh-notifier
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd aodh-notifier '/opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf' '' '' ''
+++functions-common:_run_under_systemd:1631  local service=aodh-notifier
+++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf'
+++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf'
+++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@aodh-notifier.service
+++functions-common:_run_under_systemd:1638  local group=
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[aodh-notifier] ]]
+++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf =~ uwsgi ]]
+++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@aodh-notifier.service '/opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf' '' stack ''
+++functions-common:write_user_unit_file:1538  local service=devstack@aodh-notifier.service
+++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf'
+++functions-common:write_user_unit_file:1540  local group=
+++functions-common:write_user_unit_file:1541  local user=stack
+++functions-common:write_user_unit_file:1542  local env_vars=
+++functions-common:write_user_unit_file:1543  local extra=
+++functions-common:write_user_unit_file:1544  [[ -n '' ]]
+++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@aodh-notifier.service
+++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
+++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@aodh-notifier.service Unit Description 'Devstack devstack@aodh-notifier.service'
+++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@aodh-notifier.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@aodh-notifier.service Service User stack
+++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@aodh-notifier.service Service ExecStart '/opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf'
+++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@aodh-notifier.service Service KillMode process
+++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@aodh-notifier.service Service TimeoutStopSec 300
+++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@aodh-notifier.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_user_unit_file:1557  [[ -n '' ]]
+++functions-common:write_user_unit_file:1560  [[ -n '' ]]
+++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@aodh-notifier.service Install WantedBy multi-user.target
+++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@aodh-notifier.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@aodh-notifier.service → /etc/systemd/system/devstack@aodh-notifier.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@aodh-notifier.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828766446
+++functions-common:time_stop:2432           [[ -z 1768828766446 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828767813
+++functions-common:time_stop:2436           elapsed_time=1367
+++functions-common:time_stop:2437           total=45082
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=46449
+++/opt/stack/aodh/devstack/plugin.sh:start_aodh:167  run_process aodh-evaluator '/opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf'
+++functions-common:run_process:1677         local service=aodh-evaluator
+++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=aodh-evaluator
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828767932
+++functions-common:run_process:1686         is_service_enabled aodh-evaluator
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd aodh-evaluator '/opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf' '' '' ''
+++functions-common:_run_under_systemd:1631  local service=aodh-evaluator
+++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf'
+++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf'
+++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@aodh-evaluator.service
+++functions-common:_run_under_systemd:1638  local group=
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[aodh-evaluator] ]]
+++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf =~ uwsgi ]]
+++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@aodh-evaluator.service '/opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf' '' stack ''
+++functions-common:write_user_unit_file:1538  local service=devstack@aodh-evaluator.service
+++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf'
+++functions-common:write_user_unit_file:1540  local group=
+++functions-common:write_user_unit_file:1541  local user=stack
+++functions-common:write_user_unit_file:1542  local env_vars=
+++functions-common:write_user_unit_file:1543  local extra=
+++functions-common:write_user_unit_file:1544  [[ -n '' ]]
+++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@aodh-evaluator.service
+++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
+++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@aodh-evaluator.service Unit Description 'Devstack devstack@aodh-evaluator.service'
+++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@aodh-evaluator.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@aodh-evaluator.service Service User stack
+++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@aodh-evaluator.service Service ExecStart '/opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf'
+++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@aodh-evaluator.service Service KillMode process
+++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@aodh-evaluator.service Service TimeoutStopSec 300
+++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@aodh-evaluator.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_user_unit_file:1557  [[ -n '' ]]
+++functions-common:write_user_unit_file:1560  [[ -n '' ]]
+++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@aodh-evaluator.service Install WantedBy multi-user.target
+++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@aodh-evaluator.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@aodh-evaluator.service → /etc/systemd/system/devstack@aodh-evaluator.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@aodh-evaluator.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828767932
+++functions-common:time_stop:2432           [[ -z 1768828767932 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828769354
+++functions-common:time_stop:2436           elapsed_time=1422
+++functions-common:time_stop:2437           total=46449
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=47871
+++/opt/stack/aodh/devstack/plugin.sh:start_aodh:168  run_process aodh-listener '/opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf'
+++functions-common:run_process:1677         local service=aodh-listener
+++functions-common:run_process:1678         local 'command=/opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf'
+++functions-common:run_process:1679         local group=
+++functions-common:run_process:1680         local user=
+++functions-common:run_process:1681         local env_vars=
+++functions-common:run_process:1683         local name=aodh-listener
+++functions-common:run_process:1685         time_start run_process
+++functions-common:time_start:2409          local name=run_process
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828769470
+++functions-common:run_process:1686         is_service_enabled aodh-listener
+++functions-common:is_service_enabled:2079  return 0
+++functions-common:run_process:1687         _run_under_systemd aodh-listener '/opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf' '' '' ''
+++functions-common:_run_under_systemd:1631  local service=aodh-listener
+++functions-common:_run_under_systemd:1632  local 'command=/opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf'
+++functions-common:_run_under_systemd:1633  local 'cmd=/opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf'
+++functions-common:_run_under_systemd:1635  _common_systemd_pitfalls '/opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf'
+++functions-common:_common_systemd_pitfalls:1603  local 'cmd=/opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf'
+++functions-common:_common_systemd_pitfalls:1606  [[ /opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf =~ sudo ]]
+++functions-common:_common_systemd_pitfalls:1617  [[ ! /opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf =~ ^/ ]]
+++functions-common:_run_under_systemd:1637  local systemd_service=devstack@aodh-listener.service
+++functions-common:_run_under_systemd:1638  local group=
+++functions-common:_run_under_systemd:1639  local user=stack
+++functions-common:_run_under_systemd:1640  [[ -z stack ]]
+++functions-common:_run_under_systemd:1643  local env_vars=
+++functions-common:_run_under_systemd:1644  [[ -v SYSTEMD_ENV_VARS[aodh-listener] ]]
+++functions-common:_run_under_systemd:1647  [[ /opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf =~ uwsgi ]]
+++functions-common:_run_under_systemd:1653  write_user_unit_file devstack@aodh-listener.service '/opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf' '' stack ''
+++functions-common:write_user_unit_file:1538  local service=devstack@aodh-listener.service
+++functions-common:write_user_unit_file:1539  local 'command=/opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf'
+++functions-common:write_user_unit_file:1540  local group=
+++functions-common:write_user_unit_file:1541  local user=stack
+++functions-common:write_user_unit_file:1542  local env_vars=
+++functions-common:write_user_unit_file:1543  local extra=
+++functions-common:write_user_unit_file:1544  [[ -n '' ]]
+++functions-common:write_user_unit_file:1547  local unitfile=/etc/systemd/system/devstack@aodh-listener.service
+++functions-common:write_user_unit_file:1548  mkdir -p /etc/systemd/system
+++functions-common:write_user_unit_file:1550  iniset -sudo /etc/systemd/system/devstack@aodh-listener.service Unit Description 'Devstack devstack@aodh-listener.service'
+++functions-common:write_user_unit_file:1551  iniset -sudo /etc/systemd/system/devstack@aodh-listener.service Service Environment '"PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin"'
+++functions-common:write_user_unit_file:1552  iniset -sudo /etc/systemd/system/devstack@aodh-listener.service Service User stack
+++functions-common:write_user_unit_file:1553  iniset -sudo /etc/systemd/system/devstack@aodh-listener.service Service ExecStart '/opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf'
+++functions-common:write_user_unit_file:1554  iniset -sudo /etc/systemd/system/devstack@aodh-listener.service Service KillMode process
+++functions-common:write_user_unit_file:1555  iniset -sudo /etc/systemd/system/devstack@aodh-listener.service Service TimeoutStopSec 300
+++functions-common:write_user_unit_file:1556  iniset -sudo /etc/systemd/system/devstack@aodh-listener.service Service ExecReload '/usr/bin/kill -HUP $MAINPID'
+++functions-common:write_user_unit_file:1557  [[ -n '' ]]
+++functions-common:write_user_unit_file:1560  [[ -n '' ]]
+++functions-common:write_user_unit_file:1563  iniset -sudo /etc/systemd/system/devstack@aodh-listener.service Install WantedBy multi-user.target
+++functions-common:write_user_unit_file:1566  sudo systemctl daemon-reload
+++functions-common:_run_under_systemd:1656  sudo systemctl enable devstack@aodh-listener.service
+Created symlink /etc/systemd/system/multi-user.target.wants/devstack@aodh-listener.service → /etc/systemd/system/devstack@aodh-listener.service.
+++functions-common:_run_under_systemd:1657  sudo systemctl start devstack@aodh-listener.service
+++functions-common:run_process:1689         time_stop run_process
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=run_process
+++functions-common:time_stop:2430           start_time=1768828769470
+++functions-common:time_stop:2432           [[ -z 1768828769470 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828771025
+++functions-common:time_stop:2436           elapsed_time=1555
+++functions-common:time_stop:2437           total=47871
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=49426
+++/opt/stack/aodh/devstack/plugin.sh:source:213  [[ stack == \u\n\s\t\a\c\k ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:218  [[ stack == \c\l\e\a\n ]]
++functions-common:run_plugins:1842         for plugin in ${plugins//,/ }
++functions-common:run_plugins:1843         local dir=/opt/stack/gnocchi
++functions-common:run_plugins:1844         [[ -f /opt/stack/gnocchi/devstack/plugin.sh ]]
++./stack.sh:main:1426                      merge_config_group /opt/stack/devstack/local.conf post-extra
++inc/meta-config:merge_config_group:171    local localfile=/opt/stack/devstack/local.conf
++inc/meta-config:merge_config_group:171    shift
++inc/meta-config:merge_config_group:172    local matchgroups=post-extra
++inc/meta-config:merge_config_group:174    [[ -r /opt/stack/devstack/local.conf ]]
++inc/meta-config:merge_config_group:176    local configfile group
++inc/meta-config:merge_config_group:177    for group in $matchgroups
+++inc/meta-config:merge_config_group:178    get_meta_section_files /opt/stack/devstack/local.conf post-extra
+++inc/meta-config:get_meta_section_files:63  local file=/opt/stack/devstack/local.conf
+++inc/meta-config:get_meta_section_files:64  local matchgroup=post-extra
+++inc/meta-config:get_meta_section_files:66  [[ -r /opt/stack/devstack/local.conf ]]
+++inc/meta-config:get_meta_section_files:68  awk -v matchgroup=post-extra '
+        /^\[\[.+\|.*\]\]/ {
+            gsub("[][]", "", $1);
+            split($1, a, "|");
+            if (a[1] == matchgroup)
+                print a[2]
+        }
+    ' /opt/stack/devstack/local.conf
++./stack.sh:main:1435                      is_service_enabled n-cpu
++functions-common:is_service_enabled:2079  return 0
++./stack.sh:main:1436                      is_nova_ready
++lib/nova:is_nova_ready:1199               wait_for_compute 60
++functions:wait_for_compute:483            local timeout=60
++functions:wait_for_compute:484            local rval=0
++functions:wait_for_compute:485            local compute_hostname
++functions:wait_for_compute:486            time_start wait_for_service
++functions-common:time_start:2409          local name=wait_for_service
++functions-common:time_start:2410          local start_time=
++functions-common:time_start:2411          [[ -n '' ]]
+++functions-common:time_start:2414          date +%s%3N
++functions-common:time_start:2414          _TIME_START[$name]=1768828771294
+++functions:wait_for_compute:487            iniget /etc/nova/nova.conf DEFAULT host
++functions:wait_for_compute:487            compute_hostname=
++functions:wait_for_compute:488            [[ -z '' ]]
+++functions:wait_for_compute:489            hostname
++functions:wait_for_compute:489            compute_hostname=gelani-lab-1
++functions:wait_for_compute:491            timeout 60 bash -x
+++functions:wait_for_compute:491            hostname
++::                                        ID=
++::                                        [[ '' == '' ]]
++::                                        sleep 1
++::                                        [[ libvirt = \f\a\k\e ]]
+++::                                        openstack --os-cloud devstack-admin --os-region RegionOne compute service list --host gelani-lab-1 --service nova-compute -c ID -f value
++::                                        ID=f7e97b80-41d8-4bf1-ac93-37154597ceae
++::                                        [[ f7e97b80-41d8-4bf1-ac93-37154597ceae == '' ]]
++functions:wait_for_compute:503            time_stop wait_for_service
++functions-common:time_stop:2423           local name
++functions-common:time_stop:2424           local end_time
++functions-common:time_stop:2425           local elapsed_time
++functions-common:time_stop:2426           local total
++functions-common:time_stop:2427           local start_time
++functions-common:time_stop:2429           name=wait_for_service
++functions-common:time_stop:2430           start_time=1768828771294
++functions-common:time_stop:2432           [[ -z 1768828771294 ]]
+++functions-common:time_stop:2435           date +%s%3N
++functions-common:time_stop:2435           end_time=1768828773823
++functions-common:time_stop:2436           elapsed_time=2529
++functions-common:time_stop:2437           total=11910
++functions-common:time_stop:2439           _TIME_START[$name]=
++functions-common:time_stop:2440           _TIME_TOTAL[$name]=14439
++functions:wait_for_compute:505            [[ 0 != 0 ]]
++functions:wait_for_compute:509            return 0
++./stack.sh:main:1440                      service_check
++functions-common:service_check:1716       local service
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@key.service
+Failed to get unit file state for devstack@key.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@n-api.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@n-api.service --no-pager
+● devstack@n-api.service - Devstack devstack@n-api.service
+     Loaded: loaded (/etc/systemd/system/devstack@n-api.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:16:51 UTC; 2min 42s ago
+   Main PID: 108405 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 31 (limit: 38457)
+     Memory: 506.6M
+        CPU: 14.309s
+     CGroup: /system.slice/system-devstack.slice/devstack@n-api.service
+             ├─108405 "nova-apiuWSGI master"
+             ├─108406 "nova-apiuWSGI worker 1"
+             ├─108407 "nova-apiuWSGI worker 2"
+             ├─108408 "nova-apiuWSGI worker 3"
+             └─108409 "nova-apiuWSGI worker 4"
+
+Jan 19 13:19:33 gelani-lab-1 devstack@n-api.service[108409]: [pid: 108409|app: 0|req: 10/36] 192.168.95.93 () {58 vars in 1018 bytes} [Mon Jan 19 13:19:33 2026] GET /compute/v2.1 => generated 391 bytes in 3 msecs (HTTP/1.1 200) 9 headers in 357 bytes (1 switches on core 0)
+Jan 19 13:19:33 gelani-lab-1 devstack@n-api.service[108406]: DEBUG nova.api.openstack.wsgi [None req-169a52b5-c669-4b80-ba1e-a1b23d616ea9 admin admin] Calling method '<bound method ServiceController.index of <nova.api.openstack.compute.services.ServiceController object at 0x7fe27dd21bd0>>' {{(pid=108406) _process_stack /opt/stack/nova/nova/api/openstack/wsgi.py:552}}
+Jan 19 13:19:33 gelani-lab-1 devstack@n-api.service[108406]: DEBUG oslo_concurrency.lockutils [None req-169a52b5-c669-4b80-ba1e-a1b23d616ea9 admin admin] Acquiring lock "00000000-0000-0000-0000-000000000000" by "nova.context.set_target_cell.<locals>.get_or_set_cached_cell_and_set_connections" {{(pid=108406) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:405}}
+Jan 19 13:19:33 gelani-lab-1 devstack@n-api.service[108406]: DEBUG oslo_concurrency.lockutils [None req-169a52b5-c669-4b80-ba1e-a1b23d616ea9 admin admin] Lock "00000000-0000-0000-0000-000000000000" acquired by "nova.context.set_target_cell.<locals>.get_or_set_cached_cell_and_set_connections" :: waited 0.000s {{(pid=108406) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:410}}
+Jan 19 13:19:33 gelani-lab-1 devstack@n-api.service[108406]: DEBUG oslo_concurrency.lockutils [None req-169a52b5-c669-4b80-ba1e-a1b23d616ea9 admin admin] Lock "00000000-0000-0000-0000-000000000000" "released"by "nova.context.set_target_cell.<locals>.get_or_set_cached_cell_and_set_connections" :: held 0.000s {{(pid=108406) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:424}}
+Jan 19 13:19:33 gelani-lab-1 devstack@n-api.service[108406]: DEBUG oslo_concurrency.lockutils [None req-169a52b5-c669-4b80-ba1e-a1b23d616ea9 admin admin] Acquiring lock "98f33c17-3763-4716-b1c3-d1033622122b" by "nova.context.set_target_cell.<locals>.get_or_set_cached_cell_and_set_connections" {{(pid=108406) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:405}}
+Jan 19 13:19:33 gelani-lab-1 devstack@n-api.service[108406]: DEBUG oslo_concurrency.lockutils [None req-169a52b5-c669-4b80-ba1e-a1b23d616ea9 admin admin] Lock "98f33c17-3763-4716-b1c3-d1033622122b" acquired by "nova.context.set_target_cell.<locals>.get_or_set_cached_cell_and_set_connections" :: waited 0.000s {{(pid=108406) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:410}}
+Jan 19 13:19:33 gelani-lab-1 devstack@n-api.service[108406]: DEBUG oslo_concurrency.lockutils [None req-169a52b5-c669-4b80-ba1e-a1b23d616ea9 admin admin] Lock "98f33c17-3763-4716-b1c3-d1033622122b" "released"by "nova.context.set_target_cell.<locals>.get_or_set_cached_cell_and_set_connections" :: held 0.000s {{(pid=108406) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:424}}
+Jan 19 13:19:33 gelani-lab-1 devstack@n-api.service[108406]: INFO nova.api.openstack.requestlog [None req-169a52b5-c669-4b80-ba1e-a1b23d616ea9 admin admin] 192.168.95.93 "GET /compute/v2.1/os-services?binary=nova-compute&host=gelani-lab-1" status: 200 len: 255 microversion: 2.69 time: 0.069760
+Jan 19 13:19:33 gelani-lab-1 devstack@n-api.service[108406]: [pid: 108406|app: 0|req: 9/37] 192.168.95.93 () {64 vars in 1416 bytes} [Mon Jan 19 13:19:33 2026] GET /compute/v2.1/os-services?binary=nova-compute&host=gelani-lab-1 => generated 255 bytes in 70 msecs (HTTP/1.1 200) 9 headers in 359 bytes (1 switches on core 0)
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@n-cpu.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@n-cpu.service --no-pager
+● devstack@n-cpu.service - Devstack devstack@n-cpu.service
+     Loaded: loaded (/etc/systemd/system/devstack@n-cpu.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:07 UTC; 1min 26s ago
+   Main PID: 125281 (nova-compute)
+      Tasks: 22 (limit: 38457)
+     Memory: 136.3M
+        CPU: 2.497s
+     CGroup: /system.slice/system-devstack.slice/devstack@n-cpu.service
+             └─125281 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-compute --config-file /etc/nova/nova-cpu.conf
+
+Jan 19 13:19:11 gelani-lab-1 nova-compute[125281]: DEBUG oslo_concurrency.processutils [None req-03deaeea-8fdf-4c5d-a44b-1a66daff32f6 None None] CMD "env LANG=C uptime" returned: 0 in 0.013s {{(pid=125281) execute /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/processutils.py:372}}
+Jan 19 13:19:11 gelani-lab-1 nova-compute[125281]: DEBUG nova.compute.resource_tracker [None req-03deaeea-8fdf-4c5d-a44b-1a66daff32f6 None None] Hypervisor/Node resource view: name=gelani-lab-1 free_ram=21406MB free_disk=40.58902359008789GB free_vcpus=16 pci_devices=[{"dev_id": "pci_0000_00_03_0", "address": "0000:00:03.0", "product_id": "1000", "vendor_id": "1af4", "numa_node": null, "label": "label_1af4_1000", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_00_0", "address": "0000:00:00.0", "product_id": "1237", "vendor_id": "8086", "numa_node": null, "label": "label_8086_1237", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_01_2", "address": "0000:00:01.2", "product_id": "7020", "vendor_id": "8086", "numa_node": null, "label": "label_8086_7020", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_02_0", "address": "0000:00:02.0", "product_id": "0100", "vendor_id": "1b36", "numa_node": null, "label": "label_1b36_0100", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_01_0", "address": "0000:00:01.0", "product_id": "7000", "vendor_id": "8086", "numa_node": null, "label": "label_8086_7000", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_04_0", "address": "0000:00:04.0", "product_id": "1003", "vendor_id": "1af4", "numa_node": null, "label": "label_1af4_1003", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_07_0", "address": "0000:00:07.0", "product_id": "1005", "vendor_id": "1af4", "numa_node": null, "label": "label_1af4_1005", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_01_1", "address": "0000:00:01.1", "product_id": "7010", "vendor_id": "8086", "numa_node": null, "label": "label_8086_7010", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_05_0", "address": "0000:00:05.0", "product_id": "1001", "vendor_id": "1af4", "numa_node": null, "label": "label_1af4_1001", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_01_3", "address": "0000:00:01.3", "product_id": "7113", "vendor_id": "8086", "numa_node": null, "label": "label_8086_7113", "dev_type": "type-PCI"}, {"dev_id": "pci_0000_00_06_0", "address": "0000:00:06.0", "product_id": "1002", "vendor_id": "1af4", "numa_node": null, "label": "label_1af4_1002", "dev_type": "type-PCI"}] {{(pid=125281) _report_hypervisor_resource_view /opt/stack/nova/nova/compute/resource_tracker.py:1136}}
+Jan 19 13:19:11 gelani-lab-1 nova-compute[125281]: DEBUG oslo_concurrency.lockutils [None req-03deaeea-8fdf-4c5d-a44b-1a66daff32f6 None None] Acquiring lock "compute_resources" by "nova.compute.resource_tracker.ResourceTracker._update_available_resource" {{(pid=125281) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:405}}
+Jan 19 13:19:11 gelani-lab-1 nova-compute[125281]: DEBUG oslo_concurrency.lockutils [None req-03deaeea-8fdf-4c5d-a44b-1a66daff32f6 None None] Lock "compute_resources" acquired by "nova.compute.resource_tracker.ResourceTracker._update_available_resource" :: waited 0.000s {{(pid=125281) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:410}}
+Jan 19 13:19:12 gelani-lab-1 nova-compute[125281]: DEBUG nova.compute.resource_tracker [None req-03deaeea-8fdf-4c5d-a44b-1a66daff32f6 None None] Total usable vcpus: 16, total allocated vcpus: 0 {{(pid=125281)_report_final_resource_view /opt/stack/nova/nova/compute/resource_tracker.py:1159}}
+Jan 19 13:19:12 gelani-lab-1 nova-compute[125281]: DEBUG nova.compute.resource_tracker [None req-03deaeea-8fdf-4c5d-a44b-1a66daff32f6 None None] Final resource view: name=gelani-lab-1 phys_ram=32089MB used_ram=512MB phys_disk=48GB used_disk=0GB total_vcpus=16 used_vcpus=0 pci_stats=[] stats={'failed_builds': '0', 'uptime': ' 13:19:11 up 29 min,  2 users,  load average: 2.67, 1.85, 1.05\n'} {{(pid=125281) _report_final_resource_view /opt/stack/nova/nova/compute/resource_tracker.py:1168}}
+Jan 19 13:19:12 gelani-lab-1 nova-compute[125281]: DEBUG nova.compute.provider_tree [None req-03deaeea-8fdf-4c5d-a44b-1a66daff32f6 None None] Inventory has not changed in ProviderTree for provider: ba2ec314-9891-498b-82cc-7a5f896382bf {{(pid=125281) update_inventory /opt/stack/nova/nova/compute/provider_tree.py:180}}
+Jan 19 13:19:13 gelani-lab-1 nova-compute[125281]: DEBUG nova.scheduler.client.report [None req-03deaeea-8fdf-4c5d-a44b-1a66daff32f6 None None] Inventory has not changed for provider ba2ec314-9891-498b-82cc-7a5f896382bf based on inventory data: {'MEMORY_MB': {'total': 32089, 'reserved': 512, 'min_unit': 1, 'max_unit': 32089, 'step_size': 1, 'allocation_ratio': 1.0}, 'VCPU': {'total': 16, 'reserved': 0, 'min_unit':1, 'max_unit': 16, 'step_size': 1, 'allocation_ratio': 4.0}, 'DISK_GB': {'total': 48, 'reserved': 0, 'min_unit': 1, 'max_unit': 48, 'step_size': 1, 'allocation_ratio': 1.0}} {{(pid=125281) set_inventory_for_provider /opt/stack/nova/nova/scheduler/client/report.py:958}}
+Jan 19 13:19:13 gelani-lab-1 nova-compute[125281]: DEBUG nova.compute.resource_tracker [None req-03deaeea-8fdf-4c5d-a44b-1a66daff32f6 None None] Compute_service record updated for gelani-lab-1:gelani-lab-1 {{(pid=125281) _update_available_resource /opt/stack/nova/nova/compute/resource_tracker.py:1097}}
+Jan 19 13:19:13 gelani-lab-1 nova-compute[125281]: DEBUG oslo_concurrency.lockutils [None req-03deaeea-8fdf-4c5d-a44b-1a66daff32f6 None None] Lock "compute_resources" "released" by "nova.compute.resource_tracker.ResourceTracker._update_available_resource" :: held 2.093s {{(pid=125281) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:424}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@n-cond.service
+Failed to get unit file state for devstack@n-cond.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@n-sch.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@n-sch.service --no-pager
+● devstack@n-sch.service - Devstack devstack@n-sch.service
+     Loaded: loaded (/etc/systemd/system/devstack@n-sch.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:17:56 UTC; 1min 37s ago
+   Main PID: 119874 (nova-scheduler:)
+      Tasks: 33 (limit: 38457)
+     Memory: 201.3M
+        CPU: 1.900s
+     CGroup: /system.slice/system-devstack.slice/devstack@n-sch.service
+             ├─119874 "nova-scheduler: master process [/opt/stack/data/venv/bin/nova-scheduler --config-file /etc/nova/nova.conf]" "" "" ""
+             ├─121146 "nova-scheduler: ServiceWrapper worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─121155 "nova-scheduler: ServiceWrapper worker(1)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─121164 "nova-scheduler: ServiceWrapper worker(2)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             └─121172 "nova-scheduler: ServiceWrapper worker(3)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+
+Jan 19 13:18:09 gelani-lab-1 nova-scheduler[121164]: DEBUG oslo.service.backend._threading.loopingcall [None req-8abda568-7ec0-457e-925b-856c671cdbf0 None None] Dynamic interval looping call 'nova.service.Service.periodic_tasks' sleeping for 60.00 seconds {{(pid=121164) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
+Jan 19 13:18:13 gelani-lab-1 nova-scheduler[121146]: DEBUG dbcounter [-] [121146] Writing DB stats nova_cell0:SELECT=4,nova_cell0:INSERT=1,nova_cell0:UPDATE=1 {{(pid=121146) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:13 gelani-lab-1 nova-scheduler[121164]: DEBUG dbcounter [-] [121164] Writing DB stats nova_cell0:SELECT=3 {{(pid=121164) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:13 gelani-lab-1 nova-scheduler[121155]: DEBUG dbcounter [-] [121155] Writing DB stats nova_cell0:SELECT=4,nova_cell0:INSERT=1,nova_cell0:UPDATE=1 {{(pid=121155) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:13 gelani-lab-1 nova-scheduler[121172]: DEBUG dbcounter [-] [121172] Writing DB stats nova_cell0:SELECT=3 {{(pid=121172) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:15 gelani-lab-1 nova-scheduler[121146]: DEBUG oslo.service.backend._threading.loopingcall [None req-efe4de71-c65b-495f-baa3-aa1e9ae08114 None None] Dynamic interval looping call 'nova.service.Service.periodic_tasks' sleeping for 60.00 seconds {{(pid=121146) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
+Jan 19 13:18:34 gelani-lab-1 nova-scheduler[121155]: DEBUG oslo.service.backend._threading.loopingcall [None req-05e24c13-a7d2-4743-b317-f8cbb02f6fce None None] Dynamic interval looping call 'nova.service.Service.periodic_tasks' sleeping for 60.00 seconds {{(pid=121155) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
+Jan 19 13:18:52 gelani-lab-1 nova-scheduler[121172]: DEBUG oslo.service.backend._threading.loopingcall [None req-d961efd4-4cbf-49a3-9377-00fa7fd11e39 None None] Dynamic interval looping call 'nova.service.Service.periodic_tasks' sleeping for 60.00 seconds {{(pid=121172) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
+Jan 19 13:19:09 gelani-lab-1 nova-scheduler[121164]: DEBUG oslo.service.backend._threading.loopingcall [None req-8abda568-7ec0-457e-925b-856c671cdbf0 None None] Dynamic interval looping call 'nova.service.Service.periodic_tasks' sleeping for 60.00 seconds {{(pid=121164) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
+Jan 19 13:19:15 gelani-lab-1 nova-scheduler[121146]: DEBUG oslo.service.backend._threading.loopingcall [None req-efe4de71-c65b-495f-baa3-aa1e9ae08114 None None] Dynamic interval looping call 'nova.service.Service.periodic_tasks' sleeping for 60.00 seconds {{(pid=121146) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@n-novnc.service
+Failed to get unit file state for devstack@n-novnc.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@n-api-meta.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@n-api-meta.service --no-pager
+● devstack@n-api-meta.service - Devstack devstack@n-api-meta.service
+     Loaded: loaded (/etc/systemd/system/devstack@n-api-meta.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:17:58 UTC; 1min 36s ago
+   Main PID: 120739 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 30 (limit: 38457)
+     Memory: 404.8M
+        CPU: 6.597s
+     CGroup: /system.slice/system-devstack.slice/devstack@n-api-meta.service
+             ├─120739 "nova-api-metauWSGI master"
+             ├─120740 "nova-api-metauWSGI worker 1"
+             ├─120741 "nova-api-metauWSGI worker 2"
+             ├─120742 "nova-api-metauWSGI worker 3"
+             ├─120743 "nova-api-metauWSGI worker 4"
+             └─120744 "nova-api-metauWSGI http 1"
+
+Jan 19 13:18:09 gelani-lab-1 devstack@n-api-meta.service[120743]: DEBUG dbcounter [-] [120743] Writing DB stats nova_cell0:SELECT=1 {{(pid=120743) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:09 gelani-lab-1 devstack@n-api-meta.service[120743]: DEBUG dbcounter [-] [120743] Writing DB stats nova_cell1:SELECT=1 {{(pid=120743) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:09 gelani-lab-1 devstack@n-api-meta.service[120741]: DEBUG dbcounter [-] [120741] Writing DB stats nova_cell1:SELECT=1 {{(pid=120741) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:09 gelani-lab-1 devstack@n-api-meta.service[120741]: DEBUG dbcounter [-] [120741] Writing DB stats nova_cell0:SELECT=1 {{(pid=120741) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:09 gelani-lab-1 devstack@n-api-meta.service[120740]: DEBUG dbcounter [-] [120740] Writing DB stats nova_cell0:SELECT=2,nova_cell0:INSERT=1 {{(pid=120740) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:09 gelani-lab-1 devstack@n-api-meta.service[120743]: DEBUG dbcounter [-] [120743] Writing DB stats nova_cell0:SELECT=2,nova_cell0:INSERT=1 {{(pid=120743) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:09 gelani-lab-1 devstack@n-api-meta.service[120741]: DEBUG dbcounter [-] [120741] Writing DB stats nova_cell0:SELECT=2,nova_cell0:INSERT=1 {{(pid=120741) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:09 gelani-lab-1 devstack@n-api-meta.service[120742]: DEBUG dbcounter [-] [120742] Writing DB stats nova_cell1:SELECT=1 {{(pid=120742) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:09 gelani-lab-1 devstack@n-api-meta.service[120742]: DEBUG dbcounter [-] [120742] Writing DB stats nova_cell0:SELECT=1 {{(pid=120742) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:09 gelani-lab-1 devstack@n-api-meta.service[120742]: DEBUG dbcounter [-] [120742] Writing DB stats nova_cell0:SELECT=1 {{(pid=120742) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@placement-api.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@placement-api.service --no-pager
+● devstack@placement-api.service - Devstack devstack@placement-api.service
+     Loaded: loaded (/etc/systemd/system/devstack@placement-api.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:17:15 UTC; 2min 18s ago
+   Main PID: 116137 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 9 (limit: 38457)
+     Memory: 321.9M
+        CPU: 4.463s
+     CGroup: /system.slice/system-devstack.slice/devstack@placement-api.service
+             ├─116137 "placementuWSGI master"
+             ├─116138 "placementuWSGI worker 1"
+             ├─116139 "placementuWSGI worker 2"
+             ├─116140 "placementuWSGI worker 3"
+             └─116141 "placementuWSGI worker 4"
+
+Jan 19 13:18:30 gelani-lab-1 devstack@placement-api.service[116139]: DEBUG dbcounter [-] [116139] Writing DB stats placement:SELECT=2 {{(pid=116139) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:30 gelani-lab-1 devstack@placement-api.service[116140]: DEBUG dbcounter [-] [116140] Writing DB stats placement:INSERT=59,placement:UPDATE=2,placement:SELECT=3 {{(pid=116140) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:12 gelani-lab-1 devstack@placement-api.service[116138]: DEBUG placement.requestlog [req-6679e512-a483-4b01-9de3-18ac82645eca req-e68980d7-a2c1-4ca7-b56a-02676a61fdea None None] Starting request: 192.168.95.93 "GET /placement/resource_providers/ba2ec314-9891-498b-82cc-7a5f896382bf/allocations" {{(pid=116138) __call__ /opt/stack/placement/placement/requestlog.py:55}}
+Jan 19 13:19:12 gelani-lab-1 devstack@placement-api.service[116138]: INFO placement.requestlog [req-6679e512-a483-4b01-9de3-18ac82645eca req-e68980d7-a2c1-4ca7-b56a-02676a61fdea service nova] 192.168.95.93 "GET /placement/resource_providers/ba2ec314-9891-498b-82cc-7a5f896382bf/allocations" status: 200 len: 54 microversion: 1.0
+Jan 19 13:19:12 gelani-lab-1 devstack@placement-api.service[116138]: [pid: 116138|app: 0|req: 3/12] 192.168.95.93 () {62 vars in 1485 bytes} [Mon Jan 19 13:19:12 2026] GET /placement/resource_providers/ba2ec314-9891-498b-82cc-7a5f896382bf/allocations => generated 54 bytes in 8 msecs (HTTP/1.1 200) 6 headers in 223 bytes (1 switches on core 0)
+Jan 19 13:19:12 gelani-lab-1 devstack@placement-api.service[116141]: DEBUG placement.requestlog [req-6679e512-a483-4b01-9de3-18ac82645eca req-44afe80f-0d07-49e7-9233-9d81a7e4dd75 None None] Starting request: 192.168.95.93 "GET /placement/resource_providers/ba2ec314-9891-498b-82cc-7a5f896382bf/allocations" {{(pid=116141) __call__ /opt/stack/placement/placement/requestlog.py:55}}
+Jan 19 13:19:12 gelani-lab-1 devstack@placement-api.service[116141]: INFO placement.requestlog [req-6679e512-a483-4b01-9de3-18ac82645eca req-44afe80f-0d07-49e7-9233-9d81a7e4dd75 service nova] 192.168.95.93 "GET /placement/resource_providers/ba2ec314-9891-498b-82cc-7a5f896382bf/allocations" status: 200 len: 54 microversion: 1.0
+Jan 19 13:19:12 gelani-lab-1 devstack@placement-api.service[116141]: [pid: 116141|app: 0|req: 4/13] 192.168.95.93 () {62 vars in 1485 bytes} [Mon Jan 19 13:19:12 2026] GET /placement/resource_providers/ba2ec314-9891-498b-82cc-7a5f896382bf/allocations => generated 54 bytes in 50 msecs (HTTP/1.1 200) 6 headers in 223 bytes (1 switches on core 0)
+Jan 19 13:19:22 gelani-lab-1 devstack@placement-api.service[116138]: DEBUG dbcounter [-] [116138] Writing DB stats placement:SELECT=2 {{(pid=116138) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:22 gelani-lab-1 devstack@placement-api.service[116141]: DEBUG dbcounter [-] [116141] Writing DB stats placement:SELECT=2 {{(pid=116141) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@placement-client.service
+Failed to get unit file state for devstack@placement-client.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@g-api.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@g-api.service --no-pager
+● devstack@g-api.service - Devstack devstack@g-api.service
+     Loaded: loaded (/etc/systemd/system/devstack@g-api.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:21 UTC; 1min 12s ago
+   Main PID: 129583 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 15 (limit: 38457)
+     Memory: 445.8M
+        CPU: 7.778s
+     CGroup: /system.slice/system-devstack.slice/devstack@g-api.service
+             ├─129583 "glance-apiuWSGI master"
+             ├─129589 "glance-apiuWSGI worker 1"
+             ├─129590 "glance-apiuWSGI worker 2"
+             ├─129591 "glance-apiuWSGI worker 3"
+             └─129592 "glance-apiuWSGI worker 4"
+
+Jan 19 13:19:05 gelani-lab-1 devstack@g-api.service[129591]: DEBUG glance.api.middleware.version_negotiation [None req-8ea25972-6ec6-4a99-beb2-fc24300b0060 None None] Using url versioning {{(pid=129591) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Jan 19 13:19:05 gelani-lab-1 devstack@g-api.service[129591]: DEBUG glance.api.middleware.version_negotiation [None req-8ea25972-6ec6-4a99-beb2-fc24300b0060 None None] Matched version: v2 {{(pid=129591) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Jan 19 13:19:05 gelani-lab-1 devstack@g-api.service[129591]: DEBUG glance.api.middleware.version_negotiation [None req-8ea25972-6ec6-4a99-beb2-fc24300b0060 None None] new path /v2/images {{(pid=129591) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Jan 19 13:19:05 gelani-lab-1 devstack@g-api.service[129591]: [pid: 129591|app: 0|req: 3/6] 127.0.0.1 () {38 vars in 722 bytes} [Mon Jan 19 13:19:05 2026] GET /v2/images?limit=200 => generated 1055 bytes in 144 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Jan 19 13:19:05 gelani-lab-1 devstack@g-api.service[129589]: DEBUG glance.api.middleware.version_negotiation [None req-a0981609-ab29-4d5f-b2b0-06fc577b4dd8 admin admin] Determining version of request: GET /v2/schemas/image Accept: */* {{(pid=129589) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:44}}
+Jan 19 13:19:05 gelani-lab-1 devstack@g-api.service[129589]: DEBUG glance.api.middleware.version_negotiation [None req-a0981609-ab29-4d5f-b2b0-06fc577b4dd8 admin admin] Using url versioning {{(pid=129589) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:57}}
+Jan 19 13:19:05 gelani-lab-1 devstack@g-api.service[129589]: DEBUG glance.api.middleware.version_negotiation [None req-a0981609-ab29-4d5f-b2b0-06fc577b4dd8 admin admin] Matched version: v2 {{(pid=129589) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:69}}
+Jan 19 13:19:05 gelani-lab-1 devstack@g-api.service[129589]: DEBUG glance.api.middleware.version_negotiation [None req-a0981609-ab29-4d5f-b2b0-06fc577b4dd8 admin admin] new path /v2/schemas/image {{(pid=129589) process_request /opt/stack/glance/glance/api/middleware/version_negotiation.py:70}}
+Jan 19 13:19:05 gelani-lab-1 devstack@g-api.service[129589]: [pid: 129589|app: 0|req: 2/7] 127.0.0.1 () {38 vars in 717 bytes} [Mon Jan 19 13:19:05 2026] GET /v2/schemas/image => generated 6083 bytes in 3 msecs (HTTP/1.1 200) 4 headers in 158 bytes (1 switches on core 0)
+Jan 19 13:19:15 gelani-lab-1 devstack@g-api.service[129591]: DEBUG dbcounter [-] [129591] Writing DB stats glance:SELECT=1 {{(pid=129591) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@c-sch.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@c-sch.service --no-pager
+● devstack@c-sch.service - Devstack devstack@c-sch.service
+     Loaded: loaded (/etc/systemd/system/devstack@c-sch.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:14 UTC; 1min 19s ago
+   Main PID: 127578 (cinder-schedule)
+      Tasks: 1 (limit: 38457)
+     Memory: 103.4M
+        CPU: 1.693s
+     CGroup: /system.slice/system-devstack.slice/devstack@c-sch.service
+             └─127578 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/cinder-scheduler --config-file /etc/cinder/cinder.conf
+
+Jan 19 13:18:16 gelani-lab-1 cinder-scheduler[127578]: DEBUG cinder.service [None req-5d3c3a41-a55f-488d-a77d-680e1b4ca933 None None] Pinning object versions for RPC server serializer to 1.39 {{(pid=127578) start /opt/stack/cinder/cinder/service.py:245}}
+Jan 19 13:18:25 gelani-lab-1 cinder-scheduler[127578]: DEBUG cinder.scheduler.host_manager [None req-882762ea-fddb-480d-b2dc-954518c6e14a None None] Received volume service update from  gelani-lab-1@lvmdriver-1: {'volume_backend_name': 'lvmdriver-1', 'vendor_name': 'Open Source', 'driver_version': '3.0.0', 'storage_protocol': 'iSCSI', 'pools': [{'pool_name': 'lvmdriver-1', 'total_capacity_gb': 28.5, 'free_capacity_gb': 28.5, 'reserved_percentage': 0, 'location_info': 'LVMVolumeDriver:gelani-lab-1:stack-volumes-lvmdriver-1:thin:0', 'QoS_support': False, 'provisioned_capacity_gb': 0.0, 'max_over_subscription_ratio': '20.0', 'thin_provisioning_support': True, 'thick_provisioning_support': False, 'total_volumes': 1, 'filter_function': None, 'goodness_function': None, 'multiattach': True, 'backend_state': 'up', 'allocated_capacity_gb': 0, 'cacheable': True}], 'shared_targets': False, 'sparse_copy_volume': True, 'filter_function': None, 'goodness_function': None} {{(pid=127578) update_service_capabilities /opt/stack/cinder/cinder/scheduler/host_manager.py:629}}
+Jan 19 13:18:25 gelani-lab-1 cinder-scheduler[127578]: DEBUG cinder.scheduler.host_manager [None req-882762ea-fddb-480d-b2dc-954518c6e14a None None] Updating capabilities for gelani-lab-1@lvmdriver-1#lvmdriver-1: {'pool_name': 'lvmdriver-1', 'total_capacity_gb': 28.5, 'free_capacity_gb': 28.5, 'reserved_percentage': 0, 'location_info': 'LVMVolumeDriver:gelani-lab-1:stack-volumes-lvmdriver-1:thin:0', 'QoS_support':False, 'provisioned_capacity_gb': 0.0, 'max_over_subscription_ratio': '20.0', 'thin_provisioning_support': True, 'thick_provisioning_support': False, 'total_volumes': 1, 'filter_function': None, 'goodness_function': None, 'multiattach': True, 'backend_state': 'up', 'allocated_capacity_gb': 0, 'cacheable': True, 'volume_backend_name': 'lvmdriver-1', 'storage_protocol': ['iSCSI', 'iscsi'], 'vendor_name': 'Open Source', 'driver_version': '3.0.0', 'timestamp': datetime.datetime(2026, 1, 19, 13, 18, 25, 938233)} {{(pid=127578) update_from_volume_capability /opt/stack/cinder/cinder/scheduler/host_manager.py:415}}
+Jan 19 13:18:25 gelani-lab-1 cinder-scheduler[127578]: DEBUG cinder.scheduler.host_manager [None req-3898b145-dece-4ebb-8cd5-8d2308285a7e None None] Publish storage capacity: [{'type': 'pool', 'name_to_id': 'gelani-lab-1@lvmdriver-1#lvmdriver-1', 'total': 28.5, 'free': 28.5, 'allocated': 0.0, 'provisioned': 0.0, 'virtual_free': 570.0, 'reported_at': datetime.datetime(2026, 1, 19, 13, 18, 25, 951607)}, {'type': 'backend', 'name_to_id': 'gelani-lab-1@lvmdriver-1', 'total': 28.5, 'free': 28.5, 'allocated': 0.0, 'provisioned': 0.0, 'virtual_free': 570.0, 'reported_at': datetime.datetime(2026, 1, 19, 13, 18, 25, 951607)}]. {{(pid=127578) _notify_capacity_usage /opt/stack/cinder/cinder/scheduler/host_manager.py:978}}
+Jan 19 13:18:35 gelani-lab-1 cinder-scheduler[127578]: DEBUG dbcounter [-] [127578] Writing DB stats cinder:SELECT=12,cinder:INSERT=1 {{(pid=127578) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:03 gelani-lab-1 cinder-scheduler[127578]: DEBUG cinder.scheduler.host_manager [None req-114f7059-7cea-4a46-8189-5db6a616aafb service None] Updating capabilities for gelani-lab-1@lvmdriver-1#lvmdriver-1: {'pool_name': 'lvmdriver-1', 'total_capacity_gb': 28.5, 'free_capacity_gb': 28.5, 'reserved_percentage': 0, 'location_info': 'LVMVolumeDriver:gelani-lab-1:stack-volumes-lvmdriver-1:thin:0', 'QoS_support': False, 'provisioned_capacity_gb': 0.0, 'max_over_subscription_ratio': '20.0', 'thin_provisioning_support': True, 'thick_provisioning_support': False, 'total_volumes': 1, 'filter_function': None, 'goodness_function': None, 'multiattach': True, 'backend_state': 'up', 'allocated_capacity_gb': 0, 'cacheable': True, 'volume_backend_name': 'lvmdriver-1', 'storage_protocol': ['iSCSI', 'iscsi'], 'vendor_name': 'Open Source', 'driver_version': '3.0.0', 'timestamp': datetime.datetime(2026, 1, 19, 13, 18, 25, 938233)} {{(pid=127578) update_from_volume_capability /opt/stack/cinder/cinder/scheduler/host_manager.py:415}}
+Jan 19 13:19:13 gelani-lab-1 cinder-scheduler[127578]: DEBUG oslo_service.periodic_task [None req-264f6a85-24d2-421b-864f-514baa76a461 None None] Running periodic task SchedulerManager._clean_expired_messages{{(pid=127578) run_periodic_tasks /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/periodic_task.py:210}}
+Jan 19 13:19:13 gelani-lab-1 cinder-scheduler[127578]: INFO cinder.message.api [None req-264f6a85-24d2-421b-864f-514baa76a461 None None] Deleted 0 expired messages.
+Jan 19 13:19:13 gelani-lab-1 cinder-scheduler[127578]: DEBUG oslo_service.periodic_task [None req-264f6a85-24d2-421b-864f-514baa76a461 None None] Running periodic task SchedulerManager._clean_expired_reservation {{(pid=127578) run_periodic_tasks /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/periodic_task.py:210}}
+Jan 19 13:19:23 gelani-lab-1 cinder-scheduler[127578]: DEBUG dbcounter [-] [127578] Writing DB stats cinder:SELECT=2,cinder:DELETE=1 {{(pid=127578) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@c-api.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@c-api.service --no-pager
+● devstack@c-api.service - Devstack devstack@c-api.service
+     Loaded: loaded (/etc/systemd/system/devstack@c-api.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:11 UTC; 1min 23s ago
+   Main PID: 126460 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 17 (limit: 38457)
+     Memory: 455.9M
+        CPU: 8.767s
+     CGroup: /system.slice/system-devstack.slice/devstack@c-api.service
+             ├─126460 "cinder-apiuWSGI master"
+             ├─126462 "cinder-apiuWSGI worker 1"
+             ├─126463 "cinder-apiuWSGI worker 2"
+             ├─126464 "cinder-apiuWSGI worker 3"
+             └─126465 "cinder-apiuWSGI worker 4"
+
+Jan 19 13:19:05 gelani-lab-1 devstack@c-api.service[126463]: DEBUG cinder.api.middleware.request_id [None req-6fa683a9-d2be-4085-be75-1c4e803a86e7 None None] RequestId filter calling following filter/app {{(pid=126463) _context_setter /opt/stack/cinder/cinder/api/middleware/request_id.py:62}}
+Jan 19 13:19:05 gelani-lab-1 devstack@c-api.service[126463]: INFO cinder.api.openstack.wsgi [None req-6fa683a9-d2be-4085-be75-1c4e803a86e7 service ceilometer] GET http://192.168.95.93/volume/v3/snapshots/detail?all_tenants=True
+Jan 19 13:19:05 gelani-lab-1 devstack@c-api.service[126463]: DEBUG cinder.api.openstack.wsgi [None req-6fa683a9-d2be-4085-be75-1c4e803a86e7 service ceilometer] Empty body provided in request {{(pid=126463) get_body /opt/stack/cinder/cinder/api/openstack/wsgi.py:725}}
+Jan 19 13:19:05 gelani-lab-1 devstack@c-api.service[126463]: DEBUG cinder.api.openstack.wsgi [None req-6fa683a9-d2be-4085-be75-1c4e803a86e7 service ceilometer] Calling method 'detail' {{(pid=126463) _process_stack /opt/stack/cinder/cinder/api/openstack/wsgi.py:878}}
+Jan 19 13:19:05 gelani-lab-1 devstack@c-api.service[126463]: INFO cinder.volume.api [None req-6fa683a9-d2be-4085-be75-1c4e803a86e7 service ceilometer] Get all snapshots completed successfully.
+Jan 19 13:19:05 gelani-lab-1 devstack@c-api.service[126463]: INFO cinder.api.openstack.wsgi [None req-6fa683a9-d2be-4085-be75-1c4e803a86e7 service ceilometer] http://192.168.95.93/volume/v3/snapshots/detail?all_tenants=True returned with HTTP 200
+Jan 19 13:19:05 gelani-lab-1 devstack@c-api.service[126463]: [pid: 126463|app: 0|req: 3/7] 192.168.95.93 () {62 vars in 1282 bytes} [Mon Jan 19 13:19:05 2026] GET /volume/v3/snapshots/detail?all_tenants=True => generated 17 bytes in 61 msecs (HTTP/1.1 200) 7 headers in 285 bytes (1 switches on core 0)
+Jan 19 13:19:14 gelani-lab-1 devstack@c-api.service[126465]: DEBUG dbcounter [-] [126465] Writing DB stats cinder:SELECT=1 {{(pid=126465) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:15 gelani-lab-1 devstack@c-api.service[126464]: DEBUG dbcounter [-] [126464] Writing DB stats cinder:SELECT=1 {{(pid=126464) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:15 gelani-lab-1 devstack@c-api.service[126463]: DEBUG dbcounter [-] [126463] Writing DB stats cinder:SELECT=1 {{(pid=126463) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@c-vol.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@c-vol.service --no-pager
+● devstack@c-vol.service - Devstack devstack@c-vol.service
+     Loaded: loaded (/etc/systemd/system/devstack@c-vol.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:16 UTC; 1min 17s ago
+   Main PID: 128461 (cinder-volume)
+      Tasks: 2 (limit: 38457)
+     Memory: 134.2M
+        CPU: 8.782s
+     CGroup: /system.slice/system-devstack.slice/devstack@c-vol.service
+             ├─128461 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf
+             └─128638 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/cinder-volume --config-file /etc/cinder/cinder.conf
+
+Jan 19 13:18:26 gelani-lab-1 cinder-volume[128638]: DEBUG oslo_concurrency.processutils [None req-882762ea-fddb-480d-b2dc-954518c6e14a None None] CMD "sudo cinder-rootwrap /etc/cinder/rootwrap.conf env LC_ALL=C lvs --noheadings --unit=g -o size,data_percent --separator : --nosuffix /dev/stack-volumes-lvmdriver-1/stack-volumes-lvmdriver-1-pool" returned: 0 in 0.320s {{(pid=128638) execute /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/processutils.py:372}}
+Jan 19 13:18:26 gelani-lab-1 cinder-volume[128638]: DEBUG oslo_concurrency.processutils [None req-882762ea-fddb-480d-b2dc-954518c6e14a None None] Running cmd (subprocess): sudo cinder-rootwrap /etc/cinder/rootwrap.conf env LC_ALL=C lvs --noheadings --unit=g -o vg_name,name,size --nosuffix --readonly stack-volumes-lvmdriver-1 {{(pid=128638) execute /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/processutils.py:349}}
+Jan 19 13:18:26 gelani-lab-1 sudo[130340]:    stack : PWD=/ ; USER=root ; COMMAND=/opt/stack/data/venv/bin/cinder-rootwrap /etc/cinder/rootwrap.conf env LC_ALL=C lvs --noheadings --unit=g -o vg_name,name,size--nosuffix --readonly stack-volumes-lvmdriver-1
+Jan 19 13:18:26 gelani-lab-1 sudo[130340]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1001)
+Jan 19 13:18:27 gelani-lab-1 sudo[130340]: pam_unix(sudo:session): session closed for user root
+Jan 19 13:18:27 gelani-lab-1 cinder-volume[128638]: DEBUG oslo_concurrency.processutils [None req-882762ea-fddb-480d-b2dc-954518c6e14a None None] CMD "sudo cinder-rootwrap /etc/cinder/rootwrap.conf env LC_ALL=C lvs --noheadings --unit=g -o vg_name,name,size --nosuffix --readonly stack-volumes-lvmdriver-1" returned: 0 in 0.313s {{(pid=128638) execute /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/processutils.py:372}}
+Jan 19 13:18:27 gelani-lab-1 cinder-volume[128638]: INFO cinder.volume.manager [None req-882762ea-fddb-480d-b2dc-954518c6e14a None None] Driver post RPC initialization completed successfully.
+Jan 19 13:18:28 gelani-lab-1 cinder-volume[128461]: DEBUG dbcounter [-] [128461] Writing DB stats cinder:SELECT=8,cinder:INSERT=1,cinder:UPDATE=1 {{(pid=128461) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:35 gelani-lab-1 cinder-volume[128638]: DEBUG dbcounter [-] [128638] Writing DB stats cinder:SELECT=3 {{(pid=128638) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:37 gelani-lab-1 cinder-volume[128638]: DEBUG dbcounter [-] [128638] Writing DB stats cinder:SELECT=11,cinder:INSERT=1,cinder:UPDATE=2 {{(pid=128638) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@ovn-controller.service
+Failed to get unit file state for devstack@ovn-controller.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@ovn-northd.service
+Failed to get unit file state for devstack@ovn-northd.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@ovs-vswitchd.service
+Failed to get unit file state for devstack@ovs-vswitchd.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@ovsdb-server.service
+Failed to get unit file state for devstack@ovsdb-server.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@q-svc.service
+Failed to get unit file state for devstack@q-svc.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@q-ovn-agent.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@q-ovn-agent.service --no-pager
+● devstack@q-ovn-agent.service - Devstack devstack@q-ovn-agent.service
+     Loaded: loaded (/etc/systemd/system/devstack@q-ovn-agent.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:17:05 UTC; 2min 28s ago
+   Main PID: 111053 (neutron-ovn-age)
+      Tasks: 20 (limit: 38457)
+     Memory: 326.1M
+        CPU: 4.963s
+     CGroup: /system.slice/system-devstack.slice/devstack@q-ovn-agent.service
+             ├─111053 "neutron-ovn-agent: master process [/opt/stack/data/venv/bin/neutron-ovn-agent --config-file /etc/neutron/plugins/ml2/ovn_agent.ini]"
+             ├─111972 "neutron-ovn-agent: ServiceWrapper worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─112459 /opt/stack/data/venv/bin/python3.10 /usr/local/bin/privsep-helper --config-file /etc/neutron/plugins/ml2/ovn_agent.ini --privsep_context neutron.privileged.namespace_cmd --privsep_sock_path /tmp/tmpyl3d6x0n/privsep.sock
+             └─117731 /opt/stack/data/venv/bin/python3.10 /usr/local/bin/privsep-helper --config-file /etc/neutron/plugins/ml2/ovn_agent.ini --privsep_context neutron.privileged.default --privsep_sock_path /tmp/tmpi4r1gly1/privsep.sock
+
+Jan 19 13:18:07 gelani-lab-1 neutron-ovn-agent[111972]: DEBUG oslo_concurrency.lockutils [-] Lock "_check_child_processes" "released" by "neutron.agent.linux.external_process.ProcessMonitor._check_child_processes" :: held 0.000s {{(pid=111972) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:424}}
+Jan 19 13:18:07 gelani-lab-1 neutron-ovn-agent[111972]: DEBUG oslo_concurrency.lockutils [-] Acquiring lock "_check_child_processes" by "neutron.agent.linux.external_process.ProcessMonitor._check_child_processes" {{(pid=111972) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:405}}
+Jan 19 13:18:07 gelani-lab-1 neutron-ovn-agent[111972]: DEBUG oslo_concurrency.lockutils [-] Lock "_check_child_processes" acquired by "neutron.agent.linux.external_process.ProcessMonitor._check_child_processes" :: waited 0.000s {{(pid=111972) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:410}}
+Jan 19 13:18:07 gelani-lab-1 neutron-ovn-agent[111972]: DEBUG oslo_concurrency.lockutils [-] Lock "_check_child_processes" "released" by "neutron.agent.linux.external_process.ProcessMonitor._check_child_processes" :: held 0.000s {{(pid=111972) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:424}}
+Jan 19 13:19:07 gelani-lab-1 neutron-ovn-agent[111972]: DEBUG oslo_concurrency.lockutils [-] Acquiring lock "_check_child_processes" by "neutron.agent.linux.external_process.ProcessMonitor._check_child_processes" {{(pid=111972) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:405}}
+Jan 19 13:19:07 gelani-lab-1 neutron-ovn-agent[111972]: DEBUG oslo_concurrency.lockutils [-] Lock "_check_child_processes" acquired by "neutron.agent.linux.external_process.ProcessMonitor._check_child_processes" :: waited 0.000s {{(pid=111972) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:410}}
+Jan 19 13:19:07 gelani-lab-1 neutron-ovn-agent[111972]: DEBUG oslo_concurrency.lockutils [-] Lock "_check_child_processes" "released" by "neutron.agent.linux.external_process.ProcessMonitor._check_child_processes" :: held 0.000s {{(pid=111972) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:424}}
+Jan 19 13:19:07 gelani-lab-1 neutron-ovn-agent[111972]: DEBUG oslo_concurrency.lockutils [-] Acquiring lock "_check_child_processes" by "neutron.agent.linux.external_process.ProcessMonitor._check_child_processes" {{(pid=111972) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:405}}
+Jan 19 13:19:07 gelani-lab-1 neutron-ovn-agent[111972]: DEBUG oslo_concurrency.lockutils [-] Lock "_check_child_processes" acquired by "neutron.agent.linux.external_process.ProcessMonitor._check_child_processes" :: waited 0.000s {{(pid=111972) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:410}}
+Jan 19 13:19:07 gelani-lab-1 neutron-ovn-agent[111972]: DEBUG oslo_concurrency.lockutils [-] Lock "_check_child_processes" "released" by "neutron.agent.linux.external_process.ProcessMonitor._check_child_processes" :: held 0.000s {{(pid=111972) inner /opt/stack/data/venv/lib/python3.10/site-packages/oslo_concurrency/lockutils.py:424}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@horizon.service
+Failed to get unit file state for devstack@horizon.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@rabbit.service
+Failed to get unit file state for devstack@rabbit.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@tempest.service
+Failed to get unit file state for devstack@tempest.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@mysql.service
+Failed to get unit file state for devstack@mysql.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@etcd3.service
+Failed to get unit file state for devstack@etcd3.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@dstat.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@dstat.service --no-pager
+● devstack@dstat.service - Devstack devstack@dstat.service
+     Loaded: loaded (/etc/systemd/system/devstack@dstat.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:12:27 UTC; 7min ago
+   Main PID: 67333 (dstat.sh)
+      Tasks: 3 (limit: 38457)
+     Memory: 24.1M
+        CPU: 1.852s
+     CGroup: /system.slice/system-devstack.slice/devstack@dstat.service
+             ├─67333 /bin/bash /opt/stack/devstack/tools/dstat.sh /opt/stack/logs
+             ├─67386 python3 /bin/dstat -tcmndrylpg --tcp --output /opt/stack/logs/dstat-csv.log
+             └─67387 python3 /bin/dstat -tcmndrylpg --swap --tcp
+
+Jan 19 13:19:24 gelani-lab-1 dstat.sh[67387]: 19-01 13:19:24| 10   6  82   1   0|  10G   14G  212M 6388M|1752B 7642B|   0    14M|   0  1114 |  12k   15k|2.29 1.81 1.05|5.0 1.0 301|   0     0 |   0     0 | 18781    0   29    0
+Jan 19 13:19:25 gelani-lab-1 dstat.sh[67387]: 19-01 13:19:25| 24   2  74   0   0|  10G   14G  212M 6389M|   0     0 |   0   703k|   0  46.9 |2492  3355 |2.29 1.81 1.05|4.0   0 4.0|   0     0 |   0     0 | 18781    0   28    0
+Jan 19 13:19:26 gelani-lab-1 dstat.sh[67387]: 19-01 13:19:26|  9   5  86   0   0|  10G   14G  212M 6389M|2181B   13k|   0   104k|   0  9.01 |8225    12k|2.29 1.81 1.05|4.0   0 468|   0     0 |   0     0 | 18780    0   28    0
+Jan 19 13:19:27 gelani-lab-1 dstat.sh[67387]: 19-01 13:19:27|  3   6  90   0   0|  10G   14G  212M 6389M|2585B 7832B|   0   500k|   0  35.0 |  11k   14k|2.29 1.81 1.05|3.0   0 364|   0     0 |   0     0 | 18780    0   26    0
+Jan 19 13:19:28 gelani-lab-1 dstat.sh[67387]: 19-01 13:19:28|  8   7  85   0   0|  11G   14G  212M 6390M|2374B 8645B|   0   659k|   0  58.9 |8579    11k|2.27 1.81 1.06|2.0   0 509|   0     0 |   0     0 | 18781    0   26    0
+Jan 19 13:19:29 gelani-lab-1 dstat.sh[67387]: 19-01 13:19:29|  6   5  86   0   0|  11G   14G  212M 6389M|3523B   13k|   0  1956k|   0   125 |  11k   12k|2.27 1.81 1.06|3.0   0 418|   0     0 |   0     0 | 18781    0   23    0
+Jan 19 13:19:30 gelani-lab-1 dstat.sh[67387]: 19-01 13:19:30|  8   6  85   0   0|  11G   14G  212M 6389M| 936B 3260B|   0   748k|   0  68.0 |  12k   14k|2.27 1.81 1.06|2.0   0 333|   0     0 |   0     0 | 18783    0   23    0
+Jan 19 13:19:31 gelani-lab-1 dstat.sh[67387]: 19-01 13:19:31|  7   4  89   0   0|  11G   14G  212M 6390M|3432B   10k|   0   216k|   0  13.0 |6414    11k|2.27 1.81 1.06|1.0   0 266|   0     0 |   0     0 | 18783    0   22    0
+Jan 19 13:19:32 gelani-lab-1 dstat.sh[67387]: 19-01 13:19:32|  5   1  93   0   0|  11G   14G  212M 6390M| 210B  793B|   0    36k|   0  3.00 |1719  2682 |2.27 1.81 1.06|1.0   0  14|   0     0 |   0     0 | 18784    0   22    0
+Jan 19 13:19:33 gelani-lab-1 dstat.sh[67387]: 19-01 13:19:33|  5   2  93   0   0|  11G   14G  212M 6390M|2247B   11k|   0    52k|   0  5.01 |3660  5314 |2.08 1.78 1.05|2.0   0 128|   0     0 |   0     0 | 18788    0   22    0
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@h-eng.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@h-eng.service --no-pager
+● devstack@h-eng.service - Devstack devstack@h-eng.service
+     Loaded: loaded (/etc/systemd/system/devstack@h-eng.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:40 UTC; 53s ago
+   Main PID: 132251 (heat-engine: ma)
+      Tasks: 30 (limit: 38457)
+     Memory: 250.5M
+        CPU: 2.289s
+     CGroup: /system.slice/system-devstack.slice/devstack@h-eng.service
+             ├─132251 "heat-engine: master process [/opt/stack/data/venv/bin/heat-engine --config-file=/etc/heat/heat.conf]" "" "" "" "" "" ""
+             ├─133101 "heat-engine: ServiceWrapper worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─133103 "heat-engine: ServiceWrapper worker(1)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─133106 "heat-engine: ServiceWrapper worker(2)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             └─133108 "heat-engine: ServiceWrapper worker(3)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+
+Jan 19 13:18:42 gelani-lab-1 heat-engine[133101]: DEBUG heat.engine.service [None req-795fd589-bca6-4dd9-bdd9-19f7a59545fc None None] Service 4ab52305-e503-4752-a11f-5e18ac13bf3f is updated {{(pid=133101) service_manage_report /opt/stack/heat/heat/engine/service.py:2459}}
+Jan 19 13:18:42 gelani-lab-1 heat-engine[133101]: DEBUG oslo.service.backend._threading.loopingcall [None req-795fd589-bca6-4dd9-bdd9-19f7a59545fc None None] Fixed interval looping call 'heat.engine.service.EngineService.service_manage_report' sleeping for 59.97 seconds {{(pid=133101) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
+Jan 19 13:18:42 gelani-lab-1 heat-engine[133108]: DEBUG heat.engine.service [None req-ac9333be-cd49-4d64-a9b0-4a0792fa8f1d None None] Service b0ce3e60-1930-40ae-a275-66ff3de25c32 is updated {{(pid=133108) service_manage_report /opt/stack/heat/heat/engine/service.py:2459}}
+Jan 19 13:18:42 gelani-lab-1 heat-engine[133106]: DEBUG heat.engine.service [None req-5a16d7e8-065d-4fbd-8e4e-3486e8e61a54 None None] Service cf8344f7-d6d8-4563-97ac-fa03015e10fa is updated {{(pid=133106) service_manage_report /opt/stack/heat/heat/engine/service.py:2459}}
+Jan 19 13:18:42 gelani-lab-1 heat-engine[133106]: DEBUG oslo.service.backend._threading.loopingcall [None req-5a16d7e8-065d-4fbd-8e4e-3486e8e61a54 None None] Fixed interval looping call 'heat.engine.service.EngineService.service_manage_report' sleeping for 59.96 seconds {{(pid=133106) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
+Jan 19 13:18:42 gelani-lab-1 heat-engine[133108]: DEBUG oslo.service.backend._threading.loopingcall [None req-ac9333be-cd49-4d64-a9b0-4a0792fa8f1d None None] Fixed interval looping call 'heat.engine.service.EngineService.service_manage_report' sleeping for 59.97 seconds {{(pid=133108) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
+Jan 19 13:18:52 gelani-lab-1 heat-engine[133103]: DEBUG dbcounter [-] [133103] Writing DB stats heat:SELECT=3,heat:INSERT=1,heat:UPDATE=1 {{(pid=133103) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:52 gelani-lab-1 heat-engine[133106]: DEBUG dbcounter [-] [133106] Writing DB stats heat:SELECT=3,heat:INSERT=1,heat:UPDATE=1 {{(pid=133106) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:52 gelani-lab-1 heat-engine[133108]: DEBUG dbcounter [-] [133108] Writing DB stats heat:SELECT=3,heat:INSERT=1,heat:UPDATE=1 {{(pid=133108) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:52 gelani-lab-1 heat-engine[133101]: DEBUG dbcounter [-] [133101] Writing DB stats heat:SELECT=3,heat:INSERT=1,heat:UPDATE=1 {{(pid=133101) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@h-api.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@h-api.service --no-pager
+● devstack@h-api.service - Devstack devstack@h-api.service
+     Loaded: loaded (/etc/systemd/system/devstack@h-api.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:42 UTC; 51s ago
+   Main PID: 133135 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 17 (limit: 38457)
+     Memory: 281.5M
+        CPU: 3.571s
+     CGroup: /system.slice/system-devstack.slice/devstack@h-api.service
+             ├─133135 /bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini --venv /opt/stack/data/venv
+             ├─133152 /bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini --venv /opt/stack/data/venv
+             ├─133153 /bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini --venv /opt/stack/data/venv
+             ├─133154 /bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini --venv /opt/stack/data/venv
+             └─133155 /bin/uwsgi --ini /etc/heat/heat-api-uwsgi.ini --venv /opt/stack/data/venv
+
+Jan 19 13:18:43 gelani-lab-1 devstack@h-api.service[133154]: DEBUG heat-api [-] cache.tls_cafile               = None {{(pid=133154) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:43 gelani-lab-1 devstack@h-api.service[133154]: DEBUG heat-api [-] cache.tls_certfile             = None {{(pid=133154) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:43 gelani-lab-1 devstack@h-api.service[133154]: DEBUG heat-api [-] cache.tls_enabled              = False {{(pid=133154) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:43 gelani-lab-1 devstack@h-api.service[133154]: DEBUG heat-api [-] cache.tls_keyfile              = None {{(pid=133154) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:43 gelani-lab-1 devstack@h-api.service[133154]: DEBUG heat-api [-] healthcheck.allowed_source_ranges = [] {{(pid=133154) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:43 gelani-lab-1 devstack@h-api.service[133154]: DEBUG heat-api [-] healthcheck.backends           = [] {{(pid=133154) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:43 gelani-lab-1 devstack@h-api.service[133154]: DEBUG heat-api [-] healthcheck.detailed           = False {{(pid=133154) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:43 gelani-lab-1 devstack@h-api.service[133154]: DEBUG heat-api [-] healthcheck.ignore_proxied_requests = False {{(pid=133154) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:43 gelani-lab-1 devstack@h-api.service[133154]: DEBUG heat-api [-] ******************************************************************************** {{(pid=133154) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2828}}
+Jan 19 13:18:43 gelani-lab-1 devstack@h-api.service[133154]: WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55a0a4592ce0 pid: 133154 (default app)
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@h-api-cfn.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@h-api-cfn.service --no-pager
+● devstack@h-api-cfn.service - Devstack devstack@h-api-cfn.service
+     Loaded: loaded (/etc/systemd/system/devstack@h-api-cfn.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:44 UTC; 50s ago
+   Main PID: 134027 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 5 (limit: 38457)
+     Memory: 278.0M
+        CPU: 3.591s
+     CGroup: /system.slice/system-devstack.slice/devstack@h-api-cfn.service
+             ├─134027 /bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini --venv /opt/stack/data/venv
+             ├─134028 /bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini --venv /opt/stack/data/venv
+             ├─134029 /bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini --venv /opt/stack/data/venv
+             ├─134030 /bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini --venv /opt/stack/data/venv
+             └─134031 /bin/uwsgi --ini /etc/heat/heat-api-cfn-uwsgi.ini --venv /opt/stack/data/venv
+
+Jan 19 13:18:45 gelani-lab-1 devstack@h-api-cfn.service[134030]: DEBUG heat-api-cfn [-] oslo_policy.remote_ssl_client_crt_file = None {{(pid=134030) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:45 gelani-lab-1 devstack@h-api-cfn.service[134030]: DEBUG heat-api-cfn [-] oslo_policy.remote_ssl_client_key_file = None {{(pid=134030) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:45 gelani-lab-1 devstack@h-api-cfn.service[134030]: DEBUG heat-api-cfn [-] oslo_policy.remote_ssl_verify_server_crt = False {{(pid=134030) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:45 gelani-lab-1 devstack@h-api-cfn.service[134030]: DEBUG heat-api-cfn [-] oslo_policy.remote_timeout     = 60.0 {{(pid=134030) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:45 gelani-lab-1 devstack@h-api-cfn.service[134030]: DEBUG heat-api-cfn [-] healthcheck.allowed_source_ranges = [] {{(pid=134030) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:45 gelani-lab-1 devstack@h-api-cfn.service[134030]: DEBUG heat-api-cfn [-] healthcheck.backends           = [] {{(pid=134030) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:45 gelani-lab-1 devstack@h-api-cfn.service[134030]: DEBUG heat-api-cfn [-] healthcheck.detailed           = False {{(pid=134030) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:45 gelani-lab-1 devstack@h-api-cfn.service[134030]: DEBUG heat-api-cfn [-] healthcheck.ignore_proxied_requests = False {{(pid=134030) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:45 gelani-lab-1 devstack@h-api-cfn.service[134030]: DEBUG heat-api-cfn [-] ******************************************************************************** {{(pid=134030) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2828}}
+Jan 19 13:18:45 gelani-lab-1 devstack@h-api-cfn.service[134030]: WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x5625f77e2d60 pid: 134030 (default app)
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@heat-dashboard.service
+Failed to get unit file state for devstack@heat-dashboard.service: No such file or directory
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@ceilometer-acompute.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@ceilometer-acompute.service --no-pager
+● devstack@ceilometer-acompute.service - Devstack devstack@ceilometer-acompute.service
+     Loaded: loaded (/etc/systemd/system/devstack@ceilometer-acompute.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:19:04 UTC; 30s ago
+   Main PID: 138564 (ceilometer-poll)
+      Tasks: 8 (limit: 38457)
+     Memory: 101.1M
+        CPU: 989ms
+     CGroup: /system.slice/system-devstack.slice/devstack@ceilometer-acompute.service
+             ├─138564 "ceilometer-polling: master process [/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces compute --config-file /etc/ceilometer/ceilometer.conf]"
+             └─138868 "ceilometer-polling: AgentManager worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+
+Jan 19 13:19:07 gelani-lab-1 ceilometer-polling[138868]: 2026-01-19 13:19:07.601 138868 DEBUG ceilometer.polling.manager [-] Finished processing pollster [disk.device.allocation]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:07 gelani-lab-1 ceilometer-polling[138868]: 2026-01-19 13:19:07.601 138868 DEBUG ceilometer.polling.manager [-] Finished processing pollster [network.incoming.bytes]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:07 gelani-lab-1 ceilometer-polling[138868]: 2026-01-19 13:19:07.601 138868 DEBUG ceilometer.polling.manager [-] Finished processing pollster [perf.cache.misses]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:07 gelani-lab-1 ceilometer-polling[138868]: 2026-01-19 13:19:07.601 138868 DEBUG ceilometer.polling.manager [-] Finished processing pollster [disk.device.capacity]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:07 gelani-lab-1 ceilometer-polling[138868]: 2026-01-19 13:19:07.601 138868 DEBUG ceilometer.polling.manager [-] Finished processing pollster [vcpus]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:07 gelani-lab-1 ceilometer-polling[138868]: 2026-01-19 13:19:07.601 138868 DEBUG ceilometer.polling.manager [-] Finished processing pollster [network.outgoing.bytes.delta]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:07 gelani-lab-1 ceilometer-polling[138868]: 2026-01-19 13:19:07.601 138868 DEBUG ceilometer.polling.manager [-] Finished processing pollster [network.outgoing.packets.error]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:07 gelani-lab-1 ceilometer-polling[138868]: 2026-01-19 13:19:07.601 138868 DEBUG ceilometer.polling.manager [-] Finished processing pollster [memory.swap.out]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:07 gelani-lab-1 ceilometer-polling[138868]: 2026-01-19 13:19:07.601 138868 DEBUG ceilometer.polling.manager [-] Finished processing pollster [disk.device.write.requests]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:07 gelani-lab-1 ceilometer-polling[138868]: 2026-01-19 13:19:07.601 138868 DEBUG ceilometer.polling.manager [-] Finished processing pollster [network.outgoing.packets.drop]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@ceilometer-acentral.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@ceilometer-acentral.service --no-pager
+● devstack@ceilometer-acentral.service - Devstack devstack@ceilometer-acentral.service
+     Loaded: loaded (/etc/systemd/system/devstack@ceilometer-acentral.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:19:01 UTC; 33s ago
+   Main PID: 136982 (ceilometer-poll)
+      Tasks: 9 (limit: 38457)
+     Memory: 124.4M
+        CPU: 1.089s
+     CGroup: /system.slice/system-devstack.slice/devstack@ceilometer-acentral.service
+             ├─136982 "ceilometer-polling: master process [/opt/stack/data/venv/bin/ceilometer-polling --polling-namespaces central --config-file /etc/ceilometer/ceilometer.conf]"
+             └─137461 "ceilometer-polling: AgentManager worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+
+Jan 19 13:19:05 gelani-lab-1 ceilometer-polling[137461]: 2026-01-19 13:19:05.312 137461 DEBUG ceilometer.polling.manager [-] Finished processing pollster [loadbalancer.operating]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:05 gelani-lab-1 ceilometer-polling[137461]: 2026-01-19 13:19:05.312 137461 DEBUG ceilometer.polling.manager [-] Finished processing pollster [volume.size]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:05 gelani-lab-1 ceilometer-polling[137461]: 2026-01-19 13:19:05.312 137461 DEBUG ceilometer.polling.manager [-] Finished processing pollster [radosgw.objects.size]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:05 gelani-lab-1 ceilometer-polling[137461]: 2026-01-19 13:19:05.312 137461 DEBUG ceilometer.polling.manager [-] Finished processing pollster [loadbalancer.provisioning]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:05 gelani-lab-1 ceilometer-polling[137461]: 2026-01-19 13:19:05.312 137461 DEBUG ceilometer.polling.manager [-] Finished processing pollster [volume.snapshot.size]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:05 gelani-lab-1 ceilometer-polling[137461]: 2026-01-19 13:19:05.312 137461 DEBUG ceilometer.polling.manager [-] Finished processing pollster [radosgw.usage]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:05 gelani-lab-1 ceilometer-polling[137461]: 2026-01-19 13:19:05.312 137461 DEBUG ceilometer.polling.manager [-] Finished processing pollster [storage.objects.size]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:05 gelani-lab-1 ceilometer-polling[137461]: 2026-01-19 13:19:05.312 137461 DEBUG ceilometer.polling.manager [-] Finished processing pollster [image.size]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:05 gelani-lab-1 ceilometer-polling[137461]: 2026-01-19 13:19:05.312 137461 DEBUG ceilometer.polling.manager [-] Finished processing pollster [storage.containers.objects]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
+Jan 19 13:19:05 gelani-lab-1 ceilometer-polling[137461]: 2026-01-19 13:19:05.312 137461 DEBUG ceilometer.polling.manager [-] Finished processing pollster [storage.objects.containers]. execute_polling_task_processing /opt/stack/ceilometer/ceilometer/polling/manager.py:272
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@ceilometer-anotification.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@ceilometer-anotification.service --no-pager
+● devstack@ceilometer-anotification.service - Devstack devstack@ceilometer-anotification.service
+     Loaded: loaded (/etc/systemd/system/devstack@ceilometer-anotification.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:19:02 UTC; 32s ago
+   Main PID: 137816 (ceilometer-agen)
+      Tasks: 52 (limit: 38457)
+     Memory: 289.7M
+        CPU: 29.280s
+     CGroup: /system.slice/system-devstack.slice/devstack@ceilometer-anotification.service
+             ├─137816 "ceilometer-agent-notification: master process [/opt/stack/data/venv/bin/ceilometer-agent-notification --config-file /etc/ceilometer/ceilometer.conf]"
+             ├─138318 "ceilometer-agent-notification: NotificationService worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─138327 "ceilometer-agent-notification: NotificationService worker(1)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─138336 "ceilometer-agent-notification: NotificationService worker(2)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             └─138342 "ceilometer-agent-notification: NotificationService worker(3)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+
+Jan 19 13:19:11 gelani-lab-1 ceilometer-agent-notification[138318]: 2026-01-19 13:19:11.357 138318 DEBUG ceilometer.publisher.gnocchi [-] Resource gelani-lab-1@lvmdriver-1#lvmdriver-1 created _create_resource/opt/stack/ceilometer/ceilometer/publisher/gnocchi.py:517
+Jan 19 13:19:11 gelani-lab-1 ceilometer-agent-notification[138318]: 2026-01-19 13:19:11.393 138318 DEBUG ceilometer.publisher.gnocchi [-] 5 measures posted against 5 metrics through 1 resources batch_measures/opt/stack/ceilometer/ceilometer/publisher/gnocchi.py:508
+Jan 19 13:19:11 gelani-lab-1 ceilometer-agent-notification[138318]: 2026-01-19 13:19:11.425 138318 DEBUG ceilometer.publisher.gnocchi [-] 5 measures posted against 5 metrics through 1 resources batch_measures/opt/stack/ceilometer/ceilometer/publisher/gnocchi.py:508
+Jan 19 13:19:11 gelani-lab-1 ceilometer-agent-notification[138318]: 2026-01-19 13:19:11.425 138318 DEBUG ceilometer.publisher.gnocchi [-] Resource cache hit for gelani-lab-1@lvmdriver-1#lvmdriver-1 _if_not_cached /opt/stack/ceilometer/ceilometer/publisher/gnocchi.py:539
+Jan 19 13:19:11 gelani-lab-1 ceilometer-agent-notification[138327]: Sub('sub(/.*/, )')
+Jan 19 13:19:11 gelani-lab-1 ceilometer-agent-notification[138327]: 2026-01-19 13:19:11.910 138327 DEBUG ceilometer.notification [-] Loaded endpoints [[<ceilometer.telemetry.notifications.TelemetryIpc object at 0x7f311f1497b0>, <ceilometer.ipmi.notifications.ironic.CurrentSensorNotification object at 0x7f311f149660>, <ceilometer.ipmi.notifications.ironic.FanSensorNotification object at 0x7f311f149a50>, <ceilometer.ipmi.notifications.ironic.TemperatureSensorNotification object at 0x7f311f149c60>, <ceilometer.ipmi.notifications.ironic.VoltageSensorNotification object at 0x7f311f149f30>, <ceilometer.middleware.HTTPRequestobject at 0x7f311f14a050>, <ceilometer.middleware.HTTPResponse object at 0x7f311f14a470>, <ceilometer.meter.notifications.ProcessMeterNotifications object at 0x7f311f14a380>]] for manager [<ceilometer.pipeline.sample.SamplePipelineManager object at 0x7f3125335e70>]. run /opt/stack/ceilometer/ceilometer/notification.py:135
+Jan 19 13:19:12 gelani-lab-1 ceilometer-agent-notification[138336]: Sub('sub(/.*/, )')
+Jan 19 13:19:12 gelani-lab-1 ceilometer-agent-notification[138336]: 2026-01-19 13:19:12.967 138336 DEBUG ceilometer.notification [-] Loaded endpoints [[<ceilometer.telemetry.notifications.TelemetryIpc object at 0x7f311f115870>, <ceilometer.ipmi.notifications.ironic.CurrentSensorNotification object at 0x7f311f115900>, <ceilometer.ipmi.notifications.ironic.FanSensorNotification object at 0x7f311f115630>, <ceilometer.ipmi.notifications.ironic.TemperatureSensorNotification object at 0x7f311f115f30>, <ceilometer.ipmi.notifications.ironic.VoltageSensorNotification object at 0x7f311f1141f0>, <ceilometer.middleware.HTTPRequestobject at 0x7f311f1160b0>, <ceilometer.middleware.HTTPResponse object at 0x7f311f116290>, <ceilometer.meter.notifications.ProcessMeterNotifications object at 0x7f311f1162f0>]] for manager [<ceilometer.pipeline.sample.SamplePipelineManager object at 0x7f31253361a0>]. run /opt/stack/ceilometer/ceilometer/notification.py:135
+Jan 19 13:19:13 gelani-lab-1 ceilometer-agent-notification[138342]: Sub('sub(/.*/, )')
+Jan 19 13:19:13 gelani-lab-1 ceilometer-agent-notification[138342]: 2026-01-19 13:19:13.901 138342 DEBUG ceilometer.notification [-] Loaded endpoints [[<ceilometer.telemetry.notifications.TelemetryIpc object at 0x7f311f365480>, <ceilometer.ipmi.notifications.ironic.CurrentSensorNotification object at 0x7f311f711cf0>, <ceilometer.ipmi.notifications.ironic.FanSensorNotification object at 0x7f311f710bb0>, <ceilometer.ipmi.notifications.ironic.TemperatureSensorNotification object at 0x7f311f7115a0>, <ceilometer.ipmi.notifications.ironic.VoltageSensorNotification object at 0x7f311f710f70>, <ceilometer.middleware.HTTPRequestobject at 0x7f311f711300>, <ceilometer.middleware.HTTPResponse object at 0x7f311f7139d0>, <ceilometer.meter.notifications.ProcessMeterNotifications object at 0x7f311f713c10>]] for manager [<ceilometer.pipeline.sample.SamplePipelineManager object at 0x7f31253364d0>]. run /opt/stack/ceilometer/ceilometer/notification.py:135
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@gnocchi-api.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@gnocchi-api.service --no-pager
+● devstack@gnocchi-api.service - Devstack devstack@gnocchi-api.service
+     Loaded: loaded (/etc/systemd/system/devstack@gnocchi-api.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:47 UTC; 48s ago
+   Main PID: 135182 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 75 (limit: 38457)
+     Memory: 440.2M
+        CPU: 9.258s
+     CGroup: /system.slice/system-devstack.slice/devstack@gnocchi-api.service
+             ├─135182 /bin/uwsgi --ini /etc/gnocchi/uwsgi.ini --venv /opt/stack/data/venv
+             ├─135183 /bin/uwsgi --ini /etc/gnocchi/uwsgi.ini --venv /opt/stack/data/venv
+             ├─135184 /bin/uwsgi --ini /etc/gnocchi/uwsgi.ini --venv /opt/stack/data/venv
+             ├─135185 /bin/uwsgi --ini /etc/gnocchi/uwsgi.ini --venv /opt/stack/data/venv
+             └─135186 /bin/uwsgi --ini /etc/gnocchi/uwsgi.ini --venv /opt/stack/data/venv
+
+Jan 19 13:19:11 gelani-lab-1 devstack@gnocchi-api.service[135183]: [pid: 135183|app: 0|req: 33/137] 192.168.95.93 () {64 vars in 1414 bytes} [Mon Jan 19 13:19:11 2026] POST /metric/v1/batch/resources/metrics/measures?create_metrics=True => generated 0 bytes in 1 msecs (HTTP/1.1 202) 3 headers in 95 bytes (1 switches on core 0)
+Jan 19 13:19:11 gelani-lab-1 devstack@gnocchi-api.service[135184]: [pid: 135184|app: 0|req: 38/138] 192.168.95.93 () {64 vars in 1414 bytes} [Mon Jan 19 13:19:11 2026] POST /metric/v1/batch/resources/metrics/measures?create_metrics=True => generated 0 bytes in 1 msecs (HTTP/1.1 202) 3 headers in 95 bytes (1 switches on core 0)
+Jan 19 13:19:11 gelani-lab-1 devstack@gnocchi-api.service[135185]: [pid: 135185|app: 0|req: 35/139] 192.168.95.93 () {64 vars in 1352 bytes} [Mon Jan 19 13:19:11 2026] POST /metric/v1/resource/volume_provider=> generated 520 bytes in 17 msecs (HTTP/1.1 201) 6 headers in 296 bytes (1 switches on core 0)
+Jan 19 13:19:11 gelani-lab-1 devstack@gnocchi-api.service[135183]: [pid: 135183|app: 0|req: 34/140] 192.168.95.93 () {64 vars in 1416 bytes} [Mon Jan 19 13:19:11 2026] POST /metric/v1/batch/resources/metrics/measures?create_metrics=True => generated 0 bytes in 12 msecs (HTTP/1.1 202) 3 headers in 95 bytes (1 switches on core 0)
+Jan 19 13:19:11 gelani-lab-1 devstack@gnocchi-api.service[135185]: [pid: 135185|app: 0|req: 36/141] 192.168.95.93 () {64 vars in 1416 bytes} [Mon Jan 19 13:19:11 2026] POST /metric/v1/batch/resources/metrics/measures?create_metrics=True => generated 0 bytes in 5 msecs (HTTP/1.1 202) 3 headers in 95 bytes (1 switches on core 0)
+Jan 19 13:19:11 gelani-lab-1 devstack@gnocchi-api.service[135184]: [pid: 135184|app: 0|req: 39/142] 192.168.95.93 () {64 vars in 1416 bytes} [Mon Jan 19 13:19:11 2026] POST /metric/v1/batch/resources/metrics/measures?create_metrics=True => generated 0 bytes in 17 msecs (HTTP/1.1 202) 3 headers in 95 bytes (1 switches on core 0)
+Jan 19 13:19:11 gelani-lab-1 devstack@gnocchi-api.service[135183]: [pid: 135183|app: 0|req: 35/143] 192.168.95.93 () {64 vars in 1416 bytes} [Mon Jan 19 13:19:11 2026] POST /metric/v1/batch/resources/metrics/measures?create_metrics=True => generated 0 bytes in 6 msecs (HTTP/1.1 202) 3 headers in 95 bytes (1 switches on core 0)
+Jan 19 13:19:11 gelani-lab-1 devstack@gnocchi-api.service[135186]: [pid: 135186|app: 0|req: 34/144] 192.168.95.93 () {64 vars in 1368 bytes} [Mon Jan 19 13:19:11 2026] POST /metric/v1/resource/volume_provider_pool => generated 577 bytes in 40 msecs (HTTP/1.1 201) 6 headers in 301 bytes (1 switches on core 0)
+Jan 19 13:19:11 gelani-lab-1 devstack@gnocchi-api.service[135185]: [pid: 135185|app: 0|req: 37/145] 192.168.95.93 () {64 vars in 1416 bytes} [Mon Jan 19 13:19:11 2026] POST /metric/v1/batch/resources/metrics/measures?create_metrics=True => generated 0 bytes in 34 msecs (HTTP/1.1 202) 3 headers in 95 bytes (1 switches on core 0)
+Jan 19 13:19:11 gelani-lab-1 devstack@gnocchi-api.service[135184]: [pid: 135184|app: 0|req: 40/146] 192.168.95.93 () {64 vars in 1416 bytes} [Mon Jan 19 13:19:11 2026] POST /metric/v1/batch/resources/metrics/measures?create_metrics=True => generated 0 bytes in 64 msecs (HTTP/1.1 202) 3 headers in 95 bytes (1 switches on core 0)
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@gnocchi-metricd.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@gnocchi-metricd.service --no-pager
+● devstack@gnocchi-metricd.service - Devstack devstack@gnocchi-metricd.service
+     Loaded: loaded (/etc/systemd/system/devstack@gnocchi-metricd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:48 UTC; 46s ago
+   Main PID: 135935 (gnocchi-metricd)
+      Tasks: 116 (limit: 38457)
+     Memory: 1.2G
+        CPU: 11.673s
+     CGroup: /system.slice/system-devstack.slice/devstack@gnocchi-metricd.service
+             ├─135935 "gnocchi-metricd: master process [/opt/stack/data/venv/bin/gnocchi-metricd --config-file /etc/gnocchi/gnocchi.conf]" "" ""
+             ├─136153 "gnocchi-metricd: processing worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136156 "gnocchi-metricd: processing worker(1)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136160 "gnocchi-metricd: processing worker(2)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136164 "gnocchi-metricd: processing worker(3)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136167 "gnocchi-metricd: processing worker(4)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136172 "gnocchi-metricd: processing worker(5)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136176 "gnocchi-metricd: processing worker(6)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136180 "gnocchi-metricd: processing worker(7)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136185 "gnocchi-metricd: processing worker(8)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136189 "gnocchi-metricd: processing worker(9)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136193 "gnocchi-metricd: processing worker(10)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136197 "gnocchi-metricd: processing worker(11)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136201 "gnocchi-metricd: processing worker(12)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136204 "gnocchi-metricd: processing worker(13)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136208 "gnocchi-metricd: processing worker(14)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136212 "gnocchi-metricd: processing worker(15)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             ├─136216 "gnocchi-metricd: reporting worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+             └─136217 "gnocchi-metricd: janitor worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+
+Jan 19 13:19:33 gelani-lab-1 gnocchi-metricd[136189]: 2026-01-19 13:19:33,992 [136189] DEBUG    gnocchi.chef: Processing measures for sack incoming128-70
+Jan 19 13:19:33 gelani-lab-1 gnocchi-metricd[136189]: 2026-01-19 13:19:33,992 [136189] DEBUG    gnocchi.chef: Processing measures for sack incoming128-98
+Jan 19 13:19:33 gelani-lab-1 gnocchi-metricd[136189]: 2026-01-19 13:19:33,993 [136189] DEBUG    gnocchi.chef: Processing measures for sack incoming128-102
+Jan 19 13:19:33 gelani-lab-1 gnocchi-metricd[136189]: 2026-01-19 13:19:33,993 [136189] DEBUG    gnocchi.chef: Processing measures for sack incoming128-112
+Jan 19 13:19:33 gelani-lab-1 gnocchi-metricd[136189]: 2026-01-19 13:19:33,994 [136189] DEBUG    gnocchi.chef: Processing measures for sack incoming128-113
+Jan 19 13:19:33 gelani-lab-1 gnocchi-metricd[136189]: 2026-01-19 13:19:33,994 [136189] DEBUG    gnocchi.chef: Processing measures for sack incoming128-118
+Jan 19 13:19:33 gelani-lab-1 gnocchi-metricd[136189]: 2026-01-19 13:19:33,995 [136189] DEBUG    gnocchi.chef: Processing measures for sack incoming128-123
+Jan 19 13:19:33 gelani-lab-1 gnocchi-metricd[136189]: 2026-01-19 13:19:33,995 [136189] DEBUG    gnocchi.chef: Processing measures for sack incoming128-127
+Jan 19 13:19:33 gelani-lab-1 gnocchi-metricd[136189]: 2026-01-19 13:19:33,996 [136189] DEBUG    gnocchi.cli.metricd: 0 metrics processed from 20 sacks
+Jan 19 13:19:33 gelani-lab-1 gnocchi-metricd[136189]: 2026-01-19 13:19:33,997 [136189] DEBUG    gnocchi.cli.metricd: Full scan of sacks has been done
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@aodh-api.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@aodh-api.service --no-pager
+● devstack@aodh-api.service - Devstack devstack@aodh-api.service
+     Loaded: loaded (/etc/systemd/system/devstack@aodh-api.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:19:24 UTC; 10s ago
+   Main PID: 140309 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 5 (limit: 38457)
+     Memory: 341.2M
+        CPU: 6.512s
+     CGroup: /system.slice/system-devstack.slice/devstack@aodh-api.service
+             ├─140309 /bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini --venv /opt/stack/data/venv
+             ├─140310 /bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini --venv /opt/stack/data/venv
+             ├─140311 /bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini --venv /opt/stack/data/venv
+             ├─140312 /bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini --venv /opt/stack/data/venv
+             └─140313 /bin/uwsgi --ini /etc/aodh/aodh-uwsgi.ini --venv /opt/stack/data/venv
+
+Jan 19 13:19:26 gelani-lab-1 devstack@aodh-api.service[140313]: WARNING keystonemiddleware.auth_token [-] AuthToken middleware is set with keystone_authtoken.service_token_roles_required set to False. This isbackwards compatible but deprecated behaviour. Please set this to True.
+Jan 19 13:19:26 gelani-lab-1 devstack@aodh-api.service[140310]: WARNING keystonemiddleware.auth_token [-] Configuring www_authenticate_uri to point to the public identity endpoint is required; clients may notbe able to authenticate against an admin endpoint
+Jan 19 13:19:26 gelani-lab-1 devstack@aodh-api.service[140313]: WARNING keystonemiddleware.auth_token [-] Configuring www_authenticate_uri to point to the public identity endpoint is required; clients may notbe able to authenticate against an admin endpoint
+Jan 19 13:19:26 gelani-lab-1 devstack@aodh-api.service[140312]: WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x55692c3fdd40 pid: 140312 (default app)
+Jan 19 13:19:26 gelani-lab-1 devstack@aodh-api.service[140311]: WARNING keystonemiddleware.auth_token [-] AuthToken middleware is set with keystone_authtoken.service_token_roles_required set to False. This isbackwards compatible but deprecated behaviour. Please set this to True.
+Jan 19 13:19:26 gelani-lab-1 devstack@aodh-api.service[140312]: [pid: 140312|app: 0|req: 1/1] 192.168.95.93 () {54 vars in 867 bytes} [Mon Jan 19 13:19:26 2026] GET /alarming/v2/ => generated 114 bytes in 2 msecs (HTTP/1.1 401) 5 headers in 231 bytes (1 switches on core 0)
+Jan 19 13:19:26 gelani-lab-1 devstack@aodh-api.service[140310]: WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x55692c3fdd40 pid: 140310 (default app)
+Jan 19 13:19:26 gelani-lab-1 devstack@aodh-api.service[140313]: WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x55692c3fdd40 pid: 140313 (default app)
+Jan 19 13:19:26 gelani-lab-1 devstack@aodh-api.service[140311]: WARNING keystonemiddleware.auth_token [-] Configuring www_authenticate_uri to point to the public identity endpoint is required; clients may notbe able to authenticate against an admin endpoint
+Jan 19 13:19:26 gelani-lab-1 devstack@aodh-api.service[140311]: WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x55692c3fdd40 pid: 140311 (default app)
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@aodh-notifier.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@aodh-notifier.service --no-pager
+● devstack@aodh-notifier.service - Devstack devstack@aodh-notifier.service
+     Loaded: loaded (/etc/systemd/system/devstack@aodh-notifier.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:19:27 UTC; 7s ago
+   Main PID: 141169 (aodh-notifier: )
+      Tasks: 5 (limit: 38457)
+     Memory: 91.5M
+        CPU: 1.217s
+     CGroup: /system.slice/system-devstack.slice/devstack@aodh-notifier.service
+             ├─141169 "aodh-notifier: master process [/opt/stack/data/venv/bin/aodh-notifier --config-file /etc/aodh/aodh.conf]" "" "" "" ""
+             └─141813 "aodh-notifier: AlarmNotifierService worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+
+Jan 19 13:19:27 gelani-lab-1 systemd[1]: Started Devstack devstack@aodh-notifier.service.
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@aodh-evaluator.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@aodh-evaluator.service --no-pager
+● devstack@aodh-evaluator.service - Devstack devstack@aodh-evaluator.service
+     Loaded: loaded (/etc/systemd/system/devstack@aodh-evaluator.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:19:29 UTC; 5s ago
+   Main PID: 141862 (aodh-evaluator:)
+      Tasks: 7 (limit: 38457)
+     Memory: 131.7M
+        CPU: 1.436s
+     CGroup: /system.slice/system-devstack.slice/devstack@aodh-evaluator.service
+             ├─141862 "aodh-evaluator: master process [/opt/stack/data/venv/bin/aodh-evaluator --config-file /etc/aodh/aodh.conf]" "" "" ""
+             └─142504 "aodh-evaluator: AlarmEvaluationService worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+
+Jan 19 13:19:29 gelani-lab-1 systemd[1]: Started Devstack devstack@aodh-evaluator.service.
+Jan 19 13:19:30 gelani-lab-1 aodh-evaluator[142504]: DEBUG observabilityclient.utils.metric_utils [-] Aetos endpoint discovery from Keystone failed: public endpoint for metric-storage service in RegionOne region not found {{(pid=142504) get_prometheus_client /opt/stack/data/venv/lib/python3.10/site-packages/observabilityclient/utils/metric_utils.py:125}}
+Jan 19 13:19:30 gelani-lab-1 aodh-evaluator[142504]: ERROR stevedore.extension [-] Could not load 'prometheus': Failed to configure Prometheus client. Aetos discovery from keystone failed: 'public endpoint for metric-storage service in RegionOne region not found'. Prometheus configuration from config file and environment variables failed: 'Can't find prometheus host and port configuration in config file or environment variables.': observabilityclient.utils.metric_utils.ConfigurationError: Failed to configure Prometheus client. Aetos discovery from keystone failed: 'public endpoint for metric-storage service in RegionOne region not found'. Prometheus configuration from config file and environment variables failed: 'Can't find prometheus host and port configuration in config file or environment variables.'
+Jan 19 13:19:30 gelani-lab-1 aodh-evaluator[142504]: DEBUG aodh.storage [-] looking for 'mysql+pymysql' driver in 'aodh.storage' {{(pid=142504) get_connection_from_config /opt/stack/aodh/aodh/storage/__init__.py:65}}
+Jan 19 13:19:30 gelani-lab-1 aodh-evaluator[142504]: INFO dbcounter [-] Registered counter for database aodh
+Jan 19 13:19:30 gelani-lab-1 aodh-evaluator[142504]: WARNING oslo_db.sqlalchemy.utils [-] Unique keys not in sort_keys. The sorting order may be unstable.
+Jan 19 13:19:30 gelani-lab-1 aodh-evaluator[142504]: DEBUG dbcounter [-] [142504] Writer thread running {{(pid=142504) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:102}}
+Jan 19 13:19:30 gelani-lab-1 aodh-evaluator[142504]: INFO aodh.evaluator [-] initiating evaluation cycle on 0 alarms
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@aodh-listener.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@aodh-listener.service --no-pager
+● devstack@aodh-listener.service - Devstack devstack@aodh-listener.service
+     Loaded: loaded (/etc/systemd/system/devstack@aodh-listener.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:19:30 UTC; 4s ago
+   Main PID: 142555 (aodh-listener: )
+      Tasks: 5 (limit: 38457)
+     Memory: 128.0M
+        CPU: 1.358s
+     CGroup: /system.slice/system-devstack.slice/devstack@aodh-listener.service
+             ├─142555 "aodh-listener: master process [/opt/stack/data/venv/bin/aodh-listener --config-file /etc/aodh/aodh.conf]" "" "" "" ""
+             └─142834 "aodh-listener: EventAlarmEvaluationService worker(0)" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """" "" "" "" "" "" "" "" "" "" "" ""
+
+Jan 19 13:19:30 gelani-lab-1 systemd[1]: Started Devstack devstack@aodh-listener.service.
+Jan 19 13:19:32 gelani-lab-1 aodh-listener[142834]: DEBUG aodh.storage [-] looking for 'mysql+pymysql' driver in 'aodh.storage' {{(pid=142834) get_connection_from_config /opt/stack/aodh/aodh/storage/__init__.py:65}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@neutron-api.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@neutron-api.service --no-pager
+● devstack@neutron-api.service - Devstack devstack@neutron-api.service
+     Loaded: loaded (/etc/systemd/system/devstack@neutron-api.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:17:08 UTC; 2min 26s ago
+   Main PID: 112705 (uwsgi)
+     Status: "uWSGI is ready"
+      Tasks: 81 (limit: 38457)
+     Memory: 702.8M
+        CPU: 27.252s
+     CGroup: /system.slice/system-devstack.slice/devstack@neutron-api.service
+             ├─112705 "neutron-apiuWSGI master"
+             ├─112706 "neutron-apiuWSGI worker 1"
+             ├─112707 "neutron-apiuWSGI worker 2"
+             ├─112708 "neutron-apiuWSGI worker 3"
+             └─112709 "neutron-apiuWSGI worker 4"
+
+Jan 19 13:19:23 gelani-lab-1 devstack@neutron-api.service[112708]: DEBUG dbcounter [-] [112708] Writing DB stats neutron:UPDATE=1,neutron:SELECT=1 {{(pid=112708) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:24 gelani-lab-1 devstack@neutron-api.service[112709]: DEBUG dbcounter [-] [112709] Writing DB stats neutron:UPDATE=1,neutron:SELECT=1 {{(pid=112709) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:27 gelani-lab-1 devstack@neutron-api.service[112707]: DEBUG futurist.periodics [-] Submitting periodic callback 'neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.maintenance.HashRingHealthCheckPeriodics.touch_hash_ring_node' {{(pid=112707) _process_scheduled /opt/stack/data/venv/lib/python3.10/site-packages/futurist/periodics.py:638}}
+Jan 19 13:19:27 gelani-lab-1 devstack@neutron-api.service[112707]: DEBUG neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.maintenance [-] Touching Hash Ring node "f9910b7b10c353e7ba2af03ffc60d1f9" from periodic health check thread {{(pid=112707) touch_hash_ring_node /opt/stack/neutron/neutron/plugins/ml2/drivers/ovn/mech_driver/ovsdb/maintenance.py:1182}}
+Jan 19 13:19:28 gelani-lab-1 devstack@neutron-api.service[112706]: DEBUG futurist.periodics [-] Submitting periodic callback 'neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.maintenance.HashRingHealthCheckPeriodics.touch_hash_ring_node' {{(pid=112706) _process_scheduled /opt/stack/data/venv/lib/python3.10/site-packages/futurist/periodics.py:638}}
+Jan 19 13:19:28 gelani-lab-1 devstack@neutron-api.service[112706]: DEBUG neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.maintenance [-] Touching Hash Ring node "730ff6e7bd995250bd78b73b90398a7f" from periodic health check thread {{(pid=112706) touch_hash_ring_node /opt/stack/neutron/neutron/plugins/ml2/drivers/ovn/mech_driver/ovsdb/maintenance.py:1182}}
+Jan 19 13:19:28 gelani-lab-1 devstack@neutron-api.service[112708]: DEBUG futurist.periodics [-] Submitting periodic callback 'neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.maintenance.HashRingHealthCheckPeriodics.touch_hash_ring_node' {{(pid=112708) _process_scheduled /opt/stack/data/venv/lib/python3.10/site-packages/futurist/periodics.py:638}}
+Jan 19 13:19:28 gelani-lab-1 devstack@neutron-api.service[112708]: DEBUG neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.maintenance [-] Touching Hash Ring node "ddeda02c4a885a2dbc992fe0e818006c" from periodic health check thread {{(pid=112708) touch_hash_ring_node /opt/stack/neutron/neutron/plugins/ml2/drivers/ovn/mech_driver/ovsdb/maintenance.py:1182}}
+Jan 19 13:19:29 gelani-lab-1 devstack@neutron-api.service[112709]: DEBUG futurist.periodics [-] Submitting periodic callback 'neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.maintenance.HashRingHealthCheckPeriodics.touch_hash_ring_node' {{(pid=112709) _process_scheduled /opt/stack/data/venv/lib/python3.10/site-packages/futurist/periodics.py:638}}
+Jan 19 13:19:29 gelani-lab-1 devstack@neutron-api.service[112709]: DEBUG neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.maintenance [-] Touching Hash Ring node "ed136e3fb4f6587283ef3b9e1debbcf4" from periodic health check thread {{(pid=112709) touch_hash_ring_node /opt/stack/neutron/neutron/plugins/ml2/drivers/ovn/mech_driver/ovsdb/maintenance.py:1182}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@neutron-rpc-server.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@neutron-rpc-server.service --no-pager
+● devstack@neutron-rpc-server.service - Devstack devstack@neutron-rpc-server.service
+     Loaded: loaded (/etc/systemd/system/devstack@neutron-rpc-server.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:17:10 UTC; 2min 25s ago
+   Main PID: 113566 (neutron-rpc-ser)
+      Tasks: 29 (limit: 38457)
+     Memory: 203.1M
+        CPU: 3.186s
+     CGroup: /system.slice/system-devstack.slice/devstack@neutron-rpc-server.service
+             ├─113566 "neutron-rpc-server: master process [/opt/stack/data/venv/bin/neutron-rpc-server --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini]"
+             ├─115182 "neutron-server: rpc worker (/opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/neutron-rpc-server --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini)"
+             └─115191 "neutron-server: rpc worker (/opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/neutron-rpc-server --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini)"
+
+Jan 19 13:17:25 gelani-lab-1 neutron-rpc-server[115191]: DEBUG neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.ovsdb_monitor [-] ChassisAgentWriteEvent : Matched Chassis_Private, update, None None {{(pid=115191) matches /opt/stack/neutron/neutron/plugins/ml2/drivers/ovn/mech_driver/ovsdb/ovsdb_monitor.py:65}}
+Jan 19 13:17:25 gelani-lab-1 neutron-rpc-server[115182]: DEBUG neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.ovsdb_monitor [-] ChassisAgentWriteEvent : Matched Chassis_Private, update, None None {{(pid=115182) matches /opt/stack/neutron/neutron/plugins/ml2/drivers/ovn/mech_driver/ovsdb/ovsdb_monitor.py:65}}
+Jan 19 13:17:25 gelani-lab-1 neutron-rpc-server[115191]: DEBUG neutron.common.ovn.hash_ring_manager [-] Allow caching, nodes 4>=4 {{(pid=115191) _wait_startup_before_caching /opt/stack/neutron/neutron/common/ovn/hash_ring_manager.py:65}}
+Jan 19 13:17:25 gelani-lab-1 neutron-rpc-server[115182]: DEBUG neutron.common.ovn.hash_ring_manager [-] Allow caching, nodes 4>=4 {{(pid=115182) _wait_startup_before_caching /opt/stack/neutron/neutron/common/ovn/hash_ring_manager.py:65}}
+Jan 19 13:17:25 gelani-lab-1 neutron-rpc-server[115191]: DEBUG neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.ovsdb_monitor [-] ChassisOVNAgentWriteEvent : Matched Chassis_Private, update, None None {{(pid=115191) matches /opt/stack/neutron/neutron/plugins/ml2/drivers/ovn/mech_driver/ovsdb/ovsdb_monitor.py:65}}
+Jan 19 13:17:25 gelani-lab-1 neutron-rpc-server[115182]: DEBUG neutron.plugins.ml2.drivers.ovn.mech_driver.ovsdb.ovsdb_monitor [-] ChassisOVNAgentWriteEvent : Matched Chassis_Private, update, None None {{(pid=115182) matches /opt/stack/neutron/neutron/plugins/ml2/drivers/ovn/mech_driver/ovsdb/ovsdb_monitor.py:65}}
+Jan 19 13:17:35 gelani-lab-1 neutron-rpc-server[115191]: DEBUG dbcounter [-] [115191] Writing DB stats neutron:SELECT=1 {{(pid=115191) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:17:35 gelani-lab-1 neutron-rpc-server[115182]: DEBUG dbcounter [-] [115182] Writing DB stats neutron:SELECT=1 {{(pid=115182) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:17:43 gelani-lab-1 neutron-rpc-server[115182]: WARNING oslo_messaging.server [None req-6d18a246-2edb-4555-8f68-372d7f1a719c None None] Possible hang: wait is waiting for stop to complete
+Jan 19 13:17:43 gelani-lab-1 neutron-rpc-server[115191]: WARNING oslo_messaging.server [None req-5d6e51d6-5302-4420-be33-9fec7b7b56e4 None None] Possible hang: wait is waiting for stop to complete
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@neutron-periodic-workers.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@neutron-periodic-workers.service --no-pager
+● devstack@neutron-periodic-workers.service - Devstack devstack@neutron-periodic-workers.service
+     Loaded: loaded (/etc/systemd/system/devstack@neutron-periodic-workers.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:17:11 UTC; 2min 23s ago
+   Main PID: 114318 (neutron-periodi)
+      Tasks: 23 (limit: 38457)
+     Memory: 215.4M
+        CPU: 2.620s
+     CGroup: /system.slice/system-devstack.slice/devstack@neutron-periodic-workers.service
+             ├─114318 "neutron-periodic-workers: master process [/opt/stack/data/venv/bin/neutron-periodic-workers --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini]"
+             ├─115627 "neutron-server: periodic worker (/opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/neutron-periodic-workers --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini)"
+             ├─115636 "neutron-server: periodic worker (/opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/neutron-periodic-workers --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini)"
+             ├─115647 "neutron-server: periodic worker (/opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/neutron-periodic-workers --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini)"
+             └─115656 "neutron-server: periodic worker (/opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/neutron-periodic-workers --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini)"
+
+Jan 19 13:19:08 gelani-lab-1 neutron-periodic-workers[115647]: DEBUG neutron.db.agents_db [None req-84e33cd5-c395-4aeb-8a21-be072388dd09 None None] Agent healthcheck: found 0 active agents {{(pid=115647) agent_health_check /opt/stack/neutron/neutron/db/agents_db.py:317}}
+Jan 19 13:19:08 gelani-lab-1 neutron-periodic-workers[115647]: DEBUG oslo.service.backend._threading.loopingcall [None req-84e33cd5-c395-4aeb-8a21-be072388dd09 None None] Fixed interval looping call 'neutron.plugins.ml2.plugin.AgentDbMixin.agent_health_check' sleeping for 37.00 seconds {{(pid=115647) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
+Jan 19 13:19:09 gelani-lab-1 neutron-periodic-workers[115627]: DEBUG dbcounter [-] [115627] Writer thread running {{(pid=115627) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:102}}
+Jan 19 13:19:09 gelani-lab-1 neutron-periodic-workers[115627]: DEBUG oslo.service.backend._threading.loopingcall [None req-4874c342-d3f8-4e7e-bea3-849b30f90f6f None None] Fixed interval looping call 'neutron.services.ovn_l3.plugin.L3_NAT_dbonly_mixin._clean_garbage' sleeping for 299.97 seconds {{(pid=115627) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
+Jan 19 13:19:14 gelani-lab-1 neutron-periodic-workers[115656]: DEBUG dbcounter [-] [115656] Writer thread running {{(pid=115656) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:102}}
+Jan 19 13:19:14 gelani-lab-1 neutron-periodic-workers[115656]: DEBUG oslo.service.backend._threading.loopingcall [None req-4e967cd1-6f3f-46e8-8bc2-aca131c16d49 None None] Fixed interval looping call 'neutron.db.quota.driver_nolock.DbQuotaNoLockDriver._remove_expired_reservations' sleeping for 119.99 seconds {{(pid=115656) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
+Jan 19 13:19:18 gelani-lab-1 neutron-periodic-workers[115647]: DEBUG dbcounter [-] [115647] Writing DB stats neutron:SELECT=1 {{(pid=115647) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:19 gelani-lab-1 neutron-periodic-workers[115627]: DEBUG dbcounter [-] [115627] Writing DB stats neutron:SELECT=1 {{(pid=115627) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:24 gelani-lab-1 neutron-periodic-workers[115656]: DEBUG dbcounter [-] [115656] Writing DB stats neutron:DELETE=1 {{(pid=115656) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:32 gelani-lab-1 neutron-periodic-workers[115636]: DEBUG oslo.service.backend._threading.loopingcall [None req-7297318c-917b-4d18-a96d-9dda29f02540 None None] Fixed interval looping call 'neutron.plugins.ml2.plugin.DhcpAgentSchedulerDbMixin.remove_networks_from_down_agents' sleeping for 36.99 seconds {{(pid=115636) _run_loop /opt/stack/data/venv/lib/python3.10/site-packages/oslo_service/backend/_threading/loopingcall.py:125}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@neutron-ovn-maintenance-worker.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@neutron-ovn-maintenance-worker.service --no-pager
+● devstack@neutron-ovn-maintenance-worker.service - Devstack devstack@neutron-ovn-maintenance-worker.service
+     Loaded: loaded (/etc/systemd/system/devstack@neutron-ovn-maintenance-worker.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:17:13 UTC; 2min 22s ago
+   Main PID: 115021 (neutron-ovn-mai)
+      Tasks: 33 (limit: 38457)
+     Memory: 239.7M
+        CPU: 3.512s
+     CGroup: /system.slice/system-devstack.slice/devstack@neutron-ovn-maintenance-worker.service
+             ├─115021 "neutron-ovn-maintenance-worker: master process [/opt/stack/data/venv/bin/neutron-ovn-maintenance-worker --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini]"
+             └─116260 "neutron-server: maintenance worker (/opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/neutron-ovn-maintenance-worker --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini)"
+
+Jan 19 13:17:52 gelani-lab-1 neutron-ovn-maintenance-worker[116260]: DEBUG ovsdbapp.backend.ovs_idl.event [-] Matched DELETE: LogicalRouterPortEvent(events=('create', 'delete'), table='Logical_Router_Port', conditions=None, old_conditions=None), priority=20 to row=Logical_Router_Port(name=lrp-84da9264-0bd6-462c-ac6a-fa0eb01770af, ipv6_prefix=[], mac=fa:16:3e:92:07:94, ha_chassis_group=[], options={'gateway_mtu': '1442', 'reside-on-redirect-chassis': 'true'}, external_ids={'neutron:is_ext_gw': 'True', 'neutron:network_name': 'neutron-172b9757-3f94-4b3a-8588-aaef9f5d94e3', 'neutron:revision_number': '1', 'neutron:router_name': 'neutron-c52d7d85-0c51-48c2-84e6-e60346626131', 'neutron:subnet_ids': '0f51c1e9-b2bb-4546-a208-2f911e514369'}, gateway_chassis=[<ovs.db.idl.Row object at 0x7f9ddcf973d0>], enabled=[], networks=['192.168.95.202/28'], peer=[], ipv6_ra_configs={}) old= {{(pid=116260) matches /opt/stack/data/venv/lib/python3.10/site-packages/ovsdbapp/backend/ovs_idl/event.py:55}}
+Jan 19 13:17:52 gelani-lab-1 neutron-ovn-maintenance-worker[116260]: INFO neutron.common.ovn.utils [-] HA Chassis Group neutron-af7ee1c4-02c6-438b-8784-93690f664a47 synchronized; highest priority chassis 38a3c1cf-489a-4c92-9b0a-29bcc8fe9f23
+Jan 19 13:17:52 gelani-lab-1 neutron-ovn-maintenance-worker[116260]: DEBUG ovsdbapp.backend.ovs_idl.transaction [-] Running txn n=1 command(idx=0): DbSetCommand(_result=None, table=HA_Chassis_Group, record=neutron-af7ee1c4-02c6-438b-8784-93690f664a47, col_values=(('external_ids', {'neutron:availability_zone_hints': '', 'neutron:network_id': 'af7ee1c4-02c6-438b-8784-93690f664a47', 'neutron:router_id': 'c52d7d85-0c51-48c2-84e6-e60346626131'}),), if_exists=True) {{(pid=116260) do_commit /opt/stack/data/venv/lib/python3.10/site-packages/ovsdbapp/backend/ovs_idl/transaction.py:89}}
+Jan 19 13:17:52 gelani-lab-1 neutron-ovn-maintenance-worker[116260]: DEBUG ovsdbapp.backend.ovs_idl.transaction [-] Running txn n=1 command(idx=1): HAChassisGroupAddChassisCommand(_result=None, hcg=neutron-af7ee1c4-02c6-438b-8784-93690f664a47, chassis=38a3c1cf-489a-4c92-9b0a-29bcc8fe9f23, priority=1, columns={}) {{(pid=116260) do_commit /opt/stack/data/venv/lib/python3.10/site-packages/ovsdbapp/backend/ovs_idl/transaction.py:89}}
+Jan 19 13:17:52 gelani-lab-1 neutron-ovn-maintenance-worker[116260]: DEBUG ovsdbapp.backend.ovs_idl.transaction [-] Transaction caused no change {{(pid=116260) do_commit /opt/stack/data/venv/lib/python3.10/site-packages/ovsdbapp/backend/ovs_idl/transaction.py:129}}
+Jan 19 13:17:52 gelani-lab-1 neutron-ovn-maintenance-worker[116260]: INFO neutron.common.ovn.utils [-] HA Chassis Group neutron-af7ee1c4-02c6-438b-8784-93690f664a47 synchronized; highest priority chassis 38a3c1cf-489a-4c92-9b0a-29bcc8fe9f23
+Jan 19 13:17:52 gelani-lab-1 neutron-ovn-maintenance-worker[116260]: DEBUG ovsdbapp.backend.ovs_idl.transaction [-] Running txn n=1 command(idx=0): DbSetCommand(_result=None, table=HA_Chassis_Group, record=neutron-af7ee1c4-02c6-438b-8784-93690f664a47, col_values=(('external_ids', {'neutron:availability_zone_hints': '', 'neutron:network_id': 'af7ee1c4-02c6-438b-8784-93690f664a47', 'neutron:router_id': 'c52d7d85-0c51-48c2-84e6-e60346626131'}),), if_exists=True) {{(pid=116260) do_commit /opt/stack/data/venv/lib/python3.10/site-packages/ovsdbapp/backend/ovs_idl/transaction.py:89}}
+Jan 19 13:17:52 gelani-lab-1 neutron-ovn-maintenance-worker[116260]: DEBUG ovsdbapp.backend.ovs_idl.transaction [-] Running txn n=1 command(idx=1): HAChassisGroupAddChassisCommand(_result=None, hcg=neutron-af7ee1c4-02c6-438b-8784-93690f664a47, chassis=38a3c1cf-489a-4c92-9b0a-29bcc8fe9f23, priority=1, columns={}) {{(pid=116260) do_commit /opt/stack/data/venv/lib/python3.10/site-packages/ovsdbapp/backend/ovs_idl/transaction.py:89}}
+Jan 19 13:17:52 gelani-lab-1 neutron-ovn-maintenance-worker[116260]: DEBUG ovsdbapp.backend.ovs_idl.transaction [-] Transaction caused no change {{(pid=116260) do_commit /opt/stack/data/venv/lib/python3.10/site-packages/ovsdbapp/backend/ovs_idl/transaction.py:129}}
+Jan 19 13:18:02 gelani-lab-1 neutron-ovn-maintenance-worker[116260]: DEBUG dbcounter [-] [116260] Writing DB stats neutron:SELECT=185,neutron:DELETE=1,neutron:UPDATE=1 {{(pid=116260) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@n-novnc-cell1.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@n-novnc-cell1.service --no-pager
+● devstack@n-novnc-cell1.service - Devstack devstack@n-novnc-cell1.service
+     Loaded: loaded (/etc/systemd/system/devstack@n-novnc-cell1.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:00 UTC; 1min 35s ago
+   Main PID: 121732 (nova-novncproxy)
+      Tasks: 16 (limit: 38457)
+     Memory: 101.7M
+        CPU: 2.922s
+     CGroup: /system.slice/system-devstack.slice/devstack@n-novnc-cell1.service
+             └─121732 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-novncproxy --config-file /etc/nova/nova_cell1.conf --web /opt/stack/novnc
+
+Jan 19 13:18:00 gelani-lab-1 systemd[1]: Started Devstack devstack@n-novnc-cell1.service.
+Jan 19 13:18:01 gelani-lab-1 nova-novncproxy[121732]: INFO nova.console.websocketproxy [-] WebSocket server settings:
+Jan 19 13:18:01 gelani-lab-1 nova-novncproxy[121732]: INFO nova.console.websocketproxy [-]   - Listen on 0.0.0.0:6080
+Jan 19 13:18:01 gelani-lab-1 nova-novncproxy[121732]: INFO nova.console.websocketproxy [-]   - Web server (no directory listings). Web root: /opt/stack/novnc
+Jan 19 13:18:01 gelani-lab-1 nova-novncproxy[121732]: INFO nova.console.websocketproxy [-]   - No SSL/TLS support (no cert file)
+Jan 19 13:18:01 gelani-lab-1 nova-novncproxy[121732]: INFO nova.console.websocketproxy [-]   - proxying from 0.0.0.0:6080 to None:None
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@n-super-cond.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@n-super-cond.service --no-pager
+● devstack@n-super-cond.service - Devstack devstack@n-super-cond.service
+     Loaded: loaded (/etc/systemd/system/devstack@n-super-cond.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:02 UTC; 1min 32s ago
+   Main PID: 122908 (nova-conductor)
+      Tasks: 5 (limit: 38457)
+     Memory: 197.4M
+        CPU: 2.203s
+     CGroup: /system.slice/system-devstack.slice/devstack@n-super-cond.service
+             ├─122908 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf
+             ├─123618 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf
+             ├─123619 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf
+             ├─123620 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf
+             └─123621 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova.conf
+
+Jan 19 13:18:04 gelani-lab-1 nova-conductor[122908]: DEBUG oslo_service.backend._eventlet.service [None req-15d942a5-66e0-48ff-99db-5ec46f20a31f None None] oslo_reports.file_event_handler_interval = 1 {{(pid=122908) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:04 gelani-lab-1 nova-conductor[122908]: DEBUG oslo_service.backend._eventlet.service [None req-15d942a5-66e0-48ff-99db-5ec46f20a31f None None] oslo_reports.log_dir           = None {{(pid=122908)log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:04 gelani-lab-1 nova-conductor[122908]: DEBUG oslo_service.backend._eventlet.service [None req-15d942a5-66e0-48ff-99db-5ec46f20a31f None None] ******************************************************************************** {{(pid=122908) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2828}}
+Jan 19 13:18:14 gelani-lab-1 nova-conductor[122908]: DEBUG dbcounter [-] [122908] Writing DB stats nova_api:SELECT=1 {{(pid=122908) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:14 gelani-lab-1 nova-conductor[122908]: DEBUG dbcounter [-] [122908] Writing DB stats nova_cell0:SELECT=1 {{(pid=122908) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:14 gelani-lab-1 nova-conductor[122908]: DEBUG dbcounter [-] [122908] Writing DB stats nova_cell1:SELECT=1 {{(pid=122908) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:19 gelani-lab-1 nova-conductor[123621]: DEBUG dbcounter [-] [123621] Writing DB stats nova_cell0:SELECT=5,nova_cell0:INSERT=1,nova_cell0:UPDATE=1 {{(pid=123621) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:19 gelani-lab-1 nova-conductor[123619]: DEBUG dbcounter [-] [123619] Writing DB stats nova_cell0:SELECT=5,nova_cell0:INSERT=1,nova_cell0:UPDATE=1 {{(pid=123619) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:19 gelani-lab-1 nova-conductor[123618]: DEBUG dbcounter [-] [123618] Writing DB stats nova_cell0:SELECT=4,nova_cell0:INSERT=1 {{(pid=123618) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:19 gelani-lab-1 nova-conductor[123620]: DEBUG dbcounter [-] [123620] Writing DB stats nova_cell0:SELECT=5,nova_cell0:INSERT=1,nova_cell0:UPDATE=1 {{(pid=123620) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
++functions-common:service_check:1717       for service in ${ENABLED_SERVICES//,/ }
++functions-common:service_check:1719       sudo systemctl is-enabled devstack@n-cond-cell1.service
+enabled
++functions-common:service_check:1723       sudo systemctl status devstack@n-cond-cell1.service --no-pager
+● devstack@n-cond-cell1.service - Devstack devstack@n-cond-cell1.service
+     Loaded: loaded (/etc/systemd/system/devstack@n-cond-cell1.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2026-01-19 13:18:04 UTC; 1min 31s ago
+   Main PID: 123664 (nova-conductor)
+      Tasks: 5 (limit: 38457)
+     Memory: 214.9M
+        CPU: 2.538s
+     CGroup: /system.slice/system-devstack.slice/devstack@n-cond-cell1.service
+             ├─123664 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf
+             ├─124653 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf
+             ├─124655 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf
+             ├─124657 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf
+             └─124660 /opt/stack/data/venv/bin/python3.10 /opt/stack/data/venv/bin/nova-conductor --config-file /etc/nova/nova_cell1.conf
+
+Jan 19 13:18:05 gelani-lab-1 nova-conductor[123664]: DEBUG oslo_service.backend._eventlet.service [None req-2b3f1631-17a9-48be-bd92-14172425639d None None] oslo_reports.log_dir           = None {{(pid=123664)log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2824}}
+Jan 19 13:18:05 gelani-lab-1 nova-conductor[123664]: DEBUG oslo_service.backend._eventlet.service [None req-2b3f1631-17a9-48be-bd92-14172425639d None None] ******************************************************************************** {{(pid=123664) log_opt_values /opt/stack/data/venv/lib/python3.10/site-packages/oslo_config/cfg.py:2828}}
+Jan 19 13:18:15 gelani-lab-1 nova-conductor[123664]: DEBUG dbcounter [-] [123664] Writing DB stats nova_cell1:SELECT=1 {{(pid=123664) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:30 gelani-lab-1 nova-conductor[124653]: DEBUG dbcounter [-] [124653] Writing DB stats nova_cell1:SELECT=10,nova_cell1:INSERT=2,nova_cell1:UPDATE=3 {{(pid=124653) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:30 gelani-lab-1 nova-conductor[124657]: DEBUG dbcounter [-] [124657] Writing DB stats nova_cell1:SELECT=10,nova_cell1:INSERT=2,nova_cell1:UPDATE=2 {{(pid=124657) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:30 gelani-lab-1 nova-conductor[124655]: DEBUG dbcounter [-] [124655] Writing DB stats nova_cell1:SELECT=11,nova_cell1:INSERT=1,nova_cell1:UPDATE=2 {{(pid=124655) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:18:50 gelani-lab-1 nova-conductor[124655]: DEBUG dbcounter [-] [124655] Writing DB stats nova_cell1:SELECT=2,nova_cell1:UPDATE=2 {{(pid=124655) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:00 gelani-lab-1 nova-conductor[124657]: DEBUG dbcounter [-] [124657] Writing DB stats nova_cell1:SELECT=3,nova_cell1:UPDATE=3 {{(pid=124657) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:09 gelani-lab-1 nova-conductor[124660]: DEBUG dbcounter [-] [124660] Writing DB stats nova_cell1:SELECT=17,nova_cell1:INSERT=2,nova_cell1:UPDATE=7 {{(pid=124660) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
+Jan 19 13:19:30 gelani-lab-1 nova-conductor[124657]: DEBUG dbcounter [-] [124657] Writing DB stats nova_cell1:SELECT=6,nova_cell1:UPDATE=4 {{(pid=124657) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:115}}
++./stack.sh:main:1446                      is_service_enabled n-api
++functions-common:is_service_enabled:2079  return 0
++./stack.sh:main:1447                      is_service_enabled n-cpu
++functions-common:is_service_enabled:2079  return 0
++./stack.sh:main:1448                      /opt/stack/devstack/tools/discover_hosts.sh
+INFO dbcounter [None req-01332db6-ffc1-4dd3-b7a3-aa6af88c4476 None None] Registered counter for database nova_api
+DEBUG dbcounter [-] [143708] Writer thread running {{(pid=143708) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:102}}
+Found 2 cell mappings.
+Skipping cell0 since it does not contain hosts.
+Getting computes from cell 'cell1': 98f33c17-3763-4716-b1c3-d1033622122b
+INFO dbcounter [None req-01332db6-ffc1-4dd3-b7a3-aa6af88c4476 None None] Registered counter for database nova_cell1
+DEBUG dbcounter [-] [143708] Writer thread running {{(pid=143708) stat_writer /opt/stack/data/venv/lib/python3.10/site-packages/dbcounter.py:102}}
+Checking host mapping for compute host 'gelani-lab-1': ba2ec314-9891-498b-82cc-7a5f896382bf
+Creating host mapping for compute host 'gelani-lab-1': ba2ec314-9891-498b-82cc-7a5f896382bf
+Found 1 unmapped computes in cell: 98f33c17-3763-4716-b1c3-d1033622122b
++./stack.sh:main:1461                      /opt/stack/data/venv/bin/nova-status --config-file /etc/nova/nova.conf upgrade check
++-------------------------------------------+
+| Upgrade Check Results                     |
++-------------------------------------------+
+| Check: Cells v2                           |
+| Result: Success                           |
+| Details: None                             |
++-------------------------------------------+
+| Check: Placement API                      |
+| Result: Success                           |
+| Details: None                             |
++-------------------------------------------+
+| Check: Cinder API                         |
+| Result: Success                           |
+| Details: None                             |
++-------------------------------------------+
+| Check: Policy File JSON to YAML Migration |
+| Result: Success                           |
+| Details: None                             |
++-------------------------------------------+
+| Check: Older than N-1 computes            |
+| Result: Success                           |
+| Details: None                             |
++-------------------------------------------+
+| Check: hw_machine_type unset              |
+| Result: Success                           |
+| Details: None                             |
++-------------------------------------------+
+| Check: Service User Token Configuration   |
+| Result: Success                           |
+| Details: None                             |
++-------------------------------------------+
++./stack.sh:main:1468                      [[ -x /opt/stack/devstack/local.sh ]]
++./stack.sh:main:1479                      command openstack complete
++./stack.sh:main:1480                      sudo tee /etc/bash_completion.d/osc.bash_completion
++./stack.sh:main:1483                      is_service_enabled cinder
++functions-common:is_service_enabled:2079  return 0
++./stack.sh:main:1484                      is_ubuntu
++functions-common:is_ubuntu:555            [[ -z deb ]]
++functions-common:is_ubuntu:558            '[' deb = deb ']'
++./stack.sh:main:1485                      echo_summary 'Configuring lvm.conf global device filter'
++./stack.sh:echo_summary:438               [[ -t 3 ]]
++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
++./stack.sh:echo_summary:444               echo -e Configuring lvm.conf global device filter
++./stack.sh:main:1486                      set_lvm_filter
++lib/lvm:set_lvm_filter:189                local 'filter_suffix="r|.*|" ]  # from devstack'
++lib/lvm:set_lvm_filter:190                local 'filter_string=global_filter = [ '
++lib/lvm:set_lvm_filter:191                local pv
++lib/lvm:set_lvm_filter:192                local vg
++lib/lvm:set_lvm_filter:193                local line
+++lib/lvm:set_lvm_filter:195                sudo pvs --noheadings -o name
++lib/lvm:set_lvm_filter:195                for pv_info in $(sudo pvs --noheadings -o name)
+++lib/lvm:set_lvm_filter:196                sed 's/ //g'
+++lib/lvm:set_lvm_filter:196                sed 's/\/dev\///g'
+++lib/lvm:set_lvm_filter:196                echo -e /dev/loop3
++lib/lvm:set_lvm_filter:196                pv=loop3
++lib/lvm:set_lvm_filter:197                new='"a|loop3|", '
++lib/lvm:set_lvm_filter:198                filter_string='global_filter = [ "a|loop3|", '
++lib/lvm:set_lvm_filter:200                filter_string='global_filter = [ "a|loop3|", "r|.*|" ]  # from devstack'
++lib/lvm:set_lvm_filter:202                clean_lvm_filter
++lib/lvm:clean_lvm_filter:177              sudo sed -i 's/^.*# from devstack$//' /etc/lvm/lvm.conf
++lib/lvm:set_lvm_filter:203                sudo sed -i '/# global_filter = \[.*\]/a\        global_filter = [ "a|loop3|", "r|.*|" ]  # from devstack' /etc/lvm/lvm.conf
++lib/lvm:set_lvm_filter:204                echo_summary 'set lvm.conf device global_filter to: global_filter = [ "a|loop3|", "r|.*|" ]  # from devstack'
++./stack.sh:echo_summary:438               [[ -t 3 ]]
++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
++./stack.sh:echo_summary:444               echo -e set lvm.conf device global_filter to: global_filter = '[' '"a|loop3|",' '"r|.*|"' ']' '#' from devstack
++./stack.sh:main:1496                      run_phase stack test-config
++functions-common:run_phase:1851           local mode=stack
++functions-common:run_phase:1852           local phase=test-config
++functions-common:run_phase:1853           [[ -d /opt/stack/devstack/extras.d ]]
++functions-common:run_phase:1854           local extra_plugin_file_name
++functions-common:run_phase:1855           for extra_plugin_file_name in $TOP_DIR/extras.d/*.sh
++functions-common:run_phase:1860           local exceptions=80-tempest.sh
++functions-common:run_phase:1861           local extra
+++functions-common:run_phase:1862           basename /opt/stack/devstack/extras.d/80-tempest.sh
++functions-common:run_phase:1862           extra=80-tempest.sh
++functions-common:run_phase:1863           [[ 80-tempest.sh =~ 80-tempest\.sh ]]
++functions-common:run_phase:1867           [[ -r /opt/stack/devstack/extras.d/80-tempest.sh ]]
++functions-common:run_phase:1867           source /opt/stack/devstack/extras.d/80-tempest.sh stack test-config
+++extras.d/80-tempest.sh:source:3           is_service_enabled tempest
+++functions-common:is_service_enabled:2079  return 0
+++extras.d/80-tempest.sh:source:4           [[ stack == \s\o\u\r\c\e ]]
+++extras.d/80-tempest.sh:source:7           [[ stack == \s\t\a\c\k ]]
+++extras.d/80-tempest.sh:source:7           [[ test-config == \i\n\s\t\a\l\l ]]
+++extras.d/80-tempest.sh:source:10          [[ stack == \s\t\a\c\k ]]
+++extras.d/80-tempest.sh:source:10          [[ test-config == \p\o\s\t\-\c\o\n\f\i\g ]]
+++extras.d/80-tempest.sh:source:13          [[ stack == \s\t\a\c\k ]]
+++extras.d/80-tempest.sh:source:13          [[ test-config == \e\x\t\r\a ]]
+++extras.d/80-tempest.sh:source:16          [[ stack == \s\t\a\c\k ]]
+++extras.d/80-tempest.sh:source:16          [[ test-config == \p\o\s\t\-\e\x\t\r\a ]]
+++extras.d/80-tempest.sh:source:19          [[ stack == \s\t\a\c\k ]]
+++extras.d/80-tempest.sh:source:19          [[ test-config == \t\e\s\t\-\c\o\n\f\i\g ]]
+++extras.d/80-tempest.sh:source:20          async_wait install_tempest
+[1120 Async install_tempest:61017]: Waiting for completion of install_tempest running on PID 61017 (1 other jobs running)
+[1120 Async install_tempest:61017]: Signaling child to exit
+WAKEUP
+[1120 Async install_tempest:61017]: Signaled
+++lib/tempest:install_tempest:844           git_clone https://opendev.org/openstack/tempest.git /opt/stack/tempest master
+++functions-common:git_clone:592            local git_remote=https://opendev.org/openstack/tempest.git
+++functions-common:git_clone:593            local git_dest=/opt/stack/tempest
+++functions-common:git_clone:594            local git_ref=master
+++functions-common:git_clone:595            local orig_dir
++++functions-common:git_clone:596            pwd
+++functions-common:git_clone:596            orig_dir=/opt/stack/devstack
+++functions-common:git_clone:597            local git_clone_flags=
++++functions-common:git_clone:599            trueorfalse False RECLONE
+++functions-common:git_clone:599            RECLONE=False
+++functions-common:git_clone:600            [[ 0 -gt 0 ]]
+++functions-common:git_clone:604            [[ False = \T\r\u\e ]]
+++functions-common:git_clone:613            echo master
+++functions-common:git_clone:613            egrep -q '^refs'
+++functions-common:git_clone:627            [[ ! -d /opt/stack/tempest ]]
+++functions-common:git_clone:628            [[ False = \T\r\u\e ]]
+++functions-common:git_clone:633            git_timed clone --no-checkout https://opendev.org/openstack/tempest.git /opt/stack/tempest
+++functions-common:git_timed:700            local count=0
+++functions-common:git_timed:701            local timeout=0
+++functions-common:git_timed:703            [[ -n 0 ]]
+++functions-common:git_timed:704            timeout=0
+++functions-common:git_timed:707            time_start git_timed
+++functions-common:time_start:2409          local name=git_timed
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828252345
+++functions-common:git_timed:708            timeout -s SIGINT 0 git clone --no-checkout https://opendev.org/openstack/tempest.git /opt/stack/tempest
+Cloning into '/opt/stack/tempest'...
+++functions-common:git_timed:722            time_stop git_timed
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=git_timed
+++functions-common:time_stop:2430           start_time=1768828252345
+++functions-common:time_stop:2432           [[ -z 1768828252345 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828260735
+++functions-common:time_stop:2436           elapsed_time=8390
+++functions-common:time_stop:2437           total=277161
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=285551
+++functions-common:git_clone:634            cd /opt/stack/tempest
+++functions-common:git_clone:635            git_timed fetch origin master
+++functions-common:git_timed:700            local count=0
+++functions-common:git_timed:701            local timeout=0
+++functions-common:git_timed:703            [[ -n 0 ]]
+++functions-common:git_timed:704            timeout=0
+++functions-common:git_timed:707            time_start git_timed
+++functions-common:time_start:2409          local name=git_timed
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828260828
+++functions-common:git_timed:708            timeout -s SIGINT 0 git fetch origin master
+From https://opendev.org/openstack/tempest
+ * branch                master     -> FETCH_HEAD
+++functions-common:git_timed:722            time_stop git_timed
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=git_timed
+++functions-common:time_stop:2430           start_time=1768828260828
+++functions-common:time_stop:2432           [[ -z 1768828260828 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828262052
+++functions-common:time_stop:2436           elapsed_time=1224
+++functions-common:time_stop:2437           total=285551
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=286775
+++functions-common:git_clone:636            git_timed checkout FETCH_HEAD
+++functions-common:git_timed:700            local count=0
+++functions-common:git_timed:701            local timeout=0
+++functions-common:git_timed:703            [[ -n 0 ]]
+++functions-common:git_timed:704            timeout=0
+++functions-common:git_timed:707            time_start git_timed
+++functions-common:time_start:2409          local name=git_timed
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828262139
+++functions-common:git_timed:708            timeout -s SIGINT 0 git checkout FETCH_HEAD
+Note: switching to 'FETCH_HEAD'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 01919bb03 Merge "Use reader role for network tests"
+++functions-common:git_timed:722            time_stop git_timed
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=git_timed
+++functions-common:time_stop:2430           start_time=1768828262139
+++functions-common:time_stop:2432           [[ -z 1768828262139 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828262352
+++functions-common:time_stop:2436           elapsed_time=213
+++functions-common:time_stop:2437           total=286775
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=286988
+++functions-common:git_clone:672            sudo git config --system --add safe.directory /opt/stack/tempest
+++functions-common:git_clone:675            cd /opt/stack/tempest
+++functions-common:git_clone:676            git show --oneline
+++functions-common:git_clone:676            head -1
+01919bb03 Merge "Use reader role for network tests"
+++functions-common:git_clone:677            cd /opt/stack/devstack
+++lib/tempest:install_tempest:850           pip_install 'tox!=2.8.0,<4.0.0'
+Using python 3.10 to install tox!=2.8.0,<4.0.0
+++inc/python:pip_install:210                env http_proxy= https_proxy= no_proxy= PIP_FIND_LINKS= /opt/stack/data/venv/bin/pip install -c /opt/stack/requirements/upper-constraints.txt 'tox!=2.8.0,<4.0.0'
+Collecting tox!=2.8.0,<4.0.0
+  Downloading tox-3.28.0-py2.py3-none-any.whl.metadata (7.8 kB)
+Requirement already satisfied: filelock>=3.0.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tox!=2.8.0,<4.0.0) (3.20.0)
+Requirement already satisfied: packaging>=14 in /opt/stack/data/venv/lib/python3.10/site-packages (from tox!=2.8.0,<4.0.0) (25.0)
+Requirement already satisfied: pluggy>=0.12.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tox!=2.8.0,<4.0.0) (1.6.0)
+Collecting py>=1.4.17 (from tox!=2.8.0,<4.0.0)
+  Downloading py-1.11.0-py2.py3-none-any.whl.metadata (2.8 kB)
+Requirement already satisfied: six>=1.14.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tox!=2.8.0,<4.0.0) (1.17.0)
+Requirement already satisfied: virtualenv!=20.0.0,!=20.0.1,!=20.0.2,!=20.0.3,!=20.0.4,!=20.0.5,!=20.0.6,!=20.0.7,>=16.0.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tox!=2.8.0,<4.0.0) (20.35.3)
+Requirement already satisfied: tomli>=2.0.1 in /opt/stack/data/venv/lib/python3.10/site-packages (from tox!=2.8.0,<4.0.0) (2.3.0)
+Requirement already satisfied: distlib<1,>=0.3.7 in /opt/stack/data/venv/lib/python3.10/site-packages (from virtualenv!=20.0.0,!=20.0.1,!=20.0.2,!=20.0.3,!=20.0.4,!=20.0.5,!=20.0.6,!=20.0.7,>=16.0.0->tox!=2.8.0,<4.0.0) (0.4.0)
+Requirement already satisfied: platformdirs<5,>=3.9.1 in /opt/stack/data/venv/lib/python3.10/site-packages (from virtualenv!=20.0.0,!=20.0.1,!=20.0.2,!=20.0.3,!=20.0.4,!=20.0.5,!=20.0.6,!=20.0.7,>=16.0.0->tox!=2.8.0,<4.0.0) (4.5.0)
+Requirement already satisfied: typing-extensions>=4.13.2 in /opt/stack/data/venv/lib/python3.10/site-packages (from virtualenv!=20.0.0,!=20.0.1,!=20.0.2,!=20.0.3,!=20.0.4,!=20.0.5,!=20.0.6,!=20.0.7,>=16.0.0->tox!=2.8.0,<4.0.0) (4.15.0)
+Downloading tox-3.28.0-py2.py3-none-any.whl (86 kB)
+Downloading py-1.11.0-py2.py3-none-any.whl (98 kB)
+Installing collected packages: py, tox
+  Attempting uninstall: tox
+    Found existing installation: tox 4.32.0
+    Uninstalling tox-4.32.0:
+      Successfully uninstalled tox-4.32.0
+
+Successfully installed py-1.11.0 tox-3.28.0
+++inc/python:pip_install:216                result=0
+++inc/python:pip_install:218                time_stop pip_install
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=pip_install
+++functions-common:time_stop:2430           start_time=1768828262452
+++functions-common:time_stop:2432           [[ -z 1768828262452 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828263977
+++functions-common:time_stop:2436           elapsed_time=1525
+++functions-common:time_stop:2437           total=121839
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=123364
+++inc/python:pip_install:219                return 0
+++lib/tempest:install_tempest:851           pushd /opt/stack/tempest
+~/tempest ~/devstack
+++lib/tempest:install_tempest:855           git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+++lib/tempest:install_tempest:857           local tmp_u_c_m
++++lib/tempest:install_tempest:858           mktemp -t tempest_u_c_m.XXXXXXXXXX
+++lib/tempest:install_tempest:858           tmp_u_c_m=/tmp/tempest_u_c_m.kliBhDKuWZ
+++lib/tempest:install_tempest:859           set_tempest_venv_constraints /tmp/tempest_u_c_m.kliBhDKuWZ
+++lib/tempest:set_tempest_venv_constraints:131  local tmp_c
+++lib/tempest:set_tempest_venv_constraints:132  tmp_c=/tmp/tempest_u_c_m.kliBhDKuWZ
+++lib/tempest:set_tempest_venv_constraints:133  [[ master == \m\a\s\t\e\r ]]
+++lib/tempest:set_tempest_venv_constraints:134  cd /opt/stack/requirements
+++lib/tempest:set_tempest_venv_constraints:135  git show master:upper-constraints.txt
+++lib/tempest:set_tempest_venv_constraints:142  export UPPER_CONSTRAINTS_FILE=https://releases.openstack.org/constraints/upper/master
+++lib/tempest:set_tempest_venv_constraints:142  UPPER_CONSTRAINTS_FILE=https://releases.openstack.org/constraints/upper/master
+++lib/tempest:set_tempest_venv_constraints:143  export TOX_CONSTRAINTS_FILE=https://releases.openstack.org/constraints/upper/master
+++lib/tempest:set_tempest_venv_constraints:143  TOX_CONSTRAINTS_FILE=https://releases.openstack.org/constraints/upper/master
+++lib/tempest:install_tempest:861           tox -r --notest -efull
+full create: /opt/stack/tempest/.tox/tempest
+full installdeps: -chttps://releases.openstack.org/constraints/upper/master, -r/opt/stack/tempest/requirements.txt
+full develop-inst: /opt/stack/tempest
+full installed: attrs==25.4.0,autopage==0.5.2,bcrypt==4.3.0,certifi==2026.1.4,cffi==2.0.0,charset-normalizer==3.4.4,cliff==4.13.0,cmd2==2.7.0,cryptography==43.0.3,debtcollector==3.0.0,defusedxml==0.7.1,fasteners==0.20,fixtures==4.2.6,idna==3.11,invoke==2.2.1,iso8601==2.1.0,jsonschema==4.25.1,jsonschema-specifications==2025.9.1,markdown-it-py==4.0.0,mdurl==0.1.2,msgpack==1.1.2,netaddr==1.3.0,oslo.concurrency==7.2.0,oslo.config==10.1.0,oslo.context==6.2.0,oslo.i18n==6.7.1,oslo.log==7.2.1,oslo.serialization==5.9.0,oslo.utils==9.2.0,packaging==25.0,paramiko==4.0.0,pbr==7.0.3,prettytable==3.16.0,psutil==7.1.1,pycparser==2.23,Pygments==2.19.2,PyNaCl==1.6.0,pyparsing==3.2.5,pyperclip==1.11.0,python-dateutil==2.9.0.post0,python-subunit==1.4.4,PyYAML==6.0.3,referencing==0.37.0,requests==2.32.5,rfc3986==2.0.0,rich==14.2.0,rich-argparse==1.7.1,rpds-py==0.28.0,six==1.17.0,stestr==4.2.0,stevedore==5.6.0,-e git+https://opendev.org/openstack/tempest.git@01919bb03157a913518647c29b09a80f140d2d56#egg=tempest,testscenarios==0.5.0,testtools==2.7.2,tomlkit==0.13.3,typing_extensions==4.15.0,tzdata==2025.2,urllib3==1.26.20,voluptuous==0.15.2,wcwidth==0.2.14,wrapt==2.0.0
+___________________________________ summary ____________________________________
+  full: skipped tests
+  congratulations :)
+++lib/tempest:install_tempest:865           /opt/stack/tempest/.tox/tempest/bin/pip install -c /tmp/tempest_u_c_m.kliBhDKuWZ -r requirements.txt
+Requirement already satisfied: pbr!=2.1.0,>=2.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 1)) (7.0.3)
+Requirement already satisfied: cliff!=2.9.0,>=2.8.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 2)) (4.13.0)
+Requirement already satisfied: jsonschema>=3.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 3)) (4.25.1)
+Requirement already satisfied: testtools>=2.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 4)) (2.7.2)
+Requirement already satisfied: paramiko>=2.7.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 5)) (4.0.0)
+Requirement already satisfied: cryptography>=2.1 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 6)) (43.0.3)
+Requirement already satisfied: netaddr>=0.7.18 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 7)) (1.3.0)
+Requirement already satisfied: oslo.concurrency>=3.26.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 8)) (7.2.0)
+Requirement already satisfied: oslo.config>=5.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 9)) (10.1.0)
+Requirement already satisfied: oslo.log>=3.36.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 10)) (7.2.1)
+Requirement already satisfied: stestr>=1.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 11)) (4.2.0)
+Requirement already satisfied: oslo.serialization!=2.19.1,>=2.18.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 12)) (5.9.0)
+Requirement already satisfied: oslo.utils>=7.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 13)) (9.2.0)
+Requirement already satisfied: fixtures>=3.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 14)) (4.2.6)
+Requirement already satisfied: PyYAML>=3.12 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 15)) (6.0.3)
+Requirement already satisfied: python-subunit>=1.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 16)) (1.4.4)
+Requirement already satisfied: stevedore>=1.20.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 17)) (5.6.0)
+Requirement already satisfied: PrettyTable>=0.7.1 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 18)) (3.16.0)
+Requirement already satisfied: urllib3>=1.21.1 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 19)) (1.26.20)
+Requirement already satisfied: debtcollector>=1.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 20)) (3.0.0)
+Requirement already satisfied: defusedxml>=0.7.1 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 21)) (0.7.1)
+Requirement already satisfied: fasteners>=0.16.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 22)) (0.20)
+Requirement already satisfied: testscenarios>=0.5.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 23)) (0.5.0)
+Requirement already satisfied: setuptools in ./.tox/tempest/lib/python3.10/site-packages (from pbr!=2.1.0,>=2.0.0->-r requirements.txt (line 1)) (80.9.0)
+Requirement already satisfied: autopage>=0.4.0 in ./.tox/tempest/lib/python3.10/site-packages (from cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (0.5.2)
+Requirement already satisfied: cmd2>=1.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (2.7.0)
+Requirement already satisfied: attrs>=22.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from jsonschema>=3.2.0->-r requirements.txt (line 3)) (25.4.0)
+Requirement already satisfied: jsonschema-specifications>=2023.03.6 in ./.tox/tempest/lib/python3.10/site-packages (from jsonschema>=3.2.0->-r requirements.txt (line 3)) (2025.9.1)
+Requirement already satisfied: referencing>=0.28.4 in ./.tox/tempest/lib/python3.10/site-packages (from jsonschema>=3.2.0->-r requirements.txt (line 3)) (0.37.0)
+Requirement already satisfied: rpds-py>=0.7.1 in ./.tox/tempest/lib/python3.10/site-packages (from jsonschema>=3.2.0->-r requirements.txt (line 3)) (0.28.0)
+Requirement already satisfied: bcrypt>=3.2 in ./.tox/tempest/lib/python3.10/site-packages (from paramiko>=2.7.0->-r requirements.txt (line 5)) (4.3.0)
+Requirement already satisfied: invoke>=2.0 in ./.tox/tempest/lib/python3.10/site-packages (from paramiko>=2.7.0->-r requirements.txt (line 5)) (2.2.1)
+Requirement already satisfied: pynacl>=1.5 in ./.tox/tempest/lib/python3.10/site-packages (from paramiko>=2.7.0->-r requirements.txt (line 5)) (1.6.0)
+Requirement already satisfied: cffi>=1.12 in ./.tox/tempest/lib/python3.10/site-packages (from cryptography>=2.1->-r requirements.txt (line 6)) (2.0.0)
+Requirement already satisfied: oslo.i18n>=3.15.3 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.concurrency>=3.26.0->-r requirements.txt (line 8)) (6.7.1)
+Requirement already satisfied: rfc3986>=1.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.config>=5.2.0->-r requirements.txt (line 9)) (2.0.0)
+Requirement already satisfied: requests>=2.18.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.config>=5.2.0->-r requirements.txt (line 9)) (2.32.5)
+Requirement already satisfied: oslo.context>=2.21.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.log>=3.36.0->-r requirements.txt (line 10)) (6.2.0)
+Requirement already satisfied: python-dateutil>=2.7.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.log>=3.36.0->-r requirements.txt (line 10)) (2.9.0.post0)
+Requirement already satisfied: voluptuous>=0.8.9 in ./.tox/tempest/lib/python3.10/site-packages (from stestr>=1.0.0->-r requirements.txt (line 11)) (0.15.2)
+Requirement already satisfied: tomlkit>=0.11.6 in ./.tox/tempest/lib/python3.10/site-packages (from stestr>=1.0.0->-r requirements.txt (line 11)) (0.13.3)
+Requirement already satisfied: msgpack>=0.5.2 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.serialization!=2.19.1,>=2.18.0->-r requirements.txt (line 12)) (1.1.2)
+Requirement already satisfied: tzdata>=2022.4 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.serialization!=2.19.1,>=2.18.0->-r requirements.txt (line 12)) (2025.2)
+Requirement already satisfied: iso8601>=0.1.11 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.utils>=7.0.0->-r requirements.txt (line 13)) (2.1.0)
+Requirement already satisfied: pyparsing>=2.1.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.utils>=7.0.0->-r requirements.txt (line 13)) (3.2.5)
+Requirement already satisfied: packaging>=20.4 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.utils>=7.0.0->-r requirements.txt (line 13)) (25.0)
+Requirement already satisfied: psutil>=3.2.2 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.utils>=7.0.0->-r requirements.txt (line 13)) (7.1.1)
+Requirement already satisfied: wcwidth in ./.tox/tempest/lib/python3.10/site-packages (from PrettyTable>=0.7.1->-r requirements.txt (line 18)) (0.2.14)
+Requirement already satisfied: wrapt>=1.7.0 in ./.tox/tempest/lib/python3.10/site-packages (from debtcollector>=1.2.0->-r requirements.txt (line 20)) (2.0.0)
+Requirement already satisfied: pycparser in ./.tox/tempest/lib/python3.10/site-packages (from cffi>=1.12->cryptography>=2.1->-r requirements.txt (line 6)) (2.23)
+Requirement already satisfied: pyperclip>=1.8 in ./.tox/tempest/lib/python3.10/site-packages (from cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (1.11.0)
+Requirement already satisfied: rich-argparse>=1.7.1 in ./.tox/tempest/lib/python3.10/site-packages (from cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (1.7.1)
+Requirement already satisfied: typing-extensions>=4.12.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.context>=2.21.0->oslo.log>=3.36.0->-r requirements.txt (line 10)) (4.15.0)
+Requirement already satisfied: six>=1.5 in ./.tox/tempest/lib/python3.10/site-packages (from python-dateutil>=2.7.0->oslo.log>=3.36.0->-r requirements.txt (line 10)) (1.17.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in ./.tox/tempest/lib/python3.10/site-packages (from requests>=2.18.0->oslo.config>=5.2.0->-r requirements.txt (line 9)) (3.4.4)
+Requirement already satisfied: idna<4,>=2.5 in ./.tox/tempest/lib/python3.10/site-packages (from requests>=2.18.0->oslo.config>=5.2.0->-r requirements.txt (line 9)) (3.11)
+Requirement already satisfied: certifi>=2017.4.17 in ./.tox/tempest/lib/python3.10/site-packages (from requests>=2.18.0->oslo.config>=5.2.0->-r requirements.txt (line 9)) (2026.1.4)
+Requirement already satisfied: rich>=11.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (14.2.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from rich>=11.0.0->rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (4.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in ./.tox/tempest/lib/python3.10/site-packages (from rich>=11.0.0->rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2))(2.19.2)
+Requirement already satisfied: mdurl~=0.1 in ./.tox/tempest/lib/python3.10/site-packages (from markdown-it-py>=2.2.0->rich>=11.0.0->rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt(line 2)) (0.1.2)
+
+[notice] A new release of pip is available: 25.2 -> 25.3
+[notice] To update, run: /opt/stack/tempest/.tox/tempest/bin/python -m pip install --upgrade pip
+++lib/tempest:install_tempest:866           PROJECT_VENV["tempest"]=/opt/stack/tempest/.tox/tempest
+++lib/tempest:install_tempest:867           rm -f /tmp/tempest_u_c_m.kliBhDKuWZ
+++lib/tempest:install_tempest:868           popd
+~/devstack
+[1120 Async install_tempest:61017]: finished install_tempest with result 0 in 29 seconds
+++inc/async:async_wait:197                  return 0
+++extras.d/80-tempest.sh:source:21          echo_summary 'Initializing Tempest'
+++./stack.sh:echo_summary:438               [[ -t 3 ]]
+++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
+++./stack.sh:echo_summary:444               echo -e Initializing Tempest
+++extras.d/80-tempest.sh:source:22          configure_tempest
+++lib/tempest:configure_tempest:203         [[ True == \T\r\u\e ]]
+++lib/tempest:configure_tempest:204         setup_develop /opt/stack/tempest
+++inc/python:setup_develop:353              local bindep
+++inc/python:setup_develop:354              [[ /opt/stack/tempest == -bindep* ]]
+++inc/python:setup_develop:358              local project_dir=/opt/stack/tempest
+++inc/python:setup_develop:359              local extras=
+++inc/python:setup_develop:360              _setup_package_with_constraints_edit /opt/stack/tempest -e
+++inc/python:_setup_package_with_constraints_edit:379  local bindep
+++inc/python:_setup_package_with_constraints_edit:380  [[ /opt/stack/tempest == -bindep* ]]
+++inc/python:_setup_package_with_constraints_edit:384  local project_dir=/opt/stack/tempest
+++inc/python:_setup_package_with_constraints_edit:385  local flags=-e
+++inc/python:_setup_package_with_constraints_edit:386  local extras=
++++inc/python:_setup_package_with_constraints_edit:393  cd /opt/stack/tempest
++++inc/python:_setup_package_with_constraints_edit:393  pwd
+++inc/python:_setup_package_with_constraints_edit:393  project_dir=/opt/stack/tempest
+++inc/python:_setup_package_with_constraints_edit:395  '[' -n /opt/stack/requirements ']'
+++inc/python:_setup_package_with_constraints_edit:399  local name
++++inc/python:_setup_package_with_constraints_edit:400  awk '/^name.*=/ {print $3}' /opt/stack/tempest/setup.cfg
+++inc/python:_setup_package_with_constraints_edit:400  name=tempest
+++inc/python:_setup_package_with_constraints_edit:401  '[' -z tempest ']'
+++inc/python:_setup_package_with_constraints_edit:405  /opt/stack/requirements/.venv/bin/edit-constraints /opt/stack/requirements/upper-constraints.txt -- tempest
+++inc/python:_setup_package_with_constraints_edit:408  setup_package /opt/stack/tempest -e
+++inc/python:setup_package:436              local bindep=0
+++inc/python:setup_package:437              local bindep_flag=
+++inc/python:setup_package:438              local bindep_profiles=
+++inc/python:setup_package:439              [[ /opt/stack/tempest == -bindep* ]]
+++inc/python:setup_package:444              local project_dir=/opt/stack/tempest
+++inc/python:setup_package:445              local flags=-e
+++inc/python:setup_package:446              local extras=
+++inc/python:setup_package:450              [[ -n -e ]]
+++inc/python:setup_package:450              [[ -z '' ]]
+++inc/python:setup_package:450              [[ ! -e =~ ^-.* ]]
+++inc/python:setup_package:455              [[ ! -z '' ]]
+++inc/python:setup_package:460              [[ 0 == 1 ]]
+++inc/python:setup_package:464              pip_install -e /opt/stack/tempest
+Using python 3.10 to install /opt/stack/tempest
+++inc/python:pip_install:210                env http_proxy= https_proxy= no_proxy= PIP_FIND_LINKS= /opt/stack/data/venv/bin/pip install -c /opt/stack/requirements/upper-constraints.txt -e /opt/stack/tempest
+Obtaining file:///opt/stack/tempest
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: pbr!=2.1.0,>=2.0.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (7.0.3)
+Requirement already satisfied: cliff!=2.9.0,>=2.8.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (4.13.0)
+Requirement already satisfied: jsonschema>=3.2.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (4.25.1)
+Requirement already satisfied: testtools>=2.2.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (2.7.2)
+Requirement already satisfied: paramiko>=2.7.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (4.0.0)
+Requirement already satisfied: cryptography>=2.1 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (43.0.3)
+Requirement already satisfied: netaddr>=0.7.18 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (1.3.0)
+Requirement already satisfied: oslo.concurrency>=3.26.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (7.2.0)
+Requirement already satisfied: oslo.config>=5.2.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (10.1.0)
+Requirement already satisfied: oslo.log>=3.36.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (7.2.1)
+Collecting stestr>=1.0.0 (from tempest==46.0.1.dev28)
+  Using cached stestr-4.2.0-py3-none-any.whl.metadata (7.6 kB)
+Requirement already satisfied: oslo.serialization!=2.19.1,>=2.18.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (5.9.0)
+Requirement already satisfied: oslo.utils>=7.0.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (9.2.0)
+Requirement already satisfied: fixtures>=3.0.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (4.2.6)
+Requirement already satisfied: PyYAML>=3.12 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (6.0.3)
+Requirement already satisfied: python-subunit>=1.0.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (1.4.4)
+Requirement already satisfied: stevedore>=1.20.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (5.6.0)
+Requirement already satisfied: PrettyTable>=0.7.1 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (3.16.0)
+Requirement already satisfied: urllib3>=1.21.1 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (1.26.20)
+Requirement already satisfied: debtcollector>=1.2.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (3.0.0)
+Requirement already satisfied: defusedxml>=0.7.1 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (0.7.1)
+Requirement already satisfied: fasteners>=0.16.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (0.20)
+Requirement already satisfied: testscenarios>=0.5.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from tempest==46.0.1.dev28) (0.5.0)
+Requirement already satisfied: autopage>=0.4.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from cliff!=2.9.0,>=2.8.0->tempest==46.0.1.dev28) (0.5.2)
+Requirement already satisfied: cmd2>=1.0.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from cliff!=2.9.0,>=2.8.0->tempest==46.0.1.dev28) (2.7.0)
+Requirement already satisfied: pyperclip>=1.8 in /opt/stack/data/venv/lib/python3.10/site-packages (from cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->tempest==46.0.1.dev28) (1.11.0)
+Requirement already satisfied: rich-argparse>=1.7.1 in /opt/stack/data/venv/lib/python3.10/site-packages (from cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->tempest==46.0.1.dev28) (1.7.1)
+Requirement already satisfied: wcwidth>=0.2.10 in /opt/stack/data/venv/lib/python3.10/site-packages (from cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->tempest==46.0.1.dev28) (0.2.14)
+Requirement already satisfied: cffi>=1.12 in /opt/stack/data/venv/lib/python3.10/site-packages (from cryptography>=2.1->tempest==46.0.1.dev28) (2.0.0)
+Requirement already satisfied: pycparser in /opt/stack/data/venv/lib/python3.10/site-packages (from cffi>=1.12->cryptography>=2.1->tempest==46.0.1.dev28) (2.23)
+Requirement already satisfied: wrapt>=1.7.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from debtcollector>=1.2.0->tempest==46.0.1.dev28) (2.0.0)
+Requirement already satisfied: attrs>=22.2.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from jsonschema>=3.2.0->tempest==46.0.1.dev28) (25.4.0)
+Requirement already satisfied: jsonschema-specifications>=2023.03.6 in /opt/stack/data/venv/lib/python3.10/site-packages (from jsonschema>=3.2.0->tempest==46.0.1.dev28) (2025.9.1)
+Requirement already satisfied: referencing>=0.28.4 in /opt/stack/data/venv/lib/python3.10/site-packages (from jsonschema>=3.2.0->tempest==46.0.1.dev28) (0.37.0)
+Requirement already satisfied: rpds-py>=0.7.1 in /opt/stack/data/venv/lib/python3.10/site-packages (from jsonschema>=3.2.0->tempest==46.0.1.dev28) (0.28.0)
+Requirement already satisfied: oslo.i18n>=3.15.3 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.concurrency>=3.26.0->tempest==46.0.1.dev28) (6.7.1)
+Requirement already satisfied: rfc3986>=1.2.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.config>=5.2.0->tempest==46.0.1.dev28) (2.0.0)
+Requirement already satisfied: requests>=2.18.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.config>=5.2.0->tempest==46.0.1.dev28) (2.32.5)
+Requirement already satisfied: oslo.context>=2.21.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.log>=3.36.0->tempest==46.0.1.dev28) (6.2.0)
+Requirement already satisfied: python-dateutil>=2.7.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.log>=3.36.0->tempest==46.0.1.dev28) (2.9.0.post0)
+Requirement already satisfied: typing-extensions>=4.12.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.context>=2.21.0->oslo.log>=3.36.0->tempest==46.0.1.dev28) (4.15.0)
+Requirement already satisfied: msgpack>=0.5.2 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.serialization!=2.19.1,>=2.18.0->tempest==46.0.1.dev28) (1.1.2)
+Requirement already satisfied: tzdata>=2022.4 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.serialization!=2.19.1,>=2.18.0->tempest==46.0.1.dev28) (2025.2)
+Requirement already satisfied: iso8601>=0.1.11 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.utils>=7.0.0->tempest==46.0.1.dev28) (2.1.0)
+Requirement already satisfied: pyparsing>=2.1.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.utils>=7.0.0->tempest==46.0.1.dev28) (3.2.5)
+Requirement already satisfied: packaging>=20.4 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.utils>=7.0.0->tempest==46.0.1.dev28) (25.0)
+Requirement already satisfied: psutil>=3.2.2 in /opt/stack/data/venv/lib/python3.10/site-packages (from oslo.utils>=7.0.0->tempest==46.0.1.dev28) (7.1.1)
+Requirement already satisfied: bcrypt>=3.2 in /opt/stack/data/venv/lib/python3.10/site-packages (from paramiko>=2.7.0->tempest==46.0.1.dev28) (4.3.0)
+Requirement already satisfied: invoke>=2.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from paramiko>=2.7.0->tempest==46.0.1.dev28) (2.2.1)
+Requirement already satisfied: pynacl>=1.5 in /opt/stack/data/venv/lib/python3.10/site-packages (from paramiko>=2.7.0->tempest==46.0.1.dev28) (1.6.0)
+Requirement already satisfied: setuptools in /opt/stack/data/venv/lib/python3.10/site-packages (from pbr!=2.1.0,>=2.0.0->tempest==46.0.1.dev28) (80.9.0)
+Requirement already satisfied: six>=1.5 in /opt/stack/data/venv/lib/python3.10/site-packages (from python-dateutil>=2.7.0->oslo.log>=3.36.0->tempest==46.0.1.dev28) (1.17.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /opt/stack/data/venv/lib/python3.10/site-packages (from requests>=2.18.0->oslo.config>=5.2.0->tempest==46.0.1.dev28) (3.4.4)
+Requirement already satisfied: idna<4,>=2.5 in /opt/stack/data/venv/lib/python3.10/site-packages (from requests>=2.18.0->oslo.config>=5.2.0->tempest==46.0.1.dev28) (3.11)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/lib/python3/dist-packages (from requests>=2.18.0->oslo.config>=5.2.0->tempest==46.0.1.dev28) (2020.6.20)
+Requirement already satisfied: rich>=11.0.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->tempest==46.0.1.dev28) (14.2.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from rich>=11.0.0->rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->tempest==46.0.1.dev28) (4.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /opt/stack/data/venv/lib/python3.10/site-packages (from rich>=11.0.0->rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->tempest==46.0.1.dev28) (2.19.2)
+Requirement already satisfied: mdurl~=0.1 in /opt/stack/data/venv/lib/python3.10/site-packages (from markdown-it-py>=2.2.0->rich>=11.0.0->rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->tempest==46.0.1.dev28) (0.1.2)
+Requirement already satisfied: voluptuous>=0.8.9 in /opt/stack/data/venv/lib/python3.10/site-packages (from stestr>=1.0.0->tempest==46.0.1.dev28) (0.15.2)
+Collecting tomlkit>=0.11.6 (from stestr>=1.0.0->tempest==46.0.1.dev28)
+  Using cached tomlkit-0.13.3-py3-none-any.whl.metadata (2.8 kB)
+Using cached stestr-4.2.0-py3-none-any.whl (118 kB)
+Using cached tomlkit-0.13.3-py3-none-any.whl (38 kB)
+Building wheels for collected packages: tempest
+  Building editable for tempest (pyproject.toml): started
+  Building editable for tempest (pyproject.toml): finished with status 'done'
+  Created wheel for tempest: filename=tempest-46.0.1.dev28-0.editable-py3-none-any.whl size=8256 sha256=0db681fef8bf2b98b5482675290ea7d7ceed1d50ac06d9602b6808ac846fca9f
+  Stored in directory: /tmp/pip-ephem-wheel-cache-qtzy0bvc/wheels/ea/e9/d0/d84441902c570ff70dd2897261ddd4873ca45c1cf1a9f399bb
+Successfully built tempest
+Installing collected packages: tomlkit, stestr, tempest
+
+Successfully installed stestr-4.2.0 tempest-46.0.1.dev28 tomlkit-0.13.3
+++inc/python:pip_install:216                result=0
+++inc/python:pip_install:218                time_stop pip_install
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=pip_install
+++functions-common:time_stop:2430           start_time=1768828782799
+++functions-common:time_stop:2432           [[ -z 1768828782799 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828789342
+++functions-common:time_stop:2436           elapsed_time=6543
+++functions-common:time_stop:2437           total=196302
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=202845
+++inc/python:pip_install:219                return 0
+++inc/python:setup_package:466              [[ -e == \-\e ]]
+++inc/python:setup_package:466              [[ True == \F\a\l\s\e ]]
+++inc/python:_setup_package_with_constraints_edit:412  use_library_from_git /opt/stack/tempest
+++inc/python:use_library_from_git:266       local name=/opt/stack/tempest
+++inc/python:use_library_from_git:267       local enabled=1
+++inc/python:use_library_from_git:268       [[ '' = \A\L\L ]]
+++inc/python:use_library_from_git:268       [[ ,, =~ ,/opt/stack/tempest, ]]
+++inc/python:use_library_from_git:269       return 1
+++lib/tempest:configure_tempest:210         local ENABLED_SERVICES=key,n-api,n-cpu,n-cond,n-sch,n-novnc,n-api-meta,placement-api,placement-client,g-api,c-sch,c-api,c-vol,ovn-controller,ovn-northd,ovs-vswitchd,ovsdb-server,q-svc,q-ovn-agent,horizon,rabbit,tempest,mysql,etcd3,dstat,h-eng,h-api,h-api-cfn,heat-dashboard,ceilometer-acompute,ceilometer-acentral,ceilometer-anotification,gnocchi-api,gnocchi-metricd,aodh-api,aodh-notifier,aodh-evaluator,aodh-listener,neutron-api,neutron-rpc-server,neutron-periodic-workers,neutron-ovn-maintenance-worker,n-novnc-cell1,n-super-cond,n-cond-cell1
+++lib/tempest:configure_tempest:212         local image_lines
+++lib/tempest:configure_tempest:213         local images
+++lib/tempest:configure_tempest:214         local num_images
+++lib/tempest:configure_tempest:215         local image_uuid
+++lib/tempest:configure_tempest:216         local image_uuid_alt
+++lib/tempest:configure_tempest:217         local password
+++lib/tempest:configure_tempest:218         local line
+++lib/tempest:configure_tempest:219         local flavors
+++lib/tempest:configure_tempest:220         local available_flavors
+++lib/tempest:configure_tempest:221         local flavors_ref
+++lib/tempest:configure_tempest:222         local flavor_lines
+++lib/tempest:configure_tempest:223         local flavor_ref_size
+++lib/tempest:configure_tempest:224         local flavor_ref_alt_size
+++lib/tempest:configure_tempest:225         local public_network_id
+++lib/tempest:configure_tempest:226         local public_router_id
+++lib/tempest:configure_tempest:227         local ssh_connect_method=floating
+++lib/tempest:configure_tempest:228         local disk
+++lib/tempest:configure_tempest:231         ifs='
+'
+++lib/tempest:configure_tempest:241         declare -a images
+++lib/tempest:configure_tempest:243         is_service_enabled glance
+++functions-common:is_service_enabled:2079  return 0
+++lib/tempest:configure_tempest:244         get_active_images images image_uuid
+++lib/tempest:get_active_images:160         declare -n img_array=images
+++lib/tempest:get_active_images:161         declare -n img_id=image_uuid
+++lib/tempest:get_active_images:164         img_array=()
+++lib/tempest:get_active_images:171         read -r IMAGE_NAME IMAGE_UUID DISK_FORMAT
++++lib/tempest:get_active_images:159         oscwrap --os-cloud devstack-admin image list --long --property status=active
++++lib/tempest:get_active_images:159         awk '-F|' '!/^(+--)|ID|aki|ari/ { print $3,$2,$4 }'
++++functions-common:oscwrap:2468             return 0
+++lib/tempest:get_active_images:172         [[ qcow2 == \i\s\o ]]
+++lib/tempest:get_active_images:175         '[' cirros-0.6.3-x86_64-disk = cirros-0.6.3-x86_64-disk ']'
+++lib/tempest:get_active_images:176         img_id=d3d0c59e-4eef-4932-b6dd-e436b761c6be
+++lib/tempest:get_active_images:178         img_array+=($IMAGE_UUID)
+++lib/tempest:get_active_images:171         read -r IMAGE_NAME IMAGE_UUID DISK_FORMAT
+++lib/tempest:configure_tempest:246         ((  1 < 1  ))
+++lib/tempest:configure_tempest:260         case "${#images[*]}" in
+++lib/tempest:configure_tempest:266         '[' -z d3d0c59e-4eef-4932-b6dd-e436b761c6be ']'
+++lib/tempest:configure_tempest:269         image_uuid_alt=d3d0c59e-4eef-4932-b6dd-e436b761c6be
+++lib/tempest:configure_tempest:291         sudo install -d -o stack /opt/stack/tempest/etc
+++lib/tempest:configure_tempest:292         rm -f /opt/stack/tempest/etc/tempest.conf
+++lib/tempest:configure_tempest:294         local password=SuperSecret123
+++lib/tempest:configure_tempest:297         local admin_username=admin
+++lib/tempest:configure_tempest:298         local admin_project_name=admin
+++lib/tempest:configure_tempest:299         local admin_domain_name=Default
+++lib/tempest:configure_tempest:300         local alt_username=alt_demo
+++lib/tempest:configure_tempest:301         local alt_project_name=alt_demo
+++lib/tempest:configure_tempest:302         local admin_project_id
++++lib/tempest:configure_tempest:303         oscwrap --os-cloud devstack-admin project list
++++lib/tempest:configure_tempest:303         awk '/ admin / { print $2 }'
++++functions-common:oscwrap:2468             return 0
+++lib/tempest:configure_tempest:303         admin_project_id=9fb44e4466264364b4ac3eb936bdc4c2
+++lib/tempest:configure_tempest:305         is_service_enabled nova
+++functions-common:is_service_enabled:2079  return 0
++++lib/tempest:configure_tempest:308         oscwrap --os-cloud devstack-admin flavor list
++++functions-common:oscwrap:2468             return 0
+++lib/tempest:configure_tempest:308         available_flavors='+----+-----------+-------+------+-----------+-------+-----------+
+| ID | Name      |   RAM | Disk | Ephemeral | VCPUs | Is Public |
++----+-----------+-------+------+-----------+-------+-----------+
+| 1  | m1.tiny   |   512 |    1 |         0 |     1 | True      |
+| 2  | m1.small  |  2048 |   20 |         0 |     1 | True      |
+| 3  | m1.medium |  4096 |   40 |         0 |     2 | True      |
+| 4  | m1.large  |  8192 |   80 |         0 |     4 | True      |
+| 5  | m1.xlarge | 16384 |  160 |         0 |     8 | True      |
+| c1 | cirros256 |   256 |    1 |         0 |     1 | True      |
+| d1 | ds512M    |   512 |    5 |         0 |     1 | True      |
+| d2 | ds1G      |  1024 |   10 |         0 |     1 | True      |
+| d3 | ds2G      |  2048 |   10 |         0 |     2 | True      |
+| d4 | ds4G      |  4096 |   20 |         0 |     4 | True      |
++----+-----------+-------+------+-----------+-------+-----------+'
+++lib/tempest:configure_tempest:309         [[ -z '' ]]
+++lib/tempest:configure_tempest:310         [[ +----+-----------+-------+------+-----------+-------+-----------+
+| ID | Name      |   RAM | Disk | Ephemeral | VCPUs | Is Public |
++----+-----------+-------+------+-----------+-------+-----------+
+| 1  | m1.tiny   |   512 |    1 |         0 |     1 | True      |
+| 2  | m1.small  |  2048 |   20 |         0 |     1 | True      |
+| 3  | m1.medium |  4096 |   40 |         0 |     2 | True      |
+| 4  | m1.large  |  8192 |   80 |         0 |     4 | True      |
+| 5  | m1.xlarge | 16384 |  160 |         0 |     8 | True      |
+| c1 | cirros256 |   256 |    1 |         0 |     1 | True      |
+| d1 | ds512M    |   512 |    5 |         0 |     1 | True      |
+| d2 | ds1G      |  1024 |   10 |         0 |     1 | True      |
+| d3 | ds2G      |  2048 |   10 |         0 |     2 | True      |
+| d4 | ds4G      |  4096 |   20 |         0 |     4 | True      |
++----+-----------+-------+------+-----------+-------+-----------+ =~ m1\.nano ]]
++++lib/tempest:configure_tempest:312         image_size_in_gib d3d0c59e-4eef-4932-b6dd-e436b761c6be
++++lib/tempest:image_size_in_gib:125         local size
+++++lib/tempest:image_size_in_gib:126         oscwrap --os-cloud devstack-admin image show d3d0c59e-4eef-4932-b6dd-e436b761c6be -c size -f value
+++++functions-common:oscwrap:2468             return 0
++++lib/tempest:image_size_in_gib:126         size=21692416
++++lib/tempest:image_size_in_gib:127         echo 21692416
++++lib/tempest:image_size_in_gib:127         python3 -c 'import math; print(int(math.ceil(float(int(input()) / 1024.0 ** 3))))'
+++lib/tempest:configure_tempest:312         disk=1
+++lib/tempest:configure_tempest:313         ram=192
+++lib/tempest:configure_tempest:314         openstack --os-cloud devstack-admin flavor create --id 42 --ram 192 --disk 1 --vcpus 1 --property hw_rng:allowed=True m1.nano
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 1                     |
+| id                         | 42                    |
+| name                       | m1.nano               |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 192                   |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 1                     |
++----------------------------+-----------------------+
+++lib/tempest:configure_tempest:316         flavor_ref=42
+++lib/tempest:configure_tempest:317         [[ +----+-----------+-------+------+-----------+-------+-----------+
+| ID | Name      |   RAM | Disk | Ephemeral | VCPUs | Is Public |
++----+-----------+-------+------+-----------+-------+-----------+
+| 1  | m1.tiny   |   512 |    1 |         0 |     1 | True      |
+| 2  | m1.small  |  2048 |   20 |         0 |     1 | True      |
+| 3  | m1.medium |  4096 |   40 |         0 |     2 | True      |
+| 4  | m1.large  |  8192 |   80 |         0 |     4 | True      |
+| 5  | m1.xlarge | 16384 |  160 |         0 |     8 | True      |
+| c1 | cirros256 |   256 |    1 |         0 |     1 | True      |
+| d1 | ds512M    |   512 |    5 |         0 |     1 | True      |
+| d2 | ds1G      |  1024 |   10 |         0 |     1 | True      |
+| d3 | ds2G      |  2048 |   10 |         0 |     2 | True      |
+| d4 | ds4G      |  4096 |   20 |         0 |     4 | True      |
++----+-----------+-------+------+-----------+-------+-----------+ =~ m1\.micro ]]
++++lib/tempest:configure_tempest:319         image_size_in_gib d3d0c59e-4eef-4932-b6dd-e436b761c6be
++++lib/tempest:image_size_in_gib:125         local size
+++++lib/tempest:image_size_in_gib:126         oscwrap --os-cloud devstack-admin image show d3d0c59e-4eef-4932-b6dd-e436b761c6be -c size -f value
+++++functions-common:oscwrap:2468             return 0
++++lib/tempest:image_size_in_gib:126         size=21692416
++++lib/tempest:image_size_in_gib:127         python3 -c 'import math; print(int(math.ceil(float(int(input()) / 1024.0 ** 3))))'
++++lib/tempest:image_size_in_gib:127         echo 21692416
+++lib/tempest:configure_tempest:319         disk=1
+++lib/tempest:configure_tempest:320         ram=256
+++lib/tempest:configure_tempest:321         openstack --os-cloud devstack-admin flavor create --id 84 --ram 256 --disk 1 --vcpus 1 --property hw_rng:allowed=True m1.micro
++----------------------------+-----------------------+
+| Field                      | Value                 |
++----------------------------+-----------------------+
+| OS-FLV-DISABLED:disabled   | False                 |
+| OS-FLV-EXT-DATA:ephemeral  | 0                     |
+| description                | None                  |
+| disk                       | 1                     |
+| id                         | 84                    |
+| name                       | m1.micro              |
+| os-flavor-access:is_public | True                  |
+| properties                 | hw_rng:allowed='True' |
+| ram                        | 256                   |
+| rxtx_factor                | 1.0                   |
+| swap                       | 0                     |
+| vcpus                      | 1                     |
++----------------------------+-----------------------+
+++lib/tempest:configure_tempest:323         flavor_ref_alt=84
+++lib/tempest:configure_tempest:372         is_service_enabled glance
+++functions-common:is_service_enabled:2079  return 0
+++lib/tempest:configure_tempest:373         git_clone https://opendev.org/openstack/os-test-images.git /opt/stack/os-test-images master
+++functions-common:git_clone:592            local git_remote=https://opendev.org/openstack/os-test-images.git
+++functions-common:git_clone:593            local git_dest=/opt/stack/os-test-images
+++functions-common:git_clone:594            local git_ref=master
+++functions-common:git_clone:595            local orig_dir
++++functions-common:git_clone:596            pwd
+++functions-common:git_clone:596            orig_dir=/opt/stack/devstack
+++functions-common:git_clone:597            local git_clone_flags=
++++functions-common:git_clone:599            trueorfalse False RECLONE
+++functions-common:git_clone:599            RECLONE=False
+++functions-common:git_clone:600            [[ 0 -gt 0 ]]
+++functions-common:git_clone:604            [[ False = \T\r\u\e ]]
+++functions-common:git_clone:613            echo master
+++functions-common:git_clone:613            egrep -q '^refs'
+++functions-common:git_clone:627            [[ ! -d /opt/stack/os-test-images ]]
+++functions-common:git_clone:628            [[ False = \T\r\u\e ]]
+++functions-common:git_clone:633            git_timed clone --no-checkout https://opendev.org/openstack/os-test-images.git /opt/stack/os-test-images
+++functions-common:git_timed:700            local count=0
+++functions-common:git_timed:701            local timeout=0
+++functions-common:git_timed:703            [[ -n 0 ]]
+++functions-common:git_timed:704            timeout=0
+++functions-common:git_timed:707            time_start git_timed
+++functions-common:time_start:2409          local name=git_timed
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828800418
+++functions-common:git_timed:708            timeout -s SIGINT 0 git clone --no-checkout https://opendev.org/openstack/os-test-images.git /opt/stack/os-test-images
+Cloning into '/opt/stack/os-test-images'...
+++functions-common:git_timed:722            time_stop git_timed
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=git_timed
+++functions-common:time_stop:2430           start_time=1768828800418
+++functions-common:time_stop:2432           [[ -z 1768828800418 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828802005
+++functions-common:time_stop:2436           elapsed_time=1587
+++functions-common:time_stop:2437           total=277161
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=278748
+++functions-common:git_clone:634            cd /opt/stack/os-test-images
+++functions-common:git_clone:635            git_timed fetch origin master
+++functions-common:git_timed:700            local count=0
+++functions-common:git_timed:701            local timeout=0
+++functions-common:git_timed:703            [[ -n 0 ]]
+++functions-common:git_timed:704            timeout=0
+++functions-common:git_timed:707            time_start git_timed
+++functions-common:time_start:2409          local name=git_timed
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828802098
+++functions-common:git_timed:708            timeout -s SIGINT 0 git fetch origin master
+From https://opendev.org/openstack/os-test-images
+ * branch            master     -> FETCH_HEAD
+++functions-common:git_timed:722            time_stop git_timed
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=git_timed
+++functions-common:time_stop:2430           start_time=1768828802098
+++functions-common:time_stop:2432           [[ -z 1768828802098 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828803357
+++functions-common:time_stop:2436           elapsed_time=1259
+++functions-common:time_stop:2437           total=278748
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=280007
+++functions-common:git_clone:636            git_timed checkout FETCH_HEAD
+++functions-common:git_timed:700            local count=0
+++functions-common:git_timed:701            local timeout=0
+++functions-common:git_timed:703            [[ -n 0 ]]
+++functions-common:git_timed:704            timeout=0
+++functions-common:git_timed:707            time_start git_timed
+++functions-common:time_start:2409          local name=git_timed
+++functions-common:time_start:2410          local start_time=
+++functions-common:time_start:2411          [[ -n '' ]]
++++functions-common:time_start:2414          date +%s%3N
+++functions-common:time_start:2414          _TIME_START[$name]=1768828803449
+++functions-common:git_timed:708            timeout -s SIGINT 0 git checkout FETCH_HEAD
+Note: switching to 'FETCH_HEAD'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 5d0367e Clean-up zuul config spacing
+++functions-common:git_timed:722            time_stop git_timed
+++functions-common:time_stop:2423           local name
+++functions-common:time_stop:2424           local end_time
+++functions-common:time_stop:2425           local elapsed_time
+++functions-common:time_stop:2426           local total
+++functions-common:time_stop:2427           local start_time
+++functions-common:time_stop:2429           name=git_timed
+++functions-common:time_stop:2430           start_time=1768828803449
+++functions-common:time_stop:2432           [[ -z 1768828803449 ]]
++++functions-common:time_stop:2435           date +%s%3N
+++functions-common:time_stop:2435           end_time=1768828803525
+++functions-common:time_stop:2436           elapsed_time=76
+++functions-common:time_stop:2437           total=280007
+++functions-common:time_stop:2439           _TIME_START[$name]=
+++functions-common:time_stop:2440           _TIME_TOTAL[$name]=280083
+++functions-common:git_clone:672            sudo git config --system --add safe.directory /opt/stack/os-test-images
+++functions-common:git_clone:675            cd /opt/stack/os-test-images
+++functions-common:git_clone:676            head -1
+++functions-common:git_clone:676            git show --oneline
+5d0367e Clean-up zuul config spacing
+++functions-common:git_clone:677            cd /opt/stack/devstack
+++lib/tempest:configure_tempest:374         pushd /opt/stack/os-test-images
+~/os-test-images ~/devstack
+++lib/tempest:configure_tempest:375         tox -egenerate
+generate create: /opt/stack/os-test-images/.tox/generate
+generate installdeps: -r/opt/stack/os-test-images/requirements.txt
+generate installed: PyYAML==6.0.3
+generate run-test-pre: PYTHONHASHSEED='137903337'
+generate run-test: commands[0] | python3 generate.py manifest.yaml
+INFO:generate:Generating standard-qcow2v3 step 1/1 with 'qemu-img create -f qcow2 standard-qcow2v3.qcow2 10M'
+INFO:generate:Generating qcow-with-backing step 1/1 with 'qemu-img create -f qcow2 -F raw -b /etc/hosts qcow-with-backing.qcow2 10M'
+INFO:generate:Generating qcow-with-datafile step 1/2 with 'qemu-img create -f qcow2 -o data_file=qcow-data-file,data_file_raw=on qcow-with-datafile.qcow2 10M'
+INFO:generate:Generating qcow-with-datafile step 2/2 with 'rm qcow-data-file'
+INFO:generate:Generating raw-blank step 1/1 with 'qemu-img create -f raw raw-blank.raw 1M'
+INFO:generate:Generating gpt-blank step 1/2 with 'qemu-img create -f raw gpt-blank.gpt 1M'
+INFO:generate:Generating gpt-blank step 2/2 with "parted gpt-blank.gpt --script 'mklabel gpt'"
+INFO:generate:Generating standard step 1/1 with 'qemu-img create -f qed standard.qed 10M'
+INFO:generate:Generating standard-iso9660 step 1/2 with 'qemu-img create -f raw standard-iso9660.iso 1M'
+INFO:generate:Generating standard-iso9660 step 2/2 with 'mkisofs -V standard-iso9660 -o standard-iso9660.iso /etc/hosts'
+WARNING:generate:Unable to generate image standard-udf (iso)
+INFO:generate:Generating iso-with-qcow2-in-system step 1/5 with 'qemu-img create -f raw iso-with-qcow2-in-system.iso 1M'
+INFO:generate:Generating iso-with-qcow2-in-system step 2/5 with 'mkisofs -V iso-with-qcow2-in-system -o iso-with-qcow2-in-system.iso /etc/hosts'
+INFO:generate:Generating iso-with-qcow2-in-system step 3/5 with 'qemu-img create -f qcow2 tmp.qcow 10M'
+INFO:generate:Generating iso-with-qcow2-in-system step 4/5 with 'dd if=tmp.qcow of=iso-with-qcow2-in-system.iso bs=32k count=1 conv=notrunc'
+INFO:generate:Generating iso-with-qcow2-in-system step 5/5 with 'rm tmp.qcow'
+INFO:generate:Generating vmdk-monolithicSparse step 1/1 with 'qemu-img create -f vmdk -o subformat=monolithicSparse vmdk-monolithicSparse.vmdk 10M'
+INFO:generate:Generating vmdk-streamOptimized step 1/1 with 'qemu-img create -f vmdk -o subformat=streamOptimized vmdk-streamOptimized.vmdk 10M'
+INFO:generate:Generating vmdk-monolithicFlat step 1/2 with 'qemu-img create -f vmdk -o subformat=monolithicFlat vmdk-monolithicFlat.vmdk 10M'
+INFO:generate:Generating vmdk-monolithicFlat step 2/2 with 'rm vmdk-monolithicFlat-flat.vmdk'
+INFO:generate:Generating vmdk-monolithicFlat-leak step 1/3 with 'qemu-img create -f vmdk -o subformat=monolithicFlat vmdk-monolithicFlat-leak.vmdk 10M'
+INFO:generate:Generating vmdk-monolithicFlat-leak step 2/3 with "sed -i 's#vmdk-monolithicFlat-leak-flat.vmdk#/etc/hosts#' vmdk-monolithicFlat-leak.vmdk"
+INFO:generate:Generating vmdk-monolithicFlat-leak step 3/3 with 'rm vmdk-monolithicFlat-leak-flat.vmdk'
+INFO:generate:Generating vmdk-sparse-with-url-backing step 1/2 with 'qemu-img create -f vmdk -o subformat=monolithicSparse vmdk-sparse-with-url-backing.vmdk 10M'
+INFO:generate:Generating vmdk-sparse-with-url-backing step 2/2 with "dd if=vmdk-sparse-with-url-backing.vmdk bs=512 count=1 skip=1 | sed 's#vmdk-sparse-with-url-backing.vmdk#/etc/hosts#' | dd of=vmdk-sparse-with-url-backing.vmdk conv=notrunc seek=1"
+INFO:generate:Generating vmdk-sparse-with-footer step 1/1 with 'qemu-img create -f vmdk -o subformat=monolithicSparse vmdk-sparse-with-footer.vmdk 10M'
+INFO:generate:Running postprocesser footerify_vmdk on 'vmdk-sparse-with-footer.vmdk'
+___________________________________ summary ____________________________________
+  generate: commands succeeded
+  congratulations :)
+++lib/tempest:configure_tempest:376         popd
+~/devstack
+++lib/tempest:configure_tempest:377         iniset /opt/stack/tempest/etc/tempest.conf image images_manifest_file /opt/stack/os-test-images/images/manifest.yaml
+++lib/tempest:configure_tempest:378         local image_conversion
++++lib/tempest:configure_tempest:379         iniget /etc/glance/glance-image-import.conf image_conversion output_format
+++lib/tempest:configure_tempest:379         image_conversion=
+++lib/tempest:configure_tempest:380         [[ -n '' ]]
+++lib/tempest:configure_tempest:383         iniset /opt/stack/tempest/etc/tempest.conf image-feature-enabled image_format_enforcement True
+++lib/tempest:configure_tempest:386         iniset /opt/stack/tempest/etc/tempest.conf network project_network_cidr 10.0.0.0/22
+++lib/tempest:configure_tempest:388         ssh_connect_method=floating
+++lib/tempest:configure_tempest:394         [[ True == \T\r\u\e ]]
+++lib/tempest:configure_tempest:394         is_networking_extension_supported external-net
+++lib/neutron_plugins/services/l3:is_networking_extension_supported:423  local extension=external-net
++++lib/neutron_plugins/services/l3:is_networking_extension_supported:425  oscwrap --os-cloud devstack-admin --os-region RegionOne extension list --network -c Alias -f value
++++functions-common:oscwrap:2468             return 0
+++lib/neutron_plugins/services/l3:is_networking_extension_supported:425  EXT_LIST='address-group
+address-scope
+agent
+allowed-address-pairs
+auto-allocated-topology
+availability_zone
+default-subnetpools
+dhcp_agent_scheduler
+dns-integration
+dns-domain-ports
+dns-integration-domain-keywords
+empty-string-filtering
+external-net
+extra_dhcp_opt
+extraroute
+extraroute-atomic
+filter-validation
+floating-ip-port-forwarding-detail
+fip-port-details
+flavors
+floatingip-pools
+router
+enable-default-route-bfd
+enable-default-route-ecmp
+ext-gw-mode
+l3-ha
+external-gateway-multihoming
+l3-flavors
+multi-provider
+net-mtu
+net-mtu-writable
+network_availability_zone
+network-ip-availability
+pagination
+port-device-profile
+port-mac-address-regenerate
+port-numa-affinity-policy
+port-numa-affinity-policy-socket
+binding
+binding-extended
+port-security
+project-id
+provider
+qinq
+quota-check-limit
+quota-check-limit-default
+quotas
+quota_details
+rbac-policies
+rbac-address-scope
+rbac-security-groups
+revision-if-match
+standard-attr-revisions
+router_availability_zone
+router-enable-snat
+security-groups-default-rules
+security-groups-normalized-cidr
+security-groups-remote-address-group
+security-groups-rules-belongs-to-default-sg
+security-groups-shared-filtering
+security-group
+service-type
+sorting
+standard-attr-description
+stateful-security-group
+subnet-dns-publish-fixed-ip
+subnet-external-network
+subnet-service-types
+subnet_allocation
+subnetpool-prefix-ops
+tag-creation
+standard-attr-tag
+standard-attr-timestamp
+vlan-transparent'
+++lib/neutron_plugins/services/l3:is_networking_extension_supported:426  [[ address-group
+address-scope
+agent
+allowed-address-pairs
+auto-allocated-topology
+availability_zone
+default-subnetpools
+dhcp_agent_scheduler
+dns-integration
+dns-domain-ports
+dns-integration-domain-keywords
+empty-string-filtering
+external-net
+extra_dhcp_opt
+extraroute
+extraroute-atomic
+filter-validation
+floating-ip-port-forwarding-detail
+fip-port-details
+flavors
+floatingip-pools
+router
+enable-default-route-bfd
+enable-default-route-ecmp
+ext-gw-mode
+l3-ha
+external-gateway-multihoming
+l3-flavors
+multi-provider
+net-mtu
+net-mtu-writable
+network_availability_zone
+network-ip-availability
+pagination
+port-device-profile
+port-mac-address-regenerate
+port-numa-affinity-policy
+port-numa-affinity-policy-socket
+binding
+binding-extended
+port-security
+project-id
+provider
+qinq
+quota-check-limit
+quota-check-limit-default
+quotas
+quota_details
+rbac-policies
+rbac-address-scope
+rbac-security-groups
+revision-if-match
+standard-attr-revisions
+router_availability_zone
+router-enable-snat
+security-groups-default-rules
+security-groups-normalized-cidr
+security-groups-remote-address-group
+security-groups-rules-belongs-to-default-sg
+security-groups-shared-filtering
+security-group
+service-type
+sorting
+standard-attr-description
+stateful-security-group
+subnet-dns-publish-fixed-ip
+subnet-external-network
+subnet-service-types
+subnet_allocation
+subnetpool-prefix-ops
+tag-creation
+standard-attr-tag
+standard-attr-timestamp
+vlan-transparent =~ external-net ]]
+++lib/neutron_plugins/services/l3:is_networking_extension_supported:426  return 0
++++lib/tempest:configure_tempest:395         oscwrap --os-cloud devstack-admin network show -f value -c id public
++++functions-common:oscwrap:2468             return 0
+++lib/tempest:configure_tempest:395         public_network_id=172b9757-3f94-4b3a-8588-aaef9f5d94e3
+++lib/tempest:configure_tempest:397         openstack --os-cloud devstack-admin --os-region RegionOne network create --share shared
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | UP                                   |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2026-01-19T13:20:09Z                 |
+| description               |                                      |
+| dns_domain                | None                                 |
+| id                        | 68a7ad34-b3e9-48a4-a3cc-c178a4d89ddd |
+| ipv4_address_scope        | None                                 |
+| ipv6_address_scope        | None                                 |
+| is_default                | False                                |
+| is_vlan_qinq              | None                                 |
+| is_vlan_transparent       | False                                |
+| mtu                       | 1442                                 |
+| name                      | shared                               |
+| port_security_enabled     | True                                 |
+| project_id                | 9fb44e4466264364b4ac3eb936bdc4c2     |
+| provider:network_type     | geneve                               |
+| provider:physical_network | None                                 |
+| provider:segmentation_id  | 47193                                |
+| qinq                      | False                                |
+| qos_policy_id             | None                                 |
+| revision_number           | 1                                    |
+| router:external           | Internal                             |
+| segments                  | None                                 |
+| shared                    | True                                 |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| updated_at                | 2026-01-19T13:20:09Z                 |
++---------------------------+--------------------------------------+
+++lib/tempest:configure_tempest:398         openstack --os-cloud devstack-admin --os-region RegionOne subnet create --description shared-subnet --subnet-range 192.168.233.0/24 --network shared shared-subnet
++----------------------+--------------------------------------+
+| Field                | Value                                |
++----------------------+--------------------------------------+
+| allocation_pools     | 192.168.233.2-192.168.233.254        |
+| cidr                 | 192.168.233.0/24                     |
+| created_at           | 2026-01-19T13:20:11Z                 |
+| description          | shared-subnet                        |
+| dns_nameservers      |                                      |
+| dns_publish_fixed_ip | None                                 |
+| enable_dhcp          | True                                 |
+| gateway_ip           | 192.168.233.1                        |
+| host_routes          |                                      |
+| id                   | 13063700-83a4-402f-8cc9-0ca93ac96bf6 |
+| ip_version           | 4                                    |
+| ipv6_address_mode    | None                                 |
+| ipv6_ra_mode         | None                                 |
+| name                 | shared-subnet                        |
+| network_id           | 68a7ad34-b3e9-48a4-a3cc-c178a4d89ddd |
+| project_id           | 9fb44e4466264364b4ac3eb936bdc4c2     |
+| revision_number      | 0                                    |
+| router:external      | False                                |
+| segment_id           | None                                 |
+| service_types        |                                      |
+| subnetpool_id        | None                                 |
+| tags                 |                                      |
+| updated_at           | 2026-01-19T13:20:11Z                 |
++----------------------+--------------------------------------+
+++lib/tempest:configure_tempest:401         iniset /opt/stack/tempest/etc/tempest.conf DEFAULT use_syslog False
+++lib/tempest:configure_tempest:404         iniset /opt/stack/tempest/etc/tempest.conf oslo_concurrency lock_path /opt/stack/data/tempest
+++lib/tempest:configure_tempest:405         mkdir -p /opt/stack/data/tempest
+++lib/tempest:configure_tempest:406         iniset /opt/stack/tempest/etc/tempest.conf DEFAULT use_stderr False
+++lib/tempest:configure_tempest:407         iniset /opt/stack/tempest/etc/tempest.conf DEFAULT log_file tempest.log
+++lib/tempest:configure_tempest:408         iniset /opt/stack/tempest/etc/tempest.conf DEFAULT debug True
+++lib/tempest:configure_tempest:411         iniset /opt/stack/tempest/etc/tempest.conf compute build_timeout 196
+++lib/tempest:configure_tempest:412         iniset /opt/stack/tempest/etc/tempest.conf volume build_timeout 196
+++lib/tempest:configure_tempest:415         iniset /opt/stack/tempest/etc/tempest.conf identity uri_v3 http://192.168.95.93/identity/v3
+++lib/tempest:configure_tempest:416         iniset /opt/stack/tempest/etc/tempest.conf identity user_lockout_failure_attempts 2
+++lib/tempest:configure_tempest:417         iniset /opt/stack/tempest/etc/tempest.conf identity user_lockout_duration 10
+++lib/tempest:configure_tempest:418         iniset /opt/stack/tempest/etc/tempest.conf identity user_unique_last_password_count 2
+++lib/tempest:configure_tempest:419         [[ True == \T\r\u\e ]]
+++lib/tempest:configure_tempest:420         iniset /opt/stack/tempest/etc/tempest.conf auth admin_username admin
+++lib/tempest:configure_tempest:421         iniset /opt/stack/tempest/etc/tempest.conf auth admin_password SuperSecret123
+++lib/tempest:configure_tempest:422         iniset /opt/stack/tempest/etc/tempest.conf auth admin_project_name admin
+++lib/tempest:configure_tempest:423         iniset /opt/stack/tempest/etc/tempest.conf auth admin_domain_name Default
+++lib/tempest:configure_tempest:425         iniset /opt/stack/tempest/etc/tempest.conf identity auth_version v3
+++lib/tempest:configure_tempest:426         is_service_enabled tls-proxy
+++functions-common:is_service_enabled:2079  return 1
+++lib/tempest:configure_tempest:431         [[ True = True ]]
+++lib/tempest:configure_tempest:432         iniset /opt/stack/tempest/etc/tempest.conf identity-feature-enabled security_compliance True
+++lib/tempest:configure_tempest:437         is_service_enabled ldap
+++functions-common:is_service_enabled:2079  return 1
+++lib/tempest:configure_tempest:443         iniset /opt/stack/tempest/etc/tempest.conf identity-feature-enabled project_tags True
+++lib/tempest:configure_tempest:447         iniset /opt/stack/tempest/etc/tempest.conf identity-feature-enabled application_credentials True
+++lib/tempest:configure_tempest:451         iniset /opt/stack/tempest/etc/tempest.conf identity-feature-enabled access_rules True
+++lib/tempest:configure_tempest:456         [[ ! -z '' ]]
+++lib/tempest:configure_tempest:459         iniset /opt/stack/tempest/etc/tempest.conf image-feature-enabled import_image False
+++lib/tempest:configure_tempest:460         iniset /opt/stack/tempest/etc/tempest.conf image-feature-enabled os_glance_reserved True
+++lib/tempest:configure_tempest:461         is_service_enabled g-api-r
+++functions-common:is_service_enabled:2079  return 1
+++lib/tempest:configure_tempest:466         iniset /opt/stack/tempest/etc/tempest.conf compute image_ref d3d0c59e-4eef-4932-b6dd-e436b761c6be
+++lib/tempest:configure_tempest:467         iniset /opt/stack/tempest/etc/tempest.conf compute image_ref_alt d3d0c59e-4eef-4932-b6dd-e436b761c6be
+++lib/tempest:configure_tempest:468         iniset /opt/stack/tempest/etc/tempest.conf compute flavor_ref 42
+++lib/tempest:configure_tempest:469         iniset /opt/stack/tempest/etc/tempest.conf compute flavor_ref_alt 84
+++lib/tempest:configure_tempest:470         iniset /opt/stack/tempest/etc/tempest.conf validation connect_method floating
+++lib/tempest:configure_tempest:471         is_service_enabled neutron
+++functions-common:is_service_enabled:2079  return 0
+++lib/tempest:configure_tempest:479         [[ -n '' ]]
+++lib/tempest:configure_tempest:489         local tempest_compute_min_microversion=None
+++lib/tempest:configure_tempest:490         local tempest_compute_max_microversion=latest
+++lib/tempest:configure_tempest:493         [[ '' == \c\o\m\p\u\t\e\_\l\e\g\a\c\y ]]
+++lib/tempest:configure_tempest:497         '[' None == None ']'
+++lib/tempest:configure_tempest:498         inicomment /opt/stack/tempest/etc/tempest.conf compute min_microversion
+++lib/tempest:configure_tempest:502         '[' latest == None ']'
+++lib/tempest:configure_tempest:505         iniset /opt/stack/tempest/etc/tempest.conf compute max_microversion latest
+++lib/tempest:configure_tempest:508         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled personality False
+++lib/tempest:configure_tempest:509         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled resize True
+++lib/tempest:configure_tempest:510         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled live_migration False
+++lib/tempest:configure_tempest:511         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled change_password False
+++lib/tempest:configure_tempest:512         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled block_migration_for_live_migration False
+++lib/tempest:configure_tempest:513         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled live_migrate_back_and_forth False
+++lib/tempest:configure_tempest:514         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled attach_encrypted_volume True
+++lib/tempest:configure_tempest:517         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled hostname_fqdn_sanitization True
+++lib/tempest:configure_tempest:519         [[ -n ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,ServerGroupAntiAffinityFilter,ServerGroupAffinityFilter,SameHostFilter,DifferentHostFilter ]]
+++lib/tempest:configure_tempest:520         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled scheduler_enabled_filters ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,ServerGroupAntiAffinityFilter,ServerGroupAffinityFilter,SameHostFilter,DifferentHostFilter
+++lib/tempest:configure_tempest:523         [[ False == \T\r\u\e ]]
+++lib/tempest:configure_tempest:527         is_service_enabled n-novnc
+++functions-common:is_service_enabled:2079  return 0
+++lib/tempest:configure_tempest:528         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled vnc_console True
+++lib/tempest:configure_tempest:530         is_service_enabled n-spice
+++functions-common:is_service_enabled:2079  return 1
+++lib/tempest:configure_tempest:530         '[' False '!=' False ']'
+++lib/tempest:configure_tempest:533         is_service_enabled n-sproxy
+++functions-common:is_service_enabled:2079  return 1
+++lib/tempest:configure_tempest:533         '[' False '!=' False ']'
+++lib/tempest:configure_tempest:538         local nova_policy_roles=admin,manager,member,reader,service
+++lib/tempest:configure_tempest:539         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled nova_policy_roles admin,manager,member,reader,service
+++lib/tempest:configure_tempest:542         iniset /opt/stack/tempest/etc/tempest.conf network project_networks_reachable false
+++lib/tempest:configure_tempest:543         iniset /opt/stack/tempest/etc/tempest.conf network public_network_id 172b9757-3f94-4b3a-8588-aaef9f5d94e3
+++lib/tempest:configure_tempest:544         iniset /opt/stack/tempest/etc/tempest.conf network public_router_id ''
+++lib/tempest:configure_tempest:545         iniset /opt/stack/tempest/etc/tempest.conf network default_network 10.0.0.0/22
+++lib/tempest:configure_tempest:546         iniset /opt/stack/tempest/etc/tempest.conf network-feature-enabled ipv6 True
+++lib/tempest:configure_tempest:547         iniset /opt/stack/tempest/etc/tempest.conf network-feature-enabled ipv6_subnet_attributes True
+++lib/tempest:configure_tempest:548         iniset /opt/stack/tempest/etc/tempest.conf network-feature-enabled port_security True
+++lib/tempest:configure_tempest:550         iniset /opt/stack/tempest/etc/tempest.conf enforce_scope neutron True
+++lib/tempest:configure_tempest:553         SCENARIO_IMAGE_DIR=/opt/stack/devstack/files
+++lib/tempest:configure_tempest:554         SCENARIO_IMAGE_FILE=cirros-0.6.3-x86_64-disk.img
+++lib/tempest:configure_tempest:555         SCENARIO_IMAGE_TYPE=cirros
+++lib/tempest:configure_tempest:556         iniset /opt/stack/tempest/etc/tempest.conf scenario img_file /opt/stack/devstack/files/cirros-0.6.3-x86_64-disk.img
+++lib/tempest:configure_tempest:560         [[ cirros == \c\i\r\r\o\s ]]
++++lib/tempest:configure_tempest:563         echo 0.6.3
++++lib/tempest:configure_tempest:563         tr -d .
+++lib/tempest:configure_tempest:563         [[ 063 -ge 060 ]]
+++lib/tempest:configure_tempest:564         iniset /opt/stack/tempest/etc/tempest.conf scenario dhcp_client dhcpcd
+++lib/tempest:configure_tempest:569         TEMPEST_SSH_NETWORK_NAME=private
+++lib/tempest:configure_tempest:570         is_provider_network
+++functions-common:is_provider_network:2272  '[' '' == True ']'
+++functions-common:is_provider_network:2275  return 1
+++lib/tempest:configure_tempest:574         iniset /opt/stack/tempest/etc/tempest.conf validation run_validation True
+++lib/tempest:configure_tempest:575         iniset /opt/stack/tempest/etc/tempest.conf validation ip_version_for_ssh 4
+++lib/tempest:configure_tempest:576         iniset /opt/stack/tempest/etc/tempest.conf validation ssh_timeout 196
+++lib/tempest:configure_tempest:577         iniset /opt/stack/tempest/etc/tempest.conf validation image_ssh_user cirros
+++lib/tempest:configure_tempest:578         iniset /opt/stack/tempest/etc/tempest.conf validation image_alt_ssh_user cirros
+++lib/tempest:configure_tempest:579         iniset /opt/stack/tempest/etc/tempest.conf validation network_for_ssh private
+++lib/tempest:configure_tempest:583         [[ lvm:lvmdriver-1 == *\l\v\m* ]]
+++lib/tempest:configure_tempest:584         TEMPEST_VOLUME_MANAGE_SNAPSHOT=True
++++lib/tempest:configure_tempest:586         trueorfalse False TEMPEST_VOLUME_MANAGE_SNAPSHOT
+++lib/tempest:configure_tempest:586         iniset /opt/stack/tempest/etc/tempest.conf volume-feature-enabled manage_snapshot True
+++lib/tempest:configure_tempest:588         [[ lvm:lvmdriver-1 == *\l\v\m* ]]
+++lib/tempest:configure_tempest:589         TEMPEST_VOLUME_MANAGE_VOLUME=True
++++lib/tempest:configure_tempest:591         trueorfalse False TEMPEST_VOLUME_MANAGE_VOLUME
+++lib/tempest:configure_tempest:591         iniset /opt/stack/tempest/etc/tempest.conf volume-feature-enabled manage_volume True
+++lib/tempest:configure_tempest:594         [[ lvm:lvmdriver-1 == *\l\v\m* ]]
+++lib/tempest:configure_tempest:594         '[' libvirt = libvirt ']'
+++lib/tempest:configure_tempest:595         TEMPEST_EXTEND_ATTACHED_VOLUME=True
++++lib/tempest:configure_tempest:597         trueorfalse False TEMPEST_EXTEND_ATTACHED_VOLUME
+++lib/tempest:configure_tempest:597         iniset /opt/stack/tempest/etc/tempest.conf volume-feature-enabled extend_attached_volume True
+++lib/tempest:configure_tempest:599         [[ lvm:lvmdriver-1 == *\l\v\m* ]]
+++lib/tempest:configure_tempest:600         TEMPEST_VOLUME_REVERT_TO_SNAPSHOT=True
++++lib/tempest:configure_tempest:602         trueorfalse False TEMPEST_VOLUME_REVERT_TO_SNAPSHOT
+++lib/tempest:configure_tempest:602         iniset /opt/stack/tempest/etc/tempest.conf volume-feature-enabled volume_revert True
+++lib/tempest:configure_tempest:603         iniset /opt/stack/tempest/etc/tempest.conf volume-feature-enabled extend_attached_encrypted_volume False
+++lib/tempest:configure_tempest:604         [[ swift == *\s\w\i\f\t* ]]
+++lib/tempest:configure_tempest:605         iniset /opt/stack/tempest/etc/tempest.conf volume backup_driver swift
+++lib/tempest:configure_tempest:607         local tempest_volume_min_microversion=None
+++lib/tempest:configure_tempest:608         local tempest_volume_max_microversion=latest
+++lib/tempest:configure_tempest:609         '[' None == None ']'
+++lib/tempest:configure_tempest:610         inicomment /opt/stack/tempest/etc/tempest.conf volume min_microversion
+++lib/tempest:configure_tempest:615         '[' latest == None ']'
+++lib/tempest:configure_tempest:618         iniset /opt/stack/tempest/etc/tempest.conf volume max_microversion latest
+++lib/tempest:configure_tempest:621         is_service_enabled c-bak
+++functions-common:is_service_enabled:2079  return 1
+++lib/tempest:configure_tempest:622         iniset /opt/stack/tempest/etc/tempest.conf volume-feature-enabled backup False
+++lib/tempest:configure_tempest:628         [[ -n lvm:lvmdriver-1 ]]
+++lib/tempest:configure_tempest:628         [[ lvm:lvmdriver-1 =~ .*,.* ]]
+++lib/tempest:configure_tempest:648         '[' default '!=' default -o 'Open Source' '!=' 'Open Source' ']'
+++lib/tempest:configure_tempest:652         '[' default '!=' default -o iSCSI '!=' iSCSI ']'
+++lib/tempest:configure_tempest:657         [[ False == \T\r\u\e ]]
+++lib/tempest:configure_tempest:666         local tempest_placement_min_microversion=None
+++lib/tempest:configure_tempest:667         local tempest_placement_max_microversion=latest
+++lib/tempest:configure_tempest:668         '[' None == None ']'
+++lib/tempest:configure_tempest:669         inicomment /opt/stack/tempest/etc/tempest.conf placement min_microversion
+++lib/tempest:configure_tempest:673         '[' latest == None ']'
+++lib/tempest:configure_tempest:676         iniset /opt/stack/tempest/etc/tempest.conf placement max_microversion latest
+++lib/tempest:configure_tempest:680         '[' libvirt = ironic ']'
+++lib/tempest:configure_tempest:694         '[' libvirt = libvirt ']'
+++lib/tempest:configure_tempest:696         '[' kvm = lxc ']'
+++lib/tempest:configure_tempest:703         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled shelve_migrate True
+++lib/tempest:configure_tempest:704         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled stable_rescue True
+++lib/tempest:configure_tempest:705         iniset /opt/stack/tempest/etc/tempest.conf compute-feature-enabled swap_volume True
+++lib/tempest:configure_tempest:718         local service
+++lib/tempest:configure_tempest:719         local tempest_services=key,glance,nova,neutron,cinder,swift,horizon
+++lib/tempest:configure_tempest:720         for service in ${tempest_services//,/ }
+++lib/tempest:configure_tempest:721         is_service_enabled key
+++functions-common:is_service_enabled:2079  return 0
+++lib/tempest:configure_tempest:722         iniset /opt/stack/tempest/etc/tempest.conf service_available key True
+++lib/tempest:configure_tempest:720         for service in ${tempest_services//,/ }
+++lib/tempest:configure_tempest:721         is_service_enabled glance
+++functions-common:is_service_enabled:2079  return 0
+++lib/tempest:configure_tempest:722         iniset /opt/stack/tempest/etc/tempest.conf service_available glance True
+++lib/tempest:configure_tempest:720         for service in ${tempest_services//,/ }
+++lib/tempest:configure_tempest:721         is_service_enabled nova
+++functions-common:is_service_enabled:2079  return 0
+++lib/tempest:configure_tempest:722         iniset /opt/stack/tempest/etc/tempest.conf service_available nova True
+++lib/tempest:configure_tempest:720         for service in ${tempest_services//,/ }
+++lib/tempest:configure_tempest:721         is_service_enabled neutron
+++functions-common:is_service_enabled:2079  return 0
+++lib/tempest:configure_tempest:722         iniset /opt/stack/tempest/etc/tempest.conf service_available neutron True
+++lib/tempest:configure_tempest:720         for service in ${tempest_services//,/ }
+++lib/tempest:configure_tempest:721         is_service_enabled cinder
+++functions-common:is_service_enabled:2079  return 0
+++lib/tempest:configure_tempest:722         iniset /opt/stack/tempest/etc/tempest.conf service_available cinder True
+++lib/tempest:configure_tempest:720         for service in ${tempest_services//,/ }
+++lib/tempest:configure_tempest:721         is_service_enabled swift
+++functions-common:is_service_enabled:2079  return 1
+++lib/tempest:configure_tempest:724         iniset /opt/stack/tempest/etc/tempest.conf service_available swift False
+++lib/tempest:configure_tempest:720         for service in ${tempest_services//,/ }
+++lib/tempest:configure_tempest:721         is_service_enabled horizon
+++functions-common:is_service_enabled:2079  return 0
+++lib/tempest:configure_tempest:722         iniset /opt/stack/tempest/etc/tempest.conf service_available horizon True
+++lib/tempest:configure_tempest:732         [[ False == True ]]
+++lib/tempest:configure_tempest:732         [[ False == True ]]
+++lib/tempest:configure_tempest:736         [[ True == True ]]
+++lib/tempest:configure_tempest:737         iniset /opt/stack/tempest/etc/tempest.conf enforce_scope nova true
+++lib/tempest:configure_tempest:740         [[ False == True ]]
+++lib/tempest:configure_tempest:740         [[ False == True ]]
+++lib/tempest:configure_tempest:744         [[ True == True ]]
+++lib/tempest:configure_tempest:745         iniset /opt/stack/tempest/etc/tempest.conf enforce_scope glance true
+++lib/tempest:configure_tempest:748         [[ False == True ]]
+++lib/tempest:configure_tempest:748         [[ False == True ]]
+++lib/tempest:configure_tempest:752         '[' libvirt = libvirt ']'
+++lib/tempest:configure_tempest:752         '[' kvm = lxc ']'
+++lib/tempest:configure_tempest:762         local tmp_cfg_file
++++lib/tempest:configure_tempest:763         mktemp
+++lib/tempest:configure_tempest:763         tmp_cfg_file=/tmp/tmp.znYNCD8bUM
+++lib/tempest:configure_tempest:764         cd /opt/stack/tempest
+++lib/tempest:configure_tempest:766         local tmp_u_c_m
++++lib/tempest:configure_tempest:767         mktemp -t tempest_u_c_m.XXXXXXXXXX
+++lib/tempest:configure_tempest:767         tmp_u_c_m=/tmp/tempest_u_c_m.e4L8ozUhKh
+++lib/tempest:configure_tempest:768         set_tempest_venv_constraints /tmp/tempest_u_c_m.e4L8ozUhKh
+++lib/tempest:set_tempest_venv_constraints:131  local tmp_c
+++lib/tempest:set_tempest_venv_constraints:132  tmp_c=/tmp/tempest_u_c_m.e4L8ozUhKh
+++lib/tempest:set_tempest_venv_constraints:133  [[ master == \m\a\s\t\e\r ]]
+++lib/tempest:set_tempest_venv_constraints:134  cd /opt/stack/requirements
+++lib/tempest:set_tempest_venv_constraints:135  git show master:upper-constraints.txt
+++lib/tempest:set_tempest_venv_constraints:142  export UPPER_CONSTRAINTS_FILE=https://releases.openstack.org/constraints/upper/master
+++lib/tempest:set_tempest_venv_constraints:142  UPPER_CONSTRAINTS_FILE=https://releases.openstack.org/constraints/upper/master
+++lib/tempest:set_tempest_venv_constraints:143  export TOX_CONSTRAINTS_FILE=https://releases.openstack.org/constraints/upper/master
+++lib/tempest:set_tempest_venv_constraints:143  TOX_CONSTRAINTS_FILE=https://releases.openstack.org/constraints/upper/master
+++lib/tempest:configure_tempest:769         [[ False != \T\r\u\e ]]
+++lib/tempest:configure_tempest:770         tox -revenv-tempest --notest
+venv-tempest recreate: /opt/stack/tempest/.tox/tempest
+venv-tempest installdeps: -chttps://releases.openstack.org/constraints/upper/master, -r/opt/stack/tempest/requirements.txt
+venv-tempest develop-inst: /opt/stack/tempest
+venv-tempest installed: attrs==25.4.0,autopage==0.5.2,bcrypt==4.3.0,certifi==2026.1.4,cffi==2.0.0,charset-normalizer==3.4.4,cliff==4.13.0,cmd2==2.7.0,cryptography==43.0.3,debtcollector==3.0.0,defusedxml==0.7.1,fasteners==0.20,fixtures==4.2.6,idna==3.11,invoke==2.2.1,iso8601==2.1.0,jsonschema==4.25.1,jsonschema-specifications==2025.9.1,markdown-it-py==4.0.0,mdurl==0.1.2,msgpack==1.1.2,netaddr==1.3.0,oslo.concurrency==7.2.0,oslo.config==10.1.0,oslo.context==6.2.0,oslo.i18n==6.7.1,oslo.log==7.2.1,oslo.serialization==5.9.0,oslo.utils==9.2.0,packaging==25.0,paramiko==4.0.0,pbr==7.0.3,prettytable==3.16.0,psutil==7.1.1,pycparser==2.23,Pygments==2.19.2,PyNaCl==1.6.0,pyparsing==3.2.5,pyperclip==1.11.0,python-dateutil==2.9.0.post0,python-subunit==1.4.4,PyYAML==6.0.3,referencing==0.37.0,requests==2.32.5,rfc3986==2.0.0,rich==14.2.0,rich-argparse==1.7.1,rpds-py==0.28.0,six==1.17.0,stestr==4.2.0,stevedore==5.6.0,-e git+https://opendev.org/openstack/tempest.git@01919bb03157a913518647c29b09a80f140d2d56#egg=tempest,testscenarios==0.5.0,testtools==2.7.2,tomlkit==0.13.3,typing_extensions==4.15.0,tzdata==2025.2,urllib3==1.26.20,voluptuous==0.15.2,wcwidth==0.2.14,wrapt==2.0.0
+___________________________________ summary ____________________________________
+  venv-tempest: skipped tests
+  congratulations :)
+++lib/tempest:configure_tempest:772         tox -evenv-tempest -- pip install -c /tmp/tempest_u_c_m.e4L8ozUhKh -r requirements.txt
+/opt/stack/tempest/.tox/tempest/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+/opt/stack/tempest/.tox/tempest/lib/python3.10/site-packages/setuptools/__init__.py:92: _DeprecatedInstaller: setuptools.installer and fetch_build_eggs are deprecated.
+!!
+
+        ********************************************************************************
+        Requirements should be satisfied by a PEP 517 installer.
+        If you are using pip, you can try `pip install --use-pep517`.
+
+        This deprecation is overdue, please update your project and remove deprecated
+        calls to avoid build errors in the future.
+        ********************************************************************************
+
+!!
+  dist.fetch_build_eggs(dist.setup_requires)
+/opt/stack/tempest/.tox/tempest/lib/python3.10/site-packages/setuptools/_distutils/cmd.py:90: SetuptoolsDeprecationWarning: setup.py install is deprecated.
+!!
+
+        ********************************************************************************
+        Please avoid running ``setup.py`` directly.
+        Instead, use pypa/build, pypa/installer or other
+        standards-based tools.
+
+        This deprecation is overdue, please update your project and remove deprecated
+        calls to avoid build errors in the future.
+
+        See https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html for details.
+        ********************************************************************************
+
+!!
+  self.initialize_options()
+/opt/stack/tempest/.tox/tempest/lib/python3.10/site-packages/pbr/setupcfg.py:833: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+/opt/stack/tempest/.tox/tempest/lib/python3.10/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+venv-tempest develop-inst-nodeps: /opt/stack/tempest
+venv-tempest installed: attrs==25.4.0,autopage==0.5.2,bcrypt==4.3.0,certifi==2026.1.4,cffi==2.0.0,charset-normalizer==3.4.4,cliff==4.13.0,cmd2==2.7.0,cryptography==43.0.3,debtcollector==3.0.0,defusedxml==0.7.1,fasteners==0.20,fixtures==4.2.6,idna==3.11,invoke==2.2.1,iso8601==2.1.0,jsonschema==4.25.1,jsonschema-specifications==2025.9.1,markdown-it-py==4.0.0,mdurl==0.1.2,msgpack==1.1.2,netaddr==1.3.0,oslo.concurrency==7.2.0,oslo.config==10.1.0,oslo.context==6.2.0,oslo.i18n==6.7.1,oslo.log==7.2.1,oslo.serialization==5.9.0,oslo.utils==9.2.0,packaging==25.0,paramiko==4.0.0,pbr==7.0.3,prettytable==3.16.0,psutil==7.1.1,pycparser==2.23,Pygments==2.19.2,PyNaCl==1.6.0,pyparsing==3.2.5,pyperclip==1.11.0,python-dateutil==2.9.0.post0,python-subunit==1.4.4,PyYAML==6.0.3,referencing==0.37.0,requests==2.32.5,rfc3986==2.0.0,rich==14.2.0,rich-argparse==1.7.1,rpds-py==0.28.0,six==1.17.0,stestr==4.2.0,stevedore==5.6.0,-e git+https://opendev.org/openstack/tempest.git@01919bb03157a913518647c29b09a80f140d2d56#egg=tempest,testscenarios==0.5.0,testtools==2.7.2,tomlkit==0.13.3,typing_extensions==4.15.0,tzdata==2025.2,urllib3==1.26.20,voluptuous==0.15.2,wcwidth==0.2.14,wrapt==2.0.0
+venv-tempest run-test-pre: PYTHONHASHSEED='1733138562'
+venv-tempest run-test: commands[0] | pip install -c /tmp/tempest_u_c_m.e4L8ozUhKh -r requirements.txt
+Requirement already satisfied: pbr!=2.1.0,>=2.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 1)) (7.0.3)
+Requirement already satisfied: cliff!=2.9.0,>=2.8.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 2)) (4.13.0)
+Requirement already satisfied: jsonschema>=3.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 3)) (4.25.1)
+Requirement already satisfied: testtools>=2.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 4)) (2.7.2)
+Requirement already satisfied: paramiko>=2.7.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 5)) (4.0.0)
+Requirement already satisfied: cryptography>=2.1 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 6)) (43.0.3)
+Requirement already satisfied: netaddr>=0.7.18 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 7)) (1.3.0)
+Requirement already satisfied: oslo.concurrency>=3.26.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 8)) (7.2.0)
+Requirement already satisfied: oslo.config>=5.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 9)) (10.1.0)
+Requirement already satisfied: oslo.log>=3.36.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 10)) (7.2.1)
+Requirement already satisfied: stestr>=1.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 11)) (4.2.0)
+Requirement already satisfied: oslo.serialization!=2.19.1,>=2.18.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 12)) (5.9.0)
+Requirement already satisfied: oslo.utils>=7.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 13)) (9.2.0)
+Requirement already satisfied: fixtures>=3.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 14)) (4.2.6)
+Requirement already satisfied: PyYAML>=3.12 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 15)) (6.0.3)
+Requirement already satisfied: python-subunit>=1.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 16)) (1.4.4)
+Requirement already satisfied: stevedore>=1.20.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 17)) (5.6.0)
+Requirement already satisfied: PrettyTable>=0.7.1 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 18)) (3.16.0)
+Requirement already satisfied: urllib3>=1.21.1 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 19)) (1.26.20)
+Requirement already satisfied: debtcollector>=1.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 20)) (3.0.0)
+Requirement already satisfied: defusedxml>=0.7.1 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 21)) (0.7.1)
+Requirement already satisfied: fasteners>=0.16.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 22)) (0.20)
+Requirement already satisfied: testscenarios>=0.5.0 in ./.tox/tempest/lib/python3.10/site-packages (from -r requirements.txt (line 23)) (0.5.0)
+Requirement already satisfied: setuptools in ./.tox/tempest/lib/python3.10/site-packages (from pbr!=2.1.0,>=2.0.0->-r requirements.txt (line 1)) (80.9.0)
+Requirement already satisfied: autopage>=0.4.0 in ./.tox/tempest/lib/python3.10/site-packages (from cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (0.5.2)
+Requirement already satisfied: cmd2>=1.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (2.7.0)
+Requirement already satisfied: attrs>=22.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from jsonschema>=3.2.0->-r requirements.txt (line 3)) (25.4.0)
+Requirement already satisfied: jsonschema-specifications>=2023.03.6 in ./.tox/tempest/lib/python3.10/site-packages (from jsonschema>=3.2.0->-r requirements.txt (line 3)) (2025.9.1)
+Requirement already satisfied: referencing>=0.28.4 in ./.tox/tempest/lib/python3.10/site-packages (from jsonschema>=3.2.0->-r requirements.txt (line 3)) (0.37.0)
+Requirement already satisfied: rpds-py>=0.7.1 in ./.tox/tempest/lib/python3.10/site-packages (from jsonschema>=3.2.0->-r requirements.txt (line 3)) (0.28.0)
+Requirement already satisfied: bcrypt>=3.2 in ./.tox/tempest/lib/python3.10/site-packages (from paramiko>=2.7.0->-r requirements.txt (line 5)) (4.3.0)
+Requirement already satisfied: invoke>=2.0 in ./.tox/tempest/lib/python3.10/site-packages (from paramiko>=2.7.0->-r requirements.txt (line 5)) (2.2.1)
+Requirement already satisfied: pynacl>=1.5 in ./.tox/tempest/lib/python3.10/site-packages (from paramiko>=2.7.0->-r requirements.txt (line 5)) (1.6.0)
+Requirement already satisfied: cffi>=1.12 in ./.tox/tempest/lib/python3.10/site-packages (from cryptography>=2.1->-r requirements.txt (line 6)) (2.0.0)
+Requirement already satisfied: oslo.i18n>=3.15.3 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.concurrency>=3.26.0->-r requirements.txt (line 8)) (6.7.1)
+Requirement already satisfied: rfc3986>=1.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.config>=5.2.0->-r requirements.txt (line 9)) (2.0.0)
+Requirement already satisfied: requests>=2.18.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.config>=5.2.0->-r requirements.txt (line 9)) (2.32.5)
+Requirement already satisfied: oslo.context>=2.21.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.log>=3.36.0->-r requirements.txt (line 10)) (6.2.0)
+Requirement already satisfied: python-dateutil>=2.7.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.log>=3.36.0->-r requirements.txt (line 10)) (2.9.0.post0)
+Requirement already satisfied: voluptuous>=0.8.9 in ./.tox/tempest/lib/python3.10/site-packages (from stestr>=1.0.0->-r requirements.txt (line 11)) (0.15.2)
+Requirement already satisfied: tomlkit>=0.11.6 in ./.tox/tempest/lib/python3.10/site-packages (from stestr>=1.0.0->-r requirements.txt (line 11)) (0.13.3)
+Requirement already satisfied: msgpack>=0.5.2 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.serialization!=2.19.1,>=2.18.0->-r requirements.txt (line 12)) (1.1.2)
+Requirement already satisfied: tzdata>=2022.4 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.serialization!=2.19.1,>=2.18.0->-r requirements.txt (line 12)) (2025.2)
+Requirement already satisfied: iso8601>=0.1.11 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.utils>=7.0.0->-r requirements.txt (line 13)) (2.1.0)
+Requirement already satisfied: pyparsing>=2.1.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.utils>=7.0.0->-r requirements.txt (line 13)) (3.2.5)
+Requirement already satisfied: packaging>=20.4 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.utils>=7.0.0->-r requirements.txt (line 13)) (25.0)
+Requirement already satisfied: psutil>=3.2.2 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.utils>=7.0.0->-r requirements.txt (line 13)) (7.1.1)
+Requirement already satisfied: wcwidth in ./.tox/tempest/lib/python3.10/site-packages (from PrettyTable>=0.7.1->-r requirements.txt (line 18)) (0.2.14)
+Requirement already satisfied: wrapt>=1.7.0 in ./.tox/tempest/lib/python3.10/site-packages (from debtcollector>=1.2.0->-r requirements.txt (line 20)) (2.0.0)
+Requirement already satisfied: pycparser in ./.tox/tempest/lib/python3.10/site-packages (from cffi>=1.12->cryptography>=2.1->-r requirements.txt (line 6)) (2.23)
+Requirement already satisfied: pyperclip>=1.8 in ./.tox/tempest/lib/python3.10/site-packages (from cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (1.11.0)
+Requirement already satisfied: rich-argparse>=1.7.1 in ./.tox/tempest/lib/python3.10/site-packages (from cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (1.7.1)
+Requirement already satisfied: typing-extensions>=4.12.0 in ./.tox/tempest/lib/python3.10/site-packages (from oslo.context>=2.21.0->oslo.log>=3.36.0->-r requirements.txt (line 10)) (4.15.0)
+Requirement already satisfied: six>=1.5 in ./.tox/tempest/lib/python3.10/site-packages (from python-dateutil>=2.7.0->oslo.log>=3.36.0->-r requirements.txt (line 10)) (1.17.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in ./.tox/tempest/lib/python3.10/site-packages (from requests>=2.18.0->oslo.config>=5.2.0->-r requirements.txt (line 9)) (3.4.4)
+Requirement already satisfied: idna<4,>=2.5 in ./.tox/tempest/lib/python3.10/site-packages (from requests>=2.18.0->oslo.config>=5.2.0->-r requirements.txt (line 9)) (3.11)
+Requirement already satisfied: certifi>=2017.4.17 in ./.tox/tempest/lib/python3.10/site-packages (from requests>=2.18.0->oslo.config>=5.2.0->-r requirements.txt (line 9)) (2026.1.4)
+Requirement already satisfied: rich>=11.0.0 in ./.tox/tempest/lib/python3.10/site-packages (from rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (14.2.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in ./.tox/tempest/lib/python3.10/site-packages (from rich>=11.0.0->rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2)) (4.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in ./.tox/tempest/lib/python3.10/site-packages (from rich>=11.0.0->rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt (line 2))(2.19.2)
+Requirement already satisfied: mdurl~=0.1 in ./.tox/tempest/lib/python3.10/site-packages (from markdown-it-py>=2.2.0->rich>=11.0.0->rich-argparse>=1.7.1->cmd2>=1.0.0->cliff!=2.9.0,>=2.8.0->-r requirements.txt(line 2)) (0.1.2)
+
+[notice] A new release of pip is available: 25.2 -> 25.3
+[notice] To update, run: pip install --upgrade pip
+___________________________________ summary ____________________________________
+  venv-tempest: commands succeeded
+  congratulations :)
+++lib/tempest:configure_tempest:773         rm -f /tmp/tempest_u_c_m.e4L8ozUhKh
+++lib/tempest:configure_tempest:776         [[ False == \T\r\u\e ]]
+++lib/tempest:configure_tempest:784         [[ True == \F\a\l\s\e ]]
+++lib/tempest:configure_tempest:788         iniset /opt/stack/tempest/etc/tempest.conf auth use_dynamic_credentials True
+++lib/tempest:configure_tempest:794         tox -evenv -- tempest verify-config -uro /tmp/tmp.znYNCD8bUM
+venv create: /opt/stack/tempest/.tox/venv
+venv installdeps: -chttps://releases.openstack.org/constraints/upper/master, -r/opt/stack/tempest/requirements.txt, -r/opt/stack/tempest/doc/requirements.txt
+venv develop-inst: /opt/stack/tempest
+venv installed: alabaster==1.0.0,attrs==25.4.0,autopage==0.5.2,babel==2.17.0,bcrypt==4.3.0,certifi==2026.1.4,cffi==2.0.0,charset-normalizer==3.4.4,cliff==4.13.0,cmd2==2.7.0,cryptography==43.0.3,debtcollector==3.0.0,defusedxml==0.7.1,docutils==0.21.2,dulwich==0.24.1,fasteners==0.20,fixtures==4.2.6,idna==3.11,imagesize==1.4.1,invoke==2.2.1,iso8601==2.1.0,Jinja2==3.1.6,jsonschema==4.25.1,jsonschema-specifications==2025.9.1,markdown-it-py==4.0.0,MarkupSafe==3.0.3,mdurl==0.1.2,msgpack==1.1.2,netaddr==1.3.0,openstackdocstheme==3.5.0,oslo.concurrency==7.2.0,oslo.config==10.1.0,oslo.context==6.2.0,oslo.i18n==6.7.1,oslo.log==7.2.1,oslo.serialization==5.9.0,oslo.utils==9.2.0,packaging==25.0,paramiko==4.0.0,pbr==7.0.3,prettytable==3.16.0,psutil==7.1.1,pycparser==2.23,Pygments==2.19.2,PyNaCl==1.6.0,pyparsing==3.2.5,pyperclip==1.11.0,python-dateutil==2.9.0.post0,python-subunit==1.4.4,PyYAML==6.0.3,referencing==0.37.0,reno==4.1.0,requests==2.32.5,rfc3986==2.0.0,rich==14.2.0,rich-argparse==1.7.1,rpds-py==0.28.0,six==1.17.0,snowballstemmer==3.0.1,Sphinx==8.1.3,sphinxcontrib-applehelp==2.0.0,sphinxcontrib-devhelp==2.0.0,sphinxcontrib-htmlhelp==2.1.0,sphinxcontrib-jsmath==1.0.1,sphinxcontrib-qthelp==2.0.0,sphinxcontrib-serializinghtml==2.0.0,sphinxcontrib-svg2pdfconverter==1.3.0,stestr==4.2.0,stevedore==5.6.0,-e git+https://opendev.org/openstack/tempest.git@01919bb03157a913518647c29b09a80f140d2d56#egg=tempest,testscenarios==0.5.0,testtools==2.7.2,tomli==2.3.0,tomlkit==0.13.3,typing_extensions==4.15.0,tzdata==2025.2,urllib3==1.26.20,voluptuous==0.15.2,wcwidth==0.2.14,wrapt==2.0.0
+venv run-test-pre: PYTHONHASHSEED='1708639559'
+venv run-test: commands[0] | tempest verify-config -uro /tmp/tmp.znYNCD8bUM
+/opt/stack/tempest/.tox/venv/lib/python3.10/site-packages/oslo_utils/eventletutils.py:36: DeprecationWarning: eventletutils module is deprecated and will be removed.
+  debtcollector.deprecate(
+/opt/stack/tempest/.tox/venv/lib/python3.10/site-packages/cliff/commandmanager.py:91: DeprecationWarning: Initialising <class 'cliff.commandmanager.CommandManager'> with a namespace is deprecated for removal.Prefer loading commands from a given namespace with load_commands instead
+  warnings.warn(
+/opt/stack/tempest/tempest/lib/common/jsonschema_validator.py:21: DeprecationWarning: Accessing jsonschema.draft4_format_checker is deprecated and will be removed in a future release. Instead, use the FORMAT_CHECKER attribute on the corresponding Validator.
+  FORMAT_CHECKER = jsonschema.draft4_format_checker
+/opt/stack/tempest/tempest/lib/common/jsonschema_validator.py:42: DeprecationWarning: FormatChecker.cls_checks is deprecated. Call FormatChecker.checks on a specific FormatChecker instance instead.
+  @jsonschema.FormatChecker.cls_checks('base64')
+/opt/stack/tempest/tempest/lib/services/volume/v2/__init__.py:50: DeprecationWarning: The tempest.lib.services.volume.v2 module (volume v2 APIs service clients) is deprecated in favor of tempest.lib.services.volume.v3 (volume v3 APIs service clients) and will be removed once Tempest stop supporting stable wallaby.
+  warnings.warn(
+/opt/stack/tempest/tempest/lib/common/http.py:101: DeprecationWarning: HTTPResponse.getheaders() is deprecated and will be removed in urllib3 v2.1.0. Instead access HTTPResponse.headers directly.
+  for key, value in info.getheaders().items():
+/opt/stack/tempest/tempest/lib/common/http.py:101: DeprecationWarning: HTTPResponse.getheaders() is deprecated and will be removed in urllib3 v2.1.0. Instead access HTTPResponse.headers directly.
+  for key, value in info.getheaders().items():
+/opt/stack/tempest/tempest/lib/common/http.py:101: DeprecationWarning: HTTPResponse.getheaders() is deprecated and will be removed in urllib3 v2.1.0. Instead access HTTPResponse.headers directly.
+  for key, value in info.getheaders().items():
+/opt/stack/tempest/tempest/lib/services/clients.py:209: DeprecationWarning: Class 'tempest.lib.services.volume.v2.extensions_client.ExtensionsClient' has moved to 'tempest.lib.services.volume.v3.extensions_client.ExtensionsClient' in version 'Rocky' and will be removed in a future version
+  _client = klass(auth_provider=auth_provider, **kwargs)
+___________________________________ summary ____________________________________
+  venv: commands succeeded
+  congratulations :)
+++lib/tempest:configure_tempest:799         is_service_enabled q-metering neutron-metering
+++functions-common:is_service_enabled:2079  return 1
+++lib/tempest:configure_tempest:800         DISABLE_NETWORK_API_EXTENSIONS+=', metering'
+++lib/tempest:configure_tempest:804         is_service_enabled q-l3 neutron-l3
+++functions-common:is_service_enabled:2079  return 1
+++lib/tempest:configure_tempest:805         DISABLE_NETWORK_API_EXTENSIONS+=', l3_agent_scheduler'
+++lib/tempest:configure_tempest:808         local network_api_extensions=address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,bgp,bgp_4byte_asn,bgp_dragent_scheduler,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-domain-ports,dns-integration,dns-integration-domain-keywords,empty-string-filtering,enable-default-route-bfd,enable-default-route-ecmp,expose-port-forwarding-in-fip,external-gateway-multihoming,external-net,ext-gw-mode,extra_dhcp_opt,extraroute,extraroute-atomic,filter-validation,fip-port-details,flavors,floatingip-pools,floating-ip-port-forwarding,floating-ip-port-forwarding-description,floating-ip-port-forwarding-detail,floating-ip-port-forwarding-port-ranges,fwaas_v2,l3-flavors,l3-ha,logging,multi-provider,net-mtu,net-mtu-writable,network_availability_zone,network_ha,network-ip-availability,pagination,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-resource-request,port-security,port-trusted-vif,project-id,provider,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-fip,qos-gateway-ip,qos-rules-alias,qos-rule-type-details,qos-rule-type-filter,quota-check-limit,quota-check-limit-default,quota_details,quotas,rbac-address-scope,rbac-policies,rbac-security-groups,router,router_availability_zone,router-enable-snat,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,segment,sorting,standard-attr-description,standard-attr-fwaas-v2,standard-attr-revisions,standard-attr-tag,standard-attr-timestamp,stateful-security-group,subnet_allocation,subnet-dns-publish-fixed-ip,subnet-external-network,subnetpool-prefix-ops,subnet-service-types,tag-creation,tap-mirror,trunk,uplink-status-propagation,uplink-status-propagation-updatable,vlan-transparent,vpnaas,vpn-endpoint-groups
+++lib/tempest:configure_tempest:809         [[ ! -z , metering, l3_agent_scheduler ]]
+++lib/tempest:configure_tempest:811         network_api_extensions=address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,bgp,bgp_4byte_asn,bgp_dragent_scheduler,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-domain-ports,dns-integration,dns-integration-domain-keywords,empty-string-filtering,enable-default-route-bfd,enable-default-route-ecmp,expose-port-forwarding-in-fip,external-gateway-multihoming,external-net,ext-gw-mode,extra_dhcp_opt,extraroute,extraroute-atomic,filter-validation,fip-port-details,flavors,floatingip-pools,floating-ip-port-forwarding,floating-ip-port-forwarding-description,floating-ip-port-forwarding-detail,floating-ip-port-forwarding-port-ranges,fwaas_v2,l3-flavors,l3-ha,logging,multi-provider,net-mtu,net-mtu-writable,network_availability_zone,network_ha,network-ip-availability,pagination,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-resource-request,port-security,port-trusted-vif,project-id,provider,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-fip,qos-gateway-ip,qos-rules-alias,qos-rule-type-details,qos-rule-type-filter,quota-check-limit,quota-check-limit-default,quota_details,quotas,rbac-address-scope,rbac-policies,rbac-security-groups,router,router_availability_zone,router-enable-snat,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,segment,sorting,standard-attr-description,standard-attr-fwaas-v2,standard-attr-revisions,standard-attr-tag,standard-attr-timestamp,stateful-security-group,subnet_allocation,subnet-dns-publish-fixed-ip,subnet-external-network,subnetpool-prefix-ops,subnet-service-types,tag-creation,tap-mirror,trunk,uplink-status-propagation,uplink-status-propagation-updatable,vlan-transparent,vpnaas,vpn-endpoint-groups
++++lib/tempest:configure_tempest:813         remove_disabled_extensions address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,bgp,bgp_4byte_asn,bgp_dragent_scheduler,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-domain-ports,dns-integration,dns-integration-domain-keywords,empty-string-filtering,enable-default-route-bfd,enable-default-route-ecmp,expose-port-forwarding-in-fip,external-gateway-multihoming,external-net,ext-gw-mode,extra_dhcp_opt,extraroute,extraroute-atomic,filter-validation,fip-port-details,flavors,floatingip-pools,floating-ip-port-forwarding,floating-ip-port-forwarding-description,floating-ip-port-forwarding-detail,floating-ip-port-forwarding-port-ranges,fwaas_v2,l3-flavors,l3-ha,logging,multi-provider,net-mtu,net-mtu-writable,network_availability_zone,network_ha,network-ip-availability,pagination,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-resource-request,port-security,port-trusted-vif,project-id,provider,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-fip,qos-gateway-ip,qos-rules-alias,qos-rule-type-details,qos-rule-type-filter,quota-check-limit,quota-check-limit-default,quota_details,quotas,rbac-address-scope,rbac-policies,rbac-security-groups,router,router_availability_zone,router-enable-snat,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,segment,sorting,standard-attr-description,standard-attr-fwaas-v2,standard-attr-revisions,standard-attr-tag,standard-attr-timestamp,stateful-security-group,subnet_allocation,subnet-dns-publish-fixed-ip,subnet-external-network,subnetpool-prefix-ops,subnet-service-types,tag-creation,tap-mirror,trunk,uplink-status-propagation,uplink-status-propagation-updatable,vlan-transparent,vpnaas,vpn-endpoint-groups , metering, l3_agent_scheduler
++++lib/tempest:remove_disabled_extensions:116  local extensions_list=address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,bgp,bgp_4byte_asn,bgp_dragent_scheduler,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-domain-ports,dns-integration,dns-integration-domain-keywords,empty-string-filtering,enable-default-route-bfd,enable-default-route-ecmp,expose-port-forwarding-in-fip,external-gateway-multihoming,external-net,ext-gw-mode,extra_dhcp_opt,extraroute,extraroute-atomic,filter-validation,fip-port-details,flavors,floatingip-pools,floating-ip-port-forwarding,floating-ip-port-forwarding-description,floating-ip-port-forwarding-detail,floating-ip-port-forwarding-port-ranges,fwaas_v2,l3-flavors,l3-ha,logging,multi-provider,net-mtu,net-mtu-writable,network_availability_zone,network_ha,network-ip-availability,pagination,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-resource-request,port-security,port-trusted-vif,project-id,provider,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-fip,qos-gateway-ip,qos-rules-alias,qos-rule-type-details,qos-rule-type-filter,quota-check-limit,quota-check-limit-default,quota_details,quotas,rbac-address-scope,rbac-policies,rbac-security-groups,router,router_availability_zone,router-enable-snat,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,segment,sorting,standard-attr-description,standard-attr-fwaas-v2,standard-attr-revisions,standard-attr-tag,standard-attr-timestamp,stateful-security-group,subnet_allocation,subnet-dns-publish-fixed-ip,subnet-external-network,subnetpool-prefix-ops,subnet-service-types,tag-creation,tap-mirror,trunk,uplink-status-propagation,uplink-status-propagation-updatable,vlan-transparent,vpnaas,vpn-endpoint-groups
++++lib/tempest:remove_disabled_extensions:117  shift
++++lib/tempest:remove_disabled_extensions:118  local 'disabled_exts=, metering, l3_agent_scheduler'
++++lib/tempest:remove_disabled_extensions:119  remove_disabled_services address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,bgp,bgp_4byte_asn,bgp_dragent_scheduler,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-domain-ports,dns-integration,dns-integration-domain-keywords,empty-string-filtering,enable-default-route-bfd,enable-default-route-ecmp,expose-port-forwarding-in-fip,external-gateway-multihoming,external-net,ext-gw-mode,extra_dhcp_opt,extraroute,extraroute-atomic,filter-validation,fip-port-details,flavors,floatingip-pools,floating-ip-port-forwarding,floating-ip-port-forwarding-description,floating-ip-port-forwarding-detail,floating-ip-port-forwarding-port-ranges,fwaas_v2,l3-flavors,l3-ha,logging,multi-provider,net-mtu,net-mtu-writable,network_availability_zone,network_ha,network-ip-availability,pagination,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-resource-request,port-security,port-trusted-vif,project-id,provider,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-fip,qos-gateway-ip,qos-rules-alias,qos-rule-type-details,qos-rule-type-filter,quota-check-limit,quota-check-limit-default,quota_details,quotas,rbac-address-scope,rbac-policies,rbac-security-groups,router,router_availability_zone,router-enable-snat,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,segment,sorting,standard-attr-description,standard-attr-fwaas-v2,standard-attr-revisions,standard-attr-tag,standard-attr-timestamp,stateful-security-group,subnet_allocation,subnet-dns-publish-fixed-ip,subnet-external-network,subnetpool-prefix-ops,subnet-service-types,tag-creation,tap-mirror,trunk,uplink-status-propagation,uplink-status-propagation-updatable,vlan-transparent,vpnaas,vpn-endpoint-groups ', metering, l3_agent_scheduler'
++++functions-common:remove_disabled_services:2110  _cleanup_service_list ,address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,bgp,bgp_4byte_asn,bgp_dragent_scheduler,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-domain-ports,dns-integration,dns-integration-domain-keywords,empty-string-filtering,enable-default-route-bfd,enable-default-route-ecmp,expose-port-forwarding-in-fip,external-gateway-multihoming,external-net,ext-gw-mode,extra_dhcp_opt,extraroute,extraroute-atomic,filter-validation,fip-port-details,flavors,floatingip-pools,floating-ip-port-forwarding,floating-ip-port-forwarding-description,floating-ip-port-forwarding-detail,floating-ip-port-forwarding-port-ranges,fwaas_v2,l3-flavors,l3-ha,logging,multi-provider,net-mtu,net-mtu-writable,network_availability_zone,network_ha,network-ip-availability,pagination,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-resource-request,port-security,port-trusted-vif,project-id,provider,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-fip,qos-gateway-ip,qos-rules-alias,qos-rule-type-details,qos-rule-type-filter,quota-check-limit,quota-check-limit-default,quota_details,quotas,rbac-address-scope,rbac-policies,rbac-security-groups,router,router_availability_zone,router-enable-snat,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,segment,sorting,standard-attr-description,standard-attr-fwaas-v2,standard-attr-revisions,standard-attr-tag,standard-attr-timestamp,stateful-security-group,subnet_allocation,subnet-dns-publish-fixed-ip,subnet-external-network,subnetpool-prefix-ops,subnet-service-types,tag-creation,tap-mirror,trunk,uplink-status-propagation,uplink-status-propagation-updatable,vlan-transparent,vpnaas,vpn-endpoint-groups
+++lib/tempest:configure_tempest:813         network_api_extensions=address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,bgp,bgp_4byte_asn,bgp_dragent_scheduler,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-domain-ports,dns-integration,dns-integration-domain-keywords,empty-string-filtering,enable-default-route-bfd,enable-default-route-ecmp,expose-port-forwarding-in-fip,external-gateway-multihoming,external-net,ext-gw-mode,extra_dhcp_opt,extraroute,extraroute-atomic,filter-validation,fip-port-details,flavors,floatingip-pools,floating-ip-port-forwarding,floating-ip-port-forwarding-description,floating-ip-port-forwarding-detail,floating-ip-port-forwarding-port-ranges,fwaas_v2,l3-flavors,l3-ha,logging,multi-provider,net-mtu,net-mtu-writable,network_availability_zone,network_ha,network-ip-availability,pagination,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-resource-request,port-security,port-trusted-vif,project-id,provider,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-fip,qos-gateway-ip,qos-rules-alias,qos-rule-type-details,qos-rule-type-filter,quota-check-limit,quota-check-limit-default,quota_details,quotas,rbac-address-scope,rbac-policies,rbac-security-groups,router,router_availability_zone,router-enable-snat,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,segment,sorting,standard-attr-description,standard-attr-fwaas-v2,standard-attr-revisions,standard-attr-tag,standard-attr-timestamp,stateful-security-group,subnet_allocation,subnet-dns-publish-fixed-ip,subnet-external-network,subnetpool-prefix-ops,subnet-service-types,tag-creation,tap-mirror,trunk,uplink-status-propagation,uplink-status-propagation-updatable,vlan-transparent,vpnaas,vpn-endpoint-groups
+++lib/tempest:configure_tempest:815         [[ -n '' ]]
+++lib/tempest:configure_tempest:818         iniset /opt/stack/tempest/etc/tempest.conf network-feature-enabled api_extensions address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,bgp,bgp_4byte_asn,bgp_dragent_scheduler,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-domain-ports,dns-integration,dns-integration-domain-keywords,empty-string-filtering,enable-default-route-bfd,enable-default-route-ecmp,expose-port-forwarding-in-fip,external-gateway-multihoming,external-net,ext-gw-mode,extra_dhcp_opt,extraroute,extraroute-atomic,filter-validation,fip-port-details,flavors,floatingip-pools,floating-ip-port-forwarding,floating-ip-port-forwarding-description,floating-ip-port-forwarding-detail,floating-ip-port-forwarding-port-ranges,fwaas_v2,l3-flavors,l3-ha,logging,multi-provider,net-mtu,net-mtu-writable,network_availability_zone,network_ha,network-ip-availability,pagination,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-resource-request,port-security,port-trusted-vif,project-id,provider,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-fip,qos-gateway-ip,qos-rules-alias,qos-rule-type-details,qos-rule-type-filter,quota-check-limit,quota-check-limit-default,quota_details,quotas,rbac-address-scope,rbac-policies,rbac-security-groups,router,router_availability_zone,router-enable-snat,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,segment,sorting,standard-attr-description,standard-attr-fwaas-v2,standard-attr-revisions,standard-attr-tag,standard-attr-timestamp,stateful-security-group,subnet_allocation,subnet-dns-publish-fixed-ip,subnet-external-network,subnetpool-prefix-ops,subnet-service-types,tag-creation,tap-mirror,trunk,uplink-status-propagation,uplink-status-propagation-updatable,vlan-transparent,vpnaas,vpn-endpoint-groups
+++lib/tempest:configure_tempest:820         local object_storage_api_extensions=all
+++lib/tempest:configure_tempest:821         [[ ! -z '' ]]
+++lib/tempest:configure_tempest:827         iniset /opt/stack/tempest/etc/tempest.conf object-storage-feature-enabled discoverable_apis all
+++lib/tempest:configure_tempest:829         local volume_api_extensions=all
+++lib/tempest:configure_tempest:830         [[ ! -z '' ]]
+++lib/tempest:configure_tempest:836         iniset /opt/stack/tempest/etc/tempest.conf volume-feature-enabled api_extensions all
+++lib/tempest:configure_tempest:839         IFS='
+'
+++extras.d/80-tempest.sh:source:23          echo_summary 'Installing Tempest Plugins'
+++./stack.sh:echo_summary:438               [[ -t 3 ]]
+++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
+++./stack.sh:echo_summary:444               echo -e Installing Tempest Plugins
+++extras.d/80-tempest.sh:source:24          install_tempest_plugins
+++lib/tempest:install_tempest_plugins:873   pushd /opt/stack/tempest
+~/tempest ~/tempest
+++lib/tempest:install_tempest_plugins:874   [[ 0 != 0 ]]
+++lib/tempest:install_tempest_plugins:883   popd
+~/tempest
+++extras.d/80-tempest.sh:source:27          [[ stack == \u\n\s\t\a\c\k ]]
+++extras.d/80-tempest.sh:source:32          [[ stack == \c\l\e\a\n ]]
++functions-common:run_phase:1872           [[ stack == \s\o\u\r\c\e ]]
++functions-common:run_phase:1875           [[ stack == \o\v\e\r\r\i\d\e\_\d\e\f\a\u\l\t\s ]]
++functions-common:run_phase:1878           run_plugins stack test-config
++functions-common:run_plugins:1837         local mode=stack
++functions-common:run_plugins:1838         local phase=test-config
++functions-common:run_plugins:1840         local plugins=,heat,heat-dashboard,ceilometer,aodh,gnocchi
++functions-common:run_plugins:1841         local plugin
++functions-common:run_plugins:1842         for plugin in ${plugins//,/ }
++functions-common:run_plugins:1843         local dir=/opt/stack/heat
++functions-common:run_plugins:1844         [[ -f /opt/stack/heat/devstack/plugin.sh ]]
++functions-common:run_plugins:1845         source /opt/stack/heat/devstack/plugin.sh stack test-config
+++/opt/stack/heat/devstack/plugin.sh:source:7  echo_summary 'heat'\''s plugin.sh was called...'
+++./stack.sh:echo_summary:438               [[ -t 3 ]]
+++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
+++./stack.sh:echo_summary:444               echo -e 'heat'\''s' plugin.sh was called...
+++/opt/stack/heat/devstack/plugin.sh:source:8  source /opt/stack/heat/devstack/lib/heat
+++/opt/stack/heat/devstack/plugin.sh:source:9  set -o posix
+++/opt/stack/heat/devstack/plugin.sh:source:9  set
+ACCOUNT_PORT_BASE=6612
+ADDITIONAL_VENV_PACKAGES=,PyMySQL
+ADMIN_PASSWORD=SuperSecret123
+AGENT_DHCP_BINARY=/opt/stack/data/venv/bin/neutron-dhcp-agent
+AGENT_L3_BINARY=/opt/stack/data/venv/bin/neutron-l3-agent
+AGENT_META_BINARY=/opt/stack/data/venv/bin/neutron-metadata-agent
+AGENT_METERING_BINARY=/opt/stack/data/venv/bin/neutron-metering-agent
+ALEMBIC_BRANCH=main
+ALEMBIC_DIR=/opt/stack/alembic
+ALEMBIC_REPO=https://github.com/sqlalchemy/alembic.git
+AODH_BIN_DIR=/opt/stack/data/venv/bin
+AODH_CONF=/etc/aodh/aodh.conf
+AODH_CONF_DIR=/etc/aodh
+AODH_COORDINATION_URL=
+AODH_DIR=/opt/stack/aodh
+AODH_NOTIFICATION_TOPICS=notifications
+AODH_SERVICE_HOST=192.168.95.93
+AODH_SERVICE_PROTOCOL=http
+AODH_UWSGI=aodh.wsgi.api:application
+AODH_UWSGI_CONF=/etc/aodh/aodh-uwsgi.ini
+APACHE_CONF_DIR=/etc/apache2/sites-available
+APACHE_GROUP=stack
+APACHE_LOCAL_HOST=127.0.0.1
+APACHE_LOG_DIR=/var/log/apache2
+APACHE_NAME=apache2
+APACHE_SETTINGS_DIR=/etc/apache2/conf-enabled
+APACHE_USER=stack
+API_WORKERS=4
+BACKENDS=gnocchi
+BACKING_FILE_SUFFIX=-backing-file
+BASE_SQL_CONN=mysql+pymysql://root:SuperSecret123@127.0.0.1
+BASH=/usr/bin/bash
+BASHOPTS=checkwinsize:cmdhist:complete_fullquote:expand_aliases:extquote:force_fignore:globasciiranges:hostcomplete:interactive_comments:progcomp:promptvars:sourcepath
+BASHPID=1120
+BASH_ALIASES=()
+BASH_ARGC=([0]="0")
+BASH_ARGV=()
+BASH_CMDS=()
+BASH_LINENO=([0]="1845" [1]="1878" [2]="1496" [3]="0")
+BASH_REMATCH=()
+BASH_SOURCE=([0]="/opt/stack/heat/devstack/plugin.sh" [1]="/opt/stack/devstack/functions-common" [2]="/opt/stack/devstack/functions-common" [3]="./stack.sh")
+BASH_VERSINFO=([0]="5" [1]="1" [2]="16" [3]="1" [4]="release" [5]="x86_64-pc-linux-gnu")
+BASH_VERSION='5.1.16(1)-release'
+BINDEP_CMD=/opt/stack/bindep-venv/bin/bindep
+BRANCHLESS_TARGET_BRANCH=master
+BUG_REPORT_URL=https://bugs.launchpad.net/ubuntu/
+BUILD_TIMEOUT=196
+CACHE_BACKEND=dogpile.cache.memcached
+CA_CERT_ARG=
+CEILOMETER_ALARM_AGGREGATION_METHOD=rate:mean
+CEILOMETER_ALARM_GRANULARITY=60
+CEILOMETER_ALARM_METRIC_NAME=cpu
+CEILOMETER_ALARM_THRESHOLD=10000000
+CEILOMETER_BACKEND=gnocchi
+CEILOMETER_BACKENDS=gnocchi
+CEILOMETER_BIN_DIR=/opt/stack/data/venv/bin
+CEILOMETER_CACHE_BACKEND=dogpile.cache.redis
+CEILOMETER_CACHE_URL=redis://localhost:6379
+CEILOMETER_CONF=/etc/ceilometer/ceilometer.conf
+CEILOMETER_CONF_DIR=/etc/ceilometer
+CEILOMETER_COORDINATION_URL=redis://localhost:6379
+CEILOMETER_DIR=/opt/stack/ceilometer
+CEILOMETER_EVENT_ALARM=False
+CEILOMETER_NOTIFICATION_TOPICS=notifications,profiler
+CEILOMETER_PIPELINE_INTERVAL=
+CELLSV2_SETUP=superconductor
+CINDER_ALLOWED_DIRECT_URL_SCHEMES=
+CINDER_API_PASTE_INI=/etc/cinder/api-paste.ini
+CINDER_BACKENDS=/opt/stack/devstack/lib/cinder_backends
+CINDER_BACKUPS=/opt/stack/devstack/lib/cinder_backups
+CINDER_BACKUP_DRIVER=swift
+CINDER_BIN_DIR=/opt/stack/data/venv/bin
+CINDER_BRANCH=master
+CINDER_CACHE_ENABLED_FOR_BACKENDS=lvm:lvmdriver-1
+CINDER_CONF=/etc/cinder/cinder.conf
+CINDER_CONF_DIR=/etc/cinder
+CINDER_DIR=/opt/stack/cinder
+CINDER_DRIVER=default
+CINDER_ENABLED_BACKENDS=lvm:lvmdriver-1
+CINDER_ENFORCE_SCOPE=False
+CINDER_IMG_CACHE_ENABLED=True
+CINDER_IMG_CACHE_SIZE_COUNT=
+CINDER_IMG_CACHE_SIZE_GB=
+CINDER_LVM_TYPE=auto
+CINDER_MY_IP=192.168.95.93
+CINDER_PLUGINS=/opt/stack/devstack/lib/cinder_plugins
+CINDER_REPO=https://opendev.org/openstack/cinder.git
+CINDER_SERVICE_HOST=192.168.95.93
+CINDER_SERVICE_LISTEN_ADDRESS=0.0.0.0
+CINDER_SERVICE_PORT=8776
+CINDER_SERVICE_PORT_INT=18776
+CINDER_SERVICE_PROTOCOL=http
+CINDER_SERVICE_REPORT_INTERVAL=120
+CINDER_STATE_PATH=/opt/stack/data/cinder
+CINDER_TARGET_HELPER=lioadm
+CINDER_TARGET_PORT=3260
+CINDER_TARGET_PREFIX=iqn.2010-10.org.openstack:
+CINDER_TARGET_PROTOCOL=iscsi
+CINDER_UPLOAD_INTERNAL_TENANT=False
+CINDER_UPLOAD_OPTIMIZED=False
+CINDER_UPLOAD_OPTIMIZED_BACKENDS=lvm:lvmdriver-1
+CINDER_USE_SERVICE_TOKEN=True
+CINDER_UWSGI=cinder.wsgi.api:application
+CINDER_UWSGI_CONF=/etc/cinder/cinder-api-uwsgi.ini
+CINDER_VOLUME_CLEAR=zero
+CIRROS_ARCH=x86_64
+CIRROS_VERSION=0.6.3
+CLOUDS_YAML=/etc/openstack/clouds.yaml
+COLUMNS=209
+CONF=/etc/neutron/plugins/ml2/ml2_conf.ini
+CONFIG_AWK_CMD=awk
+CONTAINER_PORT_BASE=6611
+CURL_GET='curl -g'
+CURRENT_LOG_TIME=2026-01-19-125748
+DATABASE_BACKENDS=' mysql postgresql'
+DATABASE_HOST=127.0.0.1
+DATABASE_PASSWORD=SuperSecret123
+DATABASE_QUERY_LOGGING=False
+DATABASE_TYPE=mysql
+DATABASE_USER=root
+DATA_DIR=/opt/stack/data
+DC=([0]="openstack" [1]="org")
+DEBUG_LIBVIRT=True
+DEBUG_LIBVIRT_COREDUMPS=False
+DEFAULT_IMAGE_FILE_NAME=cirros-0.6.3-x86_64-disk.img
+DEFAULT_IMAGE_NAME=cirros-0.6.3-x86_64-disk
+DEFAULT_INSTANCE_USER=cirros
+DEFAULT_VIRT_DRIVER=libvirt
+DEFAULT_VOLUME_GROUP_NAME=stack-volumes-default
+DEF_SERVICE_HOST=192.168.95.93
+DEF_SERVICE_LISTEN_ADDRESS=0.0.0.0
+DEF_SERVICE_LOCAL_HOST=127.0.0.1
+DEF_TUNNEL_ENDPOINT_IP=192.168.95.93
+DELTA=1768827587
+DEST=/opt/stack
+DEVSTACK_CERT=/opt/stack/data/devstack-cert.pem
+DEVSTACK_CERT_NAME=devstack-cert
+DEVSTACK_HOSTNAME=localhost
+DEVSTACK_PARALLEL=True
+DEVSTACK_PLUGINS=,heat,heat-dashboard,ceilometer,aodh,gnocchi
+DEVSTACK_SERIES=2026.1
+DEVSTACK_START_TIME=1768827449
+DEVSTACK_VENV=/opt/stack/data/venv
+DIRSTACK=()
+DISABLE_NETWORK_API_EXTENSIONS=', metering, l3_agent_scheduler'
+DISK_FORMAT=
+DISTRO=jammy
+DOWNLOAD_DEFAULT_IMAGES=False
+ENABLED_SERVICES=key,n-api,n-cpu,n-cond,n-sch,n-novnc,n-api-meta,placement-api,placement-client,g-api,c-sch,c-api,c-vol,ovn-controller,ovn-northd,ovs-vswitchd,ovsdb-server,q-svc,q-ovn-agent,horizon,rabbit,tempest,mysql,etcd3,dstat,h-eng,h-api,h-api-cfn,heat-dashboard,ceilometer-acompute,ceilometer-acentral,ceilometer-anotification,gnocchi-api,gnocchi-metricd,aodh-api,aodh-notifier,aodh-evaluator,aodh-listener,neutron-api,neutron-rpc-server,neutron-periodic-workers,neutron-ovn-maintenance-worker,n-novnc-cell1,n-super-cond,n-cond-cell1
+ENABLE_CHASSIS_AS_GW=True
+ENABLE_DEBUG_LOG_LEVEL=True
+ENABLE_FEDORA_VIRT_PREVIEW_REPO=False
+ENABLE_HEAT_PLUGINS=
+ENABLE_HTTPD_MOD_WSGI_SERVICES=True
+ENABLE_ISOLATED_METADATA=False
+ENABLE_KSM=True
+ENABLE_KSMTUNED=True
+ENABLE_METADATA_NETWORK=False
+ENABLE_SYSCTL_MEM_TUNING=False
+ENABLE_SYSCTL_NET_TUNING=False
+ENABLE_TENANT_TUNNELS=True
+ENABLE_TENANT_VLANS=False
+ENABLE_VOLUME_MULTIATTACH=False
+ENABLE_ZSWAP=False
+ENFORCE_SCOPE=False
+ERROR_ON_CLONE=False
+ETCD_ARCH=amd64
+ETCD_BIN_DIR=/opt/stack/bin
+ETCD_DATA_DIR=/opt/stack/data/etcd
+ETCD_DOWNLOAD_FILE=etcd-v3.5.21-linux-amd64.tar.gz
+ETCD_DOWNLOAD_LOCATION=https://github.com/etcd-io/etcd/releases/download/v3.5.21/etcd-v3.5.21-linux-amd64.tar.gz
+ETCD_DOWNLOAD_URL=https://github.com/etcd-io/etcd/releases/download
+ETCD_NAME=etcd-v3.5.21-linux-amd64
+ETCD_PEER_PORT=2380
+ETCD_PORT=2379
+ETCD_RAMDISK_MB=512
+ETCD_SHA256=adddda4b06718e68671ffabff2f8cee48488ba61ad82900e639d108f2148501c
+ETCD_SHA256_AMD64=adddda4b06718e68671ffabff2f8cee48488ba61ad82900e639d108f2148501c
+ETCD_SHA256_ARM64=95bf6918623a097c0385b96f139d90248614485e781ec9bee4768dbb6c79c53f
+ETCD_SHA256_PPC64=6fb6ecb3d1b331eb177dc610a8efad3aceb1f836d6aeb439ba0bfac5d5c2a38c
+ETCD_SHA256_S390X=a211a83961ba8a7e94f7d6343ad769e699db21a715ba4f3b68cf31ea28f9c951
+ETCD_SYSTEMD_SERVICE=devstack@etcd.service
+ETCD_USE_RAMDISK=True
+ETCD_VERSION=v3.5.21
+EUID=1001
+EXTERNAL_NETWORK_FLAGS='--external --default'
+EXTRA_CACHE_URLS=,https://github.com/etcd-io/etcd/releases/download/v3.5.21/etcd-v3.5.21-linux-amd64.tar.gz
+EXT_LIST='address-group
+address-scope
+agent
+allowed-address-pairs
+auto-allocated-topology
+availability_zone
+default-subnetpools
+dhcp_agent_scheduler
+dns-integration
+dns-domain-ports
+dns-integration-domain-keywords
+empty-string-filtering
+external-net
+extra_dhcp_opt
+extraroute
+extraroute-atomic
+filter-validation
+floating-ip-port-forwarding-detail
+fip-port-details
+flavors
+floatingip-pools
+router
+enable-default-route-bfd
+enable-default-route-ecmp
+ext-gw-mode
+l3-ha
+external-gateway-multihoming
+l3-flavors
+multi-provider
+net-mtu
+net-mtu-writable
+network_availability_zone
+network-ip-availability
+pagination
+port-device-profile
+port-mac-address-regenerate
+port-numa-affinity-policy
+port-numa-affinity-policy-socket
+binding
+binding-extended
+port-security
+project-id
+provider
+qinq
+quota-check-limit
+quota-check-limit-default
+quotas
+quota_details
+rbac-policies
+rbac-address-scope
+rbac-security-groups
+revision-if-match
+standard-attr-revisions
+router_availability_zone
+router-enable-snat
+security-groups-default-rules
+security-groups-normalized-cidr
+security-groups-remote-address-group
+security-groups-rules-belongs-to-default-sg
+security-groups-shared-filtering
+security-group
+service-type
+sorting
+standard-attr-description
+stateful-security-group
+subnet-dns-publish-fixed-ip
+subnet-external-network
+subnet-service-types
+subnet_allocation
+subnetpool-prefix-ops
+tag-creation
+standard-attr-tag
+standard-attr-timestamp
+vlan-transparent'
+EXT_NET_ID=172b9757-3f94-4b3a-8588-aaef9f5d94e3
+FILES=/opt/stack/devstack/files
+FIXED_KEY=bae3516cc1c0eb18b05440eba8012a4a880a2ee04d584a9c1579445e675b12defdc716ec
+FIXED_RANGE=10.0.0.0/22
+FIXED_RANGE_V6=fdf9:52f7:7011::/64
+FLOATING_RANGE=192.168.95.200/28
+FORCE_CONFIG_DRIVE=False
+FORCE_PREREQ=0
+FUNCNAME=([0]="source" [1]="run_plugins" [2]="run_phase" [3]="main")
+FUNC_DIR=/opt/stack/devstack
+GITBRANCH=([gnocchi]="master" [python-neutronclient]="master" [oslo.utils]="master" [stevedore]="master" [oslo.reports]="master" [osprofiler]="master" [oslo.serialization]="master" [neutron-lib]="master" [ironic-lib]="master" [python-keystoneclient]="master" [os-client-config]="master" [python-novaclient]="master" [oslo.config]="master" [ovsdbapp]="master" [ceilometermiddleware]="master" [oslo.limit]="master" [oslo.concurrency]="master" [os-ken]="master" [oslo.rootwrap]="master" [osc-lib]="master" [keystonemiddleware]="master" [oslo.vmware]="master" [tooz]="master" [oslo.privsep]="master" [oslo.policy]="master" [keystoneauth]="master" [cursive]="master" [heat-dashboard]="master" [python-barbicanclient]="master" [heat]="master" [oslo.db]="master" [osc-placement]="master" [python-glanceclient]="master" [oslo.versionedobjects]="master" [pycadf]="master" [etcd3gw]="master" [pbr]="master" [oslo.log]="master" [os-vif]="master" [taskflow]="master" [oslo.context]="master" [oslo.i18n]="master" [automaton]="master" [oslo.middleware]="master" [castellan]="master" [oslo.messaging]="master" [python-swiftclient]="master" [ceilometer]="master" [aodh]="master" [futurist]="master" [os-brick]="master" [python-brick-cinderclient-ext]="master" [python-ironicclient]="master" [debtcollector]="master" [glance_store]="master" [os-resource-classes]="master" [oslo.cache]="master" [openstacksdk]="master" [cliff]="master" [oslo.service]="master" [python-heatclient]="master" [python-openstackclient]="master" [os-traits]="master" [diskimage-builder]="master" [python-cinderclient]="master" )
+GITDIR=([gnocchi]="/opt/stack/gnocchi" [python-neutronclient]="/opt/stack/python-neutronclient" [oslo.utils]="/opt/stack/oslo.utils" [stevedore]="/opt/stack/stevedore" [oslo.reports]="/opt/stack/oslo.reports"[osprofiler]="/opt/stack/osprofiler" [oslo.serialization]="/opt/stack/oslo.serialization" [neutron-lib]="/opt/stack/neutron-lib" [ironic-lib]="/opt/stack/ironic-lib" [python-keystoneclient]="/opt/stack/python-keystoneclient" [python-aodhclient]="/opt/stack/python-aodhclient" [os-client-config]="/opt/stack/os-client-config" [python-novaclient]="/opt/stack/python-novaclient" [oslo.config]="/opt/stack/oslo.config" [ovsdbapp]="/opt/stack/ovsdbapp" [ceilometermiddleware]="/opt/stack/ceilometermiddleware" [oslo.limit]="/opt/stack/oslo.limit" [oslo.concurrency]="/opt/stack/oslo.concurrency" [oslo.rootwrap]="/opt/stack/oslo.rootwrap" [os-ken]="/opt/stack/os-ken" [osc-lib]="/opt/stack/osc-lib" [keystonemiddleware]="/opt/stack/keystonemiddleware" [oslo.vmware]="/opt/stack/oslo.vmware" [tooz]="/opt/stack/tooz" [oslo.privsep]="/opt/stack/oslo.privsep" [oslo.policy]="/opt/stack/oslo.policy" [keystoneauth]="/opt/stack/keystoneauth" [cursive]="/opt/stack/cursive" [heat-dashboard]="/opt/stack/heat-dashboard" [python-barbicanclient]="/opt/stack/python-barbicanclient" [heat]="/opt/stack/heat" [oslo.db]="/opt/stack/oslo.db" [osc-placement]="/opt/stack/osc-placement" [python-glanceclient]="/opt/stack/python-glanceclient" [oslo.versionedobjects]="/opt/stack/oslo.versionedobjects" [pycadf]="/opt/stack/pycadf" [etcd3gw]="/opt/stack/etcd3gw" [pbr]="/opt/stack/pbr" [oslo.log]="/opt/stack/oslo.log" [os-vif]="/opt/stack/os-vif" [taskflow]="/opt/stack/taskflow" [oslo.context]="/opt/stack/oslo.context" [oslo.i18n]="/opt/stack/oslo.i18n" [automaton]="/opt/stack/automaton" [oslo.middleware]="/opt/stack/oslo.middleware" [castellan]="/opt/stack/castellan" [oslo.messaging]="/opt/stack/oslo.messaging" [python-swiftclient]="/opt/stack/python-swiftclient" [ceilometer]="/opt/stack/ceilometer" [aodh]="/opt/stack/aodh" [futurist]="/opt/stack/futurist" [os-brick]="/opt/stack/os-brick" [python-brick-cinderclient-ext]="/opt/stack/python-brick-cinderclient-ext" [python-ironicclient]="/opt/stack/python-ironicclient" [debtcollector]="/opt/stack/debtcollector" [glance_store]="/opt/stack/glance_store" [os-resource-classes]="/opt/stack/os-resource-classes" [oslo.cache]="/opt/stack/oslo.cache" [openstacksdk]="/opt/stack/openstacksdk" [cliff]="/opt/stack/cliff" [oslo.service]="/opt/stack/oslo.service" [python-heatclient]="/opt/stack/python-heatclient" [python-openstackclient]="/opt/stack/python-openstackclient" [os-traits]="/opt/stack/os-traits" [diskimage-builder]="/opt/stack/diskimage-builder" [python-cinderclient]="/opt/stack/python-cinderclient" )
+GITREPO=([gnocchi]="https://opendev.org/openstack/gnocchi" [python-neutronclient]="https://opendev.org/openstack/python-neutronclient.git" [oslo.utils]="https://opendev.org/openstack/oslo.utils.git" [stevedore]="https://opendev.org/openstack/stevedore.git" [oslo.reports]="https://opendev.org/openstack/oslo.reports.git" [osprofiler]="https://opendev.org/openstack/osprofiler.git" [oslo.serialization]="https://opendev.org/openstack/oslo.serialization.git" [neutron-lib]="https://opendev.org/openstack/neutron-lib.git" [ironic-lib]="https://opendev.org/openstack/ironic-lib.git" [python-keystoneclient]="https://opendev.org/openstack/python-keystoneclient.git" [python-aodhclient]="https://opendev.org/openstack/python-aodhclient.git" [os-client-config]="https://opendev.org/openstack/os-client-config.git" [python-novaclient]="https://opendev.org/openstack/python-novaclient.git" [oslo.config]="https://opendev.org/openstack/oslo.config.git" [ovsdbapp]="https://opendev.org/openstack/ovsdbapp.git" [ceilometermiddleware]="https://opendev.org/openstack/ceilometermiddleware.git" [oslo.limit]="https://opendev.org/openstack/oslo.limit.git" [oslo.concurrency]="https://opendev.org/openstack/oslo.concurrency.git" [os-ken]="https://opendev.org/openstack/os-ken.git" [oslo.rootwrap]="https://opendev.org/openstack/oslo.rootwrap.git" [osc-lib]="https://opendev.org/openstack/osc-lib.git" [keystonemiddleware]="https://opendev.org/openstack/keystonemiddleware.git" [oslo.vmware]="https://opendev.org/openstack/oslo.vmware.git" [tooz]="https://opendev.org/openstack/tooz.git" [oslo.privsep]="https://opendev.org/openstack/oslo.privsep.git" [oslo.policy]="https://opendev.org/openstack/oslo.policy.git" [keystoneauth]="https://opendev.org/openstack/keystoneauth.git" [cursive]="https://opendev.org/openstack/cursive.git" [heat-dashboard]="https://opendev.org/openstack/heat-dashboard" [python-barbicanclient]="https://opendev.org/openstack/python-barbicanclient.git" [heat]="https://opendev.org/openstack/heat" [oslo.db]="https://opendev.org/openstack/oslo.db.git" [osc-placement]="https://opendev.org/openstack/osc-placement.git" [python-glanceclient]="https://opendev.org/openstack/python-glanceclient.git" [oslo.versionedobjects]="https://opendev.org/openstack/oslo.versionedobjects.git" [pycadf]="https://opendev.org/openstack/pycadf.git" [etcd3gw]="https://opendev.org/openstack/etcd3gw.git" [pbr]="https://opendev.org/openstack/pbr.git" [oslo.log]="https://opendev.org/openstack/oslo.log.git" [os-vif]="https://opendev.org/openstack/os-vif.git" [taskflow]="https://opendev.org/openstack/taskflow.git" [oslo.context]="https://opendev.org/openstack/oslo.context.git" [oslo.i18n]="https://opendev.org/openstack/oslo.i18n.git" [automaton]="https://opendev.org/openstack/automaton.git" [oslo.middleware]="https://opendev.org/openstack/oslo.middleware.git" [castellan]="https://opendev.org/openstack/castellan.git" [oslo.messaging]="https://opendev.org/openstack/oslo.messaging.git" [python-swiftclient]="https://opendev.org/openstack/python-swiftclient.git" [ceilometer]="https://opendev.org/openstack/ceilometer" [aodh]="https://opendev.org/openstack/aodh" [futurist]="https://opendev.org/openstack/futurist.git" [os-brick]="https://opendev.org/openstack/os-brick.git" [python-brick-cinderclient-ext]="https://opendev.org/openstack/python-brick-cinderclient-ext.git" [python-ironicclient]="https://opendev.org/openstack/python-ironicclient.git" [debtcollector]="https://opendev.org/openstack/debtcollector.git" [glance_store]="https://opendev.org/openstack/glance_store.git" [os-resource-classes]="https://opendev.org/openstack/os-resource-classes.git" [oslo.cache]="https://opendev.org/openstack/oslo.cache.git" [openstacksdk]="https://opendev.org/openstack/openstacksdk.git" [cliff]="https://opendev.org/openstack/cliff.git" [oslo.service]="https://opendev.org/openstack/oslo.service.git" [python-heatclient]="https://opendev.org/openstack/python-heatclient.git" [python-openstackclient]="https://opendev.org/openstack/python-openstackclient.git" [os-traits]="https://opendev.org/openstack/os-traits.git" [diskimage-builder]="https://opendev.org/openstack/diskimage-builder.git" [python-cinderclient]="https://opendev.org/openstack/python-cinderclient.git" )
+GIT_BASE=https://opendev.org
+GIT_DEPTH=0
+GIT_TIMEOUT=0
+GLANCE_API_CONF=/etc/glance/glance-api.conf
+GLANCE_API_PASTE_INI=/etc/glance/glance-api-paste.ini
+GLANCE_BIN_DIR=/opt/stack/data/venv/bin
+GLANCE_BRANCH=master
+GLANCE_CACHE_CONF=/etc/glance/glance-cache.conf
+GLANCE_CACHE_DIR=/opt/stack/data/glance/cache
+GLANCE_CACHE_DRIVER=centralized_db
+GLANCE_CINDER_DEFAULT_BACKEND=lvmdriver-1
+GLANCE_CONF_DIR=/etc/glance
+GLANCE_DEFAULT_BACKEND=fast
+GLANCE_DIR=/opt/stack/glance
+GLANCE_ENABLE_MULTIPLE_STORES=False
+GLANCE_ENABLE_QUOTAS=True
+GLANCE_ENFORCE_IMAGE_FORMAT=True
+GLANCE_ENFORCE_SCOPE=True
+GLANCE_HOSTPORT=192.168.95.93:9292
+GLANCE_IMAGE_DIR=/opt/stack/data/glance/images
+GLANCE_IMAGE_IMPORT_CONF=/etc/glance/glance-image-import.conf
+GLANCE_LIMIT_IMAGE_SIZE_TOTAL=2000
+GLANCE_LOCK_DIR=/opt/stack/data/glance/locks
+GLANCE_METADEF_DIR=/etc/glance/metadefs
+GLANCE_MULTIPLE_FILE_STORES=fast
+GLANCE_MULTISTORE_FILE_IMAGE_DIR=/opt/stack/data/glance
+GLANCE_NFS_MOUNTPOINT=/opt/stack/data/glance/images/mnt
+GLANCE_REPO=https://opendev.org/openstack/glance.git
+GLANCE_S3_BUCKET_NAME=images
+GLANCE_S3_BUCKET_ON_PUT=True
+GLANCE_S3_DEFAULT_BACKEND=s3_fast
+GLANCE_SCHEMA_JSON=/etc/glance/schema-image.json
+GLANCE_SERVICE_HOST=192.168.95.93
+GLANCE_SERVICE_LISTEN_ADDRESS=0.0.0.0
+GLANCE_SERVICE_PORT=9292
+GLANCE_SERVICE_PORT_INT=19292
+GLANCE_SERVICE_PROTOCOL=http
+GLANCE_SHOW_DIRECT_URL=False
+GLANCE_SHOW_MULTIPLE_LOCATIONS=False
+GLANCE_STAGING_DIR=/opt/stack/data/glance
+GLANCE_STORE_ROOTWRAP_BASE_DIR=/opt/stack/data/venv/etc/glance
+GLANCE_SWIFT_STORE_CONF=/etc/glance/glance-swift-store.conf
+GLANCE_TASKS_DIR=/opt/stack/data/glance
+GLANCE_URL=http://192.168.95.93/image
+GLANCE_USE_IMPORT_WORKFLOW=False
+GLANCE_USE_S3=False
+GLANCE_UWSGI=glance.wsgi.api:application
+GLANCE_UWSGI_CONF=/etc/glance/glance-uwsgi.ini
+GLOBAL_VENV=True
+GNOCCHI_ARCHIVE_POLICY=ceilometer-low
+GNOCCHI_BRANCH=master
+GNOCCHI_CONF=/etc/gnocchi/gnocchi.conf
+GNOCCHI_CONF_DIR=/etc/gnocchi
+GNOCCHI_COORDINATOR_URL=redis://localhost:6379
+GNOCCHI_DIR=/opt/stack/gnocchi
+GNOCCHI_METRICD_PROCESSING_DELAY=5
+GNOCCHI_REPO=https://github.com/gnocchixyz/gnocchi
+GNOCCHI_SERVICE_HOST=192.168.95.93
+GNOCCHI_SERVICE_PROTOCOL=http
+GNOCCHI_UWSGI_FILE=/etc/gnocchi/uwsgi.ini
+GNOCCHI_WSGI=gnocchi.wsgi.api:application
+GROUPS=()
+HEAT_API_CFN_HOST=192.168.95.93
+HEAT_API_HOST=192.168.95.93
+HEAT_API_PASTE_FILE=/etc/heat/api-paste.ini
+HEAT_API_UWSGI=heat.wsgi.api:application
+HEAT_API_UWSGI_CONF=/etc/heat/heat-api-uwsgi.ini
+HEAT_BIN_DIR=/opt/stack/data/venv/bin
+HEAT_CFN_API_UWSGI=heat.wsgi.cfn:application
+HEAT_CFN_API_UWSGI_CONF=/etc/heat/heat-api-cfn-uwsgi.ini
+HEAT_CONF=/etc/heat/heat.conf
+HEAT_CONF_DIR=/etc/heat
+HEAT_DASHBOARD_DIR=/opt/stack/heat-dashboard
+HEAT_DEFERRED_AUTH=
+HEAT_DIR=/opt/stack/heat
+HEAT_ENABLE_ADOPT_ABANDON=False
+HEAT_ENFORCE_SCOPE=True
+HEAT_ENGINE_WORKERS=4
+HEAT_ENV_DIR=/etc/heat/environment.d
+HEAT_PLUGIN_DIR=/opt/stack/data/heat/plugins
+HEAT_SERVICE_USER=heat
+HEAT_STACK_DOMAIN=True
+HEAT_STANDALONE=False
+HEAT_TEMPLATES_DIR=/etc/heat/templates
+HEAT_TRUSTEE_DOMAIN=default
+HEAT_TRUSTEE_PASSWORD=SuperSecret123
+HEAT_TRUSTEE_USER=heat
+HOME=/opt/stack
+HOME_URL=https://www.ubuntu.com/
+HORIZON_APACHE_ROOT=/dashboard
+HORIZON_BRANCH=master
+HORIZON_DIR=/opt/stack/horizon
+HORIZON_REPO=https://opendev.org/openstack/horizon.git
+HORIZON_SETTINGS=/opt/stack/horizon/openstack_dashboard/local/local_settings.py.example
+HOSTNAME=gelani-lab-1
+HOSTTYPE=x86_64
+HOST_IP=192.168.95.93
+HOST_IPV6=::1
+HOST_IP_IFACE=
+I=vni_ranges=1:65536
+ID=ubuntu
+ID_LIKE=debian
+IFS='
+'
+IMAGE_NAME=
+IMAGE_URLS=https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img
+IMAGE_UUID=
+INSTALL_DATABASE_SERVER_PACKAGES=True
+INSTALL_TEMPEST=True
+INSTANCES_PATH=/opt/stack/data/nova/instances
+INSTANCE_NAME_PREFIX=instance-
+INT_CA_DIR=/opt/stack/data/CA/int-ca
+IPV4_ADDRS_SAFE_TO_USE=10.0.0.0/22
+IPV6_ADDRESS_MODE=slaac
+IPV6_ADDRS_SAFE_TO_USE=fdf9:52f7:7011::/56
+IPV6_ENABLED=True
+IPV6_GLOBAL_ID=f9:52f7:7011
+IPV6_PRIVATE_NETWORK_GATEWAY=
+IPV6_PRIVATE_SUBNET_NAME=ipv6-private-subnet
+IPV6_PROVIDER_FIXED_RANGE=
+IPV6_PROVIDER_NETWORK_GATEWAY=
+IPV6_PROVIDER_SUBNET_NAME=provider_net_v6
+IPV6_PUBLIC_NETWORK_GATEWAY=2001:db8::2
+IPV6_PUBLIC_RANGE=2001:db8::/64
+IPV6_PUBLIC_SUBNET_NAME=ipv6-public-subnet
+IPV6_RA_MODE=slaac
+IPV6_ROUTER_GW_IP=2001:db8::1
+IPV6_SUBNET_ATTRIBUTES_ENABLED=True
+IPV6_SUBNET_ID=ee882e21-e946-48f8-9873-826e2c5e68b8
+IP_BRD=
+IP_VERSION=4+6
+IRONIC_PYTHON_AGENT_BRANCH=master
+IRONIC_PYTHON_AGENT_REPO=https://opendev.org/openstack/ironic-python-agent.git
+ISCSID_DEBUG=False
+ISCSID_DEBUG_LEVEL=4
+KEYSTONE_ADMIN_ENDPOINT=False
+KEYSTONE_ASSIGNMENT_BACKEND=sql
+KEYSTONE_AUTH_URI=http://192.168.95.93/identity
+KEYSTONE_AUTH_URI_V3=http://192.168.95.93/identity/v3
+KEYSTONE_BIN_DIR=/opt/stack/data/venv/bin
+KEYSTONE_BRANCH=master
+KEYSTONE_CONF=/etc/keystone/keystone.conf
+KEYSTONE_CONF_DIR=/etc/keystone
+KEYSTONE_DIR=/opt/stack/keystone
+KEYSTONE_ENABLE_CACHE=True
+KEYSTONE_ENFORCE_SCOPE=False
+KEYSTONE_IDENTITY_BACKEND=sql
+KEYSTONE_LOCKOUT_DURATION=10
+KEYSTONE_LOCKOUT_FAILURE_ATTEMPTS=2
+KEYSTONE_PASSWORD_HASH_ROUNDS=4
+KEYSTONE_PUBLIC_UWSGI=keystone.wsgi.api:application
+KEYSTONE_PUBLIC_UWSGI_CONF=/etc/keystone/keystone-uwsgi-public.ini
+KEYSTONE_REGION_NAME=RegionOne
+KEYSTONE_REPO=https://opendev.org/openstack/keystone.git
+KEYSTONE_RESOURCE_BACKEND=sql
+KEYSTONE_ROLE_BACKEND=sql
+KEYSTONE_SECURITY_COMPLIANCE_ENABLED=True
+KEYSTONE_SERVICE_HOST=192.168.95.93
+KEYSTONE_SERVICE_PORT=5000
+KEYSTONE_SERVICE_PORT_INT=5001
+KEYSTONE_SERVICE_PROTOCOL=http
+KEYSTONE_SERVICE_URI=http://192.168.95.93/identity
+KEYSTONE_SERVICE_URI_V3=http://192.168.95.93/identity/v3
+KEYSTONE_TOKEN_FORMAT=fernet
+KEYSTONE_UNIQUE_LAST_PASSWORD_COUNT=2
+KILL_PATH=/usr/bin/kill
+LAST_RUN=0
+LAST_SPINNER_PID=
+LC_ALL=en_US.utf8
+LDAP_BASE_DC=openstack
+LDAP_BASE_DN=dc=openstack,dc=org
+LDAP_DOMAIN=openstack.org
+LDAP_MANAGER_DN=cn=Manager,dc=openstack,dc=org
+LDAP_OLCDB_NUMBER=1
+LDAP_OLCDB_TYPE=mdb
+LDAP_ROOTPW_COMMAND=replace
+LDAP_SERVICE_NAME=slapd
+LDAP_URL=ldap://localhost
+LESSCLOSE='/usr/bin/lesspipe %s %s'
+LESSOPEN='| /usr/bin/lesspipe %s'
+LIBVIRT_CPU_MODE=custom
+LIBVIRT_CPU_MODEL=Nehalem
+LIBVIRT_GROUP=libvirt
+LIBVIRT_TYPE=kvm
+LINENO=395
+LINES=52
+LOCAL_HOSTNAME=gelani-lab-1
+LOGDAYS=2
+LOGDIR=/opt/stack/logs
+LOGFILE=/opt/stack/logs/stack.sh.log.2026-01-19-125748
+LOGFILE_DIR=/opt/stack/logs
+LOGFILE_NAME=stack.sh.log
+LOGNAME=stack
+LOG_COLOR=True
+LRC=localrc
+LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'
+MACHTYPE=x86_64-pc-linux-gnu
+MAIL=/var/mail/stack
+MAX_DB_CONNECTIONS=200
+MEMCACHE_SERVERS=localhost:11211
+METADATA_SERVICE_PORT=8775
+METERING_PLUGIN=neutron.services.metering.metering_plugin.MeteringPlugin
+ML2_L3_PLUGIN=ovn-router
+ML2_VLAN_RANGES=public
+MYSQL_DRIVER=PyMySQL
+MYSQL_GATHER_PERFORMANCE=True
+MYSQL_HOST=127.0.0.1
+MYSQL_REDUCE_MEMORY=True
+MYSQL_SERVICE_NAME=mysql
+MYSQL_USER=root
+NAME=Ubuntu
+NETWORK_API_EXTENSIONS=address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,bgp,bgp_4byte_asn,bgp_dragent_scheduler,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-domain-ports,dns-integration,dns-integration-domain-keywords,empty-string-filtering,enable-default-route-bfd,enable-default-route-ecmp,expose-port-forwarding-in-fip,external-gateway-multihoming,external-net,ext-gw-mode,extra_dhcp_opt,extraroute,extraroute-atomic,filter-validation,fip-port-details,flavors,floatingip-pools,floating-ip-port-forwarding,floating-ip-port-forwarding-description,floating-ip-port-forwarding-detail,floating-ip-port-forwarding-port-ranges,fwaas_v2,l3-flavors,l3-ha,logging,multi-provider,net-mtu,net-mtu-writable,network_availability_zone,network_ha,network-ip-availability,pagination,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-resource-request,port-security,port-trusted-vif,project-id,provider,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-fip,qos-gateway-ip,qos-rules-alias,qos-rule-type-details,qos-rule-type-filter,quota-check-limit,quota-check-limit-default,quota_details,quotas,rbac-address-scope,rbac-policies,rbac-security-groups,router,router_availability_zone,router-enable-snat,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,segment,sorting,standard-attr-description,standard-attr-fwaas-v2,standard-attr-revisions,standard-attr-tag,standard-attr-timestamp,stateful-security-group,subnet_allocation,subnet-dns-publish-fixed-ip,subnet-external-network,subnetpool-prefix-ops,subnet-service-types,tag-creation,tap-mirror,trunk,uplink-status-propagation,uplink-status-propagation-updatable,vlan-transparent,vpnaas,vpn-endpoint-groups
+NETWORK_GATEWAY=
+NET_ID=af7ee1c4-02c6-438b-8784-93690f664a47
+NEUTRON_BIN_DIR=/opt/stack/data/venv/bin
+NEUTRON_BRANCH=master
+NEUTRON_CONF=/etc/neutron/neutron.conf
+NEUTRON_CONF_DIR=/etc/neutron
+NEUTRON_CORE_PLUGIN_CONF=etc/neutron/plugins/ml2/ml2_conf.ini
+NEUTRON_CREATE_INITIAL_NETWORKS=True
+NEUTRON_DHCP_CONF=/etc/neutron/dhcp_agent.ini
+NEUTRON_DIR=/opt/stack/neutron
+NEUTRON_ENDPOINT_SERVICE_NAME=networking
+NEUTRON_ENFORCE_SCOPE=True
+NEUTRON_FWAAS_DIR=/opt/stack/neutron-fwaas
+NEUTRON_L3_CONF=/etc/neutron/l3_agent.ini
+NEUTRON_OVN_AGENT_BINARY=neutron-ovn-agent
+NEUTRON_OVN_BIN_DIR=/opt/stack/data/venv/bin
+NEUTRON_OVN_METADATA_BINARY=neutron-ovn-metadata-agent
+NEUTRON_PORT_SECURITY=True
+NEUTRON_REPO=https://opendev.org/openstack/neutron.git
+NEUTRON_ROOTWRAP=/opt/stack/data/venv/bin/neutron-rootwrap
+NEUTRON_TEST_CONFIG_FILE=/etc/neutron/debug.ini
+NEUTRON_UWSGI=neutron.wsgi.api:application
+NEUTRON_UWSGI_CONF=/etc/neutron/neutron-api-uwsgi.ini
+NOUNSET=
+NOVA_ALLOW_MOVE_TO_SAME_HOST=True
+NOVA_API_DB=nova_api
+NOVA_API_PASTE_INI=/etc/nova/api-paste.ini
+NOVA_BIN_DIR=/opt/stack/data/venv/bin
+NOVA_BRANCH=master
+NOVA_COND_CONF=/etc/nova/nova.conf
+NOVA_CONF=/etc/nova/nova.conf
+NOVA_CONF_DIR=/etc/nova
+NOVA_CONSOLE_PROXY_COMPUTE_TLS=False
+NOVA_CPU_CELL=1
+NOVA_CPU_CONF=/etc/nova/nova-cpu.conf
+NOVA_CPU_UUID=
+NOVA_DIR=/opt/stack/nova
+NOVA_ENABLED_APIS=osapi_compute
+NOVA_ENABLE_CACHE=True
+NOVA_ENFORCE_SCOPE=True
+NOVA_FAKE_CONF=/etc/nova/nova-fake.conf
+NOVA_FILTERS=ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,ServerGroupAntiAffinityFilter,ServerGroupAffinityFilter,SameHostFilter,DifferentHostFilter
+NOVA_INSTANCES_PATH=/opt/stack/data/nova/instances
+NOVA_LIBVIRT_TB_CACHE_SIZE=0
+NOVA_METADATA_UWSGI=nova.wsgi.metadata:application
+NOVA_METADATA_UWSGI_CONF=/etc/nova/nova-metadata-uwsgi.ini
+NOVA_MY_IP=192.168.95.93
+NOVA_NOTIFICATION_FORMAT=unversioned
+NOVA_NUM_CELLS=1
+NOVA_PLUGINS=/opt/stack/devstack/lib/nova_plugins
+NOVA_READY_TIMEOUT=60
+NOVA_REPO=https://opendev.org/openstack/nova.git
+NOVA_SERIAL_ENABLED=False
+NOVA_SERVICE_HOST=192.168.95.93
+NOVA_SERVICE_LISTEN_ADDRESS=0.0.0.0
+NOVA_SERVICE_PORT=8774
+NOVA_SERVICE_PORT_INT=18774
+NOVA_SERVICE_PROTOCOL=http
+NOVA_SERVICE_REPORT_INTERVAL=120
+NOVA_SHUTDOWN_TIMEOUT=0
+NOVA_SPICE_ENABLED=False
+NOVA_STATE_PATH=/opt/stack/data/nova
+NOVA_USE_SERVICE_TOKEN=True
+NOVA_USE_UNIFIED_LIMITS=False
+NOVA_UWSGI=nova.wsgi.osapi_compute:application
+NOVA_UWSGI_CONF=/etc/nova/nova-api-uwsgi.ini
+NOVA_VNC_ENABLED=False
+NOVNCPROXY_URL=http://192.168.95.93:6080/vnc_lite.html
+NOVNC_BRANCH=v1.3.0
+NOVNC_FROM_PACKAGE=False
+NOVNC_REPO=https://github.com/novnc/novnc.git
+NOVNC_WEB_DIR=/opt/stack/novnc
+NOW=1768827587
+NO_UPDATE_REPOS=False
+OBJECT_PORT_BASE=6613
+OFFLINE=False
+OLDPWD=/opt/stack/tempest
+OPENSSL=/usr/bin/openssl
+OPTERR=1
+OPTIND=1
+OPTS=vni_ranges=1:65536
+ORG_NAME=OpenStack
+ORG_UNIT_NAME=DevStack
+OSCWRAP_TIMER_FILE=/tmp/tmp.aRgmAbqUUu
+OSLO_BIN_DIR=/opt/stack/data/venv/bin
+OSTESTIMAGES_BRANCH=master
+OSTESTIMAGES_DIR=/opt/stack/os-test-images
+OSTESTIMAGES_REPO=https://opendev.org/openstack/os-test-images.git
+OSTYPE=linux-gnu
+OS_BRICK_LOCK_PATH=/opt/stack/data/os_brick
+OS_CLOUD=devstack-admin
+OS_VIF_OVS_ISOLATE_VIF=False
+OVN_AGENT_CONF=/etc/neutron/plugins/ml2/ovn_agent.ini
+OVN_AGENT_EXTENSIONS=metadata
+OVN_BRANCH=branch-24.03
+OVN_BRIDGE_MAPPINGS=public:br-ex
+OVN_BUILD_FROM_SOURCE=False
+OVN_BUILD_MODULES=False
+OVN_CONTROLLER_SERVICE=ovn-controller.service
+OVN_CONTROLLER_VTEP_SERVICE=ovn-controller-vtep.service
+OVN_DATADIR=/var/lib/ovn
+OVN_DBS_LOG_LEVEL=info
+OVN_DNS_SERVERS=8.8.8.8
+OVN_GENEVE_OVERHEAD=38
+OVN_IGMP_SNOOPING_ENABLE=False
+OVN_INSTALL_OVS_PYTHON_MODULE=False
+OVN_L3_CREATE_PUBLIC_NETWORK=True
+OVN_L3_SCHEDULER=leastloaded
+OVN_META_CONF=/etc/neutron/neutron_ovn_metadata_agent.ini
+OVN_META_DATA_HOST=192.168.95.93
+OVN_NB_REMOTE=tcp:192.168.95.93:6641
+OVN_NEUTRON_SYNC_MODE=log
+OVN_NORTHD_SERVICE=ovn-central.service
+OVN_PROTO=tcp
+OVN_REPO=https://github.com/ovn-org/ovn.git
+OVN_REPO_NAME=ovn
+OVN_RUNDIR=/var/run/ovn
+OVN_SB_REMOTE=tcp:192.168.95.93:6642
+OVN_SCRIPTDIR=/share/ovn/scripts
+OVN_SHAREDIR=/share/ovn
+OVN_SPLIT_HASH=05bf1dbb98b0635a51f75e268ef8aed27601401d
+OVN_UUID=38a3c1cf-489a-4c92-9b0a-29bcc8fe9f23
+OVSDB_SERVER_LOCAL_HOST=127.0.0.1
+OVSDB_SERVER_SERVICE=ovsdb-server.service
+OVS_BINDIR=/bin
+OVS_BRANCH=branch-3.3
+OVS_BRIDGE=br-int
+OVS_DATADIR=/opt/stack/data/ovs
+OVS_DATAPATH_TYPE=system
+OVS_ENABLE_TUNNELING=True
+OVS_PHYSICAL_BRIDGE=br-ex
+OVS_PREFIX=
+OVS_REPO=https://github.com/openvswitch/ovs.git
+OVS_REPO_NAME=ovs
+OVS_RUNDIR=/var/run/openvswitch
+OVS_SBINDIR=/sbin
+OVS_SCRIPTDIR=/share/openvswitch/scripts
+OVS_SHAREDIR=/share/openvswitch
+OVS_SYSCONFDIR=/etc/openvswitch
+OVS_TUNNEL_BRIDGE=br-tun
+OVS_VSWITCHD_SERVICE=ovs-vswitchd.service
+PACKAGES='apache2
+apache2-dev
+bc
+bsdmainutils
+curl
+g++
+gawk
+gcc
+gettext
+git
+graphviz
+iputils-ping
+libffi-dev
+libjpeg-dev
+libpq-dev
+libssl-dev
+libsystemd-dev
+libxml2-dev
+libxslt1-dev
+libyaml-dev
+lsof
+openssh-server
+openssl
+pkg-config
+psmisc
+python3-dev
+python3-pip
+python3-systemd
+python3-venv
+tar
+tcpdump
+unzip
+uuid-runtime
+wget
+wget
+zlib1g-dev
+libkrb5-dev
+libldap2-dev
+libsasl2-dev
+memcached
+python3-mysqldb
+sqlite3
+conntrack
+curl
+ebtables
+genisoimage
+iptables
+iputils-arping
+kpartx
+libjs-jquery-tablesorter
+parted
+pm-utils
+python3-mysqldb
+socat
+sqlite3
+sudo
+vlan
+lsscsi
+open-iscsi
+cryptsetup
+dosfstools
+genisoimage
+gir1.2-libosinfo-1.0
+netcat-openbsd
+open-iscsi
+qemu-utils
+sg3-utils
+sysfsutils
+lvm2
+qemu-utils
+thin-provisioning-tools
+acl
+dnsmasq-base
+dnsmasq-utils
+ebtables
+haproxy
+iptables
+iputils-arping
+iputils-ping
+postgresql-server-dev-all
+python3-mysqldb
+sqlite3
+sudo
+vlan
+pcp '
+PATH=/bin:/opt/stack/data/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin
+PHYSICAL_NETWORK=public
+PIPESTATUS=([0]="0")
+PIP_UPGRADE=False
+PIP_VIRTUAL_ENV=
+PLACEMENT_AUTH_STRATEGY=keystone
+PLACEMENT_BIN_DIR=/opt/stack/data/venv/bin
+PLACEMENT_BRANCH=master
+PLACEMENT_CONF=/etc/placement/placement.conf
+PLACEMENT_CONF_DIR=/etc/placement
+PLACEMENT_DIR=/opt/stack/placement
+PLACEMENT_ENFORCE_SCOPE=False
+PLACEMENT_REPO=https://opendev.org/openstack/placement.git
+PLACEMENT_SERVICE_HOST=192.168.95.93
+PLACEMENT_SERVICE_PROTOCOL=http
+PLACEMENT_UWSGI=placement.wsgi.api:application
+PLACEMENT_UWSGI_CONF=/etc/placement/placement-uwsgi.ini
+POSIXLY_CORRECT=y
+PPID=1077
+PREREQ_RERUN_HOURS=2
+PREREQ_RERUN_MARKER=/opt/stack/devstack/.prereqs
+PREREQ_RERUN_SECONDS=7200
+PRETTY_NAME='Ubuntu 22.04.5 LTS'
+PRIVACY_POLICY_URL=https://www.ubuntu.com/legal/terms-and-policies/privacy-policy
+PRIVATE_NETWORK_NAME=private
+PRIVATE_SUBNET_NAME=private-subnet
+PROVIDER_SUBNET_NAME=provider_net
+PS4='+\[$(tput  setaf 242)\]$(short_source)\[$(tput  sgr0)\] '
+PUBLIC_BRIDGE=br-ex
+PUBLIC_BRIDGE_MTU=1500
+PUBLIC_INTERFACE=eth0
+PUBLIC_NETWORK_GATEWAY=192.168.95.1
+PUBLIC_NETWORK_NAME=public
+PUBLIC_PHYSICAL_NETWORK=public
+PUBLIC_SUBNET_NAME=public-subnet
+PUB_SUBNET_ID=0f51c1e9-b2bb-4546-a208-2f911e514369
+PWD=/opt/stack/tempest
+PYTHON=/opt/stack/data/venv/bin/python3
+PYTHON3_VERSION=3.10
+QEMU_CONF=/etc/libvirt/qemu.conf
+Q_ADMIN_USERNAME=neutron
+Q_AGENT=ovn
+Q_ALLOW_OVERLAPPING_IP=True
+Q_API_PASTE_FILE=/etc/neutron/api-paste.ini
+Q_ASSIGN_GATEWAY_TO_PUBLIC_BRIDGE=True
+Q_AUTH_STRATEGY=keystone
+Q_BUILD_OVS_FROM_GIT=False
+Q_CONF_ROOTWRAP_D=/etc/neutron/rootwrap.d
+Q_DB_NAME=neutron
+Q_DHCP_CONF_FILE=/etc/neutron/dhcp_agent.ini
+Q_DVR_MODE=legacy
+Q_HOST=192.168.95.93
+Q_L3_CONF_FILE=/etc/neutron/l3_agent.ini
+Q_L3_ROUTER_PER_TENANT=True
+Q_LISTEN_ADDRESS=0.0.0.0
+Q_LOG_DRIVER_BURST_LIMIT=25
+Q_LOG_DRIVER_LOG_BASE=acl_log_meter
+Q_LOG_DRIVER_RATE_LIMIT=100
+Q_META_CONF_FILE=/etc/neutron/metadata_agent.ini
+Q_META_DATA_IP=192.168.95.93
+Q_ML2_PLUGIN_EXT_DRIVERS=port_security,qos
+Q_ML2_PLUGIN_FLAT_TYPE_OPTIONS=flat_networks=public,
+Q_ML2_PLUGIN_GENEVE_TYPE_OPTIONS=vni_ranges=1:65536
+Q_ML2_PLUGIN_GRE_TYPE_OPTIONS=tunnel_id_ranges=1:1000
+Q_ML2_PLUGIN_MECHANISM_DRIVERS=ovn
+Q_ML2_PLUGIN_TYPE_DRIVERS=geneve,vlan,flat
+Q_ML2_PLUGIN_VLAN_TYPE_OPTIONS=([0]="network_vlan_ranges=public")
+Q_ML2_PLUGIN_VXLAN_TYPE_OPTIONS=vni_ranges=1:1000
+Q_ML2_TENANT_NETWORK_TYPE=geneve
+Q_NOTIFY_NOVA_PORT_DATA_CHANGES=True
+Q_NOTIFY_NOVA_PORT_STATUS_CHANGES=True
+Q_OVS_USE_VETH=False
+Q_PLUGIN=ml2
+Q_PLUGIN_CLASS=ml2
+Q_PLUGIN_CONF_FILE=etc/neutron/plugins/ml2/ml2_conf.ini
+Q_PLUGIN_CONF_FILENAME=ml2_conf.ini
+Q_PLUGIN_CONF_PATH=etc/neutron/plugins/ml2
+Q_POLICY_FILE=/etc/neutron/policy.json
+Q_PORT=9696
+Q_PORT_INT=19696
+Q_PROTOCOL=http
+Q_PUBLIC_VETH_EX=veth-pub-ex
+Q_PUBLIC_VETH_INT=veth-pub-int
+Q_ROUTER_NAME=router1
+Q_RR_COMMAND='sudo /opt/stack/data/venv/bin/neutron-rootwrap /etc/neutron/rootwrap.conf'
+Q_RR_CONF_FILE=/etc/neutron/rootwrap.conf
+Q_RR_DAEMON_COMMAND='sudo /opt/stack/data/venv/bin/neutron-rootwrap-daemon /etc/neutron/rootwrap.conf'
+Q_SERVICE_PLUGIN_CLASSES=ovn-router
+Q_SRV_EXTRA_OPTS=([0]="tenant_network_types=geneve")
+Q_TUNNEL_TYPES=gre
+Q_USE_PROVIDERNET_FOR_PUBLIC=True
+Q_USE_PUBLIC_VETH=False
+Q_USE_ROOTWRAP=True
+Q_USE_ROOTWRAP_DAEMON=True
+Q_USE_SECGROUP=True
+RABBIT_HOST=192.168.95.93
+RABBIT_PASSWORD=SuperSecret123
+RABBIT_USERID=stackrabbit
+RC_DIR=/opt/stack/devstack
+RECLONE=False
+RECREATE_KEYSTONE_DB=True
+REGION_NAME=RegionOne
+REPOS_UPDATED=True
+REQUIREMENTS_BRANCH=master
+REQUIREMENTS_DIR=/opt/stack/requirements
+REQUIREMENTS_REPO=https://opendev.org/openstack/requirements.git
+RETRY_UPDATE=False
+ROOTWRAP_DAEMON_SUDOER_CMD='/opt/stack/data/venv/bin/neutron-rootwrap-daemon /etc/neutron/rootwrap.conf'
+ROOTWRAP_SUDOER_CMD='/opt/stack/data/venv/bin/neutron-rootwrap /etc/neutron/rootwrap.conf *'
+ROOT_CA_DIR=/opt/stack/data/CA/root-ca
+ROUTER_GW_IP='   192.168.95.202  '
+ROUTER_ID=c52d7d85-0c51-48c2-84e6-e60346626131
+S3_SERVICE_PORT=3333
+SCENARIO_IMAGE_DIR=/opt/stack/devstack/files
+SCENARIO_IMAGE_FILE=cirros-0.6.3-x86_64-disk.img
+SCENARIO_IMAGE_TYPE=cirros
+SECTION=ml2_type_geneve
+SERVICES_FOR_TEMPEST=key,n-api,n-cpu,n-cond,n-sch,n-novnc,n-api-meta,placement-api,placement-client,g-api,c-sch,c-api,c-vol,ovn-controller,ovn-northd,ovs-vswitchd,ovsdb-server,q-svc,q-ovn-agent,horizon,rabbit,tempest,mysql,etcd3,dstat,h-eng,h-api,h-api-cfn,heat-dashboard,ceilometer-acompute,ceilometer-acentral,ceilometer-anotification,gnocchi-api,gnocchi-metricd,aodh-api,aodh-notifier,aodh-evaluator,aodh-listener,neutron-api,neutron-rpc-server,neutron-periodic-workers,neutron-ovn-maintenance-worker,n-novnc-cell1,n-super-cond,n-cond-cell1
+SERVICE_DIR=/opt/stack/status
+SERVICE_DOMAIN_NAME=Default
+SERVICE_GRACEFUL_SHUTDOWN_TIMEOUT=5
+SERVICE_HOST=192.168.95.93
+SERVICE_IP_VERSION=4
+SERVICE_LISTEN_ADDRESS=0.0.0.0
+SERVICE_LOCAL_HOST=127.0.0.1
+SERVICE_PASSWORD=SuperSecret123
+SERVICE_PROJECT_NAME=service
+SERVICE_PROTOCOL=http
+SERVICE_TENANT_NAME=service
+SERVICE_TIMEOUT=60
+SHELL=/bin/bash
+SHLVL=2
+SKIP_EPEL_INSTALL=False
+SKIP_STOP_OVN=False
+SPICEHTML5PROXY_URL=http://192.168.95.93:6081/spice_auto.html
+SPICE_BRANCH=master
+SPICE_REPO=http://anongit.freedesktop.org/git/spice/spice-html5.git
+SQLALCHEMY_BRANCH=main
+SQLALCHEMY_DIR=/opt/stack/sqlalchemy
+SQLALCHEMY_REPO=https://github.com/sqlalchemy/sqlalchemy.git
+SSL_BUNDLE_FILE=/opt/stack/data/ca-bundle.pem
+STACK_ENV_VARS='BASE_SQL_CONN DATA_DIR DEST ENABLED_SERVICES HOST_IP     KEYSTONE_SERVICE_URI     LOGFILE OS_CACERT SERVICE_HOST STACK_USER TLS_IP     HOST_IPV6 SERVICE_IP_VERSION TUNNEL_ENDPOINT_IP TUNNEL_IP_VERSION'
+STACK_GROUP=stack
+STACK_USER=stack
+STUD_CIPHERS='TLSv1+HIGH:!DES:!aNULL:!eNULL:@STRENGTH'
+STUD_PROTO=--tls
+SUBNETPOOL_NAME_V4=shared-default-subnetpool-v4
+SUBNETPOOL_NAME_V6=shared-default-subnetpool-v6
+SUBNETPOOL_PREFIX_V4=10.0.0.0/22
+SUBNETPOOL_PREFIX_V6=fdf9:52f7:7011::/56
+SUBNETPOOL_SIZE_V4=26
+SUBNETPOOL_SIZE_V6=64
+SUBNETPOOL_V4_ID=b752345d-2fe5-4d77-9cbc-d857020c5df4
+SUBNETPOOL_V6_ID=d5f7c950-2879-4584-ba41-2f5de2f4487d
+SUBNET_ID=6adea907-730d-4318-98d5-1908d2d013fc
+SUBUNIT_OUTPUT=/opt/stack/devstack.subunit
+SUDO_COMMAND=/bin/bash
+SUDO_GID=1000
+SUDO_SECURE_PATH_FILE=/etc/sudoers.d/zz-secure-path
+SUDO_UID=1000
+SUDO_USER=ubuntu
+SUMFILE=/opt/stack/logs/stack.sh.log.2026-01-19-125748.summary.2026-01-19-125748
+SUPPORTED_DISTROS='trixie|bookworm|jammy|noble|rhel9|rhel10'
+SUPPORTED_NETWORK_API_EXTENSIONS=address-group,address-scope,agent,allowed-address-pairs,auto-allocated-topology,availability_zone,binding,binding-extended,default-subnetpools,dhcp_agent_scheduler,dns-integration,empty-string-filtering,external-net,extra_dhcp_opt,filter-validation,multi-provider,network_ha,net-mtu,net-mtu-writable,network_availability_zone,network-ip-availability,port-device-profile,port-hardware-offload-type,port-mac-address-regenerate,port-numa-affinity-policy,port-numa-affinity-policy-socket,port-security,port-trusted-vif,provider,port-resource-request,qinq,qos,qos-bw-limit-direction,qos-bw-minimum-ingress,qos-default,qos-rule-type-details,qos-rule-type-filter,qos-rules-alias,quotas,quota-check-limit,quota-check-limit-default,quota_details,rbac-address-scope,rbac-policies,rbac-security-groups,standard-attr-revisions,security-group,security-groups-default-rules,security-groups-normalized-cidr,security-groups-remote-address-group,security-groups-rules-belongs-to-default-sg,security-groups-shared-filtering,stateful-security-group,standard-attr-description,subnet_allocation,standard-attr-tag,standard-attr-timestamp,subnetpool-prefix-ops,subnet-external-network,subnet-service-types,tag-creation,trunk,segment,expose-port-forwarding-in-fip,floating-ip-port-forwarding-description,floating-ip-port-forwarding-port-ranges,floating-ip-port-forwarding,vlan-transparent,logging,vpnaas,vpn-endpoint-groups,bgp,bgp_4byte_asn,bgp_dragent_scheduler,fwaas_v2,standard-attr-fwaas-v2,uplink-status-propagation,uplink-status-propagation-updatable,tap-mirror,router,extraroute,extraroute-atomic,ext-gw-mode,floating-ip-port-forwarding-detail,fip-port-details,floatingip-pools,pagination,qos-fip,qos-gateway-ip,sorting,project-id,dns-integration,dns-integration-domain-keywords,dns-domain-ports,subnet-dns-publish-fixed-ip,agent,availability_zone,router_availability_zone,flavors,l3-flavors,external-gateway-multihoming,enable-default-route-bfd,enable-default-route-ecmp,l3-ha,router-enable-snat
+SUPPORT_URL=https://help.ubuntu.com/
+SWIFT_APACHE_WSGI_DIR=/var/www/swift
+SWIFT_BIN_DIR=/opt/stack/data/venv/bin
+SWIFT_BRANCH=master
+SWIFT_CONF_DIR=/etc/swift
+SWIFT_DATA_DIR=/opt/stack/data/swift
+SWIFT_DEFAULT_BIND_PORT=8080
+SWIFT_DEFAULT_BIND_PORT_INT=8081
+SWIFT_DIR=/opt/stack/swift
+SWIFT_DISK_IMAGE=/opt/stack/data/swift/drives/images/swift.img
+SWIFT_ENABLE_TEMPURLS=False
+SWIFT_EXTRAS_MIDDLEWARE='formpost staticweb'
+SWIFT_EXTRAS_MIDDLEWARE_LAST=
+SWIFT_EXTRAS_MIDDLEWARE_NO_AUTH=crossdomain
+SWIFT_LOG_TOKEN_LENGTH=12
+SWIFT_LOOPBACK_DISK_SIZE=6G
+SWIFT_LOOPBACK_DISK_SIZE_DEFAULT=6G
+SWIFT_MAX_FILE_SIZE=5368709122
+SWIFT_MAX_FILE_SIZE_DEFAULT=5368709122
+SWIFT_MAX_HEADER_SIZE=16384
+SWIFT_PARTITION_POWER_SIZE=9
+SWIFT_REPLICAS=1
+SWIFT_REPLICAS_SEQ=1
+SWIFT_REPO=https://opendev.org/openstack/swift.git
+SWIFT_SERVICE_LISTEN_ADDRESS=0.0.0.0
+SWIFT_SERVICE_LOCAL_HOST=127.0.0.1
+SWIFT_SERVICE_PROTOCOL=http
+SWIFT_START_ALL_SERVICES=True
+SWIFT_STORAGE_IPS=
+SWIFT_TEMPURL_KEY=
+SWIFT_USE_MOD_WSGI=False
+SYSLOG=False
+SYSLOG_HOST=192.168.95.93
+SYSLOG_PORT=516
+SYSTEMCTL='sudo systemctl'
+SYSTEMD_DIR=/etc/systemd/system
+TARGET_BRANCH=master
+TARGET_ENABLE_OVN_AGENT=False
+TCPDUMP_ARGS=
+TCPDUMP_OUTPUT=/opt/stack/logs/tcpdump.pcap
+TEMPEST_ALLOW_TENANT_ISOLATION=True
+TEMPEST_BRANCH=master
+TEMPEST_CONCURRENCY=16
+TEMPEST_CONFIG=/opt/stack/tempest/etc/tempest.conf
+TEMPEST_CONFIG_DIR=/opt/stack/tempest/etc
+TEMPEST_DEFAULT_STORAGE_PROTOCOL=iSCSI
+TEMPEST_DEFAULT_VOLUME_VENDOR='Open Source'
+TEMPEST_DIR=/opt/stack/tempest
+TEMPEST_EXTEND_ATTACHED_VOLUME=True
+TEMPEST_FLAVOR_ALT_RAM=256
+TEMPEST_FLAVOR_RAM=192
+TEMPEST_GLANCE_IMAGE_COUNT=1
+TEMPEST_GLANCE_IMPORT_POLL_INTERVAL=1
+TEMPEST_GLANCE_IMPORT_POLL_LIMIT=12
+TEMPEST_HAS_ADMIN=True
+TEMPEST_PLUGINS=0
+TEMPEST_REPO=https://opendev.org/openstack/tempest.git
+TEMPEST_SSH_NETWORK_NAME=private
+TEMPEST_STATE_PATH=/opt/stack/data/tempest
+TEMPEST_STORAGE_PROTOCOL=iSCSI
+TEMPEST_USE_ISO_IMAGE=False
+TEMPEST_USE_TEST_ACCOUNTS=False
+TEMPEST_VENV_UPPER_CONSTRAINTS=master
+TEMPEST_VOLUME_DRIVER=default
+TEMPEST_VOLUME_MANAGE_SNAPSHOT=True
+TEMPEST_VOLUME_MANAGE_VOLUME=True
+TEMPEST_VOLUME_REVERT_TO_SNAPSHOT=True
+TEMPEST_VOLUME_VENDOR='Open Source'
+TEMPFILE=/tmp/tmp.K3YGYjNyUU
+TENANT_TUNNEL_RANGES=1:1000
+TENANT_VLAN_RANGE=
+TERM=xterm-256color
+TIMESTAMP_FORMAT=%F-%H%M%S
+TOP_DIR=/opt/stack/devstack
+TOX_CONSTRAINTS_FILE=https://releases.openstack.org/constraints/upper/master
+TPUT_T=
+TRAILING_TARGET_BRANCH=master
+TUNNEL_ENDPOINT_IP=192.168.95.93
+TUNNEL_IP=192.168.95.93
+TUNNEL_IP_VERSION=4
+UBUNTU_CODENAME=jammy
+UBUNTU_RELEASE_BASE_NUM=22
+UID=1001
+ULIMIT_NOFILE=2048
+UPPER_CONSTRAINTS_FILE=https://releases.openstack.org/constraints/upper/master
+USER=stack
+USERRC_PARAMS='-PA --target-dir /opt/stack/devstack/accrc --os-password SuperSecret123'
+USER_UNITS=False
+USE_CINDER_FOR_GLANCE=False
+USE_JOURNAL=False
+USE_SUBNETPOOL=True
+USE_VENV=False
+VERBOSE=True
+VERBOSE_NO_TIMESTAMP=True
+VERSION='22.04.5 LTS (Jammy Jellyfish)'
+VERSION_CODENAME=jammy
+VERSION_ID=22.04
+VIF_PLUGGING_IS_FATAL=True
+VIF_PLUGGING_TIMEOUT=300
+VIRTUALENV_CMD='python3 -m venv'
+VIRT_DRIVER=libvirt
+VNCSERVER_LISTEN=0.0.0.0
+VNCSERVER_PROXYCLIENT_ADDRESS=192.168.95.93
+VOLUME_BACKING_FILE_SIZE=30G
+VOLUME_GROUP_NAME=stack-volumes
+VOLUME_NAME_PREFIX=volume-
+VOLUME_TYPE_MULTIATTACH=multiattach
+WORKER_TIMEOUT=80
+WSGI_MODE=uwsgi
+XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
+ZSWAP_COMPRESSOR=lz4
+ZSWAP_ZPOOL=zsmalloc
+_=posix
+_ASYNC_BG_TIME=325879
+_DEFAULT_LVM_INIT=0
+_DEFAULT_PYTHON3_VERSION=3.10
+_DEVSTACK_FUNCTIONS=1
+_DEVSTACK_FUNCTIONS_COMMON=1
+_DEVSTACK_STACKRC=1
+_LOG_COLOR_DEFAULT=True
+_Q_PLUGIN_EXTRA_CONF_PATH=/etc/neutron
+_TIME_BEGIN=1768827449
+_TIME_START=([wait_for_service]="" [async_wait]="" [apt-get]="" [test_with_retry]="" [dbsync]="" [pip_install]="" [apt-get-update]="" [run_process]="" [git_timed]="" )
+_TIME_TOTAL=([wait_for_service]="14439" [async_wait]="79498" [apt-get]="338820" [test_with_retry]="167" [dbsync]="4866" [pip_install]="202845" [apt-get-update]="2791" [run_process]="49426" [git_timed]="280083" )
+_of_args='-v --no-timestamp'
+attempt=1
+backend=postgresql
+be=lvm:lvmdriver-1
+be_name=lvmdriver-1
+be_type=lvm
+db=postgresql
+db_version=8.0.44
+dc=org
+default_v4_route_devs=ens3
+default_v6_route_devs=
+dir=/opt/stack/heat
+disabled_ext=
+dn=,dc=openstack,dc=org
+domain_id=5e6285b17bfd42ad8ac5a1be6f6bb23d
+enabled_ext='address-group
+address-scope
+agent
+allowed-address-pairs
+auto-allocated-topology
+availability_zone
+bgp
+bgp_4byte_asn
+bgp_dragent_scheduler
+binding
+binding-extended
+default-subnetpools
+dhcp_agent_scheduler
+dns-domain-ports
+dns-integration
+dns-integration-domain-keywords
+empty-string-filtering
+enable-default-route-bfd
+enable-default-route-ecmp
+expose-port-forwarding-in-fip
+external-gateway-multihoming
+external-net
+ext-gw-mode
+extra_dhcp_opt
+extraroute
+extraroute-atomic
+filter-validation
+fip-port-details
+flavors
+floatingip-pools
+floating-ip-port-forwarding
+floating-ip-port-forwarding-description
+floating-ip-port-forwarding-detail
+floating-ip-port-forwarding-port-ranges
+fwaas_v2
+l3-flavors
+l3-ha
+logging
+multi-provider
+net-mtu
+net-mtu-writable
+network_availability_zone
+network_ha
+network-ip-availability
+pagination
+port-device-profile
+port-hardware-offload-type
+port-mac-address-regenerate
+port-numa-affinity-policy
+port-numa-affinity-policy-socket
+port-resource-request
+port-security
+port-trusted-vif
+project-id
+provider
+qinq
+qos
+qos-bw-limit-direction
+qos-bw-minimum-ingress
+qos-default
+qos-fip
+qos-gateway-ip
+qos-rules-alias
+qos-rule-type-details
+qos-rule-type-filter
+quota-check-limit
+quota-check-limit-default
+quota_details
+quotas
+rbac-address-scope
+rbac-policies
+rbac-security-groups
+router
+router_availability_zone
+router-enable-snat
+security-group
+security-groups-default-rules
+security-groups-normalized-cidr
+security-groups-remote-address-group
+security-groups-rules-belongs-to-default-sg
+security-groups-shared-filtering
+segment
+sorting
+standard-attr-description
+standard-attr-fwaas-v2
+standard-attr-revisions
+standard-attr-tag
+standard-attr-timestamp
+stateful-security-group
+subnet_allocation
+subnet-dns-publish-fixed-ip
+subnet-external-network
+subnetpool-prefix-ops
+subnet-service-types
+tag-creation
+tap-mirror
+trunk
+uplink-status-propagation
+uplink-status-propagation-updatable
+vlan-transparent
+vpnaas
+vpn-endpoint-groups'
+exceptions=80-tempest.sh
+extensions='address-group
+address-scope
+agent
+allowed-address-pairs
+auto-allocated-topology
+availability_zone
+bgp
+bgp_4byte_asn
+bgp_dragent_scheduler
+binding
+binding-extended
+default-subnetpools
+dhcp_agent_scheduler
+dns-domain-ports
+dns-integration
+dns-integration-domain-keywords
+empty-string-filtering
+enable-default-route-bfd
+enable-default-route-ecmp
+expose-port-forwarding-in-fip
+external-gateway-multihoming
+external-net
+ext-gw-mode
+extra_dhcp_opt
+extraroute
+extraroute-atomic
+filter-validation
+fip-port-details
+flavors
+floatingip-pools
+floating-ip-port-forwarding
+floating-ip-port-forwarding-description
+floating-ip-port-forwarding-detail
+floating-ip-port-forwarding-port-ranges
+fwaas_v2
+l3-flavors
+l3-ha
+logging
+multi-provider
+net-mtu
+net-mtu-writable
+network_availability_zone
+network_ha
+network-ip-availability
+pagination
+port-device-profile
+port-hardware-offload-type
+port-mac-address-regenerate
+port-numa-affinity-policy
+port-numa-affinity-policy-socket
+port-resource-request
+port-security
+port-trusted-vif
+project-id
+provider
+qinq
+qos
+qos-bw-limit-direction
+qos-bw-minimum-ingress
+qos-default
+qos-fip
+qos-gateway-ip
+qos-rules-alias
+qos-rule-type-details
+qos-rule-type-filter
+quota-check-limit
+quota-check-limit-default
+quota_details
+quotas
+rbac-address-scope
+rbac-policies
+rbac-security-groups
+router
+router_availability_zone
+router-enable-snat
+security-group
+security-groups-default-rules
+security-groups-normalized-cidr
+security-groups-remote-address-group
+security-groups-rules-belongs-to-default-sg
+security-groups-shared-filtering
+segment
+sorting
+standard-attr-description
+standard-attr-fwaas-v2
+standard-attr-revisions
+standard-attr-tag
+standard-attr-timestamp
+stateful-security-group
+subnet_allocation
+subnet-dns-publish-fixed-ip
+subnet-external-network
+subnetpool-prefix-ops
+subnet-service-types
+tag-creation
+tap-mirror
+trunk
+uplink-status-propagation
+uplink-status-propagation-updatable
+vlan-transparent
+vpnaas
+vpn-endpoint-groups'
+extra=80-tempest.sh
+extra_plugin_file_name=/opt/stack/devstack/extras.d/80-tempest.sh
+f=/opt/stack/devstack/lib/databases/postgresql
+fips=
+flavor_ref=42
+flavor_ref_alt=84
+i=TUNNEL_IP_VERSION
+ifs='
+'
+image_url=https://github.com/cirros-dev/cirros/releases/download/0.6.3/cirros-0.6.3-x86_64-disk.img
+lfile=localrc
+localrc=/opt/stack/devstack/.localrc.password
+logfile=ovsdb-server-sb.log
+malloc_tuning='MALLOC_ARENA_MAX=1 MALLOC_MMAP_THRESHOLD_=131072 MALLOC_TRIM_THRESHOLD_=262144'
+max_db_ver=11.6.2
+min_db_ver=11.6.2
+mode=stack
+msg='ENTER A PASSWORD TO USE FOR HORIZON AND KEYSTONE (20 CHARS OR LESS).'
+name=install_tempest
+new='"a|loop3|", '
+opt='?'
+os_CODENAME=jammy
+os_PACKAGE=deb
+os_RELEASE=22.04
+os_VENDOR=Ubuntu
+phase=test-config
+pkgs=
+plugin=heat
+plugins=,heat,heat-dashboard,ceilometer,aodh,gnocchi
+port=60999
+property_key=volume_backend_name
+property_value=lvmdriver-1
+pv_info=/dev/loop3
+pw=SuperSecret123
+ram=256
+rootwrap_sudo_cmd='/opt/stack/data/venv/bin/nova-rootwrap-daemon /etc/nova/rootwrap.conf'
+srv=n-sproxy
+supported_ext='address-group
+address-scope
+agent
+allowed-address-pairs
+auto-allocated-topology
+availability_zone
+bgp
+bgp_4byte_asn
+bgp_dragent_scheduler
+binding
+binding-extended
+default-subnetpools
+dhcp_agent_scheduler
+dns-domain-ports
+dns-integration
+dns-integration-domain-keywords
+empty-string-filtering
+enable-default-route-bfd
+enable-default-route-ecmp
+expose-port-forwarding-in-fip
+external-gateway-multihoming
+external-net
+ext-gw-mode
+extra_dhcp_opt
+extraroute
+extraroute-atomic
+filter-validation
+fip-port-details
+flavors
+floatingip-pools
+floating-ip-port-forwarding
+floating-ip-port-forwarding-description
+floating-ip-port-forwarding-detail
+floating-ip-port-forwarding-port-ranges
+fwaas_v2
+l3-flavors
+l3-ha
+logging
+multi-provider
+net-mtu
+net-mtu-writable
+network_availability_zone
+network_ha
+network-ip-availability
+pagination
+port-device-profile
+port-hardware-offload-type
+port-mac-address-regenerate
+port-numa-affinity-policy
+port-numa-affinity-policy-socket
+port-resource-request
+port-security
+port-trusted-vif
+project-id
+provider
+qinq
+qos
+qos-bw-limit-direction
+qos-bw-minimum-ingress
+qos-default
+qos-fip
+qos-gateway-ip
+qos-rules-alias
+qos-rule-type-details
+qos-rule-type-filter
+quota-check-limit
+quota-check-limit-default
+quota_details
+quotas
+rbac-address-scope
+rbac-policies
+rbac-security-groups
+router
+router_availability_zone
+router-enable-snat
+security-group
+security-groups-default-rules
+security-groups-normalized-cidr
+security-groups-remote-address-group
+security-groups-rules-belongs-to-default-sg
+security-groups-shared-filtering
+segment
+sorting
+standard-attr-description
+standard-attr-fwaas-v2
+standard-attr-revisions
+standard-attr-tag
+standard-attr-timestamp
+stateful-security-group
+subnet_allocation
+subnet-dns-publish-fixed-ip
+subnet-external-network
+subnetpool-prefix-ops
+subnet-service-types
+tag-creation
+tap-mirror
+trunk
+uplink-status-propagation
+uplink-status-propagation-updatable
+vlan-transparent
+vpnaas
+vpn-endpoint-groups'
+system_member_user=8d3686c50e0b489a977dbaa420dd8df7
+system_reader_user=00188e0204c842a283c4284685a18a17
+time_stamp=2026-01-19-131836
+type_name=lvmdriver-1
+v=url:redis://localhost:6379
+var=ADMIN_PASSWORD
+++/opt/stack/heat/devstack/plugin.sh:source:11  is_heat_enabled
+++/opt/stack/heat/devstack/lib/heat:is_heat_enabled:91  [[ ,key,n-api,n-cpu,n-cond,n-sch,n-novnc,n-api-meta,placement-api,placement-client,g-api,c-sch,c-api,c-vol,ovn-controller,ovn-northd,ovs-vswitchd,ovsdb-server,q-svc,q-ovn-agent,horizon,rabbit,tempest,mysql,etcd3,dstat,h-eng,h-api,h-api-cfn,heat-dashboard,ceilometer-acompute,ceilometer-acentral,ceilometer-anotification,gnocchi-api,gnocchi-metricd,aodh-api,aodh-notifier,aodh-evaluator,aodh-listener,neutron-api,neutron-rpc-server,neutron-periodic-workers,neutron-ovn-maintenance-worker,n-novnc-cell1,n-super-cond,n-cond-cell1 =~ ,h- ]]
+++/opt/stack/heat/devstack/lib/heat:is_heat_enabled:91  return 0
+++/opt/stack/heat/devstack/plugin.sh:source:12  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat/devstack/plugin.sh:source:12  [[ test-config == \i\n\s\t\a\l\l ]]
+++/opt/stack/heat/devstack/plugin.sh:source:19  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat/devstack/plugin.sh:source:19  [[ test-config == \t\e\s\t\-\c\o\n\f\i\g ]]
+++/opt/stack/heat/devstack/plugin.sh:source:20  is_service_enabled tempest
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/heat/devstack/plugin.sh:source:21  echo_summary 'Configuring Tempest for Heat'
+++./stack.sh:echo_summary:438               [[ -t 3 ]]
+++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
+++./stack.sh:echo_summary:444               echo -e Configuring Tempest for Heat
+++/opt/stack/heat/devstack/plugin.sh:source:22  configure_tempest_for_heat
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:319  SKIP_SCENARIO_TEST_LIST=SoftwareConfigIntegrationTest
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:320  SKIP_SCENARIO_TEST_LIST+=,AodhAlarmTest
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:322  SKIP_SCENARIO_TEST_LIST+=,CfnInitIntegrationTest
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:323  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin skip_scenario_test_list SoftwareConfigIntegrationTest,AodhAlarmTest,CfnInitIntegrationTest
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:325  SKIP_FUNCTIONAL_TEST_LIST=NotificationTest
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:326  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin skip_functional_test_list NotificationTest
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:328  oscwrap flavor show m1.heat_int
+No Flavor found for m1.heat_int
+
+++functions-common:oscwrap:2468             return 1
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:328  oscwrap flavor create m1.heat_int --ram 1024 --vcpus 2 --disk 10
++----------------------------+--------------------------------------+
+| Field                      | Value                                |
++----------------------------+--------------------------------------+
+| OS-FLV-DISABLED:disabled   | False                                |
+| OS-FLV-EXT-DATA:ephemeral  | 0                                    |
+| description                | None                                 |
+| disk                       | 10                                   |
+| id                         | e6319e09-0735-4a00-af5b-11ea038cc588 |
+| name                       | m1.heat_int                          |
+| os-flavor-access:is_public | True                                 |
+| properties                 |                                      |
+| ram                        | 1024                                 |
+| rxtx_factor                | 1.0                                  |
+| swap                       | 0                                    |
+| vcpus                      | 2                                    |
++----------------------------+--------------------------------------+
+++functions-common:oscwrap:2468             return 0
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:329  oscwrap flavor show m1.heat_micro
+No Flavor found for m1.heat_micro
+
+++functions-common:oscwrap:2468             return 1
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:329  oscwrap flavor create m1.heat_micro --ram 128 --disk 1
++----------------------------+--------------------------------------+
+| Field                      | Value                                |
++----------------------------+--------------------------------------+
+| OS-FLV-DISABLED:disabled   | False                                |
+| OS-FLV-EXT-DATA:ephemeral  | 0                                    |
+| description                | None                                 |
+| disk                       | 1                                    |
+| id                         | 3f30f309-3592-4282-bb86-69ecd0fe465a |
+| name                       | m1.heat_micro                        |
+| os-flavor-access:is_public | True                                 |
+| properties                 |                                      |
+| ram                        | 128                                  |
+| rxtx_factor                | 1.0                                  |
+| swap                       | 0                                    |
+| vcpus                      | 1                                    |
++----------------------------+--------------------------------------+
+++functions-common:oscwrap:2468             return 0
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:331  export OS_CLOUD=devstack
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:331  OS_CLOUD=devstack
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:332  oscwrap network show heat-net
+Error while executing command: No Network found for heat-net
+
+++functions-common:oscwrap:2468             return 1
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:332  oscwrap network create heat-net
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | UP                                   |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2026-01-19T13:21:12Z                 |
+| description               |                                      |
+| dns_domain                | None                                 |
+| id                        | 34be5cb2-fc34-4a8b-b337-41595e361e6d |
+| ipv4_address_scope        | None                                 |
+| ipv6_address_scope        | None                                 |
+| is_default                | False                                |
+| is_vlan_qinq              | None                                 |
+| is_vlan_transparent       | False                                |
+| mtu                       | 1442                                 |
+| name                      | heat-net                             |
+| port_security_enabled     | True                                 |
+| project_id                | 6e0c493b7e814bb392ca7ea299c182de     |
+| provider:network_type     | None                                 |
+| provider:physical_network | None                                 |
+| provider:segmentation_id  | None                                 |
+| qinq                      | False                                |
+| qos_policy_id             | None                                 |
+| revision_number           | 1                                    |
+| router:external           | Internal                             |
+| segments                  | None                                 |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| updated_at                | 2026-01-19T13:21:12Z                 |
++---------------------------+--------------------------------------+
+++functions-common:oscwrap:2468             return 0
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:333  oscwrap subnet show heat-subnet
+No Subnet found for heat-subnet
+
+++functions-common:oscwrap:2468             return 1
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:333  oscwrap subnet create heat-subnet --network heat-net --subnet-range 10.0.5.0/24
++----------------------+--------------------------------------+
+| Field                | Value                                |
++----------------------+--------------------------------------+
+| allocation_pools     | 10.0.5.2-10.0.5.254                  |
+| cidr                 | 10.0.5.0/24                          |
+| created_at           | 2026-01-19T13:21:15Z                 |
+| description          |                                      |
+| dns_nameservers      |                                      |
+| dns_publish_fixed_ip | None                                 |
+| enable_dhcp          | True                                 |
+| gateway_ip           | 10.0.5.1                             |
+| host_routes          |                                      |
+| id                   | 6914f2f9-8d4e-4138-8a06-b8bbd45bb3bb |
+| ip_version           | 4                                    |
+| ipv6_address_mode    | None                                 |
+| ipv6_ra_mode         | None                                 |
+| name                 | heat-subnet                          |
+| network_id           | 34be5cb2-fc34-4a8b-b337-41595e361e6d |
+| project_id           | 6e0c493b7e814bb392ca7ea299c182de     |
+| revision_number      | 0                                    |
+| router:external      | False                                |
+| segment_id           | None                                 |
+| service_types        |                                      |
+| subnetpool_id        | None                                 |
+| tags                 |                                      |
+| updated_at           | 2026-01-19T13:21:15Z                 |
++----------------------+--------------------------------------+
+++functions-common:oscwrap:2468             return 0
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:334  oscwrap router add subnet router1 heat-subnet
+
+++functions-common:oscwrap:2468             return 0
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:338  [[ -e /etc/ci/mirror_info.sh ]]
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:341  HEAT_TEST_FEDORA_IMAGE_UPSTREAM=https://download.fedoraproject.org/pub/fedora/linux
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:342  HEAT_TEST_FEDORA_IMAGE_UPSTREAM_ARCHIVE=https://download.fedoraproject.org/pub/archive/fedora/linux/
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:343  HEAT_TEST_FEDORA_IMAGE_PATH=releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:344  curl --location --output /dev/null --silent --head --fail /releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:346  curl --location --output /dev/null --silent --head --fail https://download.fedoraproject.org/pub/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:349  export HEAT_TEST_FEDORA_IMAGE=https://download.fedoraproject.org/pub/archive/fedora/linux//releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:349  HEAT_TEST_FEDORA_IMAGE=https://download.fedoraproject.org/pub/archive/fedora/linux//releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
++++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:351  oscwrap token issue -c id -f value
++++functions-common:oscwrap:2468             return 0
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:351  TOKEN=gAAAAABpbi_Za4mH7xPTFUnu6WA6u_7Khnc1m2VIwvX_cQD7v2ffTrM8hSXeRL_3Mr3opSdhb36ggJKeJiOSs6KzV4Z8KoXxizvmE1XwQ_jFxyHKaqUy6TQwowdYyXokyMGOKc05dX1KPA3yW_WxlvxM6QIKzLfJ1eO5rIdq4DGXb8n_kjC6lRA
++++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:352  grep Fedora-Cloud-Base-37-1.7.x86_64
++++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:352  oscwrap image list
++++functions-common:oscwrap:2468             return 0
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:352  local image_exists=
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:353  [[ -z '' ]]
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:354  is_service_enabled g-api
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:355  upload_image https://download.fedoraproject.org/pub/archive/fedora/linux//releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 gAAAAABpbi_Za4mH7xPTFUnu6WA6u_7Khnc1m2VIwvX_cQD7v2ffTrM8hSXeRL_3Mr3opSdhb36ggJKeJiOSs6KzV4Z8KoXxizvmE1XwQ_jFxyHKaqUy6TQwowdYyXokyMGOKc05dX1KPA3yW_WxlvxM6QIKzLfJ1eO5rIdq4DGXb8n_kjC6lRA
+++functions:upload_image:132                local image_url=https://download.fedoraproject.org/pub/archive/fedora/linux//releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+++functions:upload_image:134                local image image_fname image_name
+++functions:upload_image:136                local max_attempts=5
+++functions:upload_image:139                mkdir -p /opt/stack/devstack/files/images
++++functions:upload_image:140                basename https://download.fedoraproject.org/pub/archive/fedora/linux//releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+++functions:upload_image:140                image_fname=Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+++functions:upload_image:141                [[ https://download.fedoraproject.org/pub/archive/fedora/linux//releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 != file* ]]
+++functions:upload_image:143                [[ ! -f /opt/stack/devstack/files/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 ]]
++++functions:upload_image:144                seq 5
+++functions:upload_image:144                for attempt in `seq $max_attempts`
+++functions:upload_image:145                local rc=0
+++functions:upload_image:146                wget --progress=dot:giga -c https://download.fedoraproject.org/pub/archive/fedora/linux//releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 -O /opt/stack/devstack/files/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+--2026-01-19 13:21:31--  https://download.fedoraproject.org/pub/archive/fedora/linux//releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+Resolving download.fedoraproject.org (download.fedoraproject.org)... 38.145.32.21, 38.145.32.48, 35.90.167.38, ...
+Connecting to download.fedoraproject.org (download.fedoraproject.org)|38.145.32.21|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://fedora-archive.mirror.liquidtelecom.com/archive/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 [following]
+--2026-01-19 13:21:32--  https://fedora-archive.mirror.liquidtelecom.com/archive/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+Resolving fedora-archive.mirror.liquidtelecom.com (fedora-archive.mirror.liquidtelecom.com)... 197.155.77.1, 2c0f:fe40:8001:10::1
+Connecting to fedora-archive.mirror.liquidtelecom.com (fedora-archive.mirror.liquidtelecom.com)|197.155.77.1|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 492830720 (470M) [application/octet-stream]
+Saving to: ‘/opt/stack/devstack/files/Fedora-Cloud-Base-37-1.7.x86_64.qcow2’
+
+     0K ........ ........ ........ ........  6% 5.50M 80s
+ 32768K ........ ........ ........ ........ 13% 9.36M 59s
+ 65536K ........ ........ ........ ........ 20% 9.20M 50s
+ 98304K ........ ........ ........ ........ 27% 7.95M 45s
+131072K ........ ........ ........ ........ 34% 9.35M 39s
+163840K ........ ........ ........ ........ 40% 9.35M 34s
+196608K ........ ........ ........ ........ 47% 9.35M 30s
+229376K ........ ........ ........ ........ 54% 7.88M 26s
+262144K ........ ........ ........ ........ 61% 9.34M 22s
+294912K ........ ........ ........ ........ 68% 9.35M 18s
+327680K ........ ........ ........ ........ 74% 9.37M 14s
+360448K ........ ........ ........ ........ 81% 9.35M 10s
+393216K ........ ........ ........ ........ 88% 7.86M 6s
+425984K ........ ........ ........ ........ 95% 9.30M 3s
+458752K ........ ........ ......           100% 9.42M=55s
+
+2026-01-19 13:22:28 (8.61 MB/s) - ‘/opt/stack/devstack/files/Fedora-Cloud-Base-37-1.7.x86_64.qcow2’ saved [492830720/492830720]
+
+++functions:upload_image:147                [[ 0 -ne 0 ]]
+++functions:upload_image:156                break
+++functions:upload_image:160                image=/opt/stack/devstack/files/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+++functions:upload_image:174                [[ https://download.fedoraproject.org/pub/archive/fedora/linux//releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 =~ openvz ]]
+++functions:upload_image:181                [[ https://download.fedoraproject.org/pub/archive/fedora/linux//releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 =~ \.vmdk ]]
+++functions:upload_image:295                [[ https://download.fedoraproject.org/pub/archive/fedora/linux//releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 =~ \.hds ]]
+++functions:upload_image:306                local kernel=
+++functions:upload_image:307                local ramdisk=
+++functions:upload_image:308                local disk_format=
+++functions:upload_image:309                local container_format=
+++functions:upload_image:310                local unpack=
+++functions:upload_image:311                local img_property=
+++functions:upload_image:315                [[ libvirt == \l\i\b\v\i\r\t ]]
+++functions:upload_image:316                [[ kvm == \q\e\m\u ]]
+++functions:upload_image:316                [[ kvm == \k\v\m ]]
+++functions:upload_image:317                img_property=hw_rng_model=virtio
+++functions:upload_image:321                case "$image_fname" in
++++functions:upload_image:365                basename /opt/stack/devstack/files/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 .qcow2
+++functions:upload_image:365                image_name=Fedora-Cloud-Base-37-1.7.x86_64
+++functions:upload_image:366                disk_format=qcow2
+++functions:upload_image:367                container_format=bare
+++functions:upload_image:397                is_arch ppc64le
++++functions-common:is_arch:517              uname -m
+++functions-common:is_arch:517              [[ x86_64 == \p\p\c\6\4\l\e ]]
+++functions:upload_image:397                is_arch ppc64
++++functions-common:is_arch:517              uname -m
+++functions-common:is_arch:517              [[ x86_64 == \p\p\c\6\4 ]]
+++functions:upload_image:397                is_arch ppc
++++functions-common:is_arch:517              uname -m
+++functions-common:is_arch:517              [[ x86_64 == \p\p\c ]]
+++functions:upload_image:401                is_arch aarch64
++++functions-common:is_arch:517              uname -m
+++functions-common:is_arch:517              [[ x86_64 == \a\a\r\c\h\6\4 ]]
+++functions:upload_image:405                '[' bare = bare ']'
+++functions:upload_image:406                '[' '' = zcat ']'
+++functions:upload_image:408                '[' '' = bunzip2 ']'
+++functions:upload_image:410                '[' '' = unxz ']'
+++functions:upload_image:421                _upload_image Fedora-Cloud-Base-37-1.7.x86_64 bare qcow2 /opt/stack/devstack/files/Fedora-Cloud-Base-37-1.7.x86_64.qcow2 hw_rng_model=virtio
+++functions:_upload_image:104               local image_name=Fedora-Cloud-Base-37-1.7.x86_64
+++functions:_upload_image:105               shift
+++functions:_upload_image:106               local container=bare
+++functions:_upload_image:107               shift
+++functions:_upload_image:108               local disk=qcow2
+++functions:_upload_image:109               shift
+++functions:_upload_image:110               local image=/opt/stack/devstack/files/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+++functions:_upload_image:111               shift
+++functions:_upload_image:112               local properties
+++functions:_upload_image:113               local useimport
++++functions:_upload_image:115               _image_properties_to_arg hw_rng_model=virtio
++++functions:_image_properties_to_arg:87     local result=
++++functions:_image_properties_to_arg:88     for property in $*
++++functions:_image_properties_to_arg:89     result+=' --property hw_rng_model=virtio'
++++functions:_image_properties_to_arg:91     echo --property hw_rng_model=virtio
+++functions:_upload_image:115               properties='--property hw_rng_model=virtio'
+++functions:_upload_image:117               [[ False == \T\r\u\e ]]
++++functions:_upload_image:121               readlink -f /opt/stack/devstack/files/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
+++functions:_upload_image:121               openstack --os-cloud=devstack-admin --os-region-name=RegionOne image create Fedora-Cloud-Base-37-1.7.x86_64 --public --container-format bare --disk-format qcow2 --property hw_rng_model=virtio --file /opt/stack/devstack/files/Fedora-Cloud-Base-37-1.7.x86_64.qcow2
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field            | Value                                                                                                                                                                        |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checksum         | 36f7b464b6ab46ad97c001b539495e90                                                                                                                                                                        |
+| container_format | bare                                                                                                                                                                        |
+| created_at       | 2026-01-19T13:22:31Z                                                                                                                                                                        |
+| disk_format      | qcow2                                                                                                                                                                        |
+| file             | /v2/images/0fcd1b67-931f-4417-a407-b887577fda9f/file                                                                                                                                                                        |
+| id               | 0fcd1b67-931f-4417-a407-b887577fda9f                                                                                                                                                                        |
+| min_disk         | 0                                                                                                                                                                        |
+| min_ram          | 0                                                                                                                                                                        |
+| name             | Fedora-Cloud-Base-37-1.7.x86_64                                                                                                                                                                        |
+| owner            | 9fb44e4466264364b4ac3eb936bdc4c2                                                                                                                                                                        |
+| properties       | hw_rng_model='virtio', os_hash_algo='sha512', os_hash_value='41f6d3e6184245bc8c92977f235030bb9c859b2e65b5e668d1ffbc436e1f655a17289bc6955e82e87c921a11e6e646a5d5cee1771e6012e3c8a24c7c5d01c421', os_hidden='False', owner_specified.openstack.md5='', owner_specified.openstack.object='images/Fedora-Cloud-Base-37-1.7.x86_64', owner_specified.openstack.sha256='' |
+| protected        | False                                                                                                                                                                        |
+| schema           | /v2/schemas/image                                                                                                                                                                        |
+| size             | 492830720                                                                                                                                                                        |
+| status           | active                                                                                                                                                                        |
+| tags             |                                                                                                                                                                        |
+| updated_at       | 2026-01-19T13:22:33Z                                                                                                                                                                        |
+| virtual_size     | 5368709120                                                                                                                                                                        |
+| visibility       | public                                                                                                                                                                        |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:359  is_service_enabled tls-proxy
+++functions-common:is_service_enabled:2079  return 1
++++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:364  oscwrap application credential show heat_multicloud
+No ApplicationCredential found for heat_multicloud
++++functions-common:oscwrap:2468             return 1
++++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:364  oscwrap application credential create heat_multicloud --secret secret --unrestricted -c id -f value
++++functions-common:oscwrap:2468             return 0
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:364  app_cred_id='
+6a559484ab5d44d2b2e90ffb8bb410dc'
++++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:367  oscwrap secret store -n heat-multi-cloud-test-cred --payload '{"auth_type": "v3applicationcredential", "auth": {"auth_url": $OS_AUTH_URL, "application_credential_id": $app_cred_id, "application_credential_secret": "secret"}}' -c 'Secret href' -f value
+public endpoint for key-manager service in RegionOne region not found
++++functions-common:oscwrap:2468             return 1
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:367  export OS_CREDENTIAL_SECRET_ID=
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:367  OS_CREDENTIAL_SECRET_ID=
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:368  source /opt/stack/devstack/openrc demo demo
++++openrc:source:10                          [[ -n demo ]]
++++openrc:source:11                          OS_USERNAME=demo
++++openrc:source:13                          [[ -n demo ]]
++++openrc:source:14                          OS_PROJECT_NAME=demo
++++++openrc:source:18                          dirname /opt/stack/devstack/openrc
+++++openrc:source:18                          cd /opt/stack/devstack
+++++openrc:source:18                          pwd
++++openrc:source:18                          RC_DIR=/opt/stack/devstack
++++openrc:source:21                          source /opt/stack/devstack/functions
+++++functions:source:14                       [[ -z 1 ]]
+++++functions:source:14                       return 0
++++openrc:source:24                          source /opt/stack/devstack/stackrc
+++++stackrc:source:7                          [[ -z 1 ]]
+++++stackrc:source:7                          return 0
++++openrc:source:27                          [[ -r /opt/stack/devstack/.stackenv ]]
++++openrc:source:28                          source /opt/stack/devstack/.stackenv
+++++.stackenv:source:2                        BASE_SQL_CONN=mysql+pymysql://root:SuperSecret123@127.0.0.1
+++++.stackenv:source:3                        DATA_DIR=/opt/stack/data
+++++.stackenv:source:4                        DEST=/opt/stack
+++++.stackenv:source:5                        ENABLED_SERVICES=key,n-api,n-cpu,n-cond,n-sch,n-novnc,n-api-meta,placement-api,placement-client,g-api,c-sch,c-api,c-vol,ovn-controller,ovn-northd,ovs-vswitchd,ovsdb-server,q-svc,q-ovn-agent,horizon,rabbit,tempest,mysql,etcd3,dstat,h-eng,h-api,h-api-cfn,heat-dashboard,ceilometer-acompute,ceilometer-acentral,ceilometer-anotification,gnocchi-api,gnocchi-metricd,aodh-api,aodh-notifier,aodh-evaluator,aodh-listener,neutron-api,neutron-rpc-server,neutron-periodic-workers,neutron-ovn-maintenance-worker,n-novnc-cell1,n-super-cond,n-cond-cell1
+++++.stackenv:source:6                        HOST_IP=192.168.95.93
+++++.stackenv:source:7                        KEYSTONE_SERVICE_URI=http://192.168.95.93/identity
+++++.stackenv:source:8                        LOGFILE=/opt/stack/logs/stack.sh.log.2026-01-19-125748
+++++.stackenv:source:9                        OS_CACERT=
+++++.stackenv:source:10                       SERVICE_HOST=192.168.95.93
+++++.stackenv:source:11                       STACK_USER=stack
+++++.stackenv:source:12                       TLS_IP=
+++++.stackenv:source:13                       HOST_IPV6=::1
+++++.stackenv:source:14                       SERVICE_IP_VERSION=4
+++++.stackenv:source:15                       TUNNEL_ENDPOINT_IP=192.168.95.93
+++++.stackenv:source:16                       TUNNEL_IP_VERSION=4
++++openrc:source:29                          export OS_CACERT
++++openrc:source:33                          source /opt/stack/devstack/lib/tls
+++++lib/tls:source:38                         is_service_enabled tls-proxy
+++++functions-common:is_service_enabled:2079  return 1
++++++lib/tls:source:43                         hostname -f
+++++lib/tls:source:43                         DEVSTACK_HOSTNAME=localhost
+++++lib/tls:source:44                         DEVSTACK_CERT_NAME=devstack-cert
+++++lib/tls:source:45                         DEVSTACK_CERT=/opt/stack/data/devstack-cert.pem
+++++lib/tls:source:48                         ROOT_CA_DIR=/opt/stack/data/CA/root-ca
+++++lib/tls:source:49                         INT_CA_DIR=/opt/stack/data/CA/int-ca
+++++lib/tls:source:51                         ORG_NAME=OpenStack
+++++lib/tls:source:52                         ORG_UNIT_NAME=DevStack
+++++lib/tls:source:55                         STUD_PROTO=--tls
+++++lib/tls:source:56                         STUD_CIPHERS='TLSv1+HIGH:!DES:!aNULL:!eNULL:@STRENGTH'
+++++lib/tls:source:63                         OPENSSL=/usr/bin/openssl
++++openrc:source:36                          export OS_AUTH_TYPE=password
++++openrc:source:36                          OS_AUTH_TYPE=password
++++openrc:source:37                          export OS_PROJECT_NAME=demo
++++openrc:source:37                          OS_PROJECT_NAME=demo
++++openrc:source:38                          export OS_USERNAME=demo
++++openrc:source:38                          OS_USERNAME=demo
++++openrc:source:39                          export OS_PASSWORD=SuperSecret123
++++openrc:source:39                          OS_PASSWORD=SuperSecret123
++++openrc:source:40                          export OS_REGION_NAME=RegionOne
++++openrc:source:40                          OS_REGION_NAME=RegionOne
++++openrc:source:48                          [[ 4 == 6 ]]
++++openrc:source:53                          HOST_IP=192.168.95.93
++++openrc:source:54                          SERVICE_HOST=192.168.95.93
++++openrc:source:55                          GLANCE_HOST=192.168.95.93
++++openrc:source:59                          KEYSTONE_BACKUP=http://192.168.95.93:5000
++++openrc:source:60                          KEYSTONE_SERVICE_URI=http://192.168.95.93/identity
++++openrc:source:62                          export OS_AUTH_URL=http://192.168.95.93/identity
++++openrc:source:62                          OS_AUTH_URL=http://192.168.95.93/identity
++++openrc:source:64                          export OS_USER_DOMAIN_ID=default
++++openrc:source:64                          OS_USER_DOMAIN_ID=default
++++openrc:source:65                          export OS_PROJECT_DOMAIN_ID=default
++++openrc:source:65                          OS_PROJECT_DOMAIN_ID=default
++++openrc:source:68                          [[ ! -v OS_CACERT ]]
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:369  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin username demo
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:370  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin password SuperSecret123
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:371  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin project_name demo
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:372  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin auth_url http://192.168.95.93/identity
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:373  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin user_domain_id default
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:374  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin project_domain_id default
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:375  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin user_domain_name
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:376  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin project_domain_name
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:377  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin region RegionOne
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:379  source /opt/stack/devstack/openrc admin admin
++++openrc:source:10                          [[ -n admin ]]
++++openrc:source:11                          OS_USERNAME=admin
++++openrc:source:13                          [[ -n admin ]]
++++openrc:source:14                          OS_PROJECT_NAME=admin
++++++openrc:source:18                          dirname /opt/stack/devstack/openrc
+++++openrc:source:18                          cd /opt/stack/devstack
+++++openrc:source:18                          pwd
++++openrc:source:18                          RC_DIR=/opt/stack/devstack
++++openrc:source:21                          source /opt/stack/devstack/functions
+++++functions:source:14                       [[ -z 1 ]]
+++++functions:source:14                       return 0
++++openrc:source:24                          source /opt/stack/devstack/stackrc
+++++stackrc:source:7                          [[ -z 1 ]]
+++++stackrc:source:7                          return 0
++++openrc:source:27                          [[ -r /opt/stack/devstack/.stackenv ]]
++++openrc:source:28                          source /opt/stack/devstack/.stackenv
+++++.stackenv:source:2                        BASE_SQL_CONN=mysql+pymysql://root:SuperSecret123@127.0.0.1
+++++.stackenv:source:3                        DATA_DIR=/opt/stack/data
+++++.stackenv:source:4                        DEST=/opt/stack
+++++.stackenv:source:5                        ENABLED_SERVICES=key,n-api,n-cpu,n-cond,n-sch,n-novnc,n-api-meta,placement-api,placement-client,g-api,c-sch,c-api,c-vol,ovn-controller,ovn-northd,ovs-vswitchd,ovsdb-server,q-svc,q-ovn-agent,horizon,rabbit,tempest,mysql,etcd3,dstat,h-eng,h-api,h-api-cfn,heat-dashboard,ceilometer-acompute,ceilometer-acentral,ceilometer-anotification,gnocchi-api,gnocchi-metricd,aodh-api,aodh-notifier,aodh-evaluator,aodh-listener,neutron-api,neutron-rpc-server,neutron-periodic-workers,neutron-ovn-maintenance-worker,n-novnc-cell1,n-super-cond,n-cond-cell1
+++++.stackenv:source:6                        HOST_IP=192.168.95.93
+++++.stackenv:source:7                        KEYSTONE_SERVICE_URI=http://192.168.95.93/identity
+++++.stackenv:source:8                        LOGFILE=/opt/stack/logs/stack.sh.log.2026-01-19-125748
+++++.stackenv:source:9                        OS_CACERT=
+++++.stackenv:source:10                       SERVICE_HOST=192.168.95.93
+++++.stackenv:source:11                       STACK_USER=stack
+++++.stackenv:source:12                       TLS_IP=
+++++.stackenv:source:13                       HOST_IPV6=::1
+++++.stackenv:source:14                       SERVICE_IP_VERSION=4
+++++.stackenv:source:15                       TUNNEL_ENDPOINT_IP=192.168.95.93
+++++.stackenv:source:16                       TUNNEL_IP_VERSION=4
++++openrc:source:29                          export OS_CACERT
++++openrc:source:33                          source /opt/stack/devstack/lib/tls
+++++lib/tls:source:38                         is_service_enabled tls-proxy
+++++functions-common:is_service_enabled:2079  return 1
++++++lib/tls:source:43                         hostname -f
+++++lib/tls:source:43                         DEVSTACK_HOSTNAME=localhost
+++++lib/tls:source:44                         DEVSTACK_CERT_NAME=devstack-cert
+++++lib/tls:source:45                         DEVSTACK_CERT=/opt/stack/data/devstack-cert.pem
+++++lib/tls:source:48                         ROOT_CA_DIR=/opt/stack/data/CA/root-ca
+++++lib/tls:source:49                         INT_CA_DIR=/opt/stack/data/CA/int-ca
+++++lib/tls:source:51                         ORG_NAME=OpenStack
+++++lib/tls:source:52                         ORG_UNIT_NAME=DevStack
+++++lib/tls:source:55                         STUD_PROTO=--tls
+++++lib/tls:source:56                         STUD_CIPHERS='TLSv1+HIGH:!DES:!aNULL:!eNULL:@STRENGTH'
+++++lib/tls:source:63                         OPENSSL=/usr/bin/openssl
++++openrc:source:36                          export OS_AUTH_TYPE=password
++++openrc:source:36                          OS_AUTH_TYPE=password
++++openrc:source:37                          export OS_PROJECT_NAME=admin
++++openrc:source:37                          OS_PROJECT_NAME=admin
++++openrc:source:38                          export OS_USERNAME=admin
++++openrc:source:38                          OS_USERNAME=admin
++++openrc:source:39                          export OS_PASSWORD=SuperSecret123
++++openrc:source:39                          OS_PASSWORD=SuperSecret123
++++openrc:source:40                          export OS_REGION_NAME=RegionOne
++++openrc:source:40                          OS_REGION_NAME=RegionOne
++++openrc:source:48                          [[ 4 == 6 ]]
++++openrc:source:53                          HOST_IP=192.168.95.93
++++openrc:source:54                          SERVICE_HOST=192.168.95.93
++++openrc:source:55                          GLANCE_HOST=192.168.95.93
++++openrc:source:59                          KEYSTONE_BACKUP=http://192.168.95.93:5000
++++openrc:source:60                          KEYSTONE_SERVICE_URI=http://192.168.95.93/identity
++++openrc:source:62                          export OS_AUTH_URL=http://192.168.95.93/identity
++++openrc:source:62                          OS_AUTH_URL=http://192.168.95.93/identity
++++openrc:source:64                          export OS_USER_DOMAIN_ID=default
++++openrc:source:64                          OS_USER_DOMAIN_ID=default
++++openrc:source:65                          export OS_PROJECT_DOMAIN_ID=default
++++openrc:source:65                          OS_PROJECT_DOMAIN_ID=default
++++openrc:source:68                          [[ ! -v OS_CACERT ]]
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:380  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin admin_username admin
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:381  iniset /opt/stack/tempest/etc/tempest.conf heat_plugin admin_password SuperSecret123
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:382  export OS_CLOUD=devstack-admin
+++/opt/stack/heat/devstack/lib/heat:configure_tempest_for_heat:382  OS_CLOUD=devstack-admin
+++/opt/stack/heat/devstack/plugin.sh:source:41  [[ stack == \u\n\s\t\a\c\k ]]
+++/opt/stack/heat/devstack/plugin.sh:source:45  [[ stack == \c\l\e\a\n ]]
++functions-common:run_plugins:1842         for plugin in ${plugins//,/ }
++functions-common:run_plugins:1843         local dir=/opt/stack/heat-dashboard
++functions-common:run_plugins:1844         [[ -f /opt/stack/heat-dashboard/devstack/plugin.sh ]]
++functions-common:run_plugins:1845         source /opt/stack/heat-dashboard/devstack/plugin.sh stack test-config
+++++/opt/stack/heat-dashboard/devstack/plugin.sh:source:3  dirname /opt/stack/heat-dashboard/devstack/plugin.sh
++++/opt/stack/heat-dashboard/devstack/plugin.sh:source:3  cd /opt/stack/heat-dashboard/devstack/..
++++/opt/stack/heat-dashboard/devstack/plugin.sh:source:3  pwd
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:3  HEAT_DASHBOARD_DIR=/opt/stack/heat-dashboard
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:30  is_service_enabled heat-dashboard
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:32  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:32  [[ test-config == \p\r\e\-\i\n\s\t\a\l\l ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:37  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:37  [[ test-config == \i\n\s\t\a\l\l ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:42  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:42  [[ test-config == \p\o\s\t\-\c\o\n\f\i\g ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:47  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:47  [[ test-config == \e\x\t\r\a ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:52  [[ stack == \u\n\s\t\a\c\k ]]
+++/opt/stack/heat-dashboard/devstack/plugin.sh:source:57  [[ stack == \c\l\e\a\n ]]
++functions-common:run_plugins:1842         for plugin in ${plugins//,/ }
++functions-common:run_plugins:1843         local dir=/opt/stack/ceilometer
++functions-common:run_plugins:1844         [[ -f /opt/stack/ceilometer/devstack/plugin.sh ]]
++functions-common:run_plugins:1845         source /opt/stack/ceilometer/devstack/plugin.sh stack test-config
+++/opt/stack/ceilometer/devstack/plugin.sh:source:46  [[ False = True ]]
++++/opt/stack/ceilometer/devstack/plugin.sh:source:50  get_python_exec_prefix
++++inc/python:get_python_exec_prefix:80      [[ True == \T\r\u\e ]]
++++inc/python:get_python_exec_prefix:81      echo /opt/stack/data/venv/bin
+++/opt/stack/ceilometer/devstack/plugin.sh:source:50  CEILOMETER_BIN_DIR=/opt/stack/data/venv/bin
+++/opt/stack/ceilometer/devstack/plugin.sh:source:319  is_service_enabled ceilometer
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/ceilometer/devstack/plugin.sh:source:320  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:320  [[ test-config == \p\r\e\-\i\n\s\t\a\l\l ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:324  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:324  [[ test-config == \i\n\s\t\a\l\l ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:328  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:328  [[ test-config == \p\o\s\t\-\c\o\n\f\i\g ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:333  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:333  [[ test-config == \e\x\t\r\a ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:339  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:339  [[ test-config == \t\e\s\t\-\c\o\n\f\i\g ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:340  iniset /opt/stack/tempest/etc/tempest.conf telemetry alarm_granularity 60
+++/opt/stack/ceilometer/devstack/plugin.sh:source:341  iniset /opt/stack/tempest/etc/tempest.conf telemetry alarm_threshold 10000000
+++/opt/stack/ceilometer/devstack/plugin.sh:source:342  iniset /opt/stack/tempest/etc/tempest.conf telemetry alarm_metric_name cpu
+++/opt/stack/ceilometer/devstack/plugin.sh:source:343  iniset /opt/stack/tempest/etc/tempest.conf telemetry alarm_aggregation_method rate:mean
+++/opt/stack/ceilometer/devstack/plugin.sh:source:346  [[ stack == \u\n\s\t\a\c\k ]]
+++/opt/stack/ceilometer/devstack/plugin.sh:source:351  [[ stack == \c\l\e\a\n ]]
++functions-common:run_plugins:1842         for plugin in ${plugins//,/ }
++functions-common:run_plugins:1843         local dir=/opt/stack/aodh
++functions-common:run_plugins:1844         [[ -f /opt/stack/aodh/devstack/plugin.sh ]]
++functions-common:run_plugins:1845         source /opt/stack/aodh/devstack/plugin.sh stack test-config
+++/opt/stack/aodh/devstack/plugin.sh:source:15  [[ False = True ]]
++++/opt/stack/aodh/devstack/plugin.sh:source:19  get_python_exec_prefix
++++inc/python:get_python_exec_prefix:80      [[ True == \T\r\u\e ]]
++++inc/python:get_python_exec_prefix:81      echo /opt/stack/data/venv/bin
+++/opt/stack/aodh/devstack/plugin.sh:source:19  AODH_BIN_DIR=/opt/stack/data/venv/bin
+++/opt/stack/aodh/devstack/plugin.sh:source:190  is_service_enabled aodh
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/aodh/devstack/plugin.sh:source:191  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:191  [[ test-config == \p\r\e\-\i\n\s\t\a\l\l ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:195  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:195  [[ test-config == \i\n\s\t\a\l\l ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:199  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:199  [[ test-config == \p\o\s\t\-\c\o\n\f\i\g ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:202  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:202  [[ test-config == \e\x\t\r\a ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:208  [[ stack == \s\t\a\c\k ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:208  [[ test-config == \t\e\s\t\-\c\o\n\f\i\g ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:209  echo_summary 'Configuring Tempest for Aodh'
+++./stack.sh:echo_summary:438               [[ -t 3 ]]
+++./stack.sh:echo_summary:438               [[ True != \T\r\u\e ]]
+++./stack.sh:echo_summary:444               echo -e Configuring Tempest for Aodh
+++/opt/stack/aodh/devstack/plugin.sh:source:210  configure_tempest_for_aodh
+++/opt/stack/aodh/devstack/plugin.sh:configure_tempest_for_aodh:175  is_service_enabled tempest
+++functions-common:is_service_enabled:2079  return 0
+++/opt/stack/aodh/devstack/plugin.sh:configure_tempest_for_aodh:176  iniset /opt/stack/tempest/etc/tempest.conf service_available aodh True
+++/opt/stack/aodh/devstack/plugin.sh:source:213  [[ stack == \u\n\s\t\a\c\k ]]
+++/opt/stack/aodh/devstack/plugin.sh:source:218  [[ stack == \c\l\e\a\n ]]
++functions-common:run_plugins:1842         for plugin in ${plugins//,/ }
++functions-common:run_plugins:1843         local dir=/opt/stack/gnocchi
++functions-common:run_plugins:1844         [[ -f /opt/stack/gnocchi/devstack/plugin.sh ]]
++./stack.sh:main:1500                      merge_config_group /opt/stack/devstack/local.conf test-config
++inc/meta-config:merge_config_group:171    local localfile=/opt/stack/devstack/local.conf
++inc/meta-config:merge_config_group:171    shift
++inc/meta-config:merge_config_group:172    local matchgroups=test-config
++inc/meta-config:merge_config_group:174    [[ -r /opt/stack/devstack/local.conf ]]
++inc/meta-config:merge_config_group:176    local configfile group
++inc/meta-config:merge_config_group:177    for group in $matchgroups
+++inc/meta-config:merge_config_group:178    get_meta_section_files /opt/stack/devstack/local.conf test-config
+++inc/meta-config:get_meta_section_files:63  local file=/opt/stack/devstack/local.conf
+++inc/meta-config:get_meta_section_files:64  local matchgroup=test-config
+++inc/meta-config:get_meta_section_files:66  [[ -r /opt/stack/devstack/local.conf ]]
+++inc/meta-config:get_meta_section_files:68  awk -v matchgroup=test-config '
+        /^\[\[.+\|.*\]\]/ {
+            gsub("[][]", "", $1);
+            split($1, a, "|");
+            if (a[1] == matchgroup)
+                print a[2]
+        }
+    ' /opt/stack/devstack/local.conf
+
+=========================
+DevStack Component Timing
+ (times are in seconds)
+=========================
+wait_for_service      14
+async_wait            79
+osc                  235
+apt-get              338
+test_with_retry        0
+dbsync                 4
+pip_install          202
+apt-get-update         2
+run_process           49
+git_timed            280
+-------------------------
+Unaccounted time     308
+=========================
+Total runtime        1511
+
+=================
+ Async summary
+=================
+ Time spent in the background minus waits: 246 sec
+ Elapsed time: 1511 sec
+ Time if we did everything serially: 1757 sec
+ Speedup:  1.16281
+
+
+Post-stack database query stats:
++------------+-----------+-------+
+| db         | op        | count |
++------------+-----------+-------+
+| keystone   | SELECT    | 31867 |
+| keystone   | INSERT    |   134 |
+| keystone   | UPDATE    |    14 |
+| neutron    | DESCRIBE  |     2 |
+| neutron    | CREATE    |     1 |
+| neutron    | SHOW      |     4 |
+| nova_api   | SELECT    |    71 |
+| nova_cell0 | SELECT    |    74 |
+| nova_cell1 | SELECT    |   160 |
+| nova_cell0 | INSERT    |    12 |
+| neutron    | SELECT    |  7997 |
+| neutron    | INSERT    |   902 |
+| neutron    | DELETE    |    51 |
+| placement  | SELECT    |    34 |
+| placement  | INSERT    |    70 |
+| placement  | SET       |     4 |
+| neutron    | UPDATE    |   441 |
+| nova_cell0 | UPDATE    |    15 |
+| cinder     | SELECT    |    75 |
+| cinder     | INSERT    |     5 |
+| cinder     | UPDATE    |     7 |
+| placement  | UPDATE    |     3 |
+| nova_cell1 | INSERT    |     7 |
+| nova_cell1 | UPDATE    |    95 |
+| glance     | INSERT    |    22 |
+| nova_api   | INSERT    |    26 |
+| nova_api   | SAVEPOINT |    12 |
+| nova_api   | RELEASE   |    12 |
+| glance     | SELECT    |    29 |
+| glance     | UPDATE    |     2 |
+| heat       | SELECT    |    24 |
+| heat       | INSERT    |     4 |
+| heat       | UPDATE    |    16 |
+| gnocchi    | SELECT    |   139 |
+| gnocchi    | INSERT    |   101 |
+| gnocchi    | DESCRIBE  |    40 |
+| gnocchi    | CREATE    |    40 |
+| gnocchi    | ALTER     |    68 |
+| gnocchi    | UPDATE    |    63 |
+| cinder     | DELETE    |     1 |
+| aodh       | SELECT    |     3 |
+| keystone   | DELETE    |    17 |
++------------+-----------+-------+
+
+
+
+This is your host IP address: 192.168.95.93
+This is your host IPv6 address: ::1
+Horizon is now available at http://192.168.95.93/dashboard
+Keystone is serving at http://192.168.95.93/identity/
+The default users are: admin and demo
+The password: SuperSecret123
+
+Services are running under systemd unit files.
+For more information see:
+https://docs.openstack.org/devstack/latest/systemd.html
+
+DevStack Version: 2026.1
+Change: 174bce17f25387959ccb66813be16948b33f7249 Merge "Fix centos/rhel 9/10 dependencies" 2026-01-07 20:15:58 +0000
+OS Version: Ubuntu 22.04 jammy
+
+stack@gelani-lab-1:~/devstack$
+stack@gelani-lab-1:~/devstack$ cd /opt/stack/devstack
+stack@gelani-lab-1:~/devstack$ source openrc admin admin
+stack@gelani-lab-1:~/devstack$ openstack service list
++----------------------------------+-------------+----------------+
+| ID                               | Name        | Type           |
++----------------------------------+-------------+----------------+
+| 180b3336945f43ebadf7dd6b2ca4069f | heat-cfn    | cloudformation |
+| 21de7d2cf32c44a7b6e257987d9c1f79 | neutron     | network        |
+| 369e58471cb0480cac9fcf0dae0e6e3e | gnocchi     | metric         |
+| 3860b7f1a74e492bbd845c1068efa995 | keystone    | identity       |
+| 4e553e0151d0475ca619290a643dacd3 | placement   | placement      |
+| 941ae461896446cb90137aa0b193b718 | cinder      | block-storage  |
+| 97cf00072bad4e04ac6df5bb97a82a48 | nova_legacy | compute_legacy |
+| a8c90297b9294f23a2cb8dc9a6c1e5fb | glance      | image          |
+| ad9cf84f832d4553a86ddbb5d84f46b0 | nova        | compute        |
+| bd970d8042704dce939fe38ef44fc0ea | heat        | orchestration  |
+| dcc8c1fbabe34e01b91abca61367cf96 | aodh        | alarming       |
++----------------------------------+-------------+----------------+
+stack@gelani-lab-1:~/devstack$ openstack network list
++--------------------------------------+----------+----------------------------------------------------------------------------+
+| ID                                   | Name     | Subnets                                                                    |
++--------------------------------------+----------+----------------------------------------------------------------------------+
+| 172b9757-3f94-4b3a-8588-aaef9f5d94e3 | public   | 0f51c1e9-b2bb-4546-a208-2f911e514369, 17c9de01-9f5b-422c-b9ce-53cc4a3f2cdc |
+| 34be5cb2-fc34-4a8b-b337-41595e361e6d | heat-net | 6914f2f9-8d4e-4138-8a06-b8bbd45bb3bb                                       |
+| 68a7ad34-b3e9-48a4-a3cc-c178a4d89ddd | shared   | 13063700-83a4-402f-8cc9-0ca93ac96bf6                                       |
+| af7ee1c4-02c6-438b-8784-93690f664a47 | private  | 6adea907-730d-4318-98d5-1908d2d013fc, ee882e21-e946-48f8-9873-826e2c5e68b8 |
++--------------------------------------+----------+----------------------------------------------------------------------------+
+stack@gelani-lab-1:~/devstack$
+``` 
