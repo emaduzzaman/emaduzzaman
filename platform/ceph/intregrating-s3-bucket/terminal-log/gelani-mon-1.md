@@ -31,6 +31,9 @@ Run 'do-release-upgrade' to upgrade to it.
 
 
 Last login: Thu Jan 29 06:29:07 2026 from 192.168.95.86
+```
+# create-RGW-pools, since production engineers create them explicitly!
+```
 ubuntu@gelani-mon-1:~$ sudo ceph osd pool create rgw.meta 16
 pool 'rgw.meta' created
 ubuntu@gelani-mon-1:~$ sudo ceph osd pool create rgw.control 16
@@ -39,6 +42,9 @@ ubuntu@gelani-mon-1:~$ sudo ceph osd pool create rgw.log 16 && sudo ceph osd poo
 pool 'rgw.log' created
 pool 'rgw.buckets.data' created
 pool 'rgw.buckets.index' created
+```
+## set-Set replication (because 2-OSD-hosts-exists-in-the-lab-environment)
+```
 ubuntu@gelani-mon-1:~$ for p in rgw.meta rgw.control rgw.log rgw.buckets.data rgw.buckets.index; do
   sudo ceph osd pool set $p size 2
   sudo ceph osd pool set $p min_size 1
@@ -53,6 +59,9 @@ set pool 9 size to 2
 set pool 9 min_size to 1
 set pool 10 size to 2
 set pool 10 min_size to 1
+```
+## enabling-application-tag
+```
 ubuntu@gelani-mon-1:~$ for p in rgw.meta rgw.control rgw.log rgw.buckets.data rgw.buckets.index; do
   sudo ceph osd pool application enable $p rgw
 done
@@ -61,6 +70,9 @@ enabled application 'rgw' on pool 'rgw.control'
 enabled application 'rgw' on pool 'rgw.log'
 enabled application 'rgw' on pool 'rgw.buckets.data'
 enabled application 'rgw' on pool 'rgw.buckets.index'
+```
+# Create-single-site-production-correct-RGW-realm-zonegroup-zone
+```
 ubuntu@gelani-mon-1:~$ sudo radosgw-admin realm create --rgw-realm=gelani-realm --default
 sudo radosgw-admin zonegroup create --rgw-zonegroup=gelani-zg --master --default
 sudo radosgw-admin zone create --rgw-zone=gelani-zone \
@@ -129,6 +141,9 @@ sudo radosgw-admin zone create --rgw-zone=gelani-zone \
     "realm_id": "a0c41d39-5ae1-4297-a6e8-c4771979ffb5",
     "notif_pool": "gelani-zone.rgw.log:notif"
 }
+```
+## commit-config:
+```
 ubuntu@gelani-mon-1:~$ sudo radosgw-admin period update --commit
 2026-01-29T06:39:49.961+0000 7fd8303f0fc0  0 period (06328a00-0f33-495f-9b98-0f066c01a6e0 does not have zone 8202dc65-5965-455c-af3f-449068ca70f7 configured
 
@@ -230,16 +245,24 @@ ubuntu@gelani-mon-1:~$ sudo radosgw-admin period update --commit
     "realm_name": "gelani-realm",
     "realm_epoch": 2
 }
+```
+# deploy-RGW-service-(HA)
+```
 ubuntu@gelani-mon-1:~$ sudo ceph orch apply rgw gelani \
   --placement="2 gelani-mon-1 gelani-mon-2 gelani-mon-3" \
   --port 7480
 Scheduled rgw.gelani update...
+```
+## check-status
 ubuntu@gelani-mon-1:~$ sudo ceph orch ps --daemon_type rgw
 NAME                            HOST          PORTS   STATUS         REFRESHED  AGE  MEM USE  MEM LIM  VERSION  IMAGE ID      CONTAINER ID  
 rgw.gelani.gelani-mon-1.cceitw  gelani-mon-1  *:7480  running (13s)     6s ago  13s    84.3M        -  17.2.8   259b35566514  268d7d785ba5  
 rgw.gelani.gelani-mon-3.vbvpvz  gelani-mon-3  *:7480  running (12s)     6s ago  12s    84.5M        -  17.2.8   259b35566514  ffe260c21a4e  
 ubuntu@gelani-mon-1:~$ curl http://192.168.95.19:7480
 <?xml version="1.0" encoding="UTF-8"?><ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>anonymous</ID><DisplayName></DisplayName></Owner><Buckets></Buckets></ListAllMyBucketsResult>ubuntu@gelani-mon-1:~$ ^C
+```
+# create-production-style-S3-user
+```
 ubuntu@gelani-mon-1:~$ sudo radosgw-admin user create \
   --uid="s3admin" \
   --display-name="S3 Admin User"
@@ -281,6 +304,7 @@ ubuntu@gelani-mon-1:~$ sudo radosgw-admin user create \
     "type": "rgw",
     "mfa_ids": []
 }
+```
 
 ubuntu@gelani-mon-1:~$ sudo cephadm shell
 Inferring fsid a9625cff-fc0e-11f0-a1f6-6998182b0a5e
