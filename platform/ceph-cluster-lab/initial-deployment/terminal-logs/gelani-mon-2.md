@@ -1,87 +1,38 @@
+# update & upgrading the system
 ```
-emaduzzaman@emaduzzaman:~$ ssh ubuntu@gelani-mon-3
-ssh: Could not resolve hostname gelani-mon-3: Temporary failure in name resolution
-emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.221
-The authenticity of host '192.168.95.221 (192.168.95.221)' can't be established.
-ED25519 key fingerprint is SHA256:EnKscBVxvr221rdA7vsECKEWl6EKtNCf292oBwQ9lEk.
-This key is not known by any other names.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added '192.168.95.221' (ED25519) to the list of known hosts.
-ubuntu@192.168.95.221's password: 
-Permission denied, please try again.
-ubuntu@192.168.95.221's password: 
-Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-143-generic x86_64)
-
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/pro
-
- System information as of Tue Jan 27 12:41:36 UTC 2026
-
-  System load:  0.0               Processes:             97
-  Usage of /:   3.9% of 38.58GB   Users logged in:       0
-  Memory usage: 5%                IPv4 address for ens3: 192.168.95.221
-  Swap usage:   0%
-
-Expanded Security Maintenance for Applications is not enabled.
-
-0 updates can be applied immediately.
-
-Enable ESM Apps to receive additional future security updates.
-See https://ubuntu.com/esm or run: sudo pro status
-
-
-The list of available updates is more than a week old.
-To check for new updates run: sudo apt update
-
-
-The programs included with the Ubuntu system are free software;
-the exact distribution terms for each program are described in the
-individual files in /usr/share/doc/*/copyright.
-
-Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
-applicable law.
-
-To run a command as administrator (user "root"), use "sudo <command>".
-See "man sudo_root" for details.
-
-ubuntu@gelani-mon-3:~$ sudo passwd ubuntu
-New password: 
-Retype new password: 
-passwd: password updated successfully
-ubuntu@gelani-mon-3:~$ sudo apt update && sudo apt upgrade -y
+ubuntu@gelani-mon-2:~$ sudo apt update && sudo apt upgrade -y
 Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]                                    
-Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease                                  
 Get:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
 Get:4 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
 Get:5 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [14.1 MB]
-Get:6 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [2,904 kB]
-Get:7 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/universe Translation-en [5,652 kB]
-Get:8 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/universe amd64 c-n-f Metadata [286 kB]
-Get:9 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [217 kB]
-Get:10 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/multiverse Translation-en [112 kB]
-Get:11 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/multiverse amd64 c-n-f Metadata [8,372 B]
-Get:12 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [3,165 kB]
-Get:13 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [486 kB]
-Get:14 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [19.2 kB]
-Get:15 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [5,110 kB]
-Get:16 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [958 kB]
-Get:17 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 c-n-f Metadata [676 B]
-Get:18 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1,249 kB]
-Get:19 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [311 kB]
-Get:20 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [30.1 kB]
-Get:21 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [59.0 kB]
-Get:22 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [13.5 kB]
-Get:23 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [612 B]
-Get:24 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [69.4 kB]
-Get:25 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.5 kB]
-Get:26 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/main amd64 c-n-f Metadata [412 B]
-Get:27 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/restricted amd64 c-n-f Metadata [116 B]
-Get:28 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [31.7 kB]
-Get:29 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.9 kB]
-Get:30 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [672 B]
-Get:31 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/multiverse amd64 c-n-f Metadata [116 B]
-Get:32 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [419 kB]                          
+Get:6 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/universe Translation-en [5,652 kB]
+Get:7 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/universe amd64 c-n-f Metadata [286 kB]
+Get:8 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [217 kB]
+Get:9 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/multiverse Translation-en [112 kB]
+Get:10 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/multiverse amd64 c-n-f Metadata [8,372 B]
+Get:11 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [3,165 kB]
+Get:12 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [486 kB]
+Get:13 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [19.2 kB]
+Get:14 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [5,110 kB]
+Get:15 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [958 kB]
+Get:16 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 c-n-f Metadata [676 B]
+Get:17 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1,249 kB]
+Get:18 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [311 kB]
+Get:19 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [30.1 kB]
+Get:20 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [59.0 kB]
+Get:21 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [13.5 kB]
+Get:22 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [612 B]
+Get:23 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [69.4 kB]
+Get:24 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.5 kB]
+Get:25 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/main amd64 c-n-f Metadata [412 B]
+Get:26 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:27 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [31.7 kB]
+Get:28 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.9 kB]
+Get:29 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [672 B]
+Get:30 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports/multiverse amd64 c-n-f Metadata [116 B]
+Get:31 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [2,904 kB]                                                                                                                                                     
+Get:32 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [419 kB]                                                                                                                                                       
 Get:33 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [14.1 kB]                                                                                                                                                
 Get:34 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [4,883 kB]                                                                                                                                               
 Get:35 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [917 kB]                                                                                                                                                 
@@ -92,7 +43,7 @@ Get:39 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Met
 Get:40 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [51.1 kB]                                                                                                                                                
 Get:41 http://security.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [10.5 kB]                                                                                                                                                
 Get:42 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 c-n-f Metadata [376 B]                                                                                                                                            
-Fetched 42.7 MB in 11s (3,948 kB/s)                                                                                                                                                                                                        
+Fetched 42.7 MB in 16s (2,620 kB/s)                                                                                                                                                                                                        
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
@@ -116,43 +67,43 @@ Need to get 140 MB of archives.
 After this operation, 244 MB of additional disk space will be used.
 Get:1 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 dpkg amd64 1.21.1ubuntu2.6 [1,239 kB]
 Get:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libperl5.34 amd64 5.34.0-3ubuntu1.5 [4,797 kB]
-Get:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 perl amd64 5.34.0-3ubuntu1.5 [232 kB]                                                                                                                 
-Get:4 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 perl-base amd64 5.34.0-3ubuntu1.5 [1,761 kB]                                                                                                          
-Get:5 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 perl-modules-5.34 all 5.34.0-3ubuntu1.5 [2,977 kB]                                                                                                    
-Get:6 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gcc-12-base amd64 12.3.0-1ubuntu1~22.04.2 [20.6 kB]                                                                                                   
-Get:7 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgcc-s1 amd64 12.3.0-1ubuntu1~22.04.2 [53.9 kB]                                                                                                     
-Get:8 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libstdc++6 amd64 12.3.0-1ubuntu1~22.04.2 [699 kB]                                                                                                     
-Get:9 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libc6 amd64 2.35-0ubuntu3.12 [3,235 kB]                                                                                                               
-Get:10 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libc-bin amd64 2.35-0ubuntu3.12 [706 kB]                                                                                                             
-Get:11 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnss-systemd amd64 249.11-0ubuntu3.17 [133 kB]                                                                                                     
-Get:12 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libsystemd0 amd64 249.11-0ubuntu3.17 [317 kB]                                                                                                        
-Get:13 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 systemd-timesyncd amd64 249.11-0ubuntu3.17 [31.2 kB]                                                                                                 
-Get:14 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 systemd-sysv amd64 249.11-0ubuntu3.17 [10.5 kB]                                                                                                      
-Get:15 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpam-systemd amd64 249.11-0ubuntu3.17 [203 kB]                                                                                                     
-Get:16 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 systemd amd64 249.11-0ubuntu3.17 [4,583 kB]                                                                                                          
-Get:17 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 udev amd64 249.11-0ubuntu3.17 [1,557 kB]                                                                                                             
-Get:18 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libudev1 amd64 249.11-0ubuntu3.17 [76.7 kB]                                                                                                          
-Get:19 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libapparmor1 amd64 3.0.4-2ubuntu2.5 [39.6 kB]                                                                                                        
-Get:20 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libtasn1-6 amd64 4.18.0-4ubuntu0.2 [43.6 kB]                                                                                                         
-Get:21 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgnutls30 amd64 3.7.3-4ubuntu1.7 [967 kB]                                                                                                          
-Get:22 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libssl3 amd64 3.0.2-0ubuntu1.20 [1,905 kB]                                                                                                           
-Get:23 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10 amd64 3.10.12-1~22.04.13 [1,949 kB]                                                                                                    
-Get:24 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10 amd64 3.10.12-1~22.04.13 [508 kB]                                                                                                         
-Get:25 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-stdlib amd64 3.10.12-1~22.04.13 [1,850 kB]                                                                                             
-Get:26 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10-minimal amd64 3.10.12-1~22.04.13 [2,272 kB]                                                                                               
-Get:27 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-minimal amd64 3.10.12-1~22.04.13 [815 kB]                                                                                              
-Get:28 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libsqlite3-0 amd64 3.37.2-2ubuntu0.5 [643 kB]                                                                                                        
-Get:29 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libglib2.0-data all 2.72.4-0ubuntu2.8 [5,062 B]                                                                                                      
-Get:30 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libglib2.0-bin amd64 2.72.4-0ubuntu2.8 [80.9 kB]                                                                                                     
-Get:31 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libglib2.0-0 amd64 2.72.4-0ubuntu2.8 [1,467 kB]                                                                                                      
-Get:32 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxml2 amd64 2.9.13+dfsg-1ubuntu0.11 [765 kB]                                                                                                       
-Get:33 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 open-vm-tools amd64 2:12.3.5-3~ubuntu0.22.04.3 [747 kB]                                                                                              
-Get:34 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-wks-client amd64 2.2.27-3ubuntu2.5 [62.7 kB]                                                                                                     
-Get:35 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 dirmngr amd64 2.2.27-3ubuntu2.5 [293 kB]                                                                                                             
-Get:36 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-wks-server amd64 2.2.27-3ubuntu2.5 [57.6 kB]                                                                                                     
-Get:37 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gnupg-utils amd64 2.2.27-3ubuntu2.5 [309 kB]                                                                                                         
-Get:38 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-agent amd64 2.2.27-3ubuntu2.5 [209 kB]                                                                                                           
-Get:39 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg amd64 2.2.27-3ubuntu2.5 [519 kB]                                                                                                                 
+Get:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 perl amd64 5.34.0-3ubuntu1.5 [232 kB]
+Get:4 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 perl-base amd64 5.34.0-3ubuntu1.5 [1,761 kB]
+Get:5 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 perl-modules-5.34 all 5.34.0-3ubuntu1.5 [2,977 kB]
+Get:6 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gcc-12-base amd64 12.3.0-1ubuntu1~22.04.2 [20.6 kB]
+Get:7 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgcc-s1 amd64 12.3.0-1ubuntu1~22.04.2 [53.9 kB]
+Get:8 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libstdc++6 amd64 12.3.0-1ubuntu1~22.04.2 [699 kB]
+Get:9 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libc6 amd64 2.35-0ubuntu3.12 [3,235 kB]
+Get:10 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libc-bin amd64 2.35-0ubuntu3.12 [706 kB]
+Get:11 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnss-systemd amd64 249.11-0ubuntu3.17 [133 kB]
+Get:12 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libsystemd0 amd64 249.11-0ubuntu3.17 [317 kB]
+Get:13 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 systemd-timesyncd amd64 249.11-0ubuntu3.17 [31.2 kB]
+Get:14 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 systemd-sysv amd64 249.11-0ubuntu3.17 [10.5 kB]
+Get:15 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpam-systemd amd64 249.11-0ubuntu3.17 [203 kB]
+Get:16 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 systemd amd64 249.11-0ubuntu3.17 [4,583 kB]
+Get:17 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 udev amd64 249.11-0ubuntu3.17 [1,557 kB]
+Get:18 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libudev1 amd64 249.11-0ubuntu3.17 [76.7 kB]
+Get:19 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libapparmor1 amd64 3.0.4-2ubuntu2.5 [39.6 kB]
+Get:20 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libtasn1-6 amd64 4.18.0-4ubuntu0.2 [43.6 kB]
+Get:21 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgnutls30 amd64 3.7.3-4ubuntu1.7 [967 kB]
+Get:22 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libssl3 amd64 3.0.2-0ubuntu1.20 [1,905 kB]
+Get:23 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10 amd64 3.10.12-1~22.04.13 [1,949 kB]
+Get:24 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10 amd64 3.10.12-1~22.04.13 [508 kB]
+Get:25 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-stdlib amd64 3.10.12-1~22.04.13 [1,850 kB]
+Get:26 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10-minimal amd64 3.10.12-1~22.04.13 [2,272 kB]
+Get:27 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-minimal amd64 3.10.12-1~22.04.13 [815 kB]
+Get:28 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libsqlite3-0 amd64 3.37.2-2ubuntu0.5 [643 kB]
+Get:29 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libglib2.0-data all 2.72.4-0ubuntu2.8 [5,062 B]
+Get:30 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libglib2.0-bin amd64 2.72.4-0ubuntu2.8 [80.9 kB]
+Get:31 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libglib2.0-0 amd64 2.72.4-0ubuntu2.8 [1,467 kB]
+Get:32 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxml2 amd64 2.9.13+dfsg-1ubuntu0.11 [765 kB]
+Get:33 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 open-vm-tools amd64 2:12.3.5-3~ubuntu0.22.04.3 [747 kB]
+Get:34 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-wks-client amd64 2.2.27-3ubuntu2.5 [62.7 kB]
+Get:35 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 dirmngr amd64 2.2.27-3ubuntu2.5 [293 kB]
+Get:36 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-wks-server amd64 2.2.27-3ubuntu2.5 [57.6 kB]
+Get:37 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gnupg-utils amd64 2.2.27-3ubuntu2.5 [309 kB]
+Get:38 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-agent amd64 2.2.27-3ubuntu2.5 [209 kB]
+Get:39 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg amd64 2.2.27-3ubuntu2.5 [519 kB]
 Get:40 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpgconf amd64 2.2.27-3ubuntu2.5 [94.3 kB]                                                                                                            
 Get:41 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gnupg-l10n all 2.2.27-3ubuntu2.5 [54.5 kB]                                                                                                           
 Get:42 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 gnupg all 2.2.27-3ubuntu2.5 [315 kB]                                                                                                                 
@@ -212,7 +163,7 @@ Get:95 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main 
 Get:96 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 sosreport amd64 4.9.2-0ubuntu0~22.04.1 [367 kB]                                                                                                      
 Get:97 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 systemd-hwe-hwdb all 249.11.6 [3,668 B]                                                                                                              
 Get:98 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 cloud-init all 25.2-0ubuntu1~22.04.1 [586 kB]                                                                                                        
-Fetched 140 MB in 57s (2,438 kB/s)                                                                                                                                                                                                         
+Fetched 140 MB in 14s (9,936 kB/s)                                                                                                                                                                                                         
 Extracting templates from packages: 100%
 Preconfiguring packages ...
 (Reading database ... 64592 files and directories currently installed.)
@@ -595,35 +546,39 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-ubuntu@gelani-mon-3:~$ 
+ubuntu@gelani-mon-2:~$ 
+```
 
+# done the initial setup for to go further which include:
+* Set correct hostname
+* Add all cluster host mappings to /etc/hosts
+* Update OS & install baseline packages
+* Configure time sync
+* Disable swap (Ceph best practice)
+* Basic firewall sanity
 
-
-emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.221
-ubuntu@192.168.95.221's password:
-Permission denied, please try again.
-ubuntu@192.168.95.221's password:
+```
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.240
+ubuntu@192.168.95.240's password:
 Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-143-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
  * Management:     https://landscape.canonical.com
  * Support:        https://ubuntu.com/pro
 
- System information as of Wed Jan 28 04:52:07 UTC 2026
+ System information as of Wed Jan 28 04:51:42 UTC 2026
 
-  System load:  0.0               Processes:             101
-  Usage of /:   5.8% of 38.58GB   Users logged in:       1
-  Memory usage: 9%                IPv4 address for ens3: 192.168.95.221
+  System load:  0.0               Processes:             100
+  Usage of /:   5.7% of 38.58GB   Users logged in:       1
+  Memory usage: 8%                IPv4 address for ens3: 192.168.95.240
   Swap usage:   0%
 
- * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
-   just raised the bar for easy, resilient and secure K8s cluster deployment.
-
-   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
 
 Expanded Security Maintenance for Applications is not enabled.
 
-0 updates can be applied immediately.
+2 updates can be applied immediately.
+2 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
 
 Enable ESM Apps to receive additional future security updates.
 See https://ubuntu.com/esm or run: sudo pro status
@@ -633,15 +588,25 @@ Run 'do-release-upgrade' to upgrade to it.
 
 
 *** System restart required ***
-Last login: Wed Jan 28 04:15:31 2026 from 192.168.95.86
-ubuntu@gelani-mon-3:~$ hostnamectl --static
-gelani-mon-3
-ubuntu@gelani-mon-3:~$ hostnamectl --static
-gelani-mon-3
-ubuntu@gelani-mon-3:~$ sudo hostnamectl set-hostname gelani-mon-3
-ubuntu@gelani-mon-3:~$ hostnamectl --static
-gelani-mon-3
-ubuntu@gelani-mon-3:~$ sudo tee -a /etc/hosts >/dev/null <<'EOF'
+Last login: Wed Jan 28 04:15:12 2026 from 192.168.95.86
+ubuntu@gelani-mon-2:~$ hostnamectl
+ Static hostname: gelani-mon-2
+       Icon name: computer-vm
+         Chassis: vm
+      Machine ID: 895077f1321140409195af4127757d44
+         Boot ID: 86b32275f5b1440f8b3d23af04a3652e
+  Virtualization: kvm
+Operating System: Ubuntu 22.04.5 LTS
+          Kernel: Linux 5.15.0-143-generic
+    Architecture: x86-64
+ Hardware Vendor: OpenStack Foundation
+  Hardware Model: OpenStack Nova
+ubuntu@gelani-mon-2:~$ hostnamectl --static
+gelani-mon-2
+ubuntu@gelani-mon-2:~$ sudo hostnamectl set-hostname gelani-mon-2
+ubuntu@gelani-mon-2:~$ hostnamectl --static
+gelani-mon-2
+ubuntu@gelani-mon-2:~$ sudo tee -a /etc/hosts >/dev/null <<'EOF'
 
 # Ceph lab nodes (private)
 192.168.95.19   gelani-mon-1
@@ -650,16 +615,21 @@ ubuntu@gelani-mon-3:~$ sudo tee -a /etc/hosts >/dev/null <<'EOF'
 192.168.95.105  gelani-osd-1
 192.168.95.250  gelani-osd-2
 EOF
-ubuntu@gelani-mon-3:~$ sudo apt update && sudo apt -y upgrade && sudo apt -y install chrony curl gnupg lsb-release ca-certificates vim nano jq
+ubuntu@gelani-mon-2:~$ getent hosts gelani-mon-1 gelani-mon-2 gelani-mon-3 gelani-osd-1 gelani-osd-2
+192.168.95.19   gelani-mon-1
+192.168.95.240  gelani-mon-2
+192.168.95.221  gelani-mon-3
+192.168.95.105  gelani-osd-1
+192.168.95.250  gelani-osd-2
+ubuntu@gelani-mon-2:~$ sudo apt update && sudo apt -y upgrade && sudo apt -y install chrony curl gnupg lsb-release ca-certificates vim nano jq
 Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
 Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease
 Get:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
 Get:4 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
-Get:5 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [2,905 kB]
+Get:5 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [14.1 kB]
 Get:6 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [3,165 kB]
 Get:7 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [19.2 kB]
-Get:8 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [14.1 kB]
-Fetched 6,487 kB in 4s (1,459 kB/s)
+Fetched 3,583 kB in 4s (1,016 kB/s)
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
@@ -672,11 +642,8 @@ The following packages will be upgraded:
   libssl3 openssl
 2 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
 2 standard LTS security updates
-Need to get 3,089 kB of archives.
+Need to get 0 B/3,089 kB of archives.
 After this operation, 1,024 B of additional disk space will be used.
-Get:1 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libssl3 amd64 3.0.2-0ubuntu1.21 [1,905 kB]
-Get:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 openssl amd64 3.0.2-0ubuntu1.21 [1,184 kB]
-Fetched 3,089 kB in 3s (919 kB/s)
 Preconfiguring packages ...
 (Reading database ... 94196 files and directories currently installed.)
 Preparing to unpack .../libssl3_3.0.2-0ubuntu1.21_amd64.deb ...
@@ -736,7 +703,7 @@ Get:1 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/main amd64 chr
 Get:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/main amd64 libonig5 amd64 6.9.7.1-2build1 [172 kB]
 Get:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libjq1 amd64 1.6-2.1ubuntu3.1 [133 kB]
 Get:4 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 jq amd64 1.6-2.1ubuntu3.1 [52.5 kB]
-Fetched 647 kB in 2s (268 kB/s)
+Fetched 647 kB in 3s (193 kB/s)
 (Reading database ... 94196 files and directories currently installed.)
 Removing systemd-timesyncd (249.11-0ubuntu3.17) ...
 Selecting previously unselected package chrony.
@@ -784,65 +751,61 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-ubuntu@gelani-mon-3:~$ sudo systemctl enable --now chrony && chronyc tracking
+ubuntu@gelani-mon-2:~$ sudo systemctl enable --now chrony && chronyc tracking
 Synchronizing state of chrony.service with SysV service script with /lib/systemd/systemd-sysv-install.
 Executing: /lib/systemd/systemd-sysv-install enable chrony
-Reference ID    : B97DBE3A (prod-ntp-5.ntp4.ps5.canonical.com)
+Reference ID    : 67BA76D6 (103.186.118.214)
 Stratum         : 3
-Ref time (UTC)  : Wed Jan 28 05:07:10 2026
-System time     : 0.001275327 seconds slow of NTP time
-Last offset     : -0.001717171 seconds
-RMS offset      : 0.001717171 seconds
-Frequency       : 10.555 ppm slow
-Residual freq   : +20.290 ppm
-Skew            : 1000000.000 ppm
-Root delay      : 0.182214454 seconds
-Root dispersion : 42.845024109 seconds
-Update interval : 64.5 seconds
+Ref time (UTC)  : Wed Jan 28 05:07:14 2026
+System time     : 0.000046785 seconds fast of NTP time
+Last offset     : +0.000944226 seconds
+RMS offset      : 0.000944226 seconds
+Frequency       : 13.224 ppm slow
+Residual freq   : -0.000 ppm
+Skew            : 85.998 ppm
+Root delay      : 0.145327955 seconds
+Root dispersion : 0.004833675 seconds
+Update interval : 64.4 seconds
 Leap status     : Normal
-ubuntu@gelani-mon-3:~$ sudo swapoff -a &&  sudo sed -i.bak '/\sswap\s/ s/^/#/' /etc/fstab && free -h | grep -i swap
+ubuntu@gelani-mon-2:~$ sudo swapoff -a &&  sudo sed -i.bak '/\sswap\s/ s/^/#/' /etc/fstab && free -h | grep -i swap
 Swap:             0B          0B          0B
-ubuntu@gelani-mon-3:~$ echo "== $(hostname) ==";
+ubuntu@gelani-mon-2:~$ echo "== $(hostname) ==";
 ip -br a | grep -E 'UP|UNKNOWN' | head -n 2;
 chronyc tracking | head -n 5;
 free -h | grep -i swap
-== gelani-mon-3 ==
+== gelani-mon-2 ==
 lo               UNKNOWN        127.0.0.1/8 ::1/128
-ens3             UP             192.168.95.221/24 metric 100 fe80::f816:3eff:fe67:593f/64
-Reference ID    : B97DBE3A (prod-ntp-5.ntp1.ps5.canonical.com)
+ens3             UP             192.168.95.240/24 metric 100 fe80::f816:3eff:fe61:5ec7/64
+Reference ID    : 67BA76D6 (103.186.118.214)
 Stratum         : 3
-Ref time (UTC)  : Wed Jan 28 05:12:35 2026
-System time     : 0.003022249 seconds fast of NTP time
-Last offset     : +0.001235526 seconds
+Ref time (UTC)  : Wed Jan 28 05:09:24 2026
+System time     : 0.000867638 seconds slow of NTP time
+Last offset     : -0.001306270 seconds
 Swap:             0B          0B          0B
-ubuntu@gelani-mon-3:~$
-ubuntu@gelani-mon-3:~$ sudo ufw status
+ubuntu@gelani-mon-2:~$
+
+ubuntu@gelani-mon-2:~$ sudo ufw status
 Status: inactive
-ubuntu@gelani-mon-3:~$
+ubuntu@gelani-mon-2:~$
 
-
-ubuntu@gelani-mon-3:~$ sudo reboot
-Connection to 192.168.95.221 closed by remote host.
-Connection to 192.168.95.221 closed.
-emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.221
-ubuntu@192.168.95.221's password:
+ubuntu@gelani-mon-2:~$ sudo reboot
+Connection to 192.168.95.240 closed by remote host.
+Connection to 192.168.95.240 closed.
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.240
+ubuntu@192.168.95.240's password:
 Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-164-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
  * Management:     https://landscape.canonical.com
  * Support:        https://ubuntu.com/pro
 
- System information as of Wed Jan 28 05:49:34 UTC 2026
+ System information as of Wed Jan 28 05:49:22 UTC 2026
 
-  System load:  0.85              Processes:             104
+  System load:  0.94              Processes:             105
   Usage of /:   5.7% of 38.58GB   Users logged in:       0
-  Memory usage: 5%                IPv4 address for ens3: 192.168.95.221
+  Memory usage: 5%                IPv4 address for ens3: 192.168.95.240
   Swap usage:   0%
 
- * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
-   just raised the bar for easy, resilient and secure K8s cluster deployment.
-
-   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
 
 Expanded Security Maintenance for Applications is not enabled.
 
@@ -855,16 +818,17 @@ New release '24.04.3 LTS' available.
 Run 'do-release-upgrade' to upgrade to it.
 
 
-Last login: Wed Jan 28 04:52:08 2026 from 192.168.95.86
-ubuntu@gelani-mon-3:~$ hostname && uptime && systemctl is-active chrony &&  free -h | grep -i swap
-gelani-mon-3
- 05:50:57 up 2 min,  1 user,  load average: 0.20, 0.21, 0.08
+Last login: Wed Jan 28 04:51:42 2026 from 192.168.95.86
+ubuntu@gelani-mon-2:~$ hostname && uptime && systemctl is-active chrony &&  free -h | grep -i swap
+gelani-mon-2
+ 05:51:00 up 2 min,  1 user,  load average: 0.17, 0.22, 0.09
 active
 Swap:             0B          0B          0B
-ubuntu@gelani-mon-3:~$
-
-
-ubuntu@gelani-mon-3:~$ sudo apt update
+ubuntu@gelani-mon-2:~$
+```
+# Install container engine
+```
+ubuntu@gelani-mon-2:~$ sudo apt update
 sudo apt install -y docker.io
 sudo systemctl enable --now docker
 Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
@@ -896,7 +860,7 @@ Get:5 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main a
 Get:6 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 dnsmasq-base amd64 2.90-0ubuntu0.22.04.1 [374 kB]
 Get:7 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 docker.io amd64 28.2.2-0ubuntu1~22.04.1 [28.4 MB]
 Get:8 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy/universe amd64 ubuntu-fan all 0.12.16 [35.2 kB]
-Fetched 76.3 MB in 7s (11.4 MB/s)
+Fetched 76.3 MB in 10s (7,277 kB/s)
 Preconfiguring packages ...
 Selecting previously unselected package pigz.
 (Reading database ... 94256 files and directories currently installed.)
@@ -951,10 +915,9 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-ubuntu@gelani-mon-3:~$ docker --version
+ubuntu@gelani-mon-2:~$ docker --version
 systemctl is-active docker
 Docker version 28.2.2, build 28.2.2-0ubuntu1~22.04.1
 active
-ubuntu@gelani-mon-3:~$
 
 ```
