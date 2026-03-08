@@ -1,3 +1,4 @@
+```
 emaduzzaman@KAZI-EMADUZZAMAN-2700:~/.ssh$ chmod 700 wireguard-server.pem
 emaduzzaman@KAZI-EMADUZZAMAN-2700:~/.ssh$ ssh -i wireguard-server.pem ubuntu@160.191.150.171
 Welcome to Ubuntu 24.04.2 LTS (GNU/Linux 6.8.0-62-generic x86_64)
@@ -1405,3 +1406,5 @@ root@wireguard:/etc/wireguard# cat /etc/wireguard/server_public.key
 WFFZlfG9f+j41Y7QUUARKh1lnzzjFA/eOjVevERVUFY=
 root@wireguard:/etc/wireguard# curl -4 ifconfig.me
 root@wireguard:/etc/wireguard#
+
+```
