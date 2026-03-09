@@ -35,7 +35,7 @@ Double-click **PortNumber**
 1. Type the new port: `50465` (see note below about port selection)
 2. Click **OK**
 
-> **📌 Choosing a Safe Port Number:**
+> **Choosing a Safe Port Number:**
 > 
 > **Recommended Port Range:** `49152 - 65535` (Dynamic/Private Ports)
 > 
@@ -57,6 +57,7 @@ Double-click **PortNumber**
 
 ### Step 02.1
 Press the **Windows key** and search for **"Windows Defender Firewall with Advanced Security"**
+
 ![Description](ss/step-6.png)
 
 ### Step 02.2
