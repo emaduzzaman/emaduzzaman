@@ -1,0 +1,22 @@
+```
+emaduzzaman@emaduzzaman:~$ sudo systemctl disable anydesk
+[sudo] password for emaduzzaman:
+emaduzzaman@emaduzzaman:~$ sudo systemctl status anydesk
+○ anydesk.service - AnyDesk
+     Loaded: loaded (/etc/systemd/system/anydesk.service; disabled; preset: enabled)
+     Active: inactive (dead)
+
+Mar 09 09:08:53 emaduzzaman systemd[1]: /etc/systemd/system/anydesk.service:9: PIDFile= references a path below legacy directory /var/run/, updating /var/run/anydesk.pid → /run/anydesk.pid; please update the unit file accordingly.
+Mar 09 09:08:53 emaduzzaman systemd[1]: /etc/systemd/system/anydesk.service:9: PIDFile= references a path below legacy directory /var/run/, updating /var/run/anydesk.pid → /run/anydesk.pid; please update the unit file accordingly.
+Mar 09 09:09:01 emaduzzaman systemd[1]: /etc/systemd/system/anydesk.service:9: PIDFile= references a path below legacy directory /var/run/, updating /var/run/anydesk.pid → /run/anydesk.pid; please update the unit file accordingly.
+emaduzzaman@emaduzzaman:~$ ls ~/.config/autostart
+emaduzzaman@emaduzzaman:~$ ls /etc/xdg/autostart | grep -i anydesk
+anydesk_global_tray.desktop
+emaduzzaman@emaduzzaman:~$ sudo mv /etc/xdg/autostart/anydesk.desktop /etc/xdg/autostart/anydesk.desktop.disabled
+mv: cannot stat '/etc/xdg/autostart/anydesk.desktop': No such file or directory
+emaduzzaman@emaduzzaman:~$ sudo mv /etc/xdg/autostart/anydesk_global_tray.desktop /etc/xdg/autostart/anydesk_global_tray.desktop.disabled
+emaduzzaman@emaduzzaman:~$ ps aux | grep anydesk
+emaduzz+    4055  0.0  0.0   9640  2432 pts/1    S+   09:11   0:00 grep --color=auto anydesk
+emaduzzaman@emaduzzaman:~$ sudo systemctl disable --now anydesk.service
+emaduzzaman@emaduzzaman:~$
+```
