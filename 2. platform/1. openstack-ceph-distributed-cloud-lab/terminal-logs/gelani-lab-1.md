@@ -40691,7 +40691,7 @@ ubuntu@ubuntu-22:~$
 
 ```
 
-![finally-net-issue-solution-created-a-new-vm-22-for-testing-and-this-worked.png](/home/emaduzzaman/Desktop/os-automation-project/screen-shots/finally-net-issue-solution-created-a-new-vm-22-for-testing-and-this-worked.png)
+![finally-net-issue-solution-created-a-new-vm-22-for-testing-and-this-worked.png](ss/finally-net-issue-solution-created-a-new-vm-22-for-testing-and-this-worked.png)
 
 # checking again if there is any issue in the networking connectivity of the created virtual machine's
 
@@ -43405,7 +43405,36 @@ ubuntu@gelani-lab-1:~/images$ openstack security group list
 | f20af708-65a7-4a7a-a4a7-899a97fd2406 | default | Default security group | 74a530ca6d4142cbbdcf25dd6b640a81 | []   | False  |
 +--------------------------------------+---------+------------------------+----------------------------------+------+--------+
 ubuntu@gelani-lab-1:~/images$ 
+emaduzzaman@emaduzzaman:~$ ssh ubuntu@192.168.95.23
+ubuntu@192.168.95.23's password: 
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-171-generic x86_64)
 
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Mar  9 08:10:56 UTC 2026
+
+  System load:  0.14               Processes:             403
+  Usage of /:   41.1% of 96.73GB   Users logged in:       0
+  Memory usage: 41%                IPv4 address for ens3: 192.168.95.23
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+18 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+Last login: Sat Mar  7 20:39:29 2026 from 192.168.95.86
+ubuntu@gelani-lab-1:~$ 
 
 
 
