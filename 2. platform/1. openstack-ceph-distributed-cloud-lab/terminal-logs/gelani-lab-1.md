@@ -43536,6 +43536,32 @@ ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
 ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
 ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
 ubuntu@gelani-lab-1:/opt/stack/devstack$ 
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ssh debian@172.24.4.190
+debian@172.24.4.190's password: 
+Linux debian-11 5.10.0-38-amd64 #1 SMP Debian 5.10.249-1 (2026-02-10) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Feb 26 04:41:52 2026 from 172.24.4.136
+debian@debian-11:~$ sudo apt update && sudo apt upgrade -y
+Hit:1 http://deb.debian.org/debian bullseye InRelease
+Get:2 http://security.debian.org/debian-security bullseye-security InRelease [27.2 kB]
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+Fetched 27.2 kB in 1s (35.1 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+debian@debian-11:~$ 
 
 ```
 
