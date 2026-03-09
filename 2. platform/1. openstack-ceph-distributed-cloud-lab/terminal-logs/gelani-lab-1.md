@@ -43435,36 +43435,126 @@ Learn more about enabling ESM Apps service at https://ubuntu.com/esm
 
 Last login: Sat Mar  7 20:39:29 2026 from 192.168.95.86
 ubuntu@gelani-lab-1:~$ 
+ubuntu@gelani-lab-1:~$ cd /opt/stack/devstack
+ubuntu@gelani-lab-1:/opt/stack/devstack$ source openrc admin admin
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server list
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+| ID                                   | Name      | Status  | Networks                         | Image                    | Flavor   |
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+| 36c88e9c-7e00-4849-af6f-6a45d0e0f9fc | alma-10   | SHUTOFF | private=10.0.0.158, 172.24.4.33  | N/A (booted from volume) | m1.small |
+| 2e339260-569d-40fb-94f2-ff26d68fa74d | debian-11 | SHUTOFF | private=10.0.0.88, 172.24.4.190  | N/A (booted from volume) | m1.small |
+| abcff3fe-3f6d-48fd-baba-a7565e71f26a | ubuntu-20 | SHUTOFF | private=10.0.0.198, 172.24.4.18  | N/A (booted from volume) | m1.small |
+| 61564dab-c835-420d-82a9-b4b6672480b0 | ubuntu-18 | SHUTOFF | private=10.0.0.21, 172.24.4.59   | N/A (booted from volume) | m1.small |
+| f7827631-9878-4000-bff5-cc4f08624f37 | debian-12 | SHUTOFF | private=10.0.0.11, 172.24.4.136  | N/A (booted from volume) | m1.small |
+| 215e7781-a397-4655-9cab-f42d0b5296fd | ubuntu-24 | SHUTOFF | private=10.0.0.37, 172.24.4.118  | N/A (booted from volume) | m1.small |
+| dc6a0c5a-ba77-4c9b-83c5-cf71469738e7 | ubuntu-22 | SHUTOFF | private=10.0.0.149, 172.24.4.108 | N/A (booted from volume) | m1.small |
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server start debian-11
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server list
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+| ID                                   | Name      | Status  | Networks                         | Image                    | Flavor   |
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+| 36c88e9c-7e00-4849-af6f-6a45d0e0f9fc | alma-10   | SHUTOFF | private=10.0.0.158, 172.24.4.33  | N/A (booted from volume) | m1.small |
+| 2e339260-569d-40fb-94f2-ff26d68fa74d | debian-11 | SHUTOFF | private=10.0.0.88, 172.24.4.190  | N/A (booted from volume) | m1.small |
+| abcff3fe-3f6d-48fd-baba-a7565e71f26a | ubuntu-20 | SHUTOFF | private=10.0.0.198, 172.24.4.18  | N/A (booted from volume) | m1.small |
+| 61564dab-c835-420d-82a9-b4b6672480b0 | ubuntu-18 | SHUTOFF | private=10.0.0.21, 172.24.4.59   | N/A (booted from volume) | m1.small |
+| f7827631-9878-4000-bff5-cc4f08624f37 | debian-12 | SHUTOFF | private=10.0.0.11, 172.24.4.136  | N/A (booted from volume) | m1.small |
+| 215e7781-a397-4655-9cab-f42d0b5296fd | ubuntu-24 | SHUTOFF | private=10.0.0.37, 172.24.4.118  | N/A (booted from volume) | m1.small |
+| dc6a0c5a-ba77-4c9b-83c5-cf71469738e7 | ubuntu-22 | SHUTOFF | private=10.0.0.149, 172.24.4.108 | N/A (booted from volume) | m1.small |
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server list
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+| ID                                   | Name      | Status  | Networks                         | Image                    | Flavor   |
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+| 36c88e9c-7e00-4849-af6f-6a45d0e0f9fc | alma-10   | SHUTOFF | private=10.0.0.158, 172.24.4.33  | N/A (booted from volume) | m1.small |
+| 2e339260-569d-40fb-94f2-ff26d68fa74d | debian-11 | ACTIVE  | private=10.0.0.88, 172.24.4.190  | N/A (booted from volume) | m1.small |
+| abcff3fe-3f6d-48fd-baba-a7565e71f26a | ubuntu-20 | SHUTOFF | private=10.0.0.198, 172.24.4.18  | N/A (booted from volume) | m1.small |
+| 61564dab-c835-420d-82a9-b4b6672480b0 | ubuntu-18 | SHUTOFF | private=10.0.0.21, 172.24.4.59   | N/A (booted from volume) | m1.small |
+| f7827631-9878-4000-bff5-cc4f08624f37 | debian-12 | SHUTOFF | private=10.0.0.11, 172.24.4.136  | N/A (booted from volume) | m1.small |
+| 215e7781-a397-4655-9cab-f42d0b5296fd | ubuntu-24 | SHUTOFF | private=10.0.0.37, 172.24.4.118  | N/A (booted from volume) | m1.small |
+| dc6a0c5a-ba77-4c9b-83c5-cf71469738e7 | ubuntu-22 | SHUTOFF | private=10.0.0.149, 172.24.4.108 | N/A (booted from volume) | m1.small |
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ping 172.24.4.190
+PING 172.24.4.190 (172.24.4.190) 56(84) bytes of data.
+^C
+--- 172.24.4.190 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2056ms
 
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ping 172.24.4.190
+PING 172.24.4.190 (172.24.4.190) 56(84) bytes of data.
+^C
+--- 172.24.4.190 ping statistics ---
+1 packets transmitted, 0 received, 100% packet loss, time 0ms
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
+ubuntu@gelani-lab-1:/opt/stack/devstack$ # again shit happens!! same issue netis not working!
+ubuntu@gelani-lab-1:/opt/stack/devstack$ 
+```
+# Again fix this with same process: 
+```
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo ip addr flush dev br-ex
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo ip addr add 172.24.4.1/24 dev br-ex
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo ip link set br-ex up
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo iptables -t nat -C POSTROUTING -s 172.24.4.0/24 -o ens3 -j MASQUERADE 2>/dev/null || \
+sudo iptables -t nat -A POSTROUTING -s 172.24.4.0/24 -o ens3 -j MASQUERADE
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ip a show br-ex
+5: br-ex: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether 42:97:f0:4e:6c:45 brd ff:ff:ff:ff:ff:ff
+    inet 172.24.4.1/24 scope global br-ex
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4097:f0ff:fe4e:6c45/64 scope link 
+       valid_lft forever preferred_lft forever
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sysctl net.ipv4.ip_forward
+net.ipv4.ip_forward = 1
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo iptables -t nat -L POSTROUTING -n -v
+Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 221K   13M LIBVIRT_PRT  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 MASQUERADE  all  --  *      ens3    172.24.4.0/24        0.0.0.0/0           
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ping 172.24.4.190
+PING 172.24.4.190 (172.24.4.190) 56(84) bytes of data.
+64 bytes from 172.24.4.190: icmp_seq=1 ttl=63 time=1.87 ms
+64 bytes from 172.24.4.190: icmp_seq=2 ttl=63 time=0.663 ms
+64 bytes from 172.24.4.190: icmp_seq=3 ttl=63 time=0.399 ms
+64 bytes from 172.24.4.190: icmp_seq=4 ttl=63 time=0.436 ms
+^C
+--- 172.24.4.190 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3037ms
+rtt min/avg/max/mdev = 0.399/0.841/1.866/0.600 ms
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ^C
+ubuntu@gelani-lab-1:/opt/stack/devstack$ 
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
