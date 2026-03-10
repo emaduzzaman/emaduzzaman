@@ -1,0 +1,2 @@
+# OS Automation Project for OpenStack
+A pipeline-driven image factory that automatically downloads upstream cloud OS images, provisions and updates them in temporary OpenStack instances, validates them, and publishes versioned production-ready Glance images backed by Ceph RBD for use in future VM deployments.

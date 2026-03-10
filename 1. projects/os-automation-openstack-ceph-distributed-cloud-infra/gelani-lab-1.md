@@ -1,5 +1,3 @@
-
-
 # Project - os automation 101
 ```
 ubuntu@gelani-lab-1:~$ sudo apt update && sudo apt upgrade -y
@@ -554,3 +552,796 @@ ubuntu@gelani-lab-1:~$ openstack console url show ubuntu-24
 | type     | novnc                                                                                        |
 | url      | http://192.168.95.93:6080/vnc_lite.html?path=%3Ftoken%3D6c932541-3707-467a-92db-2447fbb72d5a |
 +----------+----------------------------------------------------------------------------------------------+
+```
+# Study and Preparation Before the project
+## Create a new vm to check the kerenl related stuffs
+```
+ubuntu@gelani-lab-1:~$ openstack image list
++--------------------------------------+-----------+--------+
+| ID                                   | Name      | Status |
++--------------------------------------+-----------+--------+
+| 151fa56a-92e5-4a05-82bb-f4472394d3d9 | alma-10   | active |
+| f339488c-2c82-4e7d-ab70-d57a4d2c1ade | cirros    | active |
+| a05bfffb-5b9a-468e-b9a7-45e541d6e1c7 | debian-11 | active |
+| 8c2f2ee0-458e-4370-8cfa-e5e145402142 | debian-12 | active |
+| 5a2209bd-847e-4948-87e2-e66b1109f4eb | fedora-40 | active |
+| fbb9bfc0-3dc0-4f20-b230-e046473fe629 | rocky-9   | active |
+| 9bd72412-c33b-49a4-8917-396c9dd3741f | ubuntu-18 | active |
+| b5a9da1c-2fd0-404d-9e39-e7ea9a50acfb | ubuntu-20 | active |
+| c218d57e-3393-4283-8a6c-fe74551e9ea2 | ubuntu-22 | active |
+| b522ceff-bea1-465d-9dbb-ebb567769ef4 | ubuntu-24 | active |
++--------------------------------------+-----------+--------+
+ubuntu@gelani-lab-1:~$ cd raw-image/
+ubuntu@gelani-lab-1:~/raw-image$ ls
+alma-10.qcow2  bionic-server-cloudimg-amd64.img  cirros.img                        debian-11.qcow2  fedora-40.qcow2  noble.img      ubuntu-20.04.qcow2
+base-image     cirros-0.6.3-x86_64-disk.img      debian-11.11.0-amd64-netinst.iso  debian-12.qcow2  jammy.img        rocky-9.qcow2
+ubuntu@gelani-lab-1:~/raw-image$ openstack image create ubuntu-24-test   --file ubuntu-24.qcow2  --disk-format qcow2   --container-format bare   --public
+'ubuntu-24.qcow2' is not a valid file
+ubuntu@gelani-lab-1:~/raw-image$ ls
+alma-10.qcow2  bionic-server-cloudimg-amd64.img  cirros.img                        debian-11.qcow2  fedora-40.qcow2  noble.img      ubuntu-20.04.qcow2
+base-image     cirros-0.6.3-x86_64-disk.img      debian-11.11.0-amd64-netinst.iso  debian-12.qcow2  jammy.img        rocky-9.qcow2
+ubuntu@gelani-lab-1:~/raw-image$ cd base-image/
+ubuntu@gelani-lab-1:~/raw-image/base-image$ ls
+jammy.img
+ubuntu@gelani-lab-1:~/raw-image/base-image$ cd ..
+ubuntu@gelani-lab-1:~/raw-image$ rm base-image/
+rm: cannot remove 'base-image/': Is a directory
+ubuntu@gelani-lab-1:~/raw-image$ rm -r base-image/
+ubuntu@gelani-lab-1:~/raw-image$ ls
+alma-10.qcow2  bionic-server-cloudimg-amd64.img  cirros-0.6.3-x86_64-disk.img  cirros.img  debian-11.11.0-amd64-netinst.iso  debian-11.qcow2  debian-12.qcow2  fedora-40.qcow2  jammy.img  noble.img  rocky-9.qcow2  ubuntu-20.04.qcow2
+ubuntu@gelani-lab-1:~/raw-image$ openstack image create ubuntu-24-test-os-automation-project   --file ubuntu-24.qcow2  --disk-format qcow2   --container-format bare   --public
+'ubuntu-24.qcow2' is not a valid file
+ubuntu@gelani-lab-1:~/raw-image$ mv noble.img noble.qcow2
+ubuntu@gelani-lab-1:~/raw-image$ ls
+alma-10.qcow2  bionic-server-cloudimg-amd64.img  cirros-0.6.3-x86_64-disk.img  cirros.img  debian-11.11.0-amd64-netinst.iso  debian-11.qcow2  debian-12.qcow2  fedora-40.qcow2  jammy.img  noble.qcow2  rocky-9.qcow2  ubuntu-20.04.qcow2
+ubuntu@gelani-lab-1:~/raw-image$ openstack image create ubuntu-24-test-os-automation-project   --file noble.qcow2  --disk-format qcow2   --container-format bare   --public
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field            | Value                                                                                                                                                                                                                 |
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checksum         | 90b203ff0ba04640bde95dd6b57f8201                                                                                                                                                                                      |
+| container_format | bare                                                                                                                                                                                                                  |
+| created_at       | 2026-03-10T11:43:07Z                                                                                                                                                                                                  |
+| disk_format      | qcow2                                                                                                                                                                                                                 |
+| file             | /v2/images/ea3b9ae8-c81a-4198-a2a3-4936599f84c7/file                                                                                                                                                                  |
+| id               | ea3b9ae8-c81a-4198-a2a3-4936599f84c7                                                                                                                                                                                  |
+| min_disk         | 0                                                                                                                                                                                                                     |
+| min_ram          | 0                                                                                                                                                                                                                     |
+| name             | ubuntu-24-test-os-automation-project                                                                                                                                                                                  |
+| owner            | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                                                                      |
+| properties       | os_hash_algo='sha512', os_hash_value='573490ee77f021a381db402fff4cfb9b610479284dced62197e4ca799462439edf1fb95f94f4ccdeaa09d68955342f2332ac36a9c418b057edc4d3f17b832ab8', os_hidden='False',                           |
+|                  | owner_specified.openstack.md5='', owner_specified.openstack.object='images/ubuntu-24-test-os-automation-project', owner_specified.openstack.sha256=''                                                                 |
+| protected        | False                                                                                                                                                                                                                 |
+| schema           | /v2/schemas/image                                                                                                                                                                                                     |
+| size             | 628612608                                                                                                                                                                                                             |
+| status           | active                                                                                                                                                                                                                |
+| tags             |                                                                                                                                                                                                                       |
+| updated_at       | 2026-03-10T11:43:18Z                                                                                                                                                                                                  |
+| virtual_size     | 3758096384                                                                                                                                                                                                            |
+| visibility       | public                                                                                                                                                                                                                |
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ openstack image list
++--------------------------------------+--------------------------------------+--------+
+| ID                                   | Name                                 | Status |
++--------------------------------------+--------------------------------------+--------+
+| 151fa56a-92e5-4a05-82bb-f4472394d3d9 | alma-10                              | active |
+| f339488c-2c82-4e7d-ab70-d57a4d2c1ade | cirros                               | active |
+| a05bfffb-5b9a-468e-b9a7-45e541d6e1c7 | debian-11                            | active |
+| 8c2f2ee0-458e-4370-8cfa-e5e145402142 | debian-12                            | active |
+| 5a2209bd-847e-4948-87e2-e66b1109f4eb | fedora-40                            | active |
+| fbb9bfc0-3dc0-4f20-b230-e046473fe629 | rocky-9                              | active |
+| 9bd72412-c33b-49a4-8917-396c9dd3741f | ubuntu-18                            | active |
+| b5a9da1c-2fd0-404d-9e39-e7ea9a50acfb | ubuntu-20                            | active |
+| c218d57e-3393-4283-8a6c-fe74551e9ea2 | ubuntu-22                            | active |
+| b522ceff-bea1-465d-9dbb-ebb567769ef4 | ubuntu-24                            | active |
+| ea3b9ae8-c81a-4198-a2a3-4936599f84c7 | ubuntu-24-test-os-automation-project | active |
++--------------------------------------+--------------------------------------+--------+
+ubuntu@gelani-lab-1:~/raw-image$ openstack volume type list
++--------------------------------------+-------------+-----------+
+| ID                                   | Name        | Is Public |
++--------------------------------------+-------------+-----------+
+| 67bc2259-3afb-4a0f-a065-fdc7a53e905c | ceph        | True      |
+| 08a13653-2387-4764-a42b-f334dfba6074 | lvmdriver-1 | True      |
++--------------------------------------+-------------+-----------+
+ubuntu@gelani-lab-1:~/raw-image$ openstack image create ubuntu-24-test-os-automation-project   --file ubuntu-24-test-os-automation-project.qcow2  --disk-format qcow2   --container-format bare   --public
+'ubuntu-24-test-os-automation-project.qcow2' is not a valid file
+ubuntu@gelani-lab-1:~/raw-image$ openstack volume create   --image ubuntu-24-test-os-automation-project   --size 15   --type ceph  ubuntu-24-test-os-automation-project
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-03-10T11:46:26.773107           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | fb0df5a4-61ff-4164-9143-d34742096a4b |
+| multiattach                    | False                                |
+| name                           | ubuntu-24-test-os-automation-project |
+| os-vol-host-attr:host          | None                                 |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | None                                 |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 15                                   |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | creating                             |
+| type                           | ceph                                 |
+| updated_at                     | None                                 |
+| user_id                        | 270824ef176044a2a8b64a8337e2f00a     |
+| volume_type_id                 | 67bc2259-3afb-4a0f-a065-fdc7a53e905c |
++--------------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ openstack volume list
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+| ID                                   | Name                                 | Status      | Size | Attached to                        |
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+| fb0df5a4-61ff-4164-9143-d34742096a4b | ubuntu-24-test-os-automation-project | downloading |   15 |                                    |
+| 5439f4a7-213e-46e8-b525-1ee7ae5eb146 | alma-10                              | in-use      |   20 | Attached to alma-10 on /dev/vda    |
+| 87bb916a-0c97-46cb-9ab2-5ef7f2ddeda8 | ubuntu-20                            | in-use      |   10 | Attached to ubuntu-20 on /dev/vda  |
+| bd27db9b-fcd0-4086-999b-453a0b600406 | ubuntu-18                            | in-use      |   10 | Attached to ubuntu-18 on /dev/vda  |
+| 5f69af3a-15dd-4015-a513-e06dc7ab5dc1 | debian-12                            | in-use      |   19 | Attached to debian-12 on /dev/vda  |
+| 3bacc120-4199-4931-b2a3-3abf85732a84 | debian-11                            | in-use      |   19 | Attached to debian-11 on /dev/vda  |
+| b0324125-036e-449d-80e3-bf8387f7afc7 | ubuntu-24                            | in-use      |   15 | Attached to ubuntu-24 on /dev/vda  |
+| 8ba791b3-5bf9-4b4f-8e23-603c1d216f28 | ubuntu-22                            | in-use      |   10 | Attached to ubuntu-22 on /dev/vda  |
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ openstack volume list
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+| ID                                   | Name                                 | Status      | Size | Attached to                        |
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+| fb0df5a4-61ff-4164-9143-d34742096a4b | ubuntu-24-test-os-automation-project | downloading |   15 |                                    |
+| 5439f4a7-213e-46e8-b525-1ee7ae5eb146 | alma-10                              | in-use      |   20 | Attached to alma-10 on /dev/vda    |
+| 87bb916a-0c97-46cb-9ab2-5ef7f2ddeda8 | ubuntu-20                            | in-use      |   10 | Attached to ubuntu-20 on /dev/vda  |
+| bd27db9b-fcd0-4086-999b-453a0b600406 | ubuntu-18                            | in-use      |   10 | Attached to ubuntu-18 on /dev/vda  |
+| 5f69af3a-15dd-4015-a513-e06dc7ab5dc1 | debian-12                            | in-use      |   19 | Attached to debian-12 on /dev/vda  |
+| 3bacc120-4199-4931-b2a3-3abf85732a84 | debian-11                            | in-use      |   19 | Attached to debian-11 on /dev/vda  |
+| b0324125-036e-449d-80e3-bf8387f7afc7 | ubuntu-24                            | in-use      |   15 | Attached to ubuntu-24 on /dev/vda  |
+| 8ba791b3-5bf9-4b4f-8e23-603c1d216f28 | ubuntu-22                            | in-use      |   10 | Attached to ubuntu-22 on /dev/vda  |
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ openstack volume list
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+| ID                                   | Name                                 | Status      | Size | Attached to                        |
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+| fb0df5a4-61ff-4164-9143-d34742096a4b | ubuntu-24-test-os-automation-project | downloading |   15 |                                    |
+| 5439f4a7-213e-46e8-b525-1ee7ae5eb146 | alma-10                              | in-use      |   20 | Attached to alma-10 on /dev/vda    |
+| 87bb916a-0c97-46cb-9ab2-5ef7f2ddeda8 | ubuntu-20                            | in-use      |   10 | Attached to ubuntu-20 on /dev/vda  |
+| bd27db9b-fcd0-4086-999b-453a0b600406 | ubuntu-18                            | in-use      |   10 | Attached to ubuntu-18 on /dev/vda  |
+| 5f69af3a-15dd-4015-a513-e06dc7ab5dc1 | debian-12                            | in-use      |   19 | Attached to debian-12 on /dev/vda  |
+| 3bacc120-4199-4931-b2a3-3abf85732a84 | debian-11                            | in-use      |   19 | Attached to debian-11 on /dev/vda  |
+| b0324125-036e-449d-80e3-bf8387f7afc7 | ubuntu-24                            | in-use      |   15 | Attached to ubuntu-24 on /dev/vda  |
+| 8ba791b3-5bf9-4b4f-8e23-603c1d216f28 | ubuntu-22                            | in-use      |   10 | Attached to ubuntu-22 on /dev/vda  |
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ openstack volume list
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+| ID                                   | Name                                 | Status      | Size | Attached to                        |
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+| fb0df5a4-61ff-4164-9143-d34742096a4b | ubuntu-24-test-os-automation-project | downloading |   15 |                                    |
+| 5439f4a7-213e-46e8-b525-1ee7ae5eb146 | alma-10                              | in-use      |   20 | Attached to alma-10 on /dev/vda    |
+| 87bb916a-0c97-46cb-9ab2-5ef7f2ddeda8 | ubuntu-20                            | in-use      |   10 | Attached to ubuntu-20 on /dev/vda  |
+| bd27db9b-fcd0-4086-999b-453a0b600406 | ubuntu-18                            | in-use      |   10 | Attached to ubuntu-18 on /dev/vda  |
+| 5f69af3a-15dd-4015-a513-e06dc7ab5dc1 | debian-12                            | in-use      |   19 | Attached to debian-12 on /dev/vda  |
+| 3bacc120-4199-4931-b2a3-3abf85732a84 | debian-11                            | in-use      |   19 | Attached to debian-11 on /dev/vda  |
+| b0324125-036e-449d-80e3-bf8387f7afc7 | ubuntu-24                            | in-use      |   15 | Attached to ubuntu-24 on /dev/vda  |
+| 8ba791b3-5bf9-4b4f-8e23-603c1d216f28 | ubuntu-22                            | in-use      |   10 | Attached to ubuntu-22 on /dev/vda  |
++--------------------------------------+--------------------------------------+-------------+------+------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ openstack volume list
++--------------------------------------+--------------------------------------+-----------+------+------------------------------------+
+| ID                                   | Name                                 | Status    | Size | Attached to                        |
++--------------------------------------+--------------------------------------+-----------+------+------------------------------------+
+| fb0df5a4-61ff-4164-9143-d34742096a4b | ubuntu-24-test-os-automation-project | available |   15 |                                    |
+| 5439f4a7-213e-46e8-b525-1ee7ae5eb146 | alma-10                              | in-use    |   20 | Attached to alma-10 on /dev/vda    |
+| 87bb916a-0c97-46cb-9ab2-5ef7f2ddeda8 | ubuntu-20                            | in-use    |   10 | Attached to ubuntu-20 on /dev/vda  |
+| bd27db9b-fcd0-4086-999b-453a0b600406 | ubuntu-18                            | in-use    |   10 | Attached to ubuntu-18 on /dev/vda  |
+| 5f69af3a-15dd-4015-a513-e06dc7ab5dc1 | debian-12                            | in-use    |   19 | Attached to debian-12 on /dev/vda  |
+| 3bacc120-4199-4931-b2a3-3abf85732a84 | debian-11                            | in-use    |   19 | Attached to debian-11 on /dev/vda  |
+| b0324125-036e-449d-80e3-bf8387f7afc7 | ubuntu-24                            | in-use    |   15 | Attached to ubuntu-24 on /dev/vda  |
+| 8ba791b3-5bf9-4b4f-8e23-603c1d216f28 | ubuntu-22                            | in-use    |   10 | Attached to ubuntu-22 on /dev/vda  |
++--------------------------------------+--------------------------------------+-----------+------+------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ cd ~/cloudinit-userdata/
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ls
+cloud-init-net.yaml  cloud-init-ok.yaml  cloud-init.yaml
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ pwd
+/home/ubuntu/cloudinit-userdata
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack server create   --flavor m1.small   --volume ubuntu-24-test-os-automation-project   --network private   --user-data /home/ubuntu/cloudinit-userdata/cloud-init.yaml   --config-drive true   ubuntu-24-test-os-automation-project
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                                                              |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:host                | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:hostname            | ubuntu-24-test-os-automation-project                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:instance_name       | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:kernel_id           | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:launch_index        | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:ramdisk_id          | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:reservation_id      | r-1yojj21s                                                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:user_data           | I2Nsb3VkLWNvbmZpZwpwYXNzd29yZDogMTIzNDU2NzgKY2hwYXNzd2Q6IHsgZXhwaXJlOiBGYWxzZSB9CnNzaF9wd2F1dGg6IFRydWUK                                                                                           |
+| OS-EXT-STS:power_state              | N/A                                                                                                                                                                                                |
+| OS-EXT-STS:task_state               | scheduling                                                                                                                                                                                         |
+| OS-EXT-STS:vm_state                 | building                                                                                                                                                                                           |
+| OS-SRV-USG:launched_at              | None                                                                                                                                                                                               |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                                                               |
+| accessIPv4                          | None                                                                                                                                                                                               |
+| accessIPv6                          | None                                                                                                                                                                                               |
+| addresses                           | N/A                                                                                                                                                                                                |
+| adminPass                           | Di35pceGXg3Q                                                                                                                                                                                       |
+| config_drive                        | True                                                                                                                                                                                               |
+| created                             | 2026-03-10T11:50:51Z                                                                                                                                                                               |
+| description                         | None                                                                                                                                                                                               |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small', original_name='m1.small', ram='2048',        |
+|                                     | rxtx_factor=, swap='0', vcpus='1'                                                                                                                                                                  |
+| hostId                              | None                                                                                                                                                                                               |
+| host_status                         | None                                                                                                                                                                                               |
+| id                                  | 180216ab-6e58-4062-8400-e31bd488781d                                                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                                                           |
+| key_name                            | None                                                                                                                                                                                               |
+| locked                              | None                                                                                                                                                                                               |
+| locked_reason                       | None                                                                                                                                                                                               |
+| name                                | ubuntu-24-test-os-automation-project                                                                                                                                                               |
+| pinned_availability_zone            | None                                                                                                                                                                                               |
+| progress                            | None                                                                                                                                                                                               |
+| project_id                          | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                                                   |
+| properties                          | None                                                                                                                                                                                               |
+| scheduler_hints                     |                                                                                                                                                                                                    |
+| security_groups                     | name='default'                                                                                                                                                                                     |
+| server_groups                       | None                                                                                                                                                                                               |
+| status                              | BUILD                                                                                                                                                                                              |
+| tags                                |                                                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                                                               |
+| updated                             | 2026-03-10T11:50:51Z                                                                                                                                                                               |
+| user_id                             | 270824ef176044a2a8b64a8337e2f00a                                                                                                                                                                   |
+| volumes_attached                    |                                                                                                                                                                                                    |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ watch -n2 openstack server list
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ Every 2.0s: openstack server list                                                                                                                                                                     gelani-lab-1: Tue Mar 10 11:51:12 2026
+
++--------------------------------------+--------------------------------------+---------+----------------------------------+--------------------------+----------+
+| ID                                   | Name                                 | Status  | Networks                         | Image                    | Flavor   |
++--------------------------------------+--------------------------------------+---------+----------------------------------+--------------------------+----------+
+| 180216ab-6e58-4062-8400-e31bd488781d | ubuntu-24-test-os-automation-project | ACTIVE  | private=10.0.0.132               | N/A (booted from volume) | m1.small |
+| 36c88e9c-7e00-4849-af6f-6a45d0e0f9fc | alma-10                              | SHUTOFF | private=10.0.0.158, 172.24.4.33  | N/A (booted from volume) | m1.small |
+| 2e339260-569d-40fb-94f2-ff26d68fa74d | debian-11                            | ACTIVE  | private=10.0.0.88, 172.24.4.190  | N/A (booted from volume) | m1.small |
+| abcff3fe-3f6d-48fd-baba-a7565e71f26a | ubuntu-20                            | SHUTOFF | private=10.0.0.198, 172.24.4.18  | N/A (booted from volume) | m1.small |
+| 61564dab-c835-420d-82a9-b4b6672480b0 | ubuntu-18                            | SHUTOFF | private=10.0.0.21, 172.24.4.59   | N/A (booted from volume) | m1.small |
+| f7827631-9878-4000-bff5-cc4f08624f37 | debian-12                            | SHUTOFF | private=10.0.0.11, 172.24.4.136  | N/A (booted from volume) | m1.small |
+| 215e7781-a397-4655-9cab-f42d0b5296fd | ubuntu-24                            | SHUTOFF | private=10.0.0.37, 172.24.4.118  | N/A (booted from volume) | m1.small |
+| dc6a0c5a-ba77-4c9b-83c5-cf71469738e7 | ubuntu-22                            | SHUTOFF | private=10.0.0.149, 172.24.4.108 | N/A (booted from volume) | m1.small |
++--------------------------------------+--------------------------------------+---------+----------------------------------+--------------------------+----------+
+Every: command not found
++--------------------------------------+--------------------------------------+---------+----------------------------------+--------------------------+----------+: command not found
+-bash: syntax error near unexpected token `|'
++--------------------------------------+--------------------------------------+---------+----------------------------------+--------------------------+----------+: command not found
+-bash: syntax error near unexpected token `|'
+-bash: syntax error near unexpected token `|'
+-bash: syntax error near unexpected token `|'
+-bash: syntax error near unexpected token `|'
+-bash: syntax error near unexpected token `|'
+-bash: syntax error near unexpected token `|'
+-bash: syntax error near unexpected token `|'
+-bash: syntax error near unexpected token `|'
++--------------------------------------+--------------------------------------+---------+----------------------------------+--------------------------+----------+: command not found
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ^C
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ^C
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ^C
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ^C
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ^C
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ^C
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ FIP=$(openstack floating ip create public -f value -c floating_ip_address)
+openstack server add floating ip ubuntu-24-test-os-automation-project $FIP
+echo "Floating IP: $FIP"
+Floating IP: 172.24.4.41
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ping 172.24.4.41
+PING 172.24.4.41 (172.24.4.41) 56(84) bytes of data.
+64 bytes from 172.24.4.41: icmp_seq=1 ttl=63 time=1.64 ms
+64 bytes from 172.24.4.41: icmp_seq=2 ttl=63 time=0.750 ms
+^C
+--- 172.24.4.41 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 0.750/1.194/1.639/0.444 ms
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ssh ubuntu@172.24.4.41
+The authenticity of host '172.24.4.41 (172.24.4.41)' can't be established.
+ED25519 key fingerprint is SHA256:4X6J4KdIg6WeoZK5oXr6Pi8qvl7SiEIfVzf5PveC5xE.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '172.24.4.41' (ED25519) to the list of known hosts.
+ubuntu@172.24.4.41's password: 
+Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.8.0-100-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Tue Mar 10 11:53:09 UTC 2026
+
+  System load:  0.18               Processes:             96
+  Usage of /:   12.0% of 13.49GB   Users logged in:       0
+  Memory usage: 8%                 IPv4 address for ens3: 10.0.0.132
+  Swap usage:   0%
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+```
+**Note: Created new vm and it works fine with no privous net issue and other stuffs occured!**
+### Check and study on the kernel related stuffs
+```
+ubuntu@ubuntu-24-test-os-automation-project:~$ uname -r
+6.8.0-100-generic
+ubuntu@ubuntu-24-test-os-automation-project:~$ sudo apt update && sudo apt upgrade -y
+Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]             
+Hit:2 http://nova.clouds.archive.ubuntu.com/ubuntu noble InRelease                               
+Get:3 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]              
+Get:4 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,504 kB]
+Get:5 http://security.ubuntu.com/ubuntu noble-security/main Translation-en [241 kB]
+Get:6 http://security.ubuntu.com/ubuntu noble-security/main amd64 Components [21.5 kB]
+Get:7 http://security.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [10.1 kB]
+Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [976 kB]
+Get:9 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:10 http://security.ubuntu.com/ubuntu noble-security/universe Translation-en [218 kB] 
+Get:11 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Components [74.1 kB]     
+Get:12 http://security.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [20.6 kB]     
+Get:13 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [2,599 kB]
+Get:14 http://security.ubuntu.com/ubuntu noble-security/restricted Translation-en [600 kB]  
+Get:15 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B] 
+Get:16 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 c-n-f Metadata [544 B]
+Get:17 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [28.8 kB]
+Get:18 http://security.ubuntu.com/ubuntu noble-security/multiverse Translation-en [6,732 B]
+Get:19 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+Get:20 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 c-n-f Metadata [396 B]
+Get:21 http://nova.clouds.archive.ubuntu.com/ubuntu noble/universe amd64 Packages [15.0 MB]
+Get:22 http://nova.clouds.archive.ubuntu.com/ubuntu noble/universe Translation-en [5,982 kB]
+Get:23 http://nova.clouds.archive.ubuntu.com/ubuntu noble/universe amd64 Components [3,871 kB]
+Get:24 http://nova.clouds.archive.ubuntu.com/ubuntu noble/universe amd64 c-n-f Metadata [301 kB]                                                                                                                                           
+Get:25 http://nova.clouds.archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [269 kB]                                                                                                                                               
+Get:26 http://nova.clouds.archive.ubuntu.com/ubuntu noble/multiverse Translation-en [118 kB]                                                                                                                                               
+Get:27 http://nova.clouds.archive.ubuntu.com/ubuntu noble/multiverse amd64 Components [35.0 kB]                                                                                                                                            
+Get:28 http://nova.clouds.archive.ubuntu.com/ubuntu noble/multiverse amd64 c-n-f Metadata [8,328 B]                                                                                                                                        
+Get:29 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1,806 kB]                                                                                                                                           
+Get:30 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [332 kB]                                                                                                                                             
+Get:31 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [177 kB]                                                                                                                                           
+Get:32 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 c-n-f Metadata [16.7 kB]                                                                                                                                      
+Get:33 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1,564 kB]                                                                                                                                       
+Get:34 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [318 kB]                                                                                                                                         
+Get:35 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [386 kB]                                                                                                                                       
+Get:36 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [32.9 kB]                                                                                                                                  
+Get:37 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [2,748 kB]                                                                                                                                     
+Get:38 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [632 kB]                                                                                                                                       
+Get:39 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]                                                                                                                                      
+Get:40 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 c-n-f Metadata [556 B]                                                                                                                                  
+Get:41 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [32.1 kB]                                                                                                                                      
+Get:42 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [7,044 B]                                                                                                                                      
+Get:43 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]                                                                                                                                      
+Get:44 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 c-n-f Metadata [496 B]                                                                                                                                  
+Get:45 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [40.4 kB]                                                                                                                                          
+Get:46 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/main Translation-en [9,208 B]                                                                                                                                          
+Get:47 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [7,312 B]                                                                                                                                        
+Get:48 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/main amd64 c-n-f Metadata [368 B]                                                                                                                                      
+Get:49 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [29.5 kB]                                                                                                                                      
+Get:50 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [17.9 kB]                                                                                                                                      
+Get:51 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]                                                                                                                                    
+Get:52 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/universe amd64 c-n-f Metadata [1,444 B]                                                                                                                                
+Get:53 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]                                                                                                                                    
+Get:54 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 c-n-f Metadata [116 B]                                                                                                                                
+Get:55 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]                                                                                                                                    
+Get:56 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 c-n-f Metadata [116 B]                                                                                                                                
+Fetched 40.5 MB in 12s (3,322 kB/s)                                                                                                                                                                                                        
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+26 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+The following NEW packages will be installed:
+  linux-headers-6.8.0-101 linux-headers-6.8.0-101-generic linux-image-6.8.0-101-generic linux-modules-6.8.0-101-generic linux-tools-6.8.0-101 linux-tools-6.8.0-101-generic
+The following packages will be upgraded:
+  cloud-init curl gcc-14-base libcurl3t64-gnutls libcurl4t64 libgcc-s1 libgnutls30t64 libnss3 libpython3.12-minimal libpython3.12-stdlib libpython3.12t64 libssh-4 libstdc++6 linux-base linux-headers-generic linux-headers-virtual
+  linux-image-virtual linux-libc-dev linux-tools-common linux-virtual python3-software-properties python3.12 python3.12-minimal software-properties-common sosreport systemd-hwe-hwdb
+26 upgraded, 6 newly installed, 0 to remove and 0 not upgraded.
+20 standard LTS security updates
+Need to get 95.0 MB of archives.
+After this operation, 190 MB of additional disk space will be used.
+Get:1 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12t64 amd64 3.12.3-1ubuntu0.12 [2,345 kB]
+Get:2 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12 amd64 3.12.3-1ubuntu0.12 [651 kB]
+Get:3 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-stdlib amd64 3.12.3-1ubuntu0.12 [2,069 kB]
+Get:4 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12-minimal amd64 3.12.3-1ubuntu0.12 [2,334 kB]
+Get:5 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-minimal amd64 3.12.3-1ubuntu0.12 [837 kB]
+Get:6 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-14-base amd64 14.2.0-4ubuntu2~24.04.1 [51.0 kB]
+Get:7 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 libstdc++6 amd64 14.2.0-4ubuntu2~24.04.1 [792 kB]
+Get:8 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-s1 amd64 14.2.0-4ubuntu2~24.04.1 [78.4 kB]
+Get:9 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgnutls30t64 amd64 3.8.3-1.1ubuntu3.5 [1,001 kB]
+Get:10 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 systemd-hwe-hwdb all 255.1.7 [3,716 B]
+Get:11 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 libssh-4 amd64 0.10.6-2ubuntu0.3 [190 kB]
+Get:12 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 curl amd64 8.5.0-2ubuntu10.7 [227 kB]
+Get:13 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl4t64 amd64 8.5.0-2ubuntu10.7 [342 kB]
+Get:14 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl3t64-gnutls amd64 8.5.0-2ubuntu10.7 [334 kB]
+Get:15 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnss3 amd64 2:3.98-1ubuntu0.1 [1,445 kB]
+Get:16 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-base all 4.5ubuntu9+24.04.2 [19.6 kB]
+Get:17 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-headers-6.8.0-101 all 6.8.0-101.101 [14.1 MB]
+Get:18 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-headers-6.8.0-101-generic amd64 6.8.0-101.101 [4,287 kB]
+Get:19 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-modules-6.8.0-101-generic amd64 6.8.0-101.101 [39.6 MB]
+Get:20 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-image-6.8.0-101-generic amd64 6.8.0-101.101 [14.8 MB]                                                                                                   
+Get:21 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-virtual amd64 6.8.0-101.101 [1,700 B]                                                                                                                   
+Get:22 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-image-virtual amd64 6.8.0-101.101 [11.1 kB]                                                                                                             
+Get:23 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-headers-virtual amd64 6.8.0-101.101 [1,648 B]                                                                                                           
+Get:24 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-headers-generic amd64 6.8.0-101.101 [11.0 kB]                                                                                                           
+Get:25 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-libc-dev amd64 6.8.0-101.101 [2,042 kB]                                                                                                                 
+Get:26 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-tools-common all 6.8.0-101.101 [881 kB]                                                                                                                 
+Get:27 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-tools-6.8.0-101 amd64 6.8.0-101.101 [5,541 kB]                                                                                                          
+Get:28 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-tools-6.8.0-101-generic amd64 6.8.0-101.101 [1,818 B]                                                                                                   
+Get:29 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 software-properties-common all 0.99.49.4 [14.4 kB]                                                                                                            
+Get:30 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-software-properties all 0.99.49.4 [30.0 kB]                                                                                                           
+Get:31 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 sosreport amd64 4.10.2-0ubuntu0~24.04.1 [381 kB]                                                                                                              
+Get:32 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 cloud-init all 25.3-0ubuntu1~24.04.1 [628 kB]                                                                                                                 
+Fetched 95.0 MB in 9s (11.1 MB/s)                                                                                                                                                                                                          
+Extracting templates from packages: 100%
+Preconfiguring packages ...
+(Reading database ... 74832 files and directories currently installed.)
+Preparing to unpack .../0-libpython3.12t64_3.12.3-1ubuntu0.12_amd64.deb ...
+Unpacking libpython3.12t64:amd64 (3.12.3-1ubuntu0.12) over (3.12.3-1ubuntu0.11) ...
+Preparing to unpack .../1-python3.12_3.12.3-1ubuntu0.12_amd64.deb ...
+Unpacking python3.12 (3.12.3-1ubuntu0.12) over (3.12.3-1ubuntu0.11) ...
+Preparing to unpack .../2-libpython3.12-stdlib_3.12.3-1ubuntu0.12_amd64.deb ...
+Unpacking libpython3.12-stdlib:amd64 (3.12.3-1ubuntu0.12) over (3.12.3-1ubuntu0.11) ...
+Preparing to unpack .../3-python3.12-minimal_3.12.3-1ubuntu0.12_amd64.deb ...
+Unpacking python3.12-minimal (3.12.3-1ubuntu0.12) over (3.12.3-1ubuntu0.11) ...
+Preparing to unpack .../4-libpython3.12-minimal_3.12.3-1ubuntu0.12_amd64.deb ...
+Unpacking libpython3.12-minimal:amd64 (3.12.3-1ubuntu0.12) over (3.12.3-1ubuntu0.11) ...
+Preparing to unpack .../5-gcc-14-base_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+Setting up gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+(Reading database ... 74832 files and directories currently installed.)
+Preparing to unpack .../libstdc++6_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+Setting up libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+(Reading database ... 74832 files and directories currently installed.)
+Preparing to unpack .../libgcc-s1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+Unpacking libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+Setting up libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+(Reading database ... 74832 files and directories currently installed.)
+Preparing to unpack .../libgnutls30t64_3.8.3-1.1ubuntu3.5_amd64.deb ...
+Unpacking libgnutls30t64:amd64 (3.8.3-1.1ubuntu3.5) over (3.8.3-1.1ubuntu3.4) ...
+Setting up libgnutls30t64:amd64 (3.8.3-1.1ubuntu3.5) ...
+(Reading database ... 74832 files and directories currently installed.)
+Preparing to unpack .../00-systemd-hwe-hwdb_255.1.7_all.deb ...
+Unpacking systemd-hwe-hwdb (255.1.7) over (255.1.6) ...
+Preparing to unpack .../01-libssh-4_0.10.6-2ubuntu0.3_amd64.deb ...
+Unpacking libssh-4:amd64 (0.10.6-2ubuntu0.3) over (0.10.6-2ubuntu0.2) ...
+Preparing to unpack .../02-curl_8.5.0-2ubuntu10.7_amd64.deb ...
+Unpacking curl (8.5.0-2ubuntu10.7) over (8.5.0-2ubuntu10.6) ...
+Preparing to unpack .../03-libcurl4t64_8.5.0-2ubuntu10.7_amd64.deb ...
+Unpacking libcurl4t64:amd64 (8.5.0-2ubuntu10.7) over (8.5.0-2ubuntu10.6) ...
+Preparing to unpack .../04-libcurl3t64-gnutls_8.5.0-2ubuntu10.7_amd64.deb ...
+Unpacking libcurl3t64-gnutls:amd64 (8.5.0-2ubuntu10.7) over (8.5.0-2ubuntu10.6) ...
+Preparing to unpack .../05-libnss3_2%3a3.98-1ubuntu0.1_amd64.deb ...
+Unpacking libnss3:amd64 (2:3.98-1ubuntu0.1) over (2:3.98-1build1) ...
+Preparing to unpack .../06-linux-base_4.5ubuntu9+24.04.2_all.deb ...
+Unpacking linux-base (4.5ubuntu9+24.04.2) over (4.5ubuntu9+24.04.1) ...
+Selecting previously unselected package linux-headers-6.8.0-101.
+Preparing to unpack .../07-linux-headers-6.8.0-101_6.8.0-101.101_all.deb ...
+Unpacking linux-headers-6.8.0-101 (6.8.0-101.101) ...
+Selecting previously unselected package linux-headers-6.8.0-101-generic.
+Preparing to unpack .../08-linux-headers-6.8.0-101-generic_6.8.0-101.101_amd64.deb ...
+Unpacking linux-headers-6.8.0-101-generic (6.8.0-101.101) ...
+Selecting previously unselected package linux-modules-6.8.0-101-generic.
+Preparing to unpack .../09-linux-modules-6.8.0-101-generic_6.8.0-101.101_amd64.deb ...
+Unpacking linux-modules-6.8.0-101-generic (6.8.0-101.101) ...
+Selecting previously unselected package linux-image-6.8.0-101-generic.
+Preparing to unpack .../10-linux-image-6.8.0-101-generic_6.8.0-101.101_amd64.deb ...
+Unpacking linux-image-6.8.0-101-generic (6.8.0-101.101) ...
+Preparing to unpack .../11-linux-virtual_6.8.0-101.101_amd64.deb ...
+Unpacking linux-virtual (6.8.0-101.101) over (6.8.0-100.100) ...
+Preparing to unpack .../12-linux-image-virtual_6.8.0-101.101_amd64.deb ...
+Unpacking linux-image-virtual (6.8.0-101.101) over (6.8.0-100.100) ...
+Preparing to unpack .../13-linux-headers-virtual_6.8.0-101.101_amd64.deb ...
+Unpacking linux-headers-virtual (6.8.0-101.101) over (6.8.0-100.100) ...
+Preparing to unpack .../14-linux-headers-generic_6.8.0-101.101_amd64.deb ...
+Unpacking linux-headers-generic (6.8.0-101.101) over (6.8.0-100.100) ...
+Preparing to unpack .../15-linux-libc-dev_6.8.0-101.101_amd64.deb ...
+Unpacking linux-libc-dev:amd64 (6.8.0-101.101) over (6.8.0-100.100) ...
+Preparing to unpack .../16-linux-tools-common_6.8.0-101.101_all.deb ...
+Unpacking linux-tools-common (6.8.0-101.101) over (6.8.0-100.100) ...
+Selecting previously unselected package linux-tools-6.8.0-101.
+Preparing to unpack .../17-linux-tools-6.8.0-101_6.8.0-101.101_amd64.deb ...
+Unpacking linux-tools-6.8.0-101 (6.8.0-101.101) ...
+Selecting previously unselected package linux-tools-6.8.0-101-generic.
+Preparing to unpack .../18-linux-tools-6.8.0-101-generic_6.8.0-101.101_amd64.deb ...
+Unpacking linux-tools-6.8.0-101-generic (6.8.0-101.101) ...
+Preparing to unpack .../19-software-properties-common_0.99.49.4_all.deb ...
+Unpacking software-properties-common (0.99.49.4) over (0.99.49.3) ...
+Preparing to unpack .../20-python3-software-properties_0.99.49.4_all.deb ...
+Unpacking python3-software-properties (0.99.49.4) over (0.99.49.3) ...
+Preparing to unpack .../21-sosreport_4.10.2-0ubuntu0~24.04.1_amd64.deb ...
+Unpacking sosreport (4.10.2-0ubuntu0~24.04.1) over (4.9.2-0ubuntu0~24.04.1) ...
+Preparing to unpack .../22-cloud-init_25.3-0ubuntu1~24.04.1_all.deb ...
+Unpacking cloud-init (25.3-0ubuntu1~24.04.1) over (25.2-0ubuntu1~24.04.1) ...
+Setting up cloud-init (25.3-0ubuntu1~24.04.1) ...
+Setting up linux-base (4.5ubuntu9+24.04.2) ...
+Setting up linux-headers-6.8.0-101 (6.8.0-101.101) ...
+Setting up libpython3.12-minimal:amd64 (3.12.3-1ubuntu0.12) ...
+Setting up linux-libc-dev:amd64 (6.8.0-101.101) ...
+Setting up libnss3:amd64 (2:3.98-1ubuntu0.1) ...
+Setting up python3-software-properties (0.99.49.4) ...
+Setting up linux-modules-6.8.0-101-generic (6.8.0-101.101) ...
+Setting up linux-headers-6.8.0-101-generic (6.8.0-101.101) ...
+Setting up libssh-4:amd64 (0.10.6-2ubuntu0.3) ...
+Setting up sosreport (4.10.2-0ubuntu0~24.04.1) ...
+Setting up systemd-hwe-hwdb (255.1.7) ...
+Setting up linux-tools-common (6.8.0-101.101) ...
+Setting up python3.12-minimal (3.12.3-1ubuntu0.12) ...
+Setting up libpython3.12-stdlib:amd64 (3.12.3-1ubuntu0.12) ...
+Setting up libcurl4t64:amd64 (8.5.0-2ubuntu10.7) ...
+Setting up python3.12 (3.12.3-1ubuntu0.12) ...
+Setting up libcurl3t64-gnutls:amd64 (8.5.0-2ubuntu10.7) ...
+Setting up linux-headers-generic (6.8.0-101.101) ...
+Setting up software-properties-common (0.99.49.4) ...
+Setting up linux-image-6.8.0-101-generic (6.8.0-101.101) ...
+I: /boot/vmlinuz is now a symlink to vmlinuz-6.8.0-101-generic
+I: /boot/initrd.img is now a symlink to initrd.img-6.8.0-101-generic
+Setting up libpython3.12t64:amd64 (3.12.3-1ubuntu0.12) ...
+Setting up linux-tools-6.8.0-101 (6.8.0-101.101) ...
+Setting up curl (8.5.0-2ubuntu10.7) ...
+Setting up linux-image-virtual (6.8.0-101.101) ...
+Setting up linux-tools-6.8.0-101-generic (6.8.0-101.101) ...
+Setting up linux-headers-virtual (6.8.0-101.101) ...
+Setting up linux-virtual (6.8.0-101.101) ...
+Processing triggers for udev (255.4-1ubuntu8.12) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+Processing triggers for rsyslog (8.2312.0-3ubuntu9.1) ...
+Processing triggers for systemd (255.4-1ubuntu8.12) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for dbus (1.14.10-4ubuntu4.1) ...
+Processing triggers for linux-image-6.8.0-101-generic (6.8.0-101.101) ...
+/etc/kernel/postinst.d/initramfs-tools:
+update-initramfs: Generating /boot/initrd.img-6.8.0-101-generic
+/etc/kernel/postinst.d/zz-update-grub:
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/50-cloudimg-settings.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-6.8.0-101-generic
+Found initrd image: /boot/initrd.img-6.8.0-101-generic
+Found linux image: /boot/vmlinuz-6.8.0-100-generic
+Found initrd image: /boot/initrd.img-6.8.0-100-generic
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Scanning processes...                                                                                                                                                                                                                       
+Scanning candidates...                                                                                                                                                                                                                      
+Scanning linux images...                                                                                                                                                                                                                    
+
+Pending kernel upgrade!
+Running kernel version:
+  6.8.0-100-generic
+Diagnostics:
+  The currently running kernel version is not the expected kernel version 6.8.0-101-generic.
+
+Restarting the system to load the new kernel will not be handled automatically, so you should consider rebooting.
+
+Restarting services...
+ systemctl restart multipathd.service packagekit.service udisks2.service
+
+Service restarts being deferred:
+ systemctl restart unattended-upgrades.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ ubuntu @ session #1: apt[1503]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ubuntu-24-test-os-automation-project:~$ uname -r
+6.8.0-100-generic
+ubuntu@ubuntu-24-test-os-automation-project:~$ uname -r
+6.8.0-100-generic
+ubuntu@ubuntu-24-test-os-automation-project:~$ uname -r
+6.8.0-100-generic
+ubuntu@ubuntu-24-test-os-automation-project:~$ uname -r
+6.8.0-100-generic
+ubuntu@ubuntu-24-test-os-automation-project:~$ sudo reboot
+
+Broadcast message from root@ubuntu-24-test-os-automation-project on pts/1 (Tue 2026-03-10 11:57:49 UTC):
+
+The system will reboot now!
+
+ubuntu@ubuntu-24-test-os-automation-project:~$ Connection to 172.24.4.41 closed by remote host.
+Connection to 172.24.4.41 closed.
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ping 172.24.4.41
+PING 172.24.4.41 (172.24.4.41) 56(84) bytes of data.
+64 bytes from 172.24.4.41: icmp_seq=21 ttl=63 time=1.48 ms
+64 bytes from 172.24.4.41: icmp_seq=22 ttl=63 time=0.976 ms
+64 bytes from 172.24.4.41: icmp_seq=23 ttl=63 time=5.04 ms
+^C
+--- 172.24.4.41 ping statistics ---
+23 packets transmitted, 3 received, 86.9565% packet loss, time 22487ms
+rtt min/avg/max/mdev = 0.976/2.497/5.037/1.807 ms
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ssh ubuntu@172.24.4.41
+ubuntu@172.24.4.41's password: 
+Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.8.0-101-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Tue Mar 10 11:58:21 UTC 2026
+
+  System load:  0.87               Processes:             99
+  Usage of /:   15.5% of 13.49GB   Users logged in:       0
+  Memory usage: 9%                 IPv4 address for ens3: 10.0.0.132
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Tue Mar 10 11:53:10 2026 from 172.24.4.1
+ubuntu@ubuntu-24-test-os-automation-project:~$ uname -r
+6.8.0-101-generic
+ubuntu@ubuntu-24-test-os-automation-project:~$ dpkg --list | grep linux-image
+ii  linux-image-6.8.0-100-generic   6.8.0-100.100                           amd64        Signed kernel image generic
+ii  linux-image-6.8.0-101-generic   6.8.0-101.101                           amd64        Signed kernel image generic
+ii  linux-image-virtual             6.8.0-101.101                           amd64        Virtual Linux kernel image
+ubuntu@ubuntu-24-test-os-automation-project:~$ apt policy linux-image-virtual linux-generic linux-generic-hwe-24.04
+linux-image-virtual:
+  Installed: 6.8.0-101.101
+  Candidate: 6.8.0-101.101
+  Version table:
+ *** 6.8.0-101.101 500
+        500 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages
+        100 /var/lib/dpkg/status
+     6.8.0-31.31 500
+        500 http://nova.clouds.archive.ubuntu.com/ubuntu noble/main amd64 Packages
+linux-generic:
+  Installed: (none)
+  Candidate: 6.8.0-101.101
+  Version table:
+     6.8.0-101.101 500
+        500 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages
+     6.8.0-31.31 500
+        500 http://nova.clouds.archive.ubuntu.com/ubuntu noble/main amd64 Packages
+linux-generic-hwe-24.04:
+  Installed: (none)
+  Candidate: 6.17.0-14.14~24.04.1
+  Version table:
+     6.17.0-14.14~24.04.1 500
+        500 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages
+     6.8.0-31.31 500
+        500 http://nova.clouds.archive.ubuntu.com/ubuntu noble/main amd64 Packages
+ubuntu@ubuntu-24-test-os-automation-project:~$ 
+
+ubuntu@ubuntu-24-test-os-automation-project:~$ cat /etc/os-release 
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+ubuntu@ubuntu-24-test-os-automation-project:~$ sudo apt update && sudo apt upgrade -y
+Hit:1 http://security.ubuntu.com/ubuntu noble-security InRelease                      
+Hit:2 http://nova.clouds.archive.ubuntu.com/ubuntu noble InRelease                    
+Hit:3 http://nova.clouds.archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:4 http://nova.clouds.archive.ubuntu.com/ubuntu noble-backports InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+ubuntu@ubuntu-24-test-os-automation-project:~$ cat /etc/os-release 
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+ubuntu@ubuntu-24-test-os-automation-project:~$ 
+ubuntu@ubuntu-24-test-os-automation-project:~$ exit
+logout
+Connection to 172.24.4.41 closed.
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack server list
++--------------------------------------+--------------------------------------+---------+----------------------------------+--------------------------+----------+
+| ID                                   | Name                                 | Status  | Networks                         | Image                    | Flavor   |
++--------------------------------------+--------------------------------------+---------+----------------------------------+--------------------------+----------+
+| 180216ab-6e58-4062-8400-e31bd488781d | ubuntu-24-test-os-automation-project | ACTIVE  | private=10.0.0.132, 172.24.4.41  | N/A (booted from volume) | m1.small |
+| 36c88e9c-7e00-4849-af6f-6a45d0e0f9fc | alma-10                              | SHUTOFF | private=10.0.0.158, 172.24.4.33  | N/A (booted from volume) | m1.small |
+| 2e339260-569d-40fb-94f2-ff26d68fa74d | debian-11                            | ACTIVE  | private=10.0.0.88, 172.24.4.190  | N/A (booted from volume) | m1.small |
+| abcff3fe-3f6d-48fd-baba-a7565e71f26a | ubuntu-20                            | SHUTOFF | private=10.0.0.198, 172.24.4.18  | N/A (booted from volume) | m1.small |
+| 61564dab-c835-420d-82a9-b4b6672480b0 | ubuntu-18                            | SHUTOFF | private=10.0.0.21, 172.24.4.59   | N/A (booted from volume) | m1.small |
+| f7827631-9878-4000-bff5-cc4f08624f37 | debian-12                            | SHUTOFF | private=10.0.0.11, 172.24.4.136  | N/A (booted from volume) | m1.small |
+| 215e7781-a397-4655-9cab-f42d0b5296fd | ubuntu-24                            | SHUTOFF | private=10.0.0.37, 172.24.4.118  | N/A (booted from volume) | m1.small |
+| dc6a0c5a-ba77-4c9b-83c5-cf71469738e7 | ubuntu-22                            | SHUTOFF | private=10.0.0.149, 172.24.4.108 | N/A (booted from volume) | m1.small |
++--------------------------------------+--------------------------------------+---------+----------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ 
+```
+#### Clear the system (deleting the existing test virtual machines and volumes)
+```
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack server list -f value -c ID | xargs -r -n1 openstack server delete
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack server list
+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack volume list
++--------------------------------------+--------------------------------------+-----------+------+-------------+
+| ID                                   | Name                                 | Status    | Size | Attached to |
++--------------------------------------+--------------------------------------+-----------+------+-------------+
+| fb0df5a4-61ff-4164-9143-d34742096a4b | ubuntu-24-test-os-automation-project | available |   15 |             |
+| 5439f4a7-213e-46e8-b525-1ee7ae5eb146 | alma-10                              | available |   20 |             |
+| 87bb916a-0c97-46cb-9ab2-5ef7f2ddeda8 | ubuntu-20                            | available |   10 |             |
+| bd27db9b-fcd0-4086-999b-453a0b600406 | ubuntu-18                            | available |   10 |             |
+| 5f69af3a-15dd-4015-a513-e06dc7ab5dc1 | debian-12                            | available |   19 |             |
+| 3bacc120-4199-4931-b2a3-3abf85732a84 | debian-11                            | available |   19 |             |
+| b0324125-036e-449d-80e3-bf8387f7afc7 | ubuntu-24                            | available |   15 |             |
+| 8ba791b3-5bf9-4b4f-8e23-603c1d216f28 | ubuntu-22                            | available |   10 |             |
++--------------------------------------+--------------------------------------+-----------+------+-------------+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack server list -f value -c ID | xargs -r -n1 openstack server delete
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack volume list
++--------------------------------------+--------------------------------------+-----------+------+-------------+
+| ID                                   | Name                                 | Status    | Size | Attached to |
++--------------------------------------+--------------------------------------+-----------+------+-------------+
+| fb0df5a4-61ff-4164-9143-d34742096a4b | ubuntu-24-test-os-automation-project | available |   15 |             |
+| 5439f4a7-213e-46e8-b525-1ee7ae5eb146 | alma-10                              | available |   20 |             |
+| 87bb916a-0c97-46cb-9ab2-5ef7f2ddeda8 | ubuntu-20                            | available |   10 |             |
+| bd27db9b-fcd0-4086-999b-453a0b600406 | ubuntu-18                            | available |   10 |             |
+| 5f69af3a-15dd-4015-a513-e06dc7ab5dc1 | debian-12                            | available |   19 |             |
+| 3bacc120-4199-4931-b2a3-3abf85732a84 | debian-11                            | available |   19 |             |
+| b0324125-036e-449d-80e3-bf8387f7afc7 | ubuntu-24                            | available |   15 |             |
+| 8ba791b3-5bf9-4b4f-8e23-603c1d216f28 | ubuntu-22                            | available |   10 |             |
++--------------------------------------+--------------------------------------+-----------+------+-------------+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack volume list -f value -c ID | xargs -r -n1 openstack volume delete
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack volume list
+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ 
+```
+# 
