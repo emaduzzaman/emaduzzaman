@@ -43564,7 +43564,250 @@ Calculating upgrade... Done
 debian@debian-11:~$ 
 
 ```
+# Again checking the system if before image-automation-project
 
+```
+ubuntu@gelani-lab-1:~$ rbd ls -p images
+151fa56a-92e5-4a05-82bb-f4472394d3d9
+5a2209bd-847e-4948-87e2-e66b1109f4eb
+8c2f2ee0-458e-4370-8cfa-e5e145402142
+9bd72412-c33b-49a4-8917-396c9dd3741f
+a05bfffb-5b9a-468e-b9a7-45e541d6e1c7
+b522ceff-bea1-465d-9dbb-ebb567769ef4
+b5a9da1c-2fd0-404d-9e39-e7ea9a50acfb
+c218d57e-3393-4283-8a6c-fe74551e9ea2
+f339488c-2c82-4e7d-ab70-d57a4d2c1ade
+fbb9bfc0-3dc0-4f20-b230-e046473fe629
+ubuntu@gelani-lab-1:~$ openstack image list
+Missing value auth-url required for auth plugin password
+ubuntu@gelani-lab-1:~$ cd /opt/stack/devstack
+ubuntu@gelani-lab-1:/opt/stack/devstack$ source openrc admin admin
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack image list
++--------------------------------------+-----------+--------+
+| ID                                   | Name      | Status |
++--------------------------------------+-----------+--------+
+| 151fa56a-92e5-4a05-82bb-f4472394d3d9 | alma-10   | active |
+| f339488c-2c82-4e7d-ab70-d57a4d2c1ade | cirros    | active |
+| a05bfffb-5b9a-468e-b9a7-45e541d6e1c7 | debian-11 | active |
+| 8c2f2ee0-458e-4370-8cfa-e5e145402142 | debian-12 | active |
+| 5a2209bd-847e-4948-87e2-e66b1109f4eb | fedora-40 | active |
+| fbb9bfc0-3dc0-4f20-b230-e046473fe629 | rocky-9   | active |
+| 9bd72412-c33b-49a4-8917-396c9dd3741f | ubuntu-18 | active |
+| b5a9da1c-2fd0-404d-9e39-e7ea9a50acfb | ubuntu-20 | active |
+| c218d57e-3393-4283-8a6c-fe74551e9ea2 | ubuntu-22 | active |
+| b522ceff-bea1-465d-9dbb-ebb567769ef4 | ubuntu-24 | active |
++--------------------------------------+-----------+--------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ 
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server list
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+| ID                                   | Name      | Status  | Networks                         | Image                    | Flavor   |
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+| 36c88e9c-7e00-4849-af6f-6a45d0e0f9fc | alma-10   | SHUTOFF | private=10.0.0.158, 172.24.4.33  | N/A (booted from volume) | m1.small |
+| 2e339260-569d-40fb-94f2-ff26d68fa74d | debian-11 | ACTIVE  | private=10.0.0.88, 172.24.4.190  | N/A (booted from volume) | m1.small |
+| abcff3fe-3f6d-48fd-baba-a7565e71f26a | ubuntu-20 | SHUTOFF | private=10.0.0.198, 172.24.4.18  | N/A (booted from volume) | m1.small |
+| 61564dab-c835-420d-82a9-b4b6672480b0 | ubuntu-18 | SHUTOFF | private=10.0.0.21, 172.24.4.59   | N/A (booted from volume) | m1.small |
+| f7827631-9878-4000-bff5-cc4f08624f37 | debian-12 | SHUTOFF | private=10.0.0.11, 172.24.4.136  | N/A (booted from volume) | m1.small |
+| 215e7781-a397-4655-9cab-f42d0b5296fd | ubuntu-24 | SHUTOFF | private=10.0.0.37, 172.24.4.118  | N/A (booted from volume) | m1.small |
+| dc6a0c5a-ba77-4c9b-83c5-cf71469738e7 | ubuntu-22 | SHUTOFF | private=10.0.0.149, 172.24.4.108 | N/A (booted from volume) | m1.small |
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ping 172.24.4.190
+PING 172.24.4.190 (172.24.4.190) 56(84) bytes of data.
+64 bytes from 172.24.4.190: icmp_seq=1 ttl=63 time=1.72 ms
+64 bytes from 172.24.4.190: icmp_seq=2 ttl=63 time=0.794 ms
+64 bytes from 172.24.4.190: icmp_seq=3 ttl=63 time=0.307 ms
+^C
+--- 172.24.4.190 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2031ms
+rtt min/avg/max/mdev = 0.307/0.938/1.715/0.583 ms
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack image list
++--------------------------------------+-----------+--------+
+| ID                                   | Name      | Status |
++--------------------------------------+-----------+--------+
+| 151fa56a-92e5-4a05-82bb-f4472394d3d9 | alma-10   | active |
+| f339488c-2c82-4e7d-ab70-d57a4d2c1ade | cirros    | active |
+| a05bfffb-5b9a-468e-b9a7-45e541d6e1c7 | debian-11 | active |
+| 8c2f2ee0-458e-4370-8cfa-e5e145402142 | debian-12 | active |
+| 5a2209bd-847e-4948-87e2-e66b1109f4eb | fedora-40 | active |
+| fbb9bfc0-3dc0-4f20-b230-e046473fe629 | rocky-9   | active |
+| 9bd72412-c33b-49a4-8917-396c9dd3741f | ubuntu-18 | active |
+| b5a9da1c-2fd0-404d-9e39-e7ea9a50acfb | ubuntu-20 | active |
+| c218d57e-3393-4283-8a6c-fe74551e9ea2 | ubuntu-22 | active |
+| b522ceff-bea1-465d-9dbb-ebb567769ef4 | ubuntu-24 | active |
++--------------------------------------+-----------+--------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack server list
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+| ID                                   | Name      | Status  | Networks                         | Image                    | Flavor   |
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+| 36c88e9c-7e00-4849-af6f-6a45d0e0f9fc | alma-10   | SHUTOFF | private=10.0.0.158, 172.24.4.33  | N/A (booted from volume) | m1.small |
+| 2e339260-569d-40fb-94f2-ff26d68fa74d | debian-11 | ACTIVE  | private=10.0.0.88, 172.24.4.190  | N/A (booted from volume) | m1.small |
+| abcff3fe-3f6d-48fd-baba-a7565e71f26a | ubuntu-20 | SHUTOFF | private=10.0.0.198, 172.24.4.18  | N/A (booted from volume) | m1.small |
+| 61564dab-c835-420d-82a9-b4b6672480b0 | ubuntu-18 | SHUTOFF | private=10.0.0.21, 172.24.4.59   | N/A (booted from volume) | m1.small |
+| f7827631-9878-4000-bff5-cc4f08624f37 | debian-12 | SHUTOFF | private=10.0.0.11, 172.24.4.136  | N/A (booted from volume) | m1.small |
+| 215e7781-a397-4655-9cab-f42d0b5296fd | ubuntu-24 | SHUTOFF | private=10.0.0.37, 172.24.4.118  | N/A (booted from volume) | m1.small |
+| dc6a0c5a-ba77-4c9b-83c5-cf71469738e7 | ubuntu-22 | SHUTOFF | private=10.0.0.149, 172.24.4.108 | N/A (booted from volume) | m1.small |
++--------------------------------------+-----------+---------+----------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack volume list
++--------------------------------------+-----------+--------+------+------------------------------------+
+| ID                                   | Name      | Status | Size | Attached to                        |
++--------------------------------------+-----------+--------+------+------------------------------------+
+| 5439f4a7-213e-46e8-b525-1ee7ae5eb146 | alma-10   | in-use |   20 | Attached to alma-10 on /dev/vda    |
+| 87bb916a-0c97-46cb-9ab2-5ef7f2ddeda8 | ubuntu-20 | in-use |   10 | Attached to ubuntu-20 on /dev/vda  |
+| bd27db9b-fcd0-4086-999b-453a0b600406 | ubuntu-18 | in-use |   10 | Attached to ubuntu-18 on /dev/vda  |
+| 5f69af3a-15dd-4015-a513-e06dc7ab5dc1 | debian-12 | in-use |   19 | Attached to debian-12 on /dev/vda  |
+| 3bacc120-4199-4931-b2a3-3abf85732a84 | debian-11 | in-use |   19 | Attached to debian-11 on /dev/vda  |
+| b0324125-036e-449d-80e3-bf8387f7afc7 | ubuntu-24 | in-use |   15 | Attached to ubuntu-24 on /dev/vda  |
+| 8ba791b3-5bf9-4b4f-8e23-603c1d216f28 | ubuntu-22 | in-use |   10 | Attached to ubuntu-22 on /dev/vda  |
++--------------------------------------+-----------+--------+------+------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ rbd ls -p images
+151fa56a-92e5-4a05-82bb-f4472394d3d9
+5a2209bd-847e-4948-87e2-e66b1109f4eb
+8c2f2ee0-458e-4370-8cfa-e5e145402142
+9bd72412-c33b-49a4-8917-396c9dd3741f
+a05bfffb-5b9a-468e-b9a7-45e541d6e1c7
+b522ceff-bea1-465d-9dbb-ebb567769ef4
+b5a9da1c-2fd0-404d-9e39-e7ea9a50acfb
+c218d57e-3393-4283-8a6c-fe74551e9ea2
+f339488c-2c82-4e7d-ab70-d57a4d2c1ade
+fbb9bfc0-3dc0-4f20-b230-e046473fe629
+ubuntu@gelani-lab-1:/opt/stack/devstack$ rbd ls -p volume
+volume-3bacc120-4199-4931-b2a3-3abf85732a84
+volume-5439f4a7-213e-46e8-b525-1ee7ae5eb146
+volume-5f69af3a-15dd-4015-a513-e06dc7ab5dc1
+volume-87bb916a-0c97-46cb-9ab2-5ef7f2ddeda8
+volume-8ba791b3-5bf9-4b4f-8e23-603c1d216f28
+volume-b0324125-036e-449d-80e3-bf8387f7afc7
+volume-bd27db9b-fcd0-4086-999b-453a0b600406
+ubuntu@gelani-lab-1:/opt/stack/devstack$ cd ..
+ubuntu@gelani-lab-1:/opt/stack$ ls
+ls: cannot open directory '.': Permission denied
+ubuntu@gelani-lab-1:/opt/stack$ sudo ls
+aodh  async  bin  bindep-venv  ceilometer  cinder  data  devstack  devstack.subunit  glance  gnocchi  heat  heat-dashboard  horizon  keystone  logs  mykey.pem  neutron  nova  novnc  os-test-images  placement  requirements  tempest
+ubuntu@gelani-lab-1:/opt/stack$ cd data
+ubuntu@gelani-lab-1:/opt/stack/data$ ls
+cinder  etcd  glance  neutron  nova  os_brick  ovs  stack-volumes-lvmdriver-1-backing-file  tempest  venv
+ubuntu@gelani-lab-1:/opt/stack/data$ cd nova
+ubuntu@gelani-lab-1:/opt/stack/data/nova$ ls
+compute_id  instances  keys
+ubuntu@gelani-lab-1:/opt/stack/data/nova$ ll instance
+ls: cannot access 'instance': No such file or directory
+ubuntu@gelani-lab-1:/opt/stack/data/nova$ sudo ls instance
+ls: cannot access 'instance': No such file or directory
+ubuntu@gelani-lab-1:/opt/stack/data/nova$ cd instances/
+ubuntu@gelani-lab-1:/opt/stack/data/nova/instances$ ls
+215e7781-a397-4655-9cab-f42d0b5296fd  36c88e9c-7e00-4849-af6f-6a45d0e0f9fc  abcff3fe-3f6d-48fd-baba-a7565e71f26a  dc6a0c5a-ba77-4c9b-83c5-cf71469738e7  locks
+2e339260-569d-40fb-94f2-ff26d68fa74d  61564dab-c835-420d-82a9-b4b6672480b0  compute_nodes                         f7827631-9878-4000-bff5-cc4f08624f37
+ubuntu@gelani-lab-1:/opt/stack/data/nova/instances$ 
+ubuntu@gelani-lab-1:/opt/stack/data/nova/instances$ cd ~
+ubuntu@gelani-lab-1:~$ ls
+cloud-in-it  cloud-init-net.yaml  cloud-init-ok.yaml  cloud-init.yaml  image-factory  images  mykey.pem
+ubuntu@gelani-lab-1:~$ cat cloud-in-it/
+cat: cloud-in-it/: Is a directory
+ubuntu@gelani-lab-1:~$ cd cloud-in-it/
+ubuntu@gelani-lab-1:~/cloud-in-it$ ls
+ubuntu@gelani-lab-1:~/cloud-in-it$ ll
+total 8
+drwxrwxr-x  2 ubuntu ubuntu 4096 Feb 18 13:01 ./
+drwxr-x--- 10 ubuntu ubuntu 4096 Mar 10 10:41 ../
+ubuntu@gelani-lab-1:~/cloud-in-it$ cd ..
+ubuntu@gelani-lab-1:~$ rm cloud-in-it/
+rm: cannot remove 'cloud-in-it/': Is a directory
+ubuntu@gelani-lab-1:~$ rm -rf cloud-in-it/
+ubuntu@gelani-lab-1:~$ ls
+cloud-init-net.yaml  cloud-init-ok.yaml  cloud-init.yaml  image-factory  images  mykey.pem
+ubuntu@gelani-lab-1:~$ cat cloud-init-net.yaml 
+#cloud-config
+password: 12345678
+chpasswd: { expire: False }
+ssh_pwauth: True
+package_update: true
+
+write_files:
+  - path: /etc/systemd/resolved.conf.d/99-dns.conf
+    content: |
+      [Resolve]
+      DNS=8.8.8.8 1.1.1.1
+      FallbackDNS=9.9.9.9
+
+runcmd:
+  - systemctl restart systemd-resolved || true
+ubuntu@gelani-lab-1:~$ cd images
+ubuntu@gelani-lab-1:~/images$ ls
+alma-10.qcow2  bionic-server-cloudimg-amd64.img  cirros.img                        debian-11.qcow2  fedora-40.qcow2  noble.img      ubuntu-20.04.qcow2
+base-image     cirros-0.6.3-x86_64-disk.img      debian-11.11.0-amd64-netinst.iso  debian-12.qcow2  jammy.img        rocky-9.qcow2
+ubuntu@gelani-lab-1:~/images$ cd ..
+ubuntu@gelani-lab-1:~$ cd image-factory/
+ubuntu@gelani-lab-1:~/image-factory$ ls
+cloud-init  output  packer  scripts
+ubuntu@gelani-lab-1:~/image-factory$ ll
+total 24
+drwxrwxr-x 6 ubuntu ubuntu 4096 Feb 20 20:08 ./
+drwxr-x--- 9 ubuntu ubuntu 4096 Mar 10 10:58 ../
+drwxrwxr-x 2 ubuntu ubuntu 4096 Feb 20 20:08 cloud-init/
+drwxrwxr-x 2 ubuntu ubuntu 4096 Feb 20 20:08 output/
+drwxrwxr-x 2 ubuntu ubuntu 4096 Feb 20 20:40 packer/
+drwxrwxr-x 2 ubuntu ubuntu 4096 Feb 20 20:21 scripts/
+ubuntu@gelani-lab-1:~/image-factory$ 
+ubuntu@gelani-lab-1:~/image-factory$ cd ..
+ubuntu@gelani-lab-1:~$ ls
+cloud-init-net.yaml  cloud-init-ok.yaml  cloud-init.yaml  image-factory  images  mykey.pem
+ubuntu@gelani-lab-1:~$ mkdir cloud-in-it-userdata
+ubuntu@gelani-lab-1:~$ mv cloud-init-net.yaml cloud-in-it-userdata/
+ubuntu@gelani-lab-1:~$ mv cloud-init-ok.yaml cloud-in-it-userdata/
+ubuntu@gelani-lab-1:~$ mv cloud-init.yaml cloud-in-it-userdata/
+ubuntu@gelani-lab-1:~$ ls cloud-in-it-userdata/
+cloud-init-net.yaml  cloud-init-ok.yaml  cloud-init.yaml
+ubuntu@gelani-lab-1:~$ mv cloud-in-it-userdata cloudinit-userdata
+ubuntu@gelani-lab-1:~$ ls
+cloudinit-userdata  image-factory  images  mykey.pem
+ubuntu@gelani-lab-1:~$ rm mykey.pem 
+ubuntu@gelani-lab-1:~$ ll
+total 136
+drwxr-x--- 10 ubuntu ubuntu  4096 Mar 10 11:09 ./
+drwxr-xr-x  3 root   root    4096 Jan 19 10:56 ../
+-rw-------  1 ubuntu ubuntu 72322 Mar 10 10:41 .bash_history
+-rw-r--r--  1 ubuntu ubuntu   220 Jan  6  2022 .bash_logout
+-rw-r--r--  1 ubuntu ubuntu  3771 Jan  6  2022 .bashrc
+drwx------  3 ubuntu ubuntu  4096 Jan 31 14:00 .cache/
+drwxrwxr-x  6 ubuntu ubuntu  4096 Feb 26 19:54 .config/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Feb 15 06:14 .glanceclient/
+-rw-------  1 ubuntu ubuntu    20 Feb 18 06:37 .lesshst
+drwxrwxr-x  3 ubuntu ubuntu  4096 Feb 17 10:51 .local/
+-rw-------  1 ubuntu ubuntu   803 Feb 15 10:01 .mysql_history
+-rw-r--r--  1 ubuntu ubuntu   807 Jan  6  2022 .profile
+drwx------  2 ubuntu ubuntu  4096 Mar  9 08:27 .ssh/
+-rw-r--r--  1 ubuntu ubuntu     0 Jan 19 10:58 .sudo_as_admin_successful
+-rw-rw-r--  1 ubuntu ubuntu   408 Feb 26 05:49 .wget-hsts
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 10 11:08 cloudinit-userdata/
+drwxrwxr-x  6 ubuntu ubuntu  4096 Feb 20 20:08 image-factory/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Feb 26 05:55 images/
+ubuntu@gelani-lab-1:~$ ls
+cloudinit-userdata  image-factory  images
+ubuntu@gelani-lab-1:~$ cd images
+ubuntu@gelani-lab-1:~/images$ ls
+alma-10.qcow2  bionic-server-cloudimg-amd64.img  cirros.img                        debian-11.qcow2  fedora-40.qcow2  noble.img      ubuntu-20.04.qcow2
+base-image     cirros-0.6.3-x86_64-disk.img      debian-11.11.0-amd64-netinst.iso  debian-12.qcow2  jammy.img        rocky-9.qcow2
+ubuntu@gelani-lab-1:~/images$ mv images raw-images
+mv: cannot stat 'images': No such file or directory
+ubuntu@gelani-lab-1:~/images$ mv images raw-image
+mv: cannot stat 'images': No such file or directory
+ubuntu@gelani-lab-1:~/images$ cd ..
+ubuntu@gelani-lab-1:~$ mv images raw-image
+ubuntu@gelani-lab-1:~$ ls
+cloudinit-userdata  image-factory  raw-image
+ubuntu@gelani-lab-1:~$
+
+
+
+
+
+
+
+
+
+
+
+
+```
 
 
 
