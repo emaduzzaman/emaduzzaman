@@ -4018,3 +4018,17 @@ logout
 Connection to 172.24.4.105 closed.
 ubuntu@gelani-lab-1:~/image-factory/packer$ 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
