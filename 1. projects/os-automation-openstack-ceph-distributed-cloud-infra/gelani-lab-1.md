@@ -1344,4 +1344,1139 @@ ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack volume list
 
 ubuntu@gelani-lab-1:~/cloudinit-userdata$ 
 ```
-# 
+# created a new vm to test ceph backend again
+```
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack image list
++--------------------------------------+--------------------------------------+--------+
+| ID                                   | Name                                 | Status |
++--------------------------------------+--------------------------------------+--------+
+| 151fa56a-92e5-4a05-82bb-f4472394d3d9 | alma-10                              | active |
+| f339488c-2c82-4e7d-ab70-d57a4d2c1ade | cirros                               | active |
+| a05bfffb-5b9a-468e-b9a7-45e541d6e1c7 | debian-11                            | active |
+| 8c2f2ee0-458e-4370-8cfa-e5e145402142 | debian-12                            | active |
+| 5a2209bd-847e-4948-87e2-e66b1109f4eb | fedora-40                            | active |
+| fbb9bfc0-3dc0-4f20-b230-e046473fe629 | rocky-9                              | active |
+| 9bd72412-c33b-49a4-8917-396c9dd3741f | ubuntu-18                            | active |
+| b5a9da1c-2fd0-404d-9e39-e7ea9a50acfb | ubuntu-20                            | active |
+| c218d57e-3393-4283-8a6c-fe74551e9ea2 | ubuntu-22                            | active |
+| b522ceff-bea1-465d-9dbb-ebb567769ef4 | ubuntu-24                            | active |
+| ea3b9ae8-c81a-4198-a2a3-4936599f84c7 | ubuntu-24-test-os-automation-project | active |
++--------------------------------------+--------------------------------------+--------+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack volume create   --image ubuntu-24   --size 10   --type ceph   ubuntu-24
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-03-10T13:31:13.110309           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | 1b0e378c-ac45-4e6b-bb70-e506e37137f0 |
+| multiattach                    | False                                |
+| name                           | ubuntu-24                            |
+| os-vol-host-attr:host          | None                                 |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | None                                 |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 10                                   |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | creating                             |
+| type                           | ceph                                 |
+| updated_at                     | None                                 |
+| user_id                        | 270824ef176044a2a8b64a8337e2f00a     |
+| volume_type_id                 | 67bc2259-3afb-4a0f-a065-fdc7a53e905c |
++--------------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack volume show ubuntu-24 -c status -c bootable
++----------+-------------+
+| Field    | Value       |
++----------+-------------+
+| bootable | False       |
+| status   | downloading |
++----------+-------------+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ watch -n2 openstack volume list
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack server create   --flavor m1.small   --volume ubuntu-24   --network private   --user-data /home/ubuntu/cloudinit-userdata/cloud-init.yaml   --config-drive true   ubuntu-24
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                                                              |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:host                | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:hostname            | ubuntu-24                                                                                                                                                                                          |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:instance_name       | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:kernel_id           | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:launch_index        | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:ramdisk_id          | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:reservation_id      | r-vi0h2l2f                                                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | None                                                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:user_data           | I2Nsb3VkLWNvbmZpZwpwYXNzd29yZDogMTIzNDU2NzgKY2hwYXNzd2Q6IHsgZXhwaXJlOiBGYWxzZSB9CnNzaF9wd2F1dGg6IFRydWUK                                                                                           |
+| OS-EXT-STS:power_state              | N/A                                                                                                                                                                                                |
+| OS-EXT-STS:task_state               | scheduling                                                                                                                                                                                         |
+| OS-EXT-STS:vm_state                 | building                                                                                                                                                                                           |
+| OS-SRV-USG:launched_at              | None                                                                                                                                                                                               |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                                                               |
+| accessIPv4                          | None                                                                                                                                                                                               |
+| accessIPv6                          | None                                                                                                                                                                                               |
+| addresses                           | N/A                                                                                                                                                                                                |
+| adminPass                           | kyQ6NBCekovi                                                                                                                                                                                       |
+| config_drive                        | True                                                                                                                                                                                               |
+| created                             | 2026-03-10T13:32:26Z                                                                                                                                                                               |
+| description                         | None                                                                                                                                                                                               |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small', original_name='m1.small', ram='2048',        |
+|                                     | rxtx_factor=, swap='0', vcpus='1'                                                                                                                                                                  |
+| hostId                              | None                                                                                                                                                                                               |
+| host_status                         | None                                                                                                                                                                                               |
+| id                                  | 1c55a99f-bf09-4ead-8682-137466061782                                                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                                                           |
+| key_name                            | None                                                                                                                                                                                               |
+| locked                              | None                                                                                                                                                                                               |
+| locked_reason                       | None                                                                                                                                                                                               |
+| name                                | ubuntu-24                                                                                                                                                                                          |
+| pinned_availability_zone            | None                                                                                                                                                                                               |
+| progress                            | None                                                                                                                                                                                               |
+| project_id                          | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                                                   |
+| properties                          | None                                                                                                                                                                                               |
+| scheduler_hints                     |                                                                                                                                                                                                    |
+| security_groups                     | name='default'                                                                                                                                                                                     |
+| server_groups                       | None                                                                                                                                                                                               |
+| status                              | BUILD                                                                                                                                                                                              |
+| tags                                |                                                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                                                               |
+| updated                             | 2026-03-10T13:32:26Z                                                                                                                                                                               |
+| user_id                             | 270824ef176044a2a8b64a8337e2f00a                                                                                                                                                                   |
+| volumes_attached                    |                                                                                                                                                                                                    |
++-------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ watch -n2 openstack server list
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ FIP=$(openstack floating ip create public -f value -c floating_ip_address)
+openstack server add floating ip ubuntu-24 $FIP
+echo "Floating IP: $FIP"
+Floating IP: 172.24.4.192
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ping 172.24.4.192
+PING 172.24.4.192 (172.24.4.192) 56(84) bytes of data.
+64 bytes from 172.24.4.192: icmp_seq=1 ttl=63 time=2.57 ms
+64 bytes from 172.24.4.192: icmp_seq=2 ttl=63 time=0.831 ms
+^C
+--- 172.24.4.192 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 0.831/1.699/2.568/0.868 ms
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ^C
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack server show ubuntu-24 \
+  -c name -c image -c volumes_attached
++------------------+--------------------------------------------------------------------------+
+| Field            | Value                                                                    |
++------------------+--------------------------------------------------------------------------+
+| image            | N/A (booted from volume)                                                 |
+| name             | ubuntu-24                                                                |
+| volumes_attached | delete_on_termination='False', id='1b0e378c-ac45-4e6b-bb70-e506e37137f0' |
++------------------+--------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ rbd info volume-b0324125-036e-449d-80e3-bf8387f7afc7
+rbd: error opening default pool 'rbd'
+Ensure that the default pool has been created or specify an alternate pool name.
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack volume list
++--------------------------------------+-----------+--------+------+------------------------------------+
+| ID                                   | Name      | Status | Size | Attached to                        |
++--------------------------------------+-----------+--------+------+------------------------------------+
+| 1b0e378c-ac45-4e6b-bb70-e506e37137f0 | ubuntu-24 | in-use |   10 | Attached to ubuntu-24 on /dev/vda  |
++--------------------------------------+-----------+--------+------+------------------------------------+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ rbd info volume-1b0e378c-ac45-4e6b-bb70-e506e37137f0
+rbd: error opening default pool 'rbd'
+Ensure that the default pool has been created or specify an alternate pool name.
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ sudo grep -R "rbd_pool" /etc/cinder/cinder.conf /etc/kolla/cinder-volume/cinder.conf 2>/dev/null
+/etc/cinder/cinder.conf:#rbd_pool = volume
+/etc/cinder/cinder.conf:rbd_pool = volume
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ rbd info volumes/volume-1b0e378c-ac45-4e6b-bb70-e506e37137f0
+rbd: error opening pool 'volumes': (2) No such file or directory
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ rbd --pool volumes info volume-1b0e378c-ac45-4e6b-bb70-e506e37137f0
+rbd: error opening pool 'volumes': (2) No such file or directory
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ ceph osd lspools
+1 .mgr
+2 volume
+3 images
+4 vms
+5 backups
+6 rgw.meta
+7 rgw.control
+8 rgw.log
+9 rgw.buckets.data
+10 rgw.buckets.index
+11 .rgw.root
+12 gelani-zone.rgw.log
+13 gelani-zone.rgw.control
+14 gelani-zone.rgw.meta
+15 gelani-zone.rgw.buckets.index
+16 gelani-zone.rgw.buckets.data
+17 gelani-zone.rgw.buckets.non-ec
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ rbd pool ls
+error: unknown option 'pool ls'
+
+usage: rbd <command> ...
+
+Command-line interface for managing Ceph RBD images.
+
+Positional arguments:
+  <command>
+    bench                             Simple benchmark.
+    children                          Display children of an image or its
+                                      snapshot.
+    clone                             Clone a snapshot into a CoW child image.
+    config global get                 Get a global-level configuration override.
+    config global list (... ls)       List global-level configuration overrides.
+    config global remove (... rm)     Remove a global-level configuration
+                                      override.
+    config global set                 Set a global-level configuration override.
+    config image get                  Get an image-level configuration override.
+    config image list (... ls)        List image-level configuration overrides.
+    config image remove (... rm)      Remove an image-level configuration
+                                      override.
+    config image set                  Set an image-level configuration override.
+    config pool get                   Get a pool-level configuration override.
+    config pool list (... ls)         List pool-level configuration overrides.
+    config pool remove (... rm)       Remove a pool-level configuration
+                                      override.
+    config pool set                   Set a pool-level configuration override.
+    copy (cp)                         Copy src image to dest.
+    create                            Create an empty image.
+    deep copy (deep cp)               Deep copy (including snapshots) src image
+                                      to dest.
+    device attach                     Attach image to device.
+    device detach                     Detach image from device.
+    device list (showmapped)          List mapped rbd images.
+    device map (map)                  Map an image to a block device.
+    device unmap (unmap)              Unmap a rbd device.
+    diff                              Print extents that differ since a
+                                      previous snap, or image creation.
+    disk-usage (du)                   Show disk usage stats for pool, image or
+                                      snapshot.
+    encryption format                 Format image to an encrypted format.
+    export                            Export image to file.
+    export-diff                       Export incremental diff to file.
+    feature disable                   Disable the specified image feature.
+    feature enable                    Enable the specified image feature.
+    flatten                           Fill clone with parent data (make it
+                                      independent).
+    group create                      Create a group.
+    group image add                   Add an image to a group.
+    group image list (... ls)         List images in a group.
+    group image remove (... rm)       Remove an image from a group.
+    group list (group ls)             List rbd groups.
+    group remove (group rm)           Delete a group.
+    group rename                      Rename a group within its pool or
+                                      namespace.
+    group snap create                 Make a snapshot of a group.
+    group snap list (... ls)          List snapshots of a group.
+    group snap remove (... rm)        Remove a snapshot from a group.
+    group snap rename                 Rename group's snapshot.
+    group snap rollback               Rollback group to snapshot.
+    image-meta get                    Image metadata get the value associated
+                                      with the key.
+    image-meta list (image-meta ls)   Image metadata list keys with values.
+    image-meta remove (image-meta rm) Image metadata remove the key and value
+                                      associated.
+    image-meta set                    Image metadata set key with value.
+    import                            Import image from file.
+    import-diff                       Import an incremental diff.
+    info                              Show information about image size,
+                                      striping, etc.
+    journal client disconnect         Flag image journal client as disconnected.
+    journal export                    Export image journal.
+    journal import                    Import image journal.
+    journal info                      Show information about image journal.
+    journal inspect                   Inspect image journal for structural
+                                      errors.
+    journal reset                     Reset image journal.
+    journal status                    Show status of image journal.
+    list (ls)                         List rbd images.
+    lock add                          Take a lock on an image.
+    lock list (lock ls)               Show locks held on an image.
+    lock remove (lock rm)             Release a lock on an image.
+    merge-diff                        Merge two diff exports together.
+    migration abort                   Cancel interrupted image migration.
+    migration commit                  Commit image migration.
+    migration execute                 Execute image migration.
+    migration prepare                 Prepare image migration.
+    mirror image demote               Demote an image to non-primary for RBD
+                                      mirroring.
+    mirror image disable              Disable RBD mirroring for an image.
+    mirror image enable               Enable RBD mirroring for an image.
+    mirror image promote              Promote an image to primary for RBD
+                                      mirroring.
+    mirror image resync               Force resync to primary image for RBD
+                                      mirroring.
+    mirror image snapshot             Create RBD mirroring image snapshot.
+    mirror image status               Show RBD mirroring status for an image.
+    mirror pool demote                Demote all primary images in a pool or
+                                      namespace.
+    mirror pool disable               Disable RBD mirroring in a pool or
+                                      namespace.
+    mirror pool enable                Enable RBD mirroring in a pool or
+                                      namespace.
+    mirror pool info                  Show mirroring configuration for a pool
+                                      or namespace.
+    mirror pool peer add              Add a mirroring peer to a pool.
+    mirror pool peer bootstrap create Create a peer bootstrap token to import
+                                      in a remote cluster
+    mirror pool peer bootstrap import Import a peer bootstrap token created
+                                      from a remote cluster
+    mirror pool peer remove           Remove a mirroring peer from a pool.
+    mirror pool peer set              Update mirroring peer settings.
+    mirror pool promote               Promote all non-primary images in a pool
+                                      or namespace.
+    mirror pool status                Show status for all mirrored images in a
+                                      pool or namespace.
+    mirror snapshot schedule add      Add mirror snapshot schedule.
+    mirror snapshot schedule list (... ls)
+                                      List mirror snapshot schedule.
+    mirror snapshot schedule remove (... rm)
+                                      Remove mirror snapshot schedule.
+    mirror snapshot schedule status   Show mirror snapshot schedule status.
+    namespace create                  Create an RBD image namespace.
+    namespace list (namespace ls)     List RBD image namespaces.
+    namespace remove (namespace rm)   Remove an RBD image namespace.
+    object-map check                  Verify the object map is correct.
+    object-map rebuild                Rebuild an invalid object map.
+    perf image iostat                 Display image IO statistics.
+    perf image iotop                  Display a top-like IO monitor.
+    persistent-cache flush            Flush persistent cache.
+    persistent-cache invalidate       Invalidate (discard) existing / dirty
+                                      persistent cache.
+    pool init                         Initialize pool for use by RBD.
+    pool stats                        Display pool statistics.
+    remove (rm)                       Delete an image.
+    rename (mv)                       Rename an image within its pool or
+                                      namespace.
+    resize                            Resize (expand or shrink) image.
+    snap create (snap add)            Create a snapshot.
+    snap limit clear                  Remove snapshot limit.
+    snap limit set                    Limit the number of snapshots.
+    snap list (snap ls)               Dump list of image snapshots.
+    snap protect                      Prevent a snapshot from being deleted.
+    snap purge                        Delete all unprotected snapshots.
+    snap remove (snap rm)             Delete a snapshot.
+    snap rename                       Rename a snapshot.
+    snap rollback (snap revert)       Rollback image to snapshot.
+    snap unprotect                    Allow a snapshot to be deleted.
+    sparsify                          Reclaim space for zeroed image extents.
+    status                            Show the status of this image.
+    trash list (trash ls)             List trash images.
+    trash move (trash mv)             Move an image to the trash.
+    trash purge                       Remove all expired images from trash.
+    trash purge schedule add          Add trash purge schedule.
+    trash purge schedule list (... ls)
+                                      List trash purge schedule.
+    trash purge schedule remove (... rm)
+                                      Remove trash purge schedule.
+    trash purge schedule status       Show trash purge schedule status.
+    trash remove (trash rm)           Remove an image from trash.
+    trash restore                     Restore an image from trash.
+    watch                             Watch events on image.
+
+Optional arguments:
+  -c [ --conf ] arg                   path to cluster configuration
+  --cluster arg                       cluster name
+  --id arg                            client id (without 'client.' prefix)
+  -n [ --name ] arg                   client name
+  -m [ --mon_host ] arg               monitor host
+  -K [ --keyfile ] arg                path to secret key
+  -k [ --keyring ] arg                path to keyring
+
+See 'rbd help <command>' for help on a specific command.
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ for p in $(rbd pool ls); do
+  echo "== $p =="
+  rbd ls "$p" | grep 1b0e378c-ac45-4e6b-bb70-e506e37137f0 && break
+done
+error: unknown option 'pool ls'
+
+== usage: ==
+rbd: error opening pool 'usage:': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== rbd ==
+rbd: error opening default pool 'rbd'
+Ensure that the default pool has been created or specify an alternate pool name.
+rbd: listing images failed: (2) No such file or directory
+== <command> ==
+rbd: error opening pool '<command>': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== ... ==
+rbd: error opening pool '...': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== Command-line ==
+rbd: error opening pool 'Command-line': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== interface ==
+rbd: error opening pool 'interface': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== for ==
+rbd: error opening pool 'for': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== managing ==
+rbd: error opening pool 'managing': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== Ceph ==
+rbd: error opening pool 'Ceph': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== RBD ==
+rbd: error opening pool 'RBD': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== images. ==
+rbd: error opening pool 'images.': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== Positional ==
+rbd: error opening pool 'Positional': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== arguments: ==
+rbd: error opening pool 'arguments:': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== <command> ==
+rbd: error opening pool '<command>': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== bench ==
+rbd: error opening pool 'bench': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== Simple ==
+rbd: error opening pool 'Simple': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== benchmark. ==
+rbd: error opening pool 'benchmark.': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== children ==
+rbd: error opening pool 'children': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== Display ==
+rbd: error opening pool 'Display': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== children ==
+rbd: error opening pool 'children': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== of ==
+rbd: error opening pool 'of': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== an ==
+rbd: error opening pool 'an': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== image ==
+rbd: error opening pool 'image': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== or ==
+rbd: error opening pool 'or': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== its ==
+rbd: error opening pool 'its': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== snapshot. ==
+rbd: error opening pool 'snapshot.': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== clone ==
+rbd: error opening pool 'clone': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== Clone ==
+rbd: error opening pool 'Clone': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== a ==
+rbd: error opening pool 'a': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== snapshot ==
+rbd: error opening pool 'snapshot': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== into ==
+rbd: error opening pool 'into': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== a ==
+rbd: error opening pool 'a': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== CoW ==
+rbd: error opening pool 'CoW': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== child ==
+rbd: error opening pool 'child': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== image. ==
+rbd: error opening pool 'image.': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== config ==
+rbd: error opening pool 'config': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== global ==
+rbd: error opening pool 'global': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== get ==
+rbd: error opening pool 'get': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== Get ==
+rbd: error opening pool 'Get': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== a ==
+rbd: error opening pool 'a': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== global-level ==
+rbd: error opening pool 'global-level': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== configuration ==
+rbd: error opening pool 'configuration': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== override. ==
+rbd: error opening pool 'override.': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== config ==
+rbd: error opening pool 'config': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== global ==
+rbd: error opening pool 'global': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== list ==
+rbd: error opening pool 'list': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== (... ==
+rbd: error opening pool '(...': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== ls) ==
+rbd: error opening pool 'ls)': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== List ==
+rbd: error opening pool 'List': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== global-level ==
+rbd: error opening pool 'global-level': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== configuration ==
+rbd: error opening pool 'configuration': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== overrides. ==
+rbd: error opening pool 'overrides.': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== config ==
+rbd: error opening pool 'config': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== global ==
+rbd: error opening pool 'global': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== remove ==
+rbd: error opening pool 'remove': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== (... ==
+rbd: error opening pool '(...': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== rm) ==
+rbd: error opening pool 'rm)': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== Remove ==
+rbd: error opening pool 'Remove': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== a ==
+rbd: error opening pool 'a': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== global-level ==
+rbd: error opening pool 'global-level': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== configuration ==
+rbd: error opening pool 'configuration': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== override. ==
+rbd: error opening pool 'override.': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== config ==
+rbd: error opening pool 'config': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== global ==
+rbd: error opening pool 'global': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== set ==
+rbd: error opening pool 'set': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== Set ==
+rbd: error opening pool 'Set': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== a ==
+rbd: error opening pool 'a': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== global-level ==
+rbd: error opening pool 'global-level': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== configuration ==
+rbd: error opening pool 'configuration': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== override. ==
+rbd: error opening pool 'override.': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== config ==
+rbd: error opening pool 'config': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== image ==
+rbd: error opening pool 'image': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== get ==
+rbd: error opening pool 'get': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== Get ==
+rbd: error opening pool 'Get': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== an ==
+rbd: error opening pool 'an': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== image-level ==
+rbd: error opening pool 'image-level': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== configuration ==
+rbd: error opening pool 'configuration': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== override. ==
+rbd: error opening pool 'override.': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== config ==
+rbd: error opening pool 'config': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== image ==
+rbd: error opening pool 'image': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== list ==
+rbd: error opening pool 'list': (2) No such file or directory
+rbd: listing images failed: (2) No such file or directory
+== (... ==
+rbd: error opening pool '(...': (2) No such file or directory
+^C
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ rbd info volumes/volume-1b0e378c-ac45-4e6b-bb70-e506e37137f0
+rbd: error opening pool 'volumes': (2) No such file or directory
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ rbd ls volume | grep 1b0e378c-ac45-4e6b-bb70-e506e37137f0
+volume-1b0e378c-ac45-4e6b-bb70-e506e37137f0
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ for p in $(ceph osd lspools | awk '{print $2}'); do
+  echo "== $p =="
+  rbd ls "$p" 2>/dev/null | grep 1b0e378c-ac45-4e6b-bb70-e506e37137f0 && break
+done
+== .mgr ==
+== volume ==
+volume-1b0e378c-ac45-4e6b-bb70-e506e37137f0
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ rbd --pool volume info volume-1b0e378c-ac45-4e6b-bb70-e506e37137f0
+rbd image 'volume-1b0e378c-ac45-4e6b-bb70-e506e37137f0':
+        size 10 GiB in 2560 objects
+        order 22 (4 MiB objects)
+        snapshot_count: 0
+        id: a2341ec95aa92
+        block_name_prefix: rbd_data.a2341ec95aa92
+        format: 2
+        features: layering, exclusive-lock, object-map, fast-diff, deep-flatten
+        op_features: 
+        flags: 
+        create_timestamp: Tue Mar 10 13:31:24 2026
+        access_timestamp: Tue Mar 10 13:34:36 2026
+        modify_timestamp: Tue Mar 10 13:36:13 2026
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack server list
++--------------------------------------+-----------+--------+----------------------------------+--------------------------+----------+
+| ID                                   | Name      | Status | Networks                         | Image                    | Flavor   |
++--------------------------------------+-----------+--------+----------------------------------+--------------------------+----------+
+| 1c55a99f-bf09-4ead-8682-137466061782 | ubuntu-24 | ACTIVE | private=10.0.0.143, 172.24.4.192 | N/A (booted from volume) | m1.small |
++--------------------------------------+-----------+--------+----------------------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack server delete ubuntu-24
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ openstack volume delete ubuntu-24
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ 
+```
+# The real project begains:
+## Goal of this first implementation:
+* keep Glance on Ceph
+* use Packer to create a golden image
+* that image is:
+    * updated
+    *  cleaned
+    *  reusable
+
+**Then new VM will launch from it** 
+### clear the home direcotry first
+```
+ubuntu@gelani-lab-1:~/cloudinit-userdata$ cd ~
+ubuntu@gelani-lab-1:~$ ls
+cloudinit-userdata  image-factory  raw-image
+ubuntu@gelani-lab-1:~$ mv image-factory image-factory-old-files-not-used
+ubuntu@gelani-lab-1:~$ ls
+cloudinit-userdata  image-factory-old-files-not-used  raw-image
+```
+# The actual start:
+## create project folders
+```
+ubuntu@gelani-lab-1:~$ mkdir -p ~/image-factory/{packer,scripts,cloud-init,output,logs}
+tree ~/image-factory
+/home/ubuntu/image-factory
+├── cloud-init
+├── logs
+├── output
+├── packer
+└── scripts
+
+5 directories, 0 files
+```
+## install required packages and verify 
+```
+ubuntu@gelani-lab-1:~$ sudo apt update
+sudo apt install -y unzip qemu-utils jq curl wget
+Hit:1 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease     
+Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Get:4 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Fetched 129 kB in 5s (25.3 kB/s)   
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+curl is already the newest version (7.81.0-1ubuntu1.22).
+jq is already the newest version (1.6-2.1ubuntu3.1).
+qemu-utils is already the newest version (1:6.2+dfsg-2ubuntu6.28).
+unzip is already the newest version (6.0-26ubuntu3.2).
+wget is already the newest version (1.21.2-2ubuntu1.1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+ubuntu@gelani-lab-1:~$ qemu-img --version
+qemu-img version 6.2.0 (Debian 1:6.2+dfsg-2ubuntu6.28)
+Copyright (c) 2003-2021 Fabrice Bellard and the QEMU Project developers
+ubuntu@gelani-lab-1:~$ jq --version
+jq-1.6
+ubuntu@gelani-lab-1:~$ curl --version | head -n 1
+curl 7.81.0 (x86_64-pc-linux-gnu) libcurl/7.81.0 OpenSSL/3.0.2 zlib/1.2.11 brotli/1.0.9 zstd/1.4.8 libidn2/2.3.2 libpsl/0.21.0 (+libidn2/2.3.2) libssh/0.9.6/openssl/zlib nghttp2/1.43.0 librtmp/2.3 OpenLDAP/2.5.20
+ubuntu@gelani-lab-1:~$ packer version
+Packer v1.11.0
+
+Your version of Packer is out of date! The latest version
+is 1.15.0. You can update by downloading from www.packer.io/downloads
+```
+### Little clenning (I have tried some test install priviously so clean up that)
+```
+ubuntu@gelani-lab-1:~$ ll
+total 140
+drwxr-x--- 11 ubuntu ubuntu  4096 Mar 10 14:16 ./
+drwxr-xr-x  3 root   root    4096 Jan 19 10:56 ../
+-rw-------  1 ubuntu ubuntu 72322 Mar 10 10:41 .bash_history
+-rw-r--r--  1 ubuntu ubuntu   220 Jan  6  2022 .bash_logout
+-rw-r--r--  1 ubuntu ubuntu  3771 Jan  6  2022 .bashrc
+drwx------  3 ubuntu ubuntu  4096 Jan 31 14:00 .cache/
+drwxrwxr-x  6 ubuntu ubuntu  4096 Feb 26 19:54 .config/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Feb 15 06:14 .glanceclient/
+-rw-------  1 ubuntu ubuntu    20 Feb 18 06:37 .lesshst
+drwxrwxr-x  3 ubuntu ubuntu  4096 Feb 17 10:51 .local/
+-rw-------  1 ubuntu ubuntu   803 Feb 15 10:01 .mysql_history
+-rw-r--r--  1 ubuntu ubuntu   807 Jan  6  2022 .profile
+drwx------  2 ubuntu ubuntu  4096 Mar 10 11:53 .ssh/
+-rw-r--r--  1 ubuntu ubuntu     0 Jan 19 10:58 .sudo_as_admin_successful
+-rw-rw-r--  1 ubuntu ubuntu   408 Feb 26 05:49 .wget-hsts
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 10 11:08 cloudinit-userdata/
+drwxrwxr-x  7 ubuntu ubuntu  4096 Mar 10 14:16 image-factory/
+drwxrwxr-x  6 ubuntu ubuntu  4096 Feb 20 20:08 image-factory-old-files-not-used/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 10 11:42 raw-image/
+ubuntu@gelani-lab-1:~$ sudo rm image-factory-old-files-not-used/
+rm: cannot remove 'image-factory-old-files-not-used/': Is a directory
+ubuntu@gelani-lab-1:~$ sudo rm -r image-factory-old-files-not-used/
+ubuntu@gelani-lab-1:~$ ls
+cloudinit-userdata  image-factory  raw-image
+```
+## prepare the base Ubuntu 24.04 image & upload this as OpenStack base image
+```
+ubuntu@gelani-lab-1:~$ mkdir -p ~/images/base-image
+cd ~/images/base-image
+pwd
+/home/ubuntu/images/base-image
+ubuntu@gelani-lab-1:~/images/base-image$ wget -O noble.img https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
+--2026-03-10 14:19:03--  https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
+Resolving cloud-images.ubuntu.com (cloud-images.ubuntu.com)... 185.125.190.37, 185.125.190.40, 2620:2d:4000:1::1a, ...
+Connecting to cloud-images.ubuntu.com (cloud-images.ubuntu.com)|185.125.190.37|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 629048832 (600M) [application/octet-stream]
+Saving to: ‘noble.img’
+
+noble.img                                                  100%[========================================================================================================================================>] 599.91M  16.7MB/s    in 42s     
+
+2026-03-10 14:19:46 (14.2 MB/s) - ‘noble.img’ saved [629048832/629048832]
+
+ubuntu@gelani-lab-1:~/images/base-image$ ls -lh noble.img
+-rw-rw-r-- 1 ubuntu ubuntu 600M Feb 25 13:19 noble.img
+ubuntu@gelani-lab-1:~/images/base-image$ qemu-img info noble.img
+image: noble.img
+file format: qcow2
+virtual size: 3.5 GiB (3758096384 bytes)
+disk size: 600 MiB
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    compression type: zlib
+    lazy refcounts: false
+    refcount bits: 16
+    corrupt: false
+    extended l2: false
+ubuntu@gelani-lab-1:~/images/base-image$ openstack image list | grep ubuntu-24.04-base
+ubuntu@gelani-lab-1:~/images/base-image$ openstack image create ubuntu-24.04-base \
+  --file ~/images/base-image/noble.img \
+  --disk-format qcow2 \
+  --container-format bare \
+  --public
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field            | Value                                                                                                                                                                                                                 |
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checksum         | 46063c6f375646b634adb52b3681102d                                                                                                                                                                                      |
+| container_format | bare                                                                                                                                                                                                                  |
+| created_at       | 2026-03-10T15:01:48Z                                                                                                                                                                                                  |
+| disk_format      | qcow2                                                                                                                                                                                                                 |
+| file             | /v2/images/be415f83-0c94-4c5e-b351-416fbe719f45/file                                                                                                                                                                  |
+| id               | be415f83-0c94-4c5e-b351-416fbe719f45                                                                                                                                                                                  |
+| min_disk         | 0                                                                                                                                                                                                                     |
+| min_ram          | 0                                                                                                                                                                                                                     |
+| name             | ubuntu-24.04-base                                                                                                                                                                                                     |
+| owner            | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                                                                      |
+| properties       | os_hash_algo='sha512', os_hash_value='cd4d8a156272c8a250a29ec95cd174ee3e0dfb67609b1787a83299909227e678dd74d19a7f212b9d742c08a10023237f421830bccad00bc937801e2739f94725', os_hidden='False',                           |
+|                  | owner_specified.openstack.md5='', owner_specified.openstack.object='images/ubuntu-24.04-base', owner_specified.openstack.sha256=''                                                                                    |
+| protected        | False                                                                                                                                                                                                                 |
+| schema           | /v2/schemas/image                                                                                                                                                                                                     |
+| size             | 629048832                                                                                                                                                                                                             |
+| status           | active                                                                                                                                                                                                                |
+| tags             |                                                                                                                                                                                                                       |
+| updated_at       | 2026-03-10T15:01:58Z                                                                                                                                                                                                  |
+| virtual_size     | 3758096384                                                                                                                                                                                                            |
+| visibility       | public                                                                                                                                                                                                                |
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/images/base-image$ openstack image list
++--------------------------------------+--------------------------------------+--------+
+| ID                                   | Name                                 | Status |
++--------------------------------------+--------------------------------------+--------+
+| 151fa56a-92e5-4a05-82bb-f4472394d3d9 | alma-10                              | active |
+| f339488c-2c82-4e7d-ab70-d57a4d2c1ade | cirros                               | active |
+| a05bfffb-5b9a-468e-b9a7-45e541d6e1c7 | debian-11                            | active |
+| 8c2f2ee0-458e-4370-8cfa-e5e145402142 | debian-12                            | active |
+| 5a2209bd-847e-4948-87e2-e66b1109f4eb | fedora-40                            | active |
+| fbb9bfc0-3dc0-4f20-b230-e046473fe629 | rocky-9                              | active |
+| 9bd72412-c33b-49a4-8917-396c9dd3741f | ubuntu-18                            | active |
+| b5a9da1c-2fd0-404d-9e39-e7ea9a50acfb | ubuntu-20                            | active |
+| c218d57e-3393-4283-8a6c-fe74551e9ea2 | ubuntu-22                            | active |
+| b522ceff-bea1-465d-9dbb-ebb567769ef4 | ubuntu-24                            | active |
+| ea3b9ae8-c81a-4198-a2a3-4936599f84c7 | ubuntu-24-test-os-automation-project | active |
+| be415f83-0c94-4c5e-b351-416fbe719f45 | ubuntu-24.04-base                    | active |
++--------------------------------------+--------------------------------------+--------+
+ubuntu@gelani-lab-1:~/images/base-image$ openstack image show ubuntu-24.04-base -c id -c name -c status -c disk_format -c size
++-------------+--------------------------------------+
+| Field       | Value                                |
++-------------+--------------------------------------+
+| disk_format | qcow2                                |
+| id          | be415f83-0c94-4c5e-b351-416fbe719f45 |
+| name        | ubuntu-24.04-base                    |
+| size        | 629048832                            |
+| status      | active                               |
++-------------+--------------------------------------+
+ubuntu@gelani-lab-1:~/images/base-image$ rbd ls -p images | grep be415f83-0c94-4c5e-b351-416fbe719f45
+be415f83-0c94-4c5e-b351-416fbe719f45
+ubuntu@gelani-lab-1:~/images/base-image$ openstack security group list | grep packer-build-sg
+ubuntu@gelani-lab-1:~/images/base-image$ openstack security group create packer-build-sg
++-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field           | Value                                                                                                                                                                         |
++-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| created_at      | 2026-03-10T15:03:15Z                                                                                                                                                          |
+| description     | packer-build-sg                                                                                                                                                               |
+| id              | 488d0770-7c58-45fa-ae6e-69e7ee7a0476                                                                                                                                          |
+| is_shared       | False                                                                                                                                                                         |
+| name            | packer-build-sg                                                                                                                                                               |
+| project_id      | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                              |
+| revision_number | 1                                                                                                                                                                             |
+| rules           | created_at='2026-03-10T15:03:15Z', direction='egress', ethertype='IPv4', id='1e0efca5-a0a8-4a06-ba0c-a2736892f14e', standard_attr_id='138', updated_at='2026-03-10T15:03:15Z' |
+|                 | created_at='2026-03-10T15:03:15Z', direction='egress', ethertype='IPv6', id='ae5b645c-fa2a-4e89-99ae-dbbe04d0e1fa', standard_attr_id='139', updated_at='2026-03-10T15:03:15Z' |
+| stateful        | True                                                                                                                                                                          |
+| tags            | []                                                                                                                                                                            |
+| updated_at      | 2026-03-10T15:03:15Z                                                                                                                                                          |
++-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/images/base-image$ openstack security group rule create --proto tcp --dst-port 22 packer-build-sg
++-------------------------+--------------------------------------+
+| Field                   | Value                                |
++-------------------------+--------------------------------------+
+| belongs_to_default_sg   | False                                |
+| created_at              | 2026-03-10T15:03:24Z                 |
+| description             |                                      |
+| direction               | ingress                              |
+| ether_type              | IPv4                                 |
+| id                      | 2aabe56d-79df-4d10-ae91-b0e614efc3d9 |
+| normalized_cidr         | 0.0.0.0/0                            |
+| port_range_max          | 22                                   |
+| port_range_min          | 22                                   |
+| project_id              | 99ab77b7592c418096336a7ccf9e299d     |
+| protocol                | tcp                                  |
+| remote_address_group_id | None                                 |
+| remote_group_id         | None                                 |
+| remote_ip_prefix        | 0.0.0.0/0                            |
+| revision_number         | 0                                    |
+| security_group_id       | 488d0770-7c58-45fa-ae6e-69e7ee7a0476 |
+| updated_at              | 2026-03-10T15:03:24Z                 |
++-------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~/images/base-image$ openstack security group rule create --proto icmp packer-build-sg
++-------------------------+--------------------------------------+
+| Field                   | Value                                |
++-------------------------+--------------------------------------+
+| belongs_to_default_sg   | False                                |
+| created_at              | 2026-03-10T15:03:34Z                 |
+| description             |                                      |
+| direction               | ingress                              |
+| ether_type              | IPv4                                 |
+| id                      | a9e8ad64-90c8-419b-a1c9-4cccbe0a7338 |
+| normalized_cidr         | 0.0.0.0/0                            |
+| port_range_max          | None                                 |
+| port_range_min          | None                                 |
+| project_id              | 99ab77b7592c418096336a7ccf9e299d     |
+| protocol                | icmp                                 |
+| remote_address_group_id | None                                 |
+| remote_group_id         | None                                 |
+| remote_ip_prefix        | 0.0.0.0/0                            |
+| revision_number         | 0                                    |
+| security_group_id       | 488d0770-7c58-45fa-ae6e-69e7ee7a0476 |
+| updated_at              | 2026-03-10T15:03:34Z                 |
++-------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~/images/base-image$ openstack security group show packer-build-sg
++-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field           | Value                                                                                                                                                                                                                  |
++-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| created_at      | 2026-03-10T15:03:15Z                                                                                                                                                                                                   |
+| description     | packer-build-sg                                                                                                                                                                                                        |
+| id              | 488d0770-7c58-45fa-ae6e-69e7ee7a0476                                                                                                                                                                                   |
+| is_shared       | False                                                                                                                                                                                                                  |
+| name            | packer-build-sg                                                                                                                                                                                                        |
+| project_id      | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                                                                       |
+| revision_number | 3                                                                                                                                                                                                                      |
+| rules           | created_at='2026-03-10T15:03:15Z', direction='egress', ethertype='IPv4', id='1e0efca5-a0a8-4a06-ba0c-a2736892f14e', standard_attr_id='138', updated_at='2026-03-10T15:03:15Z'                                          |
+|                 | created_at='2026-03-10T15:03:24Z', direction='ingress', ethertype='IPv4', id='2aabe56d-79df-4d10-ae91-b0e614efc3d9', normalized_cidr='0.0.0.0/0', port_range_max='22', port_range_min='22', protocol='tcp',            |
+|                 | remote_ip_prefix='0.0.0.0/0', standard_attr_id='140', updated_at='2026-03-10T15:03:24Z'                                                                                                                                |
+|                 | created_at='2026-03-10T15:03:34Z', direction='ingress', ethertype='IPv4', id='a9e8ad64-90c8-419b-a1c9-4cccbe0a7338', normalized_cidr='0.0.0.0/0', protocol='icmp', remote_ip_prefix='0.0.0.0/0',                       |
+|                 | standard_attr_id='141', updated_at='2026-03-10T15:03:34Z'                                                                                                                                                              |
+|                 | created_at='2026-03-10T15:03:15Z', direction='egress', ethertype='IPv6', id='ae5b645c-fa2a-4e89-99ae-dbbe04d0e1fa', standard_attr_id='139', updated_at='2026-03-10T15:03:15Z'                                          |
+| stateful        | True                                                                                                                                                                                                                   |
+| tags            | []                                                                                                                                                                                                                     |
+| updated_at      | 2026-03-10T15:03:34Z                                                                                                                                                                                                   |
++-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+```
+## prepare build access for Packer
+```
+ubuntu@gelani-lab-1:~/images/base-image$ mkdir -p ~/.ssh
+ssh-keygen -t ed25519 -f ~/.ssh/packer_build_key -N ""
+Generating public/private ed25519 key pair.
+/home/ubuntu/.ssh/packer_build_key already exists.
+Overwrite (y/n)? y^C
+ubuntu@gelani-lab-1:~/images/base-image$ cd ~/.ssh
+ubuntu@gelani-lab-1:~/.ssh$ ll
+total 32
+drwx------  2 ubuntu ubuntu 4096 Mar 10 11:53 ./
+drwxr-x--- 11 ubuntu ubuntu 4096 Mar 10 14:18 ../
+-rw-------  1 ubuntu ubuntu  399 Feb 18 04:44 authorized_keys
+-rw-------  1 ubuntu ubuntu 4782 Mar 10 11:53 known_hosts
+-rw-------  1 ubuntu ubuntu 3946 Mar 10 11:53 known_hosts.old
+-rw-------  1 ubuntu ubuntu  411 Feb 20 20:16 packer_build_key
+-rw-r--r--  1 ubuntu ubuntu  101 Feb 20 20:16 packer_build_key.pub
+ubuntu@gelani-lab-1:~/.ssh$ rm -r packer_build_key
+ubuntu@gelani-lab-1:~/.ssh$ ll
+total 28
+drwx------  2 ubuntu ubuntu 4096 Mar 10 15:04 ./
+drwxr-x--- 11 ubuntu ubuntu 4096 Mar 10 14:18 ../
+-rw-------  1 ubuntu ubuntu  399 Feb 18 04:44 authorized_keys
+-rw-------  1 ubuntu ubuntu 4782 Mar 10 11:53 known_hosts
+-rw-------  1 ubuntu ubuntu 3946 Mar 10 11:53 known_hosts.old
+-rw-r--r--  1 ubuntu ubuntu  101 Feb 20 20:16 packer_build_key.pub
+ubuntu@gelani-lab-1:~/.ssh$ rm -r packer_build_key.pub 
+ubuntu@gelani-lab-1:~/.ssh$ ssh-keygen -t ed25519 -f ~/.ssh/packer_build_key -N ""
+Generating public/private ed25519 key pair.
+Your identification has been saved in /home/ubuntu/.ssh/packer_build_key
+Your public key has been saved in /home/ubuntu/.ssh/packer_build_key.pub
+The key fingerprint is:
+SHA256:wruMahUMNJ1x5DN1f12oUWUDAKPO42Hjw4KAqiSDTVM ubuntu@gelani-lab-1
+The key's randomart image is:
++--[ED25519 256]--+
+| .o..+o .oo..oo++|
+|  ..oo ...... .oo|
+|   oE +.    .o. .|
+|.  .o.oo    ..   |
+|..o  .oBS        |
+|oo..o =o+        |
+|=..o ..=         |
+|+..  o...        |
+|..... o          |
++----[SHA256]-----+
+ubuntu@gelani-lab-1:~/.ssh$ ls -l ~/.ssh/packer_build_key ~/.ssh/packer_build_key.pub
+-rw------- 1 ubuntu ubuntu 411 Mar 10 15:04 /home/ubuntu/.ssh/packer_build_key
+-rw-r--r-- 1 ubuntu ubuntu 101 Mar 10 15:04 /home/ubuntu/.ssh/packer_build_key.pub
+ubuntu@gelani-lab-1:~/.ssh$ openstack keypair list | grep packer-build-key
+ubuntu@gelani-lab-1:~/.ssh$ openstack keypair create --public-key ~/.ssh/packer_build_key.pub packer-build-key
++-------------+-------------------------------------------------+
+| Field       | Value                                           |
++-------------+-------------------------------------------------+
+| created_at  | None                                            |
+| fingerprint | 70:e3:7a:c1:77:f9:39:bf:dc:0b:1c:21:57:d7:76:b8 |
+| id          | packer-build-key                                |
+| is_deleted  | None                                            |
+| name        | packer-build-key                                |
+| type        | ssh                                             |
+| user_id     | 270824ef176044a2a8b64a8337e2f00a                |
++-------------+-------------------------------------------------+
+ubuntu@gelani-lab-1:~/.ssh$ openstack keypair show packer-build-key
++-------------+-------------------------------------------------+
+| Field       | Value                                           |
++-------------+-------------------------------------------------+
+| created_at  | 2026-03-10T15:04:56.000000                      |
+| fingerprint | 70:e3:7a:c1:77:f9:39:bf:dc:0b:1c:21:57:d7:76:b8 |
+| id          | packer-build-key                                |
+| is_deleted  | False                                           |
+| name        | packer-build-key                                |
+| private_key | None                                            |
+| type        | ssh                                             |
+| user_id     | 270824ef176044a2a8b64a8337e2f00a                |
++-------------+-------------------------------------------------+
+```
+## create the scripts that prepare the golden image
+```
+ubuntu@gelani-lab-1:~/.ssh$ nano ~/image-factory/scripts/provision-ubuntu.sh
+ubuntu@gelani-lab-1:~/.ssh$ chmod +x ~/image-factory/scripts/provision-ubuntu.sh
+ubuntu@gelani-lab-1:~/.ssh$ ls -l ~/image-factory/scripts/provision-ubuntu.sh
+-rwxrwxr-x 1 ubuntu ubuntu 351 Mar 10 15:05 /home/ubuntu/image-factory/scripts/provision-ubuntu.sh
+ubuntu@gelani-lab-1:~/.ssh$ nano ~/image-factory/scripts/cleanup-ubuntu.sh
+ubuntu@gelani-lab-1:~/.ssh$ chmod +x ~/image-factory/scripts/cleanup-ubuntu.sh
+ubuntu@gelani-lab-1:~/.ssh$ ls -l ~/image-factory/scripts/cleanup-ubuntu.sh
+-rwxrwxr-x 1 ubuntu ubuntu 316 Mar 10 15:05 /home/ubuntu/image-factory/scripts/cleanup-ubuntu.sh
+ubuntu@gelani-lab-1:~/.ssh$ nano ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+ubuntu@gelani-lab-1:~/.ssh$ cat ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+packer {
+  required_plugins {
+    openstack = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/openstack"
+    }
+  }
+}
+
+variable "network_name" {
+  type    = string
+  default = "private"
+}
+
+source "openstack" "ubuntu2404" {
+  image_name            = "ubuntu-24.04-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
+  source_image_name     = "ubuntu-24.04-base"
+  flavor                = "m1.small"
+  networks              = [var.network_name]
+  security_groups       = ["packer-build-sg"]
+
+  ssh_username          = "ubuntu"
+  ssh_private_key_file  = "~/.ssh/packer_build_key"
+  ssh_keypair_name      = "packer-build-key"
+  ssh_timeout           = "20m"
+  ssh_interface         = "private"
+  ssh_ip_version        = "4"
+
+  image_visibility      = "public"
+  image_tags            = ["ubuntu", "24.04", "golden", "automated"]
+
+  metadata = {
+    os_distro    = "ubuntu"
+    os_version   = "24.04"
+    build_method = "packer"
+    purpose      = "golden-image"
+  }
+}
+
+build {
+  sources = ["source.openstack.ubuntu2404"]
+
+  provisioner "shell" {
+    script = "../scripts/provision-ubuntu.sh"
+  }
+
+  provisioner "shell" {
+    script = "../scripts/cleanup-ubuntu.sh"
+  }
+}
+```
+## initialize and validate Packer
+```
+ubuntu@gelani-lab-1:~/.ssh$ cd ~/image-factory/packer
+packer init .
+ubuntu@gelani-lab-1:~/image-factory/packer$ packer validate -var "network_name=private" ubuntu-24.04.pkr.hcl
+The configuration is valid.
+ubuntu@gelani-lab-1:~/image-factory/packer$ cd ~/image-factory/packer
+packer build -var "network_name=private" ubuntu-24.04.pkr.hcl
+openstack.ubuntu2404: output will be in this color.
+
+==> openstack.ubuntu2404: Loading flavor: m1.small
+    openstack.ubuntu2404: Verified flavor. ID: 2
+==> openstack.ubuntu2404: Using existing SSH private key
+==> openstack.ubuntu2404: Using existing SSH private key
+    openstack.ubuntu2404: Found Image ID: be415f83-0c94-4c5e-b351-416fbe719f45
+==> openstack.ubuntu2404: Launching server...
+==> openstack.ubuntu2404: Launching server...
+==> openstack.ubuntu2404: Error launching source server: Bad request with: [POST http://192.168.95.23/compute/v2.1/servers], error message: {"badRequest": {"code": 400, "message": "Bad networks format: network uuid is not in proper format (private)"}}
+==> openstack.ubuntu2404: Terminating the source server:  ...
+==> openstack.ubuntu2404: Error terminating server, may still be around: Resource not found
+Build 'openstack.ubuntu2404' errored after 158 milliseconds 376 microseconds: Error launching source server: Bad request with: [POST http://192.168.95.23/compute/v2.1/servers], error message: {"badRequest": {"code": 400, "message": "Bad networks format: network uuid is not in proper format (private)"}}
+
+==> Wait completed after 158 milliseconds 467 microseconds
+
+==> Some builds didn't complete successfully and had errors:
+--> openstack.ubuntu2404: Error launching source server: Bad request with: [POST http://192.168.95.23/compute/v2.1/servers], error message: {"badRequest": {"code": 400, "message": "Bad networks format: network uuid is not in proper format (private)"}}
+
+==> Builds finished but no artifacts were created.
+```
+**Note: Here a issue occurs: Bad networks format: network uuid is not in proper format (private)**
+That means in this Packer OpenStack builder, the networks field wants the network UUID, not the network name.
+***Solution***
+1. Step 1: get the UUID of the private network
+2. Step 2: run Packer using the UUID
+```
+ubuntu@gelani-lab-1:~/image-factory/packer$ cd /opt/stack/devstack
+source openrc admin admin
+openstack network list
++--------------------------------------+----------+--------------------------------------+
+| ID                                   | Name     | Subnets                              |
++--------------------------------------+----------+--------------------------------------+
+| a374dd2e-853a-41eb-88ca-b5730143b548 | private  | bd0d784b-b8ff-4577-998d-a546756f7b8b |
+| abd82ede-929d-4f72-a034-e27922dda38f | public   | 65d17f74-a22e-452f-982f-5d641c6c6c57 |
+| e83ed974-4855-4c7b-bfb6-949d6c49e829 | shared   | bbc63ac2-84de-4309-9a01-8f69e17a63c1 |
+| ee6db446-7789-4b4e-9851-b4335a721c56 | heat-net |                                      |
++--------------------------------------+----------+--------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ cd ~/image-factory/packer
+packer build -var "network_name=a374dd2e-853a-41eb-88ca-b5730143b548" ubuntu-24.04.pkr.hcl
+openstack.ubuntu2404: output will be in this color.
+
+==> openstack.ubuntu2404: Loading flavor: m1.small
+    openstack.ubuntu2404: Verified flavor. ID: 2
+==> openstack.ubuntu2404: Using existing SSH private key
+==> openstack.ubuntu2404: Using existing SSH private key
+    openstack.ubuntu2404: Found Image ID: be415f83-0c94-4c5e-b351-416fbe719f45
+==> openstack.ubuntu2404: Launching server...
+==> openstack.ubuntu2404: Launching server...
+    openstack.ubuntu2404: Server ID: a4324b43-d94b-4d88-b084-b1f0dcd39e81
+==> openstack.ubuntu2404: Waiting for server to become ready...
+    openstack.ubuntu2404: Floating IP not required
+==> openstack.ubuntu2404: Using SSH communicator to connect: 10.0.0.36
+==> openstack.ubuntu2404: Waiting for SSH to become available...
+```
+**Note: It got stuck at SSH to become available**
+```
+ubuntu@gelani-lab-1:/opt/stack/devstack$ cd ~/image-factory/packer
+packer build -var "network_name=a374dd2e-853a-41eb-88ca-b5730143b548" ubuntu-24.04.pkr.hcl
+openstack.ubuntu2404: output will be in this color.
+
+==> openstack.ubuntu2404: Loading flavor: m1.small
+    openstack.ubuntu2404: Verified flavor. ID: 2
+==> openstack.ubuntu2404: Using existing SSH private key
+==> openstack.ubuntu2404: Using existing SSH private key
+    openstack.ubuntu2404: Found Image ID: be415f83-0c94-4c5e-b351-416fbe719f45
+==> openstack.ubuntu2404: Launching server...
+==> openstack.ubuntu2404: Launching server...
+    openstack.ubuntu2404: Server ID: a4324b43-d94b-4d88-b084-b1f0dcd39e81
+==> openstack.ubuntu2404: Waiting for server to become ready...
+    openstack.ubuntu2404: Floating IP not required
+==> openstack.ubuntu2404: Using SSH communicator to connect: 10.0.0.36
+==> openstack.ubuntu2404: Waiting for SSH to become available...
+Cancelling build after receiving interrupt
+==> openstack.ubuntu2404: Terminating the source server: a4324b43-d94b-4d88-b084-b1f0dcd39e81 ...
+Build 'openstack.ubuntu2404' finished after 14 minutes 28 seconds.
+
+==> Wait completed after 14 minutes 28 seconds
+Cleanly cancelled builds after being interrupted.
+ubuntu@gelani-lab-1:~/image-factory/packer$ ^C
+```
+
