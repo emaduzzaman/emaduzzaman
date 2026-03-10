@@ -2479,4 +2479,143 @@ Build 'openstack.ubuntu2404' finished after 14 minutes 28 seconds.
 Cleanly cancelled builds after being interrupted.
 ubuntu@gelani-lab-1:~/image-factory/packer$ ^C
 ```
+**root-cause:**
+Packer is trying to SSH to the private IP 10.0.0.36, but from host side that path is not reachable. So it just waits forever here:
+*Using SSH communicator to connect: 10.0.0.36*
+*Waiting for SSH to become available...*
+
+**Solution**
+* make Packer assign a floating IP
+* make Packer SSH through that floating IP
+***Packer handle the floating IP automatically, instead of manually creating one with openstack floating ip create every time***
+
+**What to change**
+* In Packer template, change it so that:
+* it launches on your private/internal network
+* it allocates floating IP from public
+* it connects over public IP
+
+### 
+
+```
+ubuntu@gelani-lab-1:~$ cd /opt/stack/devstack
+source openrc admin admin
+openstack network list
++--------------------------------------+----------+--------------------------------------+
+| ID                                   | Name     | Subnets                              |
++--------------------------------------+----------+--------------------------------------+
+| a374dd2e-853a-41eb-88ca-b5730143b548 | private  | bd0d784b-b8ff-4577-998d-a546756f7b8b |
+| abd82ede-929d-4f72-a034-e27922dda38f | public   | 65d17f74-a22e-452f-982f-5d641c6c6c57 |
+| e83ed974-4855-4c7b-bfb6-949d6c49e829 | shared   | bbc63ac2-84de-4309-9a01-8f69e17a63c1 |
+| ee6db446-7789-4b4e-9851-b4335a721c56 | heat-net |                                      |
++--------------------------------------+----------+--------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ cat ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+packer {
+  required_plugins {
+    openstack = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/openstack"
+    }
+  }
+}
+
+variable "network_name" {
+  type    = string
+  default = "private"
+}
+
+source "openstack" "ubuntu2404" {
+  image_name            = "ubuntu-24.04-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
+  source_image_name     = "ubuntu-24.04-base"
+  flavor                = "m1.small"
+  networks              = [var.network_name]
+  security_groups       = ["packer-build-sg"]
+
+  ssh_username          = "ubuntu"
+  ssh_private_key_file  = "~/.ssh/packer_build_key"
+  ssh_keypair_name      = "packer-build-key"
+  ssh_timeout           = "20m"
+  ssh_interface         = "private"
+  ssh_ip_version        = "4"
+
+  image_visibility      = "public"
+  image_tags            = ["ubuntu", "24.04", "golden", "automated"]
+
+  metadata = {
+    os_distro    = "ubuntu"
+    os_version   = "24.04"
+    build_method = "packer"
+    purpose      = "golden-image"
+  }
+}
+
+build {
+  sources = ["source.openstack.ubuntu2404"]
+
+  provisioner "shell" {
+    script = "../scripts/provision-ubuntu.sh"
+  }
+
+  provisioner "shell" {
+    script = "../scripts/cleanup-ubuntu.sh"
+  }
+}
+ubuntu@gelani-lab-1:/opt/stack/devstack$ nano ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+ubuntu@gelani-lab-1:/opt/stack/devstack$ cat ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+packer {
+  required_plugins {
+    openstack = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/openstack"
+    }
+  }
+}
+
+variable "network_name" {
+  type    = string
+  default = "private"
+}
+
+source "openstack" "ubuntu2404" {
+  image_name            = "ubuntu-24.04-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
+  source_image_name     = "ubuntu-24.04-base"
+  flavor                = "m1.small"
+
+  networks              = [var.network_name]
+  security_groups       = ["packer-build-sg"]
+
+  ssh_username          = "ubuntu"
+  ssh_private_key_file  = "~/.ssh/packer_build_key"
+  ssh_keypair_name      = "packer-build-key"
+  ssh_timeout           = "20m"
+
+  ssh_interface         = "public"
+  ssh_ip_version        = "4"
+
+  floating_ip_network   = "public"
+  instance_floating_ip_net = "private"
+
+  image_visibility      = "public"
+  image_tags            = ["ubuntu", "24.04", "golden", "automated"]
+
+  metadata = {
+    os_distro    = "ubuntu"
+    os_version   = "24.04"
+    build_method = "packer"
+    purpose      = "golden-image"
+  }
+}
+
+build {
+  sources = ["source.openstack.ubuntu2404"]
+
+  provisioner "shell" {
+    script = "../scripts/provision-ubuntu.sh"
+  }
+
+  provisioner "shell" {
+    script = "../scripts/cleanup-ubuntu.sh"
+  }
+}
+ubuntu@gelani-lab-1:/opt/stack/devstack$ 
 
