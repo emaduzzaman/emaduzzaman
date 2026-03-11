@@ -27,7 +27,7 @@ This repository is my **engineering workspace** — a structured, continuously u
 
 This repository is organized by **intent**, not by technology.
 
-### 🔹 [`platform/`](platform)
+### 🔹 [`platform/`](%20projects/platform)
 Reusable infrastructure building blocks and platform components.
 
 Includes:
@@ -38,7 +38,7 @@ Includes:
 
 ---
 
-### 🔹 [`projects/`](projects)
+### 🔹 [`projects/`](1.%20projects/projects)
 End-to-end, production-style system designs and deployments.
 
 Examples:
@@ -51,7 +51,7 @@ Each project includes documentation, terminal logs, and validation artifacts.
 
 ---
 
-### 🔹 [`labs/`](labs)
+### 🔹 [`labs/`](3.%20labs/ labs)
 Focused learning, experiments, and practice environments.
 
 Includes:
@@ -61,7 +61,7 @@ Includes:
 
 ---
 
-### 🔹 [`scripts/`](scripts)
+### 🔹 [`scripts/`](5.%20scripts/cripts)
 Automation tools used in daily operations and labs.
 
 - Shell scripts for Linux and macOS
@@ -69,7 +69,7 @@ Automation tools used in daily operations and labs.
 
 ---
 
-### 🔹 [`configs/`](configs)
+### 🔹 [`configs/`](4.%20configs/configs)
 System and service configuration references.
 
 - Linux system configurations
