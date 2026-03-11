@@ -4018,9 +4018,175 @@ logout
 Connection to 172.24.4.105 closed.
 ubuntu@gelani-lab-1:~/image-factory/packer$ 
 ```
+**achivement: initialization and validation paker**
+* Packer built a new image automatically
+    * the image was stored in Glance
+    * the image exists in Ceph images pool
+    * created a Ceph-backed boot volume from that image
+    * launched a VM from that volume
+    * the VM booted cleanly
+    * SSH works
+    * cloud-init finished
+    * 0 updates pending
+    * the guest is Ubuntu 24.04.4 LTS
+    * OS automation project v1 is working
+
+***from outputs, the produced image is genuinely good:***
+  * PRETTY_NAME="Ubuntu 24.04.4 LTS"
+  * cloud-init status: done
+  * ssh.service is enabled and running
+  *  apt list --upgradable shows nothing
+**That means the image is not just created — it is actually usable and updated**
+
+### One small thing to improve
+***systemctl status qemu-guest-agent --no-pager***
+
+***Active: inactive (dead)***
+
+***Loaded: ... static***
+
+**It is not a failure for this project, but for a polished golden image the guest agent to be active when possible,later the provision script will be adjusted to start it explicitly instead of only trying to enable it**
+
+#### Before changing the build, test this inside the VM:
+```
+ubuntu@gelani-lab-1:~/image-factory/packer$ ssh -i ~/.ssh/packer_build_key ubuntu@"$FIP"
+Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.8.0-101-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Tue Mar 10 19:14:06 UTC 2026
+
+  System load:  0.0               Processes:             95
+  Usage of /:   9.8% of 18.33GB   Users logged in:       0
+  Memory usage: 8%                IPv4 address for ens3: 10.0.0.48
+  Swap usage:   0%
 
 
+Expanded Security Maintenance for Applications is not enabled.
 
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Tue Mar 10 18:15:58 2026 from 172.24.4.1
+ubuntu@ubuntu-24-golden-test-vm:~$ sudo systemctl start qemu-guest-agent
+sudo systemctl status qemu-guest-agent --no-pager
+A dependency job for qemu-guest-agent.service failed. See 'journalctl -xe' for details.
+○ qemu-guest-agent.service - QEMU Guest Agent
+     Loaded: loaded (/usr/lib/systemd/system/qemu-guest-agent.service; static)
+     Active: inactive (dead)
+
+Mar 10 19:15:39 ubuntu-24-golden-test-vm systemd[1]: Dependency failed for qemu-guest-agent.service - QEMU Guest Agent.
+Mar 10 19:15:39 ubuntu-24-golden-test-vm systemd[1]: qemu-guest-agent.service: Job qemu-guest-agent.service/start failed with result 'dependency'.
+ubuntu@ubuntu-24-golden-test-vm:~$ 
+ubuntu@ubuntu-24-golden-test-vm:~$ exit
+logout
+Connection to 172.24.4.105 closed.
+ubuntu@gelani-lab-1:~/image-factory/packer$ 
+
+```
+#### saving the proof of the work and achivement
+```
+ubuntu@gelani-lab-1:~/image-factory/packer$ {
+  echo "=== IMAGES ==="
+  openstack image list
+  echo
+  echo "=== IMAGE DETAILS ==="
+  openstack image show ca73743e-149c-4999-89fe-87fd7174515d
+  echo
+  echo "=== VOLUMES ==="
+  openstack volume list
+  echo
+  echo "=== SERVERS ==="
+  openstack server list
+  echo
+  echo "=== CEPH IMAGES POOL ==="
+  rbd ls -p images
+  echo
+  echo "=== CEPH VOLUME POOL ==="
+  rbd ls -p volume
+} | tee ~/image-factory/logs/ubuntu-24-v1-success.txt
+=== IMAGES ===
++--------------------------------------+--------------------------------------+--------+
+| ID                                   | Name                                 | Status |
++--------------------------------------+--------------------------------------+--------+
+| 151fa56a-92e5-4a05-82bb-f4472394d3d9 | alma-10                              | active |
+| f339488c-2c82-4e7d-ab70-d57a4d2c1ade | cirros                               | active |
+| a05bfffb-5b9a-468e-b9a7-45e541d6e1c7 | debian-11                            | active |
+| 8c2f2ee0-458e-4370-8cfa-e5e145402142 | debian-12                            | active |
+| 5a2209bd-847e-4948-87e2-e66b1109f4eb | fedora-40                            | active |
+| fbb9bfc0-3dc0-4f20-b230-e046473fe629 | rocky-9                              | active |
+| 9bd72412-c33b-49a4-8917-396c9dd3741f | ubuntu-18                            | active |
+| b5a9da1c-2fd0-404d-9e39-e7ea9a50acfb | ubuntu-20                            | active |
+| c218d57e-3393-4283-8a6c-fe74551e9ea2 | ubuntu-22                            | active |
+| b522ceff-bea1-465d-9dbb-ebb567769ef4 | ubuntu-24                            | active |
+| ea3b9ae8-c81a-4198-a2a3-4936599f84c7 | ubuntu-24-test-os-automation-project | active |
+| ca73743e-149c-4999-89fe-87fd7174515d | ubuntu-24.04-2026-03-10-1724         | active |
+| be415f83-0c94-4c5e-b351-416fbe719f45 | ubuntu-24.04-base                    | active |
++--------------------------------------+--------------------------------------+--------+
+
+=== IMAGE DETAILS ===
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field            | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checksum         | 3a8bb168243910a4c36405b22b1225af                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| container_format | bare                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| created_at       | 2026-03-10T17:44:02Z                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| disk_format      | qcow2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| file             | /v2/images/ca73743e-149c-4999-89fe-87fd7174515d/file                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| id               | ca73743e-149c-4999-89fe-87fd7174515d                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| min_disk         | 20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| min_ram          | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| name             | ubuntu-24.04-2026-03-10-1724                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| owner            | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| properties       | base_image_ref='be415f83-0c94-4c5e-b351-416fbe719f45', boot_roles='admin,member,manager,reader', build_method='packer', hw_cdrom_bus='ide', hw_disk_bus='virtio', hw_machine_type='pc', hw_video_model='virtio', hw_vif_model='virtio', image_location='snapshot', image_state='available', image_type='image', instance_uuid='3ab9ed71-f7a3-4711-b902-990061a9605f', os_distro='ubuntu', os_hash_algo='sha512', os_hash_value='d63a617bff987d4ea1fcb4c5d38eddb8c8569ad6ce091f42be13de76d7e8b597cc320ef0398cc70e4e7210d888eb2641e8b574bcbac986a849d3420d81d03157', os_hidden='False', os_version='24.04', owner_project_name='admin', owner_specified.openstack.md5='', owner_specified.openstack.object='images/ubuntu-24.04-base', owner_specified.openstack.sha256='', owner_user_name='admin', purpose='golden-image', user_id='270824ef176044a2a8b64a8337e2f00a' |
+| protected        | False                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| schema           | /v2/schemas/image                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| size             | 2571763712                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| status           | active                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| tags             | 24.04, automated, golden, ubuntu                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| updated_at       | 2026-03-10T17:47:18Z                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| virtual_size     | 21474836480                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| visibility       | public                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
++------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+=== VOLUMES ===
++--------------------------------------+---------------------------+--------+------+---------------------------------------------------+
+| ID                                   | Name                      | Status | Size | Attached to                                       |
++--------------------------------------+---------------------------+--------+------+---------------------------------------------------+
+| 25d106dd-cab6-4ad2-a1c7-1751fcd2e84c | ubuntu-24-golden-test-vol | in-use |   20 | Attached to ubuntu-24-golden-test-vm on /dev/vda  |
++--------------------------------------+---------------------------+--------+------+---------------------------------------------------+
+
+=== SERVERS ===
++--------------------------------------+--------------------------+--------+---------------------------------+--------------------------+----------+
+| ID                                   | Name                     | Status | Networks                        | Image                    | Flavor   |
++--------------------------------------+--------------------------+--------+---------------------------------+--------------------------+----------+
+| 42a270e1-c738-46e4-ac88-78f4b1888114 | ubuntu-24-golden-test-vm | ACTIVE | private=10.0.0.48, 172.24.4.105 | N/A (booted from volume) | m1.small |
++--------------------------------------+--------------------------+--------+---------------------------------+--------------------------+----------+
+
+=== CEPH IMAGES POOL ===
+151fa56a-92e5-4a05-82bb-f4472394d3d9
+5a2209bd-847e-4948-87e2-e66b1109f4eb
+8c2f2ee0-458e-4370-8cfa-e5e145402142
+9bd72412-c33b-49a4-8917-396c9dd3741f
+a05bfffb-5b9a-468e-b9a7-45e541d6e1c7
+b522ceff-bea1-465d-9dbb-ebb567769ef4
+b5a9da1c-2fd0-404d-9e39-e7ea9a50acfb
+be415f83-0c94-4c5e-b351-416fbe719f45
+c218d57e-3393-4283-8a6c-fe74551e9ea2
+ca73743e-149c-4999-89fe-87fd7174515d
+ea3b9ae8-c81a-4198-a2a3-4936599f84c7
+f339488c-2c82-4e7d-ab70-d57a4d2c1ade
+fbb9bfc0-3dc0-4f20-b230-e046473fe629
+
+=== CEPH VOLUME POOL ===
+volume-25d106dd-cab6-4ad2-a1c7-1751fcd2e84c
+ubuntu@gelani-lab-1:~/image-factory/packer$
+```
 
 
 
