@@ -5414,7 +5414,204 @@ ubuntu@gelani-lab-1:~/image-factory/packer$
 ```
 **again failed**
 
+## clear with script
+```
+ubuntu@gelani-lab-1:~$ ll
+total 144
+drwxr-x--- 11 ubuntu ubuntu  4096 Mar 11 10:16 ./
+drwxr-xr-x  3 root   root    4096 Jan 19 10:56 ../
+-rw-------  1 ubuntu ubuntu 73924 Mar 11 10:16 .bash_history
+-rw-r--r--  1 ubuntu ubuntu   220 Jan  6  2022 .bash_logout
+-rw-r--r--  1 ubuntu ubuntu  3771 Jan  6  2022 .bashrc
+drwx------  3 ubuntu ubuntu  4096 Jan 31 14:00 .cache/
+drwxrwxr-x  6 ubuntu ubuntu  4096 Feb 26 19:54 .config/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Feb 15 06:14 .glanceclient/
+-rw-------  1 ubuntu ubuntu    20 Feb 18 06:37 .lesshst
+drwxrwxr-x  3 ubuntu ubuntu  4096 Feb 17 10:51 .local/
+-rw-------  1 ubuntu ubuntu   803 Feb 15 10:01 .mysql_history
+-rw-r--r--  1 ubuntu ubuntu   807 Jan  6  2022 .profile
+drwx------  2 ubuntu ubuntu  4096 Mar 11 09:09 .ssh/
+-rw-r--r--  1 ubuntu ubuntu     0 Jan 19 10:58 .sudo_as_admin_successful
+-rw-rw-r--  1 ubuntu ubuntu   408 Feb 26 05:49 .wget-hsts
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 10 11:08 cloudinit-userdata/
+drwxrwxr-x  7 ubuntu ubuntu  4096 Mar 11 08:52 image-factory/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Mar 11 08:52 images/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 10 11:42 raw-image/
+ubuntu@gelani-lab-1:~$ mkdir scripts-openstack
+ubuntu@gelani-lab-1:~$ cd scripts-openstack/
+ubuntu@gelani-lab-1:~/scripts-openstack$ nano cleanup-packer-env.sh
+ubuntu@gelani-lab-1:~/scripts-openstack$ cat cleanup-packer-env.sh 
+#!/usr/bin/env bash
+# ============================================================
+# cleanup-packer-env.sh
+# Removes all resources created during the Packer/OpenStack
+# image factory setup.
+# ============================================================
 
+set -euo pipefail
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+log()    { echo -e "${GREEN}[✔] $1${NC}"; }
+warn()   { echo -e "${YELLOW}[!] $1${NC}"; }
+error()  { echo -e "${RED}[✘] $1${NC}"; }
+
+echo ""
+echo "========================================"
+echo "   Packer / OpenStack Cleanup Script    "
+echo "========================================"
+echo ""
+
+# ── 1. OpenStack image ───────────────────────────────────────
+echo ">>> Deleting OpenStack image: ubuntu-24.04-base"
+if openstack image show ubuntu-24.04-base &>/dev/null; then
+    openstack image delete ubuntu-24.04-base
+    log "Image 'ubuntu-24.04-base' deleted."
+else
+    warn "Image 'ubuntu-24.04-base' not found, skipping."
+fi
+
+# ── 2. OpenStack keypair ─────────────────────────────────────
+echo ">>> Deleting OpenStack keypair: packer-build-key"
+if openstack keypair show packer-build-key &>/dev/null; then
+    openstack keypair delete packer-build-key
+    log "Keypair 'packer-build-key' deleted."
+else
+    warn "Keypair 'packer-build-key' not found, skipping."
+fi
+
+# ── 3. OpenStack security group ──────────────────────────────
+echo ">>> Deleting OpenStack security group: packer-build-sg"
+if openstack security group show packer-build-sg &>/dev/null; then
+    openstack security group delete packer-build-sg
+    log "Security group 'packer-build-sg' deleted."
+else
+    warn "Security group 'packer-build-sg' not found, skipping."
+fi
+
+# ── 4. Local SSH keys ────────────────────────────────────────
+echo ">>> Removing local SSH keys"
+for key in ~/.ssh/packer_build_key ~/.ssh/packer_build_key.pub; do
+    if [ -f "$key" ]; then
+        rm -f "$key"
+        log "Removed $key"
+    else
+        warn "$key not found, skipping."
+    fi
+done
+
+# ── 5. Local directories ─────────────────────────────────────
+echo ">>> Removing local directories"
+for dir in ~/image-factory ~/images; do
+    if [ -d "$dir" ]; then
+        rm -rf "$dir"
+        log "Removed directory $dir"
+    else
+        warn "Directory $dir not found, skipping."
+    fi
+done
+
+# ── 6. Packer binary + temp files ────────────────────────────
+echo ">>> Removing Packer binary and temp files"
+if [ -f /usr/local/bin/packer ]; then
+    sudo rm -f /usr/local/bin/packer
+    log "Removed /usr/local/bin/packer"
+else
+    warn "Packer binary not found, skipping."
+fi
+
+for f in /tmp/packer.zip /tmp/LICENSE.txt /tmp/packer; do
+    if [ -f "$f" ]; then
+        rm -f "$f"
+        log "Removed $f"
+    fi
+done
+
+# ── 7. Final verification ─────────────────────────────────────
+echo ""
+echo "========================================"
+echo "           Verification Check          "
+echo "========================================"
+
+PASS=true
+
+openstack image list | grep -q "ubuntu-24.04-base" \
+    && { error "Image still exists!"; PASS=false; } \
+    || log "Image: cleared"
+
+openstack keypair list | grep -q "packer-build-key" \
+    && { error "Keypair still exists!"; PASS=false; } \
+    || log "Keypair: cleared"
+
+openstack security group list | grep -q "packer-build-sg" \
+    && { error "Security group still exists!"; PASS=false; } \
+    || log "Security group: cleared"
+
+[ -d ~/image-factory ] \
+    && { error "~/image-factory still exists!"; PASS=false; } \
+    || log "~/image-factory: cleared"
+
+[ -d ~/images ] \
+    && { error "~/images still exists!"; PASS=false; } \
+    || log "~/images: cleared"
+
+command -v packer &>/dev/null \
+    && { error "Packer binary still found!"; PASS=false; } \
+    || log "Packer binary: cleared"
+
+echo ""
+if $PASS; then
+    echo -e "${GREEN}All resources cleaned up successfully!${NC}"
+else
+    echo -e "${RED}Some resources may still remain. Check errors above.${NC}"
+fi
+echo ""
+ubuntu@gelani-lab-1:~/scripts-openstack$ chmod +x cleanup-packer-env.sh
+ubuntu@gelani-lab-1:~/scripts-openstack$ ./cleanup-packer-env.sh
+
+========================================
+   Packer / OpenStack Cleanup Script    
+========================================
+
+>>> Deleting OpenStack image: ubuntu-24.04-base
+[!] Image 'ubuntu-24.04-base' not found, skipping.
+>>> Deleting OpenStack keypair: packer-build-key
+[!] Keypair 'packer-build-key' not found, skipping.
+>>> Deleting OpenStack security group: packer-build-sg
+[!] Security group 'packer-build-sg' not found, skipping.
+>>> Removing local SSH keys
+[✔] Removed /home/ubuntu/.ssh/packer_build_key
+[✔] Removed /home/ubuntu/.ssh/packer_build_key.pub
+>>> Removing local directories
+[✔] Removed directory /home/ubuntu/image-factory
+[✔] Removed directory /home/ubuntu/images
+>>> Removing Packer binary and temp files
+[✔] Removed /usr/local/bin/packer
+[✔] Removed /tmp/packer.zip
+[✔] Removed /tmp/LICENSE.txt
+
+========================================
+           Verification Check          
+========================================
+Missing value auth-url required for auth plugin password
+[✔] Image: cleared
+Missing value auth-url required for auth plugin password
+[✔] Keypair: cleared
+Missing value auth-url required for auth plugin password
+[✔] Security group: cleared
+[✔] ~/image-factory: cleared
+[✔] ~/images: cleared
+[✔] Packer binary: cleared
+
+All resources cleaned up successfully!
+
+ubuntu@gelani-lab-1:~/scripts-openstack$ 
+```
+## again try
+```
 
 
 
