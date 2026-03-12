@@ -5610,8 +5610,480 @@ All resources cleaned up successfully!
 
 ubuntu@gelani-lab-1:~/scripts-openstack$ 
 ```
-## again try
+## trying-again
+### here modified script and wrong ssh key choosen
 ```
+ubuntu@gelani-lab-1:~/scripts-openstack$ cd /opt/stack/devstack
+source openrc admin admin
+ubuntu@gelani-lab-1:/opt/stack/devstack$ openstack token issue
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field      | Value                                                                                                                                                                                   |
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| expires    | 2026-03-12T04:52:18+0000                                                                                                                                                                |
+| id         | gAAAAABpsjhynJhmp96MchJAuuH4xDMfpdaxHjy9sQghj_ElUvbtCb7ZLSdwAcEBZAtX4KwnHJm-7AXjWPGqIF-QMxykTl-RPds7MmfMVgg3mkBUGP_nBmthD6r-DEkzEIdQ5K8ri1zsq7Iz8ifHK2tbAnt_jjvQ9SJAvbk65e9ZApDy0G0WRb0 |
+| project_id | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                                        |
+| user_id    | 270824ef176044a2a8b64a8337e2f00a                                                                                                                                                        |
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:/opt/stack/devstack$ mkdir -p ~/image-factory/{packer,scripts,cloud-init,output,logs}
+tree ~/image-factory
+/home/ubuntu/image-factory
+├── cloud-init
+├── logs
+├── output
+├── packer
+└── scripts
+
+5 directories, 0 files
+ubuntu@gelani-lab-1:/opt/stack/devstack$ sudo apt update
+sudo apt install -y unzip qemu-utils jq curl wget
+Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease                
+Get:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:4 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [3,023 kB]
+Get:5 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:6 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [3,286 kB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [14.1 kB]
+Get:8 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1,019 kB]         
+Get:9 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [225 kB]    
+Get:10 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [19.2 kB]
+Get:11 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1,257 kB]
+Get:12 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [315 kB]
+Fetched 9,542 kB in 4s (2,256 kB/s)                             
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+5 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+jq is already the newest version (1.6-2.1ubuntu3.1).
+qemu-utils is already the newest version (1:6.2+dfsg-2ubuntu6.28).
+unzip is already the newest version (6.0-26ubuntu3.2).
+wget is already the newest version (1.21.2-2ubuntu1.1).
+The following additional packages will be installed:
+  libcurl4
+The following packages will be upgraded:
+  curl libcurl4
+2 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+Need to get 484 kB of archives.
+After this operation, 0 B of additional disk space will be used.
+Get:1 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 curl amd64 7.81.0-1ubuntu1.23 [194 kB]
+Get:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4 amd64 7.81.0-1ubuntu1.23 [290 kB]
+Fetched 484 kB in 2s (220 kB/s)   
+(Reading database ... 142620 files and directories currently installed.)
+Preparing to unpack .../curl_7.81.0-1ubuntu1.23_amd64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.23) over (7.81.0-1ubuntu1.22) ...
+Preparing to unpack .../libcurl4_7.81.0-1ubuntu1.23_amd64.deb ...
+Unpacking libcurl4:amd64 (7.81.0-1ubuntu1.23) over (7.81.0-1ubuntu1.22) ...
+Setting up libcurl4:amd64 (7.81.0-1ubuntu1.23) ...
+Setting up curl (7.81.0-1ubuntu1.23) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.13) ...
+Scanning processes...                                                                                                                                                                                                                       
+Scanning candidates...                                                                                                                                                                                                                      
+Scanning linux images...                                                                                                                                                                                                                    
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+ systemctl restart devstack@aodh-api.service devstack@aodh-evaluator.service devstack@aodh-listener.service devstack@aodh-notifier.service devstack@c-api.service devstack@c-sch.service devstack@c-vol.service devstack@ceilometer-acentral.service devstack@ceilometer-acompute.service devstack@ceilometer-anotification.service devstack@dstat.service devstack@g-api.service devstack@gnocchi-api.service devstack@gnocchi-metricd.service devstack@h-api-cfn.service devstack@h-api.service devstack@h-eng.service devstack@keystone.service devstack@n-api-meta.service devstack@n-api.service devstack@n-cond-cell1.service devstack@n-cpu.service devstack@n-novnc-cell1.service devstack@n-sch.service devstack@n-super-cond.service devstack@neutron-api.service devstack@neutron-ovn-maintenance-worker.service devstack@neutron-periodic-workers.service devstack@neutron-rpc-server.service devstack@placement-api.service devstack@q-ovn-agent.service
+Service restarts being deferred:
+ systemctl restart networkd-dispatcher.service
+ systemctl restart unattended-upgrades.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@gelani-lab-1:/opt/stack/devstack$ qemu-img --version
+jq --version
+curl --version | head -n 1
+qemu-img version 6.2.0 (Debian 1:6.2+dfsg-2ubuntu6.28)
+Copyright (c) 2003-2021 Fabrice Bellard and the QEMU Project developers
+jq-1.6
+curl 7.81.0 (x86_64-pc-linux-gnu) libcurl/7.81.0 OpenSSL/3.0.2 zlib/1.2.11 brotli/1.0.9 zstd/1.4.8 libidn2/2.3.2 libpsl/0.21.0 (+libidn2/2.3.2) libssh/0.9.6/openssl/zlib nghttp2/1.43.0 librtmp/2.3 OpenLDAP/2.5.20
+ubuntu@gelani-lab-1:/opt/stack/devstack$ packer version
+Command 'packer' not found, but can be installed with:
+sudo snap install packer  # version 1.0.0-2, or
+sudo apt  install packer  # version 1.6.6+ds1-4ubuntu0.22.04.3
+See 'snap info packer' for additional versions.
+ubuntu@gelani-lab-1:/opt/stack/devstack$ mkdir -p ~/images/base-image
+cd ~/images/base-image
+pwd
+/home/ubuntu/images/base-image
+ubuntu@gelani-lab-1:~/images/base-image$ wget -O noble.img https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
+--2026-03-12 03:53:35--  https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
+Resolving cloud-images.ubuntu.com (cloud-images.ubuntu.com)... 185.125.190.37, 185.125.190.40, 2620:2d:4000:1::1a, ...
+Connecting to cloud-images.ubuntu.com (cloud-images.ubuntu.com)|185.125.190.37|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 629380096 (600M) [application/octet-stream]
+Saving to: ‘noble.img’
+
+noble.img                                                  100%[========================================================================================================================================>] 600.22M  16.2MB/s    in 50s     
+
+2026-03-12 03:54:26 (11.9 MB/s) - ‘noble.img’ saved [629380096/629380096]
+
+ubuntu@gelani-lab-1:~/images/base-image$ ls -lh noble.img
+qemu-img info noble.img
+-rw-rw-r-- 1 ubuntu ubuntu 601M Mar  7 13:14 noble.img
+image: noble.img
+file format: qcow2
+virtual size: 3.5 GiB (3758096384 bytes)
+disk size: 600 MiB
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    compression type: zlib
+    lazy refcounts: false
+    refcount bits: 16
+    corrupt: false
+    extended l2: false
+ubuntu@gelani-lab-1:~/images/base-image$ openstack image list | grep ubuntu-24.04-base
+| 819b7582-aa1e-4f3f-a03b-edafbae2c9ef | ubuntu-24.04-base | active |
+ubuntu@gelani-lab-1:~/images/base-image$ rbd ls -p images
+819b7582-aa1e-4f3f-a03b-edafbae2c9ef
+ubuntu@gelani-lab-1:~/images/base-image$ openstack security group list | grep packer-build-sg
+| c152fa14-982c-4b3a-8df0-019b0deacbdb | packer-build-sg | packer-build-sg        | 99ab77b7592c418096336a7ccf9e299d | []   | False  |
+ubuntu@gelani-lab-1:~/images/base-image$ openstack security group show packer-build-sg
++-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field           | Value                                                                                                                                                                                                                  |
++-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| created_at      | 2026-03-11T08:55:06Z                                                                                                                                                                                                   |
+| description     | packer-build-sg                                                                                                                                                                                                        |
+| id              | c152fa14-982c-4b3a-8df0-019b0deacbdb                                                                                                                                                                                   |
+| is_shared       | False                                                                                                                                                                                                                  |
+| name            | packer-build-sg                                                                                                                                                                                                        |
+| project_id      | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                                                                       |
+| revision_number | 3                                                                                                                                                                                                                      |
+| rules           | created_at='2026-03-11T08:55:22Z', direction='ingress', ethertype='IPv4', id='8dd371cc-a271-47f9-88f5-4883bc3c6d68', normalized_cidr='0.0.0.0/0', protocol='icmp', remote_ip_prefix='0.0.0.0/0',                       |
+|                 | standard_attr_id='169', updated_at='2026-03-11T08:55:22Z'                                                                                                                                                              |
+|                 | created_at='2026-03-11T08:55:19Z', direction='ingress', ethertype='IPv4', id='a4bcf32f-e22d-4fbe-8470-af172957e9e5', normalized_cidr='0.0.0.0/0', port_range_max='22', port_range_min='22', protocol='tcp',            |
+|                 | remote_ip_prefix='0.0.0.0/0', standard_attr_id='168', updated_at='2026-03-11T08:55:19Z'                                                                                                                                |
+|                 | created_at='2026-03-11T08:55:06Z', direction='egress', ethertype='IPv4', id='b91c9a93-ab12-4f34-9f7f-4f725807fa60', standard_attr_id='166', updated_at='2026-03-11T08:55:06Z'                                          |
+|                 | created_at='2026-03-11T08:55:06Z', direction='egress', ethertype='IPv6', id='cb8fbc36-2f5d-4e23-85f9-6738b01660e6', standard_attr_id='167', updated_at='2026-03-11T08:55:06Z'                                          |
+| stateful        | True                                                                                                                                                                                                                   |
+| tags            | []                                                                                                                                                                                                                     |
+| updated_at      | 2026-03-11T08:55:22Z                                                                                                                                                                                                   |
++-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/images/base-image$ ls -l ~/.ssh/packer_build_key ~/.ssh/packer_build_key.pub
+ls: cannot access '/home/ubuntu/.ssh/packer_build_key': No such file or directory
+ls: cannot access '/home/ubuntu/.ssh/packer_build_key.pub': No such file or directory
+ubuntu@gelani-lab-1:~/images/base-image$ mkdir -p ~/.ssh
+ssh-keygen -t ed25519 -f ~/.ssh/packer_build_key -N ""
+Generating public/private ed25519 key pair.
+Your identification has been saved in /home/ubuntu/.ssh/packer_build_key
+Your public key has been saved in /home/ubuntu/.ssh/packer_build_key.pub
+The key fingerprint is:
+SHA256:css7lSeOY92ApWEJthfUDGjfTaZVgSJ7/xO5ogVTijE ubuntu@gelani-lab-1
+The key's randomart image is:
++--[ED25519 256]--+
+|       oo+   oo. |
+|      = o + =    |
+|     o +E* B.    |
+|      . B+=o.    |
+|      .oS*+o   . |
+|       +o.=oo o  |
+|        o= =.. o |
+|        =.o.o +  |
+|       ..o.. . . |
++----[SHA256]-----+
+ubuntu@gelani-lab-1:~/images/base-image$ openstack keypair list | grep packer-build-key
+| packer-build-key | 12:f1:6b:ba:2d:4b:75:66:13:f9:f0:82:d5:a0:01:b9 | ssh  |
+ubuntu@gelani-lab-1:~/images/base-image$ openstack keypair show packer-build-key
++-------------+-------------------------------------------------+
+| Field       | Value                                           |
++-------------+-------------------------------------------------+
+| created_at  | 2026-03-11T08:55:52.000000                      |
+| fingerprint | 12:f1:6b:ba:2d:4b:75:66:13:f9:f0:82:d5:a0:01:b9 |
+| id          | packer-build-key                                |
+| is_deleted  | False                                           |
+| name        | packer-build-key                                |
+| private_key | None                                            |
+| type        | ssh                                             |
+| user_id     | 270824ef176044a2a8b64a8337e2f00a                |
++-------------+-------------------------------------------------+
+ubuntu@gelani-lab-1:~/images/base-image$ nano ~/image-factory/scripts/provision-ubuntu.sh
+ubuntu@gelani-lab-1:~/images/base-image$ chmod +x ~/image-factory/scripts/provision-ubuntu.sh
+ubuntu@gelani-lab-1:~/images/base-image$ ls -l ~/image-factory/scripts/provision-ubuntu.sh
+-rwxrwxr-x 1 ubuntu ubuntu 351 Mar 12 04:00 /home/ubuntu/image-factory/scripts/provision-ubuntu.sh
+ubuntu@gelani-lab-1:~/images/base-image$ nano ~/image-factory/scripts/cleanup-ubuntu.sh
+ubuntu@gelani-lab-1:~/images/base-image$ chmod +x ~/image-factory/scripts/cleanup-ubuntu.sh
+ubuntu@gelani-lab-1:~/images/base-image$ ls -l ~/image-factory/scripts/cleanup-ubuntu.sh
+-rwxrwxr-x 1 ubuntu ubuntu 316 Mar 12 04:00 /home/ubuntu/image-factory/scripts/cleanup-ubuntu.sh
+ubuntu@gelani-lab-1:~/images/base-image$ nano ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+ubuntu@gelani-lab-1:~/images/base-image$ cat ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+packer {
+  required_plugins {
+    openstack = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/openstack"
+    }
+  }
+}
+
+variable "network_name" {
+  type    = string
+  default = "private"
+}
+
+source "openstack" "ubuntu2404" {
+  image_name            = "ubuntu-24.04-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
+  source_image_name     = "ubuntu-24.04-base"
+  flavor                = "m1.small"
+  networks              = [var.network_name]
+  security_groups       = ["packer-build-sg"]
+
+  ssh_username          = "ubuntu"
+  ssh_private_key_file  = "~/.ssh/packer_build_key"
+  ssh_keypair_name      = "packer-build-key"
+  ssh_timeout           = "20m"
+  ssh_interface         = "private"
+  ssh_ip_version        = "4"
+
+  image_visibility      = "public"
+  image_tags            = ["ubuntu", "24.04", "golden", "automated"]
+
+  metadata = {
+    os_distro    = "ubuntu"
+    os_version   = "24.04"
+    build_method = "packer"
+    purpose      = "golden-image"
+  }
+}
+
+build {
+  sources = ["source.openstack.ubuntu2404"]
+
+  provisioner "shell" {
+    script = "../scripts/provision-ubuntu.sh"
+  }
+
+  provisioner "shell" {
+    script = "../scripts/cleanup-ubuntu.sh"
+  }
+}
+ubuntu@gelani-lab-1:~/images/base-image$ nano ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+ubuntu@gelani-lab-1:~/images/base-image$ nano ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+ubuntu@gelani-lab-1:~/images/base-image$ cat ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+packer {
+  required_plugins {
+    openstack = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/openstack"
+    }
+  }
+}
+
+variable "network_name" {
+  type    = string
+  default = "private"
+}
+
+source "openstack" "ubuntu2404" {
+  image_name            = "ubuntu-24.04-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
+  source_image_name     = "ubuntu-24.04-base"
+  flavor                = "m1.small"
+
+  networks              = [var.network_name]
+  security_groups       = ["packer-build-sg"]
+
+  ssh_username          = "ubuntu"
+  ssh_private_key_file  = "~/.ssh/packer_build_key"
+  ssh_keypair_name      = "packer-build-key"
+  ssh_timeout           = "20m"
+
+  ssh_interface         = "public"
+  ssh_ip_version        = "4"
+
+  floating_ip_network   = "public"
+  instance_floating_ip_net = "private"
+
+  image_visibility      = "public"
+  image_tags            = ["ubuntu", "24.04", "golden", "automated"]
+
+  metadata = {
+    os_distro    = "ubuntu"
+    os_version   = "24.04"
+    build_method = "packer"
+    purpose      = "golden-image"
+  }
+}
+build {
+  sources = ["source.openstack.ubuntu2404"]
+
+  provisioner "shell" {
+    script = "../scripts/provision-ubuntu.sh"
+  }
+
+  provisioner "shell" {
+    script = "../scripts/cleanup-ubuntu.sh"
+  }
+}
+ubuntu@gelani-lab-1:~/images/base-image$ openstack network show
+usage: openstack network show [-h] [-f {json,shell,table,value,yaml}] [-c COLUMN] [--noindent] [--prefix PREFIX] [--max-width <integer>] [--fit-width] [--print-empty] <network>
+openstack network show: error: the following arguments are required: <network>
+ubuntu@gelani-lab-1:~/images/base-image$ openstack network list
++--------------------------------------+----------+--------------------------------------+
+| ID                                   | Name     | Subnets                              |
++--------------------------------------+----------+--------------------------------------+
+| a374dd2e-853a-41eb-88ca-b5730143b548 | private  | bd0d784b-b8ff-4577-998d-a546756f7b8b |
+| abd82ede-929d-4f72-a034-e27922dda38f | public   | 65d17f74-a22e-452f-982f-5d641c6c6c57 |
+| e83ed974-4855-4c7b-bfb6-949d6c49e829 | shared   | bbc63ac2-84de-4309-9a01-8f69e17a63c1 |
+| ee6db446-7789-4b4e-9851-b4335a721c56 | heat-net |                                      |
++--------------------------------------+----------+--------------------------------------+
+ubuntu@gelani-lab-1:~/images/base-image$ rm -r ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+ubuntu@gelani-lab-1:~/images/base-image$ nano ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+ubuntu@gelani-lab-1:~/images/base-image$ cat ~/image-factory/packer/ubuntu-24.04.pkr.hcl
+packer {
+  required_plugins {
+    openstack = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/openstack"
+    }
+  }
+}
+
+variable "network_name" {
+  type    = string
+  default = "a374dd2e-853a-41eb-88ca-b5730143b548"
+}
+
+source "openstack" "ubuntu2404" {
+  image_name               = "ubuntu-24.04-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
+  source_image_name        = "ubuntu-24.04-base"
+  flavor                   = "m1.small"
+
+  networks                 = [var.network_name]
+  security_groups          = ["packer-build-sg"]
+
+  ssh_username             = "ubuntu"
+  ssh_private_key_file     = "~/.ssh/packer_build_key"
+  ssh_keypair_name         = "packer-build-key"
+  ssh_timeout              = "20m"
+
+  ssh_interface            = "public"
+  ssh_ip_version           = "4"
+
+  floating_ip_network      = "public"
+  instance_floating_ip_net = "a374dd2e-853a-41eb-88ca-b5730143b548"
+
+  image_visibility         = "public"
+  image_tags               = ["ubuntu", "24.04", "golden", "automated"]
+
+  metadata = {
+    os_distro    = "ubuntu"
+    os_version   = "24.04"
+    build_method = "packer"
+    purpose      = "golden-image"
+  }
+}
+
+build {
+  sources = ["source.openstack.ubuntu2404"]
+
+  provisioner "shell" {
+    script = "../scripts/provision-ubuntu.sh"
+  }
+
+  provisioner "shell" {
+    script = "../scripts/cleanup-ubuntu.sh"
+  }
+}
+ubuntu@gelani-lab-1:~/images/base-image$ cd ~/image-factory/packer
+packer init .
+Command 'packer' not found, but can be installed with:
+sudo snap install packer  # version 1.0.0-2, or
+sudo apt  install packer  # version 1.6.6+ds1-4ubuntu0.22.04.3
+See 'snap info packer' for additional versions.
+ubuntu@gelani-lab-1:~/image-factory/packer$ whoami
+ubuntu
+ubuntu@gelani-lab-1:~/image-factory/packer$ packer version
+Command 'packer' not found, but can be installed with:
+sudo snap install packer  # version 1.0.0-2, or
+sudo apt  install packer  # version 1.6.6+ds1-4ubuntu0.22.04.3
+See 'snap info packer' for additional versions.
+ubuntu@gelani-lab-1:~/image-factory/packer$ cd /tmp
+curl -fsSL -o packer.zip https://releases.hashicorp.com/packer/1.11.0/packer_1.11.0_linux_amd64.zip
+unzip -o packer.zip
+sudo mv -f packer /usr/local/bin/packer
+packer version
+Archive:  packer.zip
+  inflating: LICENSE.txt             
+  inflating: packer                  
+Packer v1.11.0
+
+Your version of Packer is out of date! The latest version
+is 1.15.0. You can update by downloading from www.packer.io/downloads
+ubuntu@gelani-lab-1:/tmp$ packer version
+Packer v1.11.0
+
+Your version of Packer is out of date! The latest version
+is 1.15.0. You can update by downloading from www.packer.io/downloads
+ubuntu@gelani-lab-1:/tmp$ packer version
+Packer v1.11.0
+
+Your version of Packer is out of date! The latest version
+is 1.15.0. You can update by downloading from www.packer.io/downloads
+ubuntu@gelani-lab-1:/tmp$ cd ~/image-factory/packer
+ubuntu@gelani-lab-1:~/image-factory/packer$ packer init .
+ubuntu@gelani-lab-1:~/image-factory/packer$ packer validate -var "network_name=private" ubuntu-24.04.pkr.hcl
+The configuration is valid.
+ubuntu@gelani-lab-1:~/image-factory/packer$ cd ~/image-factory/packer
+packer build -var "network_name=private" ubuntu-24.04.pkr.hcl
+openstack.ubuntu2404: output will be in this color.
+
+==> openstack.ubuntu2404: Loading flavor: m1.small
+    openstack.ubuntu2404: Verified flavor. ID: 2
+==> openstack.ubuntu2404: Using existing SSH private key
+==> openstack.ubuntu2404: Using existing SSH private key
+    openstack.ubuntu2404: Found Image ID: 819b7582-aa1e-4f3f-a03b-edafbae2c9ef
+==> openstack.ubuntu2404: Launching server...
+==> openstack.ubuntu2404: Launching server...
+==> openstack.ubuntu2404: Error launching source server: Bad request with: [POST http://192.168.95.23/compute/v2.1/servers], error message: {"badRequest": {"code": 400, "message": "Bad networks format: network uuid is not in proper format (private)"}}
+==> openstack.ubuntu2404: Terminating the source server:  ...
+==> openstack.ubuntu2404: Error terminating server, may still be around: Resource not found
+Build 'openstack.ubuntu2404' errored after 864 milliseconds 591 microseconds: Error launching source server: Bad request with: [POST http://192.168.95.23/compute/v2.1/servers], error message: {"badRequest": {"code": 400, "message": "Bad networks format: network uuid is not in proper format (private)"}}
+
+==> Wait completed after 864 milliseconds 675 microseconds
+
+==> Some builds didn't complete successfully and had errors:
+--> openstack.ubuntu2404: Error launching source server: Bad request with: [POST http://192.168.95.23/compute/v2.1/servers], error message: {"badRequest": {"code": 400, "message": "Bad networks format: network uuid is not in proper format (private)"}}
+
+==> Builds finished but no artifacts were created.
+ubuntu@gelani-lab-1:~/image-factory/packer$ cd ~/image-factory/packer
+packer validate ubuntu-24.04.pkr.hcl
+The configuration is valid.
+ubuntu@gelani-lab-1:~/image-factory/packer$ packer build ubuntu-24.04.pkr.hcl
+openstack.ubuntu2404: output will be in this color.
+
+==> openstack.ubuntu2404: Loading flavor: m1.small
+    openstack.ubuntu2404: Verified flavor. ID: 2
+==> openstack.ubuntu2404: Using existing SSH private key
+==> openstack.ubuntu2404: Using existing SSH private key
+    openstack.ubuntu2404: Found Image ID: 819b7582-aa1e-4f3f-a03b-edafbae2c9ef
+==> openstack.ubuntu2404: Launching server...
+==> openstack.ubuntu2404: Launching server...
+    openstack.ubuntu2404: Server ID: 3d8b70b6-1fae-4fbf-a264-158b097c237e
+==> openstack.ubuntu2404: Waiting for server to become ready...
+==> openstack.ubuntu2404: Creating floating IP using network abd82ede-929d-4f72-a034-e27922dda38f ...
+    openstack.ubuntu2404: Created floating IP: 'a455c069-2e84-43ff-8945-35dd8fb33891' (172.24.4.11)
+==> openstack.ubuntu2404: Associating floating IP 'a455c069-2e84-43ff-8945-35dd8fb33891' (172.24.4.11) with instance port...
+    openstack.ubuntu2404: Added floating IP 'a455c069-2e84-43ff-8945-35dd8fb33891' (172.24.4.11) to instance!
+==> openstack.ubuntu2404: Using SSH communicator to connect: 172.24.4.11
+==> openstack.ubuntu2404: Waiting for SSH to become available...
+Cancelling build after receiving interrupt
+==> openstack.ubuntu2404: Deleted temporary floating IP 'a455c069-2e84-43ff-8945-35dd8fb33891' (172.24.4.11)
+==> openstack.ubuntu2404: Terminating the source server: 3d8b70b6-1fae-4fbf-a264-158b097c237e ...
+Build 'openstack.ubuntu2404' finished after 5 minutes 8 seconds.
+
+==> Wait completed after 5 minutes 8 seconds
+Cleanly cancelled builds after being interrupted.
+ubuntu@gelani-lab-1:~/image-factory/packer$ 
+```
+### fix this and re-run
+```
+
 
 
 
