@@ -7614,6 +7614,15 @@ ubuntu@gelani-lab-1:~/raw-image$ openstack console url show ubuntu-generic-test-
 | url      | http://192.168.95.23:6080/vnc_lite.html?path=%3Ftoken%3Dc103ce38-1769-43cc-8fe9-d15b0aea0d0f |
 +----------+----------------------------------------------------------------------------------------------+
 ubuntu@gelani-lab-1:~/raw-image$ 
+ubuntu@gelani-lab-1:~/raw-image$ openstack console url show ubuntu-generic-test-ceph
++----------+----------------------------------------------------------------------------------------------+
+| Field    | Value                                                                                        |
++----------+----------------------------------------------------------------------------------------------+
+| protocol | vnc                                                                                          |
+| type     | novnc                                                                                        |
+| url      | http://192.168.95.23:6080/vnc_lite.html?path=%3Ftoken%3D7df0a820-f089-42c1-be6b-eb8dec313dcc |
++----------+----------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ 
 ```
 
 
@@ -7621,11 +7630,26 @@ ubuntu@gelani-lab-1:~/raw-image$
 
 ![VM Network Connection Issue](../screenshots/again-same-net-connection-issue-for-created-vm.png)
 
-
-
-
-
-
+###### again-fixing-the-vm-net-connectivity-issue
+```
+ubuntu@gelani-lab-1:~/raw-image$ sudo ip addr flush dev br-ex
+sudo ip addr add 172.24.4.1/24 dev br-ex
+sudo ip link set br-ex up
+ubuntu@gelani-lab-1:~/raw-image$ sudo sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
+ubuntu@gelani-lab-1:~/raw-image$ sudo iptables -t nat -C POSTROUTING -s 172.24.4.0/24 -o ens3 -j MASQUERADE 2>/dev/null \
+  || sudo iptables -t nat -A POSTROUTING -s 172.24.4.0/24 -o ens3 -j MASQUERADE
+ubuntu@gelani-lab-1:~/raw-image$ openstack console url show ubuntu-generic-test-ceph
++----------+----------------------------------------------------------------------------------------------+
+| Field    | Value                                                                                        |
++----------+----------------------------------------------------------------------------------------------+
+| protocol | vnc                                                                                          |
+| type     | novnc                                                                                        |
+| url      | http://192.168.95.23:6080/vnc_lite.html?path=%3Ftoken%3D3f858e38-c25b-4383-bf3d-866d0e46cc3d |
++----------+----------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ 
+```
+![VM Network Connection Issue](../screenshots/fixed-net-connection-issue-for-created-vm.png)
 
 
 
