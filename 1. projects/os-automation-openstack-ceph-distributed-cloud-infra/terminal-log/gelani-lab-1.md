@@ -7337,14 +7337,289 @@ Build 'openstack.ubuntu2404' errored after 17 minutes 25 seconds: Script exited 
 ubuntu@gelani-lab-1:~/image-factory/packer$ 
 ```
 
-**Have to study on this phase in details""
+**Have to study on this phase in details!!**
+
+#### Practice lab to lean more on this
+##### Updated the system first
+```
+ubuntu@gelani-lab-1:~$ sudo apt update
+Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+20 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@gelani-lab-1:~$ sudo apt upgrade 
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+Get more security updates through Ubuntu Pro with 'esm-apps' enabled:
+  redis-server libheif1 imagemagick libpathplan4 graphviz libgvpr2 libgvc6
+  libopenexr25 libcgraph6 libmagickcore-6.q16-6-extra libcdt5
+  libmagickwand-6.q16-6 imagemagick-6.q16 redis-tools libmagickcore-6.q16-6
+  liblab-gamut1 imagemagick-6-common libde265-0
+Learn more about Ubuntu Pro at https://ubuntu.com/pro
+The following packages will be upgraded:
+  bsdextrautils bsdutils eject fdisk libblkid1 libfdisk1 libmount1 libnftables1 libsmartcols1 libuuid1 mount nftables openssh-client openssh-server openssh-sftp-server python3-cryptography sudo
+  util-linux uuid-dev uuid-runtime
+20 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+18 standard LTS security updates
+Need to get 399 kB/4820 kB of archives.
+After this operation, 4096 B of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 nftables amd64 1.0.2-1ubuntu3.1 [67.2 kB]
+Get:2 http://kkr-prd01-az1.clouds.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnftables1 amd64 1.0.2-1ubuntu3.1 [332 kB]
+Fetched 399 kB in 2s (169 kB/s)       
+Preconfiguring packages ...
+(Reading database ... 142620 files and directories currently installed.)
+Preparing to unpack .../bsdutils_1%3a2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking bsdutils (1:2.37.2-4ubuntu3.5) over (1:2.37.2-4ubuntu3.4) ...
+Setting up bsdutils (1:2.37.2-4ubuntu3.5) ...
+(Reading database ... 142620 files and directories currently installed.)
+Preparing to unpack .../util-linux_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking util-linux (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Setting up util-linux (2.37.2-4ubuntu3.5) ...
+fstrim.service is a disabled or a static unit not running, not starting it.
+(Reading database ... 142620 files and directories currently installed.)
+Preparing to unpack .../mount_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking mount (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Preparing to unpack .../libsmartcols1_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking libsmartcols1:amd64 (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Setting up libsmartcols1:amd64 (2.37.2-4ubuntu3.5) ...
+(Reading database ... 142620 files and directories currently installed.)
+Preparing to unpack .../uuid-dev_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking uuid-dev:amd64 (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Preparing to unpack .../libuuid1_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking libuuid1:amd64 (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Setting up libuuid1:amd64 (2.37.2-4ubuntu3.5) ...
+(Reading database ... 142620 files and directories currently installed.)
+Preparing to unpack .../uuid-runtime_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking uuid-runtime (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Preparing to unpack .../openssh-sftp-server_1%3a8.9p1-3ubuntu0.14_amd64.deb ...
+Unpacking openssh-sftp-server (1:8.9p1-3ubuntu0.14) over (1:8.9p1-3ubuntu0.13) ...
+Preparing to unpack .../openssh-server_1%3a8.9p1-3ubuntu0.14_amd64.deb ...
+Unpacking openssh-server (1:8.9p1-3ubuntu0.14) over (1:8.9p1-3ubuntu0.13) ...
+Preparing to unpack .../openssh-client_1%3a8.9p1-3ubuntu0.14_amd64.deb ...
+Unpacking openssh-client (1:8.9p1-3ubuntu0.14) over (1:8.9p1-3ubuntu0.13) ...
+Preparing to unpack .../libblkid1_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking libblkid1:amd64 (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Setting up libblkid1:amd64 (2.37.2-4ubuntu3.5) ...
+(Reading database ... 142620 files and directories currently installed.)
+Preparing to unpack .../libmount1_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking libmount1:amd64 (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Setting up libmount1:amd64 (2.37.2-4ubuntu3.5) ...
+(Reading database ... 142620 files and directories currently installed.)
+Preparing to unpack .../0-eject_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking eject (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Preparing to unpack .../1-sudo_1.9.9-1ubuntu2.6_amd64.deb ...
+Unpacking sudo (1.9.9-1ubuntu2.6) over (1.9.9-1ubuntu2.5) ...
+Preparing to unpack .../2-bsdextrautils_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking bsdextrautils (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Preparing to unpack .../3-nftables_1.0.2-1ubuntu3.1_amd64.deb ...
+Unpacking nftables (1.0.2-1ubuntu3.1) over (1.0.2-1ubuntu3) ...
+Preparing to unpack .../4-libnftables1_1.0.2-1ubuntu3.1_amd64.deb ...
+Unpacking libnftables1:amd64 (1.0.2-1ubuntu3.1) over (1.0.2-1ubuntu3) ...
+Preparing to unpack .../5-libfdisk1_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking libfdisk1:amd64 (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Preparing to unpack .../6-fdisk_2.37.2-4ubuntu3.5_amd64.deb ...
+Unpacking fdisk (2.37.2-4ubuntu3.5) over (2.37.2-4ubuntu3.4) ...
+Preparing to unpack .../7-python3-cryptography_3.4.8-1ubuntu2.3_amd64.deb ...
+Unpacking python3-cryptography (3.4.8-1ubuntu2.3) over (3.4.8-1ubuntu2.2) ...
+Setting up libnftables1:amd64 (1.0.2-1ubuntu3.1) ...
+Setting up nftables (1.0.2-1ubuntu3.1) ...
+Setting up bsdextrautils (2.37.2-4ubuntu3.5) ...
+Setting up openssh-client (1:8.9p1-3ubuntu0.14) ...
+Setting up eject (2.37.2-4ubuntu3.5) ...
+Setting up uuid-dev:amd64 (2.37.2-4ubuntu3.5) ...
+Setting up python3-cryptography (3.4.8-1ubuntu2.3) ...
+Setting up sudo (1.9.9-1ubuntu2.6) ...
+Setting up libfdisk1:amd64 (2.37.2-4ubuntu3.5) ...
+Setting up mount (2.37.2-4ubuntu3.5) ...
+Setting up uuid-runtime (2.37.2-4ubuntu3.5) ...
+Setting up openssh-sftp-server (1:8.9p1-3ubuntu0.14) ...
+Setting up openssh-server (1:8.9p1-3ubuntu0.14) ...
+rescue-ssh.target is a disabled or a static unit not running, not starting it.
+ssh.socket is a disabled or a static unit not running, not starting it.
+Setting up fdisk (2.37.2-4ubuntu3.5) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.13) ...
+Processing triggers for ufw (0.36.1-4ubuntu0.1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for mailcap (3.70+nmu1ubuntu1) ...
+Scanning processes...                                                                                                                                                                                       
+Scanning candidates...                                                                                                                                                                                      
+Scanning linux images...                                                                                                                                                                                    
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+ /etc/needrestart/restart.d/systemd-manager
+ systemctl restart apache2.service devstack@aodh-api.service devstack@aodh-evaluator.service devstack@aodh-listener.service devstack@aodh-notifier.service devstack@c-api.service devstack@c-sch.service devstack@c-vol.service devstack@ceilometer-acentral.service devstack@ceilometer-acompute.service devstack@ceilometer-anotification.service devstack@g-api.service devstack@gnocchi-api.service devstack@gnocchi-metricd.service devstack@h-api-cfn.service devstack@h-api.service devstack@h-eng.service devstack@keystone.service devstack@n-api-meta.service devstack@n-api.service devstack@n-cond-cell1.service devstack@n-cpu.service devstack@n-novnc-cell1.service devstack@n-sch.service devstack@n-super-cond.service devstack@neutron-api.service devstack@neutron-ovn-maintenance-worker.service devstack@neutron-periodic-workers.service devstack@neutron-rpc-server.service devstack@placement-api.service devstack@q-ovn-agent.service dm-event.service packagekit.service polkit.service rsyslog.service serial-getty@ttyS0.service systemd-journald.service systemd-machined.service systemd-networkd.service systemd-resolved.service systemd-timesyncd.service systemd-udevd.service
+Service restarts being deferred:
+ systemctl restart getty@tty1.service
+ systemctl restart libvirtd.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+ systemctl restart user@1000.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@gelani-lab-1:~$ 
+
+```
+#### Try to create a vm normally to check everything all right or not
+
+```
+ubuntu@gelani-lab-1:/opt/stack/devstack$ ls ~
+cloudinit-userdata  image-factory  images  raw-image  scripts-openstack
+ubuntu@gelani-lab-1:/opt/stack/devstack$ cd ~/raw-image/
+ubuntu@gelani-lab-1:~/raw-image$ ls
+alma-10.qcow2                     cirros-0.6.3-x86_64-disk.img  debian-11.11.0-amd64-netinst.iso  debian-12.qcow2  jammy.img    rocky-9.qcow2
+bionic-server-cloudimg-amd64.img  cirros.img                    debian-11.qcow2                   fedora-40.qcow2  noble.qcow2  ubuntu-20.04.qcow2
+ubuntu@gelani-lab-1:~/raw-image$ openstack image create ubuntu-24   --file noble.img   --disk-format qcow2   --container-format bare   --public
+'noble.img' is not a valid file
+ubuntu@gelani-lab-1:~/raw-image$ openstack image create ubuntu-24   --file noble.qcow2   --disk-format qcow2   --container-format bare   --public
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field            | Value                                                                                                                                                                                 |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| checksum         | 90b203ff0ba04640bde95dd6b57f8201                                                                                                                                                      |
+| container_format | bare                                                                                                                                                                                  |
+| created_at       | 2026-03-13T23:11:16Z                                                                                                                                                                  |
+| disk_format      | qcow2                                                                                                                                                                                 |
+| file             | /v2/images/712d8ba0-6199-4326-b328-f3465b8a958c/file                                                                                                                                  |
+| id               | 712d8ba0-6199-4326-b328-f3465b8a958c                                                                                                                                                  |
+| min_disk         | 0                                                                                                                                                                                     |
+| min_ram          | 0                                                                                                                                                                                     |
+| name             | ubuntu-24                                                                                                                                                                             |
+| owner            | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                                      |
+| properties       | os_hash_algo='sha512', os_hash_value='573490ee77f021a381db402fff4cfb9b610479284dced62197e4ca799462439edf1fb95f94f4ccdeaa09d68955342f2332ac36a9c418b057edc4d3f17b832ab8',              |
+|                  | os_hidden='False', owner_specified.openstack.md5='', owner_specified.openstack.object='images/ubuntu-24', owner_specified.openstack.sha256=''                                         |
+| protected        | False                                                                                                                                                                                 |
+| schema           | /v2/schemas/image                                                                                                                                                                     |
+| size             | 628612608                                                                                                                                                                             |
+| status           | active                                                                                                                                                                                |
+| tags             |                                                                                                                                                                                       |
+| updated_at       | 2026-03-13T23:11:25Z                                                                                                                                                                  |
+| virtual_size     | 3758096384                                                                                                                                                                            |
+| visibility       | public                                                                                                                                                                                |
++------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ openstack image list
++--------------------------------------+-----------+--------+
+| ID                                   | Name      | Status |
++--------------------------------------+-----------+--------+
+| 712d8ba0-6199-4326-b328-f3465b8a958c | ubuntu-24 | active |
++--------------------------------------+-----------+--------+
+ubuntu@gelani-lab-1:~/raw-image$ openstack volume create   --image ubuntu-24   --size 15   --type ceph   ubuntu-24
++--------------------------------+--------------------------------------+
+| Field                          | Value                                |
++--------------------------------+--------------------------------------+
+| attachments                    | []                                   |
+| availability_zone              | nova                                 |
+| backup_id                      | None                                 |
+| bootable                       | False                                |
+| cluster_name                   | None                                 |
+| consumes_quota                 | True                                 |
+| created_at                     | 2026-03-13T23:13:47.060593           |
+| description                    | None                                 |
+| encrypted                      | False                                |
+| group_id                       | None                                 |
+| id                             | 3e74ccb7-971d-47d9-95cc-44d0f4b8528d |
+| multiattach                    | False                                |
+| name                           | ubuntu-24                            |
+| os-vol-host-attr:host          | None                                 |
+| os-vol-mig-status-attr:migstat | None                                 |
+| os-vol-mig-status-attr:name_id | None                                 |
+| os-vol-tenant-attr:tenant_id   | None                                 |
+| properties                     |                                      |
+| provider_id                    | None                                 |
+| replication_status             | None                                 |
+| service_uuid                   | None                                 |
+| shared_targets                 | True                                 |
+| size                           | 15                                   |
+| snapshot_id                    | None                                 |
+| source_volid                   | None                                 |
+| status                         | creating                             |
+| type                           | ceph                                 |
+| updated_at                     | None                                 |
+| user_id                        | 270824ef176044a2a8b64a8337e2f00a     |
+| volume_type_id                 | 67bc2259-3afb-4a0f-a065-fdc7a53e905c |
++--------------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ rbd ls -p images | grep 712d8ba0-6199-4326-b328-f3465b8a958c
+712d8ba0-6199-4326-b328-f3465b8a958c
+ubuntu@gelani-lab-1:~/raw-image$ openstack server create   --flavor m1.small   --volume ubuntu-24   --network private   --user-data ~/cloudinit-userdata/cloud-init.yaml   --config-drive true   ubuntu-generic-test-ceph
++-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                              |
++-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         | None                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:host                | None                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:hostname            | ubuntu-generic-test-ceph                                                                                                                                           |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:instance_name       | None                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:kernel_id           | None                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:launch_index        | None                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:ramdisk_id          | None                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:reservation_id      | r-xhge9z3r                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | None                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:user_data           | I2Nsb3VkLWNvbmZpZwpwYXNzd29yZDogMTIzNDU2NzgKY2hwYXNzd2Q6IHsgZXhwaXJlOiBGYWxzZSB9CnNzaF9wd2F1dGg6IFRydWUK                                                           |
+| OS-EXT-STS:power_state              | N/A                                                                                                                                                                |
+| OS-EXT-STS:task_state               | scheduling                                                                                                                                                         |
+| OS-EXT-STS:vm_state                 | building                                                                                                                                                           |
+| OS-SRV-USG:launched_at              | None                                                                                                                                                               |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                               |
+| accessIPv4                          | None                                                                                                                                                               |
+| accessIPv6                          | None                                                                                                                                                               |
+| addresses                           | N/A                                                                                                                                                                |
+| adminPass                           | NuD8pYLk6evU                                                                                                                                                       |
+| config_drive                        | True                                                                                                                                                               |
+| created                             | 2026-03-13T23:16:58Z                                                                                                                                               |
+| description                         | None                                                                                                                                                               |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small',              |
+|                                     | original_name='m1.small', ram='2048', rxtx_factor=, swap='0', vcpus='1'                                                                                            |
+| hostId                              | None                                                                                                                                                               |
+| host_status                         | None                                                                                                                                                               |
+| id                                  | babd7624-a79d-439b-b85b-9c4c15db5c9f                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                           |
+| key_name                            | None                                                                                                                                                               |
+| locked                              | None                                                                                                                                                               |
+| locked_reason                       | None                                                                                                                                                               |
+| name                                | ubuntu-generic-test-ceph                                                                                                                                           |
+| pinned_availability_zone            | None                                                                                                                                                               |
+| progress                            | None                                                                                                                                                               |
+| project_id                          | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                   |
+| properties                          | None                                                                                                                                                               |
+| scheduler_hints                     |                                                                                                                                                                    |
+| security_groups                     | name='default'                                                                                                                                                     |
+| server_groups                       | None                                                                                                                                                               |
+| status                              | BUILD                                                                                                                                                              |
+| tags                                |                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                               |
+| updated                             | 2026-03-13T23:16:57Z                                                                                                                                               |
+| user_id                             | 270824ef176044a2a8b64a8337e2f00a                                                                                                                                   |
+| volumes_attached                    |                                                                                                                                                                    |
++-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ watch -n2 openstack server list
+ubuntu@gelani-lab-1:~/raw-image$ openstack console url show ubuntu-generic-test-ceph
++----------+----------------------------------------------------------------------------------------------+
+| Field    | Value                                                                                        |
++----------+----------------------------------------------------------------------------------------------+
+| protocol | vnc                                                                                          |
+| type     | novnc                                                                                        |
+| url      | http://192.168.95.23:6080/vnc_lite.html?path=%3Ftoken%3Dc103ce38-1769-43cc-8fe9-d15b0aea0d0f |
++----------+----------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~/raw-image$ 
 ```
 
-```
 
+##### find-out-that-again-lab-enviroment-has-lost-the-created-vm-net-connection
 
-
-
+![VM Network Connection Issue](../screenshots/again-same-net-connection-issue-for-created-vm.png)
 
 
 
