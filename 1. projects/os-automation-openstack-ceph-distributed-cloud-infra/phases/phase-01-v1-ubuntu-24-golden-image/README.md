@@ -418,15 +418,14 @@ Phase 2 will introduce structured **image release management**, including:
 
 Detailed command outputs and build logs can be found here:
 
-[View execution logs](../../terminal-log/gelani-lab-1.md)
+[View execution logs](./terminal-logs/gelani-lab-1.md)
 
 ## Network Issue Debugging
 
 Initial networking issue encountered when launching VM from image:
 
-![Network issue](../../screenshots/again-same-net-connection-issue-for-created-vm.png)
+![Network issue](./screenshots/again-same-net-connection-issue-for-created-vm.png)
 
 After applying NAT fix:
 
-![Network fix](../../screenshots/fixed-net-connection-issue-for-created-vm.png)
-
+![Network fix](./screenshots/fixed-net-connection-issue-for-created-vm.png)
