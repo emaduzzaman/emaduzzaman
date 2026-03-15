@@ -1,4 +1,3 @@
-```markdown
 # Phase 1 — Ubuntu 24.04 Golden Image Automation
 
 ## Phase Status
