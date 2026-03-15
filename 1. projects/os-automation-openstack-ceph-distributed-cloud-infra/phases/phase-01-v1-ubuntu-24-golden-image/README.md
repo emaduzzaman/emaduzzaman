@@ -412,7 +412,7 @@ Phase 2 will introduce structured **image release management**, including:
 - image promotion
 - rollback capability
 - naming standardization
-```
+
 
 ## Execution Logs
 
@@ -430,4 +430,3 @@ After applying NAT fix:
 
 ![Network fix](../../screenshots/fixed-net-connection-issue-for-created-vm.png)
 
----
