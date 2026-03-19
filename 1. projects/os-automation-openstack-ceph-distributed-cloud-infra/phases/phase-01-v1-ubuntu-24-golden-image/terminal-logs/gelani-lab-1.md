@@ -7651,6 +7651,212 @@ ubuntu@gelani-lab-1:~/raw-image$
 ```
 ![VM Network Connection Issue](../screenshots/fixed-net-connection-issue-for-created-vm.png)
 
+##### Finally a working vm is creatd!
+```
+
+ubuntu@gelani-lab-1:~/raw-image$ cd ~
+ubuntu@gelani-lab-1:~$ openstack server list
++--------------------------------------+--------------------------+--------+--------------------+--------------------------+----------+
+| ID                                   | Name                     | Status | Networks           | Image                    | Flavor   |
++--------------------------------------+--------------------------+--------+--------------------+--------------------------+----------+
+| babd7624-a79d-439b-b85b-9c4c15db5c9f | ubuntu-generic-test-ceph | ACTIVE | private=10.0.0.223 | N/A (booted from volume) | m1.small |
++--------------------------------------+--------------------------+--------+--------------------+--------------------------+----------+
+ubuntu@gelani-lab-1:~$ FIP=$(openstack floating ip create public -f value -c floating_ip_address)
+openstack server add floating ip ubuntu-generic-test-ceph $FIP
+echo "Floating IP: $FIP"
+Floating IP: 172.24.4.104
+ubuntu@gelani-lab-1:~$ ping 172.24.4.104
+PING 172.24.4.104 (172.24.4.104) 56(84) bytes of data.
+^C
+--- 172.24.4.104 ping statistics ---
+7 packets transmitted, 0 received, 100% packet loss, time 6136ms
+
+ubuntu@gelani-lab-1:~$ openstack security group list
++--------------------------------------+-----------------+------------------------+----------------------------------+------+--------+
+| ID                                   | Name            | Description            | Project                          | Tags | Shared |
++--------------------------------------+-----------------+------------------------+----------------------------------+------+--------+
+| 1e9895d1-1672-4cc0-a988-48ccd059f5aa | packer-build-sg | packer-build-sg        | 99ab77b7592c418096336a7ccf9e299d | []   | False  |
+| 5c1c4a65-b692-4716-99d3-2ab581b40d18 | default         | Default security group | 74a530ca6d4142cbbdcf25dd6b640a81 | []   | False  |
+| b1850b62-6d55-4171-843f-ab579ee5af17 | default         | Default security group | 99ab77b7592c418096336a7ccf9e299d | []   | False  |
++--------------------------------------+-----------------+------------------------+----------------------------------+------+--------+
+ubuntu@gelani-lab-1:~$ openstack security group create general-usecase --description "for-general-usecase"
++-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field           | Value                                                                                                                                                                         |
++-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| created_at      | 2026-03-14T00:03:04Z                                                                                                                                                          |
+| description     | for-general-usecase                                                                                                                                                           |
+| id              | b31f681f-6570-404e-8f86-1914ba995bb0                                                                                                                                          |
+| is_shared       | False                                                                                                                                                                         |
+| name            | general-usecase                                                                                                                                                               |
+| project_id      | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                              |
+| revision_number | 1                                                                                                                                                                             |
+| rules           | created_at='2026-03-14T00:03:04Z', direction='egress', ethertype='IPv4', id='33f93663-1399-431c-91b2-68dd3a474ec2', standard_attr_id='233', updated_at='2026-03-14T00:03:04Z' |
+|                 | created_at='2026-03-14T00:03:04Z', direction='egress', ethertype='IPv6', id='75270382-33eb-4d03-a8e3-417a28bc5c43', standard_attr_id='234', updated_at='2026-03-14T00:03:04Z' |
+| stateful        | True                                                                                                                                                                          |
+| tags            | []                                                                                                                                                                            |
+| updated_at      | 2026-03-14T00:03:04Z                                                                                                                                                          |
++-----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack security group lis
++--------------------------------------+-----------------+------------------------+----------------------------------+------+--------+
+| ID                                   | Name            | Description            | Project                          | Tags | Shared |
++--------------------------------------+-----------------+------------------------+----------------------------------+------+--------+
+| 1e9895d1-1672-4cc0-a988-48ccd059f5aa | packer-build-sg | packer-build-sg        | 99ab77b7592c418096336a7ccf9e299d | []   | False  |
+| 5c1c4a65-b692-4716-99d3-2ab581b40d18 | default         | Default security group | 74a530ca6d4142cbbdcf25dd6b640a81 | []   | False  |
+| b1850b62-6d55-4171-843f-ab579ee5af17 | default         | Default security group | 99ab77b7592c418096336a7ccf9e299d | []   | False  |
+| b31f681f-6570-404e-8f86-1914ba995bb0 | general-usecase | for-general-usecase    | 99ab77b7592c418096336a7ccf9e299d | []   | False  |
++--------------------------------------+-----------------+------------------------+----------------------------------+------+--------+
+ubuntu@gelani-lab-1:~$ openstack security group rule list general-usecase
++--------------------------------------+-------------+-----------+-----------+------------+-----------+-----------------------+----------------------+
+| ID                                   | IP Protocol | Ethertype | IP Range  | Port Range | Direction | Remote Security Group | Remote Address Group |
++--------------------------------------+-------------+-----------+-----------+------------+-----------+-----------------------+----------------------+
+| 33f93663-1399-431c-91b2-68dd3a474ec2 | None        | IPv4      | 0.0.0.0/0 |            | egress    | None                  | None                 |
+| 75270382-33eb-4d03-a8e3-417a28bc5c43 | None        | IPv6      | ::/0      |            | egress    | None                  | None                 |
++--------------------------------------+-------------+-----------+-----------+------------+-----------+-----------------------+----------------------+
+ubuntu@gelani-lab-1:~$ openstack security group rule create --proto tcp --dst-port 22 general-usecase
++-------------------------+--------------------------------------+
+| Field                   | Value                                |
++-------------------------+--------------------------------------+
+| belongs_to_default_sg   | False                                |
+| created_at              | 2026-03-14T00:04:19Z                 |
+| description             |                                      |
+| direction               | ingress                              |
+| ether_type              | IPv4                                 |
+| id                      | ab68bb86-8b97-4e04-8f10-008195ab7f02 |
+| normalized_cidr         | 0.0.0.0/0                            |
+| port_range_max          | 22                                   |
+| port_range_min          | 22                                   |
+| project_id              | 99ab77b7592c418096336a7ccf9e299d     |
+| protocol                | tcp                                  |
+| remote_address_group_id | None                                 |
+| remote_group_id         | None                                 |
+| remote_ip_prefix        | 0.0.0.0/0                            |
+| revision_number         | 0                                    |
+| security_group_id       | b31f681f-6570-404e-8f86-1914ba995bb0 |
+| updated_at              | 2026-03-14T00:04:19Z                 |
++-------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack security group rule create --ingress --protocol icmp general-usecase
++-------------------------+--------------------------------------+
+| Field                   | Value                                |
++-------------------------+--------------------------------------+
+| belongs_to_default_sg   | False                                |
+| created_at              | 2026-03-14T00:04:59Z                 |
+| description             |                                      |
+| direction               | ingress                              |
+| ether_type              | IPv4                                 |
+| id                      | d5d28361-66be-4b73-8619-914b0854d235 |
+| normalized_cidr         | 0.0.0.0/0                            |
+| port_range_max          | None                                 |
+| port_range_min          | None                                 |
+| project_id              | 99ab77b7592c418096336a7ccf9e299d     |
+| protocol                | icmp                                 |
+| remote_address_group_id | None                                 |
+| remote_group_id         | None                                 |
+| remote_ip_prefix        | 0.0.0.0/0                            |
+| revision_number         | 0                                    |
+| security_group_id       | b31f681f-6570-404e-8f86-1914ba995bb0 |
+| updated_at              | 2026-03-14T00:04:59Z                 |
++-------------------------+--------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack security group set --name general-use-case general-usecase
+ubuntu@gelani-lab-1:~$ openstack security group list
++--------------------------------------+------------------+------------------------+----------------------------------+------+--------+
+| ID                                   | Name             | Description            | Project                          | Tags | Shared |
++--------------------------------------+------------------+------------------------+----------------------------------+------+--------+
+| 1e9895d1-1672-4cc0-a988-48ccd059f5aa | packer-build-sg  | packer-build-sg        | 99ab77b7592c418096336a7ccf9e299d | []   | False  |
+| 5c1c4a65-b692-4716-99d3-2ab581b40d18 | default          | Default security group | 74a530ca6d4142cbbdcf25dd6b640a81 | []   | False  |
+| b1850b62-6d55-4171-843f-ab579ee5af17 | default          | Default security group | 99ab77b7592c418096336a7ccf9e299d | []   | False  |
+| b31f681f-6570-404e-8f86-1914ba995bb0 | general-use-case | for-general-usecase    | 99ab77b7592c418096336a7ccf9e299d | []   | False  |
++--------------------------------------+------------------+------------------------+----------------------------------+------+--------+
+ubuntu@gelani-lab-1:~$ openstack server add security group babd7624-a79d-439b-b85b-9c4c15db5c9f genaral-use-case
+Failed to add security group with name or ID 'genaral-use-case' to server 'babd7624-a79d-439b-b85b-9c4c15db5c9f': NotFoundException: 404: Client Error for url: http://192.168.95.23/compute/v2.1/servers/babd7624-a79d-439b-b85b-9c4c15db5c9f/action, Security group genaral-use-case is not found for project 99ab77b7592c418096336a7ccf9e299d
+1 of 1 security groups were not added.
+ubuntu@gelani-lab-1:~$ openstack server show babd7624-a79d-439b-b85b-9c4c15db5c9f
++-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                               | Value                                                                                                                                                              |
++-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                                                                                                                             |
+| OS-EXT-AZ:availability_zone         | nova                                                                                                                                                               |
+| OS-EXT-SRV-ATTR:host                | gelani-lab-1                                                                                                                                                       |
+| OS-EXT-SRV-ATTR:hostname            | ubuntu-generic-test-ceph                                                                                                                                           |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | gelani-lab-1                                                                                                                                                       |
+| OS-EXT-SRV-ATTR:instance_name       | instance-00000026                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:kernel_id           |                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:launch_index        | 0                                                                                                                                                                  |
+| OS-EXT-SRV-ATTR:ramdisk_id          |                                                                                                                                                                    |
+| OS-EXT-SRV-ATTR:reservation_id      | r-xhge9z3r                                                                                                                                                         |
+| OS-EXT-SRV-ATTR:root_device_name    | /dev/vda                                                                                                                                                           |
+| OS-EXT-SRV-ATTR:user_data           | I2Nsb3VkLWNvbmZpZwpwYXNzd29yZDogMTIzNDU2NzgKY2hwYXNzd2Q6IHsgZXhwaXJlOiBGYWxzZSB9CnNzaF9wd2F1dGg6IFRydWUK                                                           |
+| OS-EXT-STS:power_state              | Running                                                                                                                                                            |
+| OS-EXT-STS:task_state               | None                                                                                                                                                               |
+| OS-EXT-STS:vm_state                 | active                                                                                                                                                             |
+| OS-SRV-USG:launched_at              | 2026-03-13T23:17:11.000000                                                                                                                                         |
+| OS-SRV-USG:terminated_at            | None                                                                                                                                                               |
+| accessIPv4                          |                                                                                                                                                                    |
+| accessIPv6                          |                                                                                                                                                                    |
+| addresses                           | private=10.0.0.223, 172.24.4.104                                                                                                                                   |
+| config_drive                        | True                                                                                                                                                               |
+| created                             | 2026-03-13T23:16:57Z                                                                                                                                               |
+| description                         | None                                                                                                                                                               |
+| flavor                              | description=, disk='20', ephemeral='0', extra_specs.hw_rng:allowed='True', id='m1.small', is_disabled=, is_public='True', location=, name='m1.small',              |
+|                                     | original_name='m1.small', ram='2048', rxtx_factor=, swap='0', vcpus='1'                                                                                            |
+| hostId                              | b0bb36c9572dd1d0df05ece2fa8a6103c649fd0ba2635d094bb55ec5                                                                                                           |
+| host_status                         | UP                                                                                                                                                                 |
+| id                                  | babd7624-a79d-439b-b85b-9c4c15db5c9f                                                                                                                               |
+| image                               | N/A (booted from volume)                                                                                                                                           |
+| key_name                            | None                                                                                                                                                               |
+| locked                              | False                                                                                                                                                              |
+| locked_reason                       | None                                                                                                                                                               |
+| name                                | ubuntu-generic-test-ceph                                                                                                                                           |
+| pinned_availability_zone            | None                                                                                                                                                               |
+| progress                            | 0                                                                                                                                                                  |
+| project_id                          | 99ab77b7592c418096336a7ccf9e299d                                                                                                                                   |
+| properties                          |                                                                                                                                                                    |
+| scheduler_hints                     |                                                                                                                                                                    |
+| security_groups                     | name='default'                                                                                                                                                     |
+| server_groups                       | []                                                                                                                                                                 |
+| status                              | ACTIVE                                                                                                                                                             |
+| tags                                |                                                                                                                                                                    |
+| trusted_image_certificates          | None                                                                                                                                                               |
+| updated                             | 2026-03-13T23:17:12Z                                                                                                                                               |
+| user_id                             | 270824ef176044a2a8b64a8337e2f00a                                                                                                                                   |
+| volumes_attached                    | delete_on_termination='False', id='3e74ccb7-971d-47d9-95cc-44d0f4b8528d'                                                                                           |
++-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ubuntu@gelani-lab-1:~$ openstack server add security group babd7624-a79d-439b-b85b-9c4c15db5c9f b31f681f-6570-404e-8f86-1914ba995bb0
+ubuntu@gelani-lab-1:~$ ping 172.24.4.104
+PING 172.24.4.104 (172.24.4.104) 56(84) bytes of data.
+64 bytes from 172.24.4.104: icmp_seq=1 ttl=63 time=1.01 ms
+64 bytes from 172.24.4.104: icmp_seq=2 ttl=63 time=0.687 ms
+
+64 bytes from 172.24.4.104: icmp_seq=3 ttl=63 time=0.242 ms
+64 bytes from 172.24.4.104: icmp_seq=4 ttl=63 time=0.213 ms
+64 bytes from 172.24.4.104: icmp_seq=5 ttl=63 time=0.284 ms
+
+64 bytes from 172.24.4.104: icmp_seq=6 ttl=63 time=0.275 ms
+
+64 bytes from 172.24.4.104: icmp_seq=7 ttl=63 time=0.322 ms
+64 bytes from 172.24.4.104: icmp_seq=8 ttl=63 time=0.289 ms
+64 bytes from 172.24.4.104: icmp_seq=9 ttl=63 time=0.289 ms
+^C
+--- 172.24.4.104 ping statistics ---
+9 packets transmitted, 9 received, 0% packet loss, time 8151ms
+rtt min/avg/max/mdev = 0.213/0.401/1.013/0.253 ms
+ubuntu@gelani-lab-1:~$ ping 172.24.4.104
+PING 172.24.4.104 (172.24.4.104) 56(84) bytes of data.
+64 bytes from 172.24.4.104: icmp_seq=1 ttl=63 time=0.600 ms
+64 bytes from 172.24.4.104: icmp_seq=2 ttl=63 time=0.326 ms
+64 bytes from 172.24.4.104: icmp_seq=3 ttl=63 time=0.278 ms
+64 bytes from 172.24.4.104: icmp_seq=4 ttl=63 time=0.286 ms
+64 bytes from 172.24.4.104: icmp_seq=5 ttl=63 time=0.314 ms
+64 bytes from 172.24.4.104: icmp_seq=6 ttl=63 time=0.307 ms
+^C
+--- 172.24.4.104 ping statistics ---
+6 packets transmitted, 6 received, 0% packet loss, time 5113ms
+rtt min/avg/max/mdev = 0.278/0.351/0.600/0.112 ms
+ubuntu@gelani-lab-1:~$ ^C
+ubuntu@gelani-lab-1:~$ ^C
+ubuntu@gelani-lab-1:~$ 
+```
+
+
 
 
 
